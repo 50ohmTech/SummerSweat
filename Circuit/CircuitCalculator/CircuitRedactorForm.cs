@@ -9,7 +9,7 @@ namespace CircuitCalculator
 	/// <summary>
 	///     Форма редактирования эл. цепи
 	/// </summary>
-	public partial class CircuitRedactor : Form
+	public partial class CircuitRedactorForm : Form
 	{
 		#region – – Поля – – 
 
@@ -25,7 +25,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Конструктор
 		/// </summary>
-		public CircuitRedactor()
+		public CircuitRedactorForm()
 		{
 			InitializeComponent();
 

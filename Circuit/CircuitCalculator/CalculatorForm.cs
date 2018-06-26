@@ -20,7 +20,7 @@ namespace CircuitCalculator
 		{
 			InitializeComponent();
 			InitializeCircuits();
-			_redactorForm = new CircuitRedactor();
+			_redactorForm = new CircuitRedactorForm();
 			_redactorForm.Show();
 
 			//Подписывается на событие изменения значения одного из элементов цепи
@@ -34,7 +34,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Редактор цепей, взаимодействующий с this формой
 		/// </summary>
-		private readonly CircuitRedactor _redactorForm;
+		private readonly CircuitRedactorForm _redactorForm;
 
 		/// <summary>
 		///     Список доступных цепей

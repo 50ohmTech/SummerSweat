@@ -52,11 +52,11 @@
     <Compile Include="CalculatorForm.Designer.cs">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CircuitRedactor.cs">
+    <Compile Include="CircuitRedactorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CircuitRedactor.Designer.cs">
-      <DependentUpon>CircuitRedactor.cs</DependentUpon>
+    <Compile Include="CircuitRedactorForm.Designer.cs">
+      <DependentUpon>CircuitRedactorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ElementsOfCircuit\CapacitorControl.cs">
       <SubType>UserControl</SubType>
@@ -105,8 +105,8 @@
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CircuitRedactor.resx">
-      <DependentUpon>CircuitRedactor.cs</DependentUpon>
+    <EmbeddedResource Include="CircuitRedactorForm.resx">
+      <DependentUpon>CircuitRedactorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ElementsOfCircuit\CapacitorControl.resx">
       <DependentUpon>CapacitorControl.cs</DependentUpon>
