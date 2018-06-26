@@ -41,6 +41,7 @@
 			this.valueTextBox.Name = "valueTextBox";
 			this.valueTextBox.Size = new System.Drawing.Size(55, 22);
 			this.valueTextBox.TabIndex = 5;
+			this.valueTextBox.TextChanged += new System.EventHandler(this.valueTextBox_TextChanged);
 			this.valueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valueTextBox_KeyPress);
 			// 
 			// elementName

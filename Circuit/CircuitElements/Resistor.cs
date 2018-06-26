@@ -68,13 +68,13 @@ namespace CircuitElements
 				if (double.IsNaN(value) || double.IsInfinity(value))
 				{
 					throw new ArgumentException("Значение" + value +
-					                    " не является вещесвенным числом.");
+					                            " не является вещесвенным числом.");
 				}
 
-				if (value < 0)
+				if (value <= 0)
 				{
 					throw new ArgumentException(
-						"Значение" + value + " не может быть меньше ноля.");
+						"Значение" + value + " не может быть меньше или равно 0.");
 				}
 
 				_value = value;

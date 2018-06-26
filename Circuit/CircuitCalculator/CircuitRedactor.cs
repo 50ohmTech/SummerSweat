@@ -191,11 +191,11 @@ namespace CircuitCalculator
 			try
 			{
 				if (!double.TryParse(e.FormattedValue.ToString(), out var newDouble) ||
-				    newDouble < 0)
+				    newDouble <= 0)
 				{
 					e.Cancel = true;
 					elementGridView.Rows[e.RowIndex].ErrorText =
-						"The value must be a non-negative integer";
+						"Значение должно быт положительным вещественным числом";
 				}
 				else
 				{

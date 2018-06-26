@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -26,6 +27,18 @@ namespace CircuitCalculator.Controls.ElementsOfCircuit
 		public event ElementPositionStateHandler ElementPositionChanged;
 
 		#endregion – – События – – 
+
+		private void valueTextBox_TextChanged(object sender, EventArgs e)
+		{
+			if (Convert.ToDouble(valueTextBox.Text) == 0)
+			{
+				MessageBox.Show("Значение элемента не может быть равным 0", "Ошибка",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+
+				valueTextBox.Text = "1";
+			}
+		}
 
 		#region – – Приватные методы – – 
 

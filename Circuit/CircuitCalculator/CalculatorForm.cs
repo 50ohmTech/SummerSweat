@@ -107,7 +107,7 @@ namespace CircuitCalculator
 			foreach (var circuit in _circuitList)
 			{
 				circuitListComboBox.Items.Add("Тестовая цепь №" +
-				                    (_circuitList.IndexOf(circuit) + 1));
+				                              (_circuitList.IndexOf(circuit) + 1));
 			}
 		}
 
@@ -143,14 +143,14 @@ namespace CircuitCalculator
 				}
 
 				if (double.TryParse(e.FormattedValue.ToString(),
-					    out var newValue) && !(newValue < 0))
+					    out var newValue) && !(newValue <= 0))
 				{
 					return;
 				}
 
 				e.Cancel = true;
 				FrequenciesGridView.Rows[e.RowIndex].ErrorText =
-					"The value must be a non-negative double";
+					"Значение должно быт положительным вещественным числом";
 			}
 		}
 

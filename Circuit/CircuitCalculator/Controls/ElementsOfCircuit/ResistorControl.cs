@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using CircuitElements;
 
 namespace CircuitCalculator.Controls.ElementsOfCircuit
@@ -53,7 +52,8 @@ namespace CircuitCalculator.Controls.ElementsOfCircuit
 				}
 				else
 				{
-					throw new NullReferenceException("Попытка присвоить null значение в ResistorBControl");
+					throw new NullReferenceException(
+						"Попытка присвоить null значение в ResistorBControl");
 				}
 			}
 		}
