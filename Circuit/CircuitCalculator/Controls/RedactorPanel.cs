@@ -57,7 +57,7 @@ namespace CircuitCalculator.Controls
 				}
 
 				{
-					panel1.Controls.Add(value);
+					panel.Controls.Add(value);
 					_controlList.Add(value);
 					_lastPosition = new Point(i * LengthOfControl, j * WidthOfControl);
 

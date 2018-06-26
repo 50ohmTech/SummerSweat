@@ -73,7 +73,10 @@ namespace CircuitCalculator
 		/// </summary>
 		private void InitializeTestingElements()
 		{
-			CleanTable();
+			if (_displayingCircuit != null)
+			{
+				CleanTable();
+			}
 
 			redactorPanel.CleanPanel();
 
@@ -111,7 +114,7 @@ namespace CircuitCalculator
 					elementGridView.Rows.Remove(elementGridView.Rows[i]);
 				}
 			}
-
+			
 			foreach (var element in _displayingCircuit.Elements)
 			{
 				object[] elementData =

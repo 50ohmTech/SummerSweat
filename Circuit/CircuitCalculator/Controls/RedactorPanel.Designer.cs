@@ -28,26 +28,26 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.panel = new System.Windows.Forms.Panel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// panel
 			// 
-			this.panel1.AutoScroll = true;
-			this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.panel1.Location = new System.Drawing.Point(6, 21);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(614, 320);
-			this.panel1.TabIndex = 0;
+			this.panel.AutoScroll = true;
+			this.panel.BackColor = System.Drawing.SystemColors.ButtonShadow;
+			this.panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.panel.Location = new System.Drawing.Point(6, 21);
+			this.panel.Name = "panel";
+			this.panel.Size = new System.Drawing.Size(614, 320);
+			this.panel.TabIndex = 0;
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.panel1);
+			this.groupBox1.Controls.Add(this.panel);
 			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(626, 347);
@@ -69,7 +69,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel panel;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 	}
