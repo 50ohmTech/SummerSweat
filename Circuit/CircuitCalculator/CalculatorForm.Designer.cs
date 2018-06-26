@@ -28,31 +28,31 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.instrumentsGroupBox = new System.Windows.Forms.GroupBox();
 			this.resetButton = new System.Windows.Forms.Button();
 			this.calculateButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.circuitListComboBox = new System.Windows.Forms.ComboBox();
 			this.FrequenciesGridView = new System.Windows.Forms.DataGridView();
 			this.Frequencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Impedances = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.groupBox1.SuspendLayout();
+			this.instrumentsGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.FrequenciesGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// groupBox1
+			// instrumentsGroupBox
 			// 
-			this.groupBox1.Controls.Add(this.resetButton);
-			this.groupBox1.Controls.Add(this.calculateButton);
-			this.groupBox1.Controls.Add(this.label1);
-			this.groupBox1.Controls.Add(this.comboBox1);
-			this.groupBox1.Controls.Add(this.FrequenciesGridView);
-			this.groupBox1.Location = new System.Drawing.Point(12, 12);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(431, 283);
-			this.groupBox1.TabIndex = 3;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Инструменты";
+			this.instrumentsGroupBox.Controls.Add(this.resetButton);
+			this.instrumentsGroupBox.Controls.Add(this.calculateButton);
+			this.instrumentsGroupBox.Controls.Add(this.label1);
+			this.instrumentsGroupBox.Controls.Add(this.circuitListComboBox);
+			this.instrumentsGroupBox.Controls.Add(this.FrequenciesGridView);
+			this.instrumentsGroupBox.Location = new System.Drawing.Point(12, 12);
+			this.instrumentsGroupBox.Name = "instrumentsGroupBox";
+			this.instrumentsGroupBox.Size = new System.Drawing.Size(431, 283);
+			this.instrumentsGroupBox.TabIndex = 3;
+			this.instrumentsGroupBox.TabStop = false;
+			this.instrumentsGroupBox.Text = "Инструменты";
 			// 
 			// resetButton
 			// 
@@ -83,16 +83,16 @@
 			this.label1.TabIndex = 7;
 			this.label1.Text = "Выберите цепь";
 			// 
-			// comboBox1
+			// circuitListComboBox
 			// 
-			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(121, 21);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(176, 24);
-			this.comboBox1.TabIndex = 6;
-			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			this.circuitListComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.circuitListComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.circuitListComboBox.FormattingEnabled = true;
+			this.circuitListComboBox.Location = new System.Drawing.Point(121, 21);
+			this.circuitListComboBox.Name = "circuitListComboBox";
+			this.circuitListComboBox.Size = new System.Drawing.Size(176, 24);
+			this.circuitListComboBox.TabIndex = 6;
+			this.circuitListComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
 			// 
 			// FrequenciesGridView
 			// 
@@ -125,24 +125,24 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(457, 303);
-			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.instrumentsGroupBox);
 			this.Name = "CalculatorForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Калькулятор";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CalculatorForm_FormClosed);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
+			this.instrumentsGroupBox.ResumeLayout(false);
+			this.instrumentsGroupBox.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.FrequenciesGridView)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox instrumentsGroupBox;
 		private System.Windows.Forms.DataGridView FrequenciesGridView;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Frequencies;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Impedances;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox circuitListComboBox;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button calculateButton;
 		private System.Windows.Forms.Button resetButton;

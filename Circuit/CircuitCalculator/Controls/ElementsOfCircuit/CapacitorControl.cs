@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using CircuitElements;
 
 namespace CircuitCalculator.Controls.ElementsOfCircuit
@@ -52,11 +53,7 @@ namespace CircuitCalculator.Controls.ElementsOfCircuit
 				}
 				else
 				{
-					MessageBox.Show(
-						"Попытка присвоить null значение в поле Element конденсатора.",
-						"Error",
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Error);
+					throw new NullReferenceException("Попытка присвоить null значение в CapacitorControl");
 				}
 			}
 		}

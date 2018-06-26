@@ -106,7 +106,7 @@ namespace CircuitCalculator
 
 			foreach (var circuit in _circuitList)
 			{
-				comboBox1.Items.Add("Тестовая цепь №" +
+				circuitListComboBox.Items.Add("Тестовая цепь №" +
 				                    (_circuitList.IndexOf(circuit) + 1));
 			}
 		}
@@ -163,8 +163,8 @@ namespace CircuitCalculator
 		{
 			if (_currentCircuit == null)
 			{
-				MessageBox.Show("Выберите цепь", "Error", MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
+				MessageBox.Show("Выберите цепь", "Ошибка", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
 			}
 			else
 			{
@@ -196,7 +196,7 @@ namespace CircuitCalculator
 		/// </summary>
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			_currentCircuit = _circuitList[comboBox1.SelectedIndex];
+			_currentCircuit = _circuitList[circuitListComboBox.SelectedIndex];
 			_redactorForm.DisplayingCircuit = _currentCircuit;
 
 			calculateButton.Text = "Расчитать";

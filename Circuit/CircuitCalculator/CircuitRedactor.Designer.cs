@@ -35,7 +35,7 @@ namespace CircuitCalculator
 			this.resistorNameTextBox = new System.Windows.Forms.TextBox();
 			this.capacitorNameTextBox = new System.Windows.Forms.TextBox();
 			this.inductorNameTextBox = new System.Windows.Forms.TextBox();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.instrumentsGroupBox = new System.Windows.Forms.GroupBox();
 			this.testButton = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -48,7 +48,7 @@ namespace CircuitCalculator
 			this.elementNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.elementValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.redactorPanel = new CircuitCalculator.Controls.RedactorPanel();
-			this.groupBox1.SuspendLayout();
+			this.instrumentsGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -101,27 +101,27 @@ namespace CircuitCalculator
 			this.inductorNameTextBox.TabIndex = 11;
 			this.inductorNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
-			// groupBox1
+			// instrumentsGroupBox
 			// 
-			this.groupBox1.Controls.Add(this.testButton);
-			this.groupBox1.Controls.Add(this.label3);
-			this.groupBox1.Controls.Add(this.label2);
-			this.groupBox1.Controls.Add(this.label1);
-			this.groupBox1.Controls.Add(this.inductorValueTextBox);
-			this.groupBox1.Controls.Add(this.capacitorValueTextBox);
-			this.groupBox1.Controls.Add(this.resistorValueTextBox);
-			this.groupBox1.Controls.Add(this.inductorNameTextBox);
-			this.groupBox1.Controls.Add(this.addCapacitorButton);
-			this.groupBox1.Controls.Add(this.capacitorNameTextBox);
-			this.groupBox1.Controls.Add(this.addInductorButton);
-			this.groupBox1.Controls.Add(this.addResistorButton);
-			this.groupBox1.Controls.Add(this.resistorNameTextBox);
-			this.groupBox1.Location = new System.Drawing.Point(12, 15);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(432, 350);
-			this.groupBox1.TabIndex = 12;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Инструменты";
+			this.instrumentsGroupBox.Controls.Add(this.testButton);
+			this.instrumentsGroupBox.Controls.Add(this.label3);
+			this.instrumentsGroupBox.Controls.Add(this.label2);
+			this.instrumentsGroupBox.Controls.Add(this.label1);
+			this.instrumentsGroupBox.Controls.Add(this.inductorValueTextBox);
+			this.instrumentsGroupBox.Controls.Add(this.capacitorValueTextBox);
+			this.instrumentsGroupBox.Controls.Add(this.resistorValueTextBox);
+			this.instrumentsGroupBox.Controls.Add(this.inductorNameTextBox);
+			this.instrumentsGroupBox.Controls.Add(this.addCapacitorButton);
+			this.instrumentsGroupBox.Controls.Add(this.capacitorNameTextBox);
+			this.instrumentsGroupBox.Controls.Add(this.addInductorButton);
+			this.instrumentsGroupBox.Controls.Add(this.addResistorButton);
+			this.instrumentsGroupBox.Controls.Add(this.resistorNameTextBox);
+			this.instrumentsGroupBox.Location = new System.Drawing.Point(12, 15);
+			this.instrumentsGroupBox.Name = "instrumentsGroupBox";
+			this.instrumentsGroupBox.Size = new System.Drawing.Size(432, 350);
+			this.instrumentsGroupBox.TabIndex = 12;
+			this.instrumentsGroupBox.TabStop = false;
+			this.instrumentsGroupBox.Text = "Инструменты";
 			// 
 			// testButton
 			// 
@@ -244,13 +244,13 @@ namespace CircuitCalculator
 			this.ClientSize = new System.Drawing.Size(1083, 377);
 			this.Controls.Add(this.elementGridView);
 			this.Controls.Add(this.redactorPanel);
-			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.instrumentsGroupBox);
 			this.Name = "CircuitRedactor";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "CircuitRedactor";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CircuitRedactor_FormClosed);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
+			this.instrumentsGroupBox.ResumeLayout(false);
+			this.instrumentsGroupBox.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
 			this.ResumeLayout(false);
 
@@ -262,7 +262,7 @@ namespace CircuitCalculator
 		private System.Windows.Forms.TextBox resistorNameTextBox;
 		private System.Windows.Forms.TextBox capacitorNameTextBox;
 		private System.Windows.Forms.TextBox inductorNameTextBox;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox instrumentsGroupBox;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;

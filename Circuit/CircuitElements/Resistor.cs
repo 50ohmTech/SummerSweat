@@ -45,12 +45,12 @@ namespace CircuitElements
 			{
 				if (string.IsNullOrEmpty(value))
 				{
-					throw new Exception("Name can't be null or empty.");
+					throw new NullReferenceException("Name can't be null or empty.");
 				}
 
 				if (value.Contains(' '))
 				{
-					throw new Exception("Name can't have spaces.");
+					throw new ArgumentException("Name can't have spaces.");
 				}
 
 				_name = value;
@@ -67,13 +67,13 @@ namespace CircuitElements
 			{
 				if (double.IsNaN(value) || double.IsInfinity(value))
 				{
-					throw new Exception("Значение" + value +
+					throw new ArgumentException("Значение" + value +
 					                    " не является вещесвенным числом.");
 				}
 
 				if (value < 0)
 				{
-					throw new Exception(
+					throw new ArgumentException(
 						"Значение" + value + " не может быть меньше ноля.");
 				}
 
