@@ -195,7 +195,7 @@ namespace CircuitCalculator
 				{
 					e.Cancel = true;
 					elementGridView.Rows[e.RowIndex].ErrorText =
-						"Значение должно быт положительным вещественным числом";
+						"Значение должно быть положительным вещественным числом";
 				}
 				else
 				{
@@ -208,9 +208,9 @@ namespace CircuitCalculator
 						_displayingCircuit.Elements[e.RowIndex]);
 				}
 			}
-			catch (Exception e1)
+			catch (Exception exception)
 			{
-				MessageBox.Show(e1.Message);
+				MessageBox.Show(exception.Message);
 			}
 		}
 
