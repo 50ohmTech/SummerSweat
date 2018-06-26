@@ -1,4 +1,5 @@
-﻿namespace Model.ComboBoxType
+﻿using System;
+namespace Model.ComboBoxType
 {
     /// <summary>
     ///     Тип элемента в ComboBox'е
@@ -35,7 +36,7 @@
                     case ElementType.Capacitor:
                         return "Конденсатор";
                     default:
-                        return "Ошибка";
+                        throw new ArgumentException();
                 }
             }
         }

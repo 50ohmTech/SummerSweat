@@ -47,6 +47,7 @@ namespace View
 
             _comboBoxType.Visible = false;
             _labelSelectType.Visible = false;
+
         }
 
         private void InitializeComboBoxType()

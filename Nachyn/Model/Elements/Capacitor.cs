@@ -9,9 +9,12 @@ namespace Model.Elements
     /// </summary>
     public class Capacitor : IElement
     {
-        private const string NameError = "Имя не может быть пустым";
+        /// <summary>
+        /// Описание ошибки с именем
+        /// </summary>
+        private const string _nameError = "Имя не может быть пустым";
 
-        private const string CapacitorError = "Емкость не может быть отрицательная";
+        private const string _capacitorError = "Емкость не может быть отрицательная";
 
         /// <summary>
         ///     Имя элемента
@@ -32,6 +35,7 @@ namespace Model.Elements
         {
             Name = name;
             Value = capacity;
+            
         }
 
         /// <summary>
@@ -43,7 +47,10 @@ namespace Model.Elements
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentOutOfRangeException(NameError);
+                {
+                    throw new ArgumentOutOfRangeException(_nameError);
+                }
+
                 _name = value;
             }
         }
@@ -56,7 +63,10 @@ namespace Model.Elements
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException(CapacitorError);
+                {
+                    throw new ArgumentOutOfRangeException(_capacitorError);
+                }
+
                 var oldValue = _value;
                 _value = value;
                 ValueChanged?.Invoke(this, new ElementValueArgs
