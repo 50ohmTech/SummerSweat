@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Model.Elements;
 
 namespace View
 {
@@ -21,6 +22,8 @@ namespace View
             _mainForm = new MainForm();
             Application.Run(_mainForm);
 
+
+            Console.ReadKey();
         }
     }
 }

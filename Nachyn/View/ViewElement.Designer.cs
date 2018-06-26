@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    sealed partial class Element
+    sealed partial class ViewElement
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -68,14 +68,14 @@
             this._toolStripMenuDelete.Text = "Удалить";
             this._toolStripMenuDelete.Click += new System.EventHandler(this.ToolStripMenuDeleteClick);
             // 
-            // Element
+            // ViewElement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ContextMenuStrip = this._contextMenuStrip;
             this.Controls.Add(this._labelValue);
-            this.Name = "Element";
+            this.Name = "ViewElement";
             this.Size = new System.Drawing.Size(83, 60);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ElementMouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ElementMouseMove);

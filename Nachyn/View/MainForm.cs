@@ -45,7 +45,7 @@ namespace View
             foreach (var el in _circuit.Elements) Console.WriteLine(el + " " + el.Name + " " + el.Value);
 
             Console.WriteLine("-----------");
-            foreach (Element el in _panelCircuit.Controls) Console.WriteLine(el + " " + el.Name + " " + el.Item.Name);
+            foreach (ViewElement el in _panelCircuit.Controls) Console.WriteLine(el + " " + el.Name + " " + el.Item.Name);
         }
 
         private void _toolStripButtonCalculate_Click(object sender, EventArgs e)

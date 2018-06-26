@@ -8,15 +8,15 @@ using Model.Events;
 
 namespace View
 {
-    public sealed partial class Element : UserControl
+    public sealed partial class ViewElement : UserControl
     {
         private bool _isMoves;
-
+        
         private Point _oldLocation;
 
-        private readonly ObservableCollection<IElement> _elements;
+        private readonly ObservableCollection<Element> _elements;
 
-        public Element(Bitmap image, IElement element, ObservableCollection<IElement> elements)
+        public ViewElement(Bitmap image, Element element, ObservableCollection<Element> elements)
         {
             InitializeComponent();
             BackgroundImage = image;
@@ -29,7 +29,7 @@ namespace View
             element.ValueChanged += ElementValueChanged;
         }
 
-        public IElement Item { get; }
+        public Element Item { get; }
 
         private void ElementValueChanged(object sender, ElementValueArgs arguments)
         {

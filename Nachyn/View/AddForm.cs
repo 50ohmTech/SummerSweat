@@ -13,15 +13,15 @@ namespace View
     {
         private const string ButtonEditName = "Изменить";
 
-        private readonly IElement _element;
+        private readonly Model.Elements.Element _element;
 
-        private readonly ObservableCollection<IElement> _elements;
+        private readonly ObservableCollection<Model.Elements.Element> _elements;
 
         private readonly Panel _panel;
 
         private double _value;
 
-        public AddForm(ObservableCollection<IElement> elements, Panel panel)
+        public AddForm(ObservableCollection<Model.Elements.Element> elements, Panel panel)
         {
             InitializeComponent();
             InitializeComboBoxType();
@@ -31,7 +31,7 @@ namespace View
             _buttonAdd.Enabled = false;
         }
 
-        public AddForm(IElement element)
+        public AddForm(Model.Elements.Element element)
         {
             InitializeComponent();
             InitializeComboBoxType();
@@ -74,24 +74,24 @@ namespace View
             {
                 if (_comboBoxType.SelectedItem is ElementTypeComboBoxItem currentElement)
                 {
-                    IElement newElement = null;
-                    Element newViewElement = null;
+                    Model.Elements.Element newElement = null;
+                    ViewElement newViewViewElement = null;
                     switch (currentElement.Value)
                     {
                         case ElementType.Resistor:
                             newElement = new Resistor(_textBoxName.Text, _value);
-                            newViewElement = new Element(Resources.Resistor, newElement, _elements);
+                            newViewViewElement = new ViewElement(Resources.Resistor, newElement, _elements);
                             break;
                         case ElementType.Inductor:
                             newElement = new Inductor(_textBoxName.Text, _value);
-                            newViewElement = new Element(Resources.Inductor, newElement, _elements);
+                            newViewViewElement = new ViewElement(Resources.Inductor, newElement, _elements);
                             break;
                         case ElementType.Capacitor:
                             newElement = new Capacitor(_textBoxName.Text, _value);
-                            newViewElement = new Element(Resources.Capacitor, newElement, _elements);
+                            newViewViewElement = new ViewElement(Resources.Capacitor, newElement, _elements);
                             break;
                     }
-                    _panel.Controls.Add(newViewElement ?? throw new InvalidOperationException());
+                    _panel.Controls.Add(newViewViewElement ?? throw new InvalidOperationException());
                 }
 
                 Close();

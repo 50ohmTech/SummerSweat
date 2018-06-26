@@ -13,14 +13,14 @@ namespace Model
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
-        public ObservableCollection<IElement> Elements;
+        public ObservableCollection<Element> Elements;
 
         /// <summary>
         ///     Конструктор
         /// </summary>
         public Circuit()
         {
-            Elements = new ObservableCollection<IElement>();
+            Elements = new ObservableCollection<Element>();
         }
 
         /// <summary>
