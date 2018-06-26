@@ -194,7 +194,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Выбор цепи
 		/// </summary>
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		private void circuitListComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_currentCircuit = _circuitList[circuitListComboBox.SelectedIndex];
 			_redactorForm.DisplayingCircuit = _currentCircuit;

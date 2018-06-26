@@ -92,7 +92,7 @@
 			this.circuitListComboBox.Name = "circuitListComboBox";
 			this.circuitListComboBox.Size = new System.Drawing.Size(176, 24);
 			this.circuitListComboBox.TabIndex = 6;
-			this.circuitListComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			this.circuitListComboBox.SelectedIndexChanged += new System.EventHandler(this.circuitListComboBox_SelectedIndexChanged);
 			// 
 			// FrequenciesGridView
 			// 
