@@ -10,37 +10,68 @@ namespace View
 {
     public sealed partial class ViewElement : UserControl
     {
+        //TODO: УДАЛИТЬ!
         private bool _isMoves;
-        
+
+        //TODO: УДАЛИТЬ!
         private Point _oldLocation;
 
-        private readonly ObservableCollection<Element> _elements;
+        private readonly ObservableCollection<ElementBase> _elements;
 
-        public ViewElement(Bitmap image, Element element, ObservableCollection<Element> elements)
+        private ElementBase _item;
+
+        public ViewElement(ElementBase element, ObservableCollection<ElementBase> elements)
         {
             InitializeComponent();
-            BackgroundImage = image;
 
             Item = element;
             _elements = elements;
             _elements.Add(Item);
 
             _labelValue.Text = element.Value.ToString(CultureInfo.CurrentCulture);
-            element.ValueChanged += ElementValueChanged;
         }
 
-        public Element Item { get; }
+        public ElementBase Item
+        {
+            get => _item;
+            private set
+            {
+                switch (value)
+                {
+                    case Resistor _:
+                        BackgroundImage = Properties.Resources.Resistor;
+                        break;
+
+                    case Inductor _:
+                        BackgroundImage = Properties.Resources.Inductor;
+                        break;
+                    case Capacitor _:
+                        BackgroundImage = Properties.Resources.Capacitor;
+                        break;
+
+                    case null:
+                        throw new ArgumentNullException();
+
+                    default:
+                        throw new InvalidOperationException();
+                }               
+                _item = value;
+                _item.ValueChanged += ElementValueChanged;
+            }
+        }
 
         private void ElementValueChanged(object sender, ElementValueArgs arguments)
         {
             _labelValue.Text = arguments.NewValue.ToString(CultureInfo.CurrentCulture);
         }
 
+        //TODO: УДАЛИТЬ!
         private void ElementMouseDown(object sender, MouseEventArgs e)
         {
             _isMoves = true;
         }
 
+        //TODO: УДАЛИТЬ!
         private void ElementMouseMove(object sender, MouseEventArgs e)
         {
             if (_isMoves)
@@ -50,6 +81,7 @@ namespace View
             }
         }
 
+        //TODO: УДАЛИТЬ!
         private void ElementMouseUp(object sender, MouseEventArgs e)
         {
             _isMoves = false;
@@ -58,7 +90,7 @@ namespace View
 
         private void ToolStripMenuAddClick(object sender, EventArgs e)
         {
-            new AddForm(Item).ShowDialog();
+            new AddForm(this).ShowDialog();
         }
 
         private void ToolStripMenuDeleteClick(object sender, EventArgs e)

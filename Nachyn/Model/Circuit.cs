@@ -13,33 +13,63 @@ namespace Model
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
-        public ObservableCollection<Element> Elements;
+        public ObservableCollection<Branch> Branches;
 
         /// <summary>
         ///     Конструктор
         /// </summary>
         public Circuit()
         {
-            Elements = new ObservableCollection<Element>();
+            Branches = new ObservableCollection<Branch>();
         }
 
-        /// <summary>
-        ///     Расчет комплексного сопротивления
-        ///     данного элемента
-        /// </summary>
-        /// <param name="frequencies">Частоты</param>
-        /// <returns>Комплексные сопротивления</returns>
         public List<Complex> CalculateZ(params double[] frequencies)
         {
-            var resistances = new List<Complex>();
-            foreach (var frequency in frequencies)
-            {
-                var resistance = new Complex();
-                foreach (var element in Elements) resistance += element.CalculateZ(frequency);
-                resistances.Add(resistance);
-            }
+            List<Complex> resistanceZ = new List<Complex>();
 
-            return resistances;
+            foreach (double frequency in frequencies)
+            {
+                Dictionary<string, List<Branch>>
+                    tempBranches = new Dictionary<string, List<Branch>>();
+
+                foreach (Branch branch in Branches)
+                {
+                    string branchKey = branch.NodeIn + "_" + branch.NodeOut;
+                    if (!tempBranches.ContainsKey(branchKey))
+                    {
+                        tempBranches[branchKey] = new List<Branch>();
+                    }
+
+                    tempBranches[branchKey].Add(branch);
+                }
+
+                Complex resistanceTempBranches = new Complex();
+                foreach (string key in tempBranches.Keys)
+                {
+                    if (tempBranches[key].Count > 1)
+                    {
+                        Complex totalСonductivity = new Complex();
+
+                        foreach (Branch branch in tempBranches[key])
+                        {
+                            Complex conduction = 1 / branch.CalculateZ(frequency);
+                            totalСonductivity += conduction;
+                        }
+
+                        resistanceTempBranches += 1 / totalСonductivity;
+                    }
+                    else
+                    {
+                        if (tempBranches[key].Count == 1)
+                        {
+                            resistanceTempBranches +=
+                                tempBranches[key][0].CalculateZ(frequency);
+                        }
+                    }
+                }
+                resistanceZ.Add(resistanceTempBranches);
+            }
+            return resistanceZ;
         }
     }
 }

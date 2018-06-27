@@ -6,7 +6,7 @@ namespace Model.Elements
     /// <summary>
     ///     Катушка индуктивности
     /// </summary>
-    public class Inductor : Element
+    public class Inductor : ElementBase
     {
         /// <summary>
         ///     Конструктор

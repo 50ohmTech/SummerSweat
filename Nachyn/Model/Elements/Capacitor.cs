@@ -6,7 +6,7 @@ namespace Model.Elements
     /// <summary>
     ///     Конденсатор
     /// </summary>
-    public class Capacitor : Element
+    public class Capacitor : ElementBase
     {
         /// <summary>
         ///     Конструктор

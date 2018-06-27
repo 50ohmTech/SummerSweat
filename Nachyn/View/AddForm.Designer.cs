@@ -74,6 +74,7 @@
             // 
             // _buttonAdd
             // 
+            this._buttonAdd.Enabled = false;
             this._buttonAdd.Location = new System.Drawing.Point(15, 91);
             this._buttonAdd.Name = "_buttonAdd";
             this._buttonAdd.Size = new System.Drawing.Size(151, 23);

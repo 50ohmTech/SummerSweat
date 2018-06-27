@@ -4,7 +4,7 @@ using Model.Events;
 
 namespace Model.Elements
 {
-    public abstract class Element
+    public abstract class ElementBase
     {
         private string _name;
 
@@ -15,7 +15,7 @@ namespace Model.Elements
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="value">Номинал</param>
-        protected Element(string name, double value = 0)
+        protected ElementBase(string name, double value = 0)
         {
             Name = name;
             Value = value;

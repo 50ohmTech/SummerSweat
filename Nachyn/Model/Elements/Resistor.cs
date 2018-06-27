@@ -5,7 +5,7 @@ namespace Model.Elements
     /// <summary>
     ///     Резистор
     /// </summary>
-    public class Resistor : Element
+    public class Resistor : ElementBase
     {
         /// <summary>
         ///     Конструктор
