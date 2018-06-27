@@ -5,8 +5,14 @@ namespace Gpt.Model
 {
     public abstract class Element
     {
+        /// <summary>
+        ///     Имя элемента
+        /// </summary>
         private string _name;
 
+        /// <summary>
+        ///     Значение элемента
+        /// </summary>
         private double _value;
 
         /// <summary>
@@ -30,7 +36,7 @@ namespace Gpt.Model
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(Name));
+                    throw new ArgumentNullException(nameof(Name));
                 }
 
                 _name = value;
