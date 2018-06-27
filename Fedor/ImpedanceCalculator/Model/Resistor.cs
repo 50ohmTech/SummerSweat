@@ -5,7 +5,7 @@ namespace Model
     /// <summary>
     /// Резистор.
     /// </summary>
-    class Resistor : Element
+    public class Resistor : Element
     {
         #region – – Публичные методы – –
 

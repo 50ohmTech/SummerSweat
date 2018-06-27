@@ -6,7 +6,7 @@ namespace Model
     /// <summary>
     /// Катушка индуктивности.
     /// </summary>
-    class Inductor : Element
+    public class Inductor : Element
     {
         #region – – Публичные методы – –
 

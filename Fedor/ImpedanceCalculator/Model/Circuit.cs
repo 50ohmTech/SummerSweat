@@ -8,7 +8,7 @@ namespace Model
     /// <summary>
     /// Электрическая цепь.
     /// </summary>
-    class Circuit
+    public class Circuit
     {
         #region - - Свойства - -
 
