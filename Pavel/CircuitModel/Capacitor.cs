@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace CircuitCalculator
+namespace CircuitModel
 {
     /// <summary>
     /// Конденсатор
@@ -20,7 +20,7 @@ namespace CircuitCalculator
         /// <summary>
         /// Расчет импеданса
         /// </summary>
-        /// <param name="f">Частота сигнала</param>
+        /// <param name="frequency">Частота сигнала</param>
         /// <returns></returns>
         public override Complex CalculateZ(double frequency)
         {

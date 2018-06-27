@@ -7,8 +7,8 @@
     <ProjectGuid>{8F14EB09-44DC-460B-BEA9-CCCB65F812D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CircuitCalculator</RootNamespace>
-    <AssemblyName>CircuitCalculator</AssemblyName>
+    <RootNamespace>CircuitModel</RootNamespace>
+    <AssemblyName>CircuitModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

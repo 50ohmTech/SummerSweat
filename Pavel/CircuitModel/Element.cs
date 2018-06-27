@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace CircuitCalculator
+namespace CircuitModel
 {
     /// <summary>
     /// Элемент цепи

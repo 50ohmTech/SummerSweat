@@ -1,18 +1,19 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
-namespace CircuitCalculator
+namespace CircuitModel
 {
     /// <summary>
-    /// Резистор
+    /// Катушка индуктивности
     /// </summary>
-    public class Resistor:Element
+    public class Inductor:Element
     {
         /// <summary>
-        /// Конструктор класса Resistor
+        /// Конструктор класса Inductor
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="value">Номинал</param>
-        public Resistor(string name, double value) : base(name, value)
+        public Inductor(string name, double value) : base(name, value)
         {
         }
 
@@ -20,10 +21,10 @@ namespace CircuitCalculator
         /// Расчет импеданса
         /// </summary>
         /// <param name="frequency">Частота сигнала</param>
-        /// <returns>Комплекное сопротивление</returns>
+        /// <returns></returns>
         public override Complex CalculateZ(double frequency)
         {
-            return new Complex(0, Value);
+            return new Complex(0, 2 * Math.PI * frequency * Value);
         }
     }
 }

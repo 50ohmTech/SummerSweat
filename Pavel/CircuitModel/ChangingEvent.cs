@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CircuitCalculator
+namespace CircuitModel
 {
     public class ChangingEvent:EventArgs
     {

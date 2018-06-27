@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Numerics;
 
-namespace CircuitCalculator
+namespace CircuitModel
 {
     /// <summary>
     /// Электрическая цепь
