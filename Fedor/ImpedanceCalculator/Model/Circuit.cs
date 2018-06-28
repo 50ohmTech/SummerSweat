@@ -24,9 +24,9 @@ namespace Model
         /// <summary>
         /// Конструктор класса Circuit.
         /// </summary>
-        public Circuit()
+        public Circuit(ObservableCollection<Element> elements)
         {
-            Elements = new ObservableCollection<Element>();
+            Elements = elements;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Model
         /// </summary>
         /// <param name="frequencies"> Список частот сигнала. </param>
         /// <returns> Список импедансов цепи. </returns>
-        public List<Complex> CalculateZ(double[] frequencies)
+        public List<Complex> CalculateZ(List<double> frequencies)
         {
             var impedances = new List<Complex>();
 

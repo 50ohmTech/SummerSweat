@@ -37,11 +37,10 @@
             this.circuitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.circuitComboBox.FormattingEnabled = true;
             this.circuitComboBox.Items.AddRange(new object[] {
+            "Создать цепь",
             "Цепь 1",
             "Цепь 2",
-            "Цепь 3",
-            "Цепь 4",
-            "Цепь 5"});
+            "Цепь 3"});
             this.circuitComboBox.Location = new System.Drawing.Point(12, 12);
             this.circuitComboBox.Name = "circuitComboBox";
             this.circuitComboBox.Size = new System.Drawing.Size(121, 24);

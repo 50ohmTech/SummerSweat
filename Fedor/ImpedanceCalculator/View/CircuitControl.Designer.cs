@@ -41,9 +41,10 @@
             this.capacitorRadioButton = new System.Windows.Forms.RadioButton();
             this.resistorRadioButton = new System.Windows.Forms.RadioButton();
             this.elementGridView = new System.Windows.Forms.DataGridView();
-            this.elementBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ElementName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ElementValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.elementBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.calculateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.addBox.SuspendLayout();
             this.typePanel.SuspendLayout();
@@ -87,7 +88,7 @@
             this.addBox.Controls.Add(this.typePanel);
             this.addBox.Location = new System.Drawing.Point(3, 291);
             this.addBox.Name = "addBox";
-            this.addBox.Size = new System.Drawing.Size(223, 184);
+            this.addBox.Size = new System.Drawing.Size(238, 184);
             this.addBox.TabIndex = 3;
             this.addBox.TabStop = false;
             this.addBox.Text = "Параметры нового элемента";
@@ -106,9 +107,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 129);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(197, 17);
+            this.label2.Size = new System.Drawing.Size(191, 17);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Введите значение элемента";
+            this.label2.Text = "Введите номинал элемента";
             // 
             // valueBox
             // 
@@ -116,6 +117,10 @@
             this.valueBox.Name = "valueBox";
             this.valueBox.Size = new System.Drawing.Size(107, 22);
             this.valueBox.TabIndex = 1;
+            this.valueBox.Text = "0";
+            this.valueBox.Enter += new System.EventHandler(this.valueBox_Enter);
+            this.valueBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValueBox_KeyPress);
+            this.valueBox.Leave += new System.EventHandler(this.valueBox_Leave);
             // 
             // typePanel
             // 
@@ -148,7 +153,6 @@
             this.capacitorRadioButton.TabStop = true;
             this.capacitorRadioButton.Text = "Конденсатор";
             this.capacitorRadioButton.UseVisualStyleBackColor = true;
-            this.capacitorRadioButton.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // resistorRadioButton
             // 
@@ -173,7 +177,7 @@
             this.elementGridView.RowTemplate.Height = 24;
             this.elementGridView.Size = new System.Drawing.Size(238, 282);
             this.elementGridView.TabIndex = 4;
-            this.elementGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.elementGridView_CellContentClick);
+            this.elementGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ElementGridView_EditingControlShowing);
             // 
             // ElementName
             // 
@@ -190,10 +194,21 @@
             this.ElementValue.HeaderText = "Value";
             this.ElementValue.Name = "ElementValue";
             // 
+            // calculateButton
+            // 
+            this.calculateButton.Location = new System.Drawing.Point(753, 481);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(175, 39);
+            this.calculateButton.TabIndex = 5;
+            this.calculateButton.Text = "Расчитать импеданс";
+            this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
+            // 
             // CircuitControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.elementGridView);
             this.Controls.Add(this.addBox);
             this.Controls.Add(this.deleteButton);
@@ -229,5 +244,6 @@
         private System.Windows.Forms.BindingSource elementBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn ElementName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ElementValue;
+        private System.Windows.Forms.Button calculateButton;
     }
 }
