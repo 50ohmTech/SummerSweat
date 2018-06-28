@@ -58,41 +58,12 @@
     <Compile Include="CircuitRedactorForm.Designer.cs">
       <DependentUpon>CircuitRedactorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\CapacitorControl.cs">
+    <Compile Include="Controls\DrawingElements.cs" />
+    <Compile Include="Controls\ElementControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\CapacitorControl.Designer.cs">
-      <DependentUpon>CapacitorControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\EndCirccuitControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\EndCirccuitControl.Designer.cs">
-      <DependentUpon>EndCirccuitControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\StartCircuitControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\StartCircuitControl.Designer.cs">
-      <DependentUpon>StartCircuitControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\ElementControlBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\ElementControlBase.Designer.cs">
-      <DependentUpon>ElementControlBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\InductorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\InductorControl.Designer.cs">
-      <DependentUpon>InductorControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\ResistorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ElementsOfCircuit\ResistorControl.Designer.cs">
-      <DependentUpon>ResistorControl.cs</DependentUpon>
+    <Compile Include="Controls\ElementControl.Designer.cs">
+      <DependentUpon>ElementControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,23 +79,8 @@
     <EmbeddedResource Include="CircuitRedactorForm.resx">
       <DependentUpon>CircuitRedactorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ElementsOfCircuit\CapacitorControl.resx">
-      <DependentUpon>CapacitorControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ElementsOfCircuit\EndCirccuitControl.resx">
-      <DependentUpon>EndCirccuitControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ElementsOfCircuit\StartCircuitControl.resx">
-      <DependentUpon>StartCircuitControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ElementsOfCircuit\ElementControlBase.resx">
-      <DependentUpon>ElementControlBase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ElementsOfCircuit\InductorControl.resx">
-      <DependentUpon>InductorControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ElementsOfCircuit\ResistorControl.resx">
-      <DependentUpon>ResistorControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ElementControl.resx">
+      <DependentUpon>ElementControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

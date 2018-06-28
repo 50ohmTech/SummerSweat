@@ -143,14 +143,14 @@ namespace CircuitCalculator
 				}
 
 				if (double.TryParse(e.FormattedValue.ToString(),
-					    out var newValue) && !(newValue <= 0))
+					    out var newValue) && !(Math.Abs(newValue) < 0.000000001))
 				{
 					return;
 				}
 
 				e.Cancel = true;
 				frequenciesGridView.Rows[e.RowIndex].ErrorText =
-					"Значение должно быт положительным вещественным числом";
+					"Значение должно быт положительным вещественным числом, большим 0.000000001 по модулю";
 			}
 		}
 
