@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Circuit
+namespace CircuitModel.Elements
 {
     /// <summary>
     ///     Конденсатор
@@ -16,7 +16,6 @@ namespace Circuit
         public Capacitor(double value, string name) : base(value, name)
         {
         }
-
 
         /// <summary>
         ///     Вернуть тип элемента

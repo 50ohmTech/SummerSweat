@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Circuit
+namespace CircuitModel.Elements
 {
     /// <summary>
     ///     Базовый класс элемента
@@ -45,7 +45,12 @@ namespace Circuit
         /// <summary>
         ///     Уникальное имя элемента
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get => _name;
+            set => _name =
+                value ?? throw new ArgumentNullException("Имя не может быть пустым!");
+        }
 
         /// <summary>
         ///     Номинал элемента

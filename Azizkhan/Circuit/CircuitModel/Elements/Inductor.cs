@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Circuit
+namespace CircuitModel.Elements
 {
     /// <summary>
     ///     Катушка индуктивности

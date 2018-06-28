@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Circuit;
+using CircuitModel.Elements;
 
 namespace CircuitView
 {
@@ -9,7 +9,7 @@ namespace CircuitView
         public AddForm()
         {
             InitializeComponent();
-            ElementControl.ReadOnly = false;
+            _elementControl.ReadOnly = false;
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace CircuitView
                 ElementBase elementBase = null;
                 try
                 {
-                   elementBase = ElementControl.Element;
+                    elementBase = _elementControl.Element;
                 }
                 catch (ArgumentException e)
                 {
@@ -35,7 +35,7 @@ namespace CircuitView
             {
                 try
                 {
-                    ElementControl.Element = value;
+                    _elementControl.Element = value;
                 }
                 catch (ArgumentException e)
                 {

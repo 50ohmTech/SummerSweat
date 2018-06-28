@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Circuit
+namespace CircuitModel.Elements
 {
     /// <summary>
     ///     Резистор
@@ -11,6 +11,7 @@ namespace Circuit
         ///     Конструктор сущности Resistor
         /// </summary>
         /// <param name="value"></param>
+        /// <param name="name"></param>
         public Resistor(double value, string name) : base(value, name)
         {
         }

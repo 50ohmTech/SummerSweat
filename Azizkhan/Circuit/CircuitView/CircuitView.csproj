@@ -51,6 +51,12 @@
     <Compile Include="AddForm.Designer.cs">
       <DependentUpon>AddForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ElementViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ElementViewControl.Designer.cs">
+      <DependentUpon>ElementViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTools.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -68,6 +74,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ElementViewControl.resx">
+      <DependentUpon>ElementViewControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -102,6 +112,15 @@
       <Project>{dd8b055b-2c0f-41aa-9b77-4da5f5f3384c}</Project>
       <Name>CircuitModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Inductor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Resistor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Capacitor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

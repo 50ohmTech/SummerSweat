@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Circuit;
 using CircuitModel;
+using CircuitModel.Elements;
 
 namespace CircuitView
 {
@@ -15,7 +15,7 @@ namespace CircuitView
         {
             InitializeComponent();
             _calculations = new Calculations();
-            FrequencyGrid.SelectedObject = _calculations;
+            _frequencyGrid.SelectedObject = _calculations;
         }
 
         private void AddElementButton_Click(object sender, EventArgs e)
