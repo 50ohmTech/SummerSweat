@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Numerics;
 using CircuitLibrary.Events;
 
-
 namespace CircuitLibrary
 {
     /// <summary>
@@ -54,7 +53,7 @@ namespace CircuitLibrary
         /// <summary>
         /// Event, when changing one of the elements of the electrical circuit
         /// </summary>
-        public event ValueStateHandle CircuitChanged;
+        public event ValueStateEventHandler CircuitChanged;
 
         #endregion Events
 

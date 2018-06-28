@@ -5,5 +5,5 @@
     /// </summary>
     /// <param name="data"></param>
     /// <param name="valueObject"></param>
-    public delegate void ValueStateHandle(object data, object valueObject);
+    public delegate void ValueStateEventHandler(object data, object valueObject);
 }

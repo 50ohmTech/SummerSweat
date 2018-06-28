@@ -1,6 +1,6 @@
 ﻿namespace CircuitUI
 {
-    partial class CalculatorForm
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -40,13 +40,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
-            // CalculatorForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(424, 343);
             this.Controls.Add(this.groupBox1);
-            this.Name = "CalculatorForm";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
 

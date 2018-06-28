@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CircuitUI
 {
-    public partial class CalculatorForm : Form
+    public partial class MainForm : Form
     {
-        public CalculatorForm()
+        public MainForm()
         {
             InitializeComponent();
         }
