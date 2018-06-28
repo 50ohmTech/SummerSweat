@@ -13,8 +13,8 @@ namespace Model
         /// <summary>
         /// Конструктор класса Inductor.
         /// </summary>
-        /// <param name="name"> Имя элемента. </param>
-        /// <param name="value"> Номинал элемента. </param>
+        /// <param name="name">Имя элемента.</param>
+        /// <param name="value">Номинал элемента.</param>
         public Inductor(string name, double value) : base(name, value)
         {
         }
@@ -22,8 +22,8 @@ namespace Model
         /// <summary>
         /// Расчитать импеданс элемента.
         /// </summary>
-        /// <param name="frequency"> Частота сигнала. </param>
-        /// <returns> Комплексное значение импеданса. </returns>
+        /// <param name="frequency">Частота сигнала.</param>
+        /// <returns> омплексное значение импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
             return new Complex(0, 2 * Math.PI * frequency * Value);

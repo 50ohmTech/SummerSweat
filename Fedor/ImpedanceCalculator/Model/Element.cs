@@ -68,8 +68,8 @@ namespace Model
         /// <summary>
         /// Конструктор класса Element.
         /// </summary>
-        /// <param name="name"> Имя элемента. </param>
-        /// <param name="value"> Номинал элемента. </param>
+        /// <param name="name">Имя элемента.</param>
+        /// <param name="value">Номинал элемента.</param>
         public Element(string name, double value)
         {
             Name = name;
@@ -79,8 +79,8 @@ namespace Model
         /// <summary>
         /// Расчитать импеданс элемента.
         /// </summary>
-        /// <param name="frequency"> Частота сигнала. </param>
-        /// <returns> Комплексное значение импеданса. </returns>
+        /// <param name="frequency">Частота сигнала.</param>
+        /// <returns>Комплексное значение импеданса.</returns>
         public abstract Complex CalculateZ(double frequency);
 
         #endregion

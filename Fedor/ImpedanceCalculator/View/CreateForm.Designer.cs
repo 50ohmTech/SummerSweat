@@ -29,7 +29,11 @@
         private void InitializeComponent()
         {
             this.circuitComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.calculateButton = new System.Windows.Forms.Button();
             this.circuitControl = new View.CircuitControl();
+            this.circuitPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // circuitComboBox
@@ -41,29 +45,62 @@
             "Цепь 1",
             "Цепь 2",
             "Цепь 3"});
-            this.circuitComboBox.Location = new System.Drawing.Point(12, 12);
+            this.circuitComboBox.Location = new System.Drawing.Point(127, 6);
             this.circuitComboBox.Name = "circuitComboBox";
             this.circuitComboBox.Size = new System.Drawing.Size(121, 24);
             this.circuitComboBox.TabIndex = 0;
-            this.circuitComboBox.SelectedIndexChanged += new System.EventHandler(this.circuitComboBox_SelectedIndexChanged);
+            this.circuitComboBox.SelectedIndexChanged += new System.EventHandler(this.CircuitComboBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Выберите цепь";
+            // 
+            // calculateButton
+            // 
+            this.calculateButton.Location = new System.Drawing.Point(774, 565);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(158, 36);
+            this.calculateButton.TabIndex = 3;
+            this.calculateButton.Text = "Расчитать импеданс";
+            this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
             // circuitControl
             // 
-            this.circuitControl.Location = new System.Drawing.Point(12, 43);
+            this.circuitControl.Location = new System.Drawing.Point(12, 36);
             this.circuitControl.Name = "circuitControl";
-            this.circuitControl.Size = new System.Drawing.Size(992, 523);
+            this.circuitControl.Size = new System.Drawing.Size(931, 523);
             this.circuitControl.TabIndex = 1;
+            // 
+            // circuitPictureBox
+            // 
+            this.circuitPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.circuitPictureBox.Location = new System.Drawing.Point(264, 6);
+            this.circuitPictureBox.Name = "circuitPictureBox";
+            this.circuitPictureBox.Size = new System.Drawing.Size(668, 553);
+            this.circuitPictureBox.TabIndex = 4;
+            this.circuitPictureBox.TabStop = false;
             // 
             // CreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1087, 600);
+            this.ClientSize = new System.Drawing.Size(944, 606);
+            this.Controls.Add(this.circuitPictureBox);
+            this.Controls.Add(this.calculateButton);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.circuitControl);
             this.Controls.Add(this.circuitComboBox);
             this.Name = "CreateForm";
             this.Text = "Circuit Calculator";
+            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -71,6 +108,9 @@
 
         private System.Windows.Forms.ComboBox circuitComboBox;
         private CircuitControl circuitControl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button calculateButton;
+        private System.Windows.Forms.PictureBox circuitPictureBox;
     }
 }
 

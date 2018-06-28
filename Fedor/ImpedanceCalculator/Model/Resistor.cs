@@ -12,8 +12,8 @@ namespace Model
         /// <summary>
         /// Конструктор класса Resistor.
         /// </summary>
-        /// <param name="name"> Имя элемента. </param>
-        /// <param name="value"> Номинал элемента. </param>
+        /// <param name="name">Имя элемента.</param>
+        /// <param name="value">Номинал элемента.</param>
         public Resistor(string name, double value) : base(name, value)
         {
         }
@@ -21,8 +21,8 @@ namespace Model
         /// <summary>
         /// Расчитать импеданс элемента.
         /// </summary>
-        /// <param name="frequency"> Частота сигнала. </param>
-        /// <returns> Комплексное значение импеданса. </returns>
+        /// <param name="frequency">Частота сигнала.</param>
+        /// <returns>Комплексное значение импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
             return new Complex(Value, 0);

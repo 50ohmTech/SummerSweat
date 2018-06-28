@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.addButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addBox = new System.Windows.Forms.GroupBox();
@@ -44,28 +43,17 @@
             this.ElementName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ElementValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.elementBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.calculateButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.addBox.SuspendLayout();
             this.typePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.elementBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(247, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(681, 472);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // addButton
             // 
             this.addButton.Location = new System.Drawing.Point(3, 481);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(175, 39);
+            this.addButton.Size = new System.Drawing.Size(116, 39);
             this.addButton.TabIndex = 1;
             this.addButton.Text = "Добавить";
             this.addButton.UseVisualStyleBackColor = true;
@@ -73,9 +61,9 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(184, 481);
+            this.deleteButton.Location = new System.Drawing.Point(125, 481);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(175, 39);
+            this.deleteButton.Size = new System.Drawing.Size(116, 39);
             this.deleteButton.TabIndex = 2;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -118,9 +106,9 @@
             this.valueBox.Size = new System.Drawing.Size(107, 22);
             this.valueBox.TabIndex = 1;
             this.valueBox.Text = "0";
-            this.valueBox.Enter += new System.EventHandler(this.valueBox_Enter);
+            this.valueBox.Enter += new System.EventHandler(this.ValueBox_Enter);
             this.valueBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValueBox_KeyPress);
-            this.valueBox.Leave += new System.EventHandler(this.valueBox_Leave);
+            this.valueBox.Leave += new System.EventHandler(this.ValueBox_Leave);
             // 
             // typePanel
             // 
@@ -194,29 +182,16 @@
             this.ElementValue.HeaderText = "Value";
             this.ElementValue.Name = "ElementValue";
             // 
-            // calculateButton
-            // 
-            this.calculateButton.Location = new System.Drawing.Point(753, 481);
-            this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(175, 39);
-            this.calculateButton.TabIndex = 5;
-            this.calculateButton.Text = "Расчитать импеданс";
-            this.calculateButton.UseVisualStyleBackColor = true;
-            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
-            // 
             // CircuitControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.elementGridView);
             this.Controls.Add(this.addBox);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.addButton);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "CircuitControl";
-            this.Size = new System.Drawing.Size(931, 524);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Size = new System.Drawing.Size(244, 524);
             this.addBox.ResumeLayout(false);
             this.addBox.PerformLayout();
             this.typePanel.ResumeLayout(false);
@@ -228,8 +203,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.GroupBox addBox;
@@ -244,6 +217,5 @@
         private System.Windows.Forms.BindingSource elementBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn ElementName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ElementValue;
-        private System.Windows.Forms.Button calculateButton;
     }
 }

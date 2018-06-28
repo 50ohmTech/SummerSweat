@@ -15,7 +15,7 @@ namespace Model
         /// <summary>
         /// Коллекция элементов цепи.
         /// </summary>
-        public ObservableCollection<Element> Elements { get; set; }
+        public List<Element> Elements { get; set; }
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace Model
         /// <summary>
         /// Конструктор класса Circuit.
         /// </summary>
-        public Circuit(ObservableCollection<Element> elements)
+        public Circuit(List<Element> elements)
         {
             Elements = elements;
         }
@@ -32,8 +32,8 @@ namespace Model
         /// <summary>
         /// Расчитать импедансы цепи для списка частот.
         /// </summary>
-        /// <param name="frequencies"> Список частот сигнала. </param>
-        /// <returns> Список импедансов цепи. </returns>
+        /// <param name="frequencies">Список частот сигнала.</param>
+        /// <returns>Список импедансов цепи.</returns>
         public List<Complex> CalculateZ(List<double> frequencies)
         {
             var impedances = new List<Complex>();

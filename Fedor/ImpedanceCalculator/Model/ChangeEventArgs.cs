@@ -22,7 +22,7 @@ namespace Model
         /// <summary>
         /// Конструктор класса ChangedEventArgs.
         /// </summary>
-        /// <param name="value"> Новое значение. </param>
+        /// <param name="value">Новое значение.</param>
         public ChangedEventArgs(double value)
         {
             Value = value;
