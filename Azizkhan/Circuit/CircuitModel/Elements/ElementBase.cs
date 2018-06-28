@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace Circuit
 {
@@ -8,14 +9,15 @@ namespace Circuit
     public abstract class ElementBase
     {
         /// <summary>
-        ///     Уникальное имя элемента
+        ///     Конструктор базовой сущности
         /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        ///     Номинал элемента
-        /// </summary>
-        public abstract double Value { get; set; }
+        /// <param name="value"></param>
+        /// <param name="name"></param>
+        public ElementBase(double value, string name)
+        {
+            Value = value;
+            Name = name;
+        }
 
         /// <summary>
         ///     Метод для расчёта импеданса
@@ -23,5 +25,53 @@ namespace Circuit
         /// <param name="frequency"></param>
         /// <returns></returns>
         public abstract Complex CalculateZ(double frequency);
+
+        #region --- Поля ---
+
+        /// <summary>
+        ///     Имя
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        ///     Номинал
+        /// </summary>
+        private double _value;
+
+        #endregion --- Поля ---
+
+        #region --- Свойства ---
+
+        /// <summary>
+        ///     Уникальное имя элемента
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Номинал элемента
+        /// </summary>
+        public double Value
+        {
+            get => Value;
+            set
+            {
+                if (value > 0)
+                {
+                    _value = value;
+                }
+                else
+                {
+                    throw new ArgumentException(
+                        "Номинал элемента не должен быть меньше или равен 0!");
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Вернуть тип элемента
+        /// </summary>
+        public abstract ElementType Type { get; }
+
+        #endregion --- Свойства ---
     }
 }

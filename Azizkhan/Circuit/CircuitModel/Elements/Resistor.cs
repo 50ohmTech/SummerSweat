@@ -1,5 +1,4 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace Circuit
 {
@@ -12,30 +11,14 @@ namespace Circuit
         ///     Конструктор сущности Resistor
         /// </summary>
         /// <param name="value"></param>
-        public Resistor(double value)
+        public Resistor(double value, string name) : base(value, name)
         {
-            Value = value;
         }
 
         /// <summary>
-        ///     Вернуть и установить номинал Resistor
+        ///     Вернуть тип элемента
         /// </summary>
-        public sealed override double Value
-        {
-            get => Value;
-            set
-            {
-                if (value > 0)
-                {
-                    Value = value;
-                }
-                else
-                {
-                    throw new ArgumentException(
-                        "Сопротивление не должно быть меньше или равно 0!");
-                }
-            }
-        }
+        public override ElementType Type => ElementType.Resistor;
 
         /// <summary>
         ///     Метод для расчёта импеданса у резистора

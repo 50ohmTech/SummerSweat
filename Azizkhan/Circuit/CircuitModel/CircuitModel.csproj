@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculations.cs" />
+    <Compile Include="ElementFactory.cs" />
     <Compile Include="Elements\Capacitor.cs" />
     <Compile Include="Circuit.cs" />
     <Compile Include="Elements\ElementBase.cs" />

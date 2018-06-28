@@ -28,14 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.AddButton = new System.Windows.Forms.Button();
+            this.ElementControl = new CircuitView.ModifyObject();
             this.SuspendLayout();
+            // 
+            // AddButton
+            // 
+            this.AddButton.Location = new System.Drawing.Point(27, 152);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(75, 23);
+            this.AddButton.TabIndex = 1;
+            this.AddButton.Text = "Добавить!";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // ElementControl
+            // 
+            //this.ElementControl.Element = null;
+            this.ElementControl.Location = new System.Drawing.Point(-2, -1);
+            this.ElementControl.Name = "ElementControl";
+            this.ElementControl.ReadOnly = false;
+            this.ElementControl.Size = new System.Drawing.Size(139, 147);
+            this.ElementControl.TabIndex = 2;
             // 
             // AddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(176, 297);
+            this.ClientSize = new System.Drawing.Size(136, 175);
+            this.Controls.Add(this.ElementControl);
+            this.Controls.Add(this.AddButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddForm";
@@ -44,5 +69,7 @@
         }
 
         #endregion
+        private System.Windows.Forms.Button AddButton;
+        private ModifyObject ElementControl;
     }
 }

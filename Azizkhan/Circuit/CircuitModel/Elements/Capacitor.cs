@@ -9,24 +9,19 @@ namespace Circuit
     internal class Capacitor : ElementBase
     {
         /// <summary>
-        ///     Вернуть и установить ёмкость
+        ///     Конструктор сущности Конденсатор
         /// </summary>
-        public override double Value
+        /// <param name="value"></param>
+        /// <param name="name"></param>
+        public Capacitor(double value, string name) : base(value, name)
         {
-            get => Value;
-            set
-            {
-                if (value > 0)
-                {
-                    Value = value;
-                }
-                else
-                {
-                    throw new ArgumentException(
-                        "Ёмкость не должна быть меньше или равно 0!");
-                }
-            }
         }
+
+
+        /// <summary>
+        ///     Вернуть тип элемента
+        /// </summary>
+        public override ElementType Type => ElementType.Capacitor;
 
         /// <summary>
         ///     Расчёт импеданса для конденсатора

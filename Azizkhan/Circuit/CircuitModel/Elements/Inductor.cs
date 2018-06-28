@@ -9,24 +9,18 @@ namespace Circuit
     internal class Inductor : ElementBase
     {
         /// <summary>
-        ///     Вернуть и установить индуктивность
+        ///     Конструктор сущности Катушка индуктивности
         /// </summary>
-        public override double Value
+        /// <param name="value"></param>
+        /// <param name="name"></param>
+        public Inductor(double value, string name) : base(value, name)
         {
-            get => Value;
-            set
-            {
-                if (value > 0)
-                {
-                    Value = value;
-                }
-                else
-                {
-                    throw new ArgumentException(
-                        "Индуктивность не должна быть меньше или равно 0!");
-                }
-            }
         }
+
+        /// <summary>
+        ///     Вернуть тип элемента
+        /// </summary>
+        public override ElementType Type => ElementType.Inductor;
 
         /// <summary>
         ///     Метод для расчёта импеданса катушки индуктивности

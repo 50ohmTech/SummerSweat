@@ -40,7 +40,7 @@
             this.AddElementButton.TabIndex = 1;
             this.AddElementButton.Text = "Добавить элемент";
             this.AddElementButton.UseVisualStyleBackColor = true;
-            this.AddElementButton.Click += new System.EventHandler(this.AddFrequencyButton_Click);
+            this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
             // 
             // FrequencyGrid
             // 

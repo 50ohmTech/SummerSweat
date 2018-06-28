@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CircuitModel
 {
     public sealed class Calculations
     {
+        public Calculations()
+        {
+            Frequencies = new List<double>();
+            Impedances = new List<Complex>();
+        }
+
         [DisplayName("Частоты")]
         [Description("Список частот для расчёта импедансов.")]
         [Category("Данные для расчета")]
@@ -19,11 +21,5 @@ namespace CircuitModel
         [Description("Результаты для каждой частоты")]
         [Category("Результаты")]
         public List<Complex> Impedances { get; set; }
-
-        public Calculations()
-        {
-            Frequencies = new List<double>();
-            Impedances = new List<Complex>();
-        }
     }
 }
