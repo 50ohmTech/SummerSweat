@@ -10,9 +10,11 @@ namespace Model.Elements
         /// <summary>
         ///     Конструктор
         /// </summary>
+        /// <param name="branch">Ветвь</param>
         /// <param name="name">Имя</param>
         /// <param name="resistance">Сопротивление</param>
-        public Resistor(string name, double resistance = 0) : base(name, resistance)
+        public Resistor(Branch branch, string name, double resistance = 0) : base(branch,
+            name, resistance)
         {
         }
 

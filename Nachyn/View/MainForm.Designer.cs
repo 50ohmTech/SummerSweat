@@ -31,49 +31,48 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this._panelCircuit = new System.Windows.Forms.Panel();
             this._toolStripMainMenu = new System.Windows.Forms.ToolStrip();
-            this._toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            this._toolStripButtonControlPanel = new System.Windows.Forms.ToolStripButton();
             this._toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripButtonClearCircuit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripButtonCalculate = new System.Windows.Forms.ToolStripButton();
-            this.button1 = new System.Windows.Forms.Button();
             this._propertyGrid = new System.Windows.Forms.PropertyGrid();
-            this.button2 = new System.Windows.Forms.Button();
             this._toolStripMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // _panelCircuit
             // 
             this._panelCircuit.AutoScroll = true;
+            this._panelCircuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this._panelCircuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this._panelCircuit.Location = new System.Drawing.Point(12, 28);
             this._panelCircuit.Name = "_panelCircuit";
-            this._panelCircuit.Size = new System.Drawing.Size(600, 202);
+            this._panelCircuit.Size = new System.Drawing.Size(617, 304);
             this._panelCircuit.TabIndex = 0;
             // 
             // _toolStripMainMenu
             // 
             this._toolStripMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._toolStripButtonAdd,
+            this._toolStripButtonControlPanel,
             this._toolStripSeparator1,
             this._toolStripButtonClearCircuit,
             this.toolStripSeparator1,
             this._toolStripButtonCalculate});
             this._toolStripMainMenu.Location = new System.Drawing.Point(0, 0);
             this._toolStripMainMenu.Name = "_toolStripMainMenu";
-            this._toolStripMainMenu.Size = new System.Drawing.Size(703, 25);
+            this._toolStripMainMenu.Size = new System.Drawing.Size(925, 25);
             this._toolStripMainMenu.TabIndex = 1;
             this._toolStripMainMenu.Text = "_toolStripMainMenu";
             // 
-            // _toolStripButtonAdd
+            // _toolStripButtonControlPanel
             // 
-            this._toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this._toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButtonAdd.Image")));
-            this._toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonAdd.Name = "_toolStripButtonAdd";
-            this._toolStripButtonAdd.Size = new System.Drawing.Size(63, 22);
-            this._toolStripButtonAdd.Text = "Добавить";
-            this._toolStripButtonAdd.Click += new System.EventHandler(this.ToolStripButtonAddClick);
+            this._toolStripButtonControlPanel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this._toolStripButtonControlPanel.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButtonControlPanel.Image")));
+            this._toolStripButtonControlPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonControlPanel.Name = "_toolStripButtonControlPanel";
+            this._toolStripButtonControlPanel.Size = new System.Drawing.Size(120, 22);
+            this._toolStripButtonControlPanel.Text = "Панель управления";
+            this._toolStripButtonControlPanel.Click += new System.EventHandler(this.ToolStripButtonAdd_Click);
             // 
             // _toolStripSeparator1
             // 
@@ -88,7 +87,7 @@
             this._toolStripButtonClearCircuit.Name = "_toolStripButtonClearCircuit";
             this._toolStripButtonClearCircuit.Size = new System.Drawing.Size(92, 22);
             this._toolStripButtonClearCircuit.Text = "Очистить цепь";
-            this._toolStripButtonClearCircuit.Click += new System.EventHandler(this._toolStripButtonClearCircuit_Click);
+            this._toolStripButtonClearCircuit.Click += new System.EventHandler(this.ToolStripButtonClearCircuit_Click);
             // 
             // toolStripSeparator1
             // 
@@ -103,46 +102,25 @@
             this._toolStripButtonCalculate.Name = "_toolStripButtonCalculate";
             this._toolStripButtonCalculate.Size = new System.Drawing.Size(132, 22);
             this._toolStripButtonCalculate.Text = "Расчитать импедансы";
-            this._toolStripButtonCalculate.Click += new System.EventHandler(this._toolStripButtonCalculate_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(618, 51);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this._toolStripButtonCalculate.Click += new System.EventHandler(this.ToolStripButtonCalculate_Click);
             // 
             // _propertyGrid
             // 
-            this._propertyGrid.Location = new System.Drawing.Point(12, 236);
+            this._propertyGrid.Location = new System.Drawing.Point(635, 28);
             this._propertyGrid.Name = "_propertyGrid";
-            this._propertyGrid.Size = new System.Drawing.Size(337, 140);
+            this._propertyGrid.Size = new System.Drawing.Size(278, 304);
             this._propertyGrid.TabIndex = 3;
             this._propertyGrid.ToolbarVisible = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(618, 80);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 406);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(925, 344);
             this.Controls.Add(this._propertyGrid);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this._toolStripMainMenu);
             this.Controls.Add(this._panelCircuit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Расчет импедансов";
@@ -157,13 +135,11 @@
 
         private System.Windows.Forms.Panel _panelCircuit;
         private System.Windows.Forms.ToolStrip _toolStripMainMenu;
-        private System.Windows.Forms.ToolStripButton _toolStripButtonAdd;
+        private System.Windows.Forms.ToolStripButton _toolStripButtonControlPanel;
         private System.Windows.Forms.ToolStripButton _toolStripButtonClearCircuit;
         private System.Windows.Forms.ToolStripSeparator _toolStripSeparator1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton _toolStripButtonCalculate;
-        private System.Windows.Forms.Button button2;
     }
 }

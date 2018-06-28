@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Numerics;
-using Model.Elements;
 
 namespace Model
 {
@@ -25,34 +24,33 @@ namespace Model
 
         public List<Complex> CalculateZ(params double[] frequencies)
         {
-            List<Complex> resistanceZ = new List<Complex>();
+            var resistanceZ = new List<Complex>();
 
-            foreach (double frequency in frequencies)
+            foreach (var frequency in frequencies)
             {
-                Dictionary<string, List<Branch>>
+                var
                     tempBranches = new Dictionary<string, List<Branch>>();
 
-                foreach (Branch branch in Branches)
+                foreach (var branch in Branches)
                 {
-                    string branchKey = branch.NodeIn + "_" + branch.NodeOut;
-                    if (!tempBranches.ContainsKey(branchKey))
+                    if (!tempBranches.ContainsKey(branch.Key))
                     {
-                        tempBranches[branchKey] = new List<Branch>();
+                        tempBranches[branch.Key] = new List<Branch>();
                     }
 
-                    tempBranches[branchKey].Add(branch);
+                    tempBranches[branch.Key].Add(branch);
                 }
 
-                Complex resistanceTempBranches = new Complex();
-                foreach (string key in tempBranches.Keys)
+                var resistanceTempBranches = new Complex();
+                foreach (var key in tempBranches.Keys)
                 {
                     if (tempBranches[key].Count > 1)
                     {
-                        Complex totalСonductivity = new Complex();
+                        var totalСonductivity = new Complex();
 
-                        foreach (Branch branch in tempBranches[key])
+                        foreach (var branch in tempBranches[key])
                         {
-                            Complex conduction = 1 / branch.CalculateZ(frequency);
+                            var conduction = 1 / branch.CalculateZ(frequency);
                             totalСonductivity += conduction;
                         }
 

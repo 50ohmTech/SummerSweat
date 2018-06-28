@@ -11,9 +11,11 @@ namespace Model.Elements
         /// <summary>
         ///     Конструктор
         /// </summary>
+        /// <param name="branch">Ветвь</param>
         /// <param name="name">Имя</param>
         /// <param name="inductance">Индуктивность</param>
-        public Inductor(string name, double inductance = 0) : base(name, inductance)
+        public Inductor(Branch branch, string name, double inductance = 0) : base(branch,
+            name, inductance)
         {
         }
 

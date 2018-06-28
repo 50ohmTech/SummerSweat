@@ -1,31 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Numerics;
 using Model.Elements;
+using Model.Events;
 
 namespace Model
 {
     public sealed class Branch
     {
+        public static event CollectionChangedEventHandler CollectionChanged;
+
+        public Branch(uint nodeIn, uint nodeOut)
+        {
+            Elements = new ObservableCollection<ElementBase>();
+            Elements.CollectionChanged += Elements_CollectionChanged;
+            NodeIn = nodeIn;
+            NodeOut = nodeOut;
+            Key = NodeIn + "_" + NodeOut;
+        }
+
+        private void Elements_CollectionChanged(object sender,
+            System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            CollectionChanged?.Invoke();
+        }
+
         public uint NodeIn { get; }
 
         public uint NodeOut { get; }
 
+        public string Key { get; }
+
         public ObservableCollection<ElementBase> Elements { get; }
-
-        public Branch(uint nodeIn, uint nodeOut, params ElementBase[] elements)
-        {           
-            Elements = new ObservableCollection<ElementBase>();
-
-            foreach (ElementBase element in elements)
-            {
-                Elements.Add(element);
-            }
-
-            NodeIn = nodeIn;
-            NodeOut = nodeOut;
-        }
 
         /// <summary>
         ///     Расчет комплексного сопротивления Ветви
@@ -34,8 +39,8 @@ namespace Model
         /// <returns>Комплексное сопротивление</returns>
         public Complex CalculateZ(double frequency)
         {
-            Complex resistance = new Complex();
-            foreach (ElementBase element in Elements)
+            var resistance = new Complex();
+            foreach (var element in Elements)
             {
                 resistance += element.CalculateZ(frequency);
             }

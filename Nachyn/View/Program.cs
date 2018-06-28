@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using Model;
-using Model.Elements;
 
 namespace View
 {
@@ -23,7 +20,6 @@ namespace View
             Application.SetCompatibleTextRenderingDefault(false);
             _mainForm = new MainForm();
             Application.Run(_mainForm);
-            Console.ReadKey();
         }
     }
 }

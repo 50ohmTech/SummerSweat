@@ -11,9 +11,11 @@ namespace Model.Elements
         /// <summary>
         ///     Конструктор
         /// </summary>
+        /// <param name="branch">Ветвь</param>
         /// <param name="name">Имя</param>
         /// <param name="capacity">Емкость</param>
-        public Capacitor(string name, double capacity = 0) : base(name, capacity)
+        public Capacitor(Branch branch, string name, double capacity = 0) : base(branch,
+            name, capacity)
         {
         }
 

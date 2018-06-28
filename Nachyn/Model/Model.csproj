@@ -51,6 +51,7 @@
     <Compile Include="Branch.cs" />
     <Compile Include="Elements\Capacitor.cs" />
     <Compile Include="Circuit.cs" />
+    <Compile Include="Events\CollectionChangedEventHandler.cs" />
     <Compile Include="Events\ElementValueArgs.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Inductor.cs" />

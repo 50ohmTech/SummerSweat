@@ -59,14 +59,14 @@
             this._toolStripMenuEdit.Name = "_toolStripMenuEdit";
             this._toolStripMenuEdit.Size = new System.Drawing.Size(103, 22);
             this._toolStripMenuEdit.Text = "Изменить";
-            this._toolStripMenuEdit.Click += new System.EventHandler(this.ToolStripMenuAddClick);
+            this._toolStripMenuEdit.Click += new System.EventHandler(this.ToolStripMenuAdd_Click);
             // 
             // _toolStripMenuDelete
             // 
             this._toolStripMenuDelete.Name = "_toolStripMenuDelete";
             this._toolStripMenuDelete.Size = new System.Drawing.Size(103, 22);
             this._toolStripMenuDelete.Text = "Удалить";
-            this._toolStripMenuDelete.Click += new System.EventHandler(this.ToolStripMenuDeleteClick);
+            this._toolStripMenuDelete.Click += new System.EventHandler(this.ToolStripMenuDelete_Click);
             // 
             // ViewElement
             // 
@@ -76,10 +76,7 @@
             this.ContextMenuStrip = this._contextMenuStrip;
             this.Controls.Add(this._labelValue);
             this.Name = "ViewElement";
-            this.Size = new System.Drawing.Size(83, 60);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ElementMouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ElementMouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ElementMouseUp);
+            this.Size = new System.Drawing.Size(80, 60);
             this._contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

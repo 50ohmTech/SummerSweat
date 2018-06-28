@@ -1,36 +1,38 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using Model.Elements;
 using Model.Events;
+using View.Properties;
 
 namespace View
 {
+    /// <summary>
+    ///     Визуальный элемент
+    /// </summary>
     public sealed partial class ViewElement : UserControl
     {
-        //TODO: УДАЛИТЬ!
-        private bool _isMoves;
-
-        //TODO: УДАЛИТЬ!
-        private Point _oldLocation;
-
-        private readonly ObservableCollection<ElementBase> _elements;
-
+        /// <summary>
+        ///     Элемент цепи
+        /// </summary>
         private ElementBase _item;
 
-        public ViewElement(ElementBase element, ObservableCollection<ElementBase> elements)
+        /// <summary>
+        ///     Конструктор
+        /// </summary>
+        /// <param name="element">Элемент цепи</param>
+        public ViewElement(ElementBase element)
         {
             InitializeComponent();
 
             Item = element;
-            _elements = elements;
-            _elements.Add(Item);
 
             _labelValue.Text = element.Value.ToString(CultureInfo.CurrentCulture);
         }
 
+        /// <summary>
+        ///     Элемент цепи
+        /// </summary>
         public ElementBase Item
         {
             get => _item;
@@ -39,14 +41,14 @@ namespace View
                 switch (value)
                 {
                     case Resistor _:
-                        BackgroundImage = Properties.Resources.Resistor;
+                        BackgroundImage = Resources.Resistor;
                         break;
 
                     case Inductor _:
-                        BackgroundImage = Properties.Resources.Inductor;
+                        BackgroundImage = Resources.Inductor;
                         break;
                     case Capacitor _:
-                        BackgroundImage = Properties.Resources.Capacitor;
+                        BackgroundImage = Resources.Capacitor;
                         break;
 
                     case null:
@@ -54,48 +56,26 @@ namespace View
 
                     default:
                         throw new InvalidOperationException();
-                }               
+                }
+
                 _item = value;
-                _item.ValueChanged += ElementValueChanged;
+                _item.ValueChanged += Element_ValueChanged;
             }
         }
 
-        private void ElementValueChanged(object sender, ElementValueArgs arguments)
+        private void Element_ValueChanged(object sender, ElementValueArgs arguments)
         {
             _labelValue.Text = arguments.NewValue.ToString(CultureInfo.CurrentCulture);
         }
 
-        //TODO: УДАЛИТЬ!
-        private void ElementMouseDown(object sender, MouseEventArgs e)
+        private void ToolStripMenuAdd_Click(object sender, EventArgs e)
         {
-            _isMoves = true;
+            new ControlPanel(this).ShowDialog();
         }
 
-        //TODO: УДАЛИТЬ!
-        private void ElementMouseMove(object sender, MouseEventArgs e)
+        private void ToolStripMenuDelete_Click(object sender, EventArgs e)
         {
-            if (_isMoves)
-            {
-                var newLocation = new Point(e.Location.X - _oldLocation.X, e.Location.Y - _oldLocation.Y);
-                Location = new Point(Location.X + newLocation.X, Location.Y + newLocation.Y);
-            }
-        }
-
-        //TODO: УДАЛИТЬ!
-        private void ElementMouseUp(object sender, MouseEventArgs e)
-        {
-            _isMoves = false;
-            _oldLocation = e.Location;
-        }
-
-        private void ToolStripMenuAddClick(object sender, EventArgs e)
-        {
-            new AddForm(this).ShowDialog();
-        }
-
-        private void ToolStripMenuDeleteClick(object sender, EventArgs e)
-        {
-            _elements.Remove(Item);
+            Item.Delete();
             Dispose();
         }
     }

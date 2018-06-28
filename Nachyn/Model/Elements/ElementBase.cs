@@ -13,13 +13,18 @@ namespace Model.Elements
         /// <summary>
         ///     Конструктор
         /// </summary>
+        /// <param name="branch">Ветвь</param>
         /// <param name="name">Имя</param>
         /// <param name="value">Номинал</param>
-        protected ElementBase(string name, double value = 0)
+        protected ElementBase(Branch branch, string name, double value = 0)
         {
             Name = name;
+            Branch = branch;
             Value = value;
+            branch.Elements.Add(this);
         }
+
+        public Branch Branch { get; }
 
         /// <summary>
         ///     Имя элемента
@@ -56,6 +61,11 @@ namespace Model.Elements
                     ("Изменил(ось/ась/ся) " + ToString(), oldValue, _value));
             }
             get => _value;
+        }
+
+        public void Delete()
+        {
+            Branch.Elements.Remove(this);
         }
 
         /// <summary>
