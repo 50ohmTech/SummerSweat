@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.ElementsCircuit
 {
+    /// <summary>
+    /// The capacitor element of the electric circuit
+    /// </summary>
     public sealed class Capacitor : ElementBase
     {
-        #region Constructor
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Capacitor() { }
+        #region Constructor    
 
         /// <summary>
         /// Constructor with parameters
@@ -37,10 +35,9 @@ namespace CircuitLibrary
         /// <returns></returns>
         public override Complex CalculateZ(double frequency)
         {
-            return new Complex(0, -1 * (2 * Math.PI * frequency * Value));
+            return new Complex(0, -1 / (2 * Math.PI * frequency * Value));
         }
 
         #endregion Methods
-
     }
 }

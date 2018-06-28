@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using CircuitLibrary.Events;
 
 namespace CircuitLibrary
 {
+    /// <summary>
+    /// Abstract class containing general data of all
+    /// elements of the electrical circuit
+    /// </summary>
     public abstract class ElementBase: IElement
     {
         #region Constructor
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        protected ElementBase() { }
 
         /// <summary>
         /// Constructor with parameters
@@ -23,8 +23,8 @@ namespace CircuitLibrary
         /// <param name="value"></param>
         protected ElementBase(string name, double value)
         {
-            Name = _name;
-            Value = _value;
+            Name = name;
+            Value = value;
         }
 
         #endregion Constructor
@@ -35,11 +35,11 @@ namespace CircuitLibrary
         /// The name of the element of an electric circuit  
         /// </summary>        
         private string _name;
+
         /// <summary>
         /// The value of the electrical circuit element
         /// </summary>
         private double _value;
-
 
         #endregion Fields
 
@@ -70,7 +70,6 @@ namespace CircuitLibrary
                 }
                 _name = value;
             }
-
         }
 
         /// <summary>
@@ -104,12 +103,7 @@ namespace CircuitLibrary
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        public abstract Complex CalculateZ(double f);
-
-        /// <summary>
-        /// Signal changes in the nominal value of the electrical circuit element
-        /// </summary>
-        public event StateValueHandle ValueChanged;
+        public abstract Complex CalculateZ(double f);        
 
         /// <summary>
         /// Name validation
@@ -120,7 +114,7 @@ namespace CircuitLibrary
         {
             foreach (var current in source)
             {
-                if (!IsEnglishLetter(current) && !IsNumber(current))
+                if (!IsEnglishLetter(current) && !char.IsDigit(current))
                 {
                     return false;
                 }
@@ -128,17 +122,7 @@ namespace CircuitLibrary
 
             return true;
         }
-
-        /// <summary>
-        /// Сhecking whether the number is a character
-        /// </summary>
-        /// <param name="symbol"></param>
-        /// <returns></returns>
-        private static bool IsNumber(char symbol)
-        {
-            return char.IsDigit(symbol);
-        }
-
+        
         /// <summary>
         /// Checking for the symbol of the English alphabet
         /// </summary>
@@ -151,5 +135,13 @@ namespace CircuitLibrary
 
         #endregion Methods
 
+        #region Events
+
+        /// <summary>
+        /// Signal changes in the nominal value of the electrical circuit element
+        /// </summary>
+        public event ValueStateHandle ValueChanged;
+
+        #endregion Events
     }
 }

@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.ElementsCircuit
 {
+    /// <summary>
+    /// The resistor part of the circuit
+    /// </summary>
     public sealed class Resistor : ElementBase
     {
         #region Constructor
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        Resistor() { }
 
         /// <summary>
         /// Constructor with parameters
@@ -27,7 +25,7 @@ namespace CircuitLibrary
         }
 
         #endregion Constructor
-
+    
         #region Methods
 
         /// <summary>

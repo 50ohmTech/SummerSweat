@@ -4,13 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using CircuitLibrary.Events;
 
 
 namespace CircuitLibrary
 {
+    /// <summary>
+    /// Electrical circuit
+    /// </summary>
     class Circuit
     {
         #region Constructor
+
         /// <summary>
         /// Empty constructor
         /// </summary>
@@ -32,10 +37,14 @@ namespace CircuitLibrary
                 element.ValueChanged += CircuitChanged;
             }
         }
+
         #endregion Constructor
 
         #region Properties
 
+        /// <summary>
+        /// List of electrical circuit elements
+        /// </summary>
         public List<IElement> Elements { get; set; }
 
         #endregion Properties
@@ -45,7 +54,7 @@ namespace CircuitLibrary
         /// <summary>
         /// Event, when changing one of the elements of the electrical circuit
         /// </summary>
-        public event StateValueHandle CircuitChanged;
+        public event ValueStateHandle CircuitChanged;
 
         #endregion Events
 
@@ -70,7 +79,7 @@ namespace CircuitLibrary
 
             return result;
         }
-        #endregion Methods
 
+        #endregion Methods
     }   
 }

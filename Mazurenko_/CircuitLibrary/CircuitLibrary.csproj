@@ -48,6 +48,7 @@
     <Compile Include="ElementsCircuit\Indutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementsCircuit\Resistor.cs" />
+    <Compile Include="Events\ValueChangedEventHandle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

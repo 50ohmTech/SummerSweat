@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using CircuitLibrary.Events;
 
 namespace CircuitLibrary
 {
+    /// <summary>
+    /// Interface of electrical circuit elements
+    /// </summary>
     interface IElement
     {
         #region Properties
@@ -20,7 +24,6 @@ namespace CircuitLibrary
         /// The value of the electrical circuit element
         /// </summary>
         double Value { get; set; }
-
 
         #endregion Properties
 
@@ -36,20 +39,11 @@ namespace CircuitLibrary
         #endregion Methods
 
         #region Events
-
         /// <summary>
         /// Signal changes in the nominal value of the electrical circuit element
         /// </summary>
-        event StateValueHandle ValueChanged;
+        event ValueStateHandle ValueChanged;
 
         #endregion Events
-
-    }
-
-    /// <summary>
-    /// Delegate storing the signal signature
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="valueObject"></param>
-    public delegate void StateValueHandle(object data, object valueObject);
+    }   
 }

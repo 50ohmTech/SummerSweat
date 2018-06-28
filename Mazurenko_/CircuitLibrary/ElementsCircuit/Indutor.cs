@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.ElementsCircuit
 {
+    /// <summary>
+    /// Inductance coil, element of the electrical circuit
+    /// </summary>
     public sealed class Indutor : ElementBase
     {
         #region Constructor
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Indutor() { }
 
         /// <summary>
         /// Constructor with parameters
@@ -24,6 +23,7 @@ namespace CircuitLibrary
         {
 
         }
+
         #endregion Constructor
 
         #region Methods
@@ -39,6 +39,5 @@ namespace CircuitLibrary
         }
 
         #endregion Methods
-
     }
 }
