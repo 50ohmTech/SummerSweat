@@ -133,11 +133,11 @@ namespace CircuitCalculator
 		private void FrequenciesGridView_CellValidating(object sender,
 			DataGridViewCellValidatingEventArgs e)
 		{
-			if (FrequenciesGridView.CurrentCell.ColumnIndex == 0)
+			if (frequenciesGridView.CurrentCell.ColumnIndex == 0)
 			{
-				FrequenciesGridView.Rows[e.RowIndex].ErrorText = "";
+				frequenciesGridView.Rows[e.RowIndex].ErrorText = "";
 
-				if (FrequenciesGridView.Rows[e.RowIndex].IsNewRow)
+				if (frequenciesGridView.Rows[e.RowIndex].IsNewRow)
 				{
 					return;
 				}
@@ -149,7 +149,7 @@ namespace CircuitCalculator
 				}
 
 				e.Cancel = true;
-				FrequenciesGridView.Rows[e.RowIndex].ErrorText =
+				frequenciesGridView.Rows[e.RowIndex].ErrorText =
 					"Значение должно быт положительным вещественным числом";
 			}
 		}
@@ -159,7 +159,7 @@ namespace CircuitCalculator
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void calculateButton_Click(object sender, EventArgs e)
+		private void CalculateButton_Click(object sender, EventArgs e)
 		{
 			if (_currentCircuit == null)
 			{
@@ -168,18 +168,18 @@ namespace CircuitCalculator
 			}
 			else
 			{
-				_frequencies = new double[FrequenciesGridView.RowCount - 1];
+				_frequencies = new double[frequenciesGridView.RowCount - 1];
 
-				for (var i = 0; i < FrequenciesGridView.RowCount - 1; i++)
+				for (var i = 0; i < frequenciesGridView.RowCount - 1; i++)
 				{
-					_frequencies[i] = Convert.ToDouble(FrequenciesGridView[0, i].Value);
+					_frequencies[i] = Convert.ToDouble(frequenciesGridView[0, i].Value);
 				}
 
 				var impedance = _currentCircuit.CalculateZ(_frequencies);
 
-				for (var i = 0; i < FrequenciesGridView.RowCount - 1; i++)
+				for (var i = 0; i < frequenciesGridView.RowCount - 1; i++)
 				{
-					FrequenciesGridView[1, i].Value = impedance[i].Real +
+					frequenciesGridView[1, i].Value = impedance[i].Real +
 					                                  (impedance[i].Imaginary < 0
 						                                  ? " - "
 						                                  : " + ") +
@@ -194,7 +194,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Выбор цепи
 		/// </summary>
-		private void circuitListComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		private void CircuitListComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_currentCircuit = _circuitList[circuitListComboBox.SelectedIndex];
 			_redactorForm.DisplayingCircuit = _currentCircuit;
@@ -205,12 +205,12 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Сбросить значения таблицы
 		/// </summary>
-		private void resetButton_Click(object sender, EventArgs e)
+		private void ResetButton_Click(object sender, EventArgs e)
 		{
 			calculateButton.Text = "Расчитать";
-			for (var i = 0; i < FrequenciesGridView.RowCount - 1; i++)
+			for (var i = 0; i < frequenciesGridView.RowCount - 1; i++)
 			{
-				FrequenciesGridView.Rows.Clear();
+				frequenciesGridView.Rows.Clear();
 			}
 		}
 

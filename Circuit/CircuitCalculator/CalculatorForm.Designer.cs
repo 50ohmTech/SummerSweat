@@ -31,22 +31,22 @@
 			this.instrumentsGroupBox = new System.Windows.Forms.GroupBox();
 			this.resetButton = new System.Windows.Forms.Button();
 			this.calculateButton = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
+			this.pickCircuitLabel = new System.Windows.Forms.Label();
 			this.circuitListComboBox = new System.Windows.Forms.ComboBox();
-			this.FrequenciesGridView = new System.Windows.Forms.DataGridView();
+			this.frequenciesGridView = new System.Windows.Forms.DataGridView();
 			this.Frequencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Impedances = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.instrumentsGroupBox.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.FrequenciesGridView)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.frequenciesGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// instrumentsGroupBox
 			// 
 			this.instrumentsGroupBox.Controls.Add(this.resetButton);
 			this.instrumentsGroupBox.Controls.Add(this.calculateButton);
-			this.instrumentsGroupBox.Controls.Add(this.label1);
+			this.instrumentsGroupBox.Controls.Add(this.pickCircuitLabel);
 			this.instrumentsGroupBox.Controls.Add(this.circuitListComboBox);
-			this.instrumentsGroupBox.Controls.Add(this.FrequenciesGridView);
+			this.instrumentsGroupBox.Controls.Add(this.frequenciesGridView);
 			this.instrumentsGroupBox.Location = new System.Drawing.Point(12, 12);
 			this.instrumentsGroupBox.Name = "instrumentsGroupBox";
 			this.instrumentsGroupBox.Size = new System.Drawing.Size(431, 283);
@@ -62,7 +62,7 @@
 			this.resetButton.TabIndex = 9;
 			this.resetButton.Text = "Сброс";
 			this.resetButton.UseVisualStyleBackColor = true;
-			this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+			this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
 			// 
 			// calculateButton
 			// 
@@ -72,16 +72,16 @@
 			this.calculateButton.TabIndex = 8;
 			this.calculateButton.Text = "Расчитать";
 			this.calculateButton.UseVisualStyleBackColor = true;
-			this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
+			this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
 			// 
-			// label1
+			// pickCircuitLabel
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 24);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(109, 17);
-			this.label1.TabIndex = 7;
-			this.label1.Text = "Выберите цепь";
+			this.pickCircuitLabel.AutoSize = true;
+			this.pickCircuitLabel.Location = new System.Drawing.Point(6, 24);
+			this.pickCircuitLabel.Name = "pickCircuitLabel";
+			this.pickCircuitLabel.Size = new System.Drawing.Size(109, 17);
+			this.pickCircuitLabel.TabIndex = 7;
+			this.pickCircuitLabel.Text = "Выберите цепь";
 			// 
 			// circuitListComboBox
 			// 
@@ -92,20 +92,20 @@
 			this.circuitListComboBox.Name = "circuitListComboBox";
 			this.circuitListComboBox.Size = new System.Drawing.Size(176, 24);
 			this.circuitListComboBox.TabIndex = 6;
-			this.circuitListComboBox.SelectedIndexChanged += new System.EventHandler(this.circuitListComboBox_SelectedIndexChanged);
+			this.circuitListComboBox.SelectedIndexChanged += new System.EventHandler(this.CircuitListComboBox_SelectedIndexChanged);
 			// 
-			// FrequenciesGridView
+			// frequenciesGridView
 			// 
-			this.FrequenciesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.FrequenciesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.frequenciesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.frequenciesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Frequencies,
             this.Impedances});
-			this.FrequenciesGridView.Location = new System.Drawing.Point(6, 51);
-			this.FrequenciesGridView.Name = "FrequenciesGridView";
-			this.FrequenciesGridView.RowTemplate.Height = 24;
-			this.FrequenciesGridView.Size = new System.Drawing.Size(419, 193);
-			this.FrequenciesGridView.TabIndex = 5;
-			this.FrequenciesGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.FrequenciesGridView_CellValidating);
+			this.frequenciesGridView.Location = new System.Drawing.Point(6, 51);
+			this.frequenciesGridView.Name = "frequenciesGridView";
+			this.frequenciesGridView.RowTemplate.Height = 24;
+			this.frequenciesGridView.Size = new System.Drawing.Size(419, 193);
+			this.frequenciesGridView.TabIndex = 5;
+			this.frequenciesGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.FrequenciesGridView_CellValidating);
 			// 
 			// Frequencies
 			// 
@@ -132,18 +132,18 @@
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CalculatorForm_FormClosed);
 			this.instrumentsGroupBox.ResumeLayout(false);
 			this.instrumentsGroupBox.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.FrequenciesGridView)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.frequenciesGridView)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 		private System.Windows.Forms.GroupBox instrumentsGroupBox;
-		private System.Windows.Forms.DataGridView FrequenciesGridView;
+		private System.Windows.Forms.DataGridView frequenciesGridView;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Frequencies;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Impedances;
 		private System.Windows.Forms.ComboBox circuitListComboBox;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label pickCircuitLabel;
 		private System.Windows.Forms.Button calculateButton;
 		private System.Windows.Forms.Button resetButton;
 	}

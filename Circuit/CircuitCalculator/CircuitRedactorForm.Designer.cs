@@ -37,9 +37,9 @@ namespace CircuitCalculator
 			this.inductorNameTextBox = new System.Windows.Forms.TextBox();
 			this.instrumentsGroupBox = new System.Windows.Forms.GroupBox();
 			this.testButton = new System.Windows.Forms.Button();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
+			this.addLabel = new System.Windows.Forms.Label();
+			this.valueLabel = new System.Windows.Forms.Label();
+			this.nameLabel = new System.Windows.Forms.Label();
 			this.inductorValueTextBox = new System.Windows.Forms.TextBox();
 			this.capacitorValueTextBox = new System.Windows.Forms.TextBox();
 			this.resistorValueTextBox = new System.Windows.Forms.TextBox();
@@ -61,7 +61,7 @@ namespace CircuitCalculator
 			this.addInductorButton.TabIndex = 7;
 			this.addInductorButton.Text = "Катушка индуктивности";
 			this.addInductorButton.UseVisualStyleBackColor = true;
-			this.addInductorButton.Click += new System.EventHandler(this.addInductorButton_Click);
+			this.addInductorButton.Click += new System.EventHandler(this.AddInductorButton_Click);
 			// 
 			// addCapacitorButton
 			// 
@@ -72,7 +72,7 @@ namespace CircuitCalculator
 			this.addCapacitorButton.TabIndex = 8;
 			this.addCapacitorButton.Text = "Конденсатор";
 			this.addCapacitorButton.UseVisualStyleBackColor = true;
-			this.addCapacitorButton.Click += new System.EventHandler(this.addCapacitorButton_Click);
+			this.addCapacitorButton.Click += new System.EventHandler(this.AddCapacitorButton_Click);
 			// 
 			// resistorNameTextBox
 			// 
@@ -104,9 +104,9 @@ namespace CircuitCalculator
 			// instrumentsGroupBox
 			// 
 			this.instrumentsGroupBox.Controls.Add(this.testButton);
-			this.instrumentsGroupBox.Controls.Add(this.label3);
-			this.instrumentsGroupBox.Controls.Add(this.label2);
-			this.instrumentsGroupBox.Controls.Add(this.label1);
+			this.instrumentsGroupBox.Controls.Add(this.addLabel);
+			this.instrumentsGroupBox.Controls.Add(this.valueLabel);
+			this.instrumentsGroupBox.Controls.Add(this.nameLabel);
 			this.instrumentsGroupBox.Controls.Add(this.inductorValueTextBox);
 			this.instrumentsGroupBox.Controls.Add(this.capacitorValueTextBox);
 			this.instrumentsGroupBox.Controls.Add(this.resistorValueTextBox);
@@ -131,34 +131,34 @@ namespace CircuitCalculator
 			this.testButton.TabIndex = 21;
 			this.testButton.Text = "Тестирование элементов";
 			this.testButton.UseVisualStyleBackColor = true;
-			this.testButton.Click += new System.EventHandler(this.testButton_Click);
+			this.testButton.Click += new System.EventHandler(this.TestButton_Click);
 			// 
-			// label3
+			// addLabel
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(6, 98);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(72, 17);
-			this.label3.TabIndex = 20;
-			this.label3.Text = "Добавить";
+			this.addLabel.AutoSize = true;
+			this.addLabel.Location = new System.Drawing.Point(6, 98);
+			this.addLabel.Name = "addLabel";
+			this.addLabel.Size = new System.Drawing.Size(72, 17);
+			this.addLabel.TabIndex = 20;
+			this.addLabel.Text = "Добавить";
 			// 
-			// label2
+			// valueLabel
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(6, 52);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(65, 17);
-			this.label2.TabIndex = 19;
-			this.label2.Text = "Значние";
+			this.valueLabel.AutoSize = true;
+			this.valueLabel.Location = new System.Drawing.Point(6, 52);
+			this.valueLabel.Name = "valueLabel";
+			this.valueLabel.Size = new System.Drawing.Size(65, 17);
+			this.valueLabel.TabIndex = 19;
+			this.valueLabel.Text = "Значние";
 			// 
-			// label1
+			// nameLabel
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 24);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(72, 17);
-			this.label1.TabIndex = 18;
-			this.label1.Text = "Название";
+			this.nameLabel.AutoSize = true;
+			this.nameLabel.Location = new System.Drawing.Point(6, 24);
+			this.nameLabel.Name = "nameLabel";
+			this.nameLabel.Size = new System.Drawing.Size(72, 17);
+			this.nameLabel.TabIndex = 18;
+			this.nameLabel.Text = "Название";
 			// 
 			// inductorValueTextBox
 			// 
@@ -196,7 +196,7 @@ namespace CircuitCalculator
 			this.addResistorButton.TabIndex = 6;
 			this.addResistorButton.Text = "Резистор";
 			this.addResistorButton.UseVisualStyleBackColor = true;
-			this.addResistorButton.Click += new System.EventHandler(this.addResistorButton_Click);
+			this.addResistorButton.Click += new System.EventHandler(this.AddResistorButton_Click);
 			// 
 			// elementGridView
 			// 
@@ -211,7 +211,7 @@ namespace CircuitCalculator
 			this.elementGridView.RowTemplate.Height = 24;
 			this.elementGridView.Size = new System.Drawing.Size(414, 288);
 			this.elementGridView.TabIndex = 22;
-			this.elementGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.elementGridView_CellValidating);
+			this.elementGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.ElementGridView_CellValidating);
 			// 
 			// elementNameColumn
 			// 
@@ -237,7 +237,7 @@ namespace CircuitCalculator
 			this.redactorPanel.Size = new System.Drawing.Size(635, 353);
 			this.redactorPanel.TabIndex = 13;
 			// 
-			// CircuitRedactor
+			// CircuitRedactorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -245,7 +245,7 @@ namespace CircuitCalculator
 			this.Controls.Add(this.elementGridView);
 			this.Controls.Add(this.redactorPanel);
 			this.Controls.Add(this.instrumentsGroupBox);
-			this.Name = "CircuitRedactor";
+			this.Name = "CircuitRedactorForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "CircuitRedactor";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CircuitRedactor_FormClosed);
@@ -263,9 +263,9 @@ namespace CircuitCalculator
 		private System.Windows.Forms.TextBox capacitorNameTextBox;
 		private System.Windows.Forms.TextBox inductorNameTextBox;
 		private System.Windows.Forms.GroupBox instrumentsGroupBox;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label addLabel;
+		private System.Windows.Forms.Label valueLabel;
+		private System.Windows.Forms.Label nameLabel;
 		private System.Windows.Forms.TextBox inductorValueTextBox;
 		private System.Windows.Forms.TextBox capacitorValueTextBox;
 		private System.Windows.Forms.TextBox resistorValueTextBox;

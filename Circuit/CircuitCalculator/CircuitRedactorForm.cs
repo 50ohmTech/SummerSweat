@@ -129,7 +129,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Добавление резистора на панель
 		/// </summary>
-		private void addResistorButton_Click(object sender, EventArgs e)
+		private void AddResistorButton_Click(object sender, EventArgs e)
 		{
 			var newElementControl =
 				new ResistorControl(new Resistor(resistorNameTextBox.Text,
@@ -141,7 +141,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Добавление конденсатора на панель
 		/// </summary>
-		private void addCapacitorButton_Click(object sender, EventArgs e)
+		private void AddCapacitorButton_Click(object sender, EventArgs e)
 		{
 			var newElementControl =
 				new CapacitorControl(new Capacitor(capacitorNameTextBox.Text,
@@ -153,7 +153,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Добавление катушки индуктивности на панель
 		/// </summary>
-		private void addInductorButton_Click(object sender, EventArgs e)
+		private void AddInductorButton_Click(object sender, EventArgs e)
 		{
 			var newElementControl =
 				new InductorControl(new Inductor(inductorNameTextBox.Text,
@@ -173,7 +173,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     разместить на панели тестовые элементы
 		/// </summary>
-		private void testButton_Click(object sender, EventArgs e)
+		private void TestButton_Click(object sender, EventArgs e)
 		{
 			InitializeTestingElements();
 		}
@@ -181,7 +181,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Валидация ввода double значений в таблицу при изменении значений элементов
 		/// </summary>
-		private void elementGridView_CellValidating(object sender,
+		private void ElementGridView_CellValidating(object sender,
 			DataGridViewCellValidatingEventArgs e)
 		{
 			elementGridView.Rows[e.RowIndex].ErrorText = "";
