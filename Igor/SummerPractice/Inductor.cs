@@ -6,7 +6,7 @@ namespace Gpt.Model
     /// <summary>
     ///     Индуктивность
     /// </summary>
-    public class Inductor : Element
+    public class Inductor : ElementBase
     {
         /// <summary>
         ///     Конструктор для создание индуктивности

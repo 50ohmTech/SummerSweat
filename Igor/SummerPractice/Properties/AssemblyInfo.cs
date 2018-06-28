@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набором атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные с этой сборкой.
-[assembly: AssemblyTitle("SummerPractice")]
+[assembly: AssemblyTitle("Model")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SummerPractice")]
+[assembly: AssemblyProduct("Model")]
 [assembly: AssemblyCopyright("©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

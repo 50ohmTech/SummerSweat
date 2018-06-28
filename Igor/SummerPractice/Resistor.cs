@@ -5,7 +5,7 @@ namespace Gpt.Model
     /// <summary>
     ///     Резистор (сопротивление)
     /// </summary>
-    public class Resistor : Element
+    public class Resistor : ElementBase
     {
         /// <summary>
         ///     Конструктор для создания резистора

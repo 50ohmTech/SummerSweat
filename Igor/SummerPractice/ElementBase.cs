@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Gpt.Model
 {
-    public abstract class Element
+    public abstract class ElementBase
     {
         /// <summary>
         ///     Имя элемента
@@ -20,7 +20,7 @@ namespace Gpt.Model
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="value">Значение</param>
-        protected Element(string name, double value)
+        protected ElementBase(string name, double value)
         {
             Name = name;
             Value = value;

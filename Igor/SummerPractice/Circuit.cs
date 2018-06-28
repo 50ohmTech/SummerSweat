@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Numerics;
 
 namespace Gpt.Model
@@ -11,14 +12,22 @@ namespace Gpt.Model
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
-        public List<Element> Elements;
+        public ObservableCollection<ElementBase> Elements;
+
+        /// <summary>
+        ///     Конструктор
+        /// </summary>
+        public Circuit()
+        {
+            Elements = new ObservableCollection<ElementBase>();
+        }
 
         /// <summary>
         ///     Расчет комплексного сопротивления элементов
         /// </summary>
         /// <param name="f">Частоты</param>
         /// <returns></returns>
-        public List<Complex> CalculateZ(double[] f)
+        public List<Complex> CalculateZ(params double[] f)
         {
             var result = new List<Complex>();
 

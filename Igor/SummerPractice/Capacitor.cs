@@ -6,7 +6,7 @@ namespace Gpt.Model
     /// <summary>
     ///     Конденсатор
     /// </summary>
-    public class Capacitor : Element
+    public class Capacitor : ElementBase
     {
         /// <summary>
         ///     Конструктор для создание объекта ёмкости

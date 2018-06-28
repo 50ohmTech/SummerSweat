@@ -7,39 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Gpt.Model;
 
 namespace Gpt.View
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        private List<ElementBase> _elements;    
+        private AddForm _addForm;
+        public MainForm()
         {
             InitializeComponent();
-            ComboBoxCircuit.Items.Add("Цепь №1");
-            ComboBoxCircuit.Items.Add("Цепь №2");
-            ComboBoxCircuit.Items.Add("Цепь №3");
-            ComboBoxCircuit.Items.Add("Цепь №4");
-            ComboBoxCircuit.Items.Add("Цепь №5");
+            _addForm = new AddForm();
+            bindingSource1.DataSource = _elements;
+            dataGridView1.DataSource = bindingSource1;
+            dataGridView1.Visible = false;
+
         }
 
-        void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            string selectedCircuit = ComboBoxCircuit.SelectedItem.ToString();
-            MessageBox.Show(selectedCircuit);
-            switch (selectedCircuit)
+            _addForm.ShowDialog();
+            if (_addForm.ElementBase != null)
             {
-                case "Цепь №1":
-                    break;
-                case "Цепь №2":
-                    break;
-                case "Цепь №3":
-                    break;
-                case "Цепь №4":
-                    break;
-                case "Цепь №5":
-                    break;
+                bindingSource1.Add(_addForm.ElementBase);
+                //_elements.Add(_addForm.ElementBase);
+               // _addForm.NewElementControl = new ElementControl();
             }
-        }
 
+            panel1.Controls.Add(_addForm.NewElementControl);
+        }
     }
 }
