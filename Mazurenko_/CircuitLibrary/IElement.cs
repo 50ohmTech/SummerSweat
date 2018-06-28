@@ -42,7 +42,7 @@ namespace CircuitLibrary
         /// <summary>
         /// Signal changes in the nominal value of the electrical circuit element
         /// </summary>
-        event ValueStateHandle ValueChanged;
+        event ValueStateEventHandler ValueChanged;
 
         #endregion Events
     }   
