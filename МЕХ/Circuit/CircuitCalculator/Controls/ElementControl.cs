@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CircuitCalculator.Properties;
 using CircuitElements;
@@ -11,26 +10,12 @@ namespace CircuitCalculator.Controls
 {
 	public partial class ElementControl : UserControl
 	{
-		#region – – Поля – – 
-
-		/// <summary>
-		///     Элемент цепи, представляемый контролом
-		/// </summary>
-		private IElement _element;
-
-		/// <summary>
-		///     Координаты последнего местоположения элемента
-		/// </summary>
-		private Point _previousLocation;
-
-		#endregion – – Поля – – 
-
 		#region – – Свойства – – 
 
 		/// <summary>
 		///     Получиние и изменение элемента цепи, представляемого контролом
 		/// </summary>
-		public IElement Element
+		public Element Element
 		{
 			get => _element;
 			set
@@ -41,6 +26,7 @@ namespace CircuitCalculator.Controls
 					NameLabel.Text = _element.Name;
 					ValueTextBox.Text =
 						_element.Value.ToString(CultureInfo.InvariantCulture);
+
 					switch (value)
 					{
 						case Resistor _:
@@ -75,12 +61,26 @@ namespace CircuitCalculator.Controls
 
 		#endregion – – События – – 
 
+		#region – – Поля – – 
+
+		/// <summary>
+		///     Элемент цепи, представляемый контролом
+		/// </summary>
+		private Element _element;
+
+		/// <summary>
+		///     Координаты последнего местоположения элемента
+		/// </summary>
+		private Point _previousLocation;
+
+		#endregion – – Поля – – 
+
 		#region – – Публичные методы – – 
 
 		/// <summary>
 		///     Конструктор класса ElementControlBase для создания элементов цепи, имеющих номинал
 		/// </summary>
-		public ElementControl(IElement element)
+		public ElementControl(Element element)
 		{
 			InitializeComponent();
 			if (element != null)
@@ -90,7 +90,7 @@ namespace CircuitCalculator.Controls
 		}
 
 		/// <summary>
-		///		Конструктор класса ElementControlBase для создания элементов цепи, начального или конечного
+		///     Конструктор класса ElementControlBase для создания элементов цепи, начального или конечного
 		/// </summary>
 		/// <param name="element"></param>
 		public ElementControl(DrawingElements element)

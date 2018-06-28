@@ -1,20 +1,87 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Linq;
+using System.Numerics;
 
 namespace CircuitElements
 {
 	/// <summary>
 	///     Интерфейс элементов
 	/// </summary>
-	public interface IElement
+	public abstract class Element
 	{
 		#region – – События – – 
 
 		/// <summary>
 		///     Событие, которое загорается при смене значения элемента
 		/// </summary>
-		event ValueStateHandler ValueChanged;
+		public event ValueStateHandler ValueChanged;
 
 		#endregion – – События – –
+
+		#region – – Поля – – 
+
+		/// <summary>
+		///     Значение элемента
+		/// </summary>
+		private double _value;
+
+		/// <summary>
+		///     Имя элемента
+		/// </summary>
+		private string _name;
+
+		#endregion – – Поля – –
+
+		#region – – Свойства – – 
+
+		/// <summary>
+		///     Возвращает и задает имя элемента
+		/// </summary>
+		public string Name
+		{
+			get => _name;
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+				{
+					throw new NullReferenceException("Имя не может быть null или Empty.");
+				}
+
+				if (value.Contains(' '))
+				{
+					throw new ArgumentException("Имя не должно содержать пробелы.");
+				}
+
+				_name = value;
+			}
+		}
+
+		/// <summary>
+		///     Возвращает и задает значение элемента
+		/// </summary>
+		public double Value
+		{
+			get => _value;
+			set
+			{
+				if (double.IsNaN(value) || double.IsInfinity(value))
+				{
+					throw new ArgumentException("Значение" + value +
+					                            " не является вещесвенным числом.");
+				}
+
+				if (value <= 0)
+				{
+					throw new ArgumentException(
+						"Значение" + value + " не может быть меньше или равно 0.");
+				}
+
+				_value = value;
+				ValueChanged?.Invoke(_value, this);
+			}
+		}
+
+		#endregion – – Свойства – –
 
 		#region – – Публичные методы – – 
 
@@ -23,31 +90,20 @@ namespace CircuitElements
 		/// </summary>
 		/// <param name="f"> Частота сигнала </param>
 		/// <returns>Импеданс элемента в комплексной форме</returns>
-		Complex CalculateZ(double f);
-
-		#endregion – – Публичные методы – –
-
-		#region – – Свойства – – 
+		public abstract Complex CalculateZ(double f);
 
 		/// <summary>
-		///     Значение элемента
+		///     Конструктор элемента
 		/// </summary>
-		double Value
+		/// <param name="name"> Имя элемента </param>
+		/// <param name="value"> Значение элемента </param>
+		public Element(string name, double value)
 		{
-			get;
-			set;
+			Name = name;
+			Value = value;
 		}
 
-		/// <summary>
-		///     Имя элемента
-		/// </summary>
-		string Name
-		{
-			get;
-			set;
-		}
-
-		#endregion – – Свойства – –
+		#endregion – – Публичные методы – – 
 	}
 
 	/// <summary>

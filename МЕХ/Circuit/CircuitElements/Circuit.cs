@@ -13,7 +13,7 @@ namespace CircuitElements
 		/// <summary>
 		///     Список элементов электрической цепи
 		/// </summary>
-		public List<IElement> Elements
+		public List<Element> Elements
 		{
 			get;
 			set;
@@ -57,7 +57,7 @@ namespace CircuitElements
 		///     Конструктор
 		/// </summary>
 		/// <param name="elements"> Список элементов электрической цепи </param>
-		public Circuit(List<IElement> elements)
+		public Circuit(List<Element> elements)
 		{
 			if (elements != null && elements.Count != 0)
 			{

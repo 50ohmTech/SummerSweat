@@ -114,7 +114,7 @@ namespace CircuitCalculator
 					elementGridView.Rows.Remove(elementGridView.Rows[i]);
 				}
 			}
-			
+
 			foreach (var element in _displayingCircuit.Elements)
 			{
 				object[] elementData =
@@ -208,7 +208,6 @@ namespace CircuitCalculator
 					Convert.ToDouble(e.FormattedValue),
 					_displayingCircuit.Elements[e.RowIndex]);
 			}
-
 		}
 
 		/// <summary>
@@ -218,7 +217,9 @@ namespace CircuitCalculator
 		{
 			redactorPanel.CleanPanel();
 
-			var startingElementControl = new ElementControl(DrawingElements.StartingElement);
+			var startingElementControl =
+				new ElementControl(DrawingElements.StartingElement);
+
 			redactorPanel.AddControl(startingElementControl);
 
 			foreach (var element in _displayingCircuit.Elements)
