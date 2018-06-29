@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Numerics;
-
+using System;
 namespace CircuitModel
 {
     /// <summary>
     /// Электрическая цепь
     /// </summary>
-    class Circuit
+    public class Circuit
     {
         #region Свойства
 
         /// <summary>
         /// Коллекция элементов цепи
         /// </summary>
-        public ObservableCollection<Element> Elements { get; set; }
+        public List<Element> Elements { get; set; }
 
         #endregion
 
@@ -23,11 +23,19 @@ namespace CircuitModel
         /// <summary>
         /// Конструктор класса Circuit
         /// </summary>
-        public Circuit()
+        public Circuit(List<Element> elements)
         {
-            Elements = new ObservableCollection<Element>();
+            if (elements.Any())
+            {
+                Elements = elements;
+            }
         }
 
+        /// <summary>
+        /// Расчет импедансов цепи для списка частот
+        /// </summary>
+        /// <param name="frequencies">Частоты</param>
+        /// <returns></returns>
         public List<Complex> CalculateZ(double[] frequencies)
         {
             var impedance = new List<Complex>();
@@ -42,6 +50,14 @@ namespace CircuitModel
 
             return impedance;
         }
+
+        #endregion
+
+        #region События
+        /// <summary>
+        /// Событие, возникающее при изменении номинала элемента.
+        /// </summary>
+        public event EventHandler<ChangingEventArgs> ValueChanged;
 
         #endregion
     }

@@ -2,7 +2,7 @@
 
 namespace CircuitModel
 {
-    public class ChangingEvent:EventArgs
+    public class ChangingEventArgs:EventArgs
     {
         #region Свойства
 
@@ -19,7 +19,7 @@ namespace CircuitModel
         /// Конструктор класса ChangedEventArgs.
         /// </summary>
         /// <param name="value"> Новое номинал. </param>
-        public ChangingEvent(double value)
+        public ChangingEventArgs(double value)
         {
             Value = value;
         }

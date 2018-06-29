@@ -23,7 +23,7 @@ namespace CircuitModel
         /// <returns>Комплекное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
-            return new Complex(0, Value);
+            return new Complex(Value, 0);
         }
     }
 }

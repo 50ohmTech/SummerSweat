@@ -35,7 +35,7 @@ namespace CircuitModel
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Название элемента не может быть заполнено пробелами или быть пустым");
+                    throw new ArgumentException("Название элемента не может быть пустым или заполненным символами-разделителями");
                 }
 
                 _name = value;
@@ -52,7 +52,7 @@ namespace CircuitModel
             {
                 if (value < 0)
                 {
-                    throw new Exception("Значение должно быть больше нуля");
+                    throw new ArgumentOutOfRangeException($"Значение должно быть больше нуля");
                 }
                 _value = value;
             }
@@ -87,7 +87,7 @@ namespace CircuitModel
         /// <summary>
         /// Событие, возникающее при изменении номинала элемента.
         /// </summary>
-        public event EventHandler<ChangingEvent> ValueChanged;
+        public event EventHandler<ChangingEventArgs> ValueChanged;
 
         #endregion
     }
