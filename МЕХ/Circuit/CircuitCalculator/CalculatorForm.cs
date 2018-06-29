@@ -61,7 +61,7 @@ namespace CircuitCalculator
 		private void InitializeCircuits()
 		{
 			_circuitList = new List<Circuit>();
-			var circuitElements1 = new List<Element>();
+			var circuitElements1 = new List<ElementBase>();
 
 			circuitElements1.Add(new Capacitor("C1", 10));
 			circuitElements1.Add(new Inductor("L1", 5));
@@ -69,7 +69,7 @@ namespace CircuitCalculator
 			var circuit1 = new Circuit(circuitElements1);
 			_circuitList.Add(circuit1);
 
-			var circuitElements2 = new List<Element>();
+			var circuitElements2 = new List<ElementBase>();
 			circuitElements2.Add(new Capacitor("C1", 10));
 			circuitElements2.Add(new Capacitor("C2", 5));
 			circuitElements2.Add(new Resistor("R1", 20));
@@ -79,7 +79,7 @@ namespace CircuitCalculator
 			var circuit2 = new Circuit(circuitElements2);
 			_circuitList.Add(circuit2);
 
-			var circuitElements3 = new List<Element>();
+			var circuitElements3 = new List<ElementBase>();
 			circuitElements3.Add(new Inductor("L1", 10));
 			circuitElements3.Add(new Capacitor("C1", 5));
 			circuitElements3.Add(new Resistor("R1", 20));
@@ -89,12 +89,12 @@ namespace CircuitCalculator
 			var circuit3 = new Circuit(circuitElements3);
 			_circuitList.Add(circuit3);
 
-			var circuitElements4 = new List<Element>();
+			var circuitElements4 = new List<ElementBase>();
 			circuitElements4.Add(new Inductor("L1", 10));
 			var circuit4 = new Circuit(circuitElements4);
 			_circuitList.Add(circuit4);
 
-			var circuitElements5 = new List<Element>();
+			var circuitElements5 = new List<ElementBase>();
 			circuitElements5.Add(new Capacitor("C1", 10));
 			circuitElements5.Add(new Capacitor("C2", 5));
 			circuitElements5.Add(new Resistor("R1", 20));

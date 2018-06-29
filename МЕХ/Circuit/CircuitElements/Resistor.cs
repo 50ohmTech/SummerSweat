@@ -6,7 +6,7 @@ namespace CircuitElements
 	/// <summary>
 	///     Резистор, элемент эл. цепи
 	/// </summary>
-	public class Resistor : Element
+	public class Resistor : ElementBase
 	{
 		#region – – Публичные методы – – 
 

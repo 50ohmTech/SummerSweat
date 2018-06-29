@@ -6,7 +6,7 @@ namespace CircuitElements
 	/// <summary>
 	///     Конденсатор, элемент эл. цепи
 	/// </summary>
-	public class Capacitor : Element
+	public class Capacitor : ElementBase
 	{
 		#region – – Публичные методы – – 
 

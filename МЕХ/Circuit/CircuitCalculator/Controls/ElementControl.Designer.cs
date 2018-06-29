@@ -41,7 +41,7 @@
 			this.NameLabel.Name = "NameLabel";
 			this.NameLabel.Size = new System.Drawing.Size(58, 17);
 			this.NameLabel.TabIndex = 1;
-			this.NameLabel.Text = "element";
+			this.NameLabel.Text = "elementBase";
 			this.NameLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ElementControl_MouseDown);
 			this.NameLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ElementControl_MouseMove);
 			this.NameLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ElementControl_MouseUp);

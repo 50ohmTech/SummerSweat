@@ -6,7 +6,7 @@ namespace CircuitElements
 	/// <summary>
 	///     Катушка индуктивности, элемент эл. цепи
 	/// </summary>
-	public class Inductor : Element
+	public class Inductor : ElementBase
 	{
 		#region – – Публичные методы – – 
 

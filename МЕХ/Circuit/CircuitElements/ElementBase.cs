@@ -7,7 +7,7 @@ namespace CircuitElements
 	/// <summary>
 	///     Интерфейс элементов
 	/// </summary>
-	public abstract class Element
+	public abstract class ElementBase
 	{
 		#region – – События – – 
 
@@ -97,7 +97,7 @@ namespace CircuitElements
 		/// </summary>
 		/// <param name="name"> Имя элемента </param>
 		/// <param name="value"> Значение элемента </param>
-		public Element(string name, double value)
+		public ElementBase(string name, double value)
 		{
 			Name = name;
 			Value = value;

@@ -15,17 +15,17 @@ namespace CircuitCalculator.Controls
 		/// <summary>
 		///     Получиние и изменение элемента цепи, представляемого контролом
 		/// </summary>
-		public Element Element
+		public ElementBase ElementBase
 		{
-			get => _element;
+			get => _elementBase;
 			set
 			{
 				if (value != null)
 				{
-					_element = value;
-					NameLabel.Text = _element.Name;
+					_elementBase = value;
+					NameLabel.Text = _elementBase.Name;
 					ValueTextBox.Text =
-						_element.Value.ToString(CultureInfo.InvariantCulture);
+						_elementBase.Value.ToString(CultureInfo.InvariantCulture);
 
 					switch (value)
 					{
@@ -66,7 +66,7 @@ namespace CircuitCalculator.Controls
 		/// <summary>
 		///     Элемент цепи, представляемый контролом
 		/// </summary>
-		private Element _element;
+		private ElementBase _elementBase;
 
 		/// <summary>
 		///     Координаты последнего местоположения элемента
@@ -80,12 +80,12 @@ namespace CircuitCalculator.Controls
 		/// <summary>
 		///     Конструктор класса ElementControlBase для создания элементов цепи, имеющих номинал
 		/// </summary>
-		public ElementControl(Element element)
+		public ElementControl(ElementBase elementBase)
 		{
 			InitializeComponent();
-			if (element != null)
+			if (elementBase != null)
 			{
-				Element = element;
+				ElementBase = elementBase;
 			}
 		}
 
