@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System;
+
 namespace CircuitModel
 {
     /// <summary>
@@ -28,6 +28,10 @@ namespace CircuitModel
             if (elements.Any())
             {
                 Elements = elements;
+            }
+            foreach (var element in Elements)
+            {
+                element.ValueChanged += CircuitChanged;
             }
         }
 
@@ -57,7 +61,7 @@ namespace CircuitModel
         /// <summary>
         /// Событие, возникающее при изменении номинала элемента.
         /// </summary>
-        public event EventHandler<ChangingEventArgs> ValueChanged;
+        public event ValueEventHandler CircuitChanged;
 
         #endregion
     }

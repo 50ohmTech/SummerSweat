@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Capacitor.cs" />
-    <Compile Include="ChangingEventArgs.cs" />
     <Compile Include="Circuit.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Inductor.cs" />

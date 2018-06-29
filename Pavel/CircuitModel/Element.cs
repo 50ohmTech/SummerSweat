@@ -4,6 +4,13 @@ using System.Numerics;
 namespace CircuitModel
 {
     /// <summary>
+    /// Делегат хранящий подписчиков события ValueChanged
+    /// </summary>
+    /// <param name="value">Изменившееся значение</param>
+    /// <param name="сhangedElement">Изменившийся элемент</param>
+    public delegate void ValueEventHandler(object value, object сhangedElement);
+
+    /// <summary>
     /// Элемент цепи
     /// </summary>
     public abstract class Element
@@ -87,7 +94,7 @@ namespace CircuitModel
         /// <summary>
         /// Событие, возникающее при изменении номинала элемента.
         /// </summary>
-        public event EventHandler<ChangingEventArgs> ValueChanged;
+        public event ValueEventHandler ValueChanged;
 
         #endregion
     }
