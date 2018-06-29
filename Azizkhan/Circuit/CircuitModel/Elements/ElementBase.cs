@@ -57,7 +57,7 @@ namespace CircuitModel.Elements
         /// </summary>
         public double Value
         {
-            get => Value;
+            get => _value;
             set
             {
                 if (value > 0)

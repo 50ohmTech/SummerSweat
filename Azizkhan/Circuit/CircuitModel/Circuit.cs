@@ -42,7 +42,7 @@ namespace Circuit
         /// <returns></returns>
         public Complex[] CalculateZ(double[] frequencies)
         {
-            if (Elements == null)
+            if (_elements == null)
             {
                 throw new ArgumentException("Лист элементов пуст!");
             }
