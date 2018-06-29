@@ -13,7 +13,7 @@ namespace Gpt.Model
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="inductance">Индуктивность</param>
-        public Inductor(string name, double inductance = 0) : base(name, inductance)
+        public Inductor(string name, double inductance) : base(name, inductance)
         {
         }
 

@@ -112,5 +112,17 @@
   <ItemGroup>
     <None Include="Resources\resistor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inductor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ending_Part.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\condensator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Starting_Part.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
