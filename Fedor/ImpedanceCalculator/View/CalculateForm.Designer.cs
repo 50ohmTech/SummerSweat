@@ -1,4 +1,6 @@
-﻿namespace View
+﻿using System.Windows.Forms;
+
+namespace View
 {
     partial class CalculateForm
     {
@@ -29,8 +31,8 @@
         private void InitializeComponent()
         {
             this.circuitGridView = new System.Windows.Forms.DataGridView();
-            this.CircuitImpedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CircuitFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.impedanceColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.frequencyColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.circuitButton = new System.Windows.Forms.Button();
             this.frequencyBox = new System.Windows.Forms.GroupBox();
             this.countBox = new System.Windows.Forms.TextBox();
@@ -46,30 +48,35 @@
             // 
             // circuitGridView
             // 
+            this.circuitGridView.AllowUserToAddRows = false;
+            this.circuitGridView.AllowUserToDeleteRows = false;
+            this.circuitGridView.AllowUserToResizeColumns = false;
+            this.circuitGridView.AllowUserToResizeRows = false;
             this.circuitGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.circuitGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CircuitImpedance,
-            this.CircuitFrequency});
+            this.impedanceColomn,
+            this.frequencyColomn});
             this.circuitGridView.Location = new System.Drawing.Point(317, 12);
             this.circuitGridView.Name = "circuitGridView";
             this.circuitGridView.RowHeadersVisible = false;
             this.circuitGridView.RowTemplate.Height = 24;
+            this.circuitGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.circuitGridView.Size = new System.Drawing.Size(268, 219);
             this.circuitGridView.TabIndex = 0;
             // 
-            // CircuitImpedance
+            // impedanceColomn
             // 
-            this.CircuitImpedance.Frozen = true;
-            this.CircuitImpedance.HeaderText = "Impedance";
-            this.CircuitImpedance.Name = "CircuitImpedance";
-            this.CircuitImpedance.ReadOnly = true;
+            this.impedanceColomn.Frozen = true;
+            this.impedanceColomn.HeaderText = "Impedance";
+            this.impedanceColomn.Name = "impedanceColomn";
+            this.impedanceColomn.ReadOnly = true;
             // 
-            // CircuitFrequency
+            // frequencyColomn
             // 
-            this.CircuitFrequency.Frozen = true;
-            this.CircuitFrequency.HeaderText = "Frequency";
-            this.CircuitFrequency.Name = "CircuitFrequency";
-            this.CircuitFrequency.ReadOnly = true;
+            this.frequencyColomn.Frozen = true;
+            this.frequencyColomn.HeaderText = "Frequency";
+            this.frequencyColomn.Name = "frequencyColomn";
+            this.frequencyColomn.ReadOnly = true;
             // 
             // circuitButton
             // 
@@ -103,9 +110,9 @@
             this.countBox.Size = new System.Drawing.Size(100, 22);
             this.countBox.TabIndex = 5;
             this.countBox.Text = "0";
-            this.countBox.Enter += new System.EventHandler(this.CountBox_Enter);
-            this.countBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CountBox_KeyPress);
-            this.countBox.Leave += new System.EventHandler(this.CountBox_Leave);
+            this.countBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.countBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntTextBox_KeyPress);
+            this.countBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // intervalBox
             // 
@@ -114,9 +121,9 @@
             this.intervalBox.Size = new System.Drawing.Size(100, 22);
             this.intervalBox.TabIndex = 4;
             this.intervalBox.Text = "0";
-            this.intervalBox.Enter += new System.EventHandler(this.IntervalBox_Enter);
-            this.intervalBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntervalBox_KeyPress);
-            this.intervalBox.Leave += new System.EventHandler(this.IntervalBox_Leave);
+            this.intervalBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.intervalBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this.intervalBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // startValueBox
             // 
@@ -125,9 +132,9 @@
             this.startValueBox.Size = new System.Drawing.Size(100, 22);
             this.startValueBox.TabIndex = 3;
             this.startValueBox.Text = "0";
-            this.startValueBox.Enter += new System.EventHandler(this.StartValueBox_Enter);
-            this.startValueBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StartValueBox_KeyPress);
-            this.startValueBox.Leave += new System.EventHandler(this.StartValueBox_Leave);
+            this.startValueBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.startValueBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this.startValueBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // label3
             // 
@@ -175,6 +182,9 @@
             this.Controls.Add(this.frequencyBox);
             this.Controls.Add(this.circuitButton);
             this.Controls.Add(this.circuitGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximumSize = new System.Drawing.Size(615, 290);
+            this.MinimumSize = new System.Drawing.Size(615, 290);
             this.Name = "CalculateForm";
             this.Text = "Circuit Calculator";
             ((System.ComponentModel.ISupportInitialize)(this.circuitGridView)).EndInit();
@@ -187,8 +197,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView circuitGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CircuitImpedance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CircuitFrequency;
         private System.Windows.Forms.Button circuitButton;
         private System.Windows.Forms.GroupBox frequencyBox;
         private System.Windows.Forms.Label label3;
@@ -198,5 +206,7 @@
         private System.Windows.Forms.TextBox intervalBox;
         private System.Windows.Forms.TextBox startValueBox;
         private System.Windows.Forms.Button createFrequencyButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn impedanceColomn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn frequencyColomn;
     }
 }

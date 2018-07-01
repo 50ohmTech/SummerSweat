@@ -1,14 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 
@@ -19,30 +10,40 @@ namespace View
     /// </summary>
     public partial class CircuitControl : UserControl
     {
+        #region - - Поля - -
+
         /// <summary>
         /// Количество резисторов в цепи.
         /// </summary>
-        private uint _resistorCounter = 0;
+        private uint _resistorCounter;
 
         /// <summary>
         /// Количество конденсаторов в цепи.
         /// </summary>
-        private uint _capacitorCounter = 0;
+        private uint _capacitorCounter;
 
         /// <summary>
         /// Количество катушек индуктивности в цепи.
         /// </summary>
-        private uint _inductorCounter = 0;
+        private uint _inductorCounter;
 
         /// <summary>
         /// Список элементов цепи.
         /// </summary>
         private static List<Element> _elements;
 
+        #endregion
+
+        #region - - Свойства - -
+
         /// <summary>
         /// Электрическая цепь.
         /// </summary>
         public Circuit Circuit => new Circuit(_elements);
+
+        #endregion
+
+        #region - - Публичные методы - -
 
         /// <summary>
         /// Конструктор класса CircuitControl.
@@ -54,7 +55,13 @@ namespace View
             _elements = new List<Element>();
 
             elementBindingSource.DataSource = _elements;
-            elementGridView.DataSource = elementBindingSource;            
+            elementGridView.DataSource = elementBindingSource;      
+            
+            valueBox.ContextMenu = new ContextMenu();
+
+            _resistorCounter = 0;
+            _capacitorCounter = 0;
+            _inductorCounter = 0;
         }
 
         /// <summary>
@@ -79,16 +86,23 @@ namespace View
             }
         }
 
+        #endregion
+
+        #region - - Приватные методы - -
+
         private void AddButton_Click(object sender, EventArgs e)
         {
             NumberBox.ChangeSeparator(valueBox);
 
             var value = double.Parse(valueBox.Text);
 
-            if (value < 0.000001 || value > 10000.0)
+            if (value < double.Parse(Properties.Resources.minElementValue) ||
+                value > double.Parse(Properties.Resources.maxElementValue))
             {
                 MessageBox.Show(
-                    "Номинал элемента должен быть\n больше 0.000001 и не превышать 10000",
+                    "Номинал элемента должен быть\n больше " +
+                    Properties.Resources.minElementValue + " и не превышать " +
+                    Properties.Resources.maxElementValue,
                     "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -98,25 +112,41 @@ namespace View
             if (resistorRadioButton.Checked)
             {
                 elementBindingSource.Add(new Resistor(
-                    "R" + Convert.ToString(++_resistorCounter),
-                    Convert.ToDouble(valueBox.Text)));
+                    "R" + (++_resistorCounter).ToString(),
+                    double.Parse(valueBox.Text)));
             }
             else if (capacitorRadioButton.Checked)
             {
                 elementBindingSource.Add(new Capacitor(
-                    "C" + Convert.ToString(++_capacitorCounter),
-                    Convert.ToDouble(valueBox.Text)));
+                    "C" + (++_capacitorCounter).ToString(),
+                    double.Parse(valueBox.Text)));
             }
             else if (inductorRadioButton.Checked)
             {
                 elementBindingSource.Add(new Inductor(
-                    "I" + Convert.ToString(++_inductorCounter),
-                    Convert.ToDouble(valueBox.Text)));
+                    "I" + (++_inductorCounter).ToString(),
+                    double.Parse(valueBox.Text)));
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Выберите тип элемента", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in elementGridView.SelectedRows)
+            {
+                elementGridView.Rows.Remove(row);
             }
         }
 
         private void ElementGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
+            e.Control.ContextMenu = new ContextMenu();
+
             e.Control.KeyPress -= Cell_KeyPress;
             e.Control.KeyPress += Cell_KeyPress;
 
@@ -135,17 +165,19 @@ namespace View
             var text = ((DataGridViewTextBoxEditingControl) sender).Text;
             var index = ((DataGridViewTextBoxEditingControl) sender).EditingControlRowIndex;
 
-            if (text == string.Empty || text == ",")
+            if (!double.TryParse(text, out var value))
             {
                 ((DataGridViewTextBoxEditingControl)sender).Text =
                     ((Element)elementBindingSource[index]).Value.ToString();
 
                 return;
             }
-            if (double.Parse(text) < 0.000001 || double.Parse(text) > 10000)
+
+            if (value < double.Parse(Properties.Resources.minElementValue) ||
+                value > double.Parse(Properties.Resources.maxElementValue))
             {
-                ((DataGridViewTextBoxEditingControl)sender).Text =
-                    ((Element)elementBindingSource[index]).Value.ToString();
+                ((DataGridViewTextBoxEditingControl) sender).Text =
+                    ((Element) elementBindingSource[index]).Value.ToString();
             }
         }
 
@@ -163,5 +195,7 @@ namespace View
         {
             NumberBox.Leave(sender);
         }
+
+        #endregion
     }
 }

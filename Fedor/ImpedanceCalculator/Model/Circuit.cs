@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Numerics;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -15,7 +14,7 @@ namespace Model
         /// <summary>
         /// Коллекция элементов цепи.
         /// </summary>
-        public List<Element> Elements { get; set; }
+        public List<Element> Elements { get; }
 
         #endregion
 
@@ -36,6 +35,11 @@ namespace Model
         /// <returns>Список импедансов цепи.</returns>
         public List<Complex> CalculateZ(List<double> frequencies)
         {
+            if (frequencies == null)
+            {
+                throw new ArgumentNullException(nameof(frequencies));
+            }
+
             var impedances = new List<Complex>();
 
             foreach (var frequency in frequencies)

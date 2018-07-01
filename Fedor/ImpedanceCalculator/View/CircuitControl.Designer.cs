@@ -40,8 +40,8 @@
             this.capacitorRadioButton = new System.Windows.Forms.RadioButton();
             this.resistorRadioButton = new System.Windows.Forms.RadioButton();
             this.elementGridView = new System.Windows.Forms.DataGridView();
-            this.ElementName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ElementValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.elementBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.addBox.SuspendLayout();
             this.typePanel.SuspendLayout();
@@ -67,6 +67,7 @@
             this.deleteButton.TabIndex = 2;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // addBox
             // 
@@ -155,32 +156,39 @@
             // 
             // elementGridView
             // 
+            this.elementGridView.AllowUserToAddRows = false;
+            this.elementGridView.AllowUserToDeleteRows = false;
+            this.elementGridView.AllowUserToResizeColumns = false;
+            this.elementGridView.AllowUserToResizeRows = false;
             this.elementGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.elementGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ElementName,
-            this.ElementValue});
+            this.nameColomn,
+            this.valueColomn});
             this.elementGridView.Location = new System.Drawing.Point(3, 3);
             this.elementGridView.Name = "elementGridView";
             this.elementGridView.RowHeadersVisible = false;
             this.elementGridView.RowTemplate.Height = 24;
+            this.elementGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.elementGridView.Size = new System.Drawing.Size(238, 282);
             this.elementGridView.TabIndex = 4;
             this.elementGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ElementGridView_EditingControlShowing);
             // 
-            // ElementName
+            // nameColomn
             // 
-            this.ElementName.DataPropertyName = "Name";
-            this.ElementName.Frozen = true;
-            this.ElementName.HeaderText = "Name";
-            this.ElementName.Name = "ElementName";
-            this.ElementName.ReadOnly = true;
+            this.nameColomn.DataPropertyName = "Name";
+            this.nameColomn.Frozen = true;
+            this.nameColomn.HeaderText = "Name";
+            this.nameColomn.Name = "nameColomn";
+            this.nameColomn.ReadOnly = true;
+            this.nameColomn.Width = 70;
             // 
-            // ElementValue
+            // valueColomn
             // 
-            this.ElementValue.DataPropertyName = "Value";
-            this.ElementValue.Frozen = true;
-            this.ElementValue.HeaderText = "Value";
-            this.ElementValue.Name = "ElementValue";
+            this.valueColomn.DataPropertyName = "Value";
+            this.valueColomn.Frozen = true;
+            this.valueColomn.HeaderText = "Value";
+            this.valueColomn.Name = "valueColomn";
+            this.valueColomn.Width = 110;
             // 
             // CircuitControl
             // 
@@ -215,7 +223,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox valueBox;
         private System.Windows.Forms.BindingSource elementBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ElementName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ElementValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameColomn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valueColomn;
     }
 }

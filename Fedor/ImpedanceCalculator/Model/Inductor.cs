@@ -26,6 +26,11 @@ namespace Model
         /// <returns> омплексное значение импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (frequency <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(frequency));
+            }
+
             return new Complex(0, 2 * Math.PI * frequency * Value);
         }
 

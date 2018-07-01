@@ -1,13 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 
@@ -18,10 +10,16 @@ namespace View
     /// </summary>
     public partial class CreateForm : Form
     {
+        #region - - Свойства - -
+
         /// <summary>
         /// Электрическая цепь.
         /// </summary>
         public Circuit Circuit => circuitControl.Circuit;
+
+        #endregion
+
+        #region - - Публичные методы - -
 
         /// <summary>
         /// Конструктор класса CreateForm.
@@ -32,44 +30,53 @@ namespace View
             circuitComboBox.SelectedIndex = 0;
         }
 
+        #endregion
+
+        #region - - Приватные методы - -
+
         private void CircuitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (circuitComboBox.SelectedIndex == 0)
+            switch (circuitComboBox.SelectedIndex)
             {
-                circuitControl.Update(new List<Element>(), 0, 0, 0);
-            }
-            else if (circuitComboBox.SelectedIndex == 1)
-            {
-                var elements = new List<Element>
+                case 0:
+                    circuitControl.Update(new List<Element>(), 0, 0, 0);
+                    break;
+                case 1:
                 {
-                    new Resistor("R1", 33.333),
-                    new Resistor("R2", 50.5),
-                    new Resistor("R3", 100)
-                };
+                    var elements = new List<Element>
+                    {
+                        new Resistor("R1", 33.333),
+                        new Resistor("R2", 50.5),
+                        new Resistor("R3", 100)
+                    };
 
-                circuitControl.Update(elements, 3, 0, 0);
-            }
-            else if (circuitComboBox.SelectedIndex == 2)
-            {
-                var elements = new List<Element>
+                    circuitControl.Update(elements, 3, 0, 0);
+                    break;
+                }
+                case 2:
                 {
-                    new Capacitor("C1", 66.666),
-                    new Inductor("I1", 0.02)
-                };
+                    var elements = new List<Element>
+                    {
+                        new Capacitor("C1", 66.666),
+                        new Inductor("I1", 0.02)
+                    };
 
-                circuitControl.Update(elements, 0, 1, 1);
-            }
-            else if (circuitComboBox.SelectedIndex == 3)
-            {
-                var elements = new List<Element>
+                    circuitControl.Update(elements, 0, 1, 1);
+                    break;
+                }
+                case 3:
                 {
-                    new Resistor("R1", 95),
-                    new Capacitor("C1", 38),
-                    new Inductor("I1", 0.5),
-                    new Capacitor("C2", 32.8)
-                };
+                    var elements = new List<Element>
+                    {
+                        new Resistor("R1", 95),
+                        new Capacitor("C1", 38),
+                        new Inductor("I1", 0.5),
+                        new Capacitor("C2", 32.8)
+                    };
 
-                circuitControl.Update(elements, 1, 2, 1);
+                    circuitControl.Update(elements, 1, 2, 1);
+                    break;
+                }
             }
         }
 
@@ -82,8 +89,10 @@ namespace View
                 return;
             }
 
-            CalculateForm calculateForm = new CalculateForm {Owner = this};
+            var calculateForm = new CalculateForm {Owner = this};
             calculateForm.ShowDialog();
         }
+
+        #endregion
     }
 }

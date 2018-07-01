@@ -1,4 +1,6 @@
-﻿namespace View
+﻿using System.Windows.Forms;
+
+namespace View
 {
     partial class CreateForm
     {
@@ -74,7 +76,7 @@
             // 
             this.circuitControl.Location = new System.Drawing.Point(12, 36);
             this.circuitControl.Name = "circuitControl";
-            this.circuitControl.Size = new System.Drawing.Size(931, 523);
+            this.circuitControl.Size = new System.Drawing.Size(246, 523);
             this.circuitControl.TabIndex = 1;
             // 
             // circuitPictureBox
@@ -90,7 +92,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 606);
+            this.ClientSize = new System.Drawing.Size(962, 653);
+            this.MaximumSize = new System.Drawing.Size(962, 653);
+            this.MinimumSize = new System.Drawing.Size(962, 653);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Controls.Add(this.circuitPictureBox);
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.label1);

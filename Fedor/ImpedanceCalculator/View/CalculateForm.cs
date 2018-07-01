@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Numerics;
-using Model;
 
 namespace View
 {
@@ -18,6 +10,8 @@ namespace View
     /// </summary>
     public partial class CalculateForm : Form
     {
+        #region - - Поля - -
+
         /// <summary>
         /// Список частот сигнала.
         /// </summary>
@@ -28,6 +22,10 @@ namespace View
         /// </summary>
         private List<Complex> _impedancies;
 
+        #endregion
+
+        #region - - Публичные методы - -
+
         /// <summary>
         /// Конструктор класса CalculateForm.
         /// </summary>
@@ -35,6 +33,10 @@ namespace View
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region - - Приватные методы - -
 
         private void CreateFrequencyButton_Click(object sender, EventArgs e)
         {
@@ -46,30 +48,42 @@ namespace View
             var interval = double.Parse(intervalBox.Text);
             var count = uint.Parse(countBox.Text);
 
-            if (interval < 0.001 || interval > 10000.0)
+            if (interval < double.Parse(Properties.Resources.minFrequencyInterval) ||
+                interval > double.Parse(Properties.Resources.maxFrequencyInterval))
             {
                 MessageBox.Show(
-                    "Интервал между частотами должен быть\n не менее 0.001 и не более 1000",
+                    "Интервал между частотами должен быть\nне менее " +
+                    Properties.Resources.minFrequencyInterval + " и не более " +
+                    Properties.Resources.maxFrequencyInterval,
                     "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return;
             }
 
-            if (count < 2 || count > 100)
+            if (count < int.Parse(Properties.Resources.minFrequencyCount) ||
+                count > int.Parse(Properties.Resources.maxFrequencyCount))
             {
                 MessageBox.Show(
-                    "Количество значений должно быть\n не менее 2 и не более 100",
+                    "Количество значений должно быть\nне менее " +
+                    Properties.Resources.minFrequencyCount + " и не более " +
+                    Properties.Resources.maxFrequencyCount,
                     "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return;
             }
 
-            if (startValue < 0.001 || startValue > 500000.0)
+            if (startValue < double.Parse(Properties.Resources.minFrequencyStartValue) ||
+                startValue > double.Parse(Properties.Resources.maxFrequencyStartValue))
             {
                 MessageBox.Show(
-                    "Начальное значение длжно быть\n не менее 0.001 и не более 500000",
+                    "Начальное значение длжно быть\nне менее " +
+                    Properties.Resources.minFrequencyStartValue + " и не более " +
+                    Properties.Resources.maxFrequencyStartValue,
                     "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return;
             }
 
@@ -91,49 +105,26 @@ namespace View
             }
         }
 
-        private void StartValueBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_Enter(object sender, EventArgs e)
         {
-            NumberBox.PressDouble(e, ((TextBox) sender).Text);
+            NumberBox.Enter(sender);
         }
 
-        private void IntervalBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            NumberBox.Leave(sender);
+        }
+
+        private void DoubleTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             NumberBox.PressDouble(e, ((TextBox)sender).Text);
         }
 
-        private void CountBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void IntTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             NumberBox.PressInt(e);
         }
 
-        private void StartValueBox_Enter(object sender, EventArgs e)
-        {
-            NumberBox.Enter(sender);
-        }
-
-        private void IntervalBox_Enter(object sender, EventArgs e)
-        {
-            NumberBox.Enter(sender);
-        }
-
-        private void CountBox_Enter(object sender, EventArgs e)
-        {
-            NumberBox.Enter(sender);
-        }
-
-        private void StartValueBox_Leave(object sender, EventArgs e)
-        {
-            NumberBox.Leave(sender);
-        }
-
-        private void IntervalBox_Leave(object sender, EventArgs e)
-        {
-            NumberBox.Leave(sender);
-        }
-
-        private void CountBox_Leave(object sender, EventArgs e)
-        {
-            NumberBox.Leave(sender);
-        }
+        #endregion
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace View
 {
@@ -12,6 +7,8 @@ namespace View
     /// </summary>
     static class NumberBox
     {
+        #region - - Публичные методы - -
+
         /// <summary>
         /// Ввести вещественное значение.
         /// </summary>
@@ -52,7 +49,7 @@ namespace View
         {
             if (!(sender is TextBox textBox)) return;
 
-            if (textBox.Text == "0")
+            if (textBox.Text == Properties.Resources.defaultNumber)
             {
                 textBox.Text = string.Empty;
             }
@@ -68,7 +65,7 @@ namespace View
 
             if (textBox.Text == string.Empty)
             {
-                textBox.Text = "0";
+                textBox.Text = Properties.Resources.defaultNumber;
             }
         }
 
@@ -78,10 +75,12 @@ namespace View
         /// <param name="valueBox">Элемент управления текстового поля.</param>
         public static void ChangeSeparator(TextBox valueBox)
         {
-            if (valueBox.Text == ",")
+            if (valueBox.Text == System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator)
             {
-                valueBox.Text = "0";
+                valueBox.Text = Properties.Resources.defaultNumber;
             }
         }
+
+        #endregion
     }
 }
