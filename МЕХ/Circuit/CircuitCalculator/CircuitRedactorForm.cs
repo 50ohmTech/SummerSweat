@@ -163,14 +163,6 @@ namespace CircuitCalculator
 		}
 
 		/// <summary>
-		///     При закрытии формы, приложение завершает работу
-		/// </summary>
-		private void CircuitRedactor_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			Application.Exit();
-		}
-
-		/// <summary>
 		///     разместить на панели тестовые элементы
 		/// </summary>
 		private void TestButton_Click(object sender, EventArgs e)
@@ -184,29 +176,33 @@ namespace CircuitCalculator
 		private void ElementGridView_CellValidating(object sender,
 			DataGridViewCellValidatingEventArgs e)
 		{
-			elementGridView.Rows[e.RowIndex].ErrorText = "";
-
-			if (elementGridView.CurrentCell.ColumnIndex != 1)
+			if (elementGridView.CurrentCell.ColumnIndex == 1)
 			{
-				return;
-			}
+				if (double.TryParse(e.FormattedValue.ToString(),
+					    out var newValue) && !(newValue < 0.000000001) && e.FormattedValue.ToString().Length < 38)
+				{
+					_displayingCircuit.Elements[e.RowIndex].Value =
+						Convert.ToDouble(e.FormattedValue);
 
-			if (!double.TryParse(e.FormattedValue.ToString(), out var newDouble) ||
-			    Math.Abs(newDouble) < 0.000000001)
-			{
-				e.Cancel = true;
-				elementGridView.Rows[e.RowIndex].ErrorText =
-					"Значение должно быть положительным вещественным числом большим 0.000000001 по модулю";
-			}
-			else
-			{
-				_displayingCircuit.Elements[e.RowIndex].Value =
-					Convert.ToDouble(e.FormattedValue);
-
-				RefreshRedactor();
-				CircuitValueChanged?.Invoke(
-					Convert.ToDouble(e.FormattedValue),
-					_displayingCircuit.Elements[e.RowIndex]);
+					RefreshRedactor();
+					CircuitValueChanged?.Invoke(
+						Convert.ToDouble(e.FormattedValue),
+						_displayingCircuit.Elements[e.RowIndex]);
+				}
+				else
+				{
+					e.Cancel = true;
+					MessageBox.Show(
+						"Вводимое значение должно удовлетворять следующим условиям:\n " +
+						"-быть положительным числом,\n " +
+						"-быть вещественным или натуральным числом,\n " +
+						"-быть большим 0.000 000 001 по модулю,\n " +
+						"-длина значения не должна превышать 38 символов.\n " +
+						"-использование экспоненциальной записи не допускается.\n " +
+						"Чтобы продолжить работу, измените значение поля на удовлетворяющее данным условиям",
+						"Ошибка ввода значения частоты", MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+				}
 			}
 		}
 
@@ -257,5 +253,10 @@ namespace CircuitCalculator
 		}
 
 		#endregion – – Приватные методы – –
+
+		private void CircuitRedactorForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			e.Cancel = true;
+		}
 	}
 }

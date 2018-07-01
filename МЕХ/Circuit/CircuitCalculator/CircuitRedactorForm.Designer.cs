@@ -121,7 +121,7 @@ namespace CircuitCalculator
 			this.instrumentsGroupBox.Size = new System.Drawing.Size(432, 350);
 			this.instrumentsGroupBox.TabIndex = 12;
 			this.instrumentsGroupBox.TabStop = false;
-			this.instrumentsGroupBox.Text = "Инструменты";
+			this.instrumentsGroupBox.Text = "Инструменты редактирования цепи";
 			// 
 			// testButton
 			// 
@@ -208,6 +208,7 @@ namespace CircuitCalculator
             this.elementValueColumn});
 			this.elementGridView.Location = new System.Drawing.Point(18, 36);
 			this.elementGridView.Name = "elementGridView";
+			this.elementGridView.RowHeadersVisible = false;
 			this.elementGridView.RowTemplate.Height = 24;
 			this.elementGridView.Size = new System.Drawing.Size(414, 288);
 			this.elementGridView.TabIndex = 22;
@@ -245,10 +246,11 @@ namespace CircuitCalculator
 			this.Controls.Add(this.elementGridView);
 			this.Controls.Add(this.redactorPanel);
 			this.Controls.Add(this.instrumentsGroupBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "CircuitRedactorForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "CircuitRedactor";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CircuitRedactor_FormClosed);
+			this.Text = "Редактор цепи";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CircuitRedactorForm_FormClosing);
 			this.instrumentsGroupBox.ResumeLayout(false);
 			this.instrumentsGroupBox.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
