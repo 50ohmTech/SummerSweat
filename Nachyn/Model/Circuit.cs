@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Numerics;
 
 namespace Model
@@ -12,26 +11,26 @@ namespace Model
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
-        public ObservableCollection<Branch> Branches;
+        public List<Branch> Branches;
 
         /// <summary>
         ///     Конструктор
         /// </summary>
         public Circuit()
         {
-            Branches = new ObservableCollection<Branch>();
+            Branches = new List<Branch>();
         }
 
         public List<Complex> CalculateZ(params double[] frequencies)
         {
-            var resistanceZ = new List<Complex>();
+            List<Complex> resistanceZ = new List<Complex>();
 
-            foreach (var frequency in frequencies)
+            foreach (double frequency in frequencies)
             {
-                var
-                    tempBranches = new Dictionary<string, List<Branch>>();
+                Dictionary<string, List<Branch>> tempBranches =
+                    new Dictionary<string, List<Branch>>();
 
-                foreach (var branch in Branches)
+                foreach (Branch branch in Branches)
                 {
                     if (!tempBranches.ContainsKey(branch.Key))
                     {
@@ -41,16 +40,16 @@ namespace Model
                     tempBranches[branch.Key].Add(branch);
                 }
 
-                var resistanceTempBranches = new Complex();
-                foreach (var key in tempBranches.Keys)
+                Complex resistanceTempBranches = new Complex();
+                foreach (string key in tempBranches.Keys)
                 {
                     if (tempBranches[key].Count > 1)
                     {
-                        var totalСonductivity = new Complex();
+                        Complex totalСonductivity = new Complex();
 
-                        foreach (var branch in tempBranches[key])
+                        foreach (Branch branch in tempBranches[key])
                         {
-                            var conduction = 1 / branch.CalculateZ(frequency);
+                            Complex conduction = 1 / branch.CalculateZ(frequency);
                             totalСonductivity += conduction;
                         }
 
@@ -65,8 +64,10 @@ namespace Model
                         }
                     }
                 }
+
                 resistanceZ.Add(resistanceTempBranches);
             }
+
             return resistanceZ;
         }
     }

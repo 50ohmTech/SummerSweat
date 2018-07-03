@@ -11,11 +11,9 @@ namespace Model.Elements
         /// <summary>
         ///     Конструктор
         /// </summary>
-        /// <param name="branch">Ветвь</param>
         /// <param name="name">Имя</param>
         /// <param name="inductance">Индуктивность</param>
-        public Inductor(Branch branch, string name, double inductance = 0) : base(branch,
-            name, inductance)
+        public Inductor(string name, double inductance = 0) : base(name, inductance)
         {
         }
 
@@ -27,7 +25,7 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
-            var valueZ = 2 * Math.PI * frequency * Value;
+            double valueZ = 2 * Math.PI * frequency * Value;
             return new Complex(0, valueZ);
         }
     }

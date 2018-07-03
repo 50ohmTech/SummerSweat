@@ -37,6 +37,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripButtonCalculate = new System.Windows.Forms.ToolStripButton();
             this._propertyGrid = new System.Windows.Forms.PropertyGrid();
+            this._toolStripRandomizeCircuit = new System.Windows.Forms.ToolStripButton();
             this._toolStripMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +57,7 @@
             this._toolStripButtonControlPanel,
             this._toolStripSeparator1,
             this._toolStripButtonClearCircuit,
+            this._toolStripRandomizeCircuit,
             this.toolStripSeparator1,
             this._toolStripButtonCalculate});
             this._toolStripMainMenu.Location = new System.Drawing.Point(0, 0);
@@ -112,15 +114,26 @@
             this._propertyGrid.TabIndex = 3;
             this._propertyGrid.ToolbarVisible = false;
             // 
+            // _toolStripRandomizeCircuit
+            // 
+            this._toolStripRandomizeCircuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this._toolStripRandomizeCircuit.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripRandomizeCircuit.Image")));
+            this._toolStripRandomizeCircuit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripRandomizeCircuit.Name = "_toolStripRandomizeCircuit";
+            this._toolStripRandomizeCircuit.Size = new System.Drawing.Size(123, 22);
+            this._toolStripRandomizeCircuit.Text = "Сгенерировать цепь";
+            this._toolStripRandomizeCircuit.Click += new System.EventHandler(this.ToolStripRandomizeCircuit_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 344);
+            this.Controls.Add(this._panelCircuit);
             this.Controls.Add(this._propertyGrid);
             this.Controls.Add(this._toolStripMainMenu);
-            this.Controls.Add(this._panelCircuit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Расчет импедансов";
@@ -141,5 +154,6 @@
         private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton _toolStripButtonCalculate;
+        private System.Windows.Forms.ToolStripButton _toolStripRandomizeCircuit;
     }
 }

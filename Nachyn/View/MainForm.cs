@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Model;
+using Model.Elements;
+using Model.Factories;
 using Model.PropertyGrid;
 
 namespace View
@@ -13,10 +14,7 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
-        /// <summary>
-        ///     Цепь
-        /// </summary>
-        private readonly Circuit _circuit;
+        private static readonly Random _random = new Random();
 
         /// <summary>
         ///     Вычисления
@@ -24,10 +22,27 @@ namespace View
         private readonly Calculations _calculations;
 
         /// <summary>
+        ///     Цепь
+        /// </summary>
+        private readonly Circuit _circuit;
+
+        /// <summary>
         ///     Список визуальных элементов
         /// </summary>
-        private readonly ObservableCollection<ViewElement> _viewElements =
-            new ObservableCollection<ViewElement>();
+        private readonly List<ViewElement> _viewElements;
+
+
+        private readonly Pen pen = new Pen(Color.Black, 4);
+
+        /// <summary>
+        ///     Точечная поверхность для рисования цепи
+        /// </summary>
+        private Bitmap bitmapBackground;
+
+        /// <summary>
+        ///     Поверхность рисования GDI+
+        /// </summary>
+        private Graphics graphics;
 
         /// <summary>
         ///     Конструктор
@@ -35,10 +50,10 @@ namespace View
         public MainForm()
         {
             InitializeComponent();
+            _viewElements = new List<ViewElement>();
             _calculations = new Calculations();
             _circuit = new Circuit();
             _propertyGrid.SelectedObject = _calculations;
-            Branch.CollectionChanged += DrawCircuit;
             Paint += MainForm_Paint;
         }
 
@@ -55,18 +70,25 @@ namespace View
 
         private void ToolStripButtonClearCircuit_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Очистить цепь?",
+            DialogResult result = MessageBox.Show("Очистить цепь?",
                 "Подтвердите",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                _circuit.Branches.Clear();
-                _panelCircuit.Controls.Clear();
-                _viewElements.Clear();
-                _panelCircuit.BackgroundImage = null;
+                ClearCircuit();
             }
+        }
+
+        /// <summary>
+        ///     Очистить цепь
+        /// </summary>
+        private void ClearCircuit()
+        {
+            _circuit.Branches.Clear();
+            _viewElements.Clear();
+            ClearPanel();
         }
 
 
@@ -74,16 +96,21 @@ namespace View
         {
             _calculations.Impedances.Clear();
             _calculations.Impedances.AddRange(
-                _circuit.CalculateZ(_calculations.Frequencies.ToArray()));
+                _circuit.CalculateZ(_calculations.GetFrequencies()));
         }
 
-        Dictionary<string, Dictionary<int, List<ViewElement>>> GetViewBranches()
+        /// <summary>
+        ///     Получить визуальные элементы, распределенные
+        ///     по группам ветвей
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, Dictionary<int, List<ViewElement>>> GetViewBranches()
         {
-            var viewBranches =
+            Dictionary<string, Dictionary<int, List<ViewElement>>> viewBranches =
                 new Dictionary<string, Dictionary<int, List<ViewElement>>>();
 
-            var key = 0;
-            foreach (var branch in _circuit.Branches)
+            int key = 0;
+            foreach (Branch branch in _circuit.Branches)
             {
                 if (!viewBranches.ContainsKey(branch.Key))
                 {
@@ -91,9 +118,9 @@ namespace View
                 }
 
                 viewBranches[branch.Key][key] = new List<ViewElement>();
-                foreach (var baseElement in branch.Elements)
+                foreach (ElementBase baseElement in branch.Elements)
                 {
-                    foreach (var viewElement in _viewElements)
+                    foreach (ViewElement viewElement in _viewElements)
                     {
                         if (baseElement.Equals(viewElement.Item))
                         {
@@ -102,6 +129,7 @@ namespace View
                         }
                     }
                 }
+
                 key++;
             }
 
@@ -109,95 +137,176 @@ namespace View
         }
 
         /// <summary>
+        ///     Получить максимальное количество
+        ///     элементов в группе ветвей
+        /// </summary>
+        /// <param name="group">Группа</param>
+        /// <returns></returns>
+        private int GetMaxCountElementsInGroupBranches(
+            Dictionary<int, List<ViewElement>> group)
+        {
+            int maxCount = 0;
+            foreach (int keyBranch in group.Keys)
+            {
+                if (group[keyBranch].Count > maxCount)
+                {
+                    maxCount = group[keyBranch].Count;
+                }
+            }
+
+            return maxCount;
+        }
+
+        /// <summary>
         ///     Нарисовать цепь
         /// </summary>
-        private void DrawCircuit()
+        private void DrawCircuit(int stepEmptyLine = 5, int stepElement = 80,
+            int heightBetweenBranches = 50, int widthBetweenGroupsBranches = 20)
         {
-            _panelCircuit.BackgroundImage = null;
-            _panelCircuit.Controls.Clear();
+            ClearPanel();
 
-            var viewBranches = GetViewBranches();
-            
-            var bitmapBackground = new Bitmap(1000, 1000);
-            var pen = new Pen(Color.Black, 4);
-            var graphics = Graphics.FromImage(bitmapBackground);
+            Dictionary<string, Dictionary<int, List<ViewElement>>> viewBranches =
+                GetViewBranches();
 
-            var stepLine = 5;           
-            var stepElement = 80;
-            var stepBetweenBranchesY = 50;
-            var stepBetweenBranchesX = 20;
-            var groupBranchs = new Point(50, 50);
-            var lastX = groupBranchs.X;
+            bitmapBackground =
+                new Bitmap(_panelCircuit.Size.Width, _panelCircuit.Size.Height);
+
+            graphics = Graphics.FromImage(bitmapBackground);
+
+            Point groupBranchs = new Point(50, 50);
 
             graphics.DrawLine(pen, new Point(0, groupBranchs.Y), groupBranchs);
 
-            foreach (var keyBranchs in viewBranches.Keys)
+            foreach (string keyBranchs in viewBranches.Keys)
             {
-                var point = groupBranchs;
+                Point groupBranch = groupBranchs;
 
-                var countElements = 0;
-                var countKeys = viewBranches[keyBranchs].Keys.Count;
+                int maxCountElementsInGroup =
+                    GetMaxCountElementsInGroupBranches(viewBranches[keyBranchs]);
 
-                foreach (var keyBranch in viewBranches[keyBranchs].Keys)
+                int countGroupBranches = viewBranches[keyBranchs].Keys.Count;
+
+                if (maxCountElementsInGroup == 0)
                 {
-                    if (viewBranches[keyBranchs][keyBranch].Count > countElements)
-                    {
-                        countElements = viewBranches[keyBranchs][keyBranch].Count;
-                    }
+                    continue;
                 }
 
-                foreach (var keyBranch in viewBranches[keyBranchs].Keys)
+                foreach (int keyBranch in viewBranches[keyBranchs].Keys)
                 {
-                    var nextPoint = new Point(point.X + stepLine, point.Y);
-                    graphics.DrawLine(pen, point, nextPoint);
+                    Point startDrawingElementsPoint = new Point(
+                        groupBranch.X + stepEmptyLine,
+                        groupBranch.Y);
 
-                    foreach (var viewElement in viewBranches[keyBranchs][
+                    graphics.DrawLine(pen, groupBranch, startDrawingElementsPoint);
+
+                    foreach (ViewElement viewElement in viewBranches[keyBranchs][
                         keyBranch])
                     {
-                        viewElement.Location = new Point(nextPoint.X, nextPoint.Y - 26);
+                        viewElement.Location = new Point(startDrawingElementsPoint.X,
+                            startDrawingElementsPoint.Y - 26);
+
                         _panelCircuit.Controls.Add(viewElement);
-                        nextPoint.X += stepElement;
+                        startDrawingElementsPoint.X += stepElement;
                     }
 
-                    var startLine = new Point(point.X + stepLine, point.Y);
-                    var endLine =
-                        new Point(startLine.X + countElements * stepElement + stepLine,
-                            startLine.Y);
+                    Point leftPointHorizontalBranchLine =
+                        new Point(groupBranch.X + stepEmptyLine, groupBranch.Y);
 
-                    graphics.DrawLine(pen, startLine, endLine);
+                    Point rightPointHorizontalBranchLine =
+                        new Point(
+                            leftPointHorizontalBranchLine.X +
+                            maxCountElementsInGroup * stepElement + stepEmptyLine,
+                            leftPointHorizontalBranchLine.Y);
+
+                    graphics.DrawLine(pen, leftPointHorizontalBranchLine,
+                        rightPointHorizontalBranchLine);
 
                     if (viewBranches[keyBranchs][keyBranch].Count < 1 &&
                         viewBranches[keyBranchs].Keys.Count > 1)
                     {
                         graphics.DrawLine(new Pen(Color.Red, 4),
-                            new Point(startLine.X + stepLine, startLine.Y),
-                            new Point(endLine.X - stepLine, endLine.Y));
+                            new Point(leftPointHorizontalBranchLine.X + stepEmptyLine,
+                                leftPointHorizontalBranchLine.Y),
+                            new Point(rightPointHorizontalBranchLine.X - stepEmptyLine,
+                                rightPointHorizontalBranchLine.Y));
                     }
 
-                    point = new Point(lastX, point.Y + stepBetweenBranchesY);
+                    groupBranch = new Point(groupBranch.X,
+                        groupBranch.Y + heightBetweenBranches);
                 }
 
-                var endBorder = new Point(point.X, point.Y - stepBetweenBranchesY);
-                var startBorder = new Point(point.X,
-                    point.Y - stepBetweenBranchesY * countKeys);
+                Point lowerPointLeftBorderGroup = new Point(groupBranch.X,
+                    groupBranch.Y - heightBetweenBranches);
 
-                graphics.DrawLine(pen, endBorder, startBorder);
+                Point upperPointLeftBorderGroup = new Point(groupBranch.X,
+                    groupBranch.Y - heightBetweenBranches * countGroupBranches);
 
-                var endBorder2 =
-                    new Point(point.X + countElements * stepElement + 2 * stepLine,
-                        point.Y - stepBetweenBranchesY);
+                graphics.DrawLine(pen, lowerPointLeftBorderGroup,
+                    upperPointLeftBorderGroup);
 
-                var startBorder2 = new Point(
-                    point.X + countElements * stepElement + 2 * stepLine,
-                    point.Y - stepBetweenBranchesY * countKeys);
+                Point lowerPointRightBorderGroup =
+                    new Point(
+                        groupBranch.X + maxCountElementsInGroup * stepElement +
+                        2 * stepEmptyLine,
+                        groupBranch.Y - heightBetweenBranches);
 
-                graphics.DrawLine(pen, endBorder2, startBorder2);
-                var lastPoint = new Point(startBorder2.X + stepBetweenBranchesX, startBorder2.Y);
-                graphics.DrawLine(pen, startBorder2, lastPoint);
-                groupBranchs = lastPoint;
-                lastX = lastPoint.X;
+                Point upperPointRightBorderGroup = new Point(
+                    groupBranch.X + maxCountElementsInGroup * stepElement +
+                    2 * stepEmptyLine,
+                    groupBranch.Y - heightBetweenBranches * countGroupBranches);
+
+                graphics.DrawLine(pen, lowerPointRightBorderGroup,
+                    upperPointRightBorderGroup);
+
+                Point lastGroupPoint = new Point(
+                    upperPointRightBorderGroup.X + widthBetweenGroupsBranches,
+                    upperPointRightBorderGroup.Y);
+
+                graphics.DrawLine(pen, upperPointRightBorderGroup, lastGroupPoint);
+                groupBranchs = lastGroupPoint;
             }
+
+            graphics.Dispose();
             _panelCircuit.BackgroundImage = bitmapBackground;
+        }
+
+        /// <summary>
+        ///     Очистить панель для рисования
+        /// </summary>
+        private void ClearPanel()
+        {
+            _panelCircuit.BackgroundImage = null;
+            _panelCircuit.Controls.Clear();
+        }
+
+        private void ToolStripRandomizeCircuit_Click(object sender, EventArgs e)
+        {
+            ClearCircuit();
+
+            for (uint group = 0; group < _random.Next(2) + 1; group++)
+            {
+                for (uint branchGroup = 0;
+                    branchGroup < _random.Next(2) + 1;
+                    branchGroup++)
+                {
+                    Branch randomBranch = new Branch(group);
+
+                    for (uint countElements = 0;
+                        countElements < _random.Next(3) + 1;
+                        countElements++)
+                    {
+                        ElementBase randomElement = ElementFactory.GetRandomInstance();
+                        _viewElements.Add(new ViewElement(randomElement,
+                            randomBranch.Elements));
+
+                        randomBranch.Elements.Add(randomElement);
+                    }
+
+                    _circuit.Branches.Add(randomBranch);
+                }
+            }
+
+            DrawCircuit();
         }
     }
 }

@@ -36,20 +36,17 @@
             this._buttonAdd = new System.Windows.Forms.Button();
             this._labelName = new System.Windows.Forms.Label();
             this._textBoxName = new System.Windows.Forms.TextBox();
-            this._dataGridView1 = new System.Windows.Forms.DataGridView();
+            this._dataGridViewBranches = new System.Windows.Forms.DataGridView();
             this._groupBoxAddElement = new System.Windows.Forms.GroupBox();
             this._groupBoxEditBranch = new System.Windows.Forms.GroupBox();
             this._buttonDeleteBranchSelected = new System.Windows.Forms.Button();
             this._buttonAddBranch = new System.Windows.Forms.Button();
-            this._labelNodeOut = new System.Windows.Forms.Label();
-            this._textBoxNodeOut = new System.Windows.Forms.TextBox();
             this._textBoxNodeIn = new System.Windows.Forms.TextBox();
             this._labelNodeIn = new System.Windows.Forms.Label();
-            this.nodeInDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nodeOutDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._labelValidateBranch = new System.Windows.Forms.Label();
             this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._branchBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).BeginInit();
             this._groupBoxAddElement.SuspendLayout();
             this._groupBoxEditBranch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).BeginInit();
@@ -118,22 +115,20 @@
             this._textBoxName.TabIndex = 6;
             this._textBoxName.TextChanged += new System.EventHandler(this.TextBoxValue_TextChanged);
             // 
-            // _dataGridView1
+            // _dataGridViewBranches
             // 
-            this._dataGridView1.AllowUserToAddRows = false;
-            this._dataGridView1.AllowUserToDeleteRows = false;
-            this._dataGridView1.AutoGenerateColumns = false;
-            this._dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nodeInDataGridViewTextBoxColumn,
-            this.nodeOutDataGridViewTextBoxColumn,
+            this._dataGridViewBranches.AllowUserToAddRows = false;
+            this._dataGridViewBranches.AllowUserToDeleteRows = false;
+            this._dataGridViewBranches.AutoGenerateColumns = false;
+            this._dataGridViewBranches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._dataGridViewBranches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.keyDataGridViewTextBoxColumn});
-            this._dataGridView1.DataSource = this._branchBindingSource;
-            this._dataGridView1.Location = new System.Drawing.Point(191, 18);
-            this._dataGridView1.Name = "_dataGridView1";
-            this._dataGridView1.ReadOnly = true;
-            this._dataGridView1.Size = new System.Drawing.Size(362, 267);
-            this._dataGridView1.TabIndex = 7;
+            this._dataGridViewBranches.DataSource = this._branchBindingSource;
+            this._dataGridViewBranches.Location = new System.Drawing.Point(191, 18);
+            this._dataGridViewBranches.Name = "_dataGridViewBranches";
+            this._dataGridViewBranches.ReadOnly = true;
+            this._dataGridViewBranches.Size = new System.Drawing.Size(163, 288);
+            this._dataGridViewBranches.TabIndex = 7;
             // 
             // _groupBoxAddElement
             // 
@@ -153,22 +148,21 @@
             // 
             // _groupBoxEditBranch
             // 
+            this._groupBoxEditBranch.Controls.Add(this._labelValidateBranch);
             this._groupBoxEditBranch.Controls.Add(this._buttonDeleteBranchSelected);
             this._groupBoxEditBranch.Controls.Add(this._buttonAddBranch);
-            this._groupBoxEditBranch.Controls.Add(this._labelNodeOut);
-            this._groupBoxEditBranch.Controls.Add(this._textBoxNodeOut);
             this._groupBoxEditBranch.Controls.Add(this._textBoxNodeIn);
             this._groupBoxEditBranch.Controls.Add(this._labelNodeIn);
             this._groupBoxEditBranch.Location = new System.Drawing.Point(12, 153);
             this._groupBoxEditBranch.Name = "_groupBoxEditBranch";
-            this._groupBoxEditBranch.Size = new System.Drawing.Size(173, 132);
+            this._groupBoxEditBranch.Size = new System.Drawing.Size(173, 153);
             this._groupBoxEditBranch.TabIndex = 9;
             this._groupBoxEditBranch.TabStop = false;
             this._groupBoxEditBranch.Text = "Действия с ветвью";
             // 
             // _buttonDeleteBranchSelected
             // 
-            this._buttonDeleteBranchSelected.Location = new System.Drawing.Point(11, 100);
+            this._buttonDeleteBranchSelected.Location = new System.Drawing.Point(11, 78);
             this._buttonDeleteBranchSelected.Name = "_buttonDeleteBranchSelected";
             this._buttonDeleteBranchSelected.Size = new System.Drawing.Size(151, 23);
             this._buttonDeleteBranchSelected.TabIndex = 5;
@@ -179,7 +173,7 @@
             // _buttonAddBranch
             // 
             this._buttonAddBranch.Enabled = false;
-            this._buttonAddBranch.Location = new System.Drawing.Point(71, 71);
+            this._buttonAddBranch.Location = new System.Drawing.Point(71, 49);
             this._buttonAddBranch.Name = "_buttonAddBranch";
             this._buttonAddBranch.Size = new System.Drawing.Size(91, 23);
             this._buttonAddBranch.TabIndex = 4;
@@ -187,60 +181,36 @@
             this._buttonAddBranch.UseVisualStyleBackColor = true;
             this._buttonAddBranch.Click += new System.EventHandler(this.ButtonAddBranch_Click);
             // 
-            // _labelNodeOut
-            // 
-            this._labelNodeOut.AutoSize = true;
-            this._labelNodeOut.Location = new System.Drawing.Point(-3, 48);
-            this._labelNodeOut.Name = "_labelNodeOut";
-            this._labelNodeOut.Size = new System.Drawing.Size(71, 13);
-            this._labelNodeOut.TabIndex = 3;
-            this._labelNodeOut.Text = "Выход. Узел";
-            // 
-            // _textBoxNodeOut
-            // 
-            this._textBoxNodeOut.Location = new System.Drawing.Point(71, 45);
-            this._textBoxNodeOut.Name = "_textBoxNodeOut";
-            this._textBoxNodeOut.Size = new System.Drawing.Size(91, 20);
-            this._textBoxNodeOut.TabIndex = 2;
-            this._textBoxNodeOut.TextChanged += new System.EventHandler(this.TextBoxNodeIn_TextChanged);
-            // 
             // _textBoxNodeIn
             // 
-            this._textBoxNodeIn.Location = new System.Drawing.Point(71, 19);
+            this._textBoxNodeIn.Location = new System.Drawing.Point(89, 23);
             this._textBoxNodeIn.Name = "_textBoxNodeIn";
-            this._textBoxNodeIn.Size = new System.Drawing.Size(91, 20);
+            this._textBoxNodeIn.Size = new System.Drawing.Size(73, 20);
             this._textBoxNodeIn.TabIndex = 1;
             this._textBoxNodeIn.TextChanged += new System.EventHandler(this.TextBoxNodeIn_TextChanged);
             // 
             // _labelNodeIn
             // 
             this._labelNodeIn.AutoSize = true;
-            this._labelNodeIn.Location = new System.Drawing.Point(2, 22);
+            this._labelNodeIn.Location = new System.Drawing.Point(8, 26);
             this._labelNodeIn.Name = "_labelNodeIn";
-            this._labelNodeIn.Size = new System.Drawing.Size(63, 13);
+            this._labelNodeIn.Size = new System.Drawing.Size(75, 13);
             this._labelNodeIn.TabIndex = 0;
-            this._labelNodeIn.Text = "Вход. Узел";
+            this._labelNodeIn.Text = "Входной узел";
             // 
-            // nodeInDataGridViewTextBoxColumn
+            // _labelValidateBranch
             // 
-            this.nodeInDataGridViewTextBoxColumn.DataPropertyName = "NodeIn";
-            this.nodeInDataGridViewTextBoxColumn.HeaderText = "Вход. Узел";
-            this.nodeInDataGridViewTextBoxColumn.Name = "nodeInDataGridViewTextBoxColumn";
-            this.nodeInDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nodeInDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // nodeOutDataGridViewTextBoxColumn
-            // 
-            this.nodeOutDataGridViewTextBoxColumn.DataPropertyName = "NodeOut";
-            this.nodeOutDataGridViewTextBoxColumn.HeaderText = "Выход. Узел";
-            this.nodeOutDataGridViewTextBoxColumn.Name = "nodeOutDataGridViewTextBoxColumn";
-            this.nodeOutDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nodeOutDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this._labelValidateBranch.AutoSize = true;
+            this._labelValidateBranch.Location = new System.Drawing.Point(8, 104);
+            this._labelValidateBranch.Name = "_labelValidateBranch";
+            this._labelValidateBranch.Size = new System.Drawing.Size(98, 13);
+            this._labelValidateBranch.TabIndex = 7;
+            this._labelValidateBranch.Text = "Статус валидации";
             // 
             // keyDataGridViewTextBoxColumn
             // 
             this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
-            this.keyDataGridViewTextBoxColumn.HeaderText = "Ключ";
+            this.keyDataGridViewTextBoxColumn.HeaderText = "Ветвь между узлами";
             this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
             this.keyDataGridViewTextBoxColumn.ReadOnly = true;
             this.keyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -253,15 +223,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 294);
+            this.ClientSize = new System.Drawing.Size(365, 314);
             this.Controls.Add(this._groupBoxEditBranch);
             this.Controls.Add(this._groupBoxAddElement);
-            this.Controls.Add(this._dataGridView1);
+            this.Controls.Add(this._dataGridViewBranches);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "ControlPanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Панель управления";
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).EndInit();
             this._groupBoxAddElement.ResumeLayout(false);
             this._groupBoxAddElement.PerformLayout();
             this._groupBoxEditBranch.ResumeLayout(false);
@@ -280,18 +251,15 @@
         private System.Windows.Forms.Button _buttonAdd;
         private System.Windows.Forms.Label _labelName;
         private System.Windows.Forms.TextBox _textBoxName;
-        private System.Windows.Forms.DataGridView _dataGridView1;
+        private System.Windows.Forms.DataGridView _dataGridViewBranches;
         private System.Windows.Forms.BindingSource _branchBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nodeInDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nodeOutDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
         private System.Windows.Forms.GroupBox _groupBoxAddElement;
         private System.Windows.Forms.GroupBox _groupBoxEditBranch;
         private System.Windows.Forms.Button _buttonAddBranch;
-        private System.Windows.Forms.Label _labelNodeOut;
-        private System.Windows.Forms.TextBox _textBoxNodeOut;
         private System.Windows.Forms.TextBox _textBoxNodeIn;
         private System.Windows.Forms.Label _labelNodeIn;
         private System.Windows.Forms.Button _buttonDeleteBranchSelected;
+        private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label _labelValidateBranch;
     }
 }

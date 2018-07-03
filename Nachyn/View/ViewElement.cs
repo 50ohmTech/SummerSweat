@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using Model.Elements;
@@ -13,6 +14,11 @@ namespace View
     public sealed partial class ViewElement : UserControl
     {
         /// <summary>
+        ///     Список элементов в ветви
+        /// </summary>
+        private readonly List<ElementBase> _elementBases;
+
+        /// <summary>
         ///     Элемент цепи
         /// </summary>
         private ElementBase _item;
@@ -21,12 +27,12 @@ namespace View
         ///     Конструктор
         /// </summary>
         /// <param name="element">Элемент цепи</param>
-        public ViewElement(ElementBase element)
+        /// <param name="elementBases">Список элементов в ветви</param>
+        public ViewElement(ElementBase element, List<ElementBase> elementBases)
         {
+            _elementBases = elementBases;
             InitializeComponent();
-
             Item = element;
-
             _labelValue.Text = element.Value.ToString(CultureInfo.CurrentCulture);
         }
 
@@ -75,7 +81,7 @@ namespace View
 
         private void ToolStripMenuDelete_Click(object sender, EventArgs e)
         {
-            Item.Delete();
+            _elementBases.Remove(Item);
             Dispose();
         }
     }

@@ -1,46 +1,65 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Model.Elements;
-using Model.Events;
 
 namespace Model
 {
+    /// <summary>
+    ///     Ветвь
+    /// </summary>
     public sealed class Branch
     {
-        public static event CollectionChangedEventHandler CollectionChanged;
-
-        public Branch(uint nodeIn, uint nodeOut)
+        /// <summary>
+        ///     Конструктор
+        /// </summary>
+        /// <param name="nodeIn">Вход. узел</param>
+        public Branch(uint nodeIn)
         {
-            Elements = new ObservableCollection<ElementBase>();
-            Elements.CollectionChanged += Elements_CollectionChanged;
+            if (nodeIn > NodeOutLast)
+            {
+                throw new ArgumentException(
+                    $"Вход. узел должен быть равен или меньше последнего узла = {NodeOutLast}");
+            }
+
+            Elements = new List<ElementBase>();
             NodeIn = nodeIn;
-            NodeOut = nodeOut;
+            NodeOut = NodeIn + 1;
+            NodeOutLast = NodeOut;
             Key = NodeIn + "_" + NodeOut;
         }
 
-        private void Elements_CollectionChanged(object sender,
-            System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            CollectionChanged?.Invoke();
-        }
+        public static uint NodeOutLast { get; private set; }
 
+        /// <summary>
+        ///     Входящий узел
+        /// </summary>
         public uint NodeIn { get; }
 
+        /// <summary>
+        ///     Выходящий узел
+        /// </summary>
         public uint NodeOut { get; }
 
+        /// <summary>
+        ///     Ключ, который определяется из узлов
+        /// </summary>
         public string Key { get; }
 
-        public ObservableCollection<ElementBase> Elements { get; }
+        /// <summary>
+        ///     Список элементов в ветви
+        /// </summary>
+        public List<ElementBase> Elements { get; }
 
         /// <summary>
         ///     Расчет комплексного сопротивления Ветви
         /// </summary>
-        /// <param name="frequencies">Частота</param>
+        /// <param name="frequency">Частота</param>
         /// <returns>Комплексное сопротивление</returns>
         public Complex CalculateZ(double frequency)
         {
-            var resistance = new Complex();
-            foreach (var element in Elements)
+            Complex resistance = new Complex();
+            foreach (ElementBase element in Elements)
             {
                 resistance += element.CalculateZ(frequency);
             }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Model;
 using Model.ComboBoxType;
 using Model.Elements;
+using Model.Factories;
+using View.Properties;
 
 namespace View
 {
@@ -15,14 +16,14 @@ namespace View
     public partial class ControlPanel : Form
     {
         /// <summary>
-        ///     Текст кнопки
-        /// </summary>
-        private const string _buttonEditName = "Изменить";
-
-        /// <summary>
         ///     Визуальный элемент
         /// </summary>
         private readonly ViewElement _element;
+
+        /// <summary>
+        ///     Список визуальных элементов
+        /// </summary>
+        private readonly List<ViewElement> _viewElements;
 
 
         /// <summary>
@@ -31,27 +32,17 @@ namespace View
         private uint _nodeIn;
 
         /// <summary>
-        ///     Выходной узел
-        /// </summary>
-        private uint _nodeOut;
-
-        /// <summary>
         ///     Номинал
         /// </summary>
         private double _value;
-
-        /// <summary>
-        ///     Список визуальных элементов
-        /// </summary>
-        private readonly ObservableCollection<ViewElement> _viewElements;
 
         /// <summary>
         ///     Конструктор
         /// </summary>
         /// <param name="branches">Список ветвей</param>
         /// <param name="viewElements">Список визуальных элементов</param>
-        public ControlPanel(ObservableCollection<Branch> branches,
-            ObservableCollection<ViewElement> viewElements)
+        public ControlPanel(List<Branch> branches,
+            List<ViewElement> viewElements)
         {
             InitializeComponent();
             InitializeComboBoxType();
@@ -74,7 +65,7 @@ namespace View
 
             _element = element;
 
-            _buttonAdd.Text = _buttonEditName;
+            _buttonAdd.Text = Resources.ButtonEditName;
 
             _textBoxName.Text = element.Item.Name;
             _textBoxName.Enabled = false;
@@ -83,7 +74,7 @@ namespace View
             _labelSelectType.Visible = false;
 
             _groupBoxEditBranch.Visible = false;
-            _dataGridView1.Visible = false;
+            _dataGridViewBranches.Visible = false;
 
             Size = new Size(207, 193);
         }
@@ -93,7 +84,7 @@ namespace View
         /// </summary>
         private void InitializeComboBoxType()
         {
-            var elementTypes = new List<ElementTypeComboBoxItem>
+            List<ElementTypeComboBoxItem> elementTypes = new List<ElementTypeComboBoxItem>
             {
                 new ElementTypeComboBoxItem(ElementType.Resistor),
                 new ElementTypeComboBoxItem(ElementType.Inductor),
@@ -107,7 +98,7 @@ namespace View
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Добавить?",
+            DialogResult result = MessageBox.Show("Добавить?",
                 "Подтвердите",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -118,28 +109,14 @@ namespace View
                 {
                     if (_branchBindingSource.Current is Branch currentBranch)
                     {
-                        ElementBase newElement = null;
-                        switch (currentElement.Value)
-                        {
-                            case ElementType.Resistor:
-                                newElement = new Resistor(currentBranch,
-                                    _textBoxName.Text, _value);
+                        ElementBase newElement =
+                            ElementFactory.GetInstance(currentElement.Value,
+                                _textBoxName.Text, _value);
 
-                                break;
-                            case ElementType.Inductor:
-                                newElement = new Inductor(currentBranch,
-                                    _textBoxName.Text, _value);
+                        _viewElements.Add(new ViewElement(newElement,
+                            currentBranch.Elements));
 
-                                break;
-                            case ElementType.Capacitor:
-                                newElement = new Capacitor(currentBranch,
-                                    _textBoxName.Text, _value);
-
-                                break;
-                        }
-
-                        var viewElement = new ViewElement(newElement);
-                        _viewElements.Add(viewElement);
+                        currentBranch.Elements.Add(newElement);
                     }
                     else
                     {
@@ -154,7 +131,7 @@ namespace View
 
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Изменить?",
+            DialogResult result = MessageBox.Show("Изменить?",
                 "Подтвердите",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -174,7 +151,7 @@ namespace View
                 return;
             }
 
-            if (_value < 0)
+            if (_value <= 0)
             {
                 PassElementValidation(false);
                 return;
@@ -192,49 +169,32 @@ namespace View
         /// <summary>
         ///     Элементы прошли валидацию
         /// </summary>
-        /// <param name="validate">true/false</param>
-        private void PassElementValidation(bool validate)
+        /// <param name="isValidated">true/false</param>
+        private void PassElementValidation(bool isValidated)
         {
-            _buttonAdd.Enabled = validate;
+            _buttonAdd.Enabled = isValidated;
         }
 
 
         private void TextBoxNodeIn_TextChanged(object sender, EventArgs e)
         {
-            bool TryParseNode(TextBox textBox, out uint node)
+            if (!uint.TryParse(_textBoxNodeIn.Text, out _nodeIn))
             {
-                if (!uint.TryParse(textBox.Text, out node))
-                {
-                    PassBranchValidation(false);
-                    return false;
-                }
+                PassBranchValidation(false, "Введенный текст не является" +
+                                            "\r\nположительным числом");
 
-                if (_value < 0)
-                {
-                    PassBranchValidation(false);
-                    return false;
-                }
-
-                return true;
-            }
-
-            if (!TryParseNode(_textBoxNodeIn, out _nodeIn))
-            {
-                PassBranchValidation(false);
                 return;
             }
 
-            if (!TryParseNode(_textBoxNodeOut, out _nodeOut))
+            if (_nodeIn > Branch.NodeOutLast)
             {
-                PassBranchValidation(false);
+                PassBranchValidation(false, "Вход. узел должен быть " +
+                                            "\r\nравен или меньше " +
+                                            $"\r\nпоследнего узла = {Branch.NodeOutLast}");
+
                 return;
             }
 
-            if (_nodeIn == _nodeOut)
-            {
-                PassBranchValidation(false);
-                return;
-            }
 
             PassBranchValidation(true);
         }
@@ -242,16 +202,26 @@ namespace View
         /// <summary>
         ///     Элементы прошли валидацию
         /// </summary>
-        /// <param name="validate">true/false</param>
-        private void PassBranchValidation(bool validate)
+        /// <param name="isValidated">true/false</param>
+        private void PassBranchValidation(bool isValidated, string message = "")
         {
-            _buttonAddBranch.Enabled = validate;
+            _buttonAddBranch.Enabled = isValidated;
+            if (isValidated)
+            {
+                _labelValidateBranch.Text = "Валидация успешна";
+                _labelValidateBranch.ForeColor = Color.Green;
+            }
+            else
+            {
+                _labelValidateBranch.Text = message;
+                _labelValidateBranch.ForeColor = Color.Red;
+            }
         }
 
 
         private void ButtonAddBranch_Click(object sender, EventArgs e)
         {
-            _branchBindingSource.Add(new Branch(_nodeIn, _nodeOut));
+            _branchBindingSource.Add(new Branch(_nodeIn));
         }
 
         private void ButtonDeleteBranchSelected_Click(object sender, EventArgs e)

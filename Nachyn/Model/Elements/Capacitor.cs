@@ -11,11 +11,9 @@ namespace Model.Elements
         /// <summary>
         ///     Конструктор
         /// </summary>
-        /// <param name="branch">Ветвь</param>
         /// <param name="name">Имя</param>
         /// <param name="capacity">Емкость</param>
-        public Capacitor(Branch branch, string name, double capacity = 0) : base(branch,
-            name, capacity)
+        public Capacitor(string name, double capacity = 0) : base(name, capacity)
         {
         }
 
@@ -27,7 +25,7 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
-            var valueZ = 1 / (2 * Math.PI * frequency * Value);
+            double valueZ = 1 / (2 * Math.PI * frequency * Value);
             return new Complex(0, valueZ);
         }
     }

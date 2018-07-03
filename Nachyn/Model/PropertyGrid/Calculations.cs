@@ -14,19 +14,30 @@ namespace Model.PropertyGrid
         /// </summary>
         public Calculations()
         {
-            Frequencies = new List<double>();
+            Frequencies = new List<Frequency>();
             Impedances = new List<Complex>();
         }
 
         [DisplayName("Частоты")]
         [Description("Список частот, на основе которых высчитываются импедансы.")]
         [Category("Данные для расчета")]
-        public List<double> Frequencies { get; set; }
+        public List<Frequency> Frequencies { get; set; }
 
         [DisplayName("Импедансы")]
         [Description(
             "Рассчитанные значения импедансов для каждой частоты, которую задал пользователь.")]
         [Category("Результаты")]
         public List<Complex> Impedances { get; set; }
+
+        public double[] GetFrequencies()
+        {
+            List<double> frequencies = new List<double>();
+            foreach (Frequency frequency in Frequencies)
+            {
+                frequencies.Add(frequency.Value);
+            }
+
+            return frequencies.ToArray();
+        }
     }
 }

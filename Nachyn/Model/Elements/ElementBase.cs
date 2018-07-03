@@ -4,27 +4,31 @@ using Model.Events;
 
 namespace Model.Elements
 {
+    /// <summary>
+    ///     Базовый элемент эл. элементов
+    /// </summary>
     public abstract class ElementBase
     {
+        /// <summary>
+        ///     Имя
+        /// </summary>
         private string _name;
 
+        /// <summary>
+        ///     Номинал
+        /// </summary>
         private double _value;
 
         /// <summary>
         ///     Конструктор
         /// </summary>
-        /// <param name="branch">Ветвь</param>
         /// <param name="name">Имя</param>
         /// <param name="value">Номинал</param>
-        protected ElementBase(Branch branch, string name, double value = 0)
+        protected ElementBase(string name, double value = 0)
         {
             Name = name;
-            Branch = branch;
             Value = value;
-            branch.Elements.Add(this);
         }
-
-        public Branch Branch { get; }
 
         /// <summary>
         ///     Имя элемента
@@ -55,7 +59,7 @@ namespace Model.Elements
                     throw new ArgumentOutOfRangeException(nameof(Value));
                 }
 
-                var oldValue = _value;
+                double oldValue = _value;
                 _value = value;
                 ValueChanged?.Invoke(this, new ElementValueArgs
                     ("Изменил(ось/ась/ся) " + ToString(), oldValue, _value));
@@ -63,17 +67,16 @@ namespace Model.Elements
             get => _value;
         }
 
-        public void Delete()
-        {
-            Branch.Elements.Remove(this);
-        }
-
         /// <summary>
         ///     Обработчик события на изменение номинала
         /// </summary>
         public event ValueChangedEventHandler ValueChanged;
 
-
+        /// <summary>
+        ///     Расчитать комплексное сопротивление
+        /// </summary>
+        /// <param name="frequency">Частота</param>
+        /// <returns></returns>
         public abstract Complex CalculateZ(double frequency);
     }
 }
