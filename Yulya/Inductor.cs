@@ -25,7 +25,7 @@ namespace Yulya
         /// </summary>
         /// <param name="frequency">Частота сигнала.</param>
         /// <returns>Комплексное значение импеданса.</returns>
-        public override Complex GetImpedance(double frequency)
+        public override Complex CalculateZ(double frequency)
         {
             return new Complex(0, 2 * Math.PI * frequency * Value);
         }

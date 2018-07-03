@@ -51,6 +51,10 @@ namespace Yulya
             }
             set
             {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Значение должно быть больше нуля.");
+                }
                 _value = value;
             }
         }
@@ -75,7 +79,16 @@ namespace Yulya
         /// </summary>
         /// <param name="frequency">Частота сигнала.</param>
         /// <returns>Комплексное значение импеданса.</returns>
-        public abstract Complex GetImpedance(double frequency);
+        public abstract Complex CalculateZ(double frequency);
+
+        #endregion
+
+        #region События
+
+        /// <summary>
+        /// Событие, возникающее при изменении номинала элемента.
+        /// </summary>
+        public event EventHandler ValueChanged;
 
         #endregion
     }

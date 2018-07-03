@@ -14,7 +14,7 @@ namespace Yulya
         /// <summary>
         /// Список элементов цепи.
         /// </summary>
-        public List<Element> Elements { get; }
+        public List<Element> Elements { get; set; }
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace Yulya
         /// </summary>
         /// <param name="frequencies">Список частот сигнала.</param>
         /// <returns>Список импедансов цепи.</returns>
-        public List<Complex> GetImpedance(List<double> frequencies)
+        public List<Complex> CalculateZ(List<double> frequencies)
         {
             var impedances = new List<Complex>();
 
@@ -43,7 +43,7 @@ namespace Yulya
 
                 foreach (var element in Elements)
                 {
-                    impedance += element.GetImpedance(frequency);
+                    impedance += element.CalculateZ(frequency);
                 }
 
                 impedances.Add(impedance);
@@ -51,6 +51,15 @@ namespace Yulya
 
             return impedances;
         }
+
+        #endregion
+
+        #region События
+
+        /// <summary>
+        /// Событие, возникающее при изменении номинала элемента.
+        /// </summary>
+        public event EventHandler CircuitChanged;
 
         #endregion
     }
