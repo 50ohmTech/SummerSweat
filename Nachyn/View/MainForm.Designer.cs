@@ -34,10 +34,12 @@
             this._toolStripButtonControlPanel = new System.Windows.Forms.ToolStripButton();
             this._toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripButtonClearCircuit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this._toolStripRandomizeCircuit = new System.Windows.Forms.ToolStripButton();
+            this._toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripButtonCalculate = new System.Windows.Forms.ToolStripButton();
             this._propertyGrid = new System.Windows.Forms.PropertyGrid();
-            this._toolStripRandomizeCircuit = new System.Windows.Forms.ToolStripButton();
+            this._toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this._toolStripButtonHelp = new System.Windows.Forms.ToolStripButton();
             this._toolStripMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,8 +60,10 @@
             this._toolStripSeparator1,
             this._toolStripButtonClearCircuit,
             this._toolStripRandomizeCircuit,
-            this.toolStripSeparator1,
-            this._toolStripButtonCalculate});
+            this._toolStripSeparator2,
+            this._toolStripButtonCalculate,
+            this._toolStripSeparator3,
+            this._toolStripButtonHelp});
             this._toolStripMainMenu.Location = new System.Drawing.Point(0, 0);
             this._toolStripMainMenu.Name = "_toolStripMainMenu";
             this._toolStripMainMenu.Size = new System.Drawing.Size(925, 25);
@@ -91,10 +95,20 @@
             this._toolStripButtonClearCircuit.Text = "Очистить цепь";
             this._toolStripButtonClearCircuit.Click += new System.EventHandler(this.ToolStripButtonClearCircuit_Click);
             // 
-            // toolStripSeparator1
+            // _toolStripRandomizeCircuit
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this._toolStripRandomizeCircuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this._toolStripRandomizeCircuit.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripRandomizeCircuit.Image")));
+            this._toolStripRandomizeCircuit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripRandomizeCircuit.Name = "_toolStripRandomizeCircuit";
+            this._toolStripRandomizeCircuit.Size = new System.Drawing.Size(123, 22);
+            this._toolStripRandomizeCircuit.Text = "Сгенерировать цепь";
+            this._toolStripRandomizeCircuit.Click += new System.EventHandler(this.ToolStripRandomizeCircuit_Click);
+            // 
+            // _toolStripSeparator2
+            // 
+            this._toolStripSeparator2.Name = "_toolStripSeparator2";
+            this._toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // _toolStripButtonCalculate
             // 
@@ -114,15 +128,20 @@
             this._propertyGrid.TabIndex = 3;
             this._propertyGrid.ToolbarVisible = false;
             // 
-            // _toolStripRandomizeCircuit
+            // _toolStripSeparator3
             // 
-            this._toolStripRandomizeCircuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this._toolStripRandomizeCircuit.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripRandomizeCircuit.Image")));
-            this._toolStripRandomizeCircuit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripRandomizeCircuit.Name = "_toolStripRandomizeCircuit";
-            this._toolStripRandomizeCircuit.Size = new System.Drawing.Size(123, 22);
-            this._toolStripRandomizeCircuit.Text = "Сгенерировать цепь";
-            this._toolStripRandomizeCircuit.Click += new System.EventHandler(this.ToolStripRandomizeCircuit_Click);
+            this._toolStripSeparator3.Name = "_toolStripSeparator3";
+            this._toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // _toolStripButtonHelp
+            // 
+            this._toolStripButtonHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this._toolStripButtonHelp.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButtonHelp.Image")));
+            this._toolStripButtonHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonHelp.Name = "_toolStripButtonHelp";
+            this._toolStripButtonHelp.Size = new System.Drawing.Size(77, 22);
+            this._toolStripButtonHelp.Text = "Инструкция";
+            this._toolStripButtonHelp.Click += new System.EventHandler(this.ToolStripButtonHelp_Click);
             // 
             // MainForm
             // 
@@ -152,8 +171,10 @@
         private System.Windows.Forms.ToolStripButton _toolStripButtonClearCircuit;
         private System.Windows.Forms.ToolStripSeparator _toolStripSeparator1;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator _toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton _toolStripButtonCalculate;
         private System.Windows.Forms.ToolStripButton _toolStripRandomizeCircuit;
+        private System.Windows.Forms.ToolStripSeparator _toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton _toolStripButtonHelp;
     }
 }

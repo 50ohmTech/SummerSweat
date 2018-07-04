@@ -5,5 +5,5 @@
     /// </summary>
     /// <param name="sender">Отправитель</param>
     public delegate void ValueChangedEventHandler(object sender,
-        ElementValueArgs arguments);
+        ElementValueEventArgs arguments);
 }

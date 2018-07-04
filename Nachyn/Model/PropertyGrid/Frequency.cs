@@ -21,7 +21,7 @@ namespace Model.PropertyGrid
             {
                 if (value < 1 || value > 1000000000000)
                 {
-                    throw new Exception(
+                    throw new ArgumentException(
                         "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
                 }
 

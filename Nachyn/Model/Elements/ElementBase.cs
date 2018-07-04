@@ -61,14 +61,14 @@ namespace Model.Elements
 
                 double oldValue = _value;
                 _value = value;
-                ValueChanged?.Invoke(this, new ElementValueArgs
+                ValueChanged?.Invoke(this, new ElementValueEventArgs
                     ("Изменил(ось/ась/ся) " + ToString(), oldValue, _value));
             }
             get => _value;
         }
 
         /// <summary>
-        ///     Обработчик события на изменение номинала
+        ///     Событие на изменение номинала
         /// </summary>
         public event ValueChangedEventHandler ValueChanged;
 

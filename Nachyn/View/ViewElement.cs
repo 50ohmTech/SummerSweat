@@ -69,7 +69,7 @@ namespace View
             }
         }
 
-        private void Element_ValueChanged(object sender, ElementValueArgs arguments)
+        private void Element_ValueChanged(object sender, ElementValueEventArgs arguments)
         {
             _labelValue.Text = arguments.NewValue.ToString(CultureInfo.CurrentCulture);
         }

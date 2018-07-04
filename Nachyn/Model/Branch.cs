@@ -58,6 +58,12 @@ namespace Model
         /// <returns>Комплексное сопротивление</returns>
         public Complex CalculateZ(double frequency)
         {
+            if (frequency < 1 || frequency > 1000000000000)
+            {
+                throw new ArgumentException(
+                    "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
+            }
+
             Complex resistance = new Complex();
             foreach (ElementBase element in Elements)
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Model
@@ -23,10 +24,21 @@ namespace Model
 
         public List<Complex> CalculateZ(params double[] frequencies)
         {
+            if (frequencies == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             List<Complex> resistanceZ = new List<Complex>();
 
             foreach (double frequency in frequencies)
             {
+                if (frequency < 1 || frequency > 1000000000000)
+                {
+                    throw new ArgumentException(
+                        "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
+                }
+
                 Dictionary<string, List<Branch>> tempBranches =
                     new Dictionary<string, List<Branch>>();
 
