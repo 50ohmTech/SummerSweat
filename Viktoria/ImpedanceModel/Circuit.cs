@@ -10,19 +10,31 @@ namespace ImpedanceModel
         /// </summary>
         public List<IElement> elements;
 
-        private List<Complex> GetImpedance(double[] Z, List<double> frequencies)
+        public List<Complex> GetImpedanceUsingAngularFrequency(double minFrequency, double maxFrequency, double step)
         {
-            var impedances = new List<Complex>();
-
-            foreach (var frequency in frequencies)
+            List<Complex> impedances = new List<Complex>();
+            for (var i = minFrequency; i <= maxFrequency; i = i + step)
             {
-                var impedance = new Complex();
-
-                foreach (var element in elements)
+                Complex impedance = 0;
+                for (var n = 0; n <= elements.Count - 1; n++)
                 {
-                    impedance += element.GetImpedanceUsingFrequency(frequency);
+                    impedance += elements[n].GetImpedanceUsingAngularFrequency(i);
                 }
+                impedances.Add(impedance);
+            }
+            return impedances;
+        }
 
+        public List<Complex> GetImpedanceUsingFrequency(double minFrequency, double maxFrequency, double step)
+        {
+            List<Complex> impedances = new List<Complex>();
+            for (var i = minFrequency; i <= maxFrequency; i = i + step)
+            {
+                Complex impedance = 0;
+                for (var n = 0; n <= elements.Count - 1; n++)
+                {
+                    impedance += elements[n].GetImpedanceUsingFrequency(i);
+                }
                 impedances.Add(impedance);
             }
             return impedances;

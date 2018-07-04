@@ -81,36 +81,31 @@ namespace ImpedanceView
 
                 bindingSource.Clear();
 
+                Circuit circuit = new Circuit();
+                circuit.elements = elements;
+
                 if (angularFrequency.Checked)
                 {
-                    for (var i = minFrequency; i <= maxFrequency; i = i + step)
-                    {
-                        impedance = 0;
-                        for (var n = 0; n <= _bindingSource.Count - 1; n++)
-                        {
-                            impedance += elements[n].GetImpedanceUsingAngularFrequency(i);
-                        }
-                        bindingSource.Add(impedance);
-                        ImpedanceStorage.Rows[bindingSource.Count - 1].Cells[0].Value = i;
-                    }
+                   List<Complex> impedances = circuit.GetImpedanceUsingAngularFrequency(minFrequency, maxFrequency,
+                        step);
+                    bindingSource.DataSource = impedances;
                 }
                 else if (frequency.Checked)
                 {
-                    for (var i = minFrequency; i <= maxFrequency; i = i + step)
-                    {
-                        impedance = 0;
-                        for (var n = 0; n <= _bindingSource.Count - 1; n++)
-                        {
-                            impedance += elements[n].GetImpedanceUsingFrequency(i);
-                        }
-                        bindingSource.Add(impedance);
-                        ImpedanceStorage.Rows[bindingSource.Count - 1].Cells[0].Value = i;
-                    }
+                    List<Complex> impedances = circuit.GetImpedanceUsingFrequency(minFrequency, maxFrequency,
+                        step);
+                    bindingSource.DataSource = impedances;
                 }
                 else
                 {
                     MessageBox.Show("Выберите тип частоты.", "Error",
                         MessageBoxButtons.OK);
+                }
+                int index = 0;
+                for (var i = minFrequency; i <= maxFrequency; i = i + step)
+                {
+                    ImpedanceStorage.Rows[index].Cells[0].Value = i;
+                    index++;
                 }
             }
             catch (ArgumentException exception)
@@ -276,7 +271,7 @@ namespace ImpedanceView
         /// </summary>
         private readonly BindingSource _bindingSource = new BindingSource();
 
-        private readonly BindingSource bindingSource = new BindingSource();
+        private  BindingSource bindingSource = new BindingSource();
 
         /// <summary>
         ///     Список пассивных элементов
@@ -284,13 +279,18 @@ namespace ImpedanceView
         public List<IElement> elements = new List<IElement>();
 
         /// <summary>
-        ///     Список частот
+        ///     Список значений сорпотивлений цепи при разных частотах
         /// </summary>
-        public List<double> frequencies = new List<double>();
-
         private readonly List<Complex> impedances = new List<Complex>();
+
+        /// <summary>
+        ///     Значение сопротивления цепи при одной частоте
+        /// </summary>
         private Complex impedance;
 
+        /// <summary>
+        ///     Тип заранее заданной цепи в combobox
+        /// </summary>
         private int _currentCircuit;
 
         #endregion
