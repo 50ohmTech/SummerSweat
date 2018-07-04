@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpedanceModel", "ImpedanceModel\ImpedanceModel.csproj", "{B480332C-CEFE-4556-A631-0E43E70B617F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpedanceView", "ImpedanceView\ImpedanceView.csproj", "{CE5C0B37-ED24-4426-A1B8-3F461ECDFD90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B480332C-CEFE-4556-A631-0E43E70B617F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B480332C-CEFE-4556-A631-0E43E70B617F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B480332C-CEFE-4556-A631-0E43E70B617F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B480332C-CEFE-4556-A631-0E43E70B617F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5C0B37-ED24-4426-A1B8-3F461ECDFD90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5C0B37-ED24-4426-A1B8-3F461ECDFD90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5C0B37-ED24-4426-A1B8-3F461ECDFD90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5C0B37-ED24-4426-A1B8-3F461ECDFD90}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9923CCD7-71F8-4D67-8C29-4AF7DFBAC4A1}
+	EndGlobalSection
+EndGlobal
