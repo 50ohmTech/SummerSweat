@@ -6,7 +6,7 @@ namespace Model
     /// <summary>
     /// Конденсатор.
     /// </summary>
-    public class Capacitor : Element
+    public class Capacitor : ElementBase
     {
         #region – – Публичные методы – –
 

@@ -1,11 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace View
 {
     /// <summary>
     /// Обработчик элемента управления для чисел.
     /// </summary>
-    static class NumberBox
+    public static class NumberBox
     {
         #region - - Публичные методы - -
 
@@ -20,7 +21,7 @@ namespace View
 
             if (char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back) return;
 
-            if (text.IndexOf(separator) != -1)
+            if (text.IndexOf(separator, StringComparison.Ordinal) != -1)
             {
                 e.Handled = true;
                 return;

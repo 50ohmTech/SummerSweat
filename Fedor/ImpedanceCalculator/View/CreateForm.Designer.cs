@@ -41,16 +41,15 @@ namespace View
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.valueBox = new System.Windows.Forms.TextBox();
-            this.typePanel = new System.Windows.Forms.Panel();
-            this.inductorRadioButton = new System.Windows.Forms.RadioButton();
-            this.capacitorRadioButton = new System.Windows.Forms.RadioButton();
-            this.resistorRadioButton = new System.Windows.Forms.RadioButton();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.connectionComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.elementComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
             this.addBox.SuspendLayout();
-            this.typePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // circuitComboBox
@@ -79,7 +78,7 @@ namespace View
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(912, 556);
+            this.calculateButton.Location = new System.Drawing.Point(912, 585);
             this.calculateButton.Name = "calculateButton";
             this.calculateButton.Size = new System.Drawing.Size(158, 36);
             this.calculateButton.TabIndex = 3;
@@ -92,7 +91,7 @@ namespace View
             this.circuitPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.circuitPictureBox.Location = new System.Drawing.Point(256, 6);
             this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(814, 529);
+            this.circuitPictureBox.Size = new System.Drawing.Size(814, 570);
             this.circuitPictureBox.TabIndex = 4;
             this.circuitPictureBox.TabStop = false;
             // 
@@ -134,13 +133,16 @@ namespace View
             // 
             // addBox
             // 
+            this.addBox.Controls.Add(this.elementComboBox);
+            this.addBox.Controls.Add(this.label5);
+            this.addBox.Controls.Add(this.connectionComboBox);
+            this.addBox.Controls.Add(this.label4);
             this.addBox.Controls.Add(this.label2);
             this.addBox.Controls.Add(this.label3);
             this.addBox.Controls.Add(this.valueBox);
-            this.addBox.Controls.Add(this.typePanel);
             this.addBox.Location = new System.Drawing.Point(12, 324);
             this.addBox.Name = "addBox";
-            this.addBox.Size = new System.Drawing.Size(238, 225);
+            this.addBox.Size = new System.Drawing.Size(238, 204);
             this.addBox.TabIndex = 7;
             this.addBox.TabStop = false;
             this.addBox.Text = "Параметры нового элемента";
@@ -157,7 +159,7 @@ namespace View
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 129);
+            this.label3.Location = new System.Drawing.Point(7, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(191, 17);
             this.label3.TabIndex = 2;
@@ -165,7 +167,7 @@ namespace View
             // 
             // valueBox
             // 
-            this.valueBox.Location = new System.Drawing.Point(6, 149);
+            this.valueBox.Location = new System.Drawing.Point(6, 92);
             this.valueBox.Name = "valueBox";
             this.valueBox.Size = new System.Drawing.Size(107, 22);
             this.valueBox.TabIndex = 1;
@@ -174,52 +176,9 @@ namespace View
             this.valueBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValueBox_KeyPress);
             this.valueBox.Leave += new System.EventHandler(this.ValueBox_Leave);
             // 
-            // typePanel
-            // 
-            this.typePanel.Controls.Add(this.inductorRadioButton);
-            this.typePanel.Controls.Add(this.capacitorRadioButton);
-            this.typePanel.Controls.Add(this.resistorRadioButton);
-            this.typePanel.Location = new System.Drawing.Point(7, 44);
-            this.typePanel.Name = "typePanel";
-            this.typePanel.Size = new System.Drawing.Size(200, 82);
-            this.typePanel.TabIndex = 0;
-            // 
-            // inductorRadioButton
-            // 
-            this.inductorRadioButton.AutoSize = true;
-            this.inductorRadioButton.Location = new System.Drawing.Point(3, 57);
-            this.inductorRadioButton.Name = "inductorRadioButton";
-            this.inductorRadioButton.Size = new System.Drawing.Size(188, 21);
-            this.inductorRadioButton.TabIndex = 2;
-            this.inductorRadioButton.TabStop = true;
-            this.inductorRadioButton.Text = "Катушка индуктивности";
-            this.inductorRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // capacitorRadioButton
-            // 
-            this.capacitorRadioButton.AutoSize = true;
-            this.capacitorRadioButton.Location = new System.Drawing.Point(3, 30);
-            this.capacitorRadioButton.Name = "capacitorRadioButton";
-            this.capacitorRadioButton.Size = new System.Drawing.Size(116, 21);
-            this.capacitorRadioButton.TabIndex = 1;
-            this.capacitorRadioButton.TabStop = true;
-            this.capacitorRadioButton.Text = "Конденсатор";
-            this.capacitorRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // resistorRadioButton
-            // 
-            this.resistorRadioButton.AutoSize = true;
-            this.resistorRadioButton.Location = new System.Drawing.Point(3, 3);
-            this.resistorRadioButton.Name = "resistorRadioButton";
-            this.resistorRadioButton.Size = new System.Drawing.Size(91, 21);
-            this.resistorRadioButton.TabIndex = 0;
-            this.resistorRadioButton.TabStop = true;
-            this.resistorRadioButton.Text = "Резистор";
-            this.resistorRadioButton.UseVisualStyleBackColor = true;
-            // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(134, 555);
+            this.deleteButton.Location = new System.Drawing.Point(134, 582);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(116, 39);
             this.deleteButton.TabIndex = 6;
@@ -229,7 +188,7 @@ namespace View
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(12, 555);
+            this.addButton.Location = new System.Drawing.Point(12, 582);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(116, 39);
             this.addButton.TabIndex = 5;
@@ -237,11 +196,55 @@ namespace View
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 117);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(184, 17);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Выберите тип соединения";
+            // 
+            // connectionComboBox
+            // 
+            this.connectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.connectionComboBox.FormattingEnabled = true;
+            this.connectionComboBox.Items.AddRange(new object[] {
+            "Последовательное",
+            "Параллельное"});
+            this.connectionComboBox.Location = new System.Drawing.Point(6, 137);
+            this.connectionComboBox.Name = "connectionComboBox";
+            this.connectionComboBox.Size = new System.Drawing.Size(168, 24);
+            this.connectionComboBox.TabIndex = 5;
+            this.connectionComboBox.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(7, 164);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(225, 34);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "и элемент из списка, с которым хотитте соеденить";
+            this.label5.Visible = false;
+            // 
+            // elementComboBox
+            // 
+            this.elementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.elementComboBox.FormattingEnabled = true;
+            this.elementComboBox.Items.AddRange(new object[] {
+            "Резистор",
+            "Конденсатор",
+            "Катушка"});
+            this.elementComboBox.Location = new System.Drawing.Point(6, 44);
+            this.elementComboBox.Name = "elementComboBox";
+            this.elementComboBox.Size = new System.Drawing.Size(168, 24);
+            this.elementComboBox.TabIndex = 7;
+            // 
             // CreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 606);
+            this.ClientSize = new System.Drawing.Size(1082, 633);
             this.Controls.Add(this.elementGridView);
             this.Controls.Add(this.addBox);
             this.Controls.Add(this.deleteButton);
@@ -251,16 +254,14 @@ namespace View
             this.Controls.Add(this.label1);
             this.Controls.Add(this.circuitComboBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximumSize = new System.Drawing.Size(1100, 653);
-            this.MinimumSize = new System.Drawing.Size(1100, 653);
+            this.MaximumSize = new System.Drawing.Size(1100, 680);
+            this.MinimumSize = new System.Drawing.Size(1100, 680);
             this.Name = "CreateForm";
             this.Text = "Circuit Calculator";
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
             this.addBox.ResumeLayout(false);
             this.addBox.PerformLayout();
-            this.typePanel.ResumeLayout(false);
-            this.typePanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,12 +280,12 @@ namespace View
         private Label label2;
         private Label label3;
         private TextBox valueBox;
-        private Panel typePanel;
-        private RadioButton inductorRadioButton;
-        private RadioButton capacitorRadioButton;
-        private RadioButton resistorRadioButton;
         private Button deleteButton;
         private Button addButton;
+        private Label label5;
+        private ComboBox connectionComboBox;
+        private Label label4;
+        private ComboBox elementComboBox;
     }
 }
 

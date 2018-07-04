@@ -6,7 +6,7 @@ namespace Model
     /// </summary>
     public class ChangedEventArgs : EventArgs
     {
-        #region - - Свойства - -
+        #region - - Перечисления - -
 
         /// <summary>
         /// Возможные изменения.
@@ -18,6 +18,10 @@ namespace Model
             Clear
         }
 
+        #endregion
+
+        #region – – Свойства – –
+
         /// <summary>
         /// Тип изменения.
         /// </summary>
@@ -26,7 +30,7 @@ namespace Model
         /// <summary>
         /// Добавленный элемент.
         /// </summary>
-        public Element Element { get; }
+        public ElementBase Element { get; }
 
         #endregion
 
@@ -36,12 +40,17 @@ namespace Model
         /// Конструктор класса ChangedEventArgs.
         /// </summary>
         /// <param name="element">Добавляемый элемент.</param>
-        public ChangedEventArgs(Element element, ChangeType type)
+        /// <param name="type">Тип изменения.</param>
+        public ChangedEventArgs(ElementBase element, ChangeType type)
         {
             Element = element;
             Type = type;
         }
 
+        /// <summary>
+        /// Конструктор класса ChangedEventArgs.
+        /// </summary>
+        /// <param name="type">Тип изменения.</param>
         public ChangedEventArgs(ChangeType type)
         {
             Type = type;

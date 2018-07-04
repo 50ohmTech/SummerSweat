@@ -44,7 +44,7 @@
     <Compile Include="Capacitor.cs" />
     <Compile Include="ChangeEventArgs.cs" />
     <Compile Include="Circuit.cs" />
-    <Compile Include="Element.cs" />
+    <Compile Include="ElementBase.cs" />
     <Compile Include="ElementsTree.cs" />
     <Compile Include="Inductor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

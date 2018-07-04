@@ -6,7 +6,7 @@ namespace Model
     /// <summary>
     /// Элемент электрической цепи.
     /// </summary>
-    public abstract class Element
+    public abstract class ElementBase
     {
         #region - - Поля - -
 
@@ -65,11 +65,11 @@ namespace Model
         #region – – Публичные методы – –
 
         /// <summary>
-        /// Конструктор класса Element.
+        /// Конструктор класса ElementBase.
         /// </summary>
         /// <param name="name">Имя элемента.</param>
         /// <param name="value">Номинал элемента.</param>
-        public Element(string name, double value)
+        public ElementBase(string name, double value)
         {
             Name = name;
             Value = value;
