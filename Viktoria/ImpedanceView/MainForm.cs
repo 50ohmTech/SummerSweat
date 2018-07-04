@@ -83,7 +83,6 @@ namespace ImpedanceView
 
                 if (angularFrequency.Checked)
                 {
-                   
                     for (var i = minFrequency; i <= maxFrequency; i = i + step)
                     {
                         impedance = 0;
@@ -151,19 +150,22 @@ namespace ImpedanceView
                     case 0:
                         element = new Inductor(value);
                         _bindingSource.Add(element);
-                        ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0].Value =
+                        ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
+                                .Value =
                             element.ToString();
                         break;
                     case 1:
                         element = new Resistor(value);
                         _bindingSource.Add(element);
-                        ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0].Value =
+                        ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
+                                .Value =
                             element.ToString();
                         break;
                     case 2:
                         element = new Capacitor(value);
                         _bindingSource.Add(element);
-                        ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0].Value =
+                        ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
+                                .Value =
                             element.ToString();
                         break;
                 }
@@ -174,7 +176,7 @@ namespace ImpedanceView
         /// <summary>
         ///     Функция для модификации элемента. Вызывается двойным нажатием по ячейке с нужным элементом.
         /// </summary>
-        private void dataGridView1_CellDoubleClick(object sender,
+        private void DataGridView1_CellDoubleClick(object sender,
             DataGridViewCellEventArgs e)
         {
             try
@@ -193,6 +195,78 @@ namespace ImpedanceView
             {
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK);
             }
+        }
+
+        /// <summary>
+        ///     Метод для создания заранее заданных цепей
+        /// </summary>
+        private void CreateComboBoxCircuits()
+        {
+            _bindingSource.Clear();
+            elements.Clear();
+            switch (_currentCircuit)
+            {
+                case 0:
+                {
+                    elements.Add(new Resistor(1.1));
+                    elements.Add(new Inductor(1.16));
+                    elements.Add(new Capacitor(1.5663));
+                    break;
+                }
+                case 1:
+                {
+                    elements.Add(new Resistor(2.1));
+                    elements.Add(new Resistor(2.16));
+                    elements.Add(new Capacitor(2.5663));
+                    elements.Add(new Inductor(2.16));
+                    elements.Add(new Resistor(2.1));
+                    elements.Add(new Capacitor(2.5663));
+                    break;
+                }
+                case 2:
+                {
+                    elements.Add(new Inductor(0.16));
+                    elements.Add(new Resistor(5.1));
+                    elements.Add(new Inductor(0.16));
+                    elements.Add(new Resistor(5.1));
+                    elements.Add(new Capacitor(1.5663));
+                    break;
+                }
+                case 3:
+                {
+                    elements.Add(new Resistor(5.1));
+                    elements.Add(new Resistor(5.1));
+                    elements.Add(new Resistor(5.1));
+                    elements.Add(new Resistor(5.1));
+                    break;
+                }
+                case 4:
+                {
+                    elements.Add(new Capacitor(1.5663));
+                    elements.Add(new Inductor(0.16));
+                    elements.Add(new Inductor(0.16));
+                    elements.Add(new Resistor(5.1));
+                    elements.Add(new Inductor(0.16));
+                    break;
+                }
+                case 5: break;
+            }
+            _bindingSource.DataSource = null;
+            _bindingSource.DataSource = elements;
+            for (var n = 0; n <= _bindingSource.Count - 1; n++)
+            {
+                ElementStorage.Rows[n].Cells[0].Value =
+                    elements[n].ToString();
+            }
+        }
+
+        /// <summary>
+        ///     Обработка изменения значения в combobox с созданием выбранной цепи
+        /// </summary>
+        private void circuitType_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _currentCircuit = ((ComboBox) sender).SelectedIndex;
+            CreateComboBoxCircuits();
         }
 
         #region Private fields
@@ -214,8 +288,10 @@ namespace ImpedanceView
         /// </summary>
         public List<double> frequencies = new List<double>();
 
-        List<Complex> impedances = new List<Complex>();
-        Complex impedance;
+        private readonly List<Complex> impedances = new List<Complex>();
+        private Complex impedance;
+
+        private int _currentCircuit;
 
         #endregion
     }

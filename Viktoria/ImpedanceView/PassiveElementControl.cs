@@ -80,10 +80,11 @@ namespace ImpedanceView
         /// <summary>
         ///     Обработка изменения значения в combobox с заменой подсказок пользователю
         /// </summary>
-        private void ElementTypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ElementTypeComboBox_SelectionChangeCommitted(object sender,
+            EventArgs e)
         {
             FirstTextView.Text = string.Empty;
-            _currentType = ((ComboBox)sender).SelectedIndex;
+            _currentType = ((ComboBox) sender).SelectedIndex;
             ConfigureTextBoxPlaceholder();
         }
 
@@ -94,17 +95,17 @@ namespace ImpedanceView
         {
             switch (_currentType)
             {
-                case (int)ElementsType.Inductor:
+                case (int) ElementsType.Inductor:
                 {
                     ConfigureTextBoxText(FirstTextView, "Введите L");
                     break;
                 }
-                case (int)ElementsType.Resistor:
+                case (int) ElementsType.Resistor:
                 {
                     ConfigureTextBoxText(FirstTextView, "Введите R");
                     break;
                 }
-                case (int)ElementsType.Capacitor:
+                case (int) ElementsType.Capacitor:
                 {
                     ConfigureTextBoxText(FirstTextView, "Введите С");
                     break;

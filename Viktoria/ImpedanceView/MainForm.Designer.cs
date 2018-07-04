@@ -97,6 +97,7 @@
             this.circuitType.Name = "circuitType";
             this.circuitType.Size = new System.Drawing.Size(185, 21);
             this.circuitType.TabIndex = 15;
+            this.circuitType.SelectionChangeCommitted += new System.EventHandler(this.circuitType_SelectionChangeCommitted);
             // 
             // frequencyControl
             // 
@@ -246,7 +247,7 @@
             this.ElementStorage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ElementStorage.Size = new System.Drawing.Size(418, 417);
             this.ElementStorage.TabIndex = 0;
-            this.ElementStorage.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            this.ElementStorage.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellDoubleClick);
             // 
             // comboBox1
             // 
@@ -275,6 +276,7 @@
             this.ClientSize = new System.Drawing.Size(645, 446);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(661, 485);
             this.Name = "MainForm";
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
