@@ -67,7 +67,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(639, 450);
+            this.groupBox1.Size = new System.Drawing.Size(645, 446);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -75,7 +75,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(433, 19);
+            this.label4.Location = new System.Drawing.Point(439, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(157, 13);
             this.label4.TabIndex = 16;
@@ -93,9 +93,9 @@
             "R - R -R - R",
             "C - L - L - R - L",
             "Своя цепь"});
-            this.circuitType.Location = new System.Drawing.Point(436, 35);
+            this.circuitType.Location = new System.Drawing.Point(442, 35);
             this.circuitType.Name = "circuitType";
-            this.circuitType.Size = new System.Drawing.Size(175, 21);
+            this.circuitType.Size = new System.Drawing.Size(185, 21);
             this.circuitType.TabIndex = 15;
             // 
             // frequencyControl
@@ -110,12 +110,12 @@
             this.frequencyControl.Controls.Add(this.angularFrequency);
             this.frequencyControl.Controls.Add(this.frequency);
             this.frequencyControl.Controls.Add(this.CalculateButton);
-            this.frequencyControl.Location = new System.Drawing.Point(436, 142);
+            this.frequencyControl.Location = new System.Drawing.Point(442, 142);
             this.frequencyControl.Name = "frequencyControl";
             this.frequencyControl.Size = new System.Drawing.Size(203, 134);
             this.frequencyControl.TabIndex = 14;
             this.frequencyControl.TabStop = false;
-            this.frequencyControl.Text = "Настройка частот";
+            this.frequencyControl.Text = "Настройка диапазона частот";
             // 
             // maxFrequency
             // 
@@ -201,7 +201,7 @@
             // RandomButton
             // 
             this.RandomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RandomButton.Location = new System.Drawing.Point(436, 109);
+            this.RandomButton.Location = new System.Drawing.Point(442, 109);
             this.RandomButton.Name = "RandomButton";
             this.RandomButton.Size = new System.Drawing.Size(185, 27);
             this.RandomButton.TabIndex = 10;
@@ -212,7 +212,7 @@
             // Remove_button
             // 
             this.Remove_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Remove_button.Location = new System.Drawing.Point(535, 71);
+            this.Remove_button.Location = new System.Drawing.Point(541, 71);
             this.Remove_button.Name = "Remove_button";
             this.Remove_button.Size = new System.Drawing.Size(86, 27);
             this.Remove_button.TabIndex = 7;
@@ -223,7 +223,7 @@
             // Add_button
             // 
             this.Add_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Add_button.Location = new System.Drawing.Point(436, 71);
+            this.Add_button.Location = new System.Drawing.Point(442, 71);
             this.Add_button.Name = "Add_button";
             this.Add_button.Size = new System.Drawing.Size(86, 27);
             this.Add_button.TabIndex = 1;
@@ -244,7 +244,7 @@
             this.ElementStorage.ReadOnly = true;
             this.ElementStorage.RowHeadersVisible = false;
             this.ElementStorage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ElementStorage.Size = new System.Drawing.Size(412, 421);
+            this.ElementStorage.Size = new System.Drawing.Size(418, 417);
             this.ElementStorage.TabIndex = 0;
             this.ElementStorage.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -263,16 +263,16 @@
             this.ImpedanceStorage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ImpedanceStorage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ImpedanceStorage.Location = new System.Drawing.Point(436, 290);
+            this.ImpedanceStorage.Location = new System.Drawing.Point(442, 290);
             this.ImpedanceStorage.Name = "ImpedanceStorage";
-            this.ImpedanceStorage.Size = new System.Drawing.Size(191, 150);
+            this.ImpedanceStorage.Size = new System.Drawing.Size(191, 146);
             this.ImpedanceStorage.TabIndex = 17;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 450);
+            this.ClientSize = new System.Drawing.Size(645, 446);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";

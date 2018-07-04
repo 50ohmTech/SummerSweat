@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.Runtime.Serialization;
 
 namespace ImpedanceModel
@@ -37,11 +38,19 @@ namespace ImpedanceModel
         }
 
         /// <summary>
-        ///     Рассчет комплексного сопротивления.
+        ///     Рассчет комплексного сопротивления для w
         /// </summary>
-        public Complex GetImpedance(double w)
+        public Complex GetImpedanceUsingAngularFrequency(double w)
         {
             return -Complex.ImaginaryOne / (w * _capacitance);
+        }
+
+        /// <summary>
+        ///     Рассчет комплексного сопротивления для f
+        /// </summary>
+        public Complex GetImpedanceUsingFrequency(double f)
+        {
+            return - 1 / (2 * Math.PI * f * _capacitance);
         }
 
         /// <summary>

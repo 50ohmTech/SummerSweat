@@ -37,10 +37,19 @@ namespace ImpedanceModel
         }
 
         /// <summary>
-        ///     Рассчет комплексного сопротивления.
+        ///     Рассчет комплексного сопротивления для w
         /// </summary>
         /// <remarks> Входные параметры не используются при рассчете комплексного сопротивления резистора. </remarks>
-        public Complex GetImpedance(double w)
+        public Complex GetImpedanceUsingAngularFrequency(double w)
+        {
+            return _resistance;
+        }
+
+        /// <summary>
+        ///     Рассчет комплексного сопротивления для f
+        /// </summary>
+        /// <remarks> Входные параметры не используются при рассчете комплексного сопротивления резистора. </remarks>
+        public Complex GetImpedanceUsingFrequency(double f)
         {
             return _resistance;
         }

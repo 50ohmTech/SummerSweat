@@ -79,15 +79,17 @@ namespace ImpedanceView
                         "Минимальное значение частоты не может превышать максимальное.");
                 }
 
+                bindingSource.Clear();
+
                 if (angularFrequency.Checked)
                 {
-                    bindingSource.Clear();
+                   
                     for (var i = minFrequency; i <= maxFrequency; i = i + step)
                     {
                         impedance = 0;
                         for (var n = 0; n <= _bindingSource.Count - 1; n++)
                         {
-                            impedance += elements[n].GetImpedance(i);
+                            impedance += elements[n].GetImpedanceUsingAngularFrequency(i);
                         }
                         bindingSource.Add(impedance);
                         ImpedanceStorage.Rows[bindingSource.Count - 1].Cells[0].Value = i;
@@ -95,6 +97,16 @@ namespace ImpedanceView
                 }
                 else if (frequency.Checked)
                 {
+                    for (var i = minFrequency; i <= maxFrequency; i = i + step)
+                    {
+                        impedance = 0;
+                        for (var n = 0; n <= _bindingSource.Count - 1; n++)
+                        {
+                            impedance += elements[n].GetImpedanceUsingFrequency(i);
+                        }
+                        bindingSource.Add(impedance);
+                        ImpedanceStorage.Rows[bindingSource.Count - 1].Cells[0].Value = i;
+                    }
                 }
                 else
                 {

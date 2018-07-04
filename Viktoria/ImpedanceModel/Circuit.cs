@@ -20,7 +20,7 @@ namespace ImpedanceModel
 
                 foreach (var element in elements)
                 {
-                    impedance += element.GetImpedance(frequency);
+                    impedance += element.GetImpedanceUsingFrequency(frequency);
                 }
 
                 impedances.Add(impedance);

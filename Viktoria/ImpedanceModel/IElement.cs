@@ -13,8 +13,13 @@ namespace ImpedanceModel
         double Parameter { get; }
 
         /// <summary>
-        ///     Рассчет комплексного сопротивления
+        ///     Рассчет комплексного сопротивления для w
         /// </summary>
-        Complex GetImpedance(double w);
+        Complex GetImpedanceUsingAngularFrequency(double w);
+
+        /// <summary>
+        ///     Рассчет комплексного сопротивления для f
+        /// </summary>
+        Complex GetImpedanceUsingFrequency(double f);
     }
 }
