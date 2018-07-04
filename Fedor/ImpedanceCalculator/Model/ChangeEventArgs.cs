@@ -9,9 +9,24 @@ namespace Model
         #region - - Свойства - -
 
         /// <summary>
-        /// Новое значение.
+        /// Возможные изменения.
         /// </summary>
-        public double Value { get; }
+        public enum ChangeType
+        {
+            Add,
+            Delete,
+            Clear
+        }
+
+        /// <summary>
+        /// Тип изменения.
+        /// </summary>
+        public ChangeType Type { get; }
+
+        /// <summary>
+        /// Добавленный элемент.
+        /// </summary>
+        public Element Element { get; }
 
         #endregion
 
@@ -20,10 +35,16 @@ namespace Model
         /// <summary>
         /// Конструктор класса ChangedEventArgs.
         /// </summary>
-        /// <param name="value">Новое значение.</param>
-        public ChangedEventArgs(double value)
+        /// <param name="element">Добавляемый элемент.</param>
+        public ChangedEventArgs(Element element, ChangeType type)
         {
-            Value = value;
+            Element = element;
+            Type = type;
+        }
+
+        public ChangedEventArgs(ChangeType type)
+        {
+            Type = type;
         }
 
         #endregion

@@ -57,7 +57,6 @@ namespace Model
                 }
 
                 _value = value;
-                ValueChanged?.Invoke(this, new ChangedEventArgs(_value));
             }   
         }
 
@@ -82,15 +81,6 @@ namespace Model
         /// <param name="frequency">Частота сигнала.</param>
         /// <returns>Комплексное значение импеданса.</returns>
         public abstract Complex CalculateZ(double frequency);
-
-        #endregion
-
-        #region – – События – –
-
-        /// <summary>
-        /// Событие, возникающее при изменении номинала элемента.
-        /// </summary>
-        public event EventHandler<ChangedEventArgs> ValueChanged;
 
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Numerics;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace Model
 {
@@ -14,7 +14,7 @@ namespace Model
         /// <summary>
         /// Коллекция элементов цепи.
         /// </summary>
-        public List<Element> Elements { get; }
+        public ElementsTree Elements { get; }
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace Model
         /// <summary>
         /// Конструктор класса Circuit.
         /// </summary>
-        public Circuit(List<Element> elements)
+        public Circuit(ElementsTree elements)
         {
             Elements = elements;
         }
@@ -44,27 +44,11 @@ namespace Model
 
             foreach (var frequency in frequencies)
             {
-                var impedance = new Complex();
-
-                foreach (var element in Elements)
-                {
-                    impedance += element.CalculateZ(frequency);
-                }
-
-                impedances.Add(impedance);
+                impedances.Add(Elements.CalculateZ(frequency));
             }
 
             return impedances;
         }
-
-        #endregion
-
-        #region – – События – –
-
-        /// <summary>
-        /// Событие, возникающее при изменении номинала элемента.
-        /// </summary>
-        public event EventHandler<ChangedEventArgs> CircuitChanged;
 
         #endregion
     }
