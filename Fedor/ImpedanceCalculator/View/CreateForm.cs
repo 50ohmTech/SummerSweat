@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -86,20 +87,22 @@ namespace View
 
                     Circuit.Elements.Clear();
 
-                    var elements = new List<Element>
-                    {
-                        new Resistor("R1", 10),
-                        new Resistor("R2", 20),
-                        new Resistor("R3", 10),
-                        new Resistor("R4", 10),
-                        new Resistor("R5", 5)
-                    };
-
-                    Circuit.Elements.Add(elements[0]);
-                    Circuit.Elements.Add(elements[1], "R1", false);
-                    Circuit.Elements.Add(elements[2], "R1", true);
-                    Circuit.Elements.Add(elements[3], "R3", false);
-                    Circuit.Elements.Add(elements[4], "R1", true);
+                    Circuit.Elements.Add(new Resistor("R1", 10));
+                    Circuit.Elements.Add(new Resistor("R2", 10), "R1", false);
+                    Circuit.Elements.Add(new Resistor("R3", 10), "R1", true);
+                    Circuit.Elements.Add(new Resistor("R4", 5), "R1", true);
+                    Circuit.Elements.Add(new Resistor("R5", 5), "R1", false);
+                    Circuit.Elements.Add(new Resistor("R6", 20), "R5", true);
+                    Circuit.Elements.Add(new Resistor("R7", 5), "R4", false);
+                    Circuit.Elements.Add(new Resistor("R8", 10), "R4", false);
+                    Circuit.Elements.Add(new Resistor("R9", 10), "R7", false);
+                    Circuit.Elements.Add(new Resistor("R10", 10), "R7", true);
+                    Circuit.Elements.Add(new Resistor("R11", 10), "R7", true);
+                    Circuit.Elements.Add(new Resistor("R12", 10), "R9", true);
+                    Circuit.Elements.Add(new Resistor("R13", 10), "R9", true);
+                    Circuit.Elements.Add(new Resistor("R14", 10), "R9", true);
+                    Circuit.Elements.Add(new Resistor("R15", 10), "R12", false);
+                    Circuit.Elements.Add(new Resistor("R16", 10), "R15", true);
 
                     break;
                 }
@@ -150,6 +153,7 @@ namespace View
                     Circuit.Elements.Add(elements[3], "R1", true);
                     Circuit.Elements.Add(elements[4], "I1", false);
                     Circuit.Elements.Add(elements[5], "C2", false);
+                    Circuit.Elements.Add(new Resistor("R3", 222), "C2", false);
 
                     break;
                 }
@@ -287,6 +291,178 @@ namespace View
             else if (e.Type == ChangedEventArgs.ChangeType.Clear)
             {
                 elementGridView.Rows.Clear();
+            }
+
+            circuitPictureBox.Image = null;
+            var bitmapBackground = new Bitmap(1000, 1000);
+            var graphics = Graphics.FromImage(bitmapBackground);
+            var pen = new Pen(Color.Black, 1);
+
+            var displacement = new Point(50, 40);
+            DrawCircuit(graphics, pen, Circuit.Elements.Root, displacement);
+
+            circuitPictureBox.Image = bitmapBackground;
+        }
+
+        private Point DrawCircuit(Graphics graphics, Pen pen, ElementsTree.Node node,
+            Point displacement)
+        {
+            if (node.Brood.Count == 0)
+            {
+                DrawElement(graphics, pen, node.Element, displacement);
+                return new Point(1, 1);
+            }
+
+            int maxCount = 0;
+            List<int> steps = new List<int>();
+
+            if (node.IsSerial)
+            {
+                graphics.DrawLine(pen, new Point(displacement.X, 25 + displacement.Y),
+                    new Point(25 + displacement.X, 25 + displacement.Y));
+
+                for (var i = 0; i < node.Brood.Count; i++)
+                {
+                    var count = DrawCircuit(graphics, pen, node.Brood[i],
+                        new Point(25 + displacement.X, steps.Sum() * 40 + displacement.Y));
+
+                    steps.Add(count.Y);
+
+                    if (maxCount < count.X)
+                    {
+                        var step = 0;
+                        for (var j = 0; j < i; j++)
+                        {
+                            graphics.DrawLine(pen,
+                                new Point(25 + maxCount * 50 + displacement.X,
+                                    25 + step * 40 + displacement.Y),
+                                new Point(25 + count.X * 50 + displacement.X,
+                                    25 + step * 40 + displacement.Y));
+                            step += steps[j];
+                        }
+
+                        maxCount = count.X;
+
+                    }
+                    else
+                    {
+                        var step = 0;
+                        for (var j = 0; j < i; j++)
+                        {
+                            step += steps[j];
+                        }
+
+                        graphics.DrawLine(pen,
+                            new Point(25 + count.X * 50 + displacement.X,
+                                25 + step * 40 + displacement.Y),
+                            new Point(25 + maxCount * 50 + displacement.X,
+                                25 + step * 40 + displacement.Y));
+                    }
+                }
+
+                graphics.DrawLine(pen, new Point(25 + maxCount * 50 + displacement.X, 25 + displacement.Y),
+                    new Point(50 + maxCount * 50 + displacement.X, 25 + displacement.Y));
+
+
+                graphics.DrawLine(pen, new Point(25 + displacement.X, 25 + displacement.Y),
+                    new Point(25 + displacement.X, 25 + (steps.Sum() - steps[steps.Count - 1]) * 40 + displacement.Y));
+
+                graphics.DrawLine(pen, new Point(25 + maxCount * 50 + displacement.X, 25 + displacement.Y),
+                    new Point(25 + maxCount * 50 + displacement.X, 25 + (steps.Sum() - steps[steps.Count - 1]) * 40 + displacement.Y));
+
+                return new Point(maxCount + 1, steps.Sum());
+            }
+            else
+            {
+                foreach (var child in node.Brood)
+                {
+                    var count = DrawCircuit(graphics, pen, child,
+                        new Point(steps.Sum() * 50 + displacement.X, displacement.Y));
+
+                    steps.Add(count.X);
+
+                    if (maxCount < count.Y)
+                    {
+                        maxCount = count.Y;
+                    }
+                }
+
+                return new Point(steps.Sum(), maxCount);
+            }
+        }
+
+        private void DrawElement(Graphics graphics, Pen pen, Element element,
+            Point displacement)
+        {
+            var brush = new SolidBrush(Color.Black);
+            if (element is Resistor)
+            {
+                graphics.DrawLine(pen,
+                    new Point(10 + displacement.X, 20 + displacement.Y),
+                    new Point(10 + displacement.X, 30 + displacement.Y));
+
+                graphics.DrawLine(pen,
+                    new Point(10 + displacement.X, 30 + displacement.Y),
+                    new Point(40 + displacement.X, 30 + displacement.Y));
+
+                graphics.DrawLine(pen,
+                    new Point(40 + displacement.X, 20 + displacement.Y),
+                    new Point(40 + displacement.X, 30 + displacement.Y));
+
+                graphics.DrawLine(pen,
+                    new Point(40 + displacement.X, 20 + displacement.Y),
+                    new Point(10 + displacement.X, 20 + displacement.Y));
+
+                graphics.DrawLine(pen, new Point(0 + displacement.X, 25 + displacement.Y),
+                    new Point(10 + displacement.X, 25 + displacement.Y));
+
+                graphics.DrawLine(pen,
+                    new Point(40 + displacement.X, 25 + displacement.Y),
+                    new Point(50 + displacement.X, 25 + displacement.Y));
+
+                graphics.DrawString(element.Name, Font, brush, 15 + displacement.X,
+                    40 + displacement.Y);
+            }
+            else if (element is Capacitor)
+            {
+                graphics.DrawLine(pen,
+                    new Point(20 + displacement.X, 15 + displacement.Y),
+                    new Point(20 + displacement.X, 35 + displacement.Y));
+
+                graphics.DrawLine(pen,
+                    new Point(30 + displacement.X, 15 + displacement.Y),
+                    new Point(30 + displacement.X, 35 + displacement.Y));
+
+                graphics.DrawLine(pen, new Point(0 + displacement.X, 25 + displacement.Y),
+                    new Point(20 + displacement.X, 25 + displacement.Y));
+
+                graphics.DrawLine(pen,
+                    new Point(30 + displacement.X, 25 + displacement.Y),
+                    new Point(50 + displacement.X, 25 + displacement.Y));
+
+                graphics.DrawString(element.Name, Font, brush, 15 + displacement.X,
+                    40 + displacement.Y);
+            }
+            else if (element is Inductor)
+            {
+                graphics.DrawArc(pen, 10 + displacement.X, 20 + displacement.Y, 10, 10,
+                    180, 180);
+
+                graphics.DrawArc(pen, 20 + displacement.X, 20 + displacement.Y, 10, 10,
+                    180, 180);
+
+                graphics.DrawArc(pen, 30 + displacement.X, 20 + displacement.Y, 10, 10,
+                    180, 180);
+
+                graphics.DrawLine(pen, new Point(0 + displacement.X, 25 + displacement.Y),
+                    new Point(10 + displacement.X, 25 + displacement.Y));
+
+                graphics.DrawLine(pen,
+                    new Point(40 + displacement.X, 25 + displacement.Y),
+                    new Point(50 + displacement.X, 25 + displacement.Y));
+
+                graphics.DrawString(element.Name, Font, brush, 15 + displacement.X,
+                    40 + displacement.Y);
             }
 
         }
