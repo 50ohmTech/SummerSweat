@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Yulya
+namespace Model
 {
     /// <summary>
     /// Класс Capacitor.
     /// </summary>
-    public class Capacitor : Element
+    public class Capacitor : ElementBase
     {
         #region Публичные методы
 
@@ -27,6 +27,10 @@ namespace Yulya
         /// <returns>Комплексное значение импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (frequency <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(frequency));
+            }
             return new Complex(0, -1 / (2 * Math.PI * frequency * Value));
         }
 

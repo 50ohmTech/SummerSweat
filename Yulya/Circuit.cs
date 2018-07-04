@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Yulya
+namespace Model
 {
     /// <summary>
     /// Класс цепи (Circuit).
@@ -14,7 +14,7 @@ namespace Yulya
         /// <summary>
         /// Список элементов цепи.
         /// </summary>
-        public List<Element> Elements { get; set; }
+        public List<ElementBase> Elements { get; set; }
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace Yulya
         /// <summary>
         /// Конструктор класса Circuit.
         /// </summary>
-        public Circuit(List<Element> elements)
+        public Circuit(List<ElementBase> elements)
         {
             Elements = elements;
         }
@@ -35,6 +35,11 @@ namespace Yulya
         /// <returns>Список импедансов цепи.</returns>
         public List<Complex> CalculateZ(List<double> frequencies)
         {
+            if (frequencies == null)
+            {
+                throw new ArgumentOutOfRangeException(nameof(frequencies));
+            }
+
             var impedances = new List<Complex>();
 
             foreach (var frequency in frequencies)
@@ -48,7 +53,6 @@ namespace Yulya
 
                 impedances.Add(impedance);
             }
-
             return impedances;
         }
 

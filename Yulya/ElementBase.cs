@@ -2,12 +2,12 @@
 using System.Numerics;
 
 
-namespace Yulya
+namespace Model
 {
     /// <summary>
-    /// Класс элемента электрической цепи (Element).
+    /// Класс элемента электрической цепи (ElementBase).
     /// </summary>
-    public abstract class Element
+    public abstract class ElementBase
     {
         #region Поля
 
@@ -30,14 +30,8 @@ namespace Yulya
         /// </summary>
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get => _name;
+            set => _name = value ?? throw new ArgumentNullException("Поле не может быть пустым.");
         }
 
         /// <summary>
@@ -45,11 +39,8 @@ namespace Yulya
         /// </summary>
         public double Value
         {
-            get
-            {
-                return _value;
-            }
-            set
+            get => _value;
+            private set
             {
                 if (value < 0)
                 {
@@ -68,7 +59,7 @@ namespace Yulya
         /// </summary>
         /// <param name="name">Имя элемента.</param>
         /// <param name="value">Номинал элемента.</param>
-        public Element(string name, double value)
+        protected ElementBase(string name, double value)
         {
             Name = name;
             Value = value;
