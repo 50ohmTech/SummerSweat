@@ -64,7 +64,7 @@ namespace View
 
         private void ToolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            new ControlPanel(_circuit.Branches, _viewElements).ShowDialog();
+            new ElementManager(_circuit.Branches, _viewElements).ShowDialog();
             DrawCircuit();
         }
 
@@ -73,11 +73,13 @@ namespace View
             DialogResult result = MessageBox.Show("Очистить цепь?",
                 "Подтвердите",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
+                MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 ClearCircuit();
+                _calculations.Frequencies.Clear();
+                _calculations.Impedances.Clear();
             }
         }
 
@@ -88,15 +90,32 @@ namespace View
         {
             _circuit.Branches.Clear();
             _viewElements.Clear();
+            Branch.NodeOutLast = 0;
             ClearPanel();
         }
 
 
         private void ToolStripButtonCalculate_Click(object sender, EventArgs e)
         {
+            if (_calculations.Frequencies.Count < 1)
+            {
+                MessageBox.Show("Список заданных частот пуст.\r\n" +
+                                "Введите их в \"Данные для расчета\"",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
             _calculations.Impedances.Clear();
             _calculations.Impedances.AddRange(
                 _circuit.CalculateZ(_calculations.GetFrequencies()));
+
+            MessageBox.Show("Готово! Импедансы отправлены в \"Результаты\"",
+                "Информация",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -286,7 +305,7 @@ namespace View
             for (uint group = 0; group < _random.Next(2) + 1; group++)
             {
                 for (uint branchGroup = 0;
-                    branchGroup < _random.Next(2) + 1;
+                    branchGroup < _random.Next(3) + 1;
                     branchGroup++)
                 {
                     Branch randomBranch = new Branch(group);
@@ -318,6 +337,7 @@ namespace View
                 "* Результаты будут в \"Результаты\" --> \"Импедансы\"\r\n" +
                 "\r\n* Чтоб удалить или изменить номинал на уже созданном элементе\r\n" +
                 "необходимо нажать правой кнопкой мыши на элемент";
+
             MessageBox.Show(info);
         }
     }

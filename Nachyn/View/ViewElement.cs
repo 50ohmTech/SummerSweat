@@ -33,7 +33,10 @@ namespace View
             _elementBases = elementBases;
             InitializeComponent();
             Item = element;
-            _labelValue.Text = element.Value.ToString(CultureInfo.CurrentCulture);
+            _labelValue.Text =
+                "Номинал: " + element.Value.ToString(CultureInfo.CurrentCulture);
+
+            _labelName.Text = "Имя: " + element.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -71,12 +74,16 @@ namespace View
 
         private void Element_ValueChanged(object sender, ElementValueEventArgs arguments)
         {
-            _labelValue.Text = arguments.NewValue.ToString(CultureInfo.CurrentCulture);
+            _labelValue.Text = "Номинал: " +
+                               arguments.NewValue.ToString(CultureInfo.CurrentCulture);
+
+            _labelName.Text =
+                "Имя: " + arguments.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         private void ToolStripMenuAdd_Click(object sender, EventArgs e)
         {
-            new ControlPanel(this).ShowDialog();
+            new ElementManager(this).ShowDialog();
         }
 
         private void ToolStripMenuDelete_Click(object sender, EventArgs e)

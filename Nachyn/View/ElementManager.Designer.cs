@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class ControlPanel
+    partial class ElementManager
     {
         /// <summary>
         /// Required designer variable.
@@ -39,11 +39,11 @@
             this._dataGridViewBranches = new System.Windows.Forms.DataGridView();
             this._groupBoxAddElement = new System.Windows.Forms.GroupBox();
             this._groupBoxEditBranch = new System.Windows.Forms.GroupBox();
+            this._labelValidateBranch = new System.Windows.Forms.Label();
             this._buttonDeleteBranchSelected = new System.Windows.Forms.Button();
             this._buttonAddBranch = new System.Windows.Forms.Button();
             this._textBoxNodeIn = new System.Windows.Forms.TextBox();
             this._labelNodeIn = new System.Windows.Forms.Label();
-            this._labelValidateBranch = new System.Windows.Forms.Label();
             this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._branchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).BeginInit();
@@ -81,7 +81,7 @@
             // _labelValue
             // 
             this._labelValue.AutoSize = true;
-            this._labelValue.Location = new System.Drawing.Point(12, 53);
+            this._labelValue.Location = new System.Drawing.Point(8, 53);
             this._labelValue.Name = "_labelValue";
             this._labelValue.Size = new System.Drawing.Size(53, 13);
             this._labelValue.TabIndex = 3;
@@ -101,7 +101,7 @@
             // _labelName
             // 
             this._labelName.AutoSize = true;
-            this._labelName.Location = new System.Drawing.Point(36, 79);
+            this._labelName.Location = new System.Drawing.Point(8, 79);
             this._labelName.Name = "_labelName";
             this._labelName.Size = new System.Drawing.Size(29, 13);
             this._labelName.TabIndex = 5;
@@ -125,9 +125,19 @@
             this.keyDataGridViewTextBoxColumn});
             this._dataGridViewBranches.DataSource = this._branchBindingSource;
             this._dataGridViewBranches.Location = new System.Drawing.Point(191, 18);
+            this._dataGridViewBranches.MultiSelect = false;
             this._dataGridViewBranches.Name = "_dataGridViewBranches";
             this._dataGridViewBranches.ReadOnly = true;
-            this._dataGridViewBranches.Size = new System.Drawing.Size(163, 288);
+            this._dataGridViewBranches.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._dataGridViewBranches.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LawnGreen;
+            this._dataGridViewBranches.RowTemplate.ReadOnly = true;
+            this._dataGridViewBranches.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this._dataGridViewBranches.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this._dataGridViewBranches.ShowCellErrors = false;
+            this._dataGridViewBranches.ShowCellToolTips = false;
+            this._dataGridViewBranches.ShowEditingIcon = false;
+            this._dataGridViewBranches.ShowRowErrors = false;
+            this._dataGridViewBranches.Size = new System.Drawing.Size(180, 288);
             this._dataGridViewBranches.TabIndex = 7;
             // 
             // _groupBoxAddElement
@@ -144,7 +154,7 @@
             this._groupBoxAddElement.Size = new System.Drawing.Size(173, 135);
             this._groupBoxAddElement.TabIndex = 8;
             this._groupBoxAddElement.TabStop = false;
-            this._groupBoxAddElement.Text = "Действия с элементом";
+            this._groupBoxAddElement.Text = "Добавить элемент";
             // 
             // _groupBoxEditBranch
             // 
@@ -160,6 +170,15 @@
             this._groupBoxEditBranch.TabStop = false;
             this._groupBoxEditBranch.Text = "Действия с ветвью";
             // 
+            // _labelValidateBranch
+            // 
+            this._labelValidateBranch.AutoSize = true;
+            this._labelValidateBranch.Location = new System.Drawing.Point(8, 104);
+            this._labelValidateBranch.Name = "_labelValidateBranch";
+            this._labelValidateBranch.Size = new System.Drawing.Size(98, 13);
+            this._labelValidateBranch.TabIndex = 7;
+            this._labelValidateBranch.Text = "Статус валидации";
+            // 
             // _buttonDeleteBranchSelected
             // 
             this._buttonDeleteBranchSelected.Location = new System.Drawing.Point(11, 78);
@@ -173,9 +192,9 @@
             // _buttonAddBranch
             // 
             this._buttonAddBranch.Enabled = false;
-            this._buttonAddBranch.Location = new System.Drawing.Point(71, 49);
+            this._buttonAddBranch.Location = new System.Drawing.Point(11, 49);
             this._buttonAddBranch.Name = "_buttonAddBranch";
-            this._buttonAddBranch.Size = new System.Drawing.Size(91, 23);
+            this._buttonAddBranch.Size = new System.Drawing.Size(151, 23);
             this._buttonAddBranch.TabIndex = 4;
             this._buttonAddBranch.Text = "Добавить";
             this._buttonAddBranch.UseVisualStyleBackColor = true;
@@ -198,15 +217,6 @@
             this._labelNodeIn.TabIndex = 0;
             this._labelNodeIn.Text = "Входной узел";
             // 
-            // _labelValidateBranch
-            // 
-            this._labelValidateBranch.AutoSize = true;
-            this._labelValidateBranch.Location = new System.Drawing.Point(8, 104);
-            this._labelValidateBranch.Name = "_labelValidateBranch";
-            this._labelValidateBranch.Size = new System.Drawing.Size(98, 13);
-            this._labelValidateBranch.TabIndex = 7;
-            this._labelValidateBranch.Text = "Статус валидации";
-            // 
             // keyDataGridViewTextBoxColumn
             // 
             this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
@@ -214,24 +224,25 @@
             this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
             this.keyDataGridViewTextBoxColumn.ReadOnly = true;
             this.keyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.keyDataGridViewTextBoxColumn.Width = 140;
             // 
             // _branchBindingSource
             // 
             this._branchBindingSource.DataSource = typeof(Model.Branch);
             // 
-            // ControlPanel
+            // ElementManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 314);
+            this.ClientSize = new System.Drawing.Size(379, 315);
             this.Controls.Add(this._groupBoxEditBranch);
             this.Controls.Add(this._groupBoxAddElement);
             this.Controls.Add(this._dataGridViewBranches);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.Name = "ControlPanel";
+            this.Name = "ElementManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Панель управления";
+            this.Text = "Управление элементами";
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).EndInit();
             this._groupBoxAddElement.ResumeLayout(false);
             this._groupBoxAddElement.PerformLayout();
@@ -259,7 +270,7 @@
         private System.Windows.Forms.TextBox _textBoxNodeIn;
         private System.Windows.Forms.Label _labelNodeIn;
         private System.Windows.Forms.Button _buttonDeleteBranchSelected;
-        private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label _labelValidateBranch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
     }
 }

@@ -57,11 +57,11 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlPanel.cs">
+    <Compile Include="ElementManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ControlPanel.Designer.cs">
-      <DependentUpon>ControlPanel.cs</DependentUpon>
+    <Compile Include="ElementManager.Designer.cs">
+      <DependentUpon>ElementManager.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewElement.cs">
       <SubType>UserControl</SubType>
@@ -77,8 +77,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ControlPanel.resx">
-      <DependentUpon>ControlPanel.cs</DependentUpon>
+    <EmbeddedResource Include="ElementManager.resx">
+      <DependentUpon>ElementManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewElement.resx">
       <DependentUpon>ViewElement.cs</DependentUpon>

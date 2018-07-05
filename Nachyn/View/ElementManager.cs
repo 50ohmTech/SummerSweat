@@ -13,7 +13,7 @@ namespace View
     /// <summary>
     ///     Панель управления
     /// </summary>
-    public partial class ControlPanel : Form
+    public partial class ElementManager : Form
     {
         /// <summary>
         ///     Визуальный элемент
@@ -41,7 +41,7 @@ namespace View
         /// </summary>
         /// <param name="branches">Список ветвей</param>
         /// <param name="viewElements">Список визуальных элементов</param>
-        public ControlPanel(List<Branch> branches,
+        public ElementManager(List<Branch> branches,
             List<ViewElement> viewElements)
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace View
         ///     Конструктор
         /// </summary>
         /// <param name="element">Визуальный элемент</param>
-        public ControlPanel(ViewElement element)
+        public ElementManager(ViewElement element)
         {
             InitializeComponent();
             InitializeComboBoxType();
@@ -98,33 +98,25 @@ namespace View
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Добавить?",
-                "Подтвердите",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            if (_comboBoxType.SelectedItem is ElementTypeComboBoxItem currentElement)
             {
-                if (_comboBoxType.SelectedItem is ElementTypeComboBoxItem currentElement)
+                if (_branchBindingSource.Current is Branch currentBranch)
                 {
-                    if (_branchBindingSource.Current is Branch currentBranch)
-                    {
-                        ElementBase newElement =
-                            ElementFactory.GetInstance(currentElement.Value,
-                                _textBoxName.Text, _value);
+                    ElementBase newElement =
+                        ElementFactory.GetInstance(currentElement.Value,
+                            _textBoxName.Text, _value);
 
-                        _viewElements.Add(new ViewElement(newElement,
-                            currentBranch.Elements));
+                    _viewElements.Add(new ViewElement(newElement,
+                        currentBranch.Elements));
 
-                        currentBranch.Elements.Add(newElement);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Выберите ветвь",
-                            "Ошибка",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
+                    currentBranch.Elements.Add(newElement);
+                }
+                else
+                {
+                    MessageBox.Show("Выберите ветвь",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
         }
@@ -151,13 +143,14 @@ namespace View
                 return;
             }
 
-            if (_value <= 0)
+            if (_value <= 0 || _value > 1000000000000)
             {
                 PassElementValidation(false);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(_textBoxName.Text))
+            if (string.IsNullOrWhiteSpace(_textBoxName.Text) ||
+                _textBoxName.Text.Length > 10)
             {
                 PassElementValidation(false);
                 return;

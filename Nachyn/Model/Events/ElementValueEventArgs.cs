@@ -10,12 +10,12 @@ namespace Model.Events
         /// <summary>
         ///     Конструктор
         /// </summary>
-        /// <param name="message">Сообщение</param>
+        /// <param name="name">Сообщение</param>
         /// <param name="oldValue">Старое значение</param>
         /// <param name="newValue">Новое значение</param>
-        public ElementValueEventArgs(string message, double oldValue, double newValue)
+        public ElementValueEventArgs(string name, double oldValue, double newValue)
         {
-            Message = message;
+            Name = name;
             OldValue = oldValue;
             NewValue = newValue;
         }
@@ -33,6 +33,6 @@ namespace Model.Events
         /// <summary>
         ///     Сообщение
         /// </summary>
-        public string Message { get; }
+        public string Name { get; }
     }
 }

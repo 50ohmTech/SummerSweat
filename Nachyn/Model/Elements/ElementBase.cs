@@ -62,7 +62,7 @@ namespace Model.Elements
                 double oldValue = _value;
                 _value = value;
                 ValueChanged?.Invoke(this, new ElementValueEventArgs
-                    ("Изменил(ось/ась/ся) " + ToString(), oldValue, _value));
+                    (Name, oldValue, _value));
             }
             get => _value;
         }

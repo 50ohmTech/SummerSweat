@@ -29,7 +29,7 @@ namespace Model
             Key = NodeIn + "_" + NodeOut;
         }
 
-        public static uint NodeOutLast { get; private set; }
+        public static uint NodeOutLast { get; set; }
 
         /// <summary>
         ///     Входящий узел
