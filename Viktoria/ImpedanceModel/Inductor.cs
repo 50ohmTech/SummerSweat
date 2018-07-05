@@ -27,8 +27,7 @@ namespace ImpedanceModel
             get => _inductance;
             set
             {
-                ValidationTools.IsDouble(value);
-                ValidationTools.IsLessThenNull(value);
+                ValidationTools.IsCorrectParameter(value);
                 _inductance = value;
             }
         }

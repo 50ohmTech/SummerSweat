@@ -39,24 +39,22 @@ namespace ImpedanceView
             get
             {
                 ValidationTools.IsDouble(FirstTextView);
+                ValidationTools.IsCorrectParameter(Convert.ToDouble(FirstTextView.Text));
                 switch (_currentType)
                 {
                     case (int) ElementsType.Inductor:
                     {
-                        var L = Convert.ToDouble(FirstTextView.Text);
-                        IElement element = new Inductor(L);
+                        IElement element = new Inductor(Convert.ToDouble(FirstTextView.Text));
                         return element;
                     }
                     case (int) ElementsType.Resistor:
                     {
-                        var R = Convert.ToDouble(FirstTextView.Text);
-                        IElement element = new Resistor(R);
+                        IElement element = new Resistor(Convert.ToDouble(FirstTextView.Text));
                         return element;
                     }
                     case (int) ElementsType.Capacitor:
                     {
-                        var C = Convert.ToDouble(FirstTextView.Text);
-                        IElement element = new Capacitor(C);
+                        IElement element = new Capacitor(Convert.ToDouble(FirstTextView.Text));
                         return element;
                     }
                 }

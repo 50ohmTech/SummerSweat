@@ -58,11 +58,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PassiveElementControl.cs">
+    <Compile Include="EnterElementControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PassiveElementControl.Designer.cs">
-      <DependentUpon>PassiveElementControl.cs</DependentUpon>
+    <Compile Include="EnterElementControl.Designer.cs">
+      <DependentUpon>EnterElementControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -76,8 +76,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PassiveElementControl.resx">
-      <DependentUpon>PassiveElementControl.cs</DependentUpon>
+    <EmbeddedResource Include="EnterElementControl.resx">
+      <DependentUpon>EnterElementControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

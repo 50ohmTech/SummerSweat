@@ -26,8 +26,7 @@ namespace ImpedanceModel
             get => _resistance;
             set
             {
-                ValidationTools.IsDouble(value);
-                ValidationTools.IsLessThenNull(value);
+                ValidationTools.IsCorrectParameter(value);
                 _resistance = value;
             }
         }

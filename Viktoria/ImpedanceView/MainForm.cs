@@ -115,8 +115,9 @@ namespace ImpedanceView
                 var maxFrequency = Convert.ToDouble(this.maxFrequency.Text);
                 var step = Convert.ToDouble(Step.Text);
 
-                ValidationTools.IsLessThenNull(minFrequency);
-                ValidationTools.IsLessThenNull(step);
+                ValidationTools.IsCorrectFrequency(minFrequency);
+                ValidationTools.IsCorrectFrequency(maxFrequency);
+                ValidationTools.IsCorrectFrequency(step);
 
                 if (minFrequency > maxFrequency)
                 {

@@ -27,8 +27,7 @@ namespace ImpedanceModel
             get => _capacitance;
             set
             {
-                ValidationTools.IsDouble(value);
-                ValidationTools.IsLessThenNull(value);
+                ValidationTools.IsCorrectParameter(value);
                 _capacitance = value;
             }
         }
