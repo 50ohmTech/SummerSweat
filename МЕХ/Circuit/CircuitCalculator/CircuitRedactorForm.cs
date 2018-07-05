@@ -29,8 +29,8 @@ namespace CircuitCalculator
 		{
 			InitializeComponent();
 
-		#if !DEBUG
-			checkButton.Visible = false;
+#if !DEBUG
+			testButton.Visible = false;
 #endif
 		}
 
