@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -37,7 +39,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,17 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Branch.cs" />
     <Compile Include="Elements\Capacitor.cs" />
     <Compile Include="Circuit.cs" />
-    <Compile Include="Events\ElementValueArgs.cs" />
-    <Compile Include="Elements\IElement.cs" />
+    <Compile Include="Events\ElementValueEventArgs.cs" />
+    <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Inductor.cs" />
     <Compile Include="ComboBoxType\ElementTypeComboBoxItem.cs" />
+    <Compile Include="Factories\ElementFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\Resistor.cs" />
     <Compile Include="Events\ValueChangedEventHandler.cs" />
     <Compile Include="ComboBoxType\ElementType.cs" />
     <Compile Include="PropertyGrid\Calculations.cs" />
+    <Compile Include="PropertyGrid\Frequency.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

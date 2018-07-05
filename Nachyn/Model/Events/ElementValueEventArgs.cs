@@ -5,7 +5,7 @@ namespace Model.Events
     /// <summary>
     ///     Класс для обработчика события ValueChanged
     /// </summary>
-    public class ElementValueArgs : EventArgs
+    public class ElementValueEventArgs : EventArgs
     {
         /// <summary>
         ///     Конструктор
@@ -13,7 +13,7 @@ namespace Model.Events
         /// <param name="message">Сообщение</param>
         /// <param name="oldValue">Старое значение</param>
         /// <param name="newValue">Новое значение</param>
-        public ElementValueArgs(string message, double oldValue, double newValue)
+        public ElementValueEventArgs(string message, double oldValue, double newValue)
         {
             Message = message;
             OldValue = oldValue;

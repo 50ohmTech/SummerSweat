@@ -61,6 +61,15 @@ namespace View.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменить.
+        /// </summary>
+        public static string ButtonEditName {
+            get {
+                return ResourceManager.GetString("ButtonEditName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Capacitor {

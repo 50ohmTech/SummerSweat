@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
-using Model.Elements;
 
 namespace Model
 {
@@ -13,33 +12,75 @@ namespace Model
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
-        public ObservableCollection<IElement> Elements;
+        public List<Branch> Branches;
 
         /// <summary>
         ///     Конструктор
         /// </summary>
         public Circuit()
         {
-            Elements = new ObservableCollection<IElement>();
+            Branches = new List<Branch>();
         }
 
-        /// <summary>
-        ///     Расчет комплексного сопротивления
-        ///     данного элемента
-        /// </summary>
-        /// <param name="frequencies">Частоты</param>
-        /// <returns>Комплексные сопротивления</returns>
         public List<Complex> CalculateZ(params double[] frequencies)
         {
-            var resistances = new List<Complex>();
-            foreach (var frequency in frequencies)
+            if (frequencies == null)
             {
-                var resistance = new Complex();
-                foreach (var element in Elements) resistance += element.CalculateZ(frequency);
-                resistances.Add(resistance);
+                throw new ArgumentNullException();
             }
 
-            return resistances;
+            List<Complex> resistanceZ = new List<Complex>();
+
+            foreach (double frequency in frequencies)
+            {
+                if (frequency < 1 || frequency > 1000000000000)
+                {
+                    throw new ArgumentException(
+                        "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
+                }
+
+                Dictionary<string, List<Branch>> tempBranches =
+                    new Dictionary<string, List<Branch>>();
+
+                foreach (Branch branch in Branches)
+                {
+                    if (!tempBranches.ContainsKey(branch.Key))
+                    {
+                        tempBranches[branch.Key] = new List<Branch>();
+                    }
+
+                    tempBranches[branch.Key].Add(branch);
+                }
+
+                Complex resistanceTempBranches = new Complex();
+                foreach (string key in tempBranches.Keys)
+                {
+                    if (tempBranches[key].Count > 1)
+                    {
+                        Complex totalСonductivity = new Complex();
+
+                        foreach (Branch branch in tempBranches[key])
+                        {
+                            Complex conduction = 1 / branch.CalculateZ(frequency);
+                            totalСonductivity += conduction;
+                        }
+
+                        resistanceTempBranches += 1 / totalСonductivity;
+                    }
+                    else
+                    {
+                        if (tempBranches[key].Count == 1)
+                        {
+                            resistanceTempBranches +=
+                                tempBranches[key][0].CalculateZ(frequency);
+                        }
+                    }
+                }
+
+                resistanceZ.Add(resistanceTempBranches);
+            }
+
+            return resistanceZ;
         }
     }
 }
