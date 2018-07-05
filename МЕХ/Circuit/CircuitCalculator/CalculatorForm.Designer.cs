@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.instrumentsGroupBox = new System.Windows.Forms.GroupBox();
+			this.isRedactorVisibleButton = new System.Windows.Forms.Button();
 			this.resetButton = new System.Windows.Forms.Button();
 			this.calculateButton = new System.Windows.Forms.Button();
 			this.pickCircuitLabel = new System.Windows.Forms.Label();
@@ -36,7 +37,6 @@
 			this.frequenciesGridView = new System.Windows.Forms.DataGridView();
 			this.Frequencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Impedances = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isRedactorVisibleButton = new System.Windows.Forms.Button();
 			this.instrumentsGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.frequenciesGridView)).BeginInit();
 			this.SuspendLayout();
@@ -55,6 +55,16 @@
 			this.instrumentsGroupBox.TabIndex = 3;
 			this.instrumentsGroupBox.TabStop = false;
 			this.instrumentsGroupBox.Text = "Инструменты";
+			// 
+			// isRedactorVisibleButton
+			// 
+			this.isRedactorVisibleButton.Location = new System.Drawing.Point(265, 248);
+			this.isRedactorVisibleButton.Name = "isRedactorVisibleButton";
+			this.isRedactorVisibleButton.Size = new System.Drawing.Size(160, 27);
+			this.isRedactorVisibleButton.TabIndex = 10;
+			this.isRedactorVisibleButton.Text = "Показать редактор цепи";
+			this.isRedactorVisibleButton.UseVisualStyleBackColor = true;
+			this.isRedactorVisibleButton.Click += new System.EventHandler(this.IsRedactorVisible_Click);
 			// 
 			// resetButton
 			// 
@@ -112,26 +122,18 @@
 			// 
 			// Frequencies
 			// 
+			this.Frequencies.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.Frequencies.HeaderText = "Частоты";
 			this.Frequencies.Name = "Frequencies";
-			this.Frequencies.Width = 160;
+			this.Frequencies.Width = 94;
 			// 
 			// Impedances
 			// 
+			this.Impedances.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.Impedances.HeaderText = "Импедансы";
 			this.Impedances.Name = "Impedances";
 			this.Impedances.ReadOnly = true;
-			this.Impedances.Width = 215;
-			// 
-			// isRedactorVisibleButton
-			// 
-			this.isRedactorVisibleButton.Location = new System.Drawing.Point(265, 248);
-			this.isRedactorVisibleButton.Name = "isRedactorVisibleButton";
-			this.isRedactorVisibleButton.Size = new System.Drawing.Size(160, 27);
-			this.isRedactorVisibleButton.TabIndex = 10;
-			this.isRedactorVisibleButton.Text = "Показать редактор цепи";
-			this.isRedactorVisibleButton.UseVisualStyleBackColor = true;
-			this.isRedactorVisibleButton.Click += new System.EventHandler(this.IsRedactorVisible_Click);
+			this.Impedances.Width = 113;
 			// 
 			// CalculatorForm
 			// 
@@ -154,13 +156,13 @@
 		#endregion
 		private System.Windows.Forms.GroupBox instrumentsGroupBox;
 		private System.Windows.Forms.DataGridView frequenciesGridView;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Frequencies;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Impedances;
 		private System.Windows.Forms.ComboBox circuitListComboBox;
 		private System.Windows.Forms.Label pickCircuitLabel;
 		private System.Windows.Forms.Button calculateButton;
 		private System.Windows.Forms.Button resetButton;
 		private System.Windows.Forms.Button isRedactorVisibleButton;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Frequencies;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Impedances;
 	}
 }
 
