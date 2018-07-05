@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using CircuitCalculator.Controls.ElementsOfCircuit;
 
 namespace CircuitCalculator.Controls
 {
@@ -19,7 +18,7 @@ namespace CircuitCalculator.Controls
 		/// <param name="i"> Столбец </param>
 		/// <param name="j"> Строка </param>
 		/// <returns></returns>
-		public ElementControlBase this[int i, int j]
+		public ElementControl this[int i, int j]
 		{
 			get
 			{
@@ -89,7 +88,7 @@ namespace CircuitCalculator.Controls
 		/// <summary>
 		///     Список всех контролов
 		/// </summary>
-		private readonly List<ElementControlBase> _controlList;
+		private readonly List<ElementControl> _controlList;
 
 		/// <summary>
 		///     Координаты последнего добавленного элемента
@@ -117,7 +116,7 @@ namespace CircuitCalculator.Controls
 		/// <param name="control"> Перемещаемый контрол </param>
 		/// <param name="firstPosition"> Начальная позиция в координатах </param>
 		/// <param name="lastPosition"> Конечная позиция в координатах </param>
-		private void AddOnPoint(ElementControlBase control, Point firstPosition,
+		private void AddOnPoint(ElementControl control, Point firstPosition,
 			Point lastPosition)
 		{
 			if (control == null || firstPosition == null || lastPosition == null)
@@ -168,7 +167,7 @@ namespace CircuitCalculator.Controls
 		/// </summary>
 		/// <param name="controlBase"> Добавляемый контрол </param>
 		/// <param name="distance"> Через сколько позиций от данной начинать попытки вставки </param>
-		public void AddControl(ElementControlBase controlBase, int distance = 0)
+		public void AddControl(ElementControl controlBase, int distance = 0)
 		{
 			if (IsPositionFree(
 				new Point(_lastPosition.X + distance * LengthOfControl, _lastPosition.Y)))
@@ -207,7 +206,7 @@ namespace CircuitCalculator.Controls
 		public RedactorPanel()
 		{
 			InitializeComponent();
-			_controlList = new List<ElementControlBase>();
+			_controlList = new List<ElementControl>();
 			_lastPosition = new Point(0 * LengthOfControl, 1 * WidthOfControl);
 		}
 

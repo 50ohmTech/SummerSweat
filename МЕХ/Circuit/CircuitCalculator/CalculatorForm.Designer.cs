@@ -36,12 +36,14 @@
 			this.frequenciesGridView = new System.Windows.Forms.DataGridView();
 			this.Frequencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Impedances = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.isRedactorVisibleButton = new System.Windows.Forms.Button();
 			this.instrumentsGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.frequenciesGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// instrumentsGroupBox
 			// 
+			this.instrumentsGroupBox.Controls.Add(this.isRedactorVisibleButton);
 			this.instrumentsGroupBox.Controls.Add(this.resetButton);
 			this.instrumentsGroupBox.Controls.Add(this.calculateButton);
 			this.instrumentsGroupBox.Controls.Add(this.pickCircuitLabel);
@@ -102,6 +104,7 @@
             this.Impedances});
 			this.frequenciesGridView.Location = new System.Drawing.Point(6, 51);
 			this.frequenciesGridView.Name = "frequenciesGridView";
+			this.frequenciesGridView.RowHeadersVisible = false;
 			this.frequenciesGridView.RowTemplate.Height = 24;
 			this.frequenciesGridView.Size = new System.Drawing.Size(419, 193);
 			this.frequenciesGridView.TabIndex = 5;
@@ -120,12 +123,23 @@
 			this.Impedances.ReadOnly = true;
 			this.Impedances.Width = 215;
 			// 
+			// isRedactorVisibleButton
+			// 
+			this.isRedactorVisibleButton.Location = new System.Drawing.Point(265, 248);
+			this.isRedactorVisibleButton.Name = "isRedactorVisibleButton";
+			this.isRedactorVisibleButton.Size = new System.Drawing.Size(160, 27);
+			this.isRedactorVisibleButton.TabIndex = 10;
+			this.isRedactorVisibleButton.Text = "Показать редактор цепи";
+			this.isRedactorVisibleButton.UseVisualStyleBackColor = true;
+			this.isRedactorVisibleButton.Click += new System.EventHandler(this.IsRedactorVisible_Click);
+			// 
 			// CalculatorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(457, 303);
 			this.Controls.Add(this.instrumentsGroupBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "CalculatorForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Калькулятор";
@@ -146,6 +160,7 @@
 		private System.Windows.Forms.Label pickCircuitLabel;
 		private System.Windows.Forms.Button calculateButton;
 		private System.Windows.Forms.Button resetButton;
+		private System.Windows.Forms.Button isRedactorVisibleButton;
 	}
 }
 

@@ -5,9 +5,9 @@ using System.Numerics;
 namespace CircuitElements
 {
 	/// <summary>
-	///     Конденсатор, элемент эл. цепи
+	///     Интерфейс элементов
 	/// </summary>
-	public class Capacitor : IElement
+	public abstract class ElementBase
 	{
 		#region – – События – – 
 
@@ -90,22 +90,26 @@ namespace CircuitElements
 		/// </summary>
 		/// <param name="f"> Частота сигнала </param>
 		/// <returns>Импеданс элемента в комплексной форме</returns>
-		public Complex CalculateZ(double f)
-		{
-			return new Complex(0, -1 / (2 * Math.PI * f * Value));
-		}
+		public abstract Complex CalculateZ(double f);
 
 		/// <summary>
-		///     Конструктор класса Capacitor
+		///     Конструктор элемента
 		/// </summary>
 		/// <param name="name"> Имя элемента </param>
 		/// <param name="value"> Значение элемента </param>
-		public Capacitor(string name, double value)
+		public ElementBase(string name, double value)
 		{
 			Name = name;
 			Value = value;
 		}
 
-		#endregion – – Публичные методы – –
+		#endregion – – Публичные методы – – 
 	}
+
+	/// <summary>
+	///     Делегат, хранящий сигнатуру методов, подписанных на событие ValueChanged
+	/// </summary>
+	/// <param name="value"> Изменившееся значение </param>
+	/// <param name="valueOwner"> объект, который изменился </param>
+	public delegate void ValueStateHandler(object value, object valueOwner);
 }
