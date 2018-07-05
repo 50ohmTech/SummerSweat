@@ -194,7 +194,17 @@ namespace View
 
             Point groupBranchs = new Point(50, 50);
 
-            graphics.DrawLine(pen, new Point(0, groupBranchs.Y), groupBranchs);
+            int countElementsInGroups = 0;
+            foreach (string keyBranchs in viewBranches.Keys)
+            {
+                countElementsInGroups +=
+                    GetMaxCountElementsInGroupBranches(viewBranches[keyBranchs]);
+            }
+
+            if (countElementsInGroups > 0)
+            {
+                graphics.DrawLine(pen, new Point(0, groupBranchs.Y), groupBranchs);
+            }
 
             foreach (string keyBranchs in viewBranches.Keys)
             {
