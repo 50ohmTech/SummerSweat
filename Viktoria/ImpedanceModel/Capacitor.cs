@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Numerics;
-using System.Runtime.Serialization;
 
 namespace ImpedanceModel
 {
     /// <summary>
     ///     Элемент цепи: Конденсатор
     /// </summary>
-    [DataContract]
     public class Capacitor : IElement
     {
+        #region -- Поля --
+
         /// <summary>
         ///     Сопротивление конденсатора.
         /// </summary>
-        [DataMember] private double _capacitance;
+        private double _capacitance;
 
-        /// <summary>
-        ///     Конструктор класса.
-        /// </summary>
-        public Capacitor(double capacitanceValue)
-        {
-            Parameter = capacitanceValue;
-        }
+        #endregion
+
+        #region -- Свойства --
 
         /// <summary>
         ///     Свойство для работы с параметрами.
@@ -37,6 +33,18 @@ namespace ImpedanceModel
             }
         }
 
+        #endregion
+
+        #region -- Публичные методы --
+
+        /// <summary>
+        ///     Конструктор класса.
+        /// </summary>
+        public Capacitor(double capacitanceValue)
+        {
+            Parameter = capacitanceValue;
+        }
+
         /// <summary>
         ///     Рассчет комплексного сопротивления для w
         /// </summary>
@@ -50,7 +58,7 @@ namespace ImpedanceModel
         /// </summary>
         public Complex GetImpedanceUsingFrequency(double f)
         {
-            return - 1 / (2 * Math.PI * f * _capacitance);
+            return -1 / (2 * Math.PI * f * _capacitance);
         }
 
         /// <summary>
@@ -60,5 +68,7 @@ namespace ImpedanceModel
         {
             return "Capacitor";
         }
+
+        #endregion
     }
 }

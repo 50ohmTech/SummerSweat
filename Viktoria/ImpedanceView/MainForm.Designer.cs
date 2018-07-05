@@ -97,7 +97,7 @@
             this.circuitType.Name = "circuitType";
             this.circuitType.Size = new System.Drawing.Size(185, 21);
             this.circuitType.TabIndex = 15;
-            this.circuitType.SelectionChangeCommitted += new System.EventHandler(this.circuitType_SelectionChangeCommitted);
+            this.circuitType.SelectionChangeCommitted += new System.EventHandler(this.CircuitType_SelectionChangeCommitted);
             // 
             // frequencyControl
             // 

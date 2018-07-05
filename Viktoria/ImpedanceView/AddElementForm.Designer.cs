@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddElementForm));
             this.Cancel = new System.Windows.Forms.Button();
             this.OK = new System.Windows.Forms.Button();
-            this.addFormControl1 = new ImpedanceView.PassiveElementControl();
+            this.addFormControl1 = new ImpedanceView.EnterElementControl();
             this.SuspendLayout();
             // 
             // Cancel
@@ -83,6 +83,6 @@
         #endregion
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.Button OK;
-        private PassiveElementControl addFormControl1;
+        private EnterElementControl addFormControl1;
     }
 }

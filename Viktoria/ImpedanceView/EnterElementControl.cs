@@ -4,26 +4,36 @@ using ImpedanceModel;
 
 namespace ImpedanceView
 {
-    public partial class PassiveElementControl : UserControl
+    public partial class EnterElementControl : UserControl
     {
+
+        #region -- Поля --
+
+        #region -- Закрытые поля --
+
         /// <summary>
         ///     Хранение текущего типа элемента в combobox
         /// </summary>
         private int _currentType;
+
+        #endregion
+
+        #region -- Открытые поля --
 
         /// <summary>
         ///     Переменная, показывающая, редактируется элемент или добавляется новый
         /// </summary>
         public bool IsModify;
 
-        /// <summary>
-        ///     Конструктор контроллера
-        /// </summary>
-        public PassiveElementControl()
-        {
-            InitializeComponent();
-        }
+        #endregion
 
+        #endregion
+
+        #region -- Свойства --
+
+        /// <summary>
+        ///     Свойство для ввода/вывода элемента на control в зависимости от типа элемента в combobox
+        /// </summary>
         public IElement Element
         {
             get
@@ -77,13 +87,32 @@ namespace ImpedanceView
             }
         }
 
+        #endregion
+
+        #region -- Публичные методы --
+
+        /// <summary>
+        ///     Конструктор контроллера
+        /// </summary>
+        public EnterElementControl()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region -- Приватные методы --
+
         /// <summary>
         ///     Обработка изменения значения в combobox с заменой подсказок пользователю
         /// </summary>
         private void ElementTypeComboBox_SelectionChangeCommitted(object sender,
             EventArgs e)
         {
-            FirstTextView.Text = string.Empty;
+            if (!IsModify)
+            {
+                FirstTextView.Text = string.Empty;
+            }
             _currentType = ((ComboBox) sender).SelectedIndex;
             ConfigureTextBoxPlaceholder();
         }
@@ -116,7 +145,7 @@ namespace ImpedanceView
         /// <summary>
         ///     Вывод подсказки пользователю в случае если textbox пуст (т.е. пользователь не ввел значение)
         /// </summary>
-        /// <param name="title"> Текст "Введите" + обозначение параметра элемента </param>
+        /// <param name="title"> Текст "Введите" + физическое обозначение параметра элемента </param>
         private void ConfigureTextBoxText(TextBox textbox, string title)
         {
             if (textbox.Text == string.Empty)
@@ -126,7 +155,7 @@ namespace ImpedanceView
         }
 
         /// <summary>
-        ///     Отчищает textbox от подсказки при клике по нему
+        ///     Отчищает textbox от подсказки при клике по нему, если элемент не редактируется
         /// </summary>
         private void FirstTextView_Click(object sender, EventArgs e)
         {
@@ -146,5 +175,7 @@ namespace ImpedanceView
                 ConfigureTextBoxPlaceholder();
             }
         }
+
+        #endregion
     }
 }

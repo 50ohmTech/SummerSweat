@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Numerics;
-using System.Runtime.Serialization;
 
 namespace ImpedanceModel
 {
     /// <summary>
     ///     Элемент цепи: Катушка индуктивности
     /// </summary>
-    [DataContract]
     public class Inductor : IElement
     {
+        #region -- Поля --
+
         /// <summary>
         ///     Сопротивление катушки индуктивности
         /// </summary>
-        [DataMember] private double _inductance;
+        private double _inductance;
 
-        /// <summary>
-        ///     Конструктор класса.
-        /// </summary>
-        public Inductor(double inductanceValue)
-        {
-            Parameter = inductanceValue;
-        }
+        #endregion
+
+        #region -- Свойства --
 
         /// <summary>
         ///     Свойство для работы с параметрами.
@@ -35,6 +31,18 @@ namespace ImpedanceModel
                 ValidationTools.IsLessThenNull(value);
                 _inductance = value;
             }
+        }
+
+        #endregion
+
+        #region -- Публичные методы --
+
+        /// <summary>
+        ///     Конструктор класса.
+        /// </summary>
+        public Inductor(double inductanceValue)
+        {
+            Parameter = inductanceValue;
         }
 
         /// <summary>
@@ -60,5 +68,7 @@ namespace ImpedanceModel
         {
             return "Inductor";
         }
+
+        #endregion
     }
 }

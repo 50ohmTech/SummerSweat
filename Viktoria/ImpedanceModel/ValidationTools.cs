@@ -8,7 +8,7 @@ namespace ImpedanceModel
     /// </summary>
     public static class ValidationTools
     {
-        #region Статические методы
+        #region -- Публичные статические методы --
 
         /// <summary>
         ///     Проверка на корректность ввода вещественных чисел

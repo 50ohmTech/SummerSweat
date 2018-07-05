@@ -1,6 +1,6 @@
 ﻿namespace ImpedanceView
 {
-    partial class PassiveElementControl
+    partial class EnterElementControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

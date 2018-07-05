@@ -1,26 +1,22 @@
 ﻿using System.Numerics;
-using System.Runtime.Serialization;
 
 namespace ImpedanceModel
 {
     /// <summary>
     ///     Элемент цепи: Резистор
     /// </summary>
-    [DataContract]
     public class Resistor : IElement
     {
+        #region -- Поля --
+
         /// <summary>
         ///     Сопротивление резистора.
         /// </summary>
-        [DataMember] private double _resistance;
+        private double _resistance;
 
-        /// <summary>
-        ///     Конструктор класса.
-        /// </summary>
-        public Resistor(double resistanceValue)
-        {
-            Parameter = resistanceValue;
-        }
+        #endregion
+
+        #region -- Свойства --
 
         /// <summary>
         ///     Свойство для работы с параметрами.
@@ -34,6 +30,18 @@ namespace ImpedanceModel
                 ValidationTools.IsLessThenNull(value);
                 _resistance = value;
             }
+        }
+
+        #endregion
+
+        #region -- Публичные методы --
+
+        /// <summary>
+        ///     Конструктор класса.
+        /// </summary>
+        public Resistor(double resistanceValue)
+        {
+            Parameter = resistanceValue;
         }
 
         /// <summary>
@@ -61,5 +69,7 @@ namespace ImpedanceModel
         {
             return "Resistor";
         }
+
+        #endregion
     }
 }

@@ -5,14 +5,28 @@ namespace ImpedanceModel
 {
     public class Circuit
     {
+        #region -- Поля --
+
         /// <summary>
         ///     Список пассивных элементов
         /// </summary>
         public List<IElement> elements;
 
-        public List<Complex> GetImpedanceUsingAngularFrequency(double minFrequency, double maxFrequency, double step)
+        #endregion
+
+        #region -- Публичные методы --
+
+        /// <summary>
+        ///     Рассчет комплексного сопротивления цепи для диапазона частот w
+        /// </summary>
+        /// <param name="minFrequency"> Минимальное значение частоты</param>
+        /// <param name="maxFrequency"> Максимальное значение частоты</param>
+        /// <param name="step"> Цена деления/Шаг</param>
+        /// <returns> Список сопротивлений для каждой частоты из заданного диапазона с заданным шагом</returns>
+        public List<Complex> GetImpedanceUsingAngularFrequency(double minFrequency,
+            double maxFrequency, double step)
         {
-            List<Complex> impedances = new List<Complex>();
+            var impedances = new List<Complex>();
             for (var i = minFrequency; i <= maxFrequency; i = i + step)
             {
                 Complex impedance = 0;
@@ -25,9 +39,17 @@ namespace ImpedanceModel
             return impedances;
         }
 
-        public List<Complex> GetImpedanceUsingFrequency(double minFrequency, double maxFrequency, double step)
+        /// <summary>
+        ///     Рассчет комплексного сопротивления цепи для диапазона частот f
+        /// </summary>
+        /// <param name="minFrequency"> Минимальное значение частоты</param>
+        /// <param name="maxFrequency"> Максимальное значение частоты</param>
+        /// <param name="step"> Цена деления/Шаг</param>
+        /// <returns> Список сопротивлений для каждой частоты из заданного диапазона с заданным шагом</returns>
+        public List<Complex> GetImpedanceUsingFrequency(double minFrequency,
+            double maxFrequency, double step)
         {
-            List<Complex> impedances = new List<Complex>();
+            var impedances = new List<Complex>();
             for (var i = minFrequency; i <= maxFrequency; i = i + step)
             {
                 Complex impedance = 0;
@@ -39,5 +61,7 @@ namespace ImpedanceModel
             }
             return impedances;
         }
+
+        #endregion
     }
 }

@@ -8,6 +8,45 @@ namespace ImpedanceView
 {
     public partial class MainForm : Form
     {
+        #region -- Закрытые поля --
+
+        #region -- Readonly --
+
+        /// <summary>
+        ///     Связующий elements и ElementStorage список
+        /// </summary>
+        private readonly BindingSource _elementBindingSource = new BindingSource();
+
+        /// <summary>
+        ///     Связующий impedances и ImpedanceStorage список
+        /// </summary>
+        private readonly BindingSource _impedanceBindingSource = new BindingSource();
+
+        /// <summary>
+        ///     Список значений сорпотивлений цепи при разных частотах
+        /// </summary>
+        private readonly List<Complex> impedances = new List<Complex>();
+
+        /// <summary>
+        ///     Список пассивных элементов
+        /// </summary>
+        private readonly List<IElement> elements = new List<IElement>();
+
+        #endregion
+
+        /// <summary>
+        ///     Значение сопротивления цепи при одной частоте
+        /// </summary>
+        private Complex impedance;
+
+        /// <summary>
+        ///     Тип заранее заданной цепи в combobox
+        /// </summary>
+        private int _currentCircuit;
+
+        #endregion
+        #region  -- Публичные методы -- 
+
         /// <summary>
         ///     Конструктор формы
         /// </summary>
@@ -15,13 +54,13 @@ namespace ImpedanceView
         {
             InitializeComponent();
             ElementStorage.Columns.Add("ElementType", "Элемент");
-            _bindingSource.DataSource = elements;
-            ElementStorage.DataSource = _bindingSource;
+            _elementBindingSource.DataSource = elements;
+            ElementStorage.DataSource = _elementBindingSource;
             ElementStorage.MultiSelect = true;
 
             ImpedanceStorage.Columns.Add("Frequency", "Частота");
-            bindingSource.DataSource = impedances;
-            ImpedanceStorage.DataSource = bindingSource;
+            _impedanceBindingSource.DataSource = impedances;
+            ImpedanceStorage.DataSource = _impedanceBindingSource;
 
             RandomButton.Visible = false;
 #if DEBUG
@@ -29,8 +68,12 @@ namespace ImpedanceView
 #endif
         }
 
+        #endregion
+
+        #region -- Приватные методы --
+
         /// <summary>
-        ///     Кнопка добавления нового элемента
+        ///     Добавление нового элемента
         /// </summary>
         private void Add_button_Click(object sender, EventArgs e)
         {
@@ -40,7 +83,7 @@ namespace ImpedanceView
                 if (AddForm.ShowDialog() == DialogResult.OK)
                 {
                     var element = AddForm.NewElement;
-                    _bindingSource.Add(element);
+                    _elementBindingSource.Add(element);
                     ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0].Value =
                         element.ToString();
                 }
@@ -52,12 +95,14 @@ namespace ImpedanceView
         }
 
         /// <summary>
-        ///     Кнопка для вычисления комплексного сопротивления для всех элементов в таблице
+        ///     Вычисление комплексного сопротивления для всех элементов в таблице
         /// </summary>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             try
             {
+                // -- Проверка на корректность введенных данных --
+
                 ValidationTools.IsEmpty(this.minFrequency);
                 ValidationTools.IsEmpty(this.maxFrequency);
                 ValidationTools.IsEmpty(Step);
@@ -79,29 +124,33 @@ namespace ImpedanceView
                         "Минимальное значение частоты не может превышать максимальное.");
                 }
 
-                bindingSource.Clear();
+                // -- Конец проверки -- 
 
-                Circuit circuit = new Circuit();
-                circuit.elements = elements;
+                _impedanceBindingSource.Clear();
+
+                var circuit = new Circuit {elements = elements};
 
                 if (angularFrequency.Checked)
                 {
-                   List<Complex> impedances = circuit.GetImpedanceUsingAngularFrequency(minFrequency, maxFrequency,
+                    var impedances = circuit.GetImpedanceUsingAngularFrequency(
+                        minFrequency, maxFrequency,
                         step);
-                    bindingSource.DataSource = impedances;
+                    _impedanceBindingSource.DataSource = impedances;
                 }
                 else if (frequency.Checked)
                 {
-                    List<Complex> impedances = circuit.GetImpedanceUsingFrequency(minFrequency, maxFrequency,
+                    var impedances = circuit.GetImpedanceUsingFrequency(minFrequency,
+                        maxFrequency,
                         step);
-                    bindingSource.DataSource = impedances;
+                    _impedanceBindingSource.DataSource = impedances;
                 }
                 else
                 {
                     MessageBox.Show("Выберите тип частоты.", "Error",
                         MessageBoxButtons.OK);
                 }
-                int index = 0;
+
+                var index = 0;
                 for (var i = minFrequency; i <= maxFrequency; i = i + step)
                 {
                     ImpedanceStorage.Rows[index].Cells[0].Value = i;
@@ -115,7 +164,7 @@ namespace ImpedanceView
         }
 
         /// <summary>
-        ///     Кнопка удаления элементов
+        ///     Удаление выбранного элемента
         /// </summary>
         private void Remove_button_Click(object sender, EventArgs e)
         {
@@ -123,14 +172,14 @@ namespace ImpedanceView
             {
                 if (ElementStorage.Rows[elements.IndexOf(elements[n])].Selected)
                 {
-                    _bindingSource.Remove(elements[n]);
+                    _elementBindingSource.Remove(elements[n]);
                 }
             }
         }
 
 #if DEBUG
         /// <summary>
-        ///     Кнопка для создания рандомных данных
+        ///     Создания рандомных цепей
         /// </summary>
         private void RandomButton_Click(object sender, EventArgs e)
         {
@@ -144,21 +193,21 @@ namespace ImpedanceView
                 {
                     case 0:
                         element = new Inductor(value);
-                        _bindingSource.Add(element);
+                        _elementBindingSource.Add(element);
                         ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
                                 .Value =
                             element.ToString();
                         break;
                     case 1:
                         element = new Resistor(value);
-                        _bindingSource.Add(element);
+                        _elementBindingSource.Add(element);
                         ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
                                 .Value =
                             element.ToString();
                         break;
                     case 2:
                         element = new Capacitor(value);
-                        _bindingSource.Add(element);
+                        _elementBindingSource.Add(element);
                         ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
                                 .Value =
                             element.ToString();
@@ -181,8 +230,8 @@ namespace ImpedanceView
                 if (ModifyForm.ShowDialog() == DialogResult.OK)
                 {
                     var element = ModifyForm.NewElement;
-                    _bindingSource.Remove(elements[index]);
-                    _bindingSource.Insert(index, element);
+                    _elementBindingSource.Remove(elements[index]);
+                    _elementBindingSource.Insert(index, element);
                     ElementStorage.Rows[index].Cells[0].Value = element.ToString();
                 }
             }
@@ -197,7 +246,7 @@ namespace ImpedanceView
         /// </summary>
         private void CreateComboBoxCircuits()
         {
-            _bindingSource.Clear();
+            _elementBindingSource.Clear();
             elements.Clear();
             switch (_currentCircuit)
             {
@@ -246,9 +295,9 @@ namespace ImpedanceView
                 }
                 case 5: break;
             }
-            _bindingSource.DataSource = null;
-            _bindingSource.DataSource = elements;
-            for (var n = 0; n <= _bindingSource.Count - 1; n++)
+            _elementBindingSource.DataSource = null;
+            _elementBindingSource.DataSource = elements;
+            for (var n = 0; n <= _elementBindingSource.Count - 1; n++)
             {
                 ElementStorage.Rows[n].Cells[0].Value =
                     elements[n].ToString();
@@ -258,40 +307,11 @@ namespace ImpedanceView
         /// <summary>
         ///     Обработка изменения значения в combobox с созданием выбранной цепи
         /// </summary>
-        private void circuitType_SelectionChangeCommitted(object sender, EventArgs e)
+        private void CircuitType_SelectionChangeCommitted(object sender, EventArgs e)
         {
             _currentCircuit = ((ComboBox) sender).SelectedIndex;
             CreateComboBoxCircuits();
         }
-
-        #region Private fields
-
-        /// <summary>
-        ///     Связующий _elements и gridview список
-        /// </summary>
-        private readonly BindingSource _bindingSource = new BindingSource();
-
-        private  BindingSource bindingSource = new BindingSource();
-
-        /// <summary>
-        ///     Список пассивных элементов
-        /// </summary>
-        public List<IElement> elements = new List<IElement>();
-
-        /// <summary>
-        ///     Список значений сорпотивлений цепи при разных частотах
-        /// </summary>
-        private readonly List<Complex> impedances = new List<Complex>();
-
-        /// <summary>
-        ///     Значение сопротивления цепи при одной частоте
-        /// </summary>
-        private Complex impedance;
-
-        /// <summary>
-        ///     Тип заранее заданной цепи в combobox
-        /// </summary>
-        private int _currentCircuit;
 
         #endregion
     }
