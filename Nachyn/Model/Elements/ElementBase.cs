@@ -10,6 +10,25 @@ namespace Model.Elements
     public abstract class ElementBase
     {
         /// <summary>
+        ///     Возвращает символ номинала     
+        /// </summary>
+        /// <returns>Обозначение номинала</returns>
+        public static string GetSymbol(ElementType elementType)
+        {
+            switch (elementType)
+            {
+                case ElementType.Resistor:
+                    return "R";
+                case ElementType.Inductor:
+                    return "L";
+                case ElementType.Capacitor:
+                    return "C";
+                default:
+                    return null;
+            }
+        }
+
+        /// <summary>
         ///     Имя
         /// </summary>
         private string _name;

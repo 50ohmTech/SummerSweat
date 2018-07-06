@@ -74,11 +74,11 @@
             // 
             this._labelName.AutoSize = true;
             this._labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this._labelName.Location = new System.Drawing.Point(3, 53);
+            this._labelName.Location = new System.Drawing.Point(3, -3);
             this._labelName.Name = "_labelName";
-            this._labelName.Size = new System.Drawing.Size(43, 12);
+            this._labelName.Size = new System.Drawing.Size(27, 12);
             this._labelName.TabIndex = 1;
-            this._labelName.Text = "Имя: 123";
+            this._labelName.Text = "C123";
             // 
             // ViewElement
             // 
@@ -91,7 +91,7 @@
             this.Controls.Add(this._labelValue);
             this.DoubleBuffered = true;
             this.Name = "ViewElement";
-            this.Size = new System.Drawing.Size(80, 66);
+            this.Size = new System.Drawing.Size(80, 60);
             this._contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -81,7 +81,7 @@ namespace View
 
             if (result == DialogResult.Yes)
             {
-                ClearCircuit();
+                ClearCircuit();              
             }
         }
 
@@ -93,6 +93,7 @@ namespace View
             _circuit.Branches.Clear();
             _viewElements.Clear();
             Branch.NodeOutLast = 0;
+            ElementFactory.NumberRandomElement = 1;
             ClearPanel();
         }
 
@@ -174,7 +175,7 @@ namespace View
         ///     Нарисовать цепь
         /// </summary>
         private void DrawCircuit(int stepEmptyLine = 5, int stepElement = 80,
-            int heightBetweenBranches = 50, int widthBetweenGroupsBranches = 20)
+            int heightBetweenBranches = 60, int widthBetweenGroupsBranches = 20)
         {
             ClearPanel();
 

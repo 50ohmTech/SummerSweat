@@ -36,7 +36,7 @@ namespace View
             _labelValue.Text =
                 "Номинал: " + element.Value.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text = "Имя: " + element.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text = element.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -77,8 +77,7 @@ namespace View
             _labelValue.Text = "Номинал: " +
                                arguments.NewValue.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text =
-                "Имя: " + arguments.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text = arguments.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         private void ToolStripMenuAdd_Click(object sender, EventArgs e)
