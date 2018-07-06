@@ -334,13 +334,23 @@ namespace View
 
         private void ToolStripButtonHelp_Click(object sender, EventArgs e)
         {
+            ShowInfo();
+        }
+
+        private static void ShowInfo()
+        {
             string info =
                 "* Генерируете или создаете цепь через \"Управление элементами\"\r\n" +
                 "* Вводите частоты и получаете результаты в \"Рассчитать импедансы\"\r\n" +
                 "\r\n* Чтоб удалить или изменить номинал на уже созданном элементе\r\n" +
                 "необходимо нажать правой кнопкой мыши на элемент.";
 
-            MessageBox.Show(info);
+            MessageBox.Show(info, "Инструкция");
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            ShowInfo();
         }
     }
 }

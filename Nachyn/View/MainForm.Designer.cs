@@ -153,6 +153,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Расчет импедансов";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this._toolStripMainMenu.ResumeLayout(false);
             this._toolStripMainMenu.PerformLayout();
             this.ResumeLayout(false);

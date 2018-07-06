@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this._comboBoxType = new System.Windows.Forms.ComboBox();
             this._labelSelectType = new System.Windows.Forms.Label();
             this._textBoxValue = new System.Windows.Forms.TextBox();
@@ -37,8 +38,6 @@
             this._labelName = new System.Windows.Forms.Label();
             this._textBoxName = new System.Windows.Forms.TextBox();
             this._dataGridViewBranches = new System.Windows.Forms.DataGridView();
-            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._branchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._groupBoxAddElement = new System.Windows.Forms.GroupBox();
             this._groupBoxEditBranch = new System.Windows.Forms.GroupBox();
             this._labelValidateBranch = new System.Windows.Forms.Label();
@@ -46,10 +45,16 @@
             this._textBoxNodeIn = new System.Windows.Forms.TextBox();
             this._buttonDeleteBranchSelected = new System.Windows.Forms.Button();
             this._labelNodeIn = new System.Windows.Forms.Label();
+            this._labelInfo = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this._labelInfoGreenColor = new System.Windows.Forms.Label();
+            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._branchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).BeginInit();
             this._groupBoxAddElement.SuspendLayout();
             this._groupBoxEditBranch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // _comboBoxType
@@ -124,6 +129,14 @@
             this._dataGridViewBranches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.keyDataGridViewTextBoxColumn});
             this._dataGridViewBranches.DataSource = this._branchBindingSource;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this._dataGridViewBranches.DefaultCellStyle = dataGridViewCellStyle1;
             this._dataGridViewBranches.Location = new System.Drawing.Point(190, 18);
             this._dataGridViewBranches.MultiSelect = false;
             this._dataGridViewBranches.Name = "_dataGridViewBranches";
@@ -140,19 +153,6 @@
             this._dataGridViewBranches.ShowRowErrors = false;
             this._dataGridViewBranches.Size = new System.Drawing.Size(143, 281);
             this._dataGridViewBranches.TabIndex = 7;
-            // 
-            // keyDataGridViewTextBoxColumn
-            // 
-            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
-            this.keyDataGridViewTextBoxColumn.HeaderText = "Ветвь между узлами";
-            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
-            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.keyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.keyDataGridViewTextBoxColumn.Width = 140;
-            // 
-            // _branchBindingSource
-            // 
-            this._branchBindingSource.DataSource = typeof(Model.Branch);
             // 
             // _groupBoxAddElement
             // 
@@ -231,26 +231,75 @@
             this._labelNodeIn.TabIndex = 0;
             this._labelNodeIn.Text = "Вход. узел";
             // 
-            // ElementManager
+            // _labelInfo
+            // 
+            this._labelInfo.AutoSize = true;
+            this._labelInfo.Location = new System.Drawing.Point(44, 302);
+            this._labelInfo.Name = "_labelInfo";
+            this._labelInfo.Size = new System.Drawing.Size(289, 52);
+            this._labelInfo.TabIndex = 10;
+            this._labelInfo.Text = "Добавление элементов происходит в текущий узел, \r\nкоторый выделен зеленым  цветом" +
+    ".\r\nДля создания параллельного соединения используйте\r\nветви с одинаковыми узлами" +
+    ".";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::View.Properties.Resources.Info;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 305);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(26, 22);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
+            // _labelInfoGreenColor
+            // 
+            this._labelInfoGreenColor.AutoSize = true;
+            this._labelInfoGreenColor.ForeColor = System.Drawing.Color.Green;
+            this._labelInfoGreenColor.Location = new System.Drawing.Point(137, 315);
+            this._labelInfoGreenColor.Name = "_labelInfoGreenColor";
+            this._labelInfoGreenColor.Size = new System.Drawing.Size(53, 13);
+            this._labelInfoGreenColor.TabIndex = 8;
+            this._labelInfoGreenColor.Text = "зеленым";
+            // 
+            // keyDataGridViewTextBoxColumn
+            // 
+            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
+            this.keyDataGridViewTextBoxColumn.HeaderText = "Ветвь между узлами";
+            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
+            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.keyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.keyDataGridViewTextBoxColumn.Width = 140;
+            // 
+            // _branchBindingSource
+            // 
+            this._branchBindingSource.DataSource = typeof(Model.Branch);
+            // 
+            // ElementManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 309);
+            this.ClientSize = new System.Drawing.Size(344, 363);
+            this.Controls.Add(this._labelInfoGreenColor);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this._labelInfo);
             this.Controls.Add(this._groupBoxEditBranch);
             this.Controls.Add(this._groupBoxAddElement);
             this.Controls.Add(this._dataGridViewBranches);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.Name = "ElementManager";
+            this.Name = "ElementManagerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Управление элементами";
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).EndInit();
             this._groupBoxAddElement.ResumeLayout(false);
             this._groupBoxAddElement.PerformLayout();
             this._groupBoxEditBranch.ResumeLayout(false);
             this._groupBoxEditBranch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -273,5 +322,8 @@
         private System.Windows.Forms.Button _buttonDeleteBranchSelected;
         private System.Windows.Forms.Label _labelValidateBranch;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label _labelInfo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label _labelInfoGreenColor;
     }
 }

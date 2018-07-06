@@ -8,8 +8,11 @@ namespace Model.Factories
     /// </summary>
     public static class ElementFactory
     {
-        private static readonly Random random = new Random();
-
+        /// <summary>
+        /// Рандом
+        /// </summary>
+        private static readonly Random _random = new Random();
+        
         /// <summary>
         ///     Получить сущность
         /// </summary>
@@ -44,9 +47,9 @@ namespace Model.Factories
 
         public static ElementBase GetRandomInstance()
         {
-            ElementType elementType = (ElementType) random.Next(3);
+            ElementType elementType = (ElementType) _random.Next(3);
             string name = Guid.NewGuid().ToString().Remove(5).ToUpper();
-            double value = Math.Round(random.NextDouble(), 3) + random.Next(100) + 1;
+            double value = Math.Round(_random.NextDouble(), 3) + _random.Next(100) + 1;
             return GetInstance(elementType, name, value);
         }
     }

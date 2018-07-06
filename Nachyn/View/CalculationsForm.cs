@@ -67,7 +67,8 @@ namespace View
             }
         }
 
-        private void DataGridViewCalculations_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void DataGridViewCalculations_DataError(object sender,
+            DataGridViewDataErrorEventArgs e)
         {
             MessageBox.Show(e.Exception.Message);
         }
