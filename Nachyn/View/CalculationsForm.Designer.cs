@@ -67,6 +67,7 @@
             this._dataGridViewCalculations.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this._dataGridViewCalculations.Size = new System.Drawing.Size(222, 225);
             this._dataGridViewCalculations.TabIndex = 1;
+            this._dataGridViewCalculations.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridViewCalculations_DataError);
             // 
             // _calculationsBindingSource
             // 

@@ -66,5 +66,10 @@ namespace View
                 _calculationsBindingSource.RemoveCurrent();
             }
         }
+
+        private void DataGridViewCalculations_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message);
+        }
     }
 }
