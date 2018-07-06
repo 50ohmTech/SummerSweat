@@ -178,7 +178,8 @@ namespace CircuitCalculator
 		{
 			if (elementGridView.CurrentCell.ColumnIndex == 1)
 			{
-				if (double.TryParse(e.FormattedValue.ToString(),
+				string formatingString = e.FormattedValue.ToString().Replace('.', ',');
+				if (double.TryParse(formatingString,
 					    out var newValue) && !(newValue < 0.000000001) && newValue <= 1000000000000)
 				{
 					_displayingCircuit.Elements[e.RowIndex].Value =
@@ -192,9 +193,9 @@ namespace CircuitCalculator
 				else
 				{
 					elementGridView.CancelEdit();
-
+					
 					MessageBox.Show(
-						"Вы ввели: " + e.FormattedValue + "\n" +
+						"Вы ввели: " + formatingString + "\n" +
 						"Вводимое значение должно удовлетворять следующим условиям:\n " +
 						"-быть положительным числом\n " +
 						"-быть вещественным или натуральным числом\n " +
