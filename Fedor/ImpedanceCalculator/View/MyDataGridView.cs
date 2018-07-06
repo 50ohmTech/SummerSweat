@@ -6,8 +6,17 @@ using View.Properties;
 
 namespace View
 {
+    /// <summary>
+    /// Таблица.
+    /// </summary>
     public class MyDataGridView : DataGridView
     {
+        #region - - Приватные методы - -
+
+        /// <summary>
+        /// Восстановление предыдущего значения ячейки.
+        /// </summary>
+        /// <param name="keyData">Код клавиши.</param>
         private void ResetCell(Keys keyData)
         {
             if (keyData != Keys.Enter && keyData != Keys.Tab && keyData != Keys.Up &&
@@ -64,6 +73,10 @@ namespace View
             element.Value = value;
         }
 
+        #endregion
+
+        #region - - Защищенные методы - -
+
         protected override bool ProcessDialogKey(Keys keyData)
         {
             ResetCell(keyData);
@@ -75,5 +88,7 @@ namespace View
             ResetCell(e.KeyCode);
             return base.ProcessDataGridViewKey(e);
         }
+
+        #endregion
     }
 }
