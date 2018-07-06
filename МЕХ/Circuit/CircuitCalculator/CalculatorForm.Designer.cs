@@ -58,9 +58,9 @@
 			// 
 			// isRedactorVisibleButton
 			// 
-			this.isRedactorVisibleButton.Location = new System.Drawing.Point(265, 248);
+			this.isRedactorVisibleButton.Location = new System.Drawing.Point(264, 250);
 			this.isRedactorVisibleButton.Name = "isRedactorVisibleButton";
-			this.isRedactorVisibleButton.Size = new System.Drawing.Size(160, 27);
+			this.isRedactorVisibleButton.Size = new System.Drawing.Size(160, 29);
 			this.isRedactorVisibleButton.TabIndex = 10;
 			this.isRedactorVisibleButton.Text = "Показать редактор цепи";
 			this.isRedactorVisibleButton.UseVisualStyleBackColor = true;
@@ -70,7 +70,7 @@
 			// 
 			this.resetButton.Location = new System.Drawing.Point(121, 250);
 			this.resetButton.Name = "resetButton";
-			this.resetButton.Size = new System.Drawing.Size(75, 25);
+			this.resetButton.Size = new System.Drawing.Size(75, 29);
 			this.resetButton.TabIndex = 9;
 			this.resetButton.Text = "Сброс";
 			this.resetButton.UseVisualStyleBackColor = true;
@@ -80,7 +80,7 @@
 			// 
 			this.calculateButton.Location = new System.Drawing.Point(6, 250);
 			this.calculateButton.Name = "calculateButton";
-			this.calculateButton.Size = new System.Drawing.Size(109, 27);
+			this.calculateButton.Size = new System.Drawing.Size(109, 29);
 			this.calculateButton.TabIndex = 8;
 			this.calculateButton.Text = "Расчитать";
 			this.calculateButton.UseVisualStyleBackColor = true;
