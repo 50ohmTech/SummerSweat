@@ -85,15 +85,15 @@ namespace View
 
                     Circuit.Elements.Clear();
 
-                    Circuit.Elements.Add(new Resistor("R1", 10));
+                    Circuit.Elements.Add(new Resistor("R1", 5));
                     Circuit.Elements.Add(new Resistor("R2", 10), "R1", false);
-                    Circuit.Elements.Add(new Resistor("R3", 10), "R1", true);
+                    Circuit.Elements.Add(new Resistor("R3", 20), "R1", true);
                     Circuit.Elements.Add(new Resistor("R4", 5), "R1", true);
                     Circuit.Elements.Add(new Resistor("R5", 5), "R1", false);
                     Circuit.Elements.Add(new Resistor("R6", 20), "R5", true);
                     Circuit.Elements.Add(new Resistor("R7", 5), "R4", false);
                     Circuit.Elements.Add(new Resistor("R8", 10), "R4", false);
-                    Circuit.Elements.Add(new Resistor("R9", 10), "R7", false);
+                    Circuit.Elements.Add(new Resistor("R9", 15), "R7", false);
                     Circuit.Elements.Add(new Resistor("R10", 10), "R7", true);
                     break;
                 case "Цепь 2":
@@ -123,6 +123,33 @@ namespace View
                     Circuit.Elements.Add(new Capacitor("C3", 66.666), "C2", false);
                     Circuit.Elements.Add(new Resistor("R3", 222), "C2", false);
                     break;
+                case "Цепь 4":
+                    _resistorCounter = 2;
+                    _capacitorCounter = 2;
+                    _inductorCounter = 2;
+
+                    Circuit.Elements.Clear();
+
+                    Circuit.Elements.Add(new Inductor("I1", 0.02));
+                    Circuit.Elements.Add(new Resistor("R1", 38), "I1", true);
+                    Circuit.Elements.Add(new Capacitor("C1", 59.9), "I1", false);
+                    Circuit.Elements.Add(new Inductor("I2", 0.28), "C1", true);
+                    Circuit.Elements.Add(new Resistor("R2", 80.98), "I2", false);
+                    Circuit.Elements.Add(new Capacitor("C2", 25), "R2", true);
+                    break;
+                case "Цепь 5":
+                    _resistorCounter = 3;
+                    _capacitorCounter = 1;
+                    _inductorCounter = 1;
+
+                    Circuit.Elements.Clear();
+
+                    Circuit.Elements.Add(new Resistor("R1", 33.5));
+                    Circuit.Elements.Add(new Capacitor("C1", 10), "R1", false);
+                    Circuit.Elements.Add(new Inductor("I1", 0.003), "C1", true);
+                    Circuit.Elements.Add(new Resistor("R2", 20), "I1", true);
+                    Circuit.Elements.Add(new Resistor("R3", 43.21), "R2", false);
+                    break;
                 default:
                     throw new InvalidOperationException();
             }
@@ -143,9 +170,9 @@ namespace View
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            if (Circuit.Elements.Count >= 10)
+            if (Circuit.Elements.Count >= 12)
             {
-                MessageBox.Show("Цепь может содержать до 10 элементов", "Error",
+                MessageBox.Show("Цепь может содержать до 12 элементов", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }

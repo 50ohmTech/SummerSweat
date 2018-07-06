@@ -1,29 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model;
+using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using View.Properties;
-using Model;
 
 namespace View
 {
     public class MyDataGridView : DataGridView
     {
-        private void InitializeComponent()
-        {
-            ((System.ComponentModel.ISupportInitialize) (this)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // MyDataGridView
-            // 
-            this.RowTemplate.Height = 24;
-            ((System.ComponentModel.ISupportInitialize) (this)).EndInit();
-            this.ResumeLayout(false);
-        }
-
         private void ResetCell(Keys keyData)
         {
             if (keyData != Keys.Enter && keyData != Keys.Tab && keyData != Keys.Up &&
