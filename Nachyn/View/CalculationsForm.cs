@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Windows.Forms;
 using Model;
 using Model.Calculations;
@@ -49,6 +50,9 @@ namespace View
             foreach (Calculations calculations in _calculations)
             {
                 calculations.Impedance = _circuit.CalculateZ(calculations.Frequency)[0];
+                calculations.Impedance = new Complex(
+                    Math.Round(calculations.Impedance.Real, 3),
+                    Math.Round(calculations.Impedance.Imaginary, 3));
             }
 
             _dataGridViewCalculations.DataSource = null;
