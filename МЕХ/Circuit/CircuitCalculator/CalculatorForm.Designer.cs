@@ -108,6 +108,8 @@
 			// 
 			// frequenciesGridView
 			// 
+			this.frequenciesGridView.AllowUserToResizeColumns = false;
+			this.frequenciesGridView.AllowUserToResizeRows = false;
 			this.frequenciesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.frequenciesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Frequencies,
@@ -122,18 +124,18 @@
 			// 
 			// Frequencies
 			// 
-			this.Frequencies.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			this.Frequencies.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
 			this.Frequencies.HeaderText = "Частоты";
 			this.Frequencies.Name = "Frequencies";
-			this.Frequencies.Width = 94;
+			this.Frequencies.Width = 155;
 			// 
 			// Impedances
 			// 
-			this.Impedances.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			this.Impedances.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
 			this.Impedances.HeaderText = "Импедансы";
 			this.Impedances.Name = "Impedances";
 			this.Impedances.ReadOnly = true;
-			this.Impedances.Width = 113;
+			this.Impedances.Width = 155;
 			// 
 			// CalculatorForm
 			// 

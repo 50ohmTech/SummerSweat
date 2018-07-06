@@ -202,6 +202,8 @@ namespace CircuitCalculator
 			// 
 			this.elementGridView.AllowUserToAddRows = false;
 			this.elementGridView.AllowUserToDeleteRows = false;
+			this.elementGridView.AllowUserToResizeColumns = false;
+			this.elementGridView.AllowUserToResizeRows = false;
 			this.elementGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.elementGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.elementNameColumn,
@@ -223,20 +225,20 @@ namespace CircuitCalculator
 			// 
 			// elementNameColumn
 			// 
-			this.elementNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			this.elementNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
 			this.elementNameColumn.HeaderText = "Имя элемента";
 			this.elementNameColumn.Name = "elementNameColumn";
 			this.elementNameColumn.ReadOnly = true;
 			this.elementNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.elementNameColumn.Width = 97;
+			this.elementNameColumn.Width = 153;
 			// 
 			// elementValueColumn
 			// 
-			this.elementValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			this.elementValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
 			this.elementValueColumn.HeaderText = "Значение элемента";
 			this.elementValueColumn.Name = "elementValueColumn";
 			this.elementValueColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.elementValueColumn.Width = 131;
+			this.elementValueColumn.Width = 153;
 			// 
 			// CircuitRedactorForm
 			// 
