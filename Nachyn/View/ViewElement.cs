@@ -83,7 +83,7 @@ namespace View
 
         private void ToolStripMenuAdd_Click(object sender, EventArgs e)
         {
-            new ElementManager(this).ShowDialog();
+            new ElementManagerForm(this).ShowDialog();
         }
 
         private void ToolStripMenuDelete_Click(object sender, EventArgs e)

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using Model;
 using Model.Elements;
 using Model.Factories;
-using Model.PropertyGrid;
 
 namespace View
 {
@@ -17,32 +16,27 @@ namespace View
         private static readonly Random _random = new Random();
 
         /// <summary>
-        ///     Вычисления
-        /// </summary>
-        private readonly Calculations _calculations;
-
-        /// <summary>
         ///     Цепь
         /// </summary>
         private readonly Circuit _circuit;
+
+
+        private readonly Pen _pen = new Pen(Color.Black, 4);
 
         /// <summary>
         ///     Список визуальных элементов
         /// </summary>
         private readonly List<ViewElement> _viewElements;
 
-
-        private readonly Pen pen = new Pen(Color.Black, 4);
-
         /// <summary>
         ///     Точечная поверхность для рисования цепи
         /// </summary>
-        private Bitmap bitmapBackground;
+        private Bitmap _bitmapBackground;
 
         /// <summary>
         ///     Поверхность рисования GDI+
         /// </summary>
-        private Graphics graphics;
+        private Graphics _graphics;
 
         /// <summary>
         ///     Конструктор
@@ -51,9 +45,9 @@ namespace View
         {
             InitializeComponent();
             _viewElements = new List<ViewElement>();
-            _calculations = new Calculations();
+
             _circuit = new Circuit();
-            _propertyGrid.SelectedObject = _calculations;
+
             Paint += MainForm_Paint;
         }
 
@@ -64,12 +58,22 @@ namespace View
 
         private void ToolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            new ElementManager(_circuit.Branches, _viewElements).ShowDialog();
+            new ElementManagerForm(_circuit.Branches, _viewElements).ShowDialog();
             DrawCircuit();
         }
 
         private void ToolStripButtonClearCircuit_Click(object sender, EventArgs e)
         {
+            if (_circuit.IsEmpty)
+            {
+                MessageBox.Show("Цепь пуста!",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
             DialogResult result = MessageBox.Show("Очистить цепь?",
                 "Подтвердите",
                 MessageBoxButtons.YesNo,
@@ -78,8 +82,6 @@ namespace View
             if (result == DialogResult.Yes)
             {
                 ClearCircuit();
-                _calculations.Frequencies.Clear();
-                _calculations.Impedances.Clear();
             }
         }
 
@@ -97,10 +99,9 @@ namespace View
 
         private void ToolStripButtonCalculate_Click(object sender, EventArgs e)
         {
-            if (_calculations.Frequencies.Count < 1)
+            if (_circuit.IsEmpty)
             {
-                MessageBox.Show("Список заданных частот пуст.\r\n" +
-                                "Введите их в \"Данные для расчета\"",
+                MessageBox.Show("Цепь пуста!",
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -108,14 +109,7 @@ namespace View
                 return;
             }
 
-            _calculations.Impedances.Clear();
-            _calculations.Impedances.AddRange(
-                _circuit.CalculateZ(_calculations.GetFrequencies()));
-
-            MessageBox.Show("Готово! Импедансы отправлены в \"Результаты\"",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            new CalculationsForm(_circuit).ShowDialog();
         }
 
         /// <summary>
@@ -187,10 +181,10 @@ namespace View
             Dictionary<string, Dictionary<int, List<ViewElement>>> viewBranches =
                 GetViewBranches();
 
-            bitmapBackground =
+            _bitmapBackground =
                 new Bitmap(_panelCircuit.Size.Width, _panelCircuit.Size.Height);
 
-            graphics = Graphics.FromImage(bitmapBackground);
+            _graphics = Graphics.FromImage(_bitmapBackground);
 
             Point groupBranchs = new Point(50, 50);
 
@@ -203,7 +197,7 @@ namespace View
 
             if (countElementsInGroups > 0)
             {
-                graphics.DrawLine(pen, new Point(0, groupBranchs.Y), groupBranchs);
+                _graphics.DrawLine(_pen, new Point(0, groupBranchs.Y), groupBranchs);
             }
 
             foreach (string keyBranchs in viewBranches.Keys)
@@ -226,7 +220,7 @@ namespace View
                         groupBranch.X + stepEmptyLine,
                         groupBranch.Y);
 
-                    graphics.DrawLine(pen, groupBranch, startDrawingElementsPoint);
+                    _graphics.DrawLine(_pen, groupBranch, startDrawingElementsPoint);
 
                     foreach (ViewElement viewElement in viewBranches[keyBranchs][
                         keyBranch])
@@ -247,13 +241,13 @@ namespace View
                             maxCountElementsInGroup * stepElement + stepEmptyLine,
                             leftPointHorizontalBranchLine.Y);
 
-                    graphics.DrawLine(pen, leftPointHorizontalBranchLine,
+                    _graphics.DrawLine(_pen, leftPointHorizontalBranchLine,
                         rightPointHorizontalBranchLine);
 
                     if (viewBranches[keyBranchs][keyBranch].Count < 1 &&
                         viewBranches[keyBranchs].Keys.Count > 1)
                     {
-                        graphics.DrawLine(new Pen(Color.Red, 4),
+                        _graphics.DrawLine(new Pen(Color.Red, 4),
                             new Point(leftPointHorizontalBranchLine.X + stepEmptyLine,
                                 leftPointHorizontalBranchLine.Y),
                             new Point(rightPointHorizontalBranchLine.X - stepEmptyLine,
@@ -270,7 +264,7 @@ namespace View
                 Point upperPointLeftBorderGroup = new Point(groupBranch.X,
                     groupBranch.Y - heightBetweenBranches * countGroupBranches);
 
-                graphics.DrawLine(pen, lowerPointLeftBorderGroup,
+                _graphics.DrawLine(_pen, lowerPointLeftBorderGroup,
                     upperPointLeftBorderGroup);
 
                 Point lowerPointRightBorderGroup =
@@ -284,19 +278,19 @@ namespace View
                     2 * stepEmptyLine,
                     groupBranch.Y - heightBetweenBranches * countGroupBranches);
 
-                graphics.DrawLine(pen, lowerPointRightBorderGroup,
+                _graphics.DrawLine(_pen, lowerPointRightBorderGroup,
                     upperPointRightBorderGroup);
 
                 Point lastGroupPoint = new Point(
                     upperPointRightBorderGroup.X + widthBetweenGroupsBranches,
                     upperPointRightBorderGroup.Y);
 
-                graphics.DrawLine(pen, upperPointRightBorderGroup, lastGroupPoint);
+                _graphics.DrawLine(_pen, upperPointRightBorderGroup, lastGroupPoint);
                 groupBranchs = lastGroupPoint;
             }
 
-            graphics.Dispose();
-            _panelCircuit.BackgroundImage = bitmapBackground;
+            _graphics.Dispose();
+            _panelCircuit.BackgroundImage = _bitmapBackground;
         }
 
         /// <summary>
@@ -341,12 +335,10 @@ namespace View
         private void ToolStripButtonHelp_Click(object sender, EventArgs e)
         {
             string info =
-                "* Генерируете или создаете цепь через \"Панель управления\"\r\n" +
-                "* Вводите Частоты в \"Данные для расчета\"\r\n" +
-                "* Нажимаете на \"Расчитать импедансы\"\r\n" +
-                "* Результаты будут в \"Результаты\" --> \"Импедансы\"\r\n" +
+                "* Генерируете или создаете цепь через \"Управление элементами\"\r\n" +
+                "* Вводите частоты и получаете результаты в \"Рассчитать импедансы\"\r\n" +
                 "\r\n* Чтоб удалить или изменить номинал на уже созданном элементе\r\n" +
-                "необходимо нажать правой кнопкой мыши на элемент";
+                "необходимо нажать правой кнопкой мыши на элемент.";
 
             MessageBox.Show(info);
         }

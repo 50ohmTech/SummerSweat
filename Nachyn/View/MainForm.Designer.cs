@@ -34,13 +34,12 @@
             this._toolStripButtonElementManager = new System.Windows.Forms.ToolStripButton();
             this._toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripButtonClearCircuit = new System.Windows.Forms.ToolStripButton();
-            this._toolStripRandomizeCircuit = new System.Windows.Forms.ToolStripButton();
             this._toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this._toolStripButtonCalculate = new System.Windows.Forms.ToolStripButton();
+            this._toolStripRandomizeCircuit = new System.Windows.Forms.ToolStripButton();
             this._toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this._toolStripButtonHelp = new System.Windows.Forms.ToolStripButton();
-            this._propertyGrid = new System.Windows.Forms.PropertyGrid();
+            this._toolStripButtonCalculate = new System.Windows.Forms.ToolStripButton();
             this._toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this._toolStripButtonHelp = new System.Windows.Forms.ToolStripButton();
             this._toolStripMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +67,7 @@
             this._toolStripButtonHelp});
             this._toolStripMainMenu.Location = new System.Drawing.Point(0, 0);
             this._toolStripMainMenu.Name = "_toolStripMainMenu";
-            this._toolStripMainMenu.Size = new System.Drawing.Size(925, 25);
+            this._toolStripMainMenu.Size = new System.Drawing.Size(639, 25);
             this._toolStripMainMenu.TabIndex = 1;
             this._toolStripMainMenu.Text = "_toolStripMainMenu";
             // 
@@ -97,6 +96,11 @@
             this._toolStripButtonClearCircuit.Text = "Очистить цепь";
             this._toolStripButtonClearCircuit.Click += new System.EventHandler(this.ToolStripButtonClearCircuit_Click);
             // 
+            // _toolStripSeparator2
+            // 
+            this._toolStripSeparator2.Name = "_toolStripSeparator2";
+            this._toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // _toolStripRandomizeCircuit
             // 
             this._toolStripRandomizeCircuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -107,10 +111,10 @@
             this._toolStripRandomizeCircuit.Text = "Сгенерировать цепь";
             this._toolStripRandomizeCircuit.Click += new System.EventHandler(this.ToolStripRandomizeCircuit_Click);
             // 
-            // _toolStripSeparator2
+            // _toolStripSeparator3
             // 
-            this._toolStripSeparator2.Name = "_toolStripSeparator2";
-            this._toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this._toolStripSeparator3.Name = "_toolStripSeparator3";
+            this._toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // _toolStripButtonCalculate
             // 
@@ -122,10 +126,10 @@
             this._toolStripButtonCalculate.Text = "Рассчитать импедансы";
             this._toolStripButtonCalculate.Click += new System.EventHandler(this.ToolStripButtonCalculate_Click);
             // 
-            // _toolStripSeparator3
+            // _toolStripSeparator4
             // 
-            this._toolStripSeparator3.Name = "_toolStripSeparator3";
-            this._toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this._toolStripSeparator4.Name = "_toolStripSeparator4";
+            this._toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // _toolStripButtonHelp
             // 
@@ -137,26 +141,12 @@
             this._toolStripButtonHelp.Text = "Инструкция";
             this._toolStripButtonHelp.Click += new System.EventHandler(this.ToolStripButtonHelp_Click);
             // 
-            // _propertyGrid
-            // 
-            this._propertyGrid.Location = new System.Drawing.Point(635, 28);
-            this._propertyGrid.Name = "_propertyGrid";
-            this._propertyGrid.Size = new System.Drawing.Size(278, 304);
-            this._propertyGrid.TabIndex = 3;
-            this._propertyGrid.ToolbarVisible = false;
-            // 
-            // _toolStripSeparator4
-            // 
-            this._toolStripSeparator4.Name = "_toolStripSeparator4";
-            this._toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(925, 344);
+            this.ClientSize = new System.Drawing.Size(639, 344);
             this.Controls.Add(this._panelCircuit);
-            this.Controls.Add(this._propertyGrid);
             this.Controls.Add(this._toolStripMainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -177,7 +167,6 @@
         private System.Windows.Forms.ToolStripButton _toolStripButtonElementManager;
         private System.Windows.Forms.ToolStripButton _toolStripButtonClearCircuit;
         private System.Windows.Forms.ToolStripSeparator _toolStripSeparator1;
-        private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.Windows.Forms.ToolStripSeparator _toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton _toolStripButtonCalculate;
         private System.Windows.Forms.ToolStripButton _toolStripRandomizeCircuit;

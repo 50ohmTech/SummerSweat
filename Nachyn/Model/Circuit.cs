@@ -22,6 +22,27 @@ namespace Model
             Branches = new List<Branch>();
         }
 
+        /// <summary>
+        ///     Пустая ли цепь
+        /// </summary>
+        public bool IsEmpty
+        {
+            get
+            {
+                bool isEmpty = true;
+                foreach (Branch branch in Branches)
+                {
+                    if (branch.Elements.Count > 0)
+                    {
+                        isEmpty = false;
+                        break;
+                    }
+                }
+
+                return isEmpty;
+            }
+        }
+
         public List<Complex> CalculateZ(params double[] frequencies)
         {
             if (frequencies == null)

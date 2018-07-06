@@ -80,6 +80,15 @@ namespace View.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменить элемент.
+        /// </summary>
+        public static string GroupBoxEditName {
+            get {
+                return ResourceManager.GetString("GroupBoxEditName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Inductor {

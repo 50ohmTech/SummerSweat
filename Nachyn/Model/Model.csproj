@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Branch.cs" />
+    <Compile Include="Calculations\Calculations.cs" />
     <Compile Include="Elements\Capacitor.cs" />
     <Compile Include="Circuit.cs" />
     <Compile Include="Events\ElementValueEventArgs.cs" />
@@ -63,8 +64,6 @@
     <Compile Include="Elements\Resistor.cs" />
     <Compile Include="Events\ValueChangedEventHandler.cs" />
     <Compile Include="ComboBoxType\ElementType.cs" />
-    <Compile Include="PropertyGrid\Calculations.cs" />
-    <Compile Include="PropertyGrid\Frequency.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

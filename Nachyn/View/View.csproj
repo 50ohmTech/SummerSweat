@@ -57,11 +57,17 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElementManager.cs">
+    <Compile Include="CalculationsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ElementManager.Designer.cs">
-      <DependentUpon>ElementManager.cs</DependentUpon>
+    <Compile Include="CalculationsForm.Designer.cs">
+      <DependentUpon>CalculationsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ElementManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ElementManagerForm.Designer.cs">
+      <DependentUpon>ElementManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewElement.cs">
       <SubType>UserControl</SubType>
@@ -77,8 +83,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ElementManager.resx">
-      <DependentUpon>ElementManager.cs</DependentUpon>
+    <EmbeddedResource Include="CalculationsForm.resx">
+      <DependentUpon>CalculationsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ElementManagerForm.resx">
+      <DependentUpon>ElementManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewElement.resx">
       <DependentUpon>ViewElement.cs</DependentUpon>
@@ -92,6 +101,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Model.Branch.datasource" />
+    <None Include="Properties\DataSources\Model.Calculations.Calculations.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -13,7 +13,7 @@ namespace View
     /// <summary>
     ///     Панель управления
     /// </summary>
-    public partial class ElementManager : Form
+    public partial class ElementManagerForm : Form
     {
         /// <summary>
         ///     Визуальный элемент
@@ -41,7 +41,7 @@ namespace View
         /// </summary>
         /// <param name="branches">Список ветвей</param>
         /// <param name="viewElements">Список визуальных элементов</param>
-        public ElementManager(List<Branch> branches,
+        public ElementManagerForm(List<Branch> branches,
             List<ViewElement> viewElements)
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace View
         ///     Конструктор
         /// </summary>
         /// <param name="element">Визуальный элемент</param>
-        public ElementManager(ViewElement element)
+        public ElementManagerForm(ViewElement element)
         {
             InitializeComponent();
             InitializeComboBoxType();
@@ -75,6 +75,7 @@ namespace View
 
             _groupBoxEditBranch.Visible = false;
             _dataGridViewBranches.Visible = false;
+            _groupBoxAddElement.Text = Resources.GroupBoxEditName;
 
             Size = new Size(207, 193);
         }
