@@ -179,7 +179,7 @@ namespace CircuitCalculator
 			if (elementGridView.CurrentCell.ColumnIndex == 1)
 			{
 				if (double.TryParse(e.FormattedValue.ToString(),
-					    out var newValue) && !(newValue < 0.000000001) && e.FormattedValue.ToString().Length < 38)
+					    out var newValue) && !(newValue < 0.000000001) && newValue <= 1000000000000)
 				{
 					_displayingCircuit.Elements[e.RowIndex].Value =
 						Convert.ToDouble(e.FormattedValue);
@@ -191,14 +191,16 @@ namespace CircuitCalculator
 				}
 				else
 				{
-					e.Cancel = true;
+					elementGridView.CancelEdit();
+
 					MessageBox.Show(
+						"Вы ввели: " + e.FormattedValue + "\n" +
 						"Вводимое значение должно удовлетворять следующим условиям:\n " +
-						"-быть положительным числом,\n " +
-						"-быть вещественным или натуральным числом,\n " +
-						"-быть большим 0.000 000 001 по модулю,\n " +
-						"-длина значения не должна превышать 38 символов.\n " +
-						"-использование экспоненциальной записи не допускается.\n " +
+						"-быть положительным числом\n " +
+						"-быть вещественным или натуральным числом\n " +
+						"-быть большим 0.000 000 001 по модулю\n " +
+						"-быть меньше 1 000 000 000 000\n " +
+						"-использование экспоненциальной записи не допускается\n " +
 						"Чтобы продолжить работу, измените значение поля на удовлетворяющее данным условиям",
 						"Ошибка ввода значения частоты", MessageBoxButtons.OK,
 						MessageBoxIcon.Information);
