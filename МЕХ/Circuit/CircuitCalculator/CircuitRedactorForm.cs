@@ -182,18 +182,28 @@ namespace CircuitCalculator
 				if (double.TryParse(formatingString,
 					    out var newValue) && !(newValue < 0.000000001) && newValue <= 1000000000000)
 				{
+					if(formatingString.Length > 1 && formatingString[0] == '0' && formatingString[1] != ',')
+					{
+						elementGridView.CancelEdit();
+
+						MessageBox.Show(
+							"Данное число имеет неверный формат. Если первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
+							"Ошибка ввода значения частоты", MessageBoxButtons.OK,
+							MessageBoxIcon.Information);
+					}
+
 					_displayingCircuit.Elements[e.RowIndex].Value =
-						Convert.ToDouble(e.FormattedValue);
+						Convert.ToDouble(formatingString);
 
 					RefreshRedactor();
 					CircuitValueChanged?.Invoke(
-						Convert.ToDouble(e.FormattedValue),
+						Convert.ToDouble(formatingString),
 						_displayingCircuit.Elements[e.RowIndex]);
 				}
 				else
 				{
 					elementGridView.CancelEdit();
-					
+
 					MessageBox.Show(
 						"Вы ввели: " + formatingString + "\n" +
 						"Вводимое значение должно удовлетворять следующим условиям:\n " +

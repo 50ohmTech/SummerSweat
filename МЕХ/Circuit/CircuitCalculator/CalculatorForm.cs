@@ -152,10 +152,20 @@ namespace CircuitCalculator
 				}
 
 				string formatingString = e.FormattedValue.ToString().Replace('.', ',');
+				if (formatingString.Length > 1 && formatingString[0] == '0' && formatingString[1] != ',')
+				{
+					frequenciesGridView.CancelEdit();
+
+					MessageBox.Show(
+						"Данное число имеет неверный формат. Если первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
+						"Ошибка ввода значения частоты", MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+				}
 				if (double.TryParse(formatingString,
 					    out var newValue) && !(Math.Abs(newValue) < 0.000000001) && newValue <= 1000000000000)
 				{
 					return;
+
 				}
 
 				frequenciesGridView.CancelEdit();
@@ -191,7 +201,7 @@ namespace CircuitCalculator
 
 				for (var i = 0; i < frequenciesGridView.RowCount - 1; i++)
 				{
-					_frequencies[i] = Convert.ToDouble(frequenciesGridView[0, i].Value);
+					_frequencies[i] = Convert.ToDouble(frequenciesGridView[0, i].Value.ToString().Replace('.', ','));
 				}
 
 				var impedance = _currentCircuit.CalculateZ(_frequencies);
