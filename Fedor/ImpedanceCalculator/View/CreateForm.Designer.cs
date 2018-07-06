@@ -34,22 +34,22 @@ namespace View
             this.label1 = new System.Windows.Forms.Label();
             this.calculateButton = new System.Windows.Forms.Button();
             this.circuitPictureBox = new System.Windows.Forms.PictureBox();
-            this.elementGridView = new System.Windows.Forms.DataGridView();
-            this.nameColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addBox = new System.Windows.Forms.GroupBox();
+            this.elementComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.connectionComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.valueBox = new System.Windows.Forms.TextBox();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.connectionComboBox = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.elementComboBox = new System.Windows.Forms.ComboBox();
+            this.elementGridView = new View.MyDataGridView();
+            this.nameColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
             this.addBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // circuitComboBox
@@ -78,11 +78,11 @@ namespace View
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(912, 585);
+            this.calculateButton.Location = new System.Drawing.Point(912, 582);
             this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(158, 36);
+            this.calculateButton.Size = new System.Drawing.Size(158, 47);
             this.calculateButton.TabIndex = 3;
-            this.calculateButton.Text = "Расчитать импеданс";
+            this.calculateButton.Text = "Рассчитать цепь";
             this.calculateButton.UseVisualStyleBackColor = true;
             this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
@@ -95,42 +95,6 @@ namespace View
             this.circuitPictureBox.TabIndex = 4;
             this.circuitPictureBox.TabStop = false;
             // 
-            // elementGridView
-            // 
-            this.elementGridView.AllowUserToAddRows = false;
-            this.elementGridView.AllowUserToDeleteRows = false;
-            this.elementGridView.AllowUserToResizeColumns = false;
-            this.elementGridView.AllowUserToResizeRows = false;
-            this.elementGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.elementGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameColomn,
-            this.valueColomn});
-            this.elementGridView.Location = new System.Drawing.Point(10, 36);
-            this.elementGridView.Name = "elementGridView";
-            this.elementGridView.RowHeadersVisible = false;
-            this.elementGridView.RowTemplate.Height = 24;
-            this.elementGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.elementGridView.Size = new System.Drawing.Size(238, 282);
-            this.elementGridView.TabIndex = 8;
-            this.elementGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ElementGridView_EditingControlShowing);
-            // 
-            // nameColomn
-            // 
-            this.nameColomn.DataPropertyName = "Name";
-            this.nameColomn.Frozen = true;
-            this.nameColomn.HeaderText = "Name";
-            this.nameColomn.Name = "nameColomn";
-            this.nameColomn.ReadOnly = true;
-            this.nameColomn.Width = 70;
-            // 
-            // valueColomn
-            // 
-            this.valueColomn.DataPropertyName = "Value";
-            this.valueColomn.Frozen = true;
-            this.valueColomn.HeaderText = "Value";
-            this.valueColomn.Name = "valueColomn";
-            this.valueColomn.Width = 110;
-            // 
             // addBox
             // 
             this.addBox.Controls.Add(this.elementComboBox);
@@ -140,12 +104,56 @@ namespace View
             this.addBox.Controls.Add(this.label2);
             this.addBox.Controls.Add(this.label3);
             this.addBox.Controls.Add(this.valueBox);
-            this.addBox.Location = new System.Drawing.Point(12, 324);
+            this.addBox.Location = new System.Drawing.Point(12, 371);
             this.addBox.Name = "addBox";
             this.addBox.Size = new System.Drawing.Size(238, 204);
             this.addBox.TabIndex = 7;
             this.addBox.TabStop = false;
             this.addBox.Text = "Параметры нового элемента";
+            // 
+            // elementComboBox
+            // 
+            this.elementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.elementComboBox.FormattingEnabled = true;
+            this.elementComboBox.Items.AddRange(new object[] {
+            "Резистор",
+            "Конденсатор",
+            "Катушка"});
+            this.elementComboBox.Location = new System.Drawing.Point(6, 44);
+            this.elementComboBox.Name = "elementComboBox";
+            this.elementComboBox.Size = new System.Drawing.Size(168, 24);
+            this.elementComboBox.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(7, 164);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(225, 34);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "и элемент из списка, с которым хотите соеденить";
+            this.label5.Visible = false;
+            // 
+            // connectionComboBox
+            // 
+            this.connectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.connectionComboBox.FormattingEnabled = true;
+            this.connectionComboBox.Items.AddRange(new object[] {
+            "Последовательное",
+            "Параллельное"});
+            this.connectionComboBox.Location = new System.Drawing.Point(6, 137);
+            this.connectionComboBox.Name = "connectionComboBox";
+            this.connectionComboBox.Size = new System.Drawing.Size(168, 24);
+            this.connectionComboBox.TabIndex = 5;
+            this.connectionComboBox.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 117);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(184, 17);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Выберите тип соединения";
             // 
             // label2
             // 
@@ -178,9 +186,9 @@ namespace View
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(134, 582);
+            this.deleteButton.Location = new System.Drawing.Point(150, 581);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(116, 39);
+            this.deleteButton.Size = new System.Drawing.Size(132, 48);
             this.deleteButton.TabIndex = 6;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -188,57 +196,53 @@ namespace View
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(12, 582);
+            this.addButton.Location = new System.Drawing.Point(12, 581);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(116, 39);
+            this.addButton.Size = new System.Drawing.Size(132, 48);
             this.addButton.TabIndex = 5;
             this.addButton.Text = "Добавить";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // label4
+            // elementGridView
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 117);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(184, 17);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Выберите тип соединения";
+            this.elementGridView.AllowUserToAddRows = false;
+            this.elementGridView.AllowUserToDeleteRows = false;
+            this.elementGridView.AllowUserToResizeColumns = false;
+            this.elementGridView.AllowUserToResizeRows = false;
+            this.elementGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.elementGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameColomn,
+            this.valueColomn});
+            this.elementGridView.Location = new System.Drawing.Point(12, 36);
+            this.elementGridView.MultiSelect = false;
+            this.elementGridView.Name = "elementGridView";
+            this.elementGridView.RowHeadersVisible = false;
+            this.elementGridView.RowTemplate.Height = 24;
+            this.elementGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.elementGridView.Size = new System.Drawing.Size(238, 329);
+            this.elementGridView.StandardTab = true;
+            this.elementGridView.TabIndex = 8;
+            this.elementGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ElementGridView_EditingControlShowing);
             // 
-            // connectionComboBox
+            // nameColomn
             // 
-            this.connectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.connectionComboBox.FormattingEnabled = true;
-            this.connectionComboBox.Items.AddRange(new object[] {
-            "Последовательное",
-            "Параллельное"});
-            this.connectionComboBox.Location = new System.Drawing.Point(6, 137);
-            this.connectionComboBox.Name = "connectionComboBox";
-            this.connectionComboBox.Size = new System.Drawing.Size(168, 24);
-            this.connectionComboBox.TabIndex = 5;
-            this.connectionComboBox.Visible = false;
+            this.nameColomn.DataPropertyName = "Name";
+            this.nameColomn.Frozen = true;
+            this.nameColomn.HeaderText = "Name";
+            this.nameColomn.Name = "nameColomn";
+            this.nameColomn.ReadOnly = true;
+            this.nameColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.nameColomn.Width = 70;
             // 
-            // label5
+            // valueColomn
             // 
-            this.label5.Location = new System.Drawing.Point(7, 164);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(225, 34);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "и элемент из списка, с которым хотитте соеденить";
-            this.label5.Visible = false;
-            // 
-            // elementComboBox
-            // 
-            this.elementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.elementComboBox.FormattingEnabled = true;
-            this.elementComboBox.Items.AddRange(new object[] {
-            "Резистор",
-            "Конденсатор",
-            "Катушка"});
-            this.elementComboBox.Location = new System.Drawing.Point(6, 44);
-            this.elementComboBox.Name = "elementComboBox";
-            this.elementComboBox.Size = new System.Drawing.Size(168, 24);
-            this.elementComboBox.TabIndex = 7;
+            this.valueColomn.DataPropertyName = "Value";
+            this.valueColomn.Frozen = true;
+            this.valueColomn.HeaderText = "Value";
+            this.valueColomn.Name = "valueColomn";
+            this.valueColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.valueColomn.Width = 110;
             // 
             // CreateForm
             // 
@@ -259,9 +263,9 @@ namespace View
             this.Name = "CreateForm";
             this.Text = "Circuit Calculator";
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
             this.addBox.ResumeLayout(false);
             this.addBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,9 +277,7 @@ namespace View
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.PictureBox circuitPictureBox;
-        private DataGridView elementGridView;
-        private DataGridViewTextBoxColumn nameColomn;
-        private DataGridViewTextBoxColumn valueColomn;
+        private MyDataGridView elementGridView;
         private GroupBox addBox;
         private Label label2;
         private Label label3;
@@ -286,6 +288,8 @@ namespace View
         private ComboBox connectionComboBox;
         private Label label4;
         private ComboBox elementComboBox;
+        private DataGridViewTextBoxColumn nameColomn;
+        private DataGridViewTextBoxColumn valueColomn;
     }
 }
 

@@ -55,8 +55,12 @@ namespace View
 
             Circuit.Elements.ElementsChanged += Circuit_ElementsChanged;
 
+            //KeyPreview = true;
+
             valueBox.ContextMenu = new ContextMenu();
             circuitComboBox.SelectedIndex = 0;
+            elementComboBox.SelectedIndex = 0;
+            connectionComboBox.SelectedIndex = 0;
         }
 
         #endregion
@@ -65,16 +69,16 @@ namespace View
 
         private void CircuitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (circuitComboBox.SelectedIndex)
+            switch (circuitComboBox.SelectedItem)
             {
-                case 0:
+                case "Создать цепь":
                     _resistorCounter = 0;
                     _capacitorCounter = 0;
                     _inductorCounter = 0;
 
                     Circuit.Elements.Clear();
                     break;
-                case 1:
+                case "Цепь 1":
                     _resistorCounter = 10;
                     _capacitorCounter = 0;
                     _inductorCounter = 0;
@@ -92,7 +96,7 @@ namespace View
                     Circuit.Elements.Add(new Resistor("R9", 10), "R7", false);
                     Circuit.Elements.Add(new Resistor("R10", 10), "R7", true);
                     break;
-                case 2:
+                case "Цепь 2":
                     _resistorCounter = 1;
                     _capacitorCounter = 1;
                     _inductorCounter = 2;
@@ -104,7 +108,7 @@ namespace View
                     Circuit.Elements.Add(new Resistor("R1", 20.56), "I1", true);
                     Circuit.Elements.Add(new Inductor("I2", 0.7), "C1", false);
                     break;
-                case 3:
+                case "Цепь 3":
                     _resistorCounter = 3;
                     _capacitorCounter = 3;
                     _inductorCounter = 1;
@@ -165,21 +169,21 @@ namespace View
 
             if (Circuit.Elements.Count == 0)
             {
-                switch (elementComboBox.SelectedIndex)
+                switch (elementComboBox.SelectedItem)
                 {
-                    case 0:
+                    case "Резистор":
                         Circuit.Elements.Add(new Resistor(
                             "R" + (++_resistorCounter).ToString(),
                             double.Parse(valueBox.Text)));
 
                         break;
-                    case 1:
+                    case "Конденсатор":
                         Circuit.Elements.Add(new Capacitor(
                             "C" + (++_capacitorCounter).ToString(),
                             double.Parse(valueBox.Text)));
 
                         break;
-                    case 2:
+                    case "Катушка":
                         Circuit.Elements.Add(new Inductor(
                             "I" + (++_inductorCounter).ToString(),
                             double.Parse(valueBox.Text)));
@@ -214,9 +218,9 @@ namespace View
                     return;
                 }
 
-                switch (elementComboBox.SelectedIndex)
+                switch (elementComboBox.SelectedItem)
                 {
-                    case 0:
+                    case "Резистор":
                         Circuit.Elements.Add(new Resistor(
                                 "R" + (++_resistorCounter).ToString(),
                                 double.Parse(valueBox.Text)),
@@ -224,7 +228,7 @@ namespace View
                             connectionComboBox.SelectedIndex == 0);
 
                         break;
-                    case 1:
+                    case "Конденсатор":
                         Circuit.Elements.Add(new Capacitor(
                                 "C" + (++_capacitorCounter).ToString(),
                                 double.Parse(valueBox.Text)),
@@ -232,7 +236,7 @@ namespace View
                             connectionComboBox.SelectedIndex == 0);
 
                         break;
-                    case 2:
+                    case "Катушка":
                         Circuit.Elements.Add(new Inductor(
                                 "I" + (++_inductorCounter).ToString(),
                                 double.Parse(valueBox.Text)),
@@ -286,29 +290,31 @@ namespace View
 
         private void Cell_Leave(object sender, EventArgs e)
         {
-            var text = ((DataGridViewTextBoxEditingControl)sender).Text;
-            var index = ((DataGridViewTextBoxEditingControl)sender).EditingControlRowIndex;
+            var index = ((DataGridViewTextBoxEditingControl) sender)
+                .EditingControlRowIndex;
+            var name = elementGridView.Rows[index].Cells[0].Value.ToString();
+            var element = Circuit.Elements.Search(Circuit.Elements.Root, name).Element;
 
-            if (!double.TryParse(text, out var value))
+            if (!double.TryParse(((DataGridViewTextBoxEditingControl) sender).Text,
+                out var value))
             {
                 ((DataGridViewTextBoxEditingControl) sender).Text =
-                    elementGridView.Rows[index].Cells[1].Value.ToString();
+                    element.Value.ToString(CultureInfo.InvariantCulture);
+
                 return;
             }
 
             if (value < double.Parse(Resources.minElementValue) ||
                 value > double.Parse(Resources.maxElementValue))
             {
-                ((DataGridViewTextBoxEditingControl)sender).Text =
-                    elementGridView.Rows[index].Cells[1].Value.ToString();
+                ((DataGridViewTextBoxEditingControl) sender).Text =
+                    element.Value.ToString(CultureInfo.InvariantCulture);
                 return;
             }
 
-            ((DataGridViewTextBoxEditingControl)sender).Text =
+            ((DataGridViewTextBoxEditingControl) sender).Text =
                 value.ToString(CultureInfo.InvariantCulture);
 
-            var name = elementGridView.Rows[index].Cells[0].Value.ToString();
-            var element = Circuit.Elements.Search(Circuit.Elements.Root, name).Element;
             element.Value = value;
         }
 
@@ -500,7 +506,8 @@ namespace View
                         new Point(40 + displacement.X, 20 + displacement.Y),
                         new Point(10 + displacement.X, 20 + displacement.Y));
 
-                    graphics.DrawLine(pen, new Point(0 + displacement.X, 25 + displacement.Y),
+                    graphics.DrawLine(pen,
+                        new Point(0 + displacement.X, 25 + displacement.Y),
                         new Point(10 + displacement.X, 25 + displacement.Y));
 
                     graphics.DrawLine(pen,
@@ -520,7 +527,8 @@ namespace View
                         new Point(30 + displacement.X, 15 + displacement.Y),
                         new Point(30 + displacement.X, 35 + displacement.Y));
 
-                    graphics.DrawLine(pen, new Point(0 + displacement.X, 25 + displacement.Y),
+                    graphics.DrawLine(pen,
+                        new Point(0 + displacement.X, 25 + displacement.Y),
                         new Point(20 + displacement.X, 25 + displacement.Y));
 
                     graphics.DrawLine(pen,
@@ -532,16 +540,17 @@ namespace View
 
                     break;
                 case Inductor _:
-                    graphics.DrawArc(pen, 10 + displacement.X, 20 + displacement.Y, 10, 10,
-                        180, 180);
+                    graphics.DrawArc(pen, 10 + displacement.X, 20 + displacement.Y,
+                        10, 10, 180, 180);
 
-                    graphics.DrawArc(pen, 20 + displacement.X, 20 + displacement.Y, 10, 10,
-                        180, 180);
+                    graphics.DrawArc(pen, 20 + displacement.X, 20 + displacement.Y,
+                        10, 10, 180, 180);
 
-                    graphics.DrawArc(pen, 30 + displacement.X, 20 + displacement.Y, 10, 10,
-                        180, 180);
+                    graphics.DrawArc(pen, 30 + displacement.X, 20 + displacement.Y,
+                        10, 10, 180, 180);
 
-                    graphics.DrawLine(pen, new Point(0 + displacement.X, 25 + displacement.Y),
+                    graphics.DrawLine(pen,
+                        new Point(0 + displacement.X, 25 + displacement.Y),
                         new Point(10 + displacement.X, 25 + displacement.Y));
 
                     graphics.DrawLine(pen,

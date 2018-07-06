@@ -17,9 +17,10 @@ namespace View
         /// <param name="text">Текст элемента.</param>
         public static void PressDouble(KeyPressEventArgs e, string text)
         {
-            var separator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
+            var separator = System.Globalization.NumberFormatInfo.CurrentInfo
+                .NumberDecimalSeparator;
 
-            if (char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back) return;
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == (char) Keys.Back) return;
 
             if (text.IndexOf(separator, StringComparison.Ordinal) != -1)
             {
@@ -36,9 +37,12 @@ namespace View
         /// Ввести целочисленное значение.
         /// </summary>
         /// <param name="e">Аргументы события.</param>
-        public static void PressInt(KeyPressEventArgs e)
+        public static void PressInt(object sender, KeyPressEventArgs e)
         {
-            if (char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back) return;
+            if (e.KeyChar == (char) Keys.Back || char.IsDigit(e.KeyChar) &&
+                ((TextBox) sender).Text.Length < 4)
+                return;
+
             e.Handled = true;
         }
 
@@ -76,7 +80,8 @@ namespace View
         /// <param name="valueBox">Элемент управления текстового поля.</param>
         public static void ChangeSeparator(TextBox valueBox)
         {
-            if (valueBox.Text == System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator)
+            if (valueBox.Text == System.Globalization.NumberFormatInfo.CurrentInfo
+                    .NumberDecimalSeparator)
             {
                 valueBox.Text = Properties.Resources.defaultNumber;
             }

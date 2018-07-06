@@ -32,6 +32,10 @@ namespace View
         public CalculateForm()
         {
             InitializeComponent();
+
+            startValueBox.ContextMenu = new ContextMenu();
+            intervalBox.ContextMenu = new ContextMenu();
+            countBox.ContextMenu = new ContextMenu();
         }
 
         #endregion
@@ -47,19 +51,6 @@ namespace View
             var startValue = double.Parse(startValueBox.Text);
             var interval = double.Parse(intervalBox.Text);
             var count = uint.Parse(countBox.Text);
-
-            if (interval < double.Parse(Properties.Resources.minFrequencyInterval) ||
-                interval > double.Parse(Properties.Resources.maxFrequencyInterval))
-            {
-                MessageBox.Show(
-                    "Интервал между частотами должен быть\nне менее " +
-                    Properties.Resources.minFrequencyInterval + " и не более " +
-                    Properties.Resources.maxFrequencyInterval,
-                    "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
 
             if (count < int.Parse(Properties.Resources.minFrequencyCount) ||
                 count > int.Parse(Properties.Resources.maxFrequencyCount))
@@ -87,6 +78,19 @@ namespace View
                 return;
             }
 
+            if (interval < double.Parse(Properties.Resources.minFrequencyInterval) ||
+                interval > double.Parse(Properties.Resources.maxFrequencyInterval))
+            {
+                MessageBox.Show(
+                    "Интервал между частотами должен быть\nне менее " +
+                    Properties.Resources.minFrequencyInterval + " и не более " +
+                    Properties.Resources.maxFrequencyInterval,
+                    "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
             _frequencies = new List<double>();
 
             for(var index = 0; index < count; index++)
@@ -101,7 +105,7 @@ namespace View
 
             for (var index = 0; index < _impedancies.Count; index++)
             {
-                circuitGridView.Rows.Add(_impedancies[index], _frequencies[index]);
+                circuitGridView.Rows.Add(_frequencies[index], _impedancies[index]);
             }
         }
 
@@ -122,7 +126,7 @@ namespace View
 
         private void IntTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumberBox.PressInt(e);
+            NumberBox.PressInt(sender, e);
         }
 
         #endregion

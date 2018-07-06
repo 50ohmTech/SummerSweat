@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Model
 {
@@ -91,7 +92,11 @@ namespace Model
         /// <param name="element">Элемент электрической цепи.</param>
         public void Add(ElementBase element)
         {
-            if (Root.Brood.Count != 0) return;
+            if (Root.Brood.Count != 0)
+            {
+                throw new InvalidCastException(
+                    "Метод добавления первого элемента можно использовать только для пустого дерева");
+            }
 
             var node = new Node(element, Root, true);
             Root.Brood.Add(node);

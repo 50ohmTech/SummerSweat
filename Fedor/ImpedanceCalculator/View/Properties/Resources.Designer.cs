@@ -79,7 +79,7 @@ namespace View.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
+        ///   Ищет локализованную строку, похожую на 1000.
         /// </summary>
         internal static string maxFrequencyCount {
             get {
@@ -88,7 +88,7 @@ namespace View.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 10000,0.
+        ///   Ищет локализованную строку, похожую на 10000000000,0.
         /// </summary>
         internal static string maxFrequencyInterval {
             get {
@@ -97,7 +97,7 @@ namespace View.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 1000000,0.
+        ///   Ищет локализованную строку, похожую на 1000000000000,0.
         /// </summary>
         internal static string maxFrequencyStartValue {
             get {
@@ -115,7 +115,7 @@ namespace View.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 2.
+        ///   Ищет локализованную строку, похожую на 1.
         /// </summary>
         internal static string minFrequencyCount {
             get {
@@ -124,7 +124,7 @@ namespace View.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 0,001.
+        ///   Ищет локализованную строку, похожую на 0,01.
         /// </summary>
         internal static string minFrequencyInterval {
             get {

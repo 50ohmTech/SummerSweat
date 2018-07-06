@@ -124,22 +124,22 @@
     <value>10000,0</value>
   </data>
   <data name="maxFrequencyCount" xml:space="preserve">
-    <value>100</value>
+    <value>1000</value>
   </data>
   <data name="maxFrequencyInterval" xml:space="preserve">
-    <value>10000,0</value>
+    <value>10000000000,0</value>
   </data>
   <data name="maxFrequencyStartValue" xml:space="preserve">
-    <value>1000000,0</value>
+    <value>1000000000000,0</value>
   </data>
   <data name="minElementValue" xml:space="preserve">
     <value>0,000001</value>
   </data>
   <data name="minFrequencyCount" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="minFrequencyInterval" xml:space="preserve">
-    <value>0,001</value>
+    <value>0,01</value>
   </data>
   <data name="minFrequencyStartValue" xml:space="preserve">
     <value>1,0</value>
