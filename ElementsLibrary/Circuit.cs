@@ -1,22 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElementsLibrary
 {
+    /// <summary>
+    /// Класс электрическая цепь Circuit
+    /// </summary>
    public class Circuit
     {
-        public List<ElementBase> _elements;
+        /// <summary>
+        /// Список элементов цепи
+        /// </summary>
+        private List<ElementBase> _elements;
 
+        /// <summary>
+        /// Конструктор класса <see cref="Circuit"/>
+        /// </summary>
+        /// <param name="elements"></param>
         public Circuit(List<ElementBase> elements)
         {
             Elements = elements;
         }
 
+        /// <summary>
+        /// Свойство для возвращения и задачи элементов в цепи
+        /// </summary>
         public List<ElementBase> Elements
         {
             get => _elements;
@@ -29,6 +38,11 @@ namespace ElementsLibrary
             }
         }
 
+        /// <summary>
+        /// Метод расчета полного импеданса цепи
+        /// </summary>
+        /// <param name="frequencies"></param>
+        /// <returns></returns>
         public List<Complex> CalculateZ(List<double> frequencies)
         {
             if (_elements == null)
