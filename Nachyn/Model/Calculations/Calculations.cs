@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.Calculations
 {
+    /// <summary>
+    ///     Рассчеты
+    /// </summary>
     public class Calculations
     {
+        /// <summary>
+        ///     Частота
+        /// </summary>
         private double _frequency = 1;
 
+        /// <summary>
+        ///     Возвращает частоту
+        /// </summary>
         public double Frequency
         {
             get => _frequency;
@@ -21,10 +26,14 @@ namespace Model.Calculations
                     throw new ArgumentException(
                         "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
                 }
+
                 _frequency = value;
             }
         }
 
+        /// <summary>
+        ///     Импеданс
+        /// </summary>
         public Complex Impedance { get; set; }
     }
 }

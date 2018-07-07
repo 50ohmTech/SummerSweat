@@ -43,6 +43,11 @@ namespace Model
             }
         }
 
+        /// <summary>
+        ///     Расчет комплексного сопротивления Ветви
+        /// </summary>
+        /// <param name="frequencies">Частоты</param>
+        /// <returns>Комплексные сопротивления</returns>
         public List<Complex> CalculateZ(params double[] frequencies)
         {
             if (frequencies == null)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Model.ComboBoxType;
 using Model.Elements;
 
 namespace Model.Factories
@@ -9,10 +10,10 @@ namespace Model.Factories
     public static class ElementFactory
     {
         /// <summary>
-        /// Рандом
+        ///     Рандом
         /// </summary>
         private static readonly Random _random = new Random();
-        
+
         public static uint NumberRandomElement = 1;
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Model.Factories
         public static ElementBase GetInstance(ElementType elementType, string name,
             double value)
         {
-            ElementBase newElement = null;
+            ElementBase newElement;
             switch (elementType)
             {
                 case ElementType.Resistor:
@@ -48,7 +49,7 @@ namespace Model.Factories
         }
 
         /// <summary>
-        /// Получить рандомную сущность типа ElementBase
+        ///     Получить рандомную сущность типа ElementBase
         /// </summary>
         /// <returns>Элемент</returns>
         public static ElementBase GetRandomInstance()

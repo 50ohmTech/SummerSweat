@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using Model.ComboBoxType;
 using Model.Events;
 
 namespace Model.Elements

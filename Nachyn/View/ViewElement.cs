@@ -76,7 +76,6 @@ namespace View
         {
             _labelValue.Text = "Номинал: " +
                                arguments.NewValue.ToString(CultureInfo.CurrentCulture);
-
             _labelName.Text = arguments.Name.ToString(CultureInfo.CurrentCulture);
         }
 

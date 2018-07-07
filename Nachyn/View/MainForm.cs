@@ -13,6 +13,9 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        ///     Рандом
+        /// </summary>
         private static readonly Random _random = new Random();
 
         /// <summary>
@@ -20,7 +23,9 @@ namespace View
         /// </summary>
         private readonly Circuit _circuit;
 
-
+        /// <summary>
+        ///     Ручка, которая рисует цепь
+        /// </summary>
         private readonly Pen _pen = new Pen(Color.Black, 4);
 
         /// <summary>
@@ -346,6 +351,9 @@ namespace View
             ShowInfo();
         }
 
+        /// <summary>
+        ///     Показать инструкцию
+        /// </summary>
         private static void ShowInfo()
         {
             string info =
