@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this._dataGridViewCalculations = new System.Windows.Forms.DataGridView();
+            this._calculationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._buttonCalculate = new System.Windows.Forms.Button();
             this._buttonDeleteCurrent = new System.Windows.Forms.Button();
             this.frequencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.impedanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._calculationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewCalculations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._calculationsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -69,9 +69,13 @@
             this._dataGridViewCalculations.TabIndex = 1;
             this._dataGridViewCalculations.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridViewCalculations_DataError);
             // 
+            // _calculationsBindingSource
+            // 
+            this._calculationsBindingSource.DataSource = typeof(Model.Calculations.Calculations);
+            // 
             // _buttonCalculate
             // 
-            this._buttonCalculate.Location = new System.Drawing.Point(123, 243);
+            this._buttonCalculate.Location = new System.Drawing.Point(12, 243);
             this._buttonCalculate.Name = "_buttonCalculate";
             this._buttonCalculate.Size = new System.Drawing.Size(111, 23);
             this._buttonCalculate.TabIndex = 2;
@@ -81,7 +85,7 @@
             // 
             // _buttonDeleteCurrent
             // 
-            this._buttonDeleteCurrent.Location = new System.Drawing.Point(12, 243);
+            this._buttonDeleteCurrent.Location = new System.Drawing.Point(129, 243);
             this._buttonDeleteCurrent.Name = "_buttonDeleteCurrent";
             this._buttonDeleteCurrent.Size = new System.Drawing.Size(105, 23);
             this._buttonDeleteCurrent.TabIndex = 3;
@@ -93,6 +97,7 @@
             // 
             this.frequencyDataGridViewTextBoxColumn.DataPropertyName = "Frequency";
             this.frequencyDataGridViewTextBoxColumn.HeaderText = "Частота";
+            this.frequencyDataGridViewTextBoxColumn.MaxInputLength = 13;
             this.frequencyDataGridViewTextBoxColumn.Name = "frequencyDataGridViewTextBoxColumn";
             this.frequencyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
@@ -103,10 +108,6 @@
             this.impedanceDataGridViewTextBoxColumn.Name = "impedanceDataGridViewTextBoxColumn";
             this.impedanceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.impedanceDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // _calculationsBindingSource
-            // 
-            this._calculationsBindingSource.DataSource = typeof(Model.Calculations.Calculations);
             // 
             // CalculationsForm
             // 

@@ -76,7 +76,7 @@ namespace View
             _groupBoxEditBranch.Visible = false;
             _dataGridViewBranches.Visible = false;
             _groupBoxAddElement.Text = Resources.GroupBoxEditName;
-
+            _groupBoxAddElement.Location = _groupBoxEditBranch.Location;
             Size = new Size(207, 193);
         }
 

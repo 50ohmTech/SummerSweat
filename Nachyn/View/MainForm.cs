@@ -81,7 +81,7 @@ namespace View
 
             if (result == DialogResult.Yes)
             {
-                ClearCircuit();              
+                ClearCircuit();
             }
         }
 
