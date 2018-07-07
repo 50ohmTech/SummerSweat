@@ -179,6 +179,8 @@ namespace View
         {
             ClearPanel();
 
+            ClearEmptyBranches();
+
             Dictionary<string, Dictionary<int, List<ViewElement>>> viewBranches =
                 GetViewBranches();
 
@@ -214,6 +216,7 @@ namespace View
                 {
                     continue;
                 }
+
 
                 foreach (int keyBranch in viewBranches[keyBranchs].Keys)
                 {
@@ -292,6 +295,11 @@ namespace View
 
             _graphics.Dispose();
             _panelCircuit.BackgroundImage = _bitmapBackground;
+        }
+
+        private void ClearEmptyBranches()
+        {
+            _circuit.Branches.RemoveAll(branch => branch.Elements.Count < 1);
         }
 
         /// <summary>

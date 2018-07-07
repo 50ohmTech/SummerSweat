@@ -77,7 +77,18 @@ namespace View
             _dataGridViewBranches.Visible = false;
             _groupBoxAddElement.Text = Resources.GroupBoxEditName;
             _groupBoxAddElement.Location = _groupBoxEditBranch.Location;
-            Size = new Size(207, 193);
+
+            _buttonAdd.Location = _textBoxName.Location;
+            _textBoxName.Location = _textBoxValue.Location;
+            _textBoxValue.Location = _comboBoxType.Location;
+            _labelName.Location = _labelValue.Location;
+            _labelValue.Location =
+                new Point(_labelName.Location.X, _labelName.Location.Y - 30);
+
+            _groupBoxAddElement.Size = new Size(_groupBoxAddElement.Size.Width,
+                _groupBoxAddElement.Size.Height - 25);
+
+            Size = new Size(207, 170);
         }
 
         /// <summary>
