@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this._dataGridViewCalculations = new System.Windows.Forms.DataGridView();
-            this._calculationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._buttonCalculate = new System.Windows.Forms.Button();
             this._buttonDeleteCurrent = new System.Windows.Forms.Button();
+            this._calculationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frequencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.impedanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewCalculations)).BeginInit();
@@ -69,10 +69,6 @@
             this._dataGridViewCalculations.TabIndex = 1;
             this._dataGridViewCalculations.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridViewCalculations_DataError);
             // 
-            // _calculationsBindingSource
-            // 
-            this._calculationsBindingSource.DataSource = typeof(Model.Calculations.Calculations);
-            // 
             // _buttonCalculate
             // 
             this._buttonCalculate.Location = new System.Drawing.Point(12, 243);
@@ -93,6 +89,10 @@
             this._buttonDeleteCurrent.UseVisualStyleBackColor = true;
             this._buttonDeleteCurrent.Click += new System.EventHandler(this.ButtonDeleteCurrent_Click);
             // 
+            // _calculationsBindingSource
+            // 
+            this._calculationsBindingSource.DataSource = typeof(Model.Calculations.Calculations);
+            // 
             // frequencyDataGridViewTextBoxColumn
             // 
             this.frequencyDataGridViewTextBoxColumn.DataPropertyName = "Frequency";
@@ -106,7 +106,9 @@
             // 
             this.impedanceDataGridViewTextBoxColumn.DataPropertyName = "Impedance";
             this.impedanceDataGridViewTextBoxColumn.HeaderText = "Импеданс";
+            this.impedanceDataGridViewTextBoxColumn.MaxInputLength = 13;
             this.impedanceDataGridViewTextBoxColumn.Name = "impedanceDataGridViewTextBoxColumn";
+            this.impedanceDataGridViewTextBoxColumn.ReadOnly = true;
             this.impedanceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.impedanceDataGridViewTextBoxColumn.Width = 140;
             // 
