@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -14,7 +15,7 @@ namespace CircuitModel
         /// <summary>
         /// Коллекция элементов цепи
         /// </summary>
-        public List<Element> Elements { get; set; }
+        public List<ElementBase> Elements { get; }
 
         #endregion
 
@@ -23,12 +24,13 @@ namespace CircuitModel
         /// <summary>
         /// Конструктор класса Circuit
         /// </summary>
-        public Circuit(List<Element> elements)
+        public Circuit(List<ElementBase> elements)
         {
             if (elements.Any())
             {
                 Elements = elements;
             }
+
             foreach (var element in Elements)
             {
                 element.ValueChanged += CircuitChanged;
@@ -40,19 +42,27 @@ namespace CircuitModel
         /// </summary>
         /// <param name="frequencies">Частоты</param>
         /// <returns></returns>
-        public List<Complex> CalculateZ(double[] frequencies)
+        public List<Complex> CalculateZ(List<double> frequencies)
         {
-            var impedance = new List<Complex>();
-            for (var i = 0; i < frequencies.Length; i++)
+            if (frequencies == null)
             {
+                throw new ArgumentNullException($"Список частот не может быть пустым");
+            }
+            var impedances = new List<Complex>();
+
+            foreach (var frequency in frequencies)
+            {
+                var impedance = new Complex();
+
                 foreach (var element in Elements)
                 {
-                    impedance[i] = Complex.Add(impedance[i],
-                        element.CalculateZ(frequencies[i]));
+                    impedance += element.CalculateZ(frequency);
                 }
-            }
 
-            return impedance;
+                impedances.Add(impedance);
+            }
+            return impedances;
+
         }
 
         #endregion

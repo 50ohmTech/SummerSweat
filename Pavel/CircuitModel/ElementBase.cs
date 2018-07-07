@@ -13,7 +13,7 @@ namespace CircuitModel
     /// <summary>
     /// Элемент цепи
     /// </summary>
-    public abstract class Element
+    public abstract class ElementBase
     {
         #region - - Поля - -
 
@@ -74,7 +74,7 @@ namespace CircuitModel
         /// </summary>
         /// <param name="name"> Имя элемента. </param>
         /// <param name="value"> Номинал элемента. </param>
-        public Element(string name, double value)
+        public ElementBase(string name, double value)
         {
             Name = name;
             Value = value;

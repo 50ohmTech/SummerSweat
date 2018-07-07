@@ -1,11 +1,12 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace CircuitModel
 {
     /// <summary>
     /// Резистор
     /// </summary>
-    public class Resistor:Element
+    public class Resistor:ElementBase
     {
         /// <summary>
         /// Конструктор класса Resistor
@@ -23,6 +24,10 @@ namespace CircuitModel
         /// <returns>Комплекное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (frequency <= 0)
+            {
+                throw new ArgumentOutOfRangeException($"Частота не может быть меньше нуля");
+            }
             return new Complex(Value, 0);
         }
     }

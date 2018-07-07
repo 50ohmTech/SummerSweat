@@ -6,7 +6,7 @@ namespace CircuitModel
     /// <summary>
     /// Катушка индуктивности
     /// </summary>
-    public class Inductor:Element
+    public class Inductor:ElementBase
     {
         /// <summary>
         /// Конструктор класса Inductor
@@ -24,6 +24,11 @@ namespace CircuitModel
         /// <returns></returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (frequency <= 0)
+            {
+                throw new ArgumentOutOfRangeException($"Частота не может быть меньше нуля");
+            }
+
             return new Complex(0, 2 * Math.PI * frequency * Value);
         }
     }
