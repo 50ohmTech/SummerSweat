@@ -13,6 +13,8 @@ namespace View
     /// </summary>
     public sealed partial class ViewElement : UserControl
     {
+        #region Private
+
         /// <summary>
         ///     Список элементов в ветви
         /// </summary>
@@ -22,6 +24,29 @@ namespace View
         ///     Элемент цепи
         /// </summary>
         private ElementBase _item;
+
+        private void Element_ValueChanged(object sender, ElementValueEventArgs arguments)
+        {
+            _labelValue.Text = "Номинал: " +
+                               arguments.NewValue.ToString(CultureInfo.CurrentCulture);
+
+            _labelName.Text = arguments.Name.ToString(CultureInfo.CurrentCulture);
+        }
+
+        private void ToolStripMenuAdd_Click(object sender, EventArgs e)
+        {
+            new ElementManagerForm(this).ShowDialog();
+        }
+
+        private void ToolStripMenuDelete_Click(object sender, EventArgs e)
+        {
+            _elementBases.Remove(Item);
+            Dispose();
+        }
+
+        #endregion
+
+        #region Public
 
         /// <summary>
         ///     Конструктор
@@ -72,22 +97,6 @@ namespace View
             }
         }
 
-        private void Element_ValueChanged(object sender, ElementValueEventArgs arguments)
-        {
-            _labelValue.Text = "Номинал: " +
-                               arguments.NewValue.ToString(CultureInfo.CurrentCulture);
-            _labelName.Text = arguments.Name.ToString(CultureInfo.CurrentCulture);
-        }
-
-        private void ToolStripMenuAdd_Click(object sender, EventArgs e)
-        {
-            new ElementManagerForm(this).ShowDialog();
-        }
-
-        private void ToolStripMenuDelete_Click(object sender, EventArgs e)
-        {
-            _elementBases.Remove(Item);
-            Dispose();
-        }
+        #endregion
     }
 }

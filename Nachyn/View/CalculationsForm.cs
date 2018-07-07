@@ -12,15 +12,7 @@ namespace View
     /// </summary>
     public partial class CalculationsForm : Form
     {
-        /// <summary>
-        ///     Список расчетов
-        /// </summary>
-        private readonly List<Calculations> _calculations;
-
-        /// <summary>
-        ///     Цепь
-        /// </summary>
-        private readonly Circuit _circuit;
+        #region Public
 
         /// <summary>
         ///     Конструктор
@@ -33,6 +25,20 @@ namespace View
             _calculations = new List<Calculations>();
             _calculationsBindingSource.DataSource = _calculations;
         }
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        ///     Список расчетов
+        /// </summary>
+        private readonly List<Calculations> _calculations;
+
+        /// <summary>
+        ///     Цепь
+        /// </summary>
+        private readonly Circuit _circuit;
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -52,7 +58,7 @@ namespace View
                 calculations.Impedance = _circuit.CalculateZ(calculations.Frequency)[0];
                 calculations.Impedance = new Complex(
                     Math.Round(calculations.Impedance.Real, 3),
-                    Math.Round(calculations.Impedance.Imaginary, 3));
+                    Math.Round(calculations.Impedance.Imaginary, 6));
             }
 
             _dataGridViewCalculations.DataSource = null;
@@ -72,5 +78,7 @@ namespace View
         {
             MessageBox.Show(e.Exception.Message);
         }
+
+        #endregion
     }
 }

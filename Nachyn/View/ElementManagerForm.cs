@@ -15,26 +15,7 @@ namespace View
     /// </summary>
     public partial class ElementManagerForm : Form
     {
-        /// <summary>
-        ///     Визуальный элемент
-        /// </summary>
-        private readonly ViewElement _element;
-
-        /// <summary>
-        ///     Список визуальных элементов
-        /// </summary>
-        private readonly List<ViewElement> _viewElements;
-
-
-        /// <summary>
-        ///     Входной узел
-        /// </summary>
-        private uint _nodeIn;
-
-        /// <summary>
-        ///     Номинал
-        /// </summary>
-        private double _value;
+        #region Public
 
         /// <summary>
         ///     Конструктор
@@ -90,6 +71,31 @@ namespace View
 
             Size = new Size(207, 170);
         }
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        ///     Визуальный элемент
+        /// </summary>
+        private readonly ViewElement _element;
+
+        /// <summary>
+        ///     Список визуальных элементов
+        /// </summary>
+        private readonly List<ViewElement> _viewElements;
+
+
+        /// <summary>
+        ///     Входной узел
+        /// </summary>
+        private uint _nodeIn;
+
+        /// <summary>
+        ///     Номинал
+        /// </summary>
+        private double _value;
 
         /// <summary>
         ///     Инициализировать ComboBoxType
@@ -236,5 +242,7 @@ namespace View
                 _branchBindingSource.Remove(current);
             }
         }
+
+        #endregion
     }
 }

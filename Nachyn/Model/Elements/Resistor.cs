@@ -8,6 +8,8 @@ namespace Model.Elements
     /// </summary>
     public class Resistor : ElementBase
     {
+        #region Public
+
         /// <summary>
         ///     Конструктор
         /// </summary>
@@ -33,5 +35,7 @@ namespace Model.Elements
 
             return new Complex(Value, 0);
         }
+
+        #endregion
     }
 }

@@ -7,6 +7,8 @@ namespace Model.ComboBoxType
     /// </summary>
     public sealed class ElementTypeComboBoxItem
     {
+        #region Public
+
         /// <summary>
         ///     Конструктор
         /// </summary>
@@ -41,5 +43,7 @@ namespace Model.ComboBoxType
                 }
             }
         }
+
+        #endregion
     }
 }

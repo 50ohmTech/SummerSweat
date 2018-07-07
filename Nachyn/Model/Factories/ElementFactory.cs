@@ -9,10 +9,16 @@ namespace Model.Factories
     /// </summary>
     public static class ElementFactory
     {
+        #region Private
+
         /// <summary>
         ///     Рандом
         /// </summary>
         private static readonly Random _random = new Random();
+
+        #endregion
+
+        #region Public
 
         public static uint NumberRandomElement = 1;
 
@@ -59,5 +65,7 @@ namespace Model.Factories
             double value = Math.Round(_random.NextDouble(), 3) + _random.Next(100) + 1;
             return GetInstance(elementType, name, value);
         }
+
+        #endregion
     }
 }

@@ -7,6 +7,8 @@ namespace Model.Events
     /// </summary>
     public class ElementValueEventArgs : EventArgs
     {
+        #region Public
+
         /// <summary>
         ///     Конструктор
         /// </summary>
@@ -34,5 +36,7 @@ namespace Model.Events
         ///     Сообщение
         /// </summary>
         public string Name { get; }
+
+        #endregion
     }
 }

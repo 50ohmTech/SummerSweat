@@ -8,10 +8,16 @@ namespace Model.Calculations
     /// </summary>
     public class Calculations
     {
+        #region Private
+
         /// <summary>
         ///     Частота
         /// </summary>
         private double _frequency = 1;
+
+        #endregion
+
+        #region Public
 
         /// <summary>
         ///     Возвращает частоту
@@ -35,5 +41,7 @@ namespace Model.Calculations
         ///     Импеданс
         /// </summary>
         public Complex Impedance { get; set; }
+
+        #endregion
     }
 }

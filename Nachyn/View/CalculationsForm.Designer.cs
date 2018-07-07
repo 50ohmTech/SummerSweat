@@ -100,6 +100,7 @@
             this.frequencyDataGridViewTextBoxColumn.MaxInputLength = 13;
             this.frequencyDataGridViewTextBoxColumn.Name = "frequencyDataGridViewTextBoxColumn";
             this.frequencyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.frequencyDataGridViewTextBoxColumn.Width = 80;
             // 
             // impedanceDataGridViewTextBoxColumn
             // 
@@ -107,7 +108,7 @@
             this.impedanceDataGridViewTextBoxColumn.HeaderText = "Импеданс";
             this.impedanceDataGridViewTextBoxColumn.Name = "impedanceDataGridViewTextBoxColumn";
             this.impedanceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.impedanceDataGridViewTextBoxColumn.Width = 120;
+            this.impedanceDataGridViewTextBoxColumn.Width = 140;
             // 
             // CalculationsForm
             // 

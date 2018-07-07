@@ -8,6 +8,8 @@ namespace Model.Elements
     /// </summary>
     public class Inductor : ElementBase
     {
+        #region Public
+
         /// <summary>
         ///     Конструктор
         /// </summary>
@@ -34,5 +36,7 @@ namespace Model.Elements
             double valueZ = 2 * Math.PI * frequency * Value;
             return new Complex(0, valueZ);
         }
+
+        #endregion
     }
 }

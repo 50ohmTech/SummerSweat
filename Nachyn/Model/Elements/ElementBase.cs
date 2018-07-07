@@ -10,8 +10,25 @@ namespace Model.Elements
     /// </summary>
     public abstract class ElementBase
     {
+        #region Protected
+
         /// <summary>
-        ///     Возвращает символ номинала     
+        ///     Конструктор
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <param name="value">Номинал</param>
+        protected ElementBase(string name, double value = 0)
+        {
+            Name = name;
+            Value = value;
+        }
+
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        ///     Возвращает символ номинала
         /// </summary>
         /// <returns>Обозначение номинала</returns>
         public static string GetSymbol(ElementType elementType)
@@ -27,27 +44,6 @@ namespace Model.Elements
                 default:
                     return null;
             }
-        }
-
-        /// <summary>
-        ///     Имя
-        /// </summary>
-        private string _name;
-
-        /// <summary>
-        ///     Номинал
-        /// </summary>
-        private double _value;
-
-        /// <summary>
-        ///     Конструктор
-        /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="value">Номинал</param>
-        protected ElementBase(string name, double value = 0)
-        {
-            Name = name;
-            Value = value;
         }
 
         /// <summary>
@@ -98,5 +94,21 @@ namespace Model.Elements
         /// <param name="frequency">Частота</param>
         /// <returns></returns>
         public abstract Complex CalculateZ(double frequency);
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        ///     Имя
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        ///     Номинал
+        /// </summary>
+        private double _value;
+
+        #endregion
     }
 }

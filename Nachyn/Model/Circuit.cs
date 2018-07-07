@@ -9,6 +9,8 @@ namespace Model
     /// </summary>
     public class Circuit
     {
+        #region Public
+
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
@@ -108,5 +110,7 @@ namespace Model
 
             return resistanceZ;
         }
+
+        #endregion
     }
 }

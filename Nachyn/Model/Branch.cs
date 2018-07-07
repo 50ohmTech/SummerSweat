@@ -10,6 +10,8 @@ namespace Model
     /// </summary>
     public sealed class Branch
     {
+        #region Public
+
         /// <summary>
         ///     Конструктор
         /// </summary>
@@ -72,5 +74,7 @@ namespace Model
 
             return resistance;
         }
+
+        #endregion
     }
 }

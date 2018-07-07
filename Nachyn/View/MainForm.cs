@@ -13,6 +13,25 @@ namespace View
     /// </summary>
     public partial class MainForm : Form
     {
+        #region Public
+
+        /// <summary>
+        ///     Конструктор
+        /// </summary>
+        public MainForm()
+        {
+            InitializeComponent();
+            _viewElements = new List<ViewElement>();
+
+            _circuit = new Circuit();
+
+            Paint += MainForm_Paint;
+        }
+
+        #endregion
+
+        #region Private
+
         /// <summary>
         ///     Рандом
         /// </summary>
@@ -42,19 +61,6 @@ namespace View
         ///     Поверхность рисования GDI+
         /// </summary>
         private Graphics _graphics;
-
-        /// <summary>
-        ///     Конструктор
-        /// </summary>
-        public MainForm()
-        {
-            InitializeComponent();
-            _viewElements = new List<ViewElement>();
-
-            _circuit = new Circuit();
-
-            Paint += MainForm_Paint;
-        }
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
         {
@@ -302,6 +308,9 @@ namespace View
             _panelCircuit.BackgroundImage = _bitmapBackground;
         }
 
+        /// <summary>
+        ///     Очистить пустые ветки
+        /// </summary>
         private void ClearEmptyBranches()
         {
             _circuit.Branches.RemoveAll(branch => branch.Elements.Count < 1);
@@ -369,5 +378,7 @@ namespace View
         {
             ShowInfo();
         }
+
+        #endregion
     }
 }
