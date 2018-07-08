@@ -11,8 +11,8 @@ namespace ElementsLibrary
         /// <summary>
         /// Конструктор класса <see cref="Capacitor"/>
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">Имя элемента</param>
+        /// <param name="value">Значение элемента</param>
         public Capacitor(string name, double value) : base(name, value)
         {
 
@@ -21,8 +21,8 @@ namespace ElementsLibrary
         /// <summary>
         /// Метод расчета импеданса в конденсаторе <see cref="CalculateZ"/>
         /// </summary>
-        /// <param name="frequency"></param>
-        /// <returns></returns>
+        /// <param name="frequency">Частота</param>
+        /// <returns>Комплексное значение импеданса</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (frequency <= 0)

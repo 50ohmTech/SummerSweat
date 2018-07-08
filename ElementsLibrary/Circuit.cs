@@ -17,7 +17,7 @@ namespace ElementsLibrary
         /// <summary>
         /// Конструктор класса <see cref="Circuit"/>
         /// </summary>
-        /// <param name="elements"></param>
+        /// <param name="elements">Элементы</param>
         public Circuit(List<ElementBase> elements)
         {
             Elements = elements;
@@ -41,8 +41,8 @@ namespace ElementsLibrary
         /// <summary>
         /// Метод расчета полного импеданса цепи
         /// </summary>
-        /// <param name="frequencies"></param>
-        /// <returns></returns>
+        /// <param name="frequencies">Частота</param>
+        /// <returns>Импеданс всей цепи</returns>
         public List<Complex> CalculateZ(List<double> frequencies)
         {
             if (_elements == null)

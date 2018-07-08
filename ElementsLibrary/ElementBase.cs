@@ -47,15 +47,15 @@ namespace ElementsLibrary
         /// <summary>
         /// Абстрактный метод для расчета импеданса элемента <see cref="CalculateZ"/>
         /// </summary>
-        /// <param name="frequency"></param>
-        /// <returns></returns>
+        /// <param name="frequency">Частота</param>
+        /// <returns>Комплексное значение импеданса</returns>
         public abstract Complex CalculateZ(double frequency);
 
         /// <summary>
         /// Конструктор класса <see cref="ElementBase"/>
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">Имя элемента</param>
+        /// <param name="value">Значение элемента</param>
         protected ElementBase(string name, double value)
         {
             Name = name;
