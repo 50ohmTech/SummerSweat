@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElementsLibrary", "ElementsLibrary\ElementsLibrary.csproj", "{DAB5FAF4-D55E-460F-89AD-77D7AD018D40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitForms", "CircuitForms\CircuitForms.csproj", "{325675DD-A44A-4F4E-9867-59081AF8B180}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DAB5FAF4-D55E-460F-89AD-77D7AD018D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAB5FAF4-D55E-460F-89AD-77D7AD018D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAB5FAF4-D55E-460F-89AD-77D7AD018D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325675DD-A44A-4F4E-9867-59081AF8B180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325675DD-A44A-4F4E-9867-59081AF8B180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325675DD-A44A-4F4E-9867-59081AF8B180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325675DD-A44A-4F4E-9867-59081AF8B180}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
