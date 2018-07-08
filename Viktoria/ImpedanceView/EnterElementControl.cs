@@ -6,26 +6,15 @@ namespace ImpedanceView
 {
     public partial class EnterElementControl : UserControl
     {
-
-        #region -- Поля --
-
-        #region -- Закрытые поля --
+        #region -- Публичные методы --
 
         /// <summary>
-        ///     Хранение текущего типа элемента в combobox
+        ///     Конструктор контроллера
         /// </summary>
-        private int _currentType;
-
-        #endregion
-
-        #region -- Открытые поля --
-
-        /// <summary>
-        ///     Переменная, показывающая, редактируется элемент или добавляется новый
-        /// </summary>
-        public bool IsModify;
-
-        #endregion
+        public EnterElementControl()
+        {
+            InitializeComponent();
+        }
 
         #endregion
 
@@ -42,19 +31,22 @@ namespace ImpedanceView
                 ValidationTools.IsCorrectParameter(Convert.ToDouble(FirstTextView.Text));
                 switch (_currentType)
                 {
-                    case (int) ElementsType.Inductor:
+                    case ElementsType.Inductor:
                     {
-                        IElement element = new Inductor(Convert.ToDouble(FirstTextView.Text));
+                        IElement element =
+                            new Inductor(Convert.ToDouble(FirstTextView.Text));
                         return element;
                     }
-                    case (int) ElementsType.Resistor:
+                    case ElementsType.Resistor:
                     {
-                        IElement element = new Resistor(Convert.ToDouble(FirstTextView.Text));
+                        IElement element =
+                            new Resistor(Convert.ToDouble(FirstTextView.Text));
                         return element;
                     }
-                    case (int) ElementsType.Capacitor:
+                    case ElementsType.Capacitor:
                     {
-                        IElement element = new Capacitor(Convert.ToDouble(FirstTextView.Text));
+                        IElement element =
+                            new Capacitor(Convert.ToDouble(FirstTextView.Text));
                         return element;
                     }
                 }
@@ -87,15 +79,25 @@ namespace ImpedanceView
 
         #endregion
 
-        #region -- Публичные методы --
+        #region -- Поля --
+
+        #region -- Закрытые поля --
 
         /// <summary>
-        ///     Конструктор контроллера
+        ///     Хранение текущего типа элемента в combobox
         /// </summary>
-        public EnterElementControl()
-        {
-            InitializeComponent();
-        }
+        private ElementsType _currentType;
+
+        #endregion
+
+        #region -- Открытые поля --
+
+        /// <summary>
+        ///     Переменная, показывающая, редактируется элемент или добавляется новый
+        /// </summary>
+        public bool isModify;
+
+        #endregion
 
         #endregion
 
@@ -107,11 +109,11 @@ namespace ImpedanceView
         private void ElementTypeComboBox_SelectionChangeCommitted(object sender,
             EventArgs e)
         {
-            if (!IsModify)
+            if (!isModify)
             {
                 FirstTextView.Text = string.Empty;
             }
-            _currentType = ((ComboBox) sender).SelectedIndex;
+            _currentType = (ElementsType) ((ComboBox) sender).SelectedIndex;
             ConfigureTextBoxPlaceholder();
         }
 
@@ -122,17 +124,17 @@ namespace ImpedanceView
         {
             switch (_currentType)
             {
-                case (int) ElementsType.Inductor:
+                case ElementsType.Inductor:
                 {
                     ConfigureTextBoxText(FirstTextView, "Введите L");
                     break;
                 }
-                case (int) ElementsType.Resistor:
+                case ElementsType.Resistor:
                 {
                     ConfigureTextBoxText(FirstTextView, "Введите R");
                     break;
                 }
-                case (int) ElementsType.Capacitor:
+                case ElementsType.Capacitor:
                 {
                     ConfigureTextBoxText(FirstTextView, "Введите С");
                     break;
@@ -157,7 +159,7 @@ namespace ImpedanceView
         /// </summary>
         private void FirstTextView_Click(object sender, EventArgs e)
         {
-            if (!IsModify)
+            if (!isModify)
             {
                 FirstTextView.Text = string.Empty;
             }

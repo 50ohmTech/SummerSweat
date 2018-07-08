@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ImpedanceStorage = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.circuitType = new System.Windows.Forms.ComboBox();
             this.frequencyControl = new System.Windows.Forms.GroupBox();
             this.maxFrequency = new System.Windows.Forms.TextBox();
             this.minFrequency = new System.Windows.Forms.TextBox();
-            this.Step = new System.Windows.Forms.TextBox();
+            this.step = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,15 +44,16 @@
             this.frequency = new System.Windows.Forms.RadioButton();
             this.CalculateButton = new System.Windows.Forms.Button();
             this.RandomButton = new System.Windows.Forms.Button();
-            this.Remove_button = new System.Windows.Forms.Button();
-            this.Add_button = new System.Windows.Forms.Button();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
             this.ElementStorage = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.ImpedanceStorage = new System.Windows.Forms.DataGridView();
+            this.elementControl = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImpedanceStorage)).BeginInit();
             this.frequencyControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ElementStorage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImpedanceStorage)).BeginInit();
+            this.elementControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -61,15 +63,28 @@
             this.groupBox1.Controls.Add(this.circuitType);
             this.groupBox1.Controls.Add(this.frequencyControl);
             this.groupBox1.Controls.Add(this.RandomButton);
-            this.groupBox1.Controls.Add(this.Remove_button);
-            this.groupBox1.Controls.Add(this.Add_button);
             this.groupBox1.Controls.Add(this.ElementStorage);
+            this.groupBox1.Controls.Add(this.elementControl);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(645, 446);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // ImpedanceStorage
+            // 
+            this.ImpedanceStorage.AllowUserToAddRows = false;
+            this.ImpedanceStorage.AllowUserToResizeRows = false;
+            this.ImpedanceStorage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImpedanceStorage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ImpedanceStorage.Location = new System.Drawing.Point(442, 290);
+            this.ImpedanceStorage.Name = "ImpedanceStorage";
+            this.ImpedanceStorage.ReadOnly = true;
+            this.ImpedanceStorage.RowHeadersVisible = false;
+            this.ImpedanceStorage.Size = new System.Drawing.Size(191, 146);
+            this.ImpedanceStorage.TabIndex = 17;
             // 
             // label4
             // 
@@ -104,16 +119,16 @@
             this.frequencyControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.frequencyControl.Controls.Add(this.maxFrequency);
             this.frequencyControl.Controls.Add(this.minFrequency);
-            this.frequencyControl.Controls.Add(this.Step);
+            this.frequencyControl.Controls.Add(this.step);
             this.frequencyControl.Controls.Add(this.label3);
             this.frequencyControl.Controls.Add(this.label2);
             this.frequencyControl.Controls.Add(this.label1);
             this.frequencyControl.Controls.Add(this.angularFrequency);
             this.frequencyControl.Controls.Add(this.frequency);
             this.frequencyControl.Controls.Add(this.CalculateButton);
-            this.frequencyControl.Location = new System.Drawing.Point(442, 142);
+            this.frequencyControl.Location = new System.Drawing.Point(442, 150);
             this.frequencyControl.Name = "frequencyControl";
-            this.frequencyControl.Size = new System.Drawing.Size(203, 134);
+            this.frequencyControl.Size = new System.Drawing.Size(191, 134);
             this.frequencyControl.TabIndex = 14;
             this.frequencyControl.TabStop = false;
             this.frequencyControl.Text = "Настройка диапазона частот";
@@ -132,12 +147,12 @@
             this.minFrequency.Size = new System.Drawing.Size(52, 20);
             this.minFrequency.TabIndex = 24;
             // 
-            // Step
+            // step
             // 
-            this.Step.Location = new System.Drawing.Point(76, 83);
-            this.Step.Name = "Step";
-            this.Step.Size = new System.Drawing.Size(53, 20);
-            this.Step.TabIndex = 23;
+            this.step.Location = new System.Drawing.Point(76, 83);
+            this.step.Name = "step";
+            this.step.Size = new System.Drawing.Size(53, 20);
+            this.step.TabIndex = 23;
             // 
             // label3
             // 
@@ -191,7 +206,7 @@
             // CalculateButton
             // 
             this.CalculateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CalculateButton.Location = new System.Drawing.Point(63, 106);
+            this.CalculateButton.Location = new System.Drawing.Point(56, 106);
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(81, 22);
             this.CalculateButton.TabIndex = 5;
@@ -202,35 +217,35 @@
             // RandomButton
             // 
             this.RandomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RandomButton.Location = new System.Drawing.Point(442, 109);
+            this.RandomButton.Location = new System.Drawing.Point(442, 62);
             this.RandomButton.Name = "RandomButton";
             this.RandomButton.Size = new System.Drawing.Size(185, 27);
             this.RandomButton.TabIndex = 10;
-            this.RandomButton.Text = "Рандом";
+            this.RandomButton.Text = "Сгенерировать элемент";
             this.RandomButton.UseVisualStyleBackColor = true;
             this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
             // 
-            // Remove_button
+            // RemoveButton
             // 
-            this.Remove_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Remove_button.Location = new System.Drawing.Point(541, 71);
-            this.Remove_button.Name = "Remove_button";
-            this.Remove_button.Size = new System.Drawing.Size(86, 27);
-            this.Remove_button.TabIndex = 7;
-            this.Remove_button.Text = "Удалить";
-            this.Remove_button.UseVisualStyleBackColor = true;
-            this.Remove_button.Click += new System.EventHandler(this.Remove_button_Click);
+            this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemoveButton.Location = new System.Drawing.Point(99, 20);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(86, 27);
+            this.RemoveButton.TabIndex = 7;
+            this.RemoveButton.Text = "Удалить";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // Add_button
+            // AddButton
             // 
-            this.Add_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Add_button.Location = new System.Drawing.Point(442, 71);
-            this.Add_button.Name = "Add_button";
-            this.Add_button.Size = new System.Drawing.Size(86, 27);
-            this.Add_button.TabIndex = 1;
-            this.Add_button.Text = "Добавить";
-            this.Add_button.UseVisualStyleBackColor = true;
-            this.Add_button.Click += new System.EventHandler(this.Add_button_Click);
+            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddButton.Location = new System.Drawing.Point(7, 20);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(86, 27);
+            this.AddButton.TabIndex = 1;
+            this.AddButton.Text = "Добавить";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // ElementStorage
             // 
@@ -247,7 +262,8 @@
             this.ElementStorage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ElementStorage.Size = new System.Drawing.Size(418, 417);
             this.ElementStorage.TabIndex = 0;
-            this.ElementStorage.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellDoubleClick);
+            this.ElementStorage.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ElementStorage_CellDoubleClick);
+            this.ElementStorage.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ElementStorage_CellFormatting);
             // 
             // comboBox1
             // 
@@ -259,15 +275,17 @@
             this.comboBox1.Size = new System.Drawing.Size(197, 21);
             this.comboBox1.TabIndex = 13;
             // 
-            // ImpedanceStorage
+            // elementControl
             // 
-            this.ImpedanceStorage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImpedanceStorage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ImpedanceStorage.Location = new System.Drawing.Point(442, 290);
-            this.ImpedanceStorage.Name = "ImpedanceStorage";
-            this.ImpedanceStorage.Size = new System.Drawing.Size(191, 146);
-            this.ImpedanceStorage.TabIndex = 17;
+            this.elementControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.elementControl.Controls.Add(this.AddButton);
+            this.elementControl.Controls.Add(this.RemoveButton);
+            this.elementControl.Location = new System.Drawing.Point(442, 91);
+            this.elementControl.Name = "elementControl";
+            this.elementControl.Size = new System.Drawing.Size(191, 53);
+            this.elementControl.TabIndex = 18;
+            this.elementControl.TabStop = false;
+            this.elementControl.Text = "Добавление, удаление элемента";
             // 
             // MainForm
             // 
@@ -283,10 +301,11 @@
             this.Text = "CalculatorView";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImpedanceStorage)).EndInit();
             this.frequencyControl.ResumeLayout(false);
             this.frequencyControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ElementStorage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImpedanceStorage)).EndInit();
+            this.elementControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -294,16 +313,16 @@
 #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button Add_button;
+        private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.DataGridView ElementStorage;
         private System.Windows.Forms.Button CalculateButton;
-        private System.Windows.Forms.Button Remove_button;
+        private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.Button RandomButton;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.GroupBox frequencyControl;
         private System.Windows.Forms.TextBox maxFrequency;
         private System.Windows.Forms.TextBox minFrequency;
-        private System.Windows.Forms.TextBox Step;
+        private System.Windows.Forms.TextBox step;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -312,6 +331,7 @@
         private System.Windows.Forms.ComboBox circuitType;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView ImpedanceStorage;
+        private System.Windows.Forms.GroupBox elementControl;
     }
 }
 

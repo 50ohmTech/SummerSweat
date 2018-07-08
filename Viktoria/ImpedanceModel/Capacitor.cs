@@ -45,19 +45,13 @@ namespace ImpedanceModel
         }
 
         /// <summary>
-        ///     Рассчет комплексного сопротивления для w
+        ///     Рассчет комплексного сопротивления
         /// </summary>
-        public Complex GetImpedanceUsingAngularFrequency(double w)
+        /// <param name="frequency"> Частота </param>
+        /// <returns> Значение комплексного сопротивления элемента</returns>
+        public Complex CalculateImpedance(double frequency)
         {
-            return -Complex.ImaginaryOne / (w * _capacitance);
-        }
-
-        /// <summary>
-        ///     Рассчет комплексного сопротивления для f
-        /// </summary>
-        public Complex GetImpedanceUsingFrequency(double f)
-        {
-            return -1 / (2 * Math.PI * f * _capacitance);
+            return new Complex(0, -1 / (2 * Math.PI * frequency * _capacitance));
         }
 
         /// <summary>
@@ -65,7 +59,7 @@ namespace ImpedanceModel
         /// </summary>
         public override string ToString()
         {
-            return "Capacitor";
+            return "Конденсатор";
         }
 
         #endregion

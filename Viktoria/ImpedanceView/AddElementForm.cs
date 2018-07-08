@@ -8,13 +8,14 @@ namespace ImpedanceView
 
     {
         #region -- Свойства --
+
         /// <summary>
-        ///     Свойство для ввода/вывода элемента на EnterElementControl 
+        ///     Свойство для ввода/вывода элемента на EnterElementControl
         /// </summary>
         public IElement NewElement
         {
-            get => addFormControl1.Element;
-            set => addFormControl1.Element = value;
+            get => addFormControl.Element;
+            set => addFormControl.Element = value;
         }
 
         #endregion
@@ -32,20 +33,23 @@ namespace ImpedanceView
         /// <summary>
         ///     Конструктор формы для редактирования элемента
         /// </summary>
+        /// <param name="element"> Редактируемый элемент </param>
+        /// <param name="isModify"> Сообщение контроллеру о том что элемент редактируется</param>
         public AddElementForm(IElement element, bool isModify)
         {
             InitializeComponent();
-            addFormControl1.IsModify = isModify;
+            addFormControl.isModify = isModify;
             NewElement = element;
         }
 
         #endregion
 
         #region -- Приватные методы --
+
         /// <summary>
         ///     Сохранение данных об элементе для дальнейшего добавления/редактирования элемента в MainForm
         /// </summary>
-        private void OK_Click(object sender, EventArgs e)
+        private void OKButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
@@ -54,7 +58,7 @@ namespace ImpedanceView
         /// <summary>
         ///     Отмена создания/редактирования элементов
         /// </summary>
-        private void Cancel_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

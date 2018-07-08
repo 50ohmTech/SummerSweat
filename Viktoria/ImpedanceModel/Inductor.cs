@@ -45,19 +45,13 @@ namespace ImpedanceModel
         }
 
         /// <summary>
-        ///     Рассчет комплексного сопротивления для w
+        ///     Рассчет комплексного сопротивления
         /// </summary>
-        public Complex GetImpedanceUsingAngularFrequency(double w)
+        /// <param name="frequency"> Частота </param>
+        /// <returns> Значение комплексного сопротивления элемента</returns>
+        public Complex CalculateImpedance(double frequency)
         {
-            return Complex.ImaginaryOne * w * _inductance;
-        }
-
-        /// <summary>
-        ///     Рассчет комплексного сопротивления для f
-        /// </summary>
-        public Complex GetImpedanceUsingFrequency(double f)
-        {
-            return 2 * Math.PI * f * _inductance;
+            return new Complex(0, 2 * Math.PI * frequency * _inductance);
         }
 
         /// <summary>
@@ -65,7 +59,7 @@ namespace ImpedanceModel
         /// </summary>
         public override string ToString()
         {
-            return "Inductor";
+            return "Катушка индуктивности";
         }
 
         #endregion

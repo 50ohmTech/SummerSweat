@@ -29,46 +29,46 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddElementForm));
-            this.Cancel = new System.Windows.Forms.Button();
-            this.OK = new System.Windows.Forms.Button();
-            this.addFormControl1 = new ImpedanceView.EnterElementControl();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.OKButton = new System.Windows.Forms.Button();
+            this.addFormControl = new ImpedanceView.EnterElementControl();
             this.SuspendLayout();
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(115, 84);
-            this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(87, 23);
-            this.Cancel.TabIndex = 4;
-            this.Cancel.Text = "Cancel";
-            this.Cancel.UseVisualStyleBackColor = true;
-            this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
+            this.CancelButton.Location = new System.Drawing.Point(115, 84);
+            this.CancelButton.Name = "Cancel";
+            this.CancelButton.Size = new System.Drawing.Size(87, 23);
+            this.CancelButton.TabIndex = 4;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // OK
             // 
-            this.OK.Location = new System.Drawing.Point(12, 84);
-            this.OK.Name = "OK";
-            this.OK.Size = new System.Drawing.Size(97, 23);
-            this.OK.TabIndex = 5;
-            this.OK.Text = "OK";
-            this.OK.UseVisualStyleBackColor = true;
-            this.OK.Click += new System.EventHandler(this.OK_Click);
+            this.OKButton.Location = new System.Drawing.Point(12, 84);
+            this.OKButton.Name = "OK";
+            this.OKButton.Size = new System.Drawing.Size(97, 23);
+            this.OKButton.TabIndex = 5;
+            this.OKButton.Text = "OK";
+            this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // addFormControl1
             // 
-            this.addFormControl1.Location = new System.Drawing.Point(12, 12);
-            this.addFormControl1.Name = "addFormControl1";
-            this.addFormControl1.Size = new System.Drawing.Size(190, 66);
-            this.addFormControl1.TabIndex = 6;
+            this.addFormControl.Location = new System.Drawing.Point(12, 12);
+            this.addFormControl.Name = "addFormControl1";
+            this.addFormControl.Size = new System.Drawing.Size(190, 66);
+            this.addFormControl.TabIndex = 6;
             // 
             // AddElementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(211, 126);
-            this.Controls.Add(this.addFormControl1);
-            this.Controls.Add(this.OK);
-            this.Controls.Add(this.Cancel);
+            this.Controls.Add(this.addFormControl);
+            this.Controls.Add(this.OKButton);
+            this.Controls.Add(this.CancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(227, 165);
@@ -81,8 +81,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button Cancel;
-        private System.Windows.Forms.Button OK;
-        private EnterElementControl addFormControl1;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button OKButton;
+        private EnterElementControl addFormControl;
     }
 }

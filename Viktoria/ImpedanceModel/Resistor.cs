@@ -44,19 +44,15 @@ namespace ImpedanceModel
         }
 
         /// <summary>
-        ///     Рассчет комплексного сопротивления для w
+        ///     Рассчет комплексного сопротивления
         /// </summary>
-        /// <remarks> Входные параметры не используются при рассчете комплексного сопротивления резистора. </remarks>
-        public Complex GetImpedanceUsingAngularFrequency(double w)
-        {
-            return _resistance;
-        }
-
-        /// <summary>
-        ///     Рассчет комплексного сопротивления для f
-        /// </summary>
-        /// <remarks> Входные параметры не используются при рассчете комплексного сопротивления резистора. </remarks>
-        public Complex GetImpedanceUsingFrequency(double f)
+        /// <param name="frequency"> Частота </param>
+        /// <returns> Значение комплексного сопротивления элемента</returns>
+        /// <remarks>
+        ///     Входные параметры не используются при рассчете
+        ///     комплексного сопротивления резистора.
+        /// </remarks>
+        public Complex CalculateImpedance(double frequency)
         {
             return _resistance;
         }
@@ -66,7 +62,7 @@ namespace ImpedanceModel
         /// </summary>
         public override string ToString()
         {
-            return "Resistor";
+            return "Резистор";
         }
 
         #endregion

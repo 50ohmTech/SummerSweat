@@ -15,11 +15,7 @@ namespace ImpedanceModel
         /// <summary>
         ///     Рассчет комплексного сопротивления для w
         /// </summary>
-        Complex GetImpedanceUsingAngularFrequency(double w);
+        Complex CalculateImpedance(double w);
 
-        /// <summary>
-        ///     Рассчет комплексного сопротивления для f
-        /// </summary>
-        Complex GetImpedanceUsingFrequency(double f);
     }
-}
+} 
