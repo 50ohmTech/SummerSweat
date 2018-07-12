@@ -32,7 +32,11 @@ namespace CircuitView
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Расчет импеданса
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculateFrequenciesButton(object sender, EventArgs e)
         {
             var startValue = double.Parse(StartValueBox.Text);

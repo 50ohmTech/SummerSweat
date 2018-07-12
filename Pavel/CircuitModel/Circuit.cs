@@ -29,12 +29,12 @@ namespace CircuitModel
             if (elements.Any())
             {
                 Elements = elements;
-            }
 
-            foreach (var element in Elements)
-            {
-                element.ValueChanged += CircuitChanged;
-            }
+                foreach (var element in Elements)
+                {
+                    element.ValueChanged += CircuitChanged;
+                }
+            }            
         }
 
         /// <summary>

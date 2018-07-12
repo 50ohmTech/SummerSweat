@@ -5,7 +5,7 @@ using CircuitModel;
 namespace CircuitView
 {
     /// <summary>
-    /// Форма для формирования цепи
+    /// Форма для формирования цепи.
     /// </summary>
     public partial class MainForm : Form
     {
@@ -45,7 +45,7 @@ namespace CircuitView
         public Circuit Circuit => new Circuit(_elements);
 
         /// <summary>
-        /// Конструктор класса
+        /// Конструктор класса.
         /// </summary>
         public MainForm()
         {
@@ -62,7 +62,11 @@ namespace CircuitView
             _inductorIterator = 0;
             CircuitComboBox.SelectedIndex = 0;
         }
-
+        /// <summary>
+        /// Добавление элемента в цепь.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, EventArgs e)
         {
             if (ResistorRadioButton.Checked)
@@ -90,7 +94,11 @@ namespace CircuitView
                     MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Удаление элемента из цепи.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in ElementsGridView.SelectedRows)
@@ -98,7 +106,11 @@ namespace CircuitView
                 ElementsGridView.Rows.Remove(row);
             }
         }
-
+        /// <summary>
+        /// Выбор цепи.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CircuitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CircuitComboBox.SelectedIndex == 0)
@@ -143,7 +155,13 @@ namespace CircuitView
                 Update(elements, 3, 0, 2);
             }
         }
-
+        /// <summary>
+        /// Обновление цепи
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="resistorIterator"></param>
+        /// <param name="capacitorIterator"></param>
+        /// <param name="inductorIterator"></param>
         public void Update(List<ElementBase> elements, uint resistorIterator,
             uint capacitorIterator, uint inductorIterator)
         {
@@ -158,7 +176,11 @@ namespace CircuitView
                 ElementsBindingSource.Add(element);
             }
         }
-
+        /// <summary>
+        /// Расчитать импедансы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             if (ElementsGridView.RowCount == 0)
