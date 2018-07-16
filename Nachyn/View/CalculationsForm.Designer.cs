@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this._dataGridViewCalculations = new System.Windows.Forms.DataGridView();
+            this._frequencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._impedanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._calculationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._buttonCalculate = new System.Windows.Forms.Button();
             this._buttonDeleteCurrent = new System.Windows.Forms.Button();
-            this._calculationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.frequencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.impedanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewCalculations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._calculationsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -48,8 +48,8 @@
             this._dataGridViewCalculations.AutoGenerateColumns = false;
             this._dataGridViewCalculations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this._dataGridViewCalculations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.frequencyDataGridViewTextBoxColumn,
-            this.impedanceDataGridViewTextBoxColumn});
+            this._frequencyDataGridViewTextBoxColumn,
+            this._impedanceDataGridViewTextBoxColumn});
             this._dataGridViewCalculations.DataSource = this._calculationsBindingSource;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -68,6 +68,29 @@
             this._dataGridViewCalculations.Size = new System.Drawing.Size(222, 225);
             this._dataGridViewCalculations.TabIndex = 1;
             this._dataGridViewCalculations.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridViewCalculations_DataError);
+            // 
+            // _frequencyDataGridViewTextBoxColumn
+            // 
+            this._frequencyDataGridViewTextBoxColumn.DataPropertyName = "Frequency";
+            this._frequencyDataGridViewTextBoxColumn.HeaderText = "Частота";
+            this._frequencyDataGridViewTextBoxColumn.MaxInputLength = 13;
+            this._frequencyDataGridViewTextBoxColumn.Name = "_frequencyDataGridViewTextBoxColumn";
+            this._frequencyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this._frequencyDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // _impedanceDataGridViewTextBoxColumn
+            // 
+            this._impedanceDataGridViewTextBoxColumn.DataPropertyName = "Impedance";
+            this._impedanceDataGridViewTextBoxColumn.HeaderText = "Импеданс";
+            this._impedanceDataGridViewTextBoxColumn.MaxInputLength = 13;
+            this._impedanceDataGridViewTextBoxColumn.Name = "_impedanceDataGridViewTextBoxColumn";
+            this._impedanceDataGridViewTextBoxColumn.ReadOnly = true;
+            this._impedanceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this._impedanceDataGridViewTextBoxColumn.Width = 140;
+            // 
+            // _calculationsBindingSource
+            // 
+            this._calculationsBindingSource.DataSource = typeof(Model.Calculations.Calculations);
             // 
             // _buttonCalculate
             // 
@@ -89,29 +112,6 @@
             this._buttonDeleteCurrent.UseVisualStyleBackColor = true;
             this._buttonDeleteCurrent.Click += new System.EventHandler(this.ButtonDeleteCurrent_Click);
             // 
-            // _calculationsBindingSource
-            // 
-            this._calculationsBindingSource.DataSource = typeof(Model.Calculations.Calculations);
-            // 
-            // frequencyDataGridViewTextBoxColumn
-            // 
-            this.frequencyDataGridViewTextBoxColumn.DataPropertyName = "Frequency";
-            this.frequencyDataGridViewTextBoxColumn.HeaderText = "Частота";
-            this.frequencyDataGridViewTextBoxColumn.MaxInputLength = 13;
-            this.frequencyDataGridViewTextBoxColumn.Name = "frequencyDataGridViewTextBoxColumn";
-            this.frequencyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.frequencyDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // impedanceDataGridViewTextBoxColumn
-            // 
-            this.impedanceDataGridViewTextBoxColumn.DataPropertyName = "Impedance";
-            this.impedanceDataGridViewTextBoxColumn.HeaderText = "Импеданс";
-            this.impedanceDataGridViewTextBoxColumn.MaxInputLength = 13;
-            this.impedanceDataGridViewTextBoxColumn.Name = "impedanceDataGridViewTextBoxColumn";
-            this.impedanceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.impedanceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.impedanceDataGridViewTextBoxColumn.Width = 140;
-            // 
             // CalculationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,11 +132,36 @@
         }
 
         #endregion
+        /// <summary>
+        ///     Визуальный элемент управления расчетов.
+        /// </summary>
         private System.Windows.Forms.DataGridView _dataGridViewCalculations;
+
+        /// <summary>
+        ///     Источник данных расчетов.
+        /// </summary>
         private System.Windows.Forms.BindingSource _calculationsBindingSource;
+
+        /// <summary>
+        ///     Кнопка Расчитать
+        /// </summary>
         private System.Windows.Forms.Button _buttonCalculate;
+
+        /// <summary>
+        ///     Кнопка удалить текущий расчет
+        /// </summary>
         private System.Windows.Forms.Button _buttonDeleteCurrent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn frequencyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn impedanceDataGridViewTextBoxColumn;
+
+        /// <summary>
+        ///     Ячейка частоты в визуальном элементе
+        ///     управления расчетов.
+        /// </summary>
+        private System.Windows.Forms.DataGridViewTextBoxColumn _frequencyDataGridViewTextBoxColumn;
+
+        /// <summary>
+        ///     Ячейка импеданса в визуальном элементе
+        ///     управления расчетов.
+        /// </summary>
+        private System.Windows.Forms.DataGridViewTextBoxColumn _impedanceDataGridViewTextBoxColumn;
     }
 }

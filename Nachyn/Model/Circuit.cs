@@ -14,14 +14,13 @@ namespace Model
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
-        public List<Branch> Branches;
+        public readonly List<Branch> Branches = new List<Branch>();
 
         /// <summary>
         ///     Конструктор
         /// </summary>
         public Circuit()
         {
-            Branches = new List<Branch>();
         }
 
         /// <summary>
@@ -31,17 +30,15 @@ namespace Model
         {
             get
             {
-                bool isEmpty = true;
                 foreach (Branch branch in Branches)
                 {
                     if (branch.Elements.Count > 0)
                     {
-                        isEmpty = false;
-                        break;
+                        return branch.Elements.Count <= 0;
                     }
                 }
 
-                return isEmpty;
+                return true;
             }
         }
 
@@ -57,16 +54,13 @@ namespace Model
                 throw new ArgumentNullException();
             }
 
+            Calculations.Calculations.CheckFrequencies(frequencies);
+
             List<Complex> resistanceZ = new List<Complex>();
 
             foreach (double frequency in frequencies)
             {
-                if (frequency < 1 || frequency > 1000000000000)
-                {
-                    throw new ArgumentException(
-                        "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
-                }
-
+                
                 Dictionary<string, List<Branch>> tempBranches =
                     new Dictionary<string, List<Branch>>();
 
@@ -109,6 +103,14 @@ namespace Model
             }
 
             return resistanceZ;
+        }
+
+        /// <summary>
+        ///     Очистить пустые ветки
+        /// </summary>
+        public void ClearEmptyBranches()
+        {
+            Branches.RemoveAll(branch => branch.Elements.Count < 1);
         }
 
         #endregion

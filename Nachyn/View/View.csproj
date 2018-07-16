@@ -63,18 +63,6 @@
     <Compile Include="CalculationsForm.Designer.cs">
       <DependentUpon>CalculationsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ElementManagerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ElementManagerForm.Designer.cs">
-      <DependentUpon>ElementManagerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewElement.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ViewElement.Designer.cs">
-      <DependentUpon>ViewElement.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,12 +74,6 @@
     <EmbeddedResource Include="CalculationsForm.resx">
       <DependentUpon>CalculationsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ElementManagerForm.resx">
-      <DependentUpon>ElementManagerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewElement.resx">
-      <DependentUpon>ViewElement.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,7 +83,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Model.Branch.datasource" />
-    <None Include="Properties\DataSources\Model.Calculations.Calculations.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,6 +102,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Drawing Tool\Drawing Tool\Drawing Tool.csproj">
+      <Project>{17ab433a-0dc5-43a5-b99f-3516a9d47132}</Project>
+      <Name>Drawing Tool</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{065432c9-77f1-4376-b0fc-b1caec24e2ba}</Project>
       <Name>Model</Name>

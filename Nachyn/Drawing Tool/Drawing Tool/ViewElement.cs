@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Windows.Forms;
 using Model.Elements;
 using Model.Events;
-using View.Properties;
+using DrawingTool.Properties;
 
-namespace View
+namespace DrawingTool
 {
     /// <summary>
     ///     Визуальный элемент
@@ -30,12 +30,12 @@ namespace View
             _labelValue.Text = "Номинал: " +
                                arguments.NewValue.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text = arguments.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text = "Имя: " + arguments.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         private void ToolStripMenuAdd_Click(object sender, EventArgs e)
         {
-            new ElementManagerForm(this).ShowDialog();
+            new EditForm(this).ShowDialog();
         }
 
         private void ToolStripMenuDelete_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace View
             _labelValue.Text =
                 "Номинал: " + element.Value.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text = element.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text = "Имя: " + element.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>

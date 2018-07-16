@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Model.Elements;
 
 namespace View
 {
@@ -20,6 +21,7 @@ namespace View
             Application.SetCompatibleTextRenderingDefault(false);
             _mainForm = new MainForm();
             Application.Run(_mainForm);
+
         }
     }
 }
