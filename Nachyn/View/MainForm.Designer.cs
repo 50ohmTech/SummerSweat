@@ -37,7 +37,6 @@
             this._menuCircuitClear = new System.Windows.Forms.ToolStripMenuItem();
             this._menuCalculations = new System.Windows.Forms.ToolStripMenuItem();
             this._menuManual = new System.Windows.Forms.ToolStripMenuItem();
-            this.нарисоватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._labelInfoGreenColor = new System.Windows.Forms.Label();
             this._pictureBoxInfo = new System.Windows.Forms.PictureBox();
             this._labelInfo = new System.Windows.Forms.Label();
@@ -55,15 +54,16 @@
             this._labelName = new System.Windows.Forms.Label();
             this._labelValue = new System.Windows.Forms.Label();
             this._buttonAdd = new System.Windows.Forms.Button();
-            this._branchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._dataGridViewBranches = new System.Windows.Forms.DataGridView();
+            this._checkBoxDeleteEmptyBranches = new System.Windows.Forms.CheckBox();
             this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._branchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxInfo)).BeginInit();
             this._groupBoxEditBranch.SuspendLayout();
             this._groupBoxAddElement.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // _panelCircuit
@@ -81,8 +81,7 @@
             this._menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._menuCircuit,
             this._menuCalculations,
-            this._menuManual,
-            this.нарисоватьToolStripMenuItem});
+            this._menuManual});
             this._menu.Location = new System.Drawing.Point(0, 0);
             this._menu.Name = "_menu";
             this._menu.Size = new System.Drawing.Size(931, 24);
@@ -106,36 +105,29 @@
             this._menuCircuitRandomize.Name = "_menuCircuitRandomize";
             this._menuCircuitRandomize.Size = new System.Drawing.Size(180, 22);
             this._menuCircuitRandomize.Text = "Сгенерировать";
-            this._menuCircuitRandomize.Click += new System.EventHandler(this.ToolStripRandomizeCircuit_Click);
+            this._menuCircuitRandomize.Click += new System.EventHandler(this.MenuButtonRandomizeCircuit_Click);
             // 
             // _menuCircuitClear
             // 
             this._menuCircuitClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._menuCircuitClear.Name = "_menuCircuitClear";
-            this._menuCircuitClear.Size = new System.Drawing.Size(180, 22);
+            this._menuCircuitClear.Size = new System.Drawing.Size(157, 22);
             this._menuCircuitClear.Text = "Очистить";
-            this._menuCircuitClear.Click += new System.EventHandler(this.ToolStripButtonClearCircuit_Click);
+            this._menuCircuitClear.Click += new System.EventHandler(this.MenuButtonClearCircuit_Click);
             // 
             // _menuCalculations
             // 
             this._menuCalculations.Name = "_menuCalculations";
             this._menuCalculations.Size = new System.Drawing.Size(65, 20);
             this._menuCalculations.Text = "Расчеты";
-            this._menuCalculations.Click += new System.EventHandler(this.ToolStripButtonCalculate_Click);
+            this._menuCalculations.Click += new System.EventHandler(this.MenuButtonCalculate_Click);
             // 
             // _menuManual
             // 
             this._menuManual.Name = "_menuManual";
             this._menuManual.Size = new System.Drawing.Size(85, 20);
             this._menuManual.Text = "Инструкция";
-            this._menuManual.Click += new System.EventHandler(this.ToolStripButtonHelp_Click);
-            // 
-            // нарисоватьToolStripMenuItem
-            // 
-            this.нарисоватьToolStripMenuItem.Name = "нарисоватьToolStripMenuItem";
-            this.нарисоватьToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-            this.нарисоватьToolStripMenuItem.Text = "Нарисовать ";
-            this.нарисоватьToolStripMenuItem.Click += new System.EventHandler(this.нарисоватьToolStripMenuItem_Click);
+            this._menuManual.Click += new System.EventHandler(this.MenuButtonHelp_Click);
             // 
             // _labelInfoGreenColor
             // 
@@ -307,10 +299,6 @@
             this._buttonAdd.UseVisualStyleBackColor = true;
             this._buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
-            // _branchBindingSource
-            // 
-            this._branchBindingSource.DataSource = typeof(Model.Branch);
-            // 
             // _dataGridViewBranches
             // 
             this._dataGridViewBranches.AllowUserToAddRows = false;
@@ -326,7 +314,7 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this._dataGridViewBranches.DefaultCellStyle = dataGridViewCellStyle1;
@@ -343,8 +331,21 @@
             this._dataGridViewBranches.ShowCellToolTips = false;
             this._dataGridViewBranches.ShowEditingIcon = false;
             this._dataGridViewBranches.ShowRowErrors = false;
-            this._dataGridViewBranches.Size = new System.Drawing.Size(142, 281);
+            this._dataGridViewBranches.Size = new System.Drawing.Size(142, 258);
             this._dataGridViewBranches.TabIndex = 12;
+            // 
+            // _checkBoxDeleteEmptyBranches
+            // 
+            this._checkBoxDeleteEmptyBranches.AutoSize = true;
+            this._checkBoxDeleteEmptyBranches.Checked = true;
+            this._checkBoxDeleteEmptyBranches.CheckState = System.Windows.Forms.CheckState.Checked;
+            this._checkBoxDeleteEmptyBranches.Location = new System.Drawing.Point(191, 297);
+            this._checkBoxDeleteEmptyBranches.Name = "_checkBoxDeleteEmptyBranches";
+            this._checkBoxDeleteEmptyBranches.Size = new System.Drawing.Size(140, 17);
+            this._checkBoxDeleteEmptyBranches.TabIndex = 18;
+            this._checkBoxDeleteEmptyBranches.Text = "Удалять пустые ветви";
+            this._checkBoxDeleteEmptyBranches.UseVisualStyleBackColor = true;
+            this._checkBoxDeleteEmptyBranches.CheckedChanged += new System.EventHandler(this.CheckBoxDeleteEmptyBranches_CheckedChanged);
             // 
             // keyDataGridViewTextBoxColumn
             // 
@@ -355,11 +356,16 @@
             this.keyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.keyDataGridViewTextBoxColumn.Width = 140;
             // 
+            // _branchBindingSource
+            // 
+            this._branchBindingSource.DataSource = typeof(Model.Branch);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 342);
+            this.Controls.Add(this._checkBoxDeleteEmptyBranches);
             this.Controls.Add(this._dataGridViewBranches);
             this.Controls.Add(this._labelInfoGreenColor);
             this.Controls.Add(this._pictureBoxInfo);
@@ -382,8 +388,8 @@
             this._groupBoxEditBranch.PerformLayout();
             this._groupBoxAddElement.ResumeLayout(false);
             this._groupBoxAddElement.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewBranches)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._branchBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,9 +421,9 @@
         private System.Windows.Forms.Label _labelName;
         private System.Windows.Forms.Label _labelValue;
         private System.Windows.Forms.Button _buttonAdd;
-        private System.Windows.Forms.ToolStripMenuItem нарисоватьToolStripMenuItem;
         private System.Windows.Forms.BindingSource _branchBindingSource;
         private System.Windows.Forms.DataGridView _dataGridViewBranches;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.CheckBox _checkBoxDeleteEmptyBranches;
     }
 }

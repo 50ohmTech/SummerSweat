@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this._dataGridViewCalculations = new System.Windows.Forms.DataGridView();
+            this._buttonCalculate = new System.Windows.Forms.Button();
+            this._buttonDeleteCurrent = new System.Windows.Forms.Button();
             this._frequencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._impedanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._calculationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this._buttonCalculate = new System.Windows.Forms.Button();
-            this._buttonDeleteCurrent = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewCalculations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._calculationsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +55,7 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this._dataGridViewCalculations.DefaultCellStyle = dataGridViewCellStyle1;
@@ -68,6 +68,26 @@
             this._dataGridViewCalculations.Size = new System.Drawing.Size(222, 225);
             this._dataGridViewCalculations.TabIndex = 1;
             this._dataGridViewCalculations.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridViewCalculations_DataError);
+            // 
+            // _buttonCalculate
+            // 
+            this._buttonCalculate.Location = new System.Drawing.Point(12, 243);
+            this._buttonCalculate.Name = "_buttonCalculate";
+            this._buttonCalculate.Size = new System.Drawing.Size(111, 23);
+            this._buttonCalculate.TabIndex = 2;
+            this._buttonCalculate.Text = "Расчитать";
+            this._buttonCalculate.UseVisualStyleBackColor = true;
+            this._buttonCalculate.Click += new System.EventHandler(this.ButtonAdd_Click);
+            // 
+            // _buttonDeleteCurrent
+            // 
+            this._buttonDeleteCurrent.Location = new System.Drawing.Point(129, 243);
+            this._buttonDeleteCurrent.Name = "_buttonDeleteCurrent";
+            this._buttonDeleteCurrent.Size = new System.Drawing.Size(105, 23);
+            this._buttonDeleteCurrent.TabIndex = 3;
+            this._buttonDeleteCurrent.Text = "Удалить";
+            this._buttonDeleteCurrent.UseVisualStyleBackColor = true;
+            this._buttonDeleteCurrent.Click += new System.EventHandler(this.ButtonDeleteCurrent_Click);
             // 
             // _frequencyDataGridViewTextBoxColumn
             // 
@@ -91,26 +111,6 @@
             // _calculationsBindingSource
             // 
             this._calculationsBindingSource.DataSource = typeof(Model.Calculations.Calculations);
-            // 
-            // _buttonCalculate
-            // 
-            this._buttonCalculate.Location = new System.Drawing.Point(12, 243);
-            this._buttonCalculate.Name = "_buttonCalculate";
-            this._buttonCalculate.Size = new System.Drawing.Size(111, 23);
-            this._buttonCalculate.TabIndex = 2;
-            this._buttonCalculate.Text = "Расчитать";
-            this._buttonCalculate.UseVisualStyleBackColor = true;
-            this._buttonCalculate.Click += new System.EventHandler(this.ButtonAdd_Click);
-            // 
-            // _buttonDeleteCurrent
-            // 
-            this._buttonDeleteCurrent.Location = new System.Drawing.Point(129, 243);
-            this._buttonDeleteCurrent.Name = "_buttonDeleteCurrent";
-            this._buttonDeleteCurrent.Size = new System.Drawing.Size(105, 23);
-            this._buttonDeleteCurrent.TabIndex = 3;
-            this._buttonDeleteCurrent.Text = "Удалить";
-            this._buttonDeleteCurrent.UseVisualStyleBackColor = true;
-            this._buttonDeleteCurrent.Click += new System.EventHandler(this.ButtonDeleteCurrent_Click);
             // 
             // CalculationsForm
             // 

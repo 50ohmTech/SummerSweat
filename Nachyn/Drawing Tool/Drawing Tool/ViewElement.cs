@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
+using DrawingTool.Properties;
 using Model.Elements;
 using Model.Events;
-using DrawingTool.Properties;
 
 namespace DrawingTool
 {
@@ -27,10 +27,11 @@ namespace DrawingTool
 
         private void Element_ValueChanged(object sender, ElementValueEventArgs arguments)
         {
-            _labelValue.Text = "Номинал: " +
+            _labelValue.Text = @"Номинал: " +
                                arguments.NewValue.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text = "Имя: " + arguments.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text =
+                @"Имя: " + arguments.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         private void ToolStripMenuAdd_Click(object sender, EventArgs e)
@@ -41,6 +42,7 @@ namespace DrawingTool
         private void ToolStripMenuDelete_Click(object sender, EventArgs e)
         {
             _elementBases.Remove(Item);
+            OnDelete?.Invoke();
             Dispose();
         }
 
@@ -59,9 +61,10 @@ namespace DrawingTool
             InitializeComponent();
             Item = element;
             _labelValue.Text =
-                "Номинал: " + element.Value.ToString(CultureInfo.CurrentCulture);
+                @"Номинал: " + element.Value.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text = "Имя: " + element.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text =
+                @"Имя: " + element.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -96,6 +99,11 @@ namespace DrawingTool
                 _item.ValueChanged += Element_ValueChanged;
             }
         }
+
+        /// <summary>
+        ///     Событие возникающее при удалении любого элемента
+        /// </summary>
+        public static event DeleteEventHandler OnDelete;
 
         #endregion
     }

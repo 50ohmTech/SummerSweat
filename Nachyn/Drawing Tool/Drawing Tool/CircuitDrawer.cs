@@ -8,45 +8,93 @@ using Model.Factories;
 
 namespace DrawingTool
 {
+    /// <summary>
+    ///     Рисовальщик электрической цепи на панели
+    /// </summary>
     public class CircuitDrawer
     {
+        /// <summary>
+        ///     Электрическая цепь
+        /// </summary>
+        private readonly Circuit _circuit;
+
+        /// <summary>
+        ///     Панель на которой рисуется цепь
+        /// </summary>
+        private readonly Panel _panel;
+
         /// <summary>
         ///     Список визуальных элементов
         /// </summary>
         public readonly List<ViewElement> ViewElements = new List<ViewElement>();
 
-        private readonly Circuit _circuit;
-
-        private readonly Panel _panel;
-
+        /// <summary>
+        ///     Ручка которая рисует цепь
+        /// </summary>
         private Pen _pen = new Pen(Color.Black, 4);
 
+        /// <summary>
+        ///     Конструктор
+        /// </summary>
+        /// <param name="panel">Панель</param>
+        /// <param name="circuit">Электрическая цепь</param>
         public CircuitDrawer(Panel panel, Circuit circuit)
         {
+            if (circuit == null || panel == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             _panel = panel;
             _circuit = circuit;
         }
 
-
+        /// <summary>
+        ///     Цвет пустой ветки
+        /// </summary>
         public Color EmptyBranchColor { get; set; } = Color.Red;
 
+        /// <summary>
+        ///     Задает ручку которая рисует цепь
+        /// </summary>
         public Pen Pen
         {
             set => _pen = value ?? throw new ArgumentNullException();
         }
 
+        /// <summary>
+        ///     Задает и возвращает шаг пустой линии
+        /// </summary>
         public uint StepEmptyLine { get; set; } = 5;
 
+        /// <summary>
+        ///     Задает и возвращает шаг визуального элемента
+        /// </summary>
         public uint StepElement { get; set; } = 80;
 
+        /// <summary>
+        ///     Задает и возвращает высоту между ветками в группе
+        /// </summary>
         public uint HeightBetweenBranches { get; set; } = 60;
 
+        /// <summary>
+        ///     Задает и возвращает ширину(шаг) между группами ветвей
+        /// </summary>
         public uint WidthBetweenGroupsBranches { get; set; } = 20;
 
-        public bool IsDrawEmptyBranches { get; set; } = false;
+        /// <summary>
+        ///     Задает и возвращает логическое значение отрисовки пустых ветвей
+        /// </summary>
+        public bool IsDrawEmptyBranches { get; set; }
 
+        /// <summary>
+        ///     Задает и возвращает отступ визуального элемента по координате Y от пустой линии
+        /// </summary>
         public int ElementLinePositionY { get; set; } = -26;
 
+        /// <summary>
+        ///     Сброс всех настроек по умолчанию
+        /// </summary>
         public void ResetSettings()
         {
             StepEmptyLine = 5;
@@ -72,33 +120,36 @@ namespace DrawingTool
             Dictionary<string, Dictionary<int, List<ViewElement>>> viewBranches =
                 GetViewBranches();
 
-            int SumMaxCountElementsInGroups = 0;
-            int MaxCountBranchesInGroups = 0;
+            int sumMaxCountElementsInGroups = 0;
+            int maxCountBranchesInGroups = 0;
 
             foreach (string keyBranchs in viewBranches.Keys)
             {
-                SumMaxCountElementsInGroups +=
+                sumMaxCountElementsInGroups +=
                     GetMaxCountElementsInGroupBranches(viewBranches[keyBranchs]);
 
-                if (viewBranches[keyBranchs].Keys.Count > MaxCountBranchesInGroups)
+                if (viewBranches[keyBranchs].Keys.Count > maxCountBranchesInGroups)
                 {
-                    MaxCountBranchesInGroups = viewBranches[keyBranchs].Keys.Count;
+                    maxCountBranchesInGroups = viewBranches[keyBranchs].Keys.Count;
                 }
             }
 
-            int WidthBitmap = SumMaxCountElementsInGroups * (int)StepElement +
-                        (int)StepEmptyLine * viewBranches.Keys.Count + (int)WidthBetweenGroupsBranches * viewBranches.Keys.Count
-                +60;
+            int widthBitmap = sumMaxCountElementsInGroups * (int) StepElement +
+                              (int) StepEmptyLine * viewBranches.Keys.Count +
+                              (int) WidthBetweenGroupsBranches * viewBranches.Keys.Count
+                              + 60;
 
-            int HeightBitmap = MaxCountBranchesInGroups * (int)HeightBetweenBranches + 20;
+            int heightBitmap =
+                maxCountBranchesInGroups * (int) HeightBetweenBranches + 20;
+
             Bitmap bitmapBackground =
-                new Bitmap(WidthBitmap, HeightBitmap);
+                new Bitmap(widthBitmap, heightBitmap);
 
             using (Graphics scheme = Graphics.FromImage(bitmapBackground))
             {
                 Point groupBranchs = new Point(20, 30);
-               
-                if (SumMaxCountElementsInGroups > 0)
+
+                if (sumMaxCountElementsInGroups > 0)
                 {
                     scheme.DrawLine(_pen, new Point(0, groupBranchs.Y), groupBranchs);
                 }
@@ -153,6 +204,14 @@ namespace DrawingTool
             background.Location = new Point(0, 0);
         }
 
+        /// <summary>
+        ///     Нарисовать границы в группе
+        /// </summary>
+        /// <param name="groupBranch">Точка начала отрисовки группы</param>
+        /// <param name="countGroupBranches">Количество ветвей в группе</param>
+        /// <param name="scheme">Схема которая отрисуется на панели</param>
+        /// <param name="maxCountElementsInGroup">Максимальное количество визуальных элементов в группе</param>
+        /// <returns></returns>
         private Point DrawGroupBorders(Point groupBranch, int countGroupBranches,
             Graphics scheme,
             int maxCountElementsInGroup)
@@ -227,7 +286,7 @@ namespace DrawingTool
         ///     Получить максимальное количество
         ///     элементов в группе ветвей
         /// </summary>
-        /// <param name="group">Группа</param>
+        /// <param name="group">Группа ветвей</param>
         /// <returns></returns>
         private int GetMaxCountElementsInGroupBranches(
             Dictionary<int, List<ViewElement>> group)

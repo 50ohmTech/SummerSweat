@@ -17,13 +17,6 @@ namespace Model
         public readonly List<Branch> Branches = new List<Branch>();
 
         /// <summary>
-        ///     Конструктор
-        /// </summary>
-        public Circuit()
-        {
-        }
-
-        /// <summary>
         ///     Пустая ли цепь
         /// </summary>
         public bool IsEmpty
@@ -60,7 +53,6 @@ namespace Model
 
             foreach (double frequency in frequencies)
             {
-                
                 Dictionary<string, List<Branch>> tempBranches =
                     new Dictionary<string, List<Branch>>();
 
@@ -83,6 +75,11 @@ namespace Model
 
                         foreach (Branch branch in tempBranches[key])
                         {
+                            if (branch.Elements.Count < 1)
+                            {
+                                continue;
+                            }
+
                             Complex conduction = 1 / branch.CalculateZ(frequency);
                             totalСonductivity += conduction;
                         }

@@ -24,17 +24,18 @@ namespace View
         {
             InitializeComponent();
             _drawer = new CircuitDrawer(_panelCircuit, _circuit);
-            //Paint += MainForm_Paint;
 
             InitializeComboBoxType();
-            _branchBindingSource.DataSource = _circuit.Branches;    
+            _branchBindingSource.DataSource = _circuit.Branches;
+
+            ViewElement.OnDelete += SafeDrawCircuit;
         }
 
         #endregion
 
         #region Private
 
-        private CircuitDrawer _drawer;
+        private readonly CircuitDrawer _drawer;
 
         /// <summary>
         ///     Рандом
@@ -46,19 +47,7 @@ namespace View
         /// </summary>
         private readonly Circuit _circuit = new Circuit();
 
-
-        private void MainForm_Paint(object sender, PaintEventArgs e)
-        {
-            _drawer.DrawCircuit();
-        }
-
-        private void ToolStripButtonAdd_Click(object sender, EventArgs e)
-        {
-           // new ElementManagerForm(_circuit.Branches, _drawer.ViewElements).ShowDialog();
-            _drawer.DrawCircuit();
-        }
-
-        private void ToolStripButtonClearCircuit_Click(object sender, EventArgs e)
+        private void MenuButtonClearCircuit_Click(object sender, EventArgs e)
         {
             if (_circuit.IsEmpty)
             {
@@ -78,15 +67,13 @@ namespace View
             if (result == DialogResult.Yes)
             {
                 _branchBindingSource.DataSource = null;
-                _drawer.ClearCircuit();             
+                _drawer.ClearCircuit();
                 _branchBindingSource.DataSource = _circuit.Branches;
             }
         }
 
-        
 
-
-        private void ToolStripButtonCalculate_Click(object sender, EventArgs e)
+        private void MenuButtonCalculate_Click(object sender, EventArgs e)
         {
             if (_circuit.IsEmpty)
             {
@@ -102,10 +89,9 @@ namespace View
         }
 
 
-        private void ToolStripRandomizeCircuit_Click(object sender, EventArgs e)
+        private void MenuButtonRandomizeCircuit_Click(object sender, EventArgs e)
         {
             _drawer.ClearCircuit();
-            
 
             for (uint group = 0; group < _random.Next(5) + 1; group++)
             {
@@ -130,12 +116,20 @@ namespace View
                 }
             }
 
-            _branchBindingSource.DataSource = null;
-            _branchBindingSource.DataSource = _circuit.Branches;
-            _drawer.DrawCircuit();
+            SafeDrawCircuit();
         }
 
-        private void ToolStripButtonHelp_Click(object sender, EventArgs e)
+        /// <summary>
+        ///     Безопасно отрисовать цепь
+        /// </summary>
+        private void SafeDrawCircuit()
+        {
+            _branchBindingSource.DataSource = null;
+            _drawer.DrawCircuit();
+            _branchBindingSource.DataSource = _circuit.Branches;
+        }
+
+        private void MenuButtonHelp_Click(object sender, EventArgs e)
         {
             ShowInfo();
         }
@@ -205,6 +199,8 @@ namespace View
                         currentBranch.Elements));
 
                     currentBranch.Elements.Add(newElement);
+
+                    SafeDrawCircuit();
                 }
                 else
                 {
@@ -304,21 +300,25 @@ namespace View
             if (_branchBindingSource.Current is Branch current)
             {
                 _branchBindingSource.Remove(current);
+                SafeDrawCircuit();
             }
         }
 
+        private void CheckBoxDeleteEmptyBranches_CheckedChanged(object sender,
+            EventArgs e)
+        {
+            if (_checkBoxDeleteEmptyBranches.Checked)
+            {
+                _drawer.IsDrawEmptyBranches = false;
+            }
+            else
+            {
+                _drawer.IsDrawEmptyBranches = true;
+            }
+
+            SafeDrawCircuit();
+        }
+
         #endregion
-
-        private void нарисоватьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _drawer.DrawCircuit();
-            _branchBindingSource.DataSource = null;
-            _branchBindingSource.DataSource = _circuit.Branches;
-        }
-
-        private void _dataGridViewBranches_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MessageBox.Show(e.Exception.Message);
-        }
     }
 }

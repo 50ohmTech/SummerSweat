@@ -20,8 +20,8 @@ namespace Model.Calculations
         #region Public
 
         /// <summary>
-        /// Проверить частоты на значения, которые они могут принимать.
-        /// В случае ошибки выбрасывается ArgumentException исключение.
+        ///     Проверить частоты на значения, которые они могут принимать.
+        ///     В случае ошибки выбрасывается ArgumentException исключение.
         /// </summary>
         /// <param name="frequncies"></param>
         public static void CheckFrequencies(params double[] frequncies)
