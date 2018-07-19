@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace CircuitElements
@@ -8,6 +9,12 @@ namespace CircuitElements
 	/// </summary>
 	public class Circuit
 	{
+		#region --Поля--
+
+		private List<ElementBase> _elements;
+
+		#endregion
+		
 		#region – – Свойства – – 
 
 		/// <summary>
@@ -15,8 +22,19 @@ namespace CircuitElements
 		/// </summary>
 		public List<ElementBase> Elements
 		{
-			get;
-			set;
+			get => new List<ElementBase>(_elements);
+			set
+			{
+				if (value == null)
+				{
+					throw new NullReferenceException("An attempt to assign a null value to the Elements property");
+				}
+				if(value.Capacity == 0)
+				{
+					throw new ArgumentException("An attempt to assign an empty List to the Elements property");
+				}
+				_elements = value; 
+			}
 		}
 
 		#endregion – – Свойства – –
@@ -39,6 +57,11 @@ namespace CircuitElements
 		/// <returns></returns>
 		public Complex[] CalculateZ(double[] frequencies)
 		{
+			if (frequencies.Length == 0)
+			{
+				throw new ArgumentException("Frequencies array is empty");
+			}
+
 			var result = new Complex[frequencies.Length];
 
 			for (var i = 0; i < frequencies.Length; i++)
@@ -62,11 +85,11 @@ namespace CircuitElements
 			if (elements != null && elements.Count != 0)
 			{
 				Elements = elements;
-			}
 
-			foreach (var element in Elements)
-			{
-				element.ValueChanged += CircuitChanged;
+				foreach (var element in Elements)
+				{
+					element.ValueChanged += CircuitChanged;
+				}
 			}
 		}
 

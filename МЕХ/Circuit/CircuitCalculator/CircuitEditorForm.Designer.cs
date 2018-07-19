@@ -2,7 +2,7 @@
 
 namespace CircuitCalculator
 {
-	partial class CircuitRedactorForm
+	partial class CircuitEditorForm
 	{
 		/// <summary>
 		/// Required designer variable.

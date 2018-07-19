@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Forms;
 using CircuitCalculator.Controls;
+using CircuitCalculator.Factories;
 using CircuitElements;
 
 namespace CircuitCalculator
@@ -9,7 +10,7 @@ namespace CircuitCalculator
 	/// <summary>
 	///     Форма редактирования эл. цепи
 	/// </summary>
-	public partial class CircuitRedactorForm : Form
+	public partial class CircuitEditorForm : Form
 	{
 		#region – – Поля – – 
 
@@ -25,7 +26,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Конструктор
 		/// </summary>
-		public CircuitRedactorForm()
+		public CircuitEditorForm()
 		{
 			InitializeComponent();
 
@@ -131,11 +132,8 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddResistorButton_Click(object sender, EventArgs e)
 		{
-			var newElementControl =
-				new ElementControl(new Resistor(resistorNameTextBox.Text,
-					Convert.ToDouble(resistorValueTextBox.Text)));
-
-			redactorPanel.AddControl(newElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateResistorControl(resistorNameTextBox.Text,
+				Convert.ToDouble(resistorValueTextBox.Text)));
 		}
 
 		/// <summary>
@@ -143,11 +141,8 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddCapacitorButton_Click(object sender, EventArgs e)
 		{
-			var newElementControl =
-				new ElementControl(new Capacitor(capacitorNameTextBox.Text,
-					Convert.ToDouble(capacitorValueTextBox.Text)));
-
-			redactorPanel.AddControl(newElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateCapacitorControl(capacitorNameTextBox.Text,
+				Convert.ToDouble(capacitorValueTextBox.Text)));
 		}
 
 		/// <summary>
@@ -155,11 +150,8 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddInductorButton_Click(object sender, EventArgs e)
 		{
-			var newElementControl =
-				new ElementControl(new Inductor(inductorNameTextBox.Text,
-					Convert.ToDouble(inductorValueTextBox.Text)));
-
-			redactorPanel.AddControl(newElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateInductorControl(inductorNameTextBox.Text,
+				Convert.ToDouble(inductorValueTextBox.Text)));
 		}
 
 		/// <summary>
@@ -219,39 +211,37 @@ namespace CircuitCalculator
 		}
 
 		/// <summary>
+		///		Закрытие формы редактора
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CircuitRedactorForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			e.Cancel = true;
+		}
+
+		/// <summary>
 		///     Обновить панель редактора
 		/// </summary>
 		private void RefreshRedactor()
 		{
 			redactorPanel.CleanPanel();
-
-			var startingElementControl =
-				new ElementControl(DrawingElements.StartingElement);
-
-			redactorPanel.AddControl(startingElementControl);
+			
+			redactorPanel.AddControl(ControlFactory.CreateStartingElementControl());
 
 			foreach (var element in _displayingCircuit.Elements)
 			{
 				if (element is Resistor)
 				{
-					var newElementControl =
-						new ElementControl(new Resistor(element.Name, element.Value));
-
-					redactorPanel.AddControl(newElementControl);
+					redactorPanel.AddControl(ControlFactory.CreateResistorControl(element.Name, element.Value));
 				}
 				else if (element is Inductor)
 				{
-					var newElementControl =
-						new ElementControl(new Inductor(element.Name, element.Value));
-
-					redactorPanel.AddControl(newElementControl);
+					redactorPanel.AddControl(ControlFactory.CreateInductorControl(element.Name, element.Value));
 				}
 				else if (element is Capacitor)
 				{
-					var newElementControl =
-						new ElementControl(new Capacitor(element.Name, element.Value));
-
-					redactorPanel.AddControl(newElementControl);
+					redactorPanel.AddControl(ControlFactory.CreateCapacitorControl(element.Name, element.Value));
 				}
 				else
 				{
@@ -260,15 +250,9 @@ namespace CircuitCalculator
 				}
 			}
 
-			var endingElementControl = new ElementControl(DrawingElements.FiniteElement);
-			redactorPanel.AddControl(endingElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateFiniteElementControl());
 		}
 
 		#endregion – – Приватные методы – –
-
-		private void CircuitRedactorForm_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			e.Cancel = true;
-		}
 	}
 }
