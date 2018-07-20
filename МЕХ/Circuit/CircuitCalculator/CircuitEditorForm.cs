@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CircuitCalculator.Controls;
 using CircuitCalculator.Factories;
 using CircuitElements;
+using CircuitCalculator.Validation;
 
 namespace CircuitCalculator
 {
@@ -168,45 +169,39 @@ namespace CircuitCalculator
 		private void ElementGridView_CellValidating(object sender,
 			DataGridViewCellValidatingEventArgs e)
 		{
-			if (elementGridView.CurrentCell.ColumnIndex == 1)
+			if (elementGridView.CurrentCell.ColumnIndex != 1)
 			{
-				string formatingString = e.FormattedValue.ToString().Replace('.', ',');
-				if (double.TryParse(formatingString,
-					    out var newValue) && !(newValue < 0.000000001) && newValue <= 1000000000000)
-				{
-					if(formatingString.Length > 1 && formatingString[0] == '0' && formatingString[1] != ',')
-					{
-						elementGridView.CancelEdit();
+				return;
+			}
 
-						MessageBox.Show(
-							"Данное число имеет неверный формат. Если первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
-							"Ошибка ввода значения частоты", MessageBoxButtons.OK,
-							MessageBoxIcon.Information);
-					}
+			string formatingString = e.FormattedValue.ToString().Replace('.', ',');
+			if (ValidatingClass.IsCellCorrect(e))
+			{
+				_displayingCircuit.Elements[e.RowIndex].Value =
+					Convert.ToDouble(formatingString);
 
-					_displayingCircuit.Elements[e.RowIndex].Value =
-						Convert.ToDouble(formatingString);
+				RefreshRedactor();
+				CircuitValueChanged?.Invoke(
+					Convert.ToDouble(formatingString),
+					_displayingCircuit.Elements[e.RowIndex]);
+			}
+			else
+			{
+				elementGridView.CancelEdit();
 
-					RefreshRedactor();
-					CircuitValueChanged?.Invoke(
-						Convert.ToDouble(formatingString),
-						_displayingCircuit.Elements[e.RowIndex]);
-				}
-				else
-				{
-					elementGridView.CancelEdit();
-
-					MessageBox.Show(
-						"Вы ввели: " + formatingString + "\n" +
-						"Вводимое значение должно удовлетворять следующим условиям:\n " +
-						"-быть положительным числом\n " +
-						"-быть вещественным или натуральным числом\n " +
-						"-быть большим 0.000 000 001 по модулю\n " +
-						"-быть меньше 1 000 000 000 000\n " +
-						"-использование экспоненциальной записи не допускается\n ",
-						"Ошибка ввода значения частоты", MessageBoxButtons.OK,
-						MessageBoxIcon.Information);
-				}
+				MessageBox.Show(
+					"Вы ввели: " + formatingString + "\n" +
+					"Вводимое значение должно удовлетворять следующим условиям:\n " +
+					"-быть положительным числом\n " +
+					"-быть вещественным или натуральным числом\n " +
+					"-быть большим 0.000 000 001 по модулю\n " +
+					"-быть меньше 1 000 000 000 000\n " +
+					"-запись не должна содержать пробелов\n " +
+					"-запись должна начинаться с цифры\n " +
+					"-использование экспоненциальной записи не допускается\n " +
+					"-eсли первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
+					"Ошибка ввода значения частоты", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
 			}
 		}
 

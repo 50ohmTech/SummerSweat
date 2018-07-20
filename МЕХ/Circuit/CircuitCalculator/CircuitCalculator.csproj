@@ -74,6 +74,7 @@
     <Compile Include="Controls\RedactorPanel.Designer.cs">
       <DependentUpon>RedactorPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validation\ValidatingClass.cs" />
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using CircuitCalculator.Validation;
 using CircuitElements;
 
 namespace CircuitCalculator
@@ -161,34 +162,24 @@ namespace CircuitCalculator
 				}
 
 				string formatingString = e.FormattedValue.ToString().Replace('.', ',');
-				if (formatingString.Length > 1 && formatingString[0] == '0' && formatingString[1] != ',')
+				if (!ValidatingClass.IsCellCorrect(e))
 				{
 					frequenciesGridView.CancelEdit();
 
 					MessageBox.Show(
-						"Данное число имеет неверный формат. Если первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
+						"Вы ввели: " + formatingString + "\n" +
+						"Вводимое значение должно удовлетворять следующим условиям:\n " +
+						"-быть положительным числом\n " +
+						"-быть вещественным или натуральным числом\n " +
+						"-быть большим 0.000 000 001 по модулю\n " +
+						"-быть меньше 1 000 000 000 000\n " +
+						"-запись не должна содержать пробелов\n " +
+						"-запись должна начинаться с цифры\n " +
+						"-использование экспоненциальной записи не допускается\n " +
+						"-eсли первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
 						"Ошибка ввода значения частоты", MessageBoxButtons.OK,
 						MessageBoxIcon.Information);
 				}
-				if (double.TryParse(formatingString,
-					    out var newValue) && !(Math.Abs(newValue) < 0.000000001) && newValue <= 1000000000000)
-				{
-					return;
-
-				}
-
-				frequenciesGridView.CancelEdit();
-
-				MessageBox.Show(
-					"Вы ввели: " + formatingString + "\n" +
-					"Вводимое значение должно удовлетворять следующим условиям:\n " +
-					"-быть положительным числом\n " +
-					"-быть вещественным или натуральным числом\n " +
-					"-быть большим 0.000 000 001 по модулю\n " +
-					"-быть меньше 1 000 000 000 000\n " +
-					"-использование экспоненциальной записи не допускается\n ",
-					"Ошибка ввода значения частоты", MessageBoxButtons.OK,
-					MessageBoxIcon.Information);
 			}
 		}
 
