@@ -16,23 +16,23 @@ namespace Model
         public Node Root { get; }
 
         /// <summary>
-        /// Количесвто элементов.
+        /// Количество элементов.
         /// </summary>
         public uint Count => GetCount(Root,
             new List<Type>() {typeof(Resistor), typeof(Capacitor), typeof(Inductor)});
 
         /// <summary>
-        /// Количесвто резисторов.
+        /// Количество резисторов.
         /// </summary>
         public uint ResistorCount => GetCount(Root, new List<Type>() { typeof(Resistor)});
 
         /// <summary>
-        /// Количесвто конденсаторов.
+        /// Количество конденсаторов.
         /// </summary>
         public uint CapacitorCount => GetCount(Root, new List<Type>() { typeof(Capacitor)});
 
         /// <summary>
-        /// Количесвто катушек индуктивности.
+        /// Количество катушек индуктивности.
         /// </summary>
         public uint InductorCount => GetCount(Root, new List<Type>() { typeof(Inductor)});
 
