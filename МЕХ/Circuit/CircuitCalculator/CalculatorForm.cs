@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using CircuitCalculator.Validation;
 using CircuitElements;
@@ -28,12 +27,17 @@ namespace CircuitCalculator
 			_redactorForm.Visible = false;
 			_redactorForm.FormClosing += IsRedactorVisible_Click;
 
-			ToolTip calculateToolTip = new ToolTip();
-			calculateToolTip.SetToolTip(calculateButton, "Расчитать импаденсы для введенных частот");
-			ToolTip resetToolTipt = new ToolTip();
-			resetToolTipt.SetToolTip(resetButton, "Удаляет из таблицы все введенные частоты");
-			ToolTip isRedactorVisibleToolTip = new ToolTip();
-			isRedactorVisibleToolTip.SetToolTip(isRedactorVisibleButton, "Скрывает/Показывает окно редактирования цепи");
+			var calculateToolTip = new ToolTip();
+			calculateToolTip.SetToolTip(calculateButton,
+				"Расчитать импаденсы для введенных частот");
+
+			var resetToolTipt = new ToolTip();
+			resetToolTipt.SetToolTip(resetButton,
+				"Удаляет из таблицы все введенные частоты");
+
+			var isRedactorVisibleToolTip = new ToolTip();
+			isRedactorVisibleToolTip.SetToolTip(isRedactorVisibleButton,
+				"Скрывает/Показывает окно редактирования цепи");
 
 			//Подписывается на событие изменения значения одного из элементов цепи
 			_redactorForm.CircuitValueChanged += ElementChanged;
@@ -79,6 +83,7 @@ namespace CircuitCalculator
 				new Inductor("L1", 5),
 				new Resistor("R1", 20)
 			};
+
 			var circuit1 = new Circuit(circuitElements1);
 			_circuitList.Add(circuit1);
 
@@ -91,6 +96,7 @@ namespace CircuitCalculator
 				new Resistor("R3", 20),
 				new Resistor("R4", 20)
 			};
+
 			var circuit2 = new Circuit(circuitElements2);
 			_circuitList.Add(circuit2);
 
@@ -103,6 +109,7 @@ namespace CircuitCalculator
 				new Resistor("R2", 20),
 				new Capacitor("C2", 20)
 			};
+
 			var circuit3 = new Circuit(circuitElements3);
 			_circuitList.Add(circuit3);
 
@@ -110,6 +117,7 @@ namespace CircuitCalculator
 			{
 				new Inductor("L1", 10)
 			};
+
 			var circuit4 = new Circuit(circuitElements4);
 			_circuitList.Add(circuit4);
 
@@ -122,6 +130,7 @@ namespace CircuitCalculator
 				new Resistor("R3", 20),
 				new Inductor("I1", 20)
 			};
+
 			var circuit5 = new Circuit(circuitElements5);
 			_circuitList.Add(circuit5);
 
@@ -143,7 +152,7 @@ namespace CircuitCalculator
 			{
 				if (element == changedElement)
 				{
-					element.Value = (double) newValue;
+					element.Value = newValue;
 				}
 			}
 		}
@@ -161,7 +170,7 @@ namespace CircuitCalculator
 					return;
 				}
 
-				string formatingString = e.FormattedValue.ToString().Replace('.', ',');
+				var formatingString = e.FormattedValue.ToString().Replace('.', ',');
 				if (!ValidatingClass.IsCellCorrect(e))
 				{
 					frequenciesGridView.CancelEdit();
@@ -254,9 +263,9 @@ namespace CircuitCalculator
 		{
 			Application.Exit();
 		}
-	
+
 		/// <summary>
-		/// Скрывает/открывает редактор цепи
+		///     Скрывает/открывает редактор цепи
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>

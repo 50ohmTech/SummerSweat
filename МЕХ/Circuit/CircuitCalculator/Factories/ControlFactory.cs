@@ -3,7 +3,7 @@ using CircuitElements;
 
 namespace CircuitCalculator.Factories
 {
-	static class ControlFactory
+	internal static class ControlFactory
 	{
 		public static ElementControl CreateResistorControl(string name, double value)
 		{

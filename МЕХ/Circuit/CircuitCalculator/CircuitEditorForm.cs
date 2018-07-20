@@ -3,8 +3,8 @@ using System.Globalization;
 using System.Windows.Forms;
 using CircuitCalculator.Controls;
 using CircuitCalculator.Factories;
-using CircuitElements;
 using CircuitCalculator.Validation;
+using CircuitElements;
 
 namespace CircuitCalculator
 {
@@ -31,7 +31,7 @@ namespace CircuitCalculator
 		{
 			InitializeComponent();
 
-#if !DEBUG
+		#if !DEBUG
 			testButton.Visible = false;
 #endif
 		}
@@ -133,7 +133,8 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddResistorButton_Click(object sender, EventArgs e)
 		{
-			redactorPanel.AddControl(ControlFactory.CreateResistorControl(resistorNameTextBox.Text,
+			redactorPanel.AddControl(ControlFactory.CreateResistorControl(
+				resistorNameTextBox.Text,
 				Convert.ToDouble(resistorValueTextBox.Text)));
 		}
 
@@ -142,7 +143,8 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddCapacitorButton_Click(object sender, EventArgs e)
 		{
-			redactorPanel.AddControl(ControlFactory.CreateCapacitorControl(capacitorNameTextBox.Text,
+			redactorPanel.AddControl(ControlFactory.CreateCapacitorControl(
+				capacitorNameTextBox.Text,
 				Convert.ToDouble(capacitorValueTextBox.Text)));
 		}
 
@@ -151,7 +153,8 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddInductorButton_Click(object sender, EventArgs e)
 		{
-			redactorPanel.AddControl(ControlFactory.CreateInductorControl(inductorNameTextBox.Text,
+			redactorPanel.AddControl(ControlFactory.CreateInductorControl(
+				inductorNameTextBox.Text,
 				Convert.ToDouble(inductorValueTextBox.Text)));
 		}
 
@@ -174,7 +177,7 @@ namespace CircuitCalculator
 				return;
 			}
 
-			string formatingString = e.FormattedValue.ToString().Replace('.', ',');
+			var formatingString = e.FormattedValue.ToString().Replace('.', ',');
 			if (ValidatingClass.IsCellCorrect(e))
 			{
 				_displayingCircuit.Elements[e.RowIndex].Value =
@@ -206,11 +209,12 @@ namespace CircuitCalculator
 		}
 
 		/// <summary>
-		///		Закрытие формы редактора
+		///     Закрытие формы редактора
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void CircuitRedactorForm_FormClosing(object sender, FormClosingEventArgs e)
+		private void CircuitRedactorForm_FormClosing(object sender,
+			FormClosingEventArgs e)
 		{
 			e.Cancel = true;
 		}
@@ -221,22 +225,28 @@ namespace CircuitCalculator
 		private void RefreshRedactor()
 		{
 			redactorPanel.CleanPanel();
-			
+
 			redactorPanel.AddControl(ControlFactory.CreateStartingElementControl());
 
 			foreach (var element in _displayingCircuit.Elements)
 			{
 				if (element is Resistor)
 				{
-					redactorPanel.AddControl(ControlFactory.CreateResistorControl(element.Name, element.Value));
+					redactorPanel.AddControl(
+						ControlFactory.CreateResistorControl(element.Name,
+							element.Value));
 				}
 				else if (element is Inductor)
 				{
-					redactorPanel.AddControl(ControlFactory.CreateInductorControl(element.Name, element.Value));
+					redactorPanel.AddControl(
+						ControlFactory.CreateInductorControl(element.Name,
+							element.Value));
 				}
 				else if (element is Capacitor)
 				{
-					redactorPanel.AddControl(ControlFactory.CreateCapacitorControl(element.Name, element.Value));
+					redactorPanel.AddControl(
+						ControlFactory.CreateCapacitorControl(element.Name,
+							element.Value));
 				}
 				else
 				{

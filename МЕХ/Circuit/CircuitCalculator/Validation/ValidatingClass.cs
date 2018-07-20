@@ -9,11 +9,13 @@ namespace CircuitCalculator.Validation
 		/// </summary>
 		public static bool IsCellCorrect(DataGridViewCellValidatingEventArgs e)
 		{
-			string formatingString = e.FormattedValue.ToString().Replace('.', ',');
+			var formatingString = e.FormattedValue.ToString().Replace('.', ',');
 			if (double.TryParse(formatingString,
-				    out var newValue) && !(newValue < 0.000000001) && newValue <= 1000000000000)
+				    out var newValue) && !(newValue < 0.000000001) &&
+			    newValue <= 1000000000000)
 			{
-				if (formatingString.Length > 1 && formatingString[0] == '0' && formatingString[1] != ',')
+				if (formatingString.Length > 1 && formatingString[0] == '0' &&
+				    formatingString[1] != ',')
 				{
 					return false;
 				}
