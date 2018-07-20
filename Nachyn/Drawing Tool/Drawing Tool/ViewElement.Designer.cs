@@ -1,4 +1,4 @@
-﻿namespace View
+﻿namespace DrawingTool
 {
     sealed partial class ViewElement
     {
@@ -41,7 +41,7 @@
             // 
             this._labelValue.AutoSize = true;
             this._labelValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this._labelValue.Location = new System.Drawing.Point(3, 41);
+            this._labelValue.Location = new System.Drawing.Point(3, 53);
             this._labelValue.Name = "_labelValue";
             this._labelValue.Size = new System.Drawing.Size(64, 12);
             this._labelValue.TabIndex = 0;
@@ -74,24 +74,24 @@
             // 
             this._labelName.AutoSize = true;
             this._labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this._labelName.Location = new System.Drawing.Point(3, -3);
+            this._labelName.Location = new System.Drawing.Point(3, 41);
             this._labelName.Name = "_labelName";
-            this._labelName.Size = new System.Drawing.Size(27, 12);
+            this._labelName.Size = new System.Drawing.Size(50, 12);
             this._labelName.TabIndex = 1;
-            this._labelName.Text = "C123";
+            this._labelName.Text = "Имя: C123";
             // 
             // ViewElement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::View.Properties.Resources.Capacitor;
+            this.BackgroundImage = global::DrawingTool.Properties.Resources.Capacitor;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ContextMenuStrip = this._contextMenuStrip;
             this.Controls.Add(this._labelName);
             this.Controls.Add(this._labelValue);
             this.DoubleBuffered = true;
             this.Name = "ViewElement";
-            this.Size = new System.Drawing.Size(80, 60);
+            this.Size = new System.Drawing.Size(80, 67);
             this._contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

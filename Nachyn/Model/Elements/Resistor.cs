@@ -1,5 +1,4 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace Model.Elements
 {
@@ -27,12 +26,7 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
-            if (frequency < 1 || frequency > 1000000000000)
-            {
-                throw new ArgumentException(
-                    "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
-            }
-
+            Calculations.Calculations.CheckFrequencies(frequency);
             return new Complex(Value, 0);
         }
 

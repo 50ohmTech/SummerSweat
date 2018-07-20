@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
+using DrawingTool.Properties;
 using Model.Elements;
 using Model.Events;
-using View.Properties;
 
-namespace View
+namespace DrawingTool
 {
     /// <summary>
     ///     Визуальный элемент
@@ -27,20 +27,22 @@ namespace View
 
         private void Element_ValueChanged(object sender, ElementValueEventArgs arguments)
         {
-            _labelValue.Text = "Номинал: " +
+            _labelValue.Text = @"Номинал: " +
                                arguments.NewValue.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text = arguments.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text =
+                @"Имя: " + arguments.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         private void ToolStripMenuAdd_Click(object sender, EventArgs e)
         {
-            new ElementManagerForm(this).ShowDialog();
+            new EditForm(this).ShowDialog();
         }
 
         private void ToolStripMenuDelete_Click(object sender, EventArgs e)
         {
             _elementBases.Remove(Item);
+            OnDelete?.Invoke();
             Dispose();
         }
 
@@ -59,9 +61,10 @@ namespace View
             InitializeComponent();
             Item = element;
             _labelValue.Text =
-                "Номинал: " + element.Value.ToString(CultureInfo.CurrentCulture);
+                @"Номинал: " + element.Value.ToString(CultureInfo.CurrentCulture);
 
-            _labelName.Text = element.Name.ToString(CultureInfo.CurrentCulture);
+            _labelName.Text =
+                @"Имя: " + element.Name.ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -96,6 +99,11 @@ namespace View
                 _item.ValueChanged += Element_ValueChanged;
             }
         }
+
+        /// <summary>
+        ///     Событие возникающее при удалении любого элемента
+        /// </summary>
+        public static event DeleteEventHandler OnDelete;
 
         #endregion
     }

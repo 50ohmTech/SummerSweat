@@ -14,15 +14,7 @@ namespace Model
         /// <summary>
         ///     Список элементов цепи
         /// </summary>
-        public List<Branch> Branches;
-
-        /// <summary>
-        ///     Конструктор
-        /// </summary>
-        public Circuit()
-        {
-            Branches = new List<Branch>();
-        }
+        public readonly List<Branch> Branches = new List<Branch>();
 
         /// <summary>
         ///     Пустая ли цепь
@@ -31,17 +23,15 @@ namespace Model
         {
             get
             {
-                bool isEmpty = true;
                 foreach (Branch branch in Branches)
                 {
                     if (branch.Elements.Count > 0)
                     {
-                        isEmpty = false;
-                        break;
+                        return branch.Elements.Count <= 0;
                     }
                 }
 
-                return isEmpty;
+                return true;
             }
         }
 
@@ -57,16 +47,12 @@ namespace Model
                 throw new ArgumentNullException();
             }
 
+            Calculations.Calculations.CheckFrequencies(frequencies);
+
             List<Complex> resistanceZ = new List<Complex>();
 
             foreach (double frequency in frequencies)
             {
-                if (frequency < 1 || frequency > 1000000000000)
-                {
-                    throw new ArgumentException(
-                        "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
-                }
-
                 Dictionary<string, List<Branch>> tempBranches =
                     new Dictionary<string, List<Branch>>();
 
@@ -89,6 +75,11 @@ namespace Model
 
                         foreach (Branch branch in tempBranches[key])
                         {
+                            if (branch.Elements.Count < 1)
+                            {
+                                continue;
+                            }
+
                             Complex conduction = 1 / branch.CalculateZ(frequency);
                             totalСonductivity += conduction;
                         }
@@ -109,6 +100,14 @@ namespace Model
             }
 
             return resistanceZ;
+        }
+
+        /// <summary>
+        ///     Очистить пустые ветки
+        /// </summary>
+        public void ClearEmptyBranches()
+        {
+            Branches.RemoveAll(branch => branch.Elements.Count < 1);
         }
 
         #endregion

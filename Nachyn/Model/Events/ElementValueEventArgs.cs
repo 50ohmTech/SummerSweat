@@ -7,6 +7,25 @@ namespace Model.Events
     /// </summary>
     public class ElementValueEventArgs : EventArgs
     {
+        #region Private
+
+        /// <summary>
+        ///     Имя
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        ///     Новое значение
+        /// </summary>
+        private double _newValue;
+
+        /// <summary>
+        ///     Старое значение
+        /// </summary>
+        private double _oldValue;
+
+        #endregion
+
         #region Public
 
         /// <summary>
@@ -25,17 +44,45 @@ namespace Model.Events
         /// <summary>
         ///     Старое значение
         /// </summary>
-        public double OldValue { get; }
+        public double OldValue
+        {
+            set
+            {
+                Calculations.Calculations.CheckFrequencies(value);
+                _oldValue = value;
+            }
+            get => _oldValue;
+        }
 
         /// <summary>
         ///     Новое значение
         /// </summary>
-        public double NewValue { get; }
+        public double NewValue
+        {
+            set
+            {
+                Calculations.Calculations.CheckFrequencies(value);
+                _newValue = value;
+            }
+            get => _newValue;
+        }
 
         /// <summary>
         ///     Сообщение
         /// </summary>
-        public string Name { get; }
+        public string Name
+        {
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Name));
+                }
+
+                _name = value;
+            }
+            get => _name;
+        }
 
         #endregion
     }

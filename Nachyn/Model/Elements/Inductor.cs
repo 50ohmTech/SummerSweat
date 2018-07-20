@@ -27,12 +27,7 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
-            if (frequency < 1 || frequency > 1000000000000)
-            {
-                throw new ArgumentException(
-                    "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
-            }
-
+            Calculations.Calculations.CheckFrequencies(frequency);
             double valueZ = 2 * Math.PI * frequency * Value;
             return new Complex(0, valueZ);
         }

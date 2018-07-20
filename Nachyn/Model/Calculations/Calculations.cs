@@ -20,6 +20,23 @@ namespace Model.Calculations
         #region Public
 
         /// <summary>
+        ///     Проверить частоты на значения, которые они могут принимать.
+        ///     В случае ошибки выбрасывается ArgumentException исключение.
+        /// </summary>
+        /// <param name="frequncies"></param>
+        public static void CheckFrequencies(params double[] frequncies)
+        {
+            foreach (double frequency in frequncies)
+            {
+                if (frequency < 1 || frequency > 1000000000000)
+                {
+                    throw new ArgumentException(
+                        "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
+                }
+            }
+        }
+
+        /// <summary>
         ///     Возвращает частоту
         /// </summary>
         public double Frequency
@@ -27,12 +44,7 @@ namespace Model.Calculations
             get => _frequency;
             set
             {
-                if (value < 1 || value > 1000000000000)
-                {
-                    throw new ArgumentException(
-                        "Частота может иметь значение только от 1 Гц. до 1 ТГц.");
-                }
-
+                CheckFrequencies(value);
                 _frequency = value;
             }
         }
