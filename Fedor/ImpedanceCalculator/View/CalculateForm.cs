@@ -32,12 +32,21 @@ namespace View
         public CalculateForm()
         {
             InitializeComponent();
+
+            startValueBox.ContextMenu = new ContextMenu();
+            intervalBox.ContextMenu = new ContextMenu();
+            countBox.ContextMenu = new ContextMenu();
         }
 
         #endregion
 
         #region - - Приватные методы - -
 
+        /// <summary>
+        /// Расчитать импедансы для диапазона частот.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void CreateFrequencyButton_Click(object sender, EventArgs e)
         {
             NumberBox.ChangeSeparator(startValueBox);
@@ -48,44 +57,7 @@ namespace View
             var interval = double.Parse(intervalBox.Text);
             var count = uint.Parse(countBox.Text);
 
-            if (interval < double.Parse(Properties.Resources.minFrequencyInterval) ||
-                interval > double.Parse(Properties.Resources.maxFrequencyInterval))
-            {
-                MessageBox.Show(
-                    "Интервал между частотами должен быть\nне менее " +
-                    Properties.Resources.minFrequencyInterval + " и не более " +
-                    Properties.Resources.maxFrequencyInterval,
-                    "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
-
-            if (count < int.Parse(Properties.Resources.minFrequencyCount) ||
-                count > int.Parse(Properties.Resources.maxFrequencyCount))
-            {
-                MessageBox.Show(
-                    "Количество значений должно быть\nне менее " +
-                    Properties.Resources.minFrequencyCount + " и не более " +
-                    Properties.Resources.maxFrequencyCount,
-                    "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
-
-            if (startValue < double.Parse(Properties.Resources.minFrequencyStartValue) ||
-                startValue > double.Parse(Properties.Resources.maxFrequencyStartValue))
-            {
-                MessageBox.Show(
-                    "Начальное значение длжно быть\nне менее " +
-                    Properties.Resources.minFrequencyStartValue + " и не более " +
-                    Properties.Resources.maxFrequencyStartValue,
-                    "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
+            if (!ConstraintTools.IsCorrectFrequency(startValue, interval, count)) return;
 
             _frequencies = new List<double>();
 
@@ -101,28 +73,48 @@ namespace View
 
             for (var index = 0; index < _impedancies.Count; index++)
             {
-                circuitGridView.Rows.Add(_impedancies[index], _frequencies[index]);
+                circuitGridView.Rows.Add(_frequencies[index], _impedancies[index]);
             }
         }
 
+        /// <summary>
+        /// Подготовить текстовое поле к вводу.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void TextBox_Enter(object sender, EventArgs e)
         {
             NumberBox.Enter(sender);
         }
 
+        /// <summary>
+        /// Подготовить текстовое поле к выводу.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void TextBox_Leave(object sender, EventArgs e)
         {
             NumberBox.Leave(sender);
         }
 
+        /// <summary>
+        /// Ограничить ввод символов в текстовое поля для double.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void DoubleTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             NumberBox.PressDouble(e, ((TextBox)sender).Text);
         }
 
+        /// <summary>
+        /// Ограничить ввод символов в текстовое поля для int.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void IntTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumberBox.PressInt(e);
+            NumberBox.PressInt(sender, e);
         }
 
         #endregion

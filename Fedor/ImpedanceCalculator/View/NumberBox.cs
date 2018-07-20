@@ -13,13 +13,14 @@ namespace View
         /// <summary>
         /// Ввести вещественное значение.
         /// </summary>
-        /// <param name="e">Аргументы события.</param>
+        /// <param name="e">Параметры события.</param>
         /// <param name="text">Текст элемента.</param>
         public static void PressDouble(KeyPressEventArgs e, string text)
         {
-            var separator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
+            var separator = System.Globalization.NumberFormatInfo.CurrentInfo
+                .NumberDecimalSeparator;
 
-            if (char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back) return;
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == (char) Keys.Back) return;
 
             if (text.IndexOf(separator, StringComparison.Ordinal) != -1)
             {
@@ -35,10 +36,14 @@ namespace View
         /// <summary>
         /// Ввести целочисленное значение.
         /// </summary>
-        /// <param name="e">Аргументы события.</param>
-        public static void PressInt(KeyPressEventArgs e)
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
+        public static void PressInt(object sender, KeyPressEventArgs e)
         {
-            if (char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back) return;
+            if (e.KeyChar == (char) Keys.Back || char.IsDigit(e.KeyChar) &&
+                ((TextBox) sender).Text.Length < 4)
+                return;
+
             e.Handled = true;
         }
 
@@ -50,7 +55,7 @@ namespace View
         {
             if (!(sender is TextBox textBox)) return;
 
-            if (textBox.Text == Properties.Resources.defaultNumber)
+            if (textBox.Text == "0")
             {
                 textBox.Text = string.Empty;
             }
@@ -66,7 +71,7 @@ namespace View
 
             if (textBox.Text == string.Empty)
             {
-                textBox.Text = Properties.Resources.defaultNumber;
+                textBox.Text = "0";
             }
         }
 
@@ -76,9 +81,10 @@ namespace View
         /// <param name="valueBox">Элемент управления текстового поля.</param>
         public static void ChangeSeparator(TextBox valueBox)
         {
-            if (valueBox.Text == System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator)
+            if (valueBox.Text == System.Globalization.NumberFormatInfo.CurrentInfo
+                    .NumberDecimalSeparator)
             {
-                valueBox.Text = Properties.Resources.defaultNumber;
+                valueBox.Text = "0";
             }
         }
 

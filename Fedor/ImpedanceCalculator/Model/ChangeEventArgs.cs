@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Model
 {
     /// <summary>
@@ -6,17 +7,9 @@ namespace Model
     /// </summary>
     public class ChangedEventArgs : EventArgs
     {
-        #region - - Перечисления - -
+        #region - - Поля - -
 
-        /// <summary>
-        /// Возможные изменения.
-        /// </summary>
-        public enum ChangeType
-        {
-            Add,
-            Delete,
-            Clear
-        }
+        private ElementBase _element;
 
         #endregion
 
@@ -30,7 +23,11 @@ namespace Model
         /// <summary>
         /// Добавленный элемент.
         /// </summary>
-        public ElementBase Element { get; }
+        public ElementBase Element
+        {
+            get => _element;
+            private set => _element = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
         #endregion
 
@@ -39,7 +36,7 @@ namespace Model
         /// <summary>
         /// Конструктор класса ChangedEventArgs.
         /// </summary>
-        /// <param name="element">Добавляемый элемент.</param>
+        /// <param name="element">Изменяемый элемент.</param>
         /// <param name="type">Тип изменения.</param>
         public ChangedEventArgs(ElementBase element, ChangeType type)
         {

@@ -34,22 +34,24 @@ namespace View
             this.label1 = new System.Windows.Forms.Label();
             this.calculateButton = new System.Windows.Forms.Button();
             this.circuitPictureBox = new System.Windows.Forms.PictureBox();
-            this.elementGridView = new System.Windows.Forms.DataGridView();
-            this.nameColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addBox = new System.Windows.Forms.GroupBox();
+            this.addGroupBox = new System.Windows.Forms.GroupBox();
+            this.elementComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.connectionComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.valueBox = new System.Windows.Forms.TextBox();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.connectionComboBox = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.elementComboBox = new System.Windows.Forms.ComboBox();
+            this.elementGridView = new View.MyDataGridView();
+            this.nameColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.circuitGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
+            this.addGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
-            this.addBox.SuspendLayout();
+            this.circuitGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // circuitComboBox
@@ -60,8 +62,10 @@ namespace View
             "Создать цепь",
             "Цепь 1",
             "Цепь 2",
-            "Цепь 3"});
-            this.circuitComboBox.Location = new System.Drawing.Point(127, 6);
+            "Цепь 3",
+            "Цепь 4",
+            "Цепь 5"});
+            this.circuitComboBox.Location = new System.Drawing.Point(124, 16);
             this.circuitComboBox.Name = "circuitComboBox";
             this.circuitComboBox.Size = new System.Drawing.Size(121, 24);
             this.circuitComboBox.TabIndex = 0;
@@ -70,7 +74,7 @@ namespace View
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(9, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 17);
             this.label1.TabIndex = 2;
@@ -78,74 +82,82 @@ namespace View
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(912, 585);
+            this.calculateButton.Location = new System.Drawing.Point(7, 637);
             this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(158, 36);
+            this.calculateButton.Size = new System.Drawing.Size(238, 39);
             this.calculateButton.TabIndex = 3;
-            this.calculateButton.Text = "Расчитать импеданс";
+            this.calculateButton.Text = "Рассчитать цепь";
             this.calculateButton.UseVisualStyleBackColor = true;
             this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
             // circuitPictureBox
             // 
             this.circuitPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.circuitPictureBox.Location = new System.Drawing.Point(256, 6);
+            this.circuitPictureBox.Location = new System.Drawing.Point(269, 12);
             this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(814, 570);
+            this.circuitPictureBox.Size = new System.Drawing.Size(951, 676);
             this.circuitPictureBox.TabIndex = 4;
             this.circuitPictureBox.TabStop = false;
             // 
-            // elementGridView
+            // addGroupBox
             // 
-            this.elementGridView.AllowUserToAddRows = false;
-            this.elementGridView.AllowUserToDeleteRows = false;
-            this.elementGridView.AllowUserToResizeColumns = false;
-            this.elementGridView.AllowUserToResizeRows = false;
-            this.elementGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.elementGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameColomn,
-            this.valueColomn});
-            this.elementGridView.Location = new System.Drawing.Point(10, 36);
-            this.elementGridView.Name = "elementGridView";
-            this.elementGridView.RowHeadersVisible = false;
-            this.elementGridView.RowTemplate.Height = 24;
-            this.elementGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.elementGridView.Size = new System.Drawing.Size(238, 282);
-            this.elementGridView.TabIndex = 8;
-            this.elementGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ElementGridView_EditingControlShowing);
+            this.addGroupBox.Controls.Add(this.elementComboBox);
+            this.addGroupBox.Controls.Add(this.label5);
+            this.addGroupBox.Controls.Add(this.connectionComboBox);
+            this.addGroupBox.Controls.Add(this.label4);
+            this.addGroupBox.Controls.Add(this.label2);
+            this.addGroupBox.Controls.Add(this.label3);
+            this.addGroupBox.Controls.Add(this.valueBox);
+            this.addGroupBox.Location = new System.Drawing.Point(7, 381);
+            this.addGroupBox.Name = "addGroupBox";
+            this.addGroupBox.Size = new System.Drawing.Size(238, 204);
+            this.addGroupBox.TabIndex = 7;
+            this.addGroupBox.TabStop = false;
+            this.addGroupBox.Text = "Параметры нового элемента";
             // 
-            // nameColomn
+            // elementComboBox
             // 
-            this.nameColomn.DataPropertyName = "Name";
-            this.nameColomn.Frozen = true;
-            this.nameColomn.HeaderText = "Name";
-            this.nameColomn.Name = "nameColomn";
-            this.nameColomn.ReadOnly = true;
-            this.nameColomn.Width = 70;
+            this.elementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.elementComboBox.FormattingEnabled = true;
+            this.elementComboBox.Items.AddRange(new object[] {
+            "Резистор",
+            "Конденсатор",
+            "Катушка"});
+            this.elementComboBox.Location = new System.Drawing.Point(6, 44);
+            this.elementComboBox.Name = "elementComboBox";
+            this.elementComboBox.Size = new System.Drawing.Size(168, 24);
+            this.elementComboBox.TabIndex = 7;
             // 
-            // valueColomn
+            // label5
             // 
-            this.valueColomn.DataPropertyName = "Value";
-            this.valueColomn.Frozen = true;
-            this.valueColomn.HeaderText = "Value";
-            this.valueColomn.Name = "valueColomn";
-            this.valueColomn.Width = 110;
+            this.label5.Location = new System.Drawing.Point(6, 164);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(225, 34);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "и элемент из списка, с которым хотите соеденить";
+            this.label5.Visible = false;
             // 
-            // addBox
+            // connectionComboBox
             // 
-            this.addBox.Controls.Add(this.elementComboBox);
-            this.addBox.Controls.Add(this.label5);
-            this.addBox.Controls.Add(this.connectionComboBox);
-            this.addBox.Controls.Add(this.label4);
-            this.addBox.Controls.Add(this.label2);
-            this.addBox.Controls.Add(this.label3);
-            this.addBox.Controls.Add(this.valueBox);
-            this.addBox.Location = new System.Drawing.Point(12, 324);
-            this.addBox.Name = "addBox";
-            this.addBox.Size = new System.Drawing.Size(238, 204);
-            this.addBox.TabIndex = 7;
-            this.addBox.TabStop = false;
-            this.addBox.Text = "Параметры нового элемента";
+            this.connectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.connectionComboBox.FormattingEnabled = true;
+            this.connectionComboBox.Items.AddRange(new object[] {
+            "Последовательное",
+            "Параллельное"});
+            this.connectionComboBox.Location = new System.Drawing.Point(6, 137);
+            this.connectionComboBox.Name = "connectionComboBox";
+            this.connectionComboBox.Size = new System.Drawing.Size(168, 24);
+            this.connectionComboBox.TabIndex = 5;
+            this.connectionComboBox.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 117);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(184, 17);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Выберите тип соединения";
             // 
             // label2
             // 
@@ -169,7 +181,7 @@ namespace View
             // 
             this.valueBox.Location = new System.Drawing.Point(6, 92);
             this.valueBox.Name = "valueBox";
-            this.valueBox.Size = new System.Drawing.Size(107, 22);
+            this.valueBox.Size = new System.Drawing.Size(168, 22);
             this.valueBox.TabIndex = 1;
             this.valueBox.Text = "0";
             this.valueBox.Enter += new System.EventHandler(this.ValueBox_Enter);
@@ -178,9 +190,9 @@ namespace View
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(134, 582);
+            this.deleteButton.Location = new System.Drawing.Point(128, 591);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(116, 39);
+            this.deleteButton.Size = new System.Drawing.Size(117, 40);
             this.deleteButton.TabIndex = 6;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -188,82 +200,88 @@ namespace View
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(12, 582);
+            this.addButton.Location = new System.Drawing.Point(6, 591);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(116, 39);
+            this.addButton.Size = new System.Drawing.Size(115, 40);
             this.addButton.TabIndex = 5;
             this.addButton.Text = "Добавить";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // label4
+            // elementGridView
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 117);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(184, 17);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Выберите тип соединения";
+            this.elementGridView.AllowUserToAddRows = false;
+            this.elementGridView.AllowUserToDeleteRows = false;
+            this.elementGridView.AllowUserToResizeColumns = false;
+            this.elementGridView.AllowUserToResizeRows = false;
+            this.elementGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.elementGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameColomn,
+            this.valueColomn});
+            this.elementGridView.Location = new System.Drawing.Point(7, 46);
+            this.elementGridView.MultiSelect = false;
+            this.elementGridView.Name = "elementGridView";
+            this.elementGridView.RowHeadersVisible = false;
+            this.elementGridView.RowTemplate.Height = 24;
+            this.elementGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.elementGridView.Size = new System.Drawing.Size(238, 329);
+            this.elementGridView.StandardTab = true;
+            this.elementGridView.TabIndex = 8;
+            this.elementGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ElementGridView_EditingControlShowing);
             // 
-            // connectionComboBox
+            // nameColomn
             // 
-            this.connectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.connectionComboBox.FormattingEnabled = true;
-            this.connectionComboBox.Items.AddRange(new object[] {
-            "Последовательное",
-            "Параллельное"});
-            this.connectionComboBox.Location = new System.Drawing.Point(6, 137);
-            this.connectionComboBox.Name = "connectionComboBox";
-            this.connectionComboBox.Size = new System.Drawing.Size(168, 24);
-            this.connectionComboBox.TabIndex = 5;
-            this.connectionComboBox.Visible = false;
+            this.nameColomn.DataPropertyName = "Name";
+            this.nameColomn.Frozen = true;
+            this.nameColomn.HeaderText = "Name";
+            this.nameColomn.Name = "nameColomn";
+            this.nameColomn.ReadOnly = true;
+            this.nameColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.nameColomn.Width = 70;
             // 
-            // label5
+            // valueColomn
             // 
-            this.label5.Location = new System.Drawing.Point(7, 164);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(225, 34);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "и элемент из списка, с которым хотитте соеденить";
-            this.label5.Visible = false;
+            this.valueColomn.DataPropertyName = "Value";
+            this.valueColomn.Frozen = true;
+            this.valueColomn.HeaderText = "Value";
+            this.valueColomn.Name = "valueColomn";
+            this.valueColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.valueColomn.Width = 110;
             // 
-            // elementComboBox
+            // circuitGroupBox
             // 
-            this.elementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.elementComboBox.FormattingEnabled = true;
-            this.elementComboBox.Items.AddRange(new object[] {
-            "Резистор",
-            "Конденсатор",
-            "Катушка"});
-            this.elementComboBox.Location = new System.Drawing.Point(6, 44);
-            this.elementComboBox.Name = "elementComboBox";
-            this.elementComboBox.Size = new System.Drawing.Size(168, 24);
-            this.elementComboBox.TabIndex = 7;
+            this.circuitGroupBox.Controls.Add(this.calculateButton);
+            this.circuitGroupBox.Controls.Add(this.elementGridView);
+            this.circuitGroupBox.Controls.Add(this.circuitComboBox);
+            this.circuitGroupBox.Controls.Add(this.label1);
+            this.circuitGroupBox.Controls.Add(this.addButton);
+            this.circuitGroupBox.Controls.Add(this.addGroupBox);
+            this.circuitGroupBox.Controls.Add(this.deleteButton);
+            this.circuitGroupBox.Location = new System.Drawing.Point(12, 6);
+            this.circuitGroupBox.Name = "circuitGroupBox";
+            this.circuitGroupBox.Size = new System.Drawing.Size(251, 682);
+            this.circuitGroupBox.TabIndex = 9;
+            this.circuitGroupBox.TabStop = false;
             // 
             // CreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 633);
-            this.Controls.Add(this.elementGridView);
-            this.Controls.Add(this.addBox);
-            this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.addButton);
+            this.ClientSize = new System.Drawing.Size(1232, 693);
+            this.Controls.Add(this.circuitGroupBox);
             this.Controls.Add(this.circuitPictureBox);
-            this.Controls.Add(this.calculateButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.circuitComboBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximumSize = new System.Drawing.Size(1100, 680);
-            this.MinimumSize = new System.Drawing.Size(1100, 680);
+            this.MaximumSize = new System.Drawing.Size(1250, 740);
+            this.MinimumSize = new System.Drawing.Size(1250, 740);
             this.Name = "CreateForm";
             this.Text = "Circuit Calculator";
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
+            this.addGroupBox.ResumeLayout(false);
+            this.addGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
-            this.addBox.ResumeLayout(false);
-            this.addBox.PerformLayout();
+            this.circuitGroupBox.ResumeLayout(false);
+            this.circuitGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -273,10 +291,8 @@ namespace View
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.PictureBox circuitPictureBox;
-        private DataGridView elementGridView;
-        private DataGridViewTextBoxColumn nameColomn;
-        private DataGridViewTextBoxColumn valueColomn;
-        private GroupBox addBox;
+        private MyDataGridView elementGridView;
+        private GroupBox addGroupBox;
         private Label label2;
         private Label label3;
         private TextBox valueBox;
@@ -286,6 +302,9 @@ namespace View
         private ComboBox connectionComboBox;
         private Label label4;
         private ComboBox elementComboBox;
+        private DataGridViewTextBoxColumn nameColomn;
+        private DataGridViewTextBoxColumn valueColomn;
+        private GroupBox circuitGroupBox;
     }
 }
 

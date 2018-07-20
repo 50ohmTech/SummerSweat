@@ -57,20 +57,20 @@ namespace Model
         /// <summary>
         /// Расчитать импеданс цепи рекурсивно.
         /// </summary>
-        /// <param name="node">Корень поддерева.</param>
+        /// <param name="root">Корень поддерева.</param>
         /// <param name="frequency">Частота сигнала.</param>
         /// <returns></returns>
-        private Complex CalculateZ(ElementsTree.Node node, double frequency)
+        private Complex CalculateZ(Node root, double frequency)
         {
-            if (node.Brood.Count == 0)
+            if (root.Brood.Count == 0)
             {
-                return node.Element.CalculateZ(frequency);
+                return root.Element.CalculateZ(frequency);
             }
 
             var impedance = new Complex();
-            if (node.IsSerial)
+            if (root.IsSerial)
             {
-                foreach (var child in node.Brood)
+                foreach (var child in root.Brood)
                 {
                     impedance += 1 / CalculateZ(child, frequency);
                 }
@@ -79,7 +79,7 @@ namespace Model
             }
             else
             {
-                foreach (var child in node.Brood)
+                foreach (var child in root.Brood)
                 {
                     impedance += CalculateZ(child, frequency);
                 }
