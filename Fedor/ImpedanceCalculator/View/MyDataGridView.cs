@@ -58,8 +58,7 @@ namespace View
                 return;
             }
 
-            if (value < double.Parse(Resources.minElementValue) ||
-                value > double.Parse(Resources.maxElementValue))
+            if (ConstraintTools.IsCorrectNominal(value))
             {
                 EditingControl.Text =
                     element.Value.ToString(CultureInfo.InvariantCulture);
