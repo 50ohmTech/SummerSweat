@@ -2,7 +2,6 @@
 using System;
 using System.Globalization;
 using System.Windows.Forms;
-using View.Properties;
 
 namespace View
 {
@@ -58,7 +57,7 @@ namespace View
                 return;
             }
 
-            if (ConstraintTools.IsCorrectNominal(value))
+            if (!ConstraintTools.IsCorrectNominal(value))
             {
                 EditingControl.Text =
                     element.Value.ToString(CultureInfo.InvariantCulture);
@@ -76,12 +75,22 @@ namespace View
 
         #region - - Защищенные методы - -
 
+        /// <summary>
+        /// Обрабатывает клавишу диалогового окна.
+        /// </summary>
+        /// <param name="keyData">Одно из значений Keys, представляющее обрабатываемую клавишу.</param>
+        /// <returns></returns>
         protected override bool ProcessDialogKey(Keys keyData)
         {
             ResetCell(keyData);
             return base.ProcessDialogKey(keyData);
         }
 
+        /// <summary>
+        /// Обрабатывает клавиши, используемые для навигации в объекте DataGridView.
+        /// </summary>
+        /// <param name="e">Содержит сведения о клавише, которая была нажата.</param>
+        /// <returns></returns>
         protected override bool ProcessDataGridViewKey(KeyEventArgs e)
         {
             ResetCell(e.KeyCode);
