@@ -52,12 +52,13 @@
     <Compile Include="CalculatorForm.Designer.cs">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CircuitRedactorForm.cs">
+    <Compile Include="CircuitEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CircuitRedactorForm.Designer.cs">
-      <DependentUpon>CircuitRedactorForm.cs</DependentUpon>
+    <Compile Include="CircuitEditorForm.Designer.cs">
+      <DependentUpon>CircuitEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Factories\ControlFactory.cs" />
     <Compile Include="Controls\DrawingElements.cs" />
     <Compile Include="Controls\ElementControl.cs">
       <SubType>UserControl</SubType>
@@ -73,11 +74,12 @@
     <Compile Include="Controls\RedactorPanel.Designer.cs">
       <DependentUpon>RedactorPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validation\ValidatingClass.cs" />
     <EmbeddedResource Include="CalculatorForm.resx">
       <DependentUpon>CalculatorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CircuitRedactorForm.resx">
-      <DependentUpon>CircuitRedactorForm.cs</DependentUpon>
+    <EmbeddedResource Include="CircuitEditorForm.resx">
+      <DependentUpon>CircuitEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ElementControl.resx">
       <DependentUpon>ElementControl.cs</DependentUpon>

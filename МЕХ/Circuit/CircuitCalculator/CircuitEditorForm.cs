@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Windows.Forms;
 using CircuitCalculator.Controls;
+using CircuitCalculator.Factories;
+using CircuitCalculator.Validation;
 using CircuitElements;
 
 namespace CircuitCalculator
@@ -9,7 +11,7 @@ namespace CircuitCalculator
 	/// <summary>
 	///     Форма редактирования эл. цепи
 	/// </summary>
-	public partial class CircuitRedactorForm : Form
+	public partial class CircuitEditorForm : Form
 	{
 		#region – – Поля – – 
 
@@ -25,12 +27,12 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Конструктор
 		/// </summary>
-		public CircuitRedactorForm()
+		public CircuitEditorForm()
 		{
 			InitializeComponent();
 
 		#if !DEBUG
-			checkButton.Visible = false;
+			testButton.Visible = false;
 #endif
 		}
 
@@ -131,11 +133,9 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddResistorButton_Click(object sender, EventArgs e)
 		{
-			var newElementControl =
-				new ElementControl(new Resistor(resistorNameTextBox.Text,
-					Convert.ToDouble(resistorValueTextBox.Text)));
-
-			redactorPanel.AddControl(newElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateResistorControl(
+				resistorNameTextBox.Text,
+				Convert.ToDouble(resistorValueTextBox.Text)));
 		}
 
 		/// <summary>
@@ -143,11 +143,9 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddCapacitorButton_Click(object sender, EventArgs e)
 		{
-			var newElementControl =
-				new ElementControl(new Capacitor(capacitorNameTextBox.Text,
-					Convert.ToDouble(capacitorValueTextBox.Text)));
-
-			redactorPanel.AddControl(newElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateCapacitorControl(
+				capacitorNameTextBox.Text,
+				Convert.ToDouble(capacitorValueTextBox.Text)));
 		}
 
 		/// <summary>
@@ -155,11 +153,9 @@ namespace CircuitCalculator
 		/// </summary>
 		private void AddInductorButton_Click(object sender, EventArgs e)
 		{
-			var newElementControl =
-				new ElementControl(new Inductor(inductorNameTextBox.Text,
-					Convert.ToDouble(inductorValueTextBox.Text)));
-
-			redactorPanel.AddControl(newElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateInductorControl(
+				inductorNameTextBox.Text,
+				Convert.ToDouble(inductorValueTextBox.Text)));
 		}
 
 		/// <summary>
@@ -176,34 +172,51 @@ namespace CircuitCalculator
 		private void ElementGridView_CellValidating(object sender,
 			DataGridViewCellValidatingEventArgs e)
 		{
-			if (elementGridView.CurrentCell.ColumnIndex == 1)
+			if (elementGridView.CurrentCell.ColumnIndex != 1)
 			{
-				if (double.TryParse(e.FormattedValue.ToString(),
-					    out var newValue) && !(newValue < 0.000000001) && e.FormattedValue.ToString().Length < 38)
-				{
-					_displayingCircuit.Elements[e.RowIndex].Value =
-						Convert.ToDouble(e.FormattedValue);
-
-					RefreshRedactor();
-					CircuitValueChanged?.Invoke(
-						Convert.ToDouble(e.FormattedValue),
-						_displayingCircuit.Elements[e.RowIndex]);
-				}
-				else
-				{
-					e.Cancel = true;
-					MessageBox.Show(
-						"Вводимое значение должно удовлетворять следующим условиям:\n " +
-						"-быть положительным числом,\n " +
-						"-быть вещественным или натуральным числом,\n " +
-						"-быть большим 0.000 000 001 по модулю,\n " +
-						"-длина значения не должна превышать 38 символов.\n " +
-						"-использование экспоненциальной записи не допускается.\n " +
-						"Чтобы продолжить работу, измените значение поля на удовлетворяющее данным условиям",
-						"Ошибка ввода значения частоты", MessageBoxButtons.OK,
-						MessageBoxIcon.Information);
-				}
+				return;
 			}
+
+			var formatingString = e.FormattedValue.ToString().Replace('.', ',');
+			if (ValidatingClass.IsCellCorrect(e))
+			{
+				_displayingCircuit.Elements[e.RowIndex].Value =
+					Convert.ToDouble(formatingString);
+
+				RefreshRedactor();
+				CircuitValueChanged?.Invoke(
+					Convert.ToDouble(formatingString),
+					_displayingCircuit.Elements[e.RowIndex]);
+			}
+			else
+			{
+				elementGridView.CancelEdit();
+
+				MessageBox.Show(
+					"Вы ввели: " + formatingString + "\n" +
+					"Вводимое значение должно удовлетворять следующим условиям:\n " +
+					"-быть положительным числом\n " +
+					"-быть вещественным или натуральным числом\n " +
+					"-быть большим 0.000 000 001 по модулю\n " +
+					"-быть меньше 1 000 000 000 000\n " +
+					"-запись не должна содержать пробелов\n " +
+					"-запись должна начинаться с цифры\n " +
+					"-использование экспоненциальной записи не допускается\n " +
+					"-eсли первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
+					"Ошибка ввода значения частоты", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+			}
+		}
+
+		/// <summary>
+		///     Закрытие формы редактора
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CircuitRedactorForm_FormClosing(object sender,
+			FormClosingEventArgs e)
+		{
+			e.Cancel = true;
 		}
 
 		/// <summary>
@@ -213,33 +226,27 @@ namespace CircuitCalculator
 		{
 			redactorPanel.CleanPanel();
 
-			var startingElementControl =
-				new ElementControl(DrawingElements.StartingElement);
-
-			redactorPanel.AddControl(startingElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateStartingElementControl());
 
 			foreach (var element in _displayingCircuit.Elements)
 			{
 				if (element is Resistor)
 				{
-					var newElementControl =
-						new ElementControl(new Resistor(element.Name, element.Value));
-
-					redactorPanel.AddControl(newElementControl);
+					redactorPanel.AddControl(
+						ControlFactory.CreateResistorControl(element.Name,
+							element.Value));
 				}
 				else if (element is Inductor)
 				{
-					var newElementControl =
-						new ElementControl(new Inductor(element.Name, element.Value));
-
-					redactorPanel.AddControl(newElementControl);
+					redactorPanel.AddControl(
+						ControlFactory.CreateInductorControl(element.Name,
+							element.Value));
 				}
 				else if (element is Capacitor)
 				{
-					var newElementControl =
-						new ElementControl(new Capacitor(element.Name, element.Value));
-
-					redactorPanel.AddControl(newElementControl);
+					redactorPanel.AddControl(
+						ControlFactory.CreateCapacitorControl(element.Name,
+							element.Value));
 				}
 				else
 				{
@@ -248,15 +255,9 @@ namespace CircuitCalculator
 				}
 			}
 
-			var endingElementControl = new ElementControl(DrawingElements.FiniteElement);
-			redactorPanel.AddControl(endingElementControl);
+			redactorPanel.AddControl(ControlFactory.CreateFiniteElementControl());
 		}
 
 		#endregion – – Приватные методы – –
-
-		private void CircuitRedactorForm_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			e.Cancel = true;
-		}
 	}
 }

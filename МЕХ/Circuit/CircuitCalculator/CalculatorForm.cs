@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
+using CircuitCalculator.Validation;
 using CircuitElements;
 
 namespace CircuitCalculator
@@ -22,17 +22,22 @@ namespace CircuitCalculator
 			InitializeComponent();
 			InitializeCircuits();
 
-			_redactorForm = new CircuitRedactorForm();
+			_redactorForm = new CircuitEditorForm();
 			_redactorForm.Show();
 			_redactorForm.Visible = false;
 			_redactorForm.FormClosing += IsRedactorVisible_Click;
 
-			ToolTip calculateToolTip = new ToolTip();
-			calculateToolTip.SetToolTip(calculateButton, "Расчитать импаденсы для введенных частот");
-			ToolTip resetToolTipt = new ToolTip();
-			resetToolTipt.SetToolTip(resetButton, "Удаляет из таблицы все введенные частоты");
-			ToolTip isRedactorVisibleToolTip = new ToolTip();
-			isRedactorVisibleToolTip.SetToolTip(isRedactorVisibleButton, "Скрывает/Показывает окно редактирования цепи");
+			var calculateToolTip = new ToolTip();
+			calculateToolTip.SetToolTip(calculateButton,
+				"Расчитать импаденсы для введенных частот");
+
+			var resetToolTipt = new ToolTip();
+			resetToolTipt.SetToolTip(resetButton,
+				"Удаляет из таблицы все введенные частоты");
+
+			var isRedactorVisibleToolTip = new ToolTip();
+			isRedactorVisibleToolTip.SetToolTip(isRedactorVisibleButton,
+				"Скрывает/Показывает окно редактирования цепи");
 
 			//Подписывается на событие изменения значения одного из элементов цепи
 			_redactorForm.CircuitValueChanged += ElementChanged;
@@ -45,7 +50,7 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Редактор цепей, взаимодействующий с this формой
 		/// </summary>
-		private readonly CircuitRedactorForm _redactorForm;
+		private readonly CircuitEditorForm _redactorForm;
 
 		/// <summary>
 		///     Список доступных цепей
@@ -72,46 +77,60 @@ namespace CircuitCalculator
 		private void InitializeCircuits()
 		{
 			_circuitList = new List<Circuit>();
-			var circuitElements1 = new List<ElementBase>();
+			var circuitElements1 = new List<ElementBase>
+			{
+				new Capacitor("C1", 10),
+				new Inductor("L1", 5),
+				new Resistor("R1", 20)
+			};
 
-			circuitElements1.Add(new Capacitor("C1", 10));
-			circuitElements1.Add(new Inductor("L1", 5));
-			circuitElements1.Add(new Resistor("R1", 20));
 			var circuit1 = new Circuit(circuitElements1);
 			_circuitList.Add(circuit1);
 
-			var circuitElements2 = new List<ElementBase>();
-			circuitElements2.Add(new Capacitor("C1", 10));
-			circuitElements2.Add(new Capacitor("C2", 5));
-			circuitElements2.Add(new Resistor("R1", 20));
-			circuitElements2.Add(new Resistor("R2", 20));
-			circuitElements2.Add(new Resistor("R3", 20));
-			circuitElements2.Add(new Resistor("R4", 20));
+			var circuitElements2 = new List<ElementBase>
+			{
+				new Capacitor("C1", 10),
+				new Capacitor("C2", 5),
+				new Resistor("R1", 20),
+				new Resistor("R2", 20),
+				new Resistor("R3", 20),
+				new Resistor("R4", 20)
+			};
+
 			var circuit2 = new Circuit(circuitElements2);
 			_circuitList.Add(circuit2);
 
-			var circuitElements3 = new List<ElementBase>();
-			circuitElements3.Add(new Inductor("L1", 10));
-			circuitElements3.Add(new Capacitor("C1", 5));
-			circuitElements3.Add(new Resistor("R1", 20));
-			circuitElements3.Add(new Inductor("L2", 20));
-			circuitElements3.Add(new Resistor("R2", 20));
-			circuitElements3.Add(new Capacitor("C2", 20));
+			var circuitElements3 = new List<ElementBase>
+			{
+				new Inductor("L1", 10),
+				new Capacitor("C1", 5),
+				new Resistor("R1", 20),
+				new Inductor("L2", 20),
+				new Resistor("R2", 20),
+				new Capacitor("C2", 20)
+			};
+
 			var circuit3 = new Circuit(circuitElements3);
 			_circuitList.Add(circuit3);
 
-			var circuitElements4 = new List<ElementBase>();
-			circuitElements4.Add(new Inductor("L1", 10));
+			var circuitElements4 = new List<ElementBase>
+			{
+				new Inductor("L1", 10)
+			};
+
 			var circuit4 = new Circuit(circuitElements4);
 			_circuitList.Add(circuit4);
 
-			var circuitElements5 = new List<ElementBase>();
-			circuitElements5.Add(new Capacitor("C1", 10));
-			circuitElements5.Add(new Capacitor("C2", 5));
-			circuitElements5.Add(new Resistor("R1", 20));
-			circuitElements5.Add(new Resistor("R2", 20));
-			circuitElements5.Add(new Resistor("R3", 20));
-			circuitElements5.Add(new Inductor("I1", 20));
+			var circuitElements5 = new List<ElementBase>
+			{
+				new Capacitor("C1", 10),
+				new Capacitor("C2", 5),
+				new Resistor("R1", 20),
+				new Resistor("R2", 20),
+				new Resistor("R3", 20),
+				new Inductor("I1", 20)
+			};
+
 			var circuit5 = new Circuit(circuitElements5);
 			_circuitList.Add(circuit5);
 
@@ -127,13 +146,13 @@ namespace CircuitCalculator
 		/// </summary>
 		/// <param name="newValue"> новое значение </param>
 		/// <param name="changedElement"> измененный элемент </param>
-		private void ElementChanged(object newValue, object changedElement)
+		private void ElementChanged(double newValue, ElementBase changedElement)
 		{
 			foreach (var element in _currentCircuit.Elements)
 			{
 				if (element == changedElement)
 				{
-					element.Value = (double) newValue;
+					element.Value = newValue;
 				}
 			}
 		}
@@ -151,20 +170,25 @@ namespace CircuitCalculator
 					return;
 				}
 
-				if (double.TryParse(e.FormattedValue.ToString(),
-					    out var newValue) && !(Math.Abs(newValue) < 0.000000001) && e.FormattedValue.ToString().Length < 38)
+				var formatingString = e.FormattedValue.ToString().Replace('.', ',');
+				if (!ValidatingClass.IsCellCorrect(e))
 				{
-					return;
-				}
+					frequenciesGridView.CancelEdit();
 
-				e.Cancel = true;
-				MessageBox.Show("Вводимое значение должно удовлетворять следующим условиям:\n " +
-				                "-быть вещественным или целым числом,\n " +
-								"-быть большим 0.000 000 001 по модулю,\n " +
-				                "-длина значения не должна превышать 38 символов.\n " +
-				                "-использование экспоненциальной записи не допускается.\n " +
-				                "Чтобы продолжить работу, измените значение поля на удовлетворяющее данным условиям", "Ошибка ввода значения частоты", MessageBoxButtons.OK,
-					MessageBoxIcon.Information);
+					MessageBox.Show(
+						"Вы ввели: " + formatingString + "\n" +
+						"Вводимое значение должно удовлетворять следующим условиям:\n " +
+						"-быть положительным числом\n " +
+						"-быть вещественным или натуральным числом\n " +
+						"-быть большим 0.000 000 001 по модулю\n " +
+						"-быть меньше 1 000 000 000 000\n " +
+						"-запись не должна содержать пробелов\n " +
+						"-запись должна начинаться с цифры\n " +
+						"-использование экспоненциальной записи не допускается\n " +
+						"-eсли первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
+						"Ошибка ввода значения частоты", MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+				}
 			}
 		}
 
@@ -180,13 +204,14 @@ namespace CircuitCalculator
 				MessageBox.Show("Выберите цепь", "Ошибка", MessageBoxButtons.OK,
 					MessageBoxIcon.Information);
 			}
-			else
+			else if (frequenciesGridView.Rows.Count != 1)
 			{
 				_frequencies = new double[frequenciesGridView.RowCount - 1];
 
 				for (var i = 0; i < frequenciesGridView.RowCount - 1; i++)
 				{
-					_frequencies[i] = Convert.ToDouble(frequenciesGridView[0, i].Value);
+					_frequencies[i] = Convert.ToDouble(frequenciesGridView[0, i].Value
+						.ToString().Replace('.', ','));
 				}
 
 				var impedance = _currentCircuit.CalculateZ(_frequencies);
@@ -197,7 +222,8 @@ namespace CircuitCalculator
 					                                  (impedance[i].Imaginary < 0
 						                                  ? " - "
 						                                  : " + ") +
-					                                  Math.Abs(impedance[i].Imaginary) +
+					                                  Math.Abs(impedance[i]
+						                                  .Imaginary) +
 					                                  " * i";
 				}
 
@@ -237,20 +263,20 @@ namespace CircuitCalculator
 		{
 			Application.Exit();
 		}
-	
+
 		/// <summary>
-		/// Скрывает/открывает редактор цепи
+		///     Скрывает/открывает редактор цепи
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void IsRedactorVisible_Click(object sender, EventArgs e)
 		{
 			_redactorForm.Visible = !_redactorForm.Visible;
-			isRedactorVisibleButton.Text = _redactorForm.Visible ? "Скрыть редактор цепи" : "Показать редактор цепи";
+			isRedactorVisibleButton.Text = _redactorForm.Visible
+				? "Скрыть редактор цепи"
+				: "Показать редактор цепи";
 		}
 
 		#endregion – – Приватные методы – –
-		
-	
 	}
 }

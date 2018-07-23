@@ -2,7 +2,7 @@
 
 namespace CircuitCalculator
 {
-	partial class CircuitRedactorForm
+	partial class CircuitEditorForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -45,9 +45,9 @@ namespace CircuitCalculator
 			this.resistorValueTextBox = new System.Windows.Forms.TextBox();
 			this.addResistorButton = new System.Windows.Forms.Button();
 			this.elementGridView = new System.Windows.Forms.DataGridView();
+			this.redactorPanel = new CircuitCalculator.Controls.RedactorPanel();
 			this.elementNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.elementValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.redactorPanel = new CircuitCalculator.Controls.RedactorPanel();
 			this.instrumentsGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
 			this.SuspendLayout();
@@ -202,6 +202,8 @@ namespace CircuitCalculator
 			// 
 			this.elementGridView.AllowUserToAddRows = false;
 			this.elementGridView.AllowUserToDeleteRows = false;
+			this.elementGridView.AllowUserToResizeColumns = false;
+			this.elementGridView.AllowUserToResizeRows = false;
 			this.elementGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.elementGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.elementNameColumn,
@@ -214,6 +216,13 @@ namespace CircuitCalculator
 			this.elementGridView.TabIndex = 22;
 			this.elementGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.ElementGridView_CellValidating);
 			// 
+			// redactorPanel
+			// 
+			this.redactorPanel.Location = new System.Drawing.Point(450, 12);
+			this.redactorPanel.Name = "redactorPanel";
+			this.redactorPanel.Size = new System.Drawing.Size(635, 353);
+			this.redactorPanel.TabIndex = 13;
+			// 
 			// elementNameColumn
 			// 
 			this.elementNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -221,7 +230,7 @@ namespace CircuitCalculator
 			this.elementNameColumn.Name = "elementNameColumn";
 			this.elementNameColumn.ReadOnly = true;
 			this.elementNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.elementNameColumn.Width = 120;
+			this.elementNameColumn.Width = 153;
 			// 
 			// elementValueColumn
 			// 
@@ -229,14 +238,7 @@ namespace CircuitCalculator
 			this.elementValueColumn.HeaderText = "Значение элемента";
 			this.elementValueColumn.Name = "elementValueColumn";
 			this.elementValueColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.elementValueColumn.Width = 120;
-			// 
-			// redactorPanel
-			// 
-			this.redactorPanel.Location = new System.Drawing.Point(450, 12);
-			this.redactorPanel.Name = "redactorPanel";
-			this.redactorPanel.Size = new System.Drawing.Size(635, 353);
-			this.redactorPanel.TabIndex = 13;
+			this.elementValueColumn.Width = 153;
 			// 
 			// CircuitRedactorForm
 			// 

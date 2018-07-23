@@ -42,7 +42,7 @@ namespace CircuitElements
 			get => _name;
 			set
 			{
-				if (string.IsNullOrEmpty(value))
+				if (string.IsNullOrWhiteSpace(value))
 				{
 					throw new NullReferenceException("Имя не может быть null или Empty.");
 				}
@@ -88,17 +88,26 @@ namespace CircuitElements
 		/// <summary>
 		///     Расчитать импеданс
 		/// </summary>
-		/// <param name="f"> Частота сигнала </param>
+		/// <param name="frequency"> Частота сигнала </param>
 		/// <returns>Импеданс элемента в комплексной форме</returns>
-		public abstract Complex CalculateZ(double f);
+		public abstract Complex CalculateZ(double frequency);
 
 		/// <summary>
 		///     Конструктор элемента
 		/// </summary>
 		/// <param name="name"> Имя элемента </param>
 		/// <param name="value"> Значение элемента </param>
-		public ElementBase(string name, double value)
+		protected ElementBase(string name, double value)
 		{
+			if (string.IsNullOrWhiteSpace(name))
+			{
+				throw new ArgumentNullException("An attempt to commit a null or empty name to the element\'s constructor");
+			}
+
+			if (value < 0.000000001)
+			{
+				throw new ArgumentOutOfRangeException("An attempt to commit an invalid value to the element\'s constructor. Value must be bigger than 0");
+			}
 			Name = name;
 			Value = value;
 		}
@@ -111,5 +120,5 @@ namespace CircuitElements
 	/// </summary>
 	/// <param name="value"> Изменившееся значение </param>
 	/// <param name="valueOwner"> объект, который изменился </param>
-	public delegate void ValueStateHandler(object value, object valueOwner);
+	public delegate void ValueStateHandler(double value, ElementBase valueOwner);
 }
