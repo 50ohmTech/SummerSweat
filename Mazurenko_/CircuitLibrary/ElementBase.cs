@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
 using CircuitLibrary.Events;
 
@@ -85,9 +82,16 @@ namespace CircuitLibrary
                     throw new ArgumentException("The value is not a real number");
                 }
 
-                if (value <= 0)
+                double minValue = 0.000001;
+                if (value < minValue)
                 {
-                    throw new ArgumentException("The value cannot be 0 or less than 0");
+                    throw new ArgumentException("The value cannot be less than 0.000001");
+                }
+
+                double maxValue = 100000000000000;
+                if (value > maxValue)
+                {
+                    throw new ArgumentException("The value cannot be more than 100000000000000");
                 }
                 _value = value;
                 ValueChanged?.Invoke(_value, this);

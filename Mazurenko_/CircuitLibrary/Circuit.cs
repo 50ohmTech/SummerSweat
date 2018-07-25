@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
 using CircuitLibrary.Events;
 
@@ -11,7 +8,7 @@ namespace CircuitLibrary
     /// <summary>
     /// Electrical circuit
     /// </summary>
-    class Circuit
+    public class Circuit
     {
         #region Constructor
 
@@ -26,14 +23,13 @@ namespace CircuitLibrary
         /// <param name="elements"></param>
         public Circuit(List<IElement> elements)
         {
-            if (elements.Any())
+            Elements = elements.Any() ? elements : new List<IElement>();
+            if (Elements != null)
             {
-                Elements = elements;
-            }
-
-            foreach (var element in Elements)
-            {
-                element.ValueChanged += CircuitChanged;
+                foreach (var element in Elements)
+                {
+                    element.ValueChanged += CircuitChanged;
+                }
             }
         }
 

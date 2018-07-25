@@ -11,7 +11,7 @@ namespace CircuitLibrary
     /// <summary>
     /// Interface of electrical circuit elements
     /// </summary>
-    interface IElement
+    public interface IElement
     {
         #region Properties
 

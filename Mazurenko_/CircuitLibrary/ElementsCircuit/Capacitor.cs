@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
 
-namespace CircuitLibrary.ElementsCircuit
+namespace CircuitLibrary
 {
     /// <summary>
     /// The capacitor element of the electric circuit

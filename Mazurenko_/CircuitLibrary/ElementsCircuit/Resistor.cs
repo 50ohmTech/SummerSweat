@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Numerics;
+﻿using System.Numerics;
 
-namespace CircuitLibrary.ElementsCircuit
+namespace CircuitLibrary
 {
     /// <summary>
     /// The resistor part of the circuit
@@ -25,17 +20,17 @@ namespace CircuitLibrary.ElementsCircuit
         }
 
         #endregion Constructor
-    
+
         #region Methods
 
         /// <summary>
         /// Calculation of impedance
         /// </summary>
-        /// <param name="R"></param>
+        /// <param name="frequency"></param>
         /// <returns></returns>
-        public override Complex CalculateZ(double R)
+        public override Complex CalculateZ(double frequency)
         {
-            return new Complex(R, 0);
+            return new Complex(Value, 0);
         }
 
         #endregion Methods    
