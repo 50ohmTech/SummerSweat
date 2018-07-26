@@ -11,20 +11,7 @@ namespace CircuitUI
     /// </summary>
     public partial class CalculationForm : Form
     {
-        #region Constructor
-
-        /// <summary>
-        /// Empty Constructor
-        /// </summary>
-        public CalculationForm()
-        {
-            InitializeComponent();            
-            DefaultSettingCalculationForm();
-        }
-
-        #endregion Constructor
-
-        #region Fields
+        #region -- Fields --
 
         /// <summary>
         /// List of electrical circuit elements
@@ -56,9 +43,9 @@ namespace CircuitUI
         /// </summary>
         private const double _maxValue = 100000000000000;
 
-        #endregion Fields
+        #endregion -- Fields --
 
-        #region Properties
+        #region -- Properties --
 
         /// <summary>
         /// Adding a list of electrical circuit elements
@@ -79,28 +66,21 @@ namespace CircuitUI
             }
         }
 
-        #endregion Properties
+        #endregion -- Properties --
 
-        #region Methods
+        #region -- Public Methods --
 
         /// <summary>
-        /// Initial setting CalculationForm
+        /// Constructor
         /// </summary>
-        private void DefaultSettingCalculationForm()
+        public CalculationForm()
         {
-            dataGridViewCalculation.RowHeadersVisible = false;
-            dataGridViewCalculation.MultiSelect = false;
-            dataGridViewCalculation.Columns.Add("columnFrequenies", "Frequenies");
-            dataGridViewCalculation.Columns.Add("columnImpendances", "Impendances");
-            dataGridViewCalculation.Columns[1].Width = 150;
-            dataGridViewCalculation.Columns[0].ReadOnly = false;
-            dataGridViewCalculation.Columns[1].ReadOnly = true;
-            dataGridViewCalculation.ShowCellToolTips = true;
+            InitializeComponent();
         }
 
-        #endregion Methods
+        #endregion -- Public Methods --
 
-        #region Buttons
+        #region -- Private Methods --
 
         /// <summary>
         /// Calculation of the total complex resistance of the electrical
@@ -108,25 +88,44 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonСalculation_Click(object sender, EventArgs e)
+        private void СalculationButton_Click(object sender, EventArgs e)
         {
-            if (dataGridViewCalculation.RowCount > 0)
+            if (calculationGridView.RowCount > 0)
             {
-                _frequencies = new double[dataGridViewCalculation.RowCount - 1];
+                _frequencies = new double[calculationGridView.RowCount - 1];
 
-                for (int i = 0; i < dataGridViewCalculation.RowCount - 1; i++)
+                for (int i = 0; i < calculationGridView.RowCount - 1; i++)
                 {
-                    _frequencies[i] = Convert.ToDouble(dataGridViewCalculation[0, i].Value);
+                    _frequencies[i] = Convert.ToDouble(calculationGridView[0, i].Value);
                 }
 
                 Complex[] impedance = _curcuit.CalculateZ(_frequencies);
 
-                for (int j = 0; j < dataGridViewCalculation.RowCount - 1; j++)
-                {                  
-                    dataGridViewCalculation[1, j].Value =
+                for (int j = 0; j < calculationGridView.RowCount - 1; j++)
+                {
+                    calculationGridView[1, j].Value =
                         "( " + Math.Round(impedance[j].Real, 6) + " , " +
                         Math.Round(impedance[j].Imaginary, 6) + " )";
-                }                
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete the selected line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            if (calculationGridView.CurrentRow != null)
+            {
+                int indexDeleteRow = calculationGridView.SelectedCells[0].RowIndex;
+
+                if (calculationGridView.CurrentRow != null &&
+                    (indexDeleteRow >= 0 && !calculationGridView.CurrentRow.IsNewRow))
+                {
+                    calculationGridView.Rows.RemoveAt(indexDeleteRow);
+                }
             }
         }
 
@@ -135,45 +134,22 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonDeleteAll_Click(object sender, EventArgs e)
+        private void DeleteAllButton_Click(object sender, EventArgs e)
         {
-            dataGridViewCalculation.Rows.Clear();
+            calculationGridView.Rows.Clear();
         }
-
-        /// <summary>
-        /// Delete the selected line
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonDelete_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewCalculation.CurrentRow != null)
-            {
-                int indexDeleteRow = dataGridViewCalculation.SelectedCells[0].RowIndex;
-
-                if (dataGridViewCalculation.CurrentRow != null &&
-                    (indexDeleteRow >= 0 && !dataGridViewCalculation.CurrentRow.IsNewRow))
-                {
-                    dataGridViewCalculation.Rows.RemoveAt(indexDeleteRow);
-                }
-            }
-        }
-
-        #endregion Buttons
-
-        #region DataGridView
 
         /// <summary>
         /// Fires when the cursor is over the cells of the "Frequenies" column"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewCalculation_CellEnter(object sender, DataGridViewCellEventArgs e)
+        private void CalculationGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
-                dataGridViewCalculation[e.ColumnIndex, e.RowIndex].ToolTipText =
-                    MyToolTipText.MessageForRows;
+                calculationGridView[e.ColumnIndex, e.RowIndex].ToolTipText =
+                    ToolTipText.MessageForRows;
             }
         }
 
@@ -182,16 +158,16 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewCalculation_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void CalculationGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (dataGridViewCalculation.CurrentRow != null && (e.ColumnIndex == 0 && !dataGridViewCalculation.CurrentRow.IsNewRow))
+            if (calculationGridView.CurrentRow != null && (e.ColumnIndex == 0 && !calculationGridView.CurrentRow.IsNewRow))
             {
                 double.TryParse(e.FormattedValue.ToString(), out double newFrequency);
                 if (newFrequency < _minValue || newFrequency > _maxValue)
                 {
                     _frequency.Text = Convert.ToString(_oldValueFrequency);
                 }
-            }            
+            }
         }
 
         /// <summary>
@@ -199,10 +175,10 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewCalculation_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void CalculationGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             _frequency = new TextBox();
-            _oldValueFrequency = !dataGridViewCalculation.CurrentRow.IsNewRow ? Convert.ToDouble(dataGridViewCalculation.CurrentCell.Value) : _minValue;
+            _oldValueFrequency = !calculationGridView.CurrentRow.IsNewRow ? Convert.ToDouble(calculationGridView.CurrentCell.Value) : _minValue;
         }
 
         /// <summary>
@@ -210,7 +186,7 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewCalculationForm_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void CalculationGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             _frequency = (TextBox)e.Control;
             _frequency.KeyPress += new KeyPressEventHandler(Frequency_KeyPress);
@@ -223,9 +199,9 @@ namespace CircuitUI
         /// <param name="e"></param>
         private void Frequency_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !EditTextBoxValue.IsCurrectionTextBoxValue_Edit(_frequency.Text, e.KeyChar);
+            e.Handled = !EditTextBoxValue.IsCorrectionTextBoxValue_Edit(_frequency.Text, e.KeyChar);
         }
 
-        #endregion DataGridView       
+        #endregion -- Private Methods --   
     }
 }

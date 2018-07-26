@@ -29,168 +29,171 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlCircuitForm));
-            this.groupBoxElementsCircuit = new System.Windows.Forms.GroupBox();
-            this.pictureBoxElementCircuit = new System.Windows.Forms.PictureBox();
-            this.textBoxValue = new System.Windows.Forms.TextBox();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.labelNominalValue = new System.Windows.Forms.Label();
-            this.labelCircuitElementType = new System.Windows.Forms.Label();
-            this.labelName = new System.Windows.Forms.Label();
-            this.comboBoxType = new System.Windows.Forms.ComboBox();
-            this.groupBoxButtons = new System.Windows.Forms.GroupBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.groupBoxElementsCircuit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxElementCircuit)).BeginInit();
-            this.groupBoxButtons.SuspendLayout();
+            this.elementsCircuitGroupBox = new System.Windows.Forms.GroupBox();
+            this.elementCircuitPictureBox = new System.Windows.Forms.PictureBox();
+            this.valueTextBox = new System.Windows.Forms.TextBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.nominalValueLabel = new System.Windows.Forms.Label();
+            this.circuitElementTypeLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.buttonsGroupBox = new System.Windows.Forms.GroupBox();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.OKButton = new System.Windows.Forms.Button();
+            this.elementsCircuitGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.elementCircuitPictureBox)).BeginInit();
+            this.buttonsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBoxElementsCircuit
+            // elementsCircuitGroupBox
             // 
-            this.groupBoxElementsCircuit.Controls.Add(this.pictureBoxElementCircuit);
-            this.groupBoxElementsCircuit.Controls.Add(this.textBoxValue);
-            this.groupBoxElementsCircuit.Controls.Add(this.textBoxName);
-            this.groupBoxElementsCircuit.Controls.Add(this.labelNominalValue);
-            this.groupBoxElementsCircuit.Controls.Add(this.labelCircuitElementType);
-            this.groupBoxElementsCircuit.Controls.Add(this.labelName);
-            this.groupBoxElementsCircuit.Controls.Add(this.comboBoxType);
-            this.groupBoxElementsCircuit.Location = new System.Drawing.Point(12, 12);
-            this.groupBoxElementsCircuit.Name = "groupBoxElementsCircuit";
-            this.groupBoxElementsCircuit.Size = new System.Drawing.Size(291, 125);
-            this.groupBoxElementsCircuit.TabIndex = 4;
-            this.groupBoxElementsCircuit.TabStop = false;
-            this.groupBoxElementsCircuit.Text = "The action with the circuit elements";
+            this.elementsCircuitGroupBox.Controls.Add(this.elementCircuitPictureBox);
+            this.elementsCircuitGroupBox.Controls.Add(this.valueTextBox);
+            this.elementsCircuitGroupBox.Controls.Add(this.nameTextBox);
+            this.elementsCircuitGroupBox.Controls.Add(this.nominalValueLabel);
+            this.elementsCircuitGroupBox.Controls.Add(this.circuitElementTypeLabel);
+            this.elementsCircuitGroupBox.Controls.Add(this.nameLabel);
+            this.elementsCircuitGroupBox.Controls.Add(this.typeComboBox);
+            this.elementsCircuitGroupBox.Location = new System.Drawing.Point(10, 10);
+            this.elementsCircuitGroupBox.Name = "elementsCircuitGroupBox";
+            this.elementsCircuitGroupBox.Size = new System.Drawing.Size(274, 114);
+            this.elementsCircuitGroupBox.TabIndex = 4;
+            this.elementsCircuitGroupBox.TabStop = false;
+            this.elementsCircuitGroupBox.Text = "The action with the circuit elements";
             // 
-            // pictureBoxElementCircuit
+            // elementCircuitPictureBox
             // 
-            this.pictureBoxElementCircuit.Location = new System.Drawing.Point(178, 40);
-            this.pictureBoxElementCircuit.Name = "pictureBoxElementCircuit";
-            this.pictureBoxElementCircuit.Size = new System.Drawing.Size(100, 50);
-            this.pictureBoxElementCircuit.TabIndex = 8;
-            this.pictureBoxElementCircuit.TabStop = false;
+            this.elementCircuitPictureBox.Location = new System.Drawing.Point(178, 35);
+            this.elementCircuitPictureBox.Name = "elementCircuitPictureBox";
+            this.elementCircuitPictureBox.Size = new System.Drawing.Size(89, 50);
+            this.elementCircuitPictureBox.TabIndex = 8;
+            this.elementCircuitPictureBox.TabStop = false;
             // 
-            // textBoxValue
+            // valueTextBox
             // 
-            this.textBoxValue.Location = new System.Drawing.Point(88, 83);
-            this.textBoxValue.Name = "textBoxValue";
-            this.textBoxValue.Size = new System.Drawing.Size(84, 20);
-            this.textBoxValue.TabIndex = 7;
-            this.textBoxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxValue_KeyPress);
-            this.textBoxValue.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxValue_KeyUp);
-            this.textBoxValue.Leave += new System.EventHandler(this.TextBoxValue_Leave);
+            this.valueTextBox.Location = new System.Drawing.Point(88, 83);
+            this.valueTextBox.MaxLength = 15;
+            this.valueTextBox.Name = "valueTextBox";
+            this.valueTextBox.Size = new System.Drawing.Size(84, 20);
+            this.valueTextBox.TabIndex = 3;
+            this.valueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValueTextBox_KeyPress);
+            this.valueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ValueTextBox_KeyUp);
+            this.valueTextBox.Leave += new System.EventHandler(this.ValueTextBox_Leave);
             // 
-            // textBoxName
+            // nameTextBox
             // 
-            this.textBoxName.Location = new System.Drawing.Point(88, 53);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(84, 20);
-            this.textBoxName.TabIndex = 5;
-            this.textBoxName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxName_KeyPress);
-            this.textBoxName.Leave += new System.EventHandler(this.TextBoxName_Leave);
+            this.nameTextBox.Location = new System.Drawing.Point(88, 53);
+            this.nameTextBox.MaxLength = 10;
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(84, 20);
+            this.nameTextBox.TabIndex = 2;
+            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextBox_KeyPress);
+            this.nameTextBox.Leave += new System.EventHandler(this.NameTextBox_Leave);
             // 
-            // labelNominalValue
+            // nominalValueLabel
             // 
-            this.labelNominalValue.AutoSize = true;
-            this.labelNominalValue.Location = new System.Drawing.Point(6, 86);
-            this.labelNominalValue.Name = "labelNominalValue";
-            this.labelNominalValue.Size = new System.Drawing.Size(74, 13);
-            this.labelNominalValue.TabIndex = 6;
-            this.labelNominalValue.Text = "Nominal value";
+            this.nominalValueLabel.AutoSize = true;
+            this.nominalValueLabel.Location = new System.Drawing.Point(6, 86);
+            this.nominalValueLabel.Name = "nominalValueLabel";
+            this.nominalValueLabel.Size = new System.Drawing.Size(74, 13);
+            this.nominalValueLabel.TabIndex = 6;
+            this.nominalValueLabel.Text = "Nominal value";
             // 
-            // labelCircuitElementType
+            // circuitElementTypeLabel
             // 
-            this.labelCircuitElementType.AutoSize = true;
-            this.labelCircuitElementType.Location = new System.Drawing.Point(6, 22);
-            this.labelCircuitElementType.Name = "labelCircuitElementType";
-            this.labelCircuitElementType.Size = new System.Drawing.Size(76, 26);
-            this.labelCircuitElementType.TabIndex = 5;
-            this.labelCircuitElementType.Text = "Circuit element\r\ntype";
+            this.circuitElementTypeLabel.AutoSize = true;
+            this.circuitElementTypeLabel.Location = new System.Drawing.Point(6, 22);
+            this.circuitElementTypeLabel.Name = "circuitElementTypeLabel";
+            this.circuitElementTypeLabel.Size = new System.Drawing.Size(76, 26);
+            this.circuitElementTypeLabel.TabIndex = 5;
+            this.circuitElementTypeLabel.Text = "Circuit element\r\ntype";
             // 
-            // labelName
+            // nameLabel
             // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(6, 56);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(35, 13);
-            this.labelName.TabIndex = 5;
-            this.labelName.Text = "Name";
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(6, 56);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.TabIndex = 5;
+            this.nameLabel.Text = "Name";
             // 
-            // comboBoxType
+            // typeComboBox
             // 
-            this.comboBoxType.FormattingEnabled = true;
-            this.comboBoxType.Items.AddRange(new object[] {
+            this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeComboBox.FormattingEnabled = true;
+            this.typeComboBox.Items.AddRange(new object[] {
             "Resistor",
             "Inductor",
             "Capacitor"});
-            this.comboBoxType.Location = new System.Drawing.Point(88, 26);
-            this.comboBoxType.Name = "comboBoxType";
-            this.comboBoxType.Size = new System.Drawing.Size(84, 21);
-            this.comboBoxType.TabIndex = 5;
-            this.comboBoxType.SelectedValueChanged += new System.EventHandler(this.ComboBoxType_SelectedValueChanged);
+            this.typeComboBox.Location = new System.Drawing.Point(88, 26);
+            this.typeComboBox.Name = "typeComboBox";
+            this.typeComboBox.Size = new System.Drawing.Size(84, 21);
+            this.typeComboBox.TabIndex = 1;
+            this.typeComboBox.SelectedValueChanged += new System.EventHandler(this.TypeComboBox_SelectedValueChanged);
             // 
-            // groupBoxButtons
+            // buttonsGroupBox
             // 
-            this.groupBoxButtons.Controls.Add(this.buttonCancel);
-            this.groupBoxButtons.Controls.Add(this.buttonOK);
-            this.groupBoxButtons.Location = new System.Drawing.Point(12, 141);
-            this.groupBoxButtons.Name = "groupBoxButtons";
-            this.groupBoxButtons.Size = new System.Drawing.Size(206, 59);
-            this.groupBoxButtons.TabIndex = 5;
-            this.groupBoxButtons.TabStop = false;
+            this.buttonsGroupBox.Controls.Add(this.cancelButton);
+            this.buttonsGroupBox.Controls.Add(this.OKButton);
+            this.buttonsGroupBox.Location = new System.Drawing.Point(63, 125);
+            this.buttonsGroupBox.Name = "buttonsGroupBox";
+            this.buttonsGroupBox.Size = new System.Drawing.Size(184, 52);
+            this.buttonsGroupBox.TabIndex = 5;
+            this.buttonsGroupBox.TabStop = false;
             // 
-            // buttonCancel
+            // cancelButton
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(101, 19);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(81, 27);
-            this.buttonCancel.TabIndex = 7;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
+            this.cancelButton.Location = new System.Drawing.Point(93, 14);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(81, 27);
+            this.cancelButton.TabIndex = 5;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // buttonOK
+            // OKButton
             // 
-            this.buttonOK.Location = new System.Drawing.Point(9, 19);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(81, 27);
-            this.buttonOK.TabIndex = 6;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
+            this.OKButton.Location = new System.Drawing.Point(6, 14);
+            this.OKButton.Name = "OKButton";
+            this.OKButton.Size = new System.Drawing.Size(81, 27);
+            this.OKButton.TabIndex = 4;
+            this.OKButton.Text = "OK";
+            this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // ControlCircuitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 207);
-            this.Controls.Add(this.groupBoxButtons);
-            this.Controls.Add(this.groupBoxElementsCircuit);
+            this.ClientSize = new System.Drawing.Size(291, 182);
+            this.Controls.Add(this.buttonsGroupBox);
+            this.Controls.Add(this.elementsCircuitGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ControlCircuitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Circuit";
-            this.groupBoxElementsCircuit.ResumeLayout(false);
-            this.groupBoxElementsCircuit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxElementCircuit)).EndInit();
-            this.groupBoxButtons.ResumeLayout(false);
+            this.elementsCircuitGroupBox.ResumeLayout(false);
+            this.elementsCircuitGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.elementCircuitPictureBox)).EndInit();
+            this.buttonsGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBoxElementsCircuit;
-        private System.Windows.Forms.Label labelCircuitElementType;
-        private System.Windows.Forms.ComboBox comboBoxType;
-        private System.Windows.Forms.TextBox textBoxValue;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Label labelNominalValue;
-        private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.PictureBox pictureBoxElementCircuit;
-        private System.Windows.Forms.GroupBox groupBoxButtons;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.GroupBox elementsCircuitGroupBox;
+        private System.Windows.Forms.Label circuitElementTypeLabel;
+        private System.Windows.Forms.ComboBox typeComboBox;
+        private System.Windows.Forms.TextBox valueTextBox;
+        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.Label nominalValueLabel;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.PictureBox elementCircuitPictureBox;
+        private System.Windows.Forms.GroupBox buttonsGroupBox;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button OKButton;
     }
 }

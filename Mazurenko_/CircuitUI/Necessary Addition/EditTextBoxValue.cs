@@ -5,16 +5,16 @@ namespace CircuitUI
     /// <summary>
     /// Class for checking the input parameters in the value of the electrical circuit element
     /// </summary>
-    public abstract class EditTextBoxValue
+    public static class EditTextBoxValue
     {
-        #region Methods
+        #region -- Public Methods --
 
         /// <summary>
         /// Event when you press a key in the 'Value' field
         /// </summary>
         /// <param name="stringValue"></param>
         /// <param name="symbol"></param>
-        public static bool IsCurrectionTextBoxValue_Edit(string stringValue, char symbol)
+        public static bool IsCorrectionTextBoxValue_Edit(string stringValue, char symbol)
         {
             if (symbol != (char)Keys.Back)
             {
@@ -31,6 +31,10 @@ namespace CircuitUI
 
             return true;
         }
+
+        #endregion -- Public Methods --
+
+        #region -- Private Methods --
 
         /// <summary>
         /// Checks the string for more than one comma in the field 'Value'
@@ -58,6 +62,6 @@ namespace CircuitUI
             return true;
         }
 
-        #endregion Methods
+        #endregion -- Private Methods --
     }
 }

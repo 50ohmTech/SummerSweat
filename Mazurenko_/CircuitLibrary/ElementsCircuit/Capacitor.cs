@@ -8,10 +8,9 @@ namespace CircuitLibrary
     /// </summary>
     public sealed class Capacitor : ElementBase
     {
-        #region Constructor    
-
+        #region -- Public Methods --
         /// <summary>
-        /// Constructor with parameters
+        /// Constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -19,10 +18,6 @@ namespace CircuitLibrary
         {
 
         }
-
-        #endregion Constructor
-
-        #region Methods
 
         /// <summary>
         /// Calculation of impedance
@@ -34,6 +29,6 @@ namespace CircuitLibrary
             return new Complex(0, -1 / (2 * Math.PI * frequency * Value));
         }
 
-        #endregion Methods
+        #endregion -- Public Methods --
     }
 }

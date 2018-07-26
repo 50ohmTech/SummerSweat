@@ -3,9 +3,9 @@
     /// <summary>
     /// The class serves to group shared messages "Tooltip"
     /// </summary>
-    public static class MyToolTipText
+    public static class ToolTipText
     {
-        #region Properties
+        #region -- Properties --
 
         /// <summary>
         /// Property passing a string containing information to fill in the fields "Value" and " Frequenies"
@@ -26,6 +26,6 @@
             }
         }
 
-        #endregion Properties
+        #endregion -- Properties --
     }
 }

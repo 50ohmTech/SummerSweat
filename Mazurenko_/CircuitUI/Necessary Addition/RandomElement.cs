@@ -8,7 +8,7 @@ namespace CircuitUI
     /// </summary>
     public sealed class RandomElement
     {
-        #region Fields
+        #region -- Fields --
 
         /// <summary>
         /// Field for storing a random value of the electrical circuit element
@@ -30,9 +30,9 @@ namespace CircuitUI
         /// </summary>
         private Random _rand;
 
-        #endregion Fields
+        #endregion -- Fields --
 
-        #region Methods
+        #region -- Public Methods --
 
         /// <summary>
         /// Method for creating a random element of an electrical circuit
@@ -61,6 +61,10 @@ namespace CircuitUI
 
             return newElement;
         }
+
+        #endregion -- Public Methods --
+
+        #region -- Private Methods --
 
         /// <summary>
         /// Method for creating a random type of electrical circuit element
@@ -116,7 +120,7 @@ namespace CircuitUI
             return name;
         }
 
-        #endregion Methods
+        #endregion -- Private Methods --
 
     }
 }

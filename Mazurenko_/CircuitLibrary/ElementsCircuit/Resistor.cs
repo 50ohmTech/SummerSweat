@@ -7,10 +7,10 @@ namespace CircuitLibrary
     /// </summary>
     public sealed class Resistor : ElementBase
     {
-        #region Constructor
+        #region -- Public Methods --
 
         /// <summary>
-        /// Constructor with parameters
+        /// Constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -18,10 +18,6 @@ namespace CircuitLibrary
         {
 
         }
-
-        #endregion Constructor
-
-        #region Methods
 
         /// <summary>
         /// Calculation of impedance
@@ -33,6 +29,6 @@ namespace CircuitLibrary
             return new Complex(Value, 0);
         }
 
-        #endregion Methods    
+        #endregion -- Public Methods --    
     }
 }

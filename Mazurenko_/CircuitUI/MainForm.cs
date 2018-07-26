@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CircuitLibrary;
@@ -11,26 +12,12 @@ namespace CircuitUI
     /// </summary>
     public partial class MainForm : Form
     {
-        #region Constructor
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public MainForm()
-        {
-            InitializeComponent();
-            InitializeCircuits();
-            DefaultSettingMainForm();
-        }
-
-        #endregion Constructor
-
-        #region Fields
+        #region -- Private Fields --
 
         /// <summary>
         /// List of all electrical circuits
         /// </summary>
-        private List<Circuit> _circuitsAll;
+        private List<Circuit> _circuits;
 
         /// <summary>
         /// Selected circuit
@@ -56,130 +43,139 @@ namespace CircuitUI
         /// </summary>
         private const double _maxValue = 100000000000000;
 
-        #endregion Fields        
+        #endregion -- Private Fields --        
 
-        #region Methods
+        #region -- Public Methods --
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public MainForm()
+        {
+            InitializeComponent();           
+        }
+
+        #endregion -- Public Methods --
+
+        #region -- Private Methods --
+
+        /// <summary>
+        /// Triggered when this form is run
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            InitializeCircuits();
+            MainFormInitialize();
+        }
+
         /// <summary>
         /// Initialization of all electrical circuits
         /// </summary>
         private void InitializeCircuits()
         {
-            _circuitsAll = new List<Circuit>();
+            _circuits = new List<Circuit>();
 
             var itsCircuit = new Circuit(new List<IElement>());
-            _circuitsAll.Add(itsCircuit);
-            comboBoxCircuitsAll.Items.Add("Your electrical circuit");
+            _circuits.Add(itsCircuit);
+            circuitsComboBox.Items.Add("Your electrical circuit");
 
-            var firstCircuit = new Circuit(new List<IElement>());
-            firstCircuit.Elements.Add(new Indutor("I1", 0.000001));
-            firstCircuit.Elements.Add(new Indutor("I2", 0.1));
-            firstCircuit.Elements.Add(new Capacitor("C1", 10));
-            firstCircuit.Elements.Add(new Resistor("R1", 5));
-            firstCircuit.Elements.Add(new Resistor("R2", 20.97));
-            firstCircuit.Elements.Add(new Resistor("R3", 13.12));
-            _circuitsAll.Add(firstCircuit);
-
-            var secondCircuit = new Circuit(new List<IElement>());
-            secondCircuit.Elements.Add(new Resistor("R1", 0.000123));
-            secondCircuit.Elements.Add(new Resistor("R2", 0.103));
-            secondCircuit.Elements.Add(new Indutor("I1", 20));
-            secondCircuit.Elements.Add(new Resistor("R3", 10.3));
-            secondCircuit.Elements.Add(new Indutor("I2", 20));
-            secondCircuit.Elements.Add(new Capacitor("C1", 15));
-            secondCircuit.Elements.Add(new Capacitor("C2", 15));
-            _circuitsAll.Add(secondCircuit);
-
-            var thirdCircuit = new Circuit(new List<IElement>());
-            thirdCircuit.Elements.Add(new Capacitor("C1", 5));
-            thirdCircuit.Elements.Add(new Resistor("R1", 10));
-            thirdCircuit.Elements.Add(new Indutor("I1", 15));
-            _circuitsAll.Add(thirdCircuit);
-
-            var fourCircuit = new Circuit(new List<IElement>());
-            fourCircuit.Elements.Add(new Indutor("I1", 0.333));
-            fourCircuit.Elements.Add(new Indutor("I2", 0.123));
-            fourCircuit.Elements.Add(new Resistor("R1", 52.333));
-            fourCircuit.Elements.Add(new Capacitor("C1", 10));
-            fourCircuit.Elements.Add(new Resistor("R2", 32.12));
-            _circuitsAll.Add(fourCircuit);
-
-            var fifthCircuit = new Circuit(new List<IElement>());
-            fifthCircuit.Elements.Add(new Resistor("R1", 9.25));
-            _circuitsAll.Add(fifthCircuit);
-
-            for (int i = 1; i < _circuitsAll.Count; i++)
+            var firstCircuit = new Circuit(new List<IElement>
             {
-                comboBoxCircuitsAll.Items.Add("Test electric circuit № " + i);
+                new Indutor("I1", 0.000001),
+                new Indutor("I2", 0.1),
+                new Capacitor("C1", 10),
+                new Resistor("R1", 5),
+                new Resistor("R2", 20.97),
+                new Resistor("R3", 13.12)
+            });
+            _circuits.Add(firstCircuit);
+
+            var secondCircuit = new Circuit(new List<IElement>
+            {
+                new Resistor("R1", 0.000123),
+                new Resistor("R2", 0.103),
+                new Indutor("I1", 20),
+                new Resistor("R3", 10.3),
+                new Indutor("I2", 20),
+                new Capacitor("C1", 15),
+                new Capacitor("C2", 5.23)
+            });
+            _circuits.Add(secondCircuit);
+
+            var thirdCircuit = new Circuit(new List<IElement>
+            {
+                new Capacitor("C1", 5),
+                new Resistor("R1", 10),
+                new Indutor("I1", 15)
+            });
+            _circuits.Add(thirdCircuit);
+
+            var fourCircuit = new Circuit(new List<IElement>
+            {
+                new Indutor("I1", 0.333),
+                new Indutor("I2", 0.123),
+                new Resistor("R1", 52.333),
+                new Capacitor("C1", 10),
+                new Resistor("R2", 32.12)
+            });
+            _circuits.Add(fourCircuit);
+
+            var fifthCircuit = new Circuit(new List<IElement>
+            {
+                new Resistor("R1", 9.25)
+            });
+            _circuits.Add(fifthCircuit);
+
+            for (int i = 1; i < _circuits.Count; i++)
+            {
+                circuitsComboBox.Items.Add("Test electric circuit № " + i);
             }
         }
 
         /// <summary>
         /// Initial setting MainForm
         /// </summary>
-        private void DefaultSettingMainForm()
+        private void MainFormInitialize()
         {
             #if !DEBUG
-            buttonRandomElement.Visible = false;
-            dataGridViewValueDisplay.Size = new Size(dataGridViewValueDisplay.Size.Width,
-                dataGridViewValueDisplay.Size.Height + 20);
-            #endif
-            comboBoxCircuitsAll.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxCircuitsAll.SelectedIndex = 0;
+            randomElementButton.Visible = false;
+            elementsGridView.Size = new Size(elementsGridView.Size.Width,
+                elementsGridView.Size.Height + 20);
+            #endif            
+            circuitsComboBox.SelectedIndex = 0;
 
-            dataGridViewValueDisplay.DataSource = bindingSourceContainer;
-            dataGridViewValueDisplay.RowHeadersVisible = false;
-            dataGridViewValueDisplay.MultiSelect = false;
-            dataGridViewValueDisplay.Columns[0].ReadOnly = true;
-            dataGridViewValueDisplay.Columns[1].ReadOnly = false;
+            elementsGridView.DataSource = bindingSourceContainer;            
+            elementsGridView.Columns[0].ReadOnly = true;
+            elementsGridView.Columns[1].ReadOnly = false;
 
-            mainMenuStrip.ShowItemToolTips = true;
-            addElementToolStripMenuItem.ToolTipText =
-                @"Adding a new electrical circuit element";
-            clearToolStripMenuItem.ToolTipText = @"To choose how to delete rows";
-            deleteToolStripMenuItem.ToolTipText = @"Delete the selected row";
-            deleteAllToolStripMenuItem.ToolTipText =
-                @"Remove all values of this electrical circuit";
-            calculationToolStripMenuItem.ToolTipText =
-                @"To open the window to calculate the total complex \nresistance of the selected electrical circuit";
-
-            dataGridViewValueDisplay.ShowCellToolTips = true;
-            dataGridViewValueDisplay.Columns[0].ToolTipText = @"Element name";
-            dataGridViewValueDisplay.Columns[1].ToolTipText =
+            elementsGridView.Columns[0].ToolTipText = @"Element name";
+            elementsGridView.Columns[1].ToolTipText =
                 @"Nominal value of the electrical circuit element";
         }
-
-        #endregion Methods
-
-        #region ComboBox
 
         /// <summary>
         /// Occurs when the selection of a desired electrical circuit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ComboBoxAllCircuit_SelectedIndexChanged(object sender, EventArgs e)
+        private void CircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _currentCircuit = _circuitsAll[comboBoxCircuitsAll.SelectedIndex];
+            _currentCircuit = _circuits[circuitsComboBox.SelectedIndex];
             bindingSourceContainer.DataSource = _currentCircuit.Elements;
         }
-
-        #endregion ComboBox
-
-        #region Buttons
 
         /// <summary>
         /// Adding a random element of an electrical circuit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonRandomElement_Click(object sender, EventArgs e)
+        private void RandomElementButton_Click(object sender, EventArgs e)
         {
             RandomElement randomElementCircuit = new RandomElement();
             bindingSourceContainer.Add(randomElementCircuit.CreateRandomElement());
         }
-        #endregion Buttons
-
-        #region ToolStripMenuItem
 
         /// <summary>
         /// Adding the element of an electric circuit
@@ -219,9 +215,9 @@ namespace CircuitUI
         /// <param name="e"></param>
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridViewValueDisplay.CurrentRow != null)
+            if (elementsGridView.CurrentRow != null)
             {
-                int rowToDelete = dataGridViewValueDisplay.CurrentRow.Index;
+                int rowToDelete = elementsGridView.CurrentRow.Index;
 
                 if (rowToDelete > -1)
                 {
@@ -240,22 +236,18 @@ namespace CircuitUI
             bindingSourceContainer.Clear();
         }
 
-        #endregion ToolStripMenuItem
-
-        #region DataGridView
-
         /// <summary>
         /// Fires when the cursor is over the nominal value of the electrical circuit element
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewValueDisplay_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {            
+        private void ElementsGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
             if (e.RowIndex >= 0 && e.ColumnIndex == 1)
-            {               
-                dataGridViewValueDisplay[e.ColumnIndex, e.RowIndex].ToolTipText =
-                    MyToolTipText.MessageForRows;
-            }          
+            {
+                elementsGridView[e.ColumnIndex, e.RowIndex].ToolTipText =
+                    ToolTipText.MessageForRows;
+            }
         }
 
         /// <summary>
@@ -263,10 +255,10 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewValueDisplay_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void ElementsGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            _newValueElement = new TextBox();            
-            _oldValueElement = Convert.ToDouble(dataGridViewValueDisplay.CurrentCell.Value);           
+            _newValueElement = new TextBox();
+            _oldValueElement = Convert.ToDouble(elementsGridView.CurrentCell.Value);
         }
 
         /// <summary>
@@ -274,7 +266,7 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewValueDisplay_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void ElementsGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.ColumnIndex == 1)
             {
@@ -291,10 +283,10 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewValueDisplay_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void ElementsGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             _newValueElement = (TextBox)e.Control;
-            _newValueElement.KeyPress += new KeyPressEventHandler(ValueElement_KeyPress);                       
+            _newValueElement.KeyPress += new KeyPressEventHandler(ValueElement_KeyPress);
         }
 
         /// <summary>
@@ -304,10 +296,10 @@ namespace CircuitUI
         /// <param name="e"></param>
         private void ValueElement_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !EditTextBoxValue.IsCurrectionTextBoxValue_Edit(_newValueElement.Text, e.KeyChar);
+            e.Handled = !EditTextBoxValue.IsCorrectionTextBoxValue_Edit(_newValueElement.Text, e.KeyChar);
         }
 
-        #endregion DataGridView                                              
+        #endregion -- Private Methods --
     }
 }
 

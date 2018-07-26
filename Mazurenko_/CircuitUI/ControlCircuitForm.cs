@@ -9,7 +9,7 @@ namespace CircuitUI
     /// </summary>
     public partial class ControlCircuitForm : Form
     {
-        #region Fields
+        #region -- Fields --
 
         /// <summary>
         /// Field to store the name of electrical circuit element
@@ -36,76 +36,40 @@ namespace CircuitUI
         /// </summary>
         private const double _maxValue = 100000000000000;
 
-        #endregion Fields
+        #endregion -- Fields --
 
-        #region Сonstructor
+        #region -- Public Methods --
 
         /// <summary>
-        /// Constructor without parameters
+        /// Constructor
         /// </summary>
         public ControlCircuitForm()
         {
             InitializeComponent();
-            DefaultSetting();
+            typeComboBox.SelectedIndex = 0;
         }
 
-        #endregion Сonstructor
+        #endregion -- Public Methods --
 
-        #region Properties
+        #region -- Properties --
 
         /// <summary>
         /// Property for interaction with an element of an electrical circuit
         /// </summary>
         public IElement Element { get; private set; }
 
-        #endregion Properties
+        #endregion -- Properties --
 
-        #region Methods
-
-        /// <summary>
-        /// Form settings
-        /// </summary>
-        private void DefaultSetting()
-        {
-            comboBoxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBoxType.Text = Convert.ToString(comboBoxType.Items[0]);
-            textBoxName.MaxLength = 10;
-            textBoxValue.MaxLength = 15;
-        }
-
-        /// <summary>
-        /// Checking for empty name and value
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private static bool IsClearBlank(string name, string value)
-        {
-            return string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(value);
-        }
-
-        /// <summary>
-        /// Method for checking strings for English characters only
-        /// </summary>
-        /// <param name="symbol"></param>
-        /// <returns></returns>
-        private static bool IsEnglishSymbol(char symbol)
-        {
-            return symbol >= 'A' && symbol <= 'Z';
-        }        
-
-        #endregion Methods
-
-        #region TextBox
+        #region -- Private Methods --
 
         /// <summary>
         /// Event when you press a key in the 'Name' field
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxName_KeyPress(object sender, KeyPressEventArgs e)
+        private void NameTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar != (char) Keys.Back)
+            if (e.KeyChar != (char)Keys.Back)
             {
                 e.KeyChar = char.ToUpper(e.KeyChar);
                 if (!IsEnglishSymbol(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -120,9 +84,9 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxName_Leave(object sender, EventArgs e)
+        private void NameTextBox_Leave(object sender, EventArgs e)
         {
-            _name = textBoxName.Text;
+            _name = nameTextBox.Text;
         }
 
         /// <summary>
@@ -130,10 +94,10 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxValue_KeyPress(object sender, KeyPressEventArgs e)
+        private void ValueTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled =
-                !EditTextBoxValue.IsCurrectionTextBoxValue_Edit(textBoxValue.Text,
+                !EditTextBoxValue.IsCorrectionTextBoxValue_Edit(valueTextBox.Text,
                     e.KeyChar);
         }
 
@@ -142,10 +106,10 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxValue_KeyUp(object sender, KeyEventArgs e)
-        {            
-            double.TryParse(textBoxValue.Text, out double number);
-            buttonOK.Enabled = (number >= _minValue && number <= _maxValue) || textBoxValue.Text == "";
+        private void ValueTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            double.TryParse(valueTextBox.Text, out double number);
+            OKButton.Enabled = (number >= _minValue && number <= _maxValue) || valueTextBox.Text == "";
         }
 
         /// <summary>
@@ -153,49 +117,41 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxValue_Leave(object sender, EventArgs e)
+        private void ValueTextBox_Leave(object sender, EventArgs e)
         {
-            _value = textBoxValue.Text;
+            _value = valueTextBox.Text;
         }
-
-        #endregion TextBox
-
-        #region ComboBox
 
         /// <summary>
         /// Event occurs when the selection of element type
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ComboBoxType_SelectedValueChanged(object sender, EventArgs e)
+        private void TypeComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (comboBoxType.Text == @"Resistor")
+            if (typeComboBox.Text == @"Resistor")
             {
-                pictureBoxElementCircuit.Image = Properties.Resources.Resistor;
+                elementCircuitPictureBox.Image = Properties.Resources.Resistor;
                 _type = "Resistor";
             }
-            else if (comboBoxType.Text == @"Inductor")
+            else if (typeComboBox.Text == @"Inductor")
             {
-                pictureBoxElementCircuit.Image = Properties.Resources.Inductor;
+                elementCircuitPictureBox.Image = Properties.Resources.Inductor;
                 _type = "Inductor";
             }
-            else if (comboBoxType.Text == @"Capacitor")
+            else if (typeComboBox.Text == @"Capacitor")
             {
-                pictureBoxElementCircuit.Image = Properties.Resources.Capacitor;
+                elementCircuitPictureBox.Image = Properties.Resources.Capacitor;
                 _type = "Capacitor";
             }
         }
-
-        #endregion ComboBox
-
-        #region Button
 
         /// <summary>
         /// Event when pressing the 'OK' button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonOK_Click(object sender, EventArgs e)
+        private void OKButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             if (IsClearBlank(_name, _value))
@@ -230,12 +186,33 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonCancel_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        #endregion Button
+        /// <summary>
+        /// Checking for empty name and value
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private static bool IsClearBlank(string name, string value)
+        {
+            return string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(value);
+        }
+
+        /// <summary>
+        /// Method for checking strings for English characters only
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <returns></returns>
+        private static bool IsEnglishSymbol(char symbol)
+        {
+            return symbol >= 'A' && symbol <= 'Z';
+        }
+
+        #endregion -- Private Methods --
     }
 }

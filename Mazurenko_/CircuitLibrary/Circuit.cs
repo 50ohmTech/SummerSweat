@@ -10,7 +10,25 @@ namespace CircuitLibrary
     /// </summary>
     public class Circuit
     {
-        #region Constructor
+        #region -- Properties --
+
+        /// <summary>
+        /// List of electrical circuit elements
+        /// </summary>
+        public List<IElement> Elements { get; set; }
+
+        #endregion -- Properties --
+
+        #region -- Events --
+
+        /// <summary>
+        /// Event, when changing one of the elements of the electrical circuit
+        /// </summary>
+        public event ValueStateEventHandler CircuitChanged;
+
+        #endregion -- Events --
+
+        #region -- Public Methods --
 
         /// <summary>
         /// Empty constructor
@@ -33,28 +51,6 @@ namespace CircuitLibrary
             }
         }
 
-        #endregion Constructor
-
-        #region Properties
-
-        /// <summary>
-        /// List of electrical circuit elements
-        /// </summary>
-        public List<IElement> Elements { get; set; }
-
-        #endregion Properties
-
-        #region Events
-
-        /// <summary>
-        /// Event, when changing one of the elements of the electrical circuit
-        /// </summary>
-        public event ValueStateEventHandler CircuitChanged;
-
-        #endregion Events
-
-        #region Methods
-
         /// <summary>
         /// Calculation of complex resistance
         /// </summary>
@@ -75,6 +71,6 @@ namespace CircuitLibrary
             return result;
         }
 
-        #endregion Methods
-    }   
+        #endregion -- Public Methods --
+    }
 }
