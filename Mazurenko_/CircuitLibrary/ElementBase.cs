@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
 using CircuitLibrary.Events;
 
@@ -14,22 +11,7 @@ namespace CircuitLibrary
     /// </summary>
     public abstract class ElementBase: IElement
     {
-        #region Constructor
-
-        /// <summary>
-        /// Constructor with parameters
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        protected ElementBase(string name, double value)
-        {
-            Name = name;
-            Value = value;
-        }
-
-        #endregion Constructor
-
-        #region Fields
+        #region -- Fields --
 
         /// <summary>
         /// The name of the element of an electric circuit  
@@ -41,9 +23,9 @@ namespace CircuitLibrary
         /// </summary>
         private double _value;
 
-        #endregion Fields
+        #endregion -- Fields --
 
-        #region Properties
+        #region -- Properties --
 
         /// <summary>
         /// The name of the element of an electric circuit
@@ -85,25 +67,51 @@ namespace CircuitLibrary
                     throw new ArgumentException("The value is not a real number");
                 }
 
-                if (value <= 0)
+                double minValue = 0.000001;
+                if (value < minValue)
                 {
-                    throw new ArgumentException("The value cannot be 0 or less than 0");
+                    throw new ArgumentException("The value cannot be less than 0.000001");
+                }
+
+                double maxValue = 100000000000000;
+                if (value > maxValue)
+                {
+                    throw new ArgumentException("The value cannot be more than 100000000000000");
                 }
                 _value = value;
                 ValueChanged?.Invoke(_value, this);
             }
         }
 
-        #endregion Properties
+        #endregion -- Properties --
 
-        #region Methods
+        #region -- Public Methods --
 
         /// <summary>
         /// Calculation of impedance
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        public abstract Complex CalculateZ(double f);        
+        public abstract Complex CalculateZ(double f);
+
+        #endregion -- Public Methods --
+
+        #region -- Protected Methods --
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        protected ElementBase(string name, double value)
+        {
+            Name = name;
+            Value = value;
+        }
+
+        #endregion -- Protected Methods --
+
+        #region -- Private Methods --
 
         /// <summary>
         /// Name validation
@@ -133,15 +141,15 @@ namespace CircuitLibrary
             return (symbol >= 'A' && symbol <= 'Z');
         }
 
-        #endregion Methods
+        #endregion -- Private Methods --
 
-        #region Events
+        #region -- Events --
 
         /// <summary>
         /// Signal changes in the nominal value of the electrical circuit element
         /// </summary>
         public event ValueStateEventHandler ValueChanged;
 
-        #endregion Events
+        #endregion -- Events --
     }
 }

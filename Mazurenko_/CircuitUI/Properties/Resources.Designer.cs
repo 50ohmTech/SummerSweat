@@ -63,9 +63,49 @@ namespace CircuitUI.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap resistor {
+        internal static System.Drawing.Bitmap Capacitor {
             get {
-                object obj = ResourceManager.GetObject("resistor", resourceCulture);
+                object obj = ResourceManager.GetObject("Capacitor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ending_Part {
+            get {
+                object obj = ResourceManager.GetObject("Ending_Part", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Inductor {
+            get {
+                object obj = ResourceManager.GetObject("Inductor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Resistor {
+            get {
+                object obj = ResourceManager.GetObject("Resistor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Starting_Part {
+            get {
+                object obj = ResourceManager.GetObject("Starting_Part", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

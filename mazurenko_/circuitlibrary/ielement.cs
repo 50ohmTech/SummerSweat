@@ -11,9 +11,9 @@ namespace CircuitLibrary
     /// <summary>
     /// Interface of electrical circuit elements
     /// </summary>
-    interface IElement
+    public interface IElement
     {
-        #region Properties
+        #region -- Properties --
 
         /// <summary>
         /// The name of the element of an electric circuit
@@ -25,9 +25,9 @@ namespace CircuitLibrary
         /// </summary>
         double Value { get; set; }
 
-        #endregion Properties
+        #endregion -- Properties --
 
-        #region Methods
+        #region -- Methods --
 
         /// <summary>
         /// Calculation of impedance
@@ -36,14 +36,14 @@ namespace CircuitLibrary
         /// <returns></returns>
         Complex CalculateZ(double frequency);
 
-        #endregion Methods
+        #endregion -- Methods --
 
-        #region Events
+        #region -- Events --
         /// <summary>
         /// Signal changes in the nominal value of the electrical circuit element
         /// </summary>
         event ValueStateEventHandler ValueChanged;
 
-        #endregion Events
+        #endregion -- Events --
     }   
 }

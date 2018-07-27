@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
 
-namespace CircuitLibrary.ElementsCircuit
+namespace CircuitLibrary
 {
     /// <summary>
     /// Inductance coil, element of the electrical circuit
     /// </summary>
     public sealed class Indutor : ElementBase
     {
-        #region Constructor
+        #region -- Public Methods --
 
         /// <summary>
-        /// Constructor with parameters
+        /// Constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -23,10 +19,6 @@ namespace CircuitLibrary.ElementsCircuit
         {
 
         }
-
-        #endregion Constructor
-
-        #region Methods
 
         /// <summary>
         /// Calculation of impedance
@@ -38,6 +30,6 @@ namespace CircuitLibrary.ElementsCircuit
             return new Complex(0, 2 * Math.PI * frequency * Value);
         }
 
-        #endregion Methods
+        #endregion -- Public Methods --
     }
 }
