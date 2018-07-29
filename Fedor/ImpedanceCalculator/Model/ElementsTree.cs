@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Model
 {
@@ -9,59 +8,6 @@ namespace Model
     /// </summary>
     public class ElementsTree
     {
-        #region – – Внутренние классы – –
-
-        /// <summary>
-        /// Ячейка дерева.
-        /// </summary>
-        public class Node
-        {
-            #region - - Свойства - -
-
-            /// <summary>
-            /// Родительская ячейка.
-            /// </summary>
-            public Node Parent { get; set; }
-
-            /// <summary>
-            /// Список дочерних ячеек.
-            /// </summary>
-            public List<Node> Brood { get; set; }
-
-            /// <summary>
-            /// Значение ячейки.
-            /// </summary>
-            public ElementBase Element { get; }
-
-            /// <summary>
-            /// Тип соединения.
-            /// </summary>
-            public bool IsSerial { get; set; }
-
-            #endregion
-
-            #region - - Публичные методы - -
-
-            /// <summary>
-            /// Конструктор класса Node.
-            /// </summary>
-            /// <param name="element">Значение ячейки.</param>
-            /// <param name="parent">Родительская ячейка.</param>
-            /// <param name="isSerial">Тип соединения.</param>
-            public Node(ElementBase element, Node parent, bool isSerial)
-            {
-                IsSerial = isSerial;
-                Element = element;
-
-                Parent = parent;
-                Brood = new List<Node>();
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region - - Свойства - -
 
         /// <summary>
@@ -70,9 +16,25 @@ namespace Model
         public Node Root { get; }
 
         /// <summary>
-        /// Количесвто элементов.
+        /// Количество элементов.
         /// </summary>
-        public uint Count => GetCount(Root);
+        public uint Count => GetCount(Root,
+            new List<Type>() {typeof(Resistor), typeof(Capacitor), typeof(Inductor)});
+
+        /// <summary>
+        /// Количество резисторов.
+        /// </summary>
+        public uint ResistorCount => GetCount(Root, new List<Type>() { typeof(Resistor)});
+
+        /// <summary>
+        /// Количество конденсаторов.
+        /// </summary>
+        public uint CapacitorCount => GetCount(Root, new List<Type>() { typeof(Capacitor)});
+
+        /// <summary>
+        /// Количество катушек индуктивности.
+        /// </summary>
+        public uint InductorCount => GetCount(Root, new List<Type>() { typeof(Inductor)});
 
         #endregion
 
@@ -101,7 +63,7 @@ namespace Model
             var node = new Node(element, Root, true);
             Root.Brood.Add(node);
             ElementsChanged?.Invoke(this,
-                new ChangedEventArgs(element, ChangedEventArgs.ChangeType.Add));
+                new ChangedEventArgs(element, ChangeType.Add));
         }
 
         /// <summary>
@@ -135,7 +97,7 @@ namespace Model
             }
 
             ElementsChanged?.Invoke(this,
-                new ChangedEventArgs(element, ChangedEventArgs.ChangeType.Add));
+                new ChangedEventArgs(element, ChangeType.Add));
         }
 
         /// <summary>
@@ -152,7 +114,7 @@ namespace Model
                 parent.Brood.Remove(elementNode);
 
                 ElementsChanged?.Invoke(this,
-                    new ChangedEventArgs(elementNode.Element, ChangedEventArgs.ChangeType.Delete));
+                    new ChangedEventArgs(elementNode.Element, ChangeType.Delete));
 
                 return;
             }
@@ -172,9 +134,11 @@ namespace Model
                 parent.Brood.Remove(elementNode);
             }
 
+            UpdateName(Root, elementName);
+
             ElementsChanged?.Invoke(this,
                 new ChangedEventArgs(elementNode.Element,
-                    ChangedEventArgs.ChangeType.Delete));
+                    ChangeType.Delete));
         }
 
         /// <summary>
@@ -184,26 +148,26 @@ namespace Model
         {
             Root.Brood = new List<Node>();
             ElementsChanged?.Invoke(this,
-                new ChangedEventArgs(ChangedEventArgs.ChangeType.Clear));
+                new ChangedEventArgs(ChangeType.Clear));
         }
 
         /// <summary>
         /// Найти ячейку в дереве по имени элемента.
         /// </summary>
-        /// <param name="node">Корень поддерева.</param>
+        /// <param name="root">Корень поддерева.</param>
         /// <param name="elementName">Имя элемента.</param>
         /// <returns>Ячейка дерева.</returns>
-        public Node Search(Node node, string elementName)
+        public Node Search(Node root, string elementName)
         {
-            if (node.Element != null)
+            if (root.Element != null)
             {
-                if (node.Element.Name == elementName)
+                if (root.Element.Name == elementName)
                 {
-                    return node;
+                    return root;
                 }
             }
 
-            foreach (var child in node.Brood)
+            foreach (var child in root.Brood)
             {
                 var searhNode = Search(child, elementName);
                 if (searhNode != null)
@@ -222,22 +186,48 @@ namespace Model
         /// <summary>
         /// Получить количество элементов дерева.
         /// </summary>
-        /// <param name="node">Корень поддерева.</param>
+        /// <param name="root">Корень поддерева.</param>
+        /// <param name="types">Типы элементов.</param>
         /// <returns>Количество элементов.</returns>
-        private uint GetCount(Node node)
+        private uint GetCount(Node root, ICollection<Type> types)
         {
-            if (node.Element != null)
+            if (root.Element != null)
             {
-                return 1;
+                return types.Contains(root.Element.GetType()) ? 1 : (uint) 0;
             }
 
             uint count = 0;
-            foreach (var child in node.Brood)
+            foreach (var child in root.Brood)
             {
-                count += GetCount(child);
+                count += GetCount(child, types);
             }
 
             return count;
+        }
+
+        /// <summary>
+        /// Обновить имя элемента цепи.
+        /// </summary>
+        /// <param name="root">Корень поддерева.</param>
+        /// <param name="deleteName">Имя удаляемого элемента.</param>
+        private void UpdateName(Node root, string deleteName)
+        {
+            if (root.Element != null)
+            {
+                var number = uint.Parse(root.Element.Name.Substring(1));
+                var deleteNumber = uint.Parse(deleteName.Substring(1));
+
+                if (root.Element.Name[0] != deleteName[0] || number <= deleteNumber) return;
+
+                number--;
+                root.Element.Name = root.Element.Name[0] + number.ToString();
+                return;
+            }
+
+            foreach (var child in root.Brood)
+            {
+                UpdateName(child, deleteName);
+            }
         }
 
         #endregion

@@ -13,7 +13,7 @@ namespace View
         /// <summary>
         /// Ввести вещественное значение.
         /// </summary>
-        /// <param name="e">Аргументы события.</param>
+        /// <param name="e">Параметры события.</param>
         /// <param name="text">Текст элемента.</param>
         public static void PressDouble(KeyPressEventArgs e, string text)
         {
@@ -36,7 +36,8 @@ namespace View
         /// <summary>
         /// Ввести целочисленное значение.
         /// </summary>
-        /// <param name="e">Аргументы события.</param>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         public static void PressInt(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char) Keys.Back || char.IsDigit(e.KeyChar) &&
@@ -54,7 +55,7 @@ namespace View
         {
             if (!(sender is TextBox textBox)) return;
 
-            if (textBox.Text == Properties.Resources.defaultNumber)
+            if (textBox.Text == "0")
             {
                 textBox.Text = string.Empty;
             }
@@ -70,7 +71,7 @@ namespace View
 
             if (textBox.Text == string.Empty)
             {
-                textBox.Text = Properties.Resources.defaultNumber;
+                textBox.Text = "0";
             }
         }
 
@@ -83,7 +84,7 @@ namespace View
             if (valueBox.Text == System.Globalization.NumberFormatInfo.CurrentInfo
                     .NumberDecimalSeparator)
             {
-                valueBox.Text = Properties.Resources.defaultNumber;
+                valueBox.Text = "0";
             }
         }
 

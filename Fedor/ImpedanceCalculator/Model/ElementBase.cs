@@ -31,7 +31,7 @@ namespace Model
         {
             get => _name;
 
-            private set
+            set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -69,7 +69,7 @@ namespace Model
         /// </summary>
         /// <param name="name">Имя элемента.</param>
         /// <param name="value">Номинал элемента.</param>
-        public ElementBase(string name, double value)
+        protected ElementBase(string name, double value)
         {
             Name = name;
             Value = value;
