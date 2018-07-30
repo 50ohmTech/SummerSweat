@@ -21,7 +21,7 @@ namespace Gpt.Model
         /// </summary>
         /// <param name="f">Частоста</param>
         /// <returns>Комплексное сопротивление</returns>
-        public override Complex CalculateZ(double f)
+        public override Complex CalculateZ(double frequency)
         {
             return new Complex(Value, 0);
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Gpt.Model;
 using Gpt.View.Properties;
@@ -13,6 +14,9 @@ namespace Gpt.View
 
         private ElementBase _item;
 
+        public int x, y;
+        
+        //public ElementControl Control { get; set; }
 
         public ElementControl(ElementBase elementBase,
             ObservableCollection<ElementBase> elements)
@@ -26,6 +30,8 @@ namespace Gpt.View
 
             label1.Text = elementBase.Value.ToString(); //CultureInfo.CurrentCulture
             //elementBase.ValueChanged += ElementValueChanged;
+            //x = Control.Location.X;
+            //y = Control.Location.Y;
         }
 
         public ElementControl(string nameEndingCircuit)
@@ -77,5 +83,15 @@ namespace Gpt.View
                 _item = value;
             }
         }
+
+        private void Control_Click(object sender, EventArgs e)
+        {
+            //x = Control.Location.X;
+            //y = Control.Location.Y;
+            //Control.Top = x;
+            //Control.Left = y;
+            //x += 5;
+            //y += 5;
+        }
     }
-}
+}   

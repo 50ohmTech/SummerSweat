@@ -22,9 +22,9 @@ namespace Gpt.Model
         /// </summary>
         /// <param name="f">Частоста</param>
         /// <returns>Комплексное сопротивление</returns>
-        public override Complex CalculateZ(double f)
+        public override Complex CalculateZ(double frequency)
         {
-            var valueZ = 2 * Math.PI * f * Value;
+            var valueZ = 2 * Math.PI * frequency * Value;
             return new Complex(0, valueZ);
         }
     }
