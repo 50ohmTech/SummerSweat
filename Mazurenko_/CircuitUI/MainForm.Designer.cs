@@ -32,13 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.addElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.randomElementtoolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.elementsGridView = new System.Windows.Forms.DataGridView();
             this.bindingSourceContainer = new System.Windows.Forms.BindingSource(this.components);
-            this.randomElementButton = new System.Windows.Forms.Button();
             this.circuitsComboBox = new System.Windows.Forms.ComboBox();
             this.currentCircuitLabel = new System.Windows.Forms.Label();
             this.mainMenuStrip.SuspendLayout();
@@ -50,23 +50,35 @@
             // 
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addElementToolStripMenuItem,
+            this.randomElementtoolStripMenu,
             this.clearToolStripMenuItem,
             this.calculationToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.ShowItemToolTips = true;
-            this.mainMenuStrip.Size = new System.Drawing.Size(235, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(255, 24);
             this.mainMenuStrip.TabIndex = 1;
-            this.mainMenuStrip.Text = "menuStrip1";
+            this.mainMenuStrip.Text = "Strip";
             // 
             // addElementToolStripMenuItem
             // 
             this.addElementToolStripMenuItem.Name = "addElementToolStripMenuItem";
             this.addElementToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.addElementToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-            this.addElementToolStripMenuItem.Text = "Add Element";
+            this.addElementToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.addElementToolStripMenuItem.Text = "Add";
             this.addElementToolStripMenuItem.ToolTipText = "Adding a new electrical circuit element\r\n( Ctrl + A )";
             this.addElementToolStripMenuItem.Click += new System.EventHandler(this.AddElementToolStripMenuItem_Click);
+            // 
+            // randomElementtoolStripMenu
+            // 
+            this.randomElementtoolStripMenu.Name = "randomElementtoolStripMenu";
+            this.randomElementtoolStripMenu.ShortcutKeyDisplayString = "";
+            this.randomElementtoolStripMenu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+            this.randomElementtoolStripMenu.Size = new System.Drawing.Size(67, 20);
+            this.randomElementtoolStripMenu.Text = "Random ";
+            this.randomElementtoolStripMenu.ToolTipText = "Adding a random element of an electrical circuit\r\n( Ctrl + Shift + A )\r\n";
+            this.randomElementtoolStripMenu.Click += new System.EventHandler(this.RandomElementtoolStripMenu_Click);
             // 
             // clearToolStripMenuItem
             // 
@@ -113,34 +125,30 @@
             this.elementsGridView.AllowUserToDeleteRows = false;
             this.elementsGridView.AllowUserToResizeColumns = false;
             this.elementsGridView.AllowUserToResizeRows = false;
+            this.elementsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.elementsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.elementsGridView.Location = new System.Drawing.Point(12, 75);
+            this.elementsGridView.Location = new System.Drawing.Point(12, 56);
             this.elementsGridView.MultiSelect = false;
             this.elementsGridView.Name = "elementsGridView";
             this.elementsGridView.RowHeadersVisible = false;
-            this.elementsGridView.Size = new System.Drawing.Size(211, 207);
+            this.elementsGridView.Size = new System.Drawing.Size(236, 207);
             this.elementsGridView.TabIndex = 2;
             this.elementsGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.ElementsGridView_CellBeginEdit);
             this.elementsGridView.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ElementsGridView_CellMouseEnter);
             this.elementsGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.ElementsGridView_CellValidating);
             this.elementsGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ElementsGridView_EditingControlShowing);
             // 
-            // randomElementButton
+            // bindingSourceContainer
             // 
-            this.randomElementButton.Location = new System.Drawing.Point(62, 288);
-            this.randomElementButton.Name = "randomElementButton";
-            this.randomElementButton.Size = new System.Drawing.Size(100, 23);
-            this.randomElementButton.TabIndex = 3;
-            this.randomElementButton.Text = "Random Element";
-            this.randomElementButton.UseVisualStyleBackColor = true;
-            this.randomElementButton.Click += new System.EventHandler(this.RandomElementButton_Click);
+            this.bindingSourceContainer.DataSourceChanged += new System.EventHandler(this.BindingSourceContainer_DataSourceChanged);
+            this.bindingSourceContainer.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.BindingSourceContainer_ListChanged);
             // 
             // circuitsComboBox
             // 
             this.circuitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.circuitsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.circuitsComboBox.FormattingEnabled = true;
-            this.circuitsComboBox.Location = new System.Drawing.Point(43, 46);
+            this.circuitsComboBox.Location = new System.Drawing.Point(68, 27);
             this.circuitsComboBox.Name = "circuitsComboBox";
             this.circuitsComboBox.Size = new System.Drawing.Size(154, 23);
             this.circuitsComboBox.TabIndex = 1;
@@ -149,20 +157,19 @@
             // currentCircuitLabel
             // 
             this.currentCircuitLabel.AutoSize = true;
-            this.currentCircuitLabel.Location = new System.Drawing.Point(45, 30);
+            this.currentCircuitLabel.Location = new System.Drawing.Point(12, 32);
             this.currentCircuitLabel.Name = "currentCircuitLabel";
-            this.currentCircuitLabel.Size = new System.Drawing.Size(117, 13);
+            this.currentCircuitLabel.Size = new System.Drawing.Size(50, 13);
             this.currentCircuitLabel.TabIndex = 5;
-            this.currentCircuitLabel.Text = "Current electrical circuit";
+            this.currentCircuitLabel.Text = "Current : ";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 323);
+            this.ClientSize = new System.Drawing.Size(255, 273);
             this.Controls.Add(this.currentCircuitLabel);
             this.Controls.Add(this.circuitsComboBox);
-            this.Controls.Add(this.randomElementButton);
             this.Controls.Add(this.elementsGridView);
             this.Controls.Add(this.mainMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -190,11 +197,11 @@
         private System.Windows.Forms.ToolStripMenuItem calculationToolStripMenuItem;
         private System.Windows.Forms.BindingSource bindingSourceContainer;
         private System.Windows.Forms.DataGridView elementsGridView;
-        private System.Windows.Forms.Button randomElementButton;
         private System.Windows.Forms.ComboBox circuitsComboBox;
         private System.Windows.Forms.Label currentCircuitLabel;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem randomElementtoolStripMenu;
     }
 }
 

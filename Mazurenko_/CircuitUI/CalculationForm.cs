@@ -75,12 +75,46 @@ namespace CircuitUI
         /// </summary>
         public CalculationForm()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         #endregion -- Public Methods --
 
-        #region -- Private Methods --
+        #region -- Private Methods --        
+
+        /// <summary>
+        /// Triggered when this form is run
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculationForm_Load(object sender, EventArgs e)
+        {
+            KeyPreview = true;
+            InitializeToolTip();
+        }
+
+        /// <summary>
+        /// Initializatio ToolTip
+        /// </summary>
+        private void InitializeToolTip()
+        {
+            ToolTip toolTipButton = new ToolTip
+            {
+                InitialDelay = 100,
+                ReshowDelay = 100,
+                ShowAlways = true
+            };
+
+            toolTipButton.SetToolTip(calculationButton,
+                "Calculation of the total complex resistance of the electrical" +
+                "\n( Ctrl + C )");
+
+            toolTipButton.SetToolTip(deleteButton,
+                "Delete the selected line" + "\n( Ctrl + D )");
+
+            toolTipButton.SetToolTip(deleteAllButton,
+                "Clear the entire list of values" + "\n( Ctrl + Shift + D )");
+        }
 
         /// <summary>
         /// Calculation of the total complex resistance of the electrical
@@ -202,6 +236,30 @@ namespace CircuitUI
             e.Handled = !EditTextBoxValue.IsCorrectionTextBoxValue_Edit(_frequency.Text, e.KeyChar);
         }
 
-        #endregion -- Private Methods --   
+        /// <summary>
+        /// Checking for shortcut Keys
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculationForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                calculationButton.PerformClick();
+            }
+
+            if (e.Control && e.Shift && e.KeyCode == Keys.D)
+            {
+                deleteAllButton.PerformClick();
+                return;
+            }
+
+            if (e.Control && e.KeyCode == Keys.D)
+            {
+                deleteButton.PerformClick();
+            }
+        }
+        #endregion -- Private Methods --           
+        
     }
 }

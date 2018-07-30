@@ -41,7 +41,7 @@ namespace CircuitUI
         public IElement CreateRandomElement()
         {
             _rand = new Random();
-            _valueRandom = _rand.Next(1, 1000) * 0.4;
+            _valueRandom = Math.Round(_rand.NextDouble() * 200, 4);
             _typeRandom = CreateType();
             _nameRandom = CreateName();
 

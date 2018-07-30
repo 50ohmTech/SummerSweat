@@ -61,17 +61,19 @@
             // 
             // columnFrequenies
             // 
-            this.columnFrequenies.Frozen = true;
+            this.columnFrequenies.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.columnFrequenies.HeaderText = "Frequenies";
+            this.columnFrequenies.MaxInputLength = 14;
             this.columnFrequenies.Name = "columnFrequenies";
+            this.columnFrequenies.Width = 84;
             // 
             // columnImpendances
             // 
-            this.columnImpendances.Frozen = true;
+            this.columnImpendances.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.columnImpendances.HeaderText = "Impendances";
             this.columnImpendances.Name = "columnImpendances";
             this.columnImpendances.ReadOnly = true;
-            this.columnImpendances.Width = 150;
+            this.columnImpendances.ToolTipText = "\"E\" - the exponent means  \"* 10 ^ \" (times ten to the power)";
             // 
             // groupBoxButtons
             // 
@@ -127,6 +129,8 @@
             this.Name = "CalculationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Calculation Form";
+            this.Load += new System.EventHandler(this.CalculationForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CalculationForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.calculationGridView)).EndInit();
             this.groupBoxButtons.ResumeLayout(false);
             this.ResumeLayout(false);
