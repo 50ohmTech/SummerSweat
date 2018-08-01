@@ -41,10 +41,10 @@ namespace Gpt.View
             
             //_addForm = new AddForm(null,null);
             _elements = new ObservableCollection<ElementBase>();
-            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
-            column.DataPropertyName = "ElementBase.CalculateZ()";
-            column.HeaderText = "AAAAAAAAAa";
-            dataGridView1.Columns.Add(column);
+            //DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+            //column.DataPropertyName = "ElementBase.CalculateZ()";
+            //column.HeaderText = "AAAAAAAAAa";
+            //dataGridView1.Columns.Add(column);
             bindingSource1.DataSource = _elements;
             dataGridView1.DataSource = bindingSource1;
             _circuit = new Circuit();
@@ -100,52 +100,98 @@ namespace Gpt.View
             switch (salary)
             {
                 case "Цепь №1":
-                {
-                    //_circuitsList = new List<Circuit>();
-                    //var circuitElements = new ObservableCollection<ElementBase>();
-                    endElementsControls.Add(new ElementControl("Starting"));
-                    circuitElements.Add(new Capacitor("C1", 10));   
-                    circuitElements.Add(new Inductor("L1", 5));
-                    circuitElements.Add(new Resistor("R1", 10));
-                    //var elementsControls = new List<ElementControl>();
-                    elementsControls.Add(new ElementControl("Starting"));
-                    elementsControls.Add(new ElementControl(new Capacitor("C1", 10),
-                        circuitElements));
-                    elementsControls.Add(new ElementControl(new Resistor("R1", 10),
-                        circuitElements));
-                    elementsControls.Add(new ElementControl(new Inductor("L1", 10),
-                        circuitElements));
-                    elementsControls.Add(new ElementControl("Ending"));
-                    
-                    elementsControls[0].Location = new Point(0, 50);
-                    elementsControls[1].Location = new Point(80, 50);
-                    elementsControls[2].Location = new Point(160,50);
-                    elementsControls[3].Location = new Point(240, 50);
-                    elementsControls[4].Location = new Point(320, 50);
-                    _circuit.Elements = circuitElements;
-                        break;
-                }
-                case "Цепь №2":
-                {
-                    //panel1.Visible = false;
-                    //Bitmap image = new Bitmap(@"C:\Users\Игорь\Desktop\asd.jpeg");
-                    //this.BackgroundImage = image;
-                    break;
-                }
-                case "Цепь №3":
-                {
-                    break;
-                }
-                case "Цепь №4":
-                {
-                    break;
-                }
-                case "Цепь №5":
-                {
-                    break;
-                }
-            }
+                    {
+                        //_circuitsList = new List<Circuit>();
+                        //var circuitElements = new ObservableCollection<ElementBase>();
+                        //endElementsControls.Add(new ElementControl("Starting"));
+                        circuitElements.Add(new Capacitor("C1", 10));
+                        circuitElements.Add(new Inductor("L1", 5));
+                        circuitElements.Add(new Resistor("R1", 10));
+                        //var elementsControls = new List<ElementControl>();
+                        elementsControls.Add(new ElementControl("Starting"));
+                        elementsControls.Add(new ElementControl(new Capacitor("C1", 10),
+                            circuitElements));
+                        elementsControls.Add(new ElementControl(new Resistor("R1", 10),
+                            circuitElements));
+                        elementsControls.Add(new ElementControl(new Inductor("L1", 10),
+                            circuitElements));
+                        elementsControls.Add(new ElementControl("Ending"));
 
+                        elementsControls[0].Location = new Point(0, 50);
+                        elementsControls[1].Location = new Point(80, 50);
+                        elementsControls[2].Location = new Point(160, 50);
+                        elementsControls[3].Location = new Point(240, 50);
+                        elementsControls[4].Location = new Point(320, 50);
+                        _circuit.Elements = circuitElements;
+
+                        dataGridView1.Rows.Clear();
+                        for (int i = 0; i < 5; i++)
+                        {
+                            bindingSource1.Add(circuitElements[i]);
+                        }
+                        break;
+                    }
+                case "Цепь №2":
+                    {
+                        circuitElements.Add(new Capacitor("C1", 10));
+                        circuitElements.Add(new Capacitor("C2", 5));
+                        circuitElements.Add(new Resistor("R1", 20));
+                        circuitElements.Add(new Resistor("R2", 20));
+                        circuitElements.Add(new Resistor("R3", 20));
+                        circuitElements.Add(new Resistor("R4", 20));
+                        _circuit.Elements = circuitElements;
+
+                        dataGridView1.Rows.Clear();
+                        for (int i = 0; i < 6; i++)
+                        {
+                            bindingSource1.Add(circuitElements[i]);
+                        }
+                        break;
+                    }
+                case "Цепь №3":
+                    {
+                        circuitElements.Add(new Capacitor("C1", 10));
+                        circuitElements.Add(new Capacitor("C2", 10));
+                        circuitElements.Add(new Inductor("L1", 5));
+                        circuitElements.Add(new Resistor("R1", 20));
+                        circuitElements.Add(new Resistor("R2", 20));
+                        circuitElements.Add(new Resistor("R2", 20));
+                        circuitElements.Add(new Resistor("R3", 20));
+                        _circuit.Elements = circuitElements;
+
+                        dataGridView1.Rows.Clear();
+                        for (int i = 0; i < 7; i++)
+                        {
+                            bindingSource1.Add(circuitElements[i]);
+                        }
+                        break;
+                    }
+                case "Цепь №4":
+                    {
+                        circuitElements.Add(new Capacitor("C1", 10));
+                        circuitElements.Add(new Capacitor("C2", 5));
+                        circuitElements.Add(new Resistor("R1", 20));
+                        circuitElements.Add(new Resistor("R2", 20));
+                        circuitElements.Add(new Resistor("R3", 20));
+                        circuitElements.Add(new Inductor("I1", 20));
+                        _circuit.Elements = circuitElements;
+
+                        dataGridView1.Rows.Clear();
+                        for (int i = 0; i < 6; i++)
+                        {
+                            bindingSource1.Add(circuitElements[i]);
+                        }
+                        break;
+                    }
+                case "Цепь №5":
+                    {
+                        circuitElements.Add(new Inductor("I1", 10));
+                        _circuit.Elements = circuitElements;
+                        dataGridView1.Rows.Clear();
+                        bindingSource1.Add(circuitElements[0]);
+                        break;
+                    }
+            }
             if (elementsControls.Capacity != 0)
             {
                 panel1.Controls.Add(elementsControls[0]);
