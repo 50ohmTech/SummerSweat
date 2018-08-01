@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,12 @@
     <Compile Include="AddForm.Designer.cs">
       <DependentUpon>AddForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalculateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalculateForm.Designer.cs">
+      <DependentUpon>CalculateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ElementControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalculateForm.resx">
+      <DependentUpon>CalculateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ElementControl.resx">
       <DependentUpon>ElementControl.cs</DependentUpon>
@@ -87,6 +97,7 @@
     <None Include="Properties\DataSources\Gpt.Model.Capacitor.datasource" />
     <None Include="Properties\DataSources\Gpt.Model.Circuit.datasource" />
     <None Include="Properties\DataSources\Gpt.Model.Element.datasource" />
+    <None Include="Properties\DataSources\Gpt.Model.ElementBase.datasource" />
     <None Include="Properties\DataSources\Gpt.Model.Inductor.datasource" />
     <None Include="Properties\DataSources\Gpt.Model.Resistor.datasource" />
     <None Include="Properties\DataSources\Gpt.Model.TypeElements.datasource" />

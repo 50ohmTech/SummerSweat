@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Numerics;
 
+//using System.Numerics;
+
 namespace Gpt.Model
 {
     public abstract class ElementBase
@@ -38,7 +40,6 @@ namespace Gpt.Model
                 {
                     throw new ArgumentNullException(nameof(Name));
                 }
-
                 _name = value;
             }
         }
@@ -62,7 +63,6 @@ namespace Gpt.Model
                     throw new ArgumentException(
                         $"Значение {value} не может быть меньше или равно 0.");
                 }
-
                 _value = value;
             }
         }
@@ -72,6 +72,6 @@ namespace Gpt.Model
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        public abstract Complex CalculateZ(double f);
+        public abstract Complex CalculateZ(double frequency);
     }
 }
