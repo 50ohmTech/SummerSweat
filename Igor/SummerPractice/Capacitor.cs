@@ -18,10 +18,10 @@ namespace Gpt.Model
         }
 
         /// <summary>
-        ///     Расчет комслексного сопротивления конденсатор
+        ///     Расчет комплексного сопротивления конденсатор
         /// </summary>
         /// <param name="frequency">Частота</param>
-        /// <returns></returns>
+        /// <returns >Комплексное сопротивлени</returns>
         public override Complex CalculateZ(double frequency)
         {
             var valueZ = 1 / (2 * Math.PI * frequency * Value);

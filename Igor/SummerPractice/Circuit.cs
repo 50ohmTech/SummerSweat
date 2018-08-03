@@ -25,8 +25,8 @@ namespace Gpt.Model
         /// <summary>
         ///     Расчет комплексного сопротивления элементов
         /// </summary>
-        /// <param name="f">Частоты</param>
-        /// <returns></returns>
+        /// <param name="frequency">Частоты</param>
+        /// <returns name="result">Комлпексное сопротивление</returns>
         public List<Complex> CalculateZ(params double[] frequency)
         {
             var result = new List<Complex>();

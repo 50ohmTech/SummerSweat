@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Numerics;
 
-//using System.Numerics;
-
 namespace Gpt.Model
 {
     public abstract class ElementBase
@@ -71,7 +69,7 @@ namespace Gpt.Model
         ///     Расчет комплексного сопротивления
         /// </summary>
         /// <param name="f"></param>
-        /// <returns></returns>
+        /// <returns>Комплексное сопротивление</returns>
         public abstract Complex CalculateZ(double frequency);
     }
 }
