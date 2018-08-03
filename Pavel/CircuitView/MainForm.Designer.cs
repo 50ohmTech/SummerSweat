@@ -52,6 +52,7 @@
             // 
             // CircuitComboBox
             // 
+            this.CircuitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CircuitComboBox.FormattingEnabled = true;
             this.CircuitComboBox.Items.AddRange(new object[] {
             "Новая цепь",
@@ -92,8 +93,8 @@
             this.NominalTextBox.DecimalPlaces = 3;
             this.NominalTextBox.Location = new System.Drawing.Point(9, 122);
             this.NominalTextBox.Maximum = new decimal(new int[] {
-            10000,
-            0,
+            -727379968,
+            232,
             0,
             0});
             this.NominalTextBox.Minimum = new decimal(new int[] {
