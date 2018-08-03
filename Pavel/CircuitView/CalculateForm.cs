@@ -31,6 +31,7 @@ namespace CircuitView
         public CalculateForm()
         {
             InitializeComponent();
+            _frequencies = new List<double>();
         }
         /// <summary>
         /// Расчет импеданса
@@ -43,7 +44,7 @@ namespace CircuitView
             var interval = double.Parse(IntervalBox.Text);
             var count = uint.Parse(AmountBox.Text);
 
-            _frequencies = new List<double>();
+            FrequenciesGridView.Rows.Clear();
 
             for (var index = 0; index < count; index++)
             {

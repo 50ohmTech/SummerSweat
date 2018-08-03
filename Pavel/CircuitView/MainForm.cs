@@ -56,7 +56,7 @@ namespace CircuitView
 
             ElementsBindingSource.DataSource = _elements;
             ElementsGridView.DataSource = ElementsBindingSource;
-
+            
             _resistorIterator = 0;
             _capacitorIterator = 0;
             _inductorIterator = 0;
@@ -192,6 +192,13 @@ namespace CircuitView
 
             var calculateForm = new CalculateForm { Owner = this };
             calculateForm.ShowDialog();
+        }
+
+        private void ElementsGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Некорректный ввод символов", "Error",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
         }
 
         #endregion

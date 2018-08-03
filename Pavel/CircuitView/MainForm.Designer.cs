@@ -40,9 +40,10 @@
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateButton = new System.Windows.Forms.Button();
             this.ElementsGridView = new System.Windows.Forms.DataGridView();
-            this.ElementsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ElementsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.NewElementGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NominalTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ElementsGridView)).BeginInit();
@@ -57,7 +58,7 @@
             "Цепь №1",
             "Цепь №2",
             "Цепь №3"});
-            this.CircuitComboBox.Location = new System.Drawing.Point(12, 12);
+            this.CircuitComboBox.Location = new System.Drawing.Point(12, 29);
             this.CircuitComboBox.Name = "CircuitComboBox";
             this.CircuitComboBox.Size = new System.Drawing.Size(245, 24);
             this.CircuitComboBox.TabIndex = 0;
@@ -70,7 +71,7 @@
             this.NewElementGroupBox.Controls.Add(this.InductorRadioButton);
             this.NewElementGroupBox.Controls.Add(this.CapacitorRadioButton);
             this.NewElementGroupBox.Controls.Add(this.ResistorRadioButton);
-            this.NewElementGroupBox.Location = new System.Drawing.Point(12, 42);
+            this.NewElementGroupBox.Location = new System.Drawing.Point(12, 63);
             this.NewElementGroupBox.Name = "NewElementGroupBox";
             this.NewElementGroupBox.Size = new System.Drawing.Size(243, 152);
             this.NewElementGroupBox.TabIndex = 1;
@@ -145,9 +146,9 @@
             // AddButton
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.AddButton.Location = new System.Drawing.Point(12, 200);
+            this.AddButton.Location = new System.Drawing.Point(12, 221);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(88, 23);
+            this.AddButton.Size = new System.Drawing.Size(118, 23);
             this.AddButton.TabIndex = 3;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -156,9 +157,9 @@
             // DeleteButton
             // 
             this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.DeleteButton.Location = new System.Drawing.Point(171, 200);
+            this.DeleteButton.Location = new System.Drawing.Point(134, 221);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(86, 23);
+            this.DeleteButton.Size = new System.Drawing.Size(121, 23);
             this.DeleteButton.TabIndex = 4;
             this.DeleteButton.Text = "Удалить";
             this.DeleteButton.UseVisualStyleBackColor = true;
@@ -167,11 +168,11 @@
             // CalculateButton
             // 
             this.CalculateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.CalculateButton.Location = new System.Drawing.Point(14, 229);
+            this.CalculateButton.Location = new System.Drawing.Point(12, 250);
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(243, 23);
             this.CalculateButton.TabIndex = 5;
-            this.CalculateButton.Text = "Рассчитать";
+            this.CalculateButton.Text = "Расчитать импеданс";
             this.CalculateButton.UseVisualStyleBackColor = true;
             this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
@@ -179,6 +180,8 @@
             // 
             this.ElementsGridView.AllowUserToAddRows = false;
             this.ElementsGridView.AllowUserToDeleteRows = false;
+            this.ElementsGridView.AllowUserToResizeColumns = false;
+            this.ElementsGridView.AllowUserToResizeRows = false;
             this.ElementsGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -188,40 +191,51 @@
             this.Column1,
             this.Column2});
             this.ElementsGridView.DataSource = this.ElementsBindingSource;
-            this.ElementsGridView.Location = new System.Drawing.Point(263, 12);
+            this.ElementsGridView.Location = new System.Drawing.Point(265, 28);
             this.ElementsGridView.Name = "ElementsGridView";
             this.ElementsGridView.RowHeadersVisible = false;
             this.ElementsGridView.RowTemplate.Height = 24;
             this.ElementsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ElementsGridView.Size = new System.Drawing.Size(390, 241);
+            this.ElementsGridView.Size = new System.Drawing.Size(390, 245);
             this.ElementsGridView.TabIndex = 6;
+            this.ElementsGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.ElementsGridView_DataError);
             // 
             // Column1
             // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column1.DataPropertyName = "Name";
             this.Column1.HeaderText = "Название";
             this.Column1.Name = "Column1";
-            this.Column1.Width = 195;
             // 
             // Column2
             // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column2.DataPropertyName = "Value";
             this.Column2.HeaderText = "Номинал";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 195;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Выбор цепи";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 265);
+            this.ClientSize = new System.Drawing.Size(667, 285);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ElementsGridView);
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.NewElementGroupBox);
             this.Controls.Add(this.CircuitComboBox);
-            this.MinimumSize = new System.Drawing.Size(685, 312);
+            this.MinimumSize = new System.Drawing.Size(685, 332);
             this.Name = "MainForm";
             this.NewElementGroupBox.ResumeLayout(false);
             this.NewElementGroupBox.PerformLayout();
@@ -229,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ElementsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ElementsBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -248,6 +263,7 @@
         private System.Windows.Forms.DataGridView ElementsGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
