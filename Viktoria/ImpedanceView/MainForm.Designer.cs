@@ -44,11 +44,11 @@
             this.frequency = new System.Windows.Forms.RadioButton();
             this.CalculateButton = new System.Windows.Forms.Button();
             this.RandomButton = new System.Windows.Forms.Button();
-            this.RemoveButton = new System.Windows.Forms.Button();
-            this.AddButton = new System.Windows.Forms.Button();
             this.ElementStorage = new System.Windows.Forms.DataGridView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.elementControl = new System.Windows.Forms.GroupBox();
+            this.AddButton = new System.Windows.Forms.Button();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImpedanceStorage)).BeginInit();
             this.frequencyControl.SuspendLayout();
@@ -105,7 +105,7 @@
             "R - L - C",
             "R - R - C - L - R - C",
             "L - R - L - R - C",
-            "R - R -R - R",
+            "R - R - R - R",
             "C - L - L - R - L",
             "Своя цепь"});
             this.circuitType.Location = new System.Drawing.Point(442, 35);
@@ -225,28 +225,6 @@
             this.RandomButton.UseVisualStyleBackColor = true;
             this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
             // 
-            // RemoveButton
-            // 
-            this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemoveButton.Location = new System.Drawing.Point(99, 20);
-            this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(86, 27);
-            this.RemoveButton.TabIndex = 7;
-            this.RemoveButton.Text = "Удалить";
-            this.RemoveButton.UseVisualStyleBackColor = true;
-            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
-            // 
-            // AddButton
-            // 
-            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddButton.Location = new System.Drawing.Point(7, 20);
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(86, 27);
-            this.AddButton.TabIndex = 1;
-            this.AddButton.Text = "Добавить";
-            this.AddButton.UseVisualStyleBackColor = true;
-            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
-            // 
             // ElementStorage
             // 
             this.ElementStorage.AllowUserToAddRows = false;
@@ -265,16 +243,6 @@
             this.ElementStorage.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ElementStorage_CellDoubleClick);
             this.ElementStorage.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ElementStorage_CellFormatting);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Тип элемента"});
-            this.comboBox1.Location = new System.Drawing.Point(6, 28);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(197, 21);
-            this.comboBox1.TabIndex = 13;
-            // 
             // elementControl
             // 
             this.elementControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -286,6 +254,38 @@
             this.elementControl.TabIndex = 18;
             this.elementControl.TabStop = false;
             this.elementControl.Text = "Добавление, удаление элемента";
+            // 
+            // AddButton
+            // 
+            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddButton.Location = new System.Drawing.Point(7, 20);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(86, 27);
+            this.AddButton.TabIndex = 1;
+            this.AddButton.Text = "Добавить";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemoveButton.Location = new System.Drawing.Point(99, 20);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(86, 27);
+            this.RemoveButton.TabIndex = 7;
+            this.RemoveButton.Text = "Удалить";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Тип элемента"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 28);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(197, 21);
+            this.comboBox1.TabIndex = 13;
             // 
             // MainForm
             // 

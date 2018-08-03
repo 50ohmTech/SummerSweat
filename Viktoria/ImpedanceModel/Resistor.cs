@@ -18,6 +18,12 @@ namespace ImpedanceModel
 
         #region -- Свойства --
 
+
+        /// <summary>
+        ///     Свойство для работы с типом пассивных элементов
+        /// </summary>
+        public string Type => "Резистор";
+
         /// <summary>
         ///     Свойство для работы с параметрами.
         /// </summary>
@@ -55,14 +61,6 @@ namespace ImpedanceModel
         public Complex CalculateImpedance(double frequency)
         {
             return _resistance;
-        }
-
-        /// <summary>
-        ///     Переопределение ToString для вывода названия элемента
-        /// </summary>
-        public override string ToString()
-        {
-            return "Резистор";
         }
 
         #endregion

@@ -31,20 +31,19 @@ namespace ImpedanceModel
         /// <param name="maxFrequency"> Максимальное значение частоты</param>
         /// <param name="step"> Цена деления/Шаг</param>
         /// <returns> Список сопротивлений для каждой частоты из заданного диапазона с заданным шагом</returns>
-        public List<Complex> CalculateImpedance(double minFrequency, double maxFrequency,
-            double step)
+        public List<Complex> CalculateImpedance(List<double> frequencyList)
         {
             var impedances = new List<Complex>();
 
-            for (var i = minFrequency; i <= maxFrequency; i = i + step)
+            foreach (var frequency in frequencyList)
             {
                 Complex impedance = 0;
                 for (var n = 0; n <= elements.Count - 1; n++)
                 {
-                    var currentFrequency = i;
+                    var currentFrequency = frequency;
                     if (isAngular)
                     {
-                        currentFrequency = i / (2 * Math.PI);
+                        currentFrequency = frequency / (2 * Math.PI);
                     }
                     impedance += elements[n].CalculateImpedance(currentFrequency);
                 }

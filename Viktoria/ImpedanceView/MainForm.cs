@@ -8,6 +8,47 @@ namespace ImpedanceView
 {
     public partial class MainForm : Form
     {
+        #region  -- Публичные методы -- 
+
+        /// <summary>
+        ///     Конструктор формы
+        /// </summary>
+        public MainForm()
+        {
+            InitializeComponent();
+
+            _elementBindingSource.DataSource = _circuit.elements;
+            ElementStorage.DataSource = _elementBindingSource;
+            ElementStorage.MultiSelect = true;
+
+            ImpedanceStorage.Columns.Add("Frequency", "Частота");
+            _impedanceBindingSource.DataSource = _impedances;
+            ImpedanceStorage.DataSource = _impedanceBindingSource;
+
+            RandomButton.Visible = false;
+            frequency.Checked = true;
+#if DEBUG
+            RandomButton.Visible = true;
+#endif
+        }
+
+        #endregion
+
+        /// <summary>
+        ///     Подсказка, всплывающая при наведении на ячейку с номиналом элемента
+        /// </summary>
+        private void ElementStorage_CellFormatting(object sender,
+            DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null)
+            {
+                var cell = ElementStorage.Rows[ElementStorage.Rows.Count - 1]
+                    .Cells[1];
+                cell.ToolTipText =
+                    "Кликните один раз для выделения элемента с целью дальнейшего удаления." +
+                    "\nКликните дважды для вызова окна редактирования элемента.";
+            }
+        }
 
         #region -- Закрытые поля --
 
@@ -29,7 +70,7 @@ namespace ImpedanceView
         private readonly List<Complex> _impedances = new List<Complex>();
 
         /// <summary>
-        ///     Цепь 
+        ///     Цепь
         /// </summary>
         private readonly Circuit _circuit = new Circuit();
 
@@ -39,32 +80,6 @@ namespace ImpedanceView
         ///     Тип заранее заданной цепи в combobox
         /// </summary>
         private int _currentCircuit;
-
-        #endregion
-
-        #region  -- Публичные методы -- 
-
-        /// <summary>
-        ///     Конструктор формы
-        /// </summary>
-        public MainForm()
-        {
-            InitializeComponent();
-
-            ElementStorage.Columns.Add("ElementType", "Элемент");
-            _elementBindingSource.DataSource = _circuit.elements;
-            ElementStorage.DataSource = _elementBindingSource;
-            ElementStorage.MultiSelect = true;
-
-            ImpedanceStorage.Columns.Add("Frequency", "Частота");
-            _impedanceBindingSource.DataSource = _impedances;
-            ImpedanceStorage.DataSource = _impedanceBindingSource;
-
-            RandomButton.Visible = false;
-#if DEBUG
-            RandomButton.Visible = true;
-#endif
-        }
 
         #endregion
 
@@ -82,8 +97,6 @@ namespace ImpedanceView
                 {
                     var element = AddForm.NewElement;
                     _elementBindingSource.Add(element);
-                    ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0].Value =
-                        element.ToString();
                 }
             }
             catch (ArgumentException exception)
@@ -93,70 +106,82 @@ namespace ImpedanceView
         }
 
         /// <summary>
-        ///     Вычисление комплексного сопротивления для всех элементов в таблице
+        /// Создание списка частот и полная проверка корректности введенных для списка частот данных
         /// </summary>
-        private void CalculateButton_Click(object sender, EventArgs e)
+        /// <returns></returns>
+        private List<double> CreateFrequencyList()
         {
             try
             {
                 // -- Проверка на корректность введенных данных --
 
-                ValidationTools.IsEmpty(this.minFrequency);
-                ValidationTools.IsEmpty(this.maxFrequency);
-                ValidationTools.IsEmpty(this.step);
+                ValidationTools.IsEmpty(minFrequency);
+                ValidationTools.IsEmpty(maxFrequency);
+                ValidationTools.IsEmpty(step);
 
-                ValidationTools.IsDouble(this.minFrequency);
-                ValidationTools.IsDouble(this.maxFrequency);
-                ValidationTools.IsDouble(this.step);
+                ValidationTools.IsDouble(minFrequency);
+                ValidationTools.IsDouble(maxFrequency);
+                ValidationTools.IsDouble(step);
 
-                var minFrequency = Convert.ToDouble(this.minFrequency.Text);
-                var maxFrequency = Convert.ToDouble(this.maxFrequency.Text);
-                var step = Convert.ToDouble(this.step.Text);
+                var minFrequencyValue = Convert.ToDouble(minFrequency.Text);
+                var maxFrequencyValue = Convert.ToDouble(maxFrequency.Text);
+                var stepValue = Convert.ToDouble(step.Text);
 
-                ValidationTools.IsCorrectFrequency(minFrequency);
-                ValidationTools.IsCorrectFrequency(maxFrequency);
-                ValidationTools.IsCorrectStep(step);
+                ValidationTools.IsCorrectFrequency(minFrequencyValue);
+                ValidationTools.IsCorrectFrequency(maxFrequencyValue);
+                ValidationTools.IsCorrectStep(stepValue);
 
-                if (minFrequency > maxFrequency)
+                if (minFrequencyValue > maxFrequencyValue)
                 {
                     throw new ArgumentException(
                         "Минимальное значение частоты не может превышать максимальное.");
                 }
 
-                if (step > maxFrequency - minFrequency)
+                if (stepValue > maxFrequencyValue - minFrequencyValue)
                 {
                     throw new ArgumentException(
                         " Значение шага не может привышать разницу " +
                         "между максимальной и минимальной частотой");
                 }
 
-                if (!angularFrequency.Checked && !frequency.Checked)
-                {
-                    MessageBox.Show("Выберите тип частоты.", "Error",
-                        MessageBoxButtons.OK);
-                }
-
                 // -- Конец проверки -- 
 
-                _impedanceBindingSource.Clear();
+                var frequencyList = new List<double>();
+                for (var i = minFrequencyValue; i <= maxFrequencyValue; i = i + stepValue)
+                {
+                    frequencyList.Add(i);
+                }
 
-                if (frequency.Checked)
-                {
-                    _circuit.isAngular = true;
-                }
-                var impedances = _circuit.CalculateImpedance(minFrequency, maxFrequency,
-                    step);
-                _impedanceBindingSource.DataSource = impedances;
-                var index = 0;
-                for (var i = minFrequency; i <= maxFrequency; i = i + step)
-                {
-                    ImpedanceStorage.Rows[index].Cells[0].Value = i;
-                    index++;
-                }
+                return frequencyList;
             }
             catch (ArgumentException exception)
             {
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///     Вычисление комплексного сопротивления для всех элементов в таблице
+        /// </summary>
+        private void CalculateButton_Click(object sender, EventArgs e)
+        {
+            var frequencyList = CreateFrequencyList();
+            _impedanceBindingSource.Clear();
+            if (frequencyList != null)
+            {
+                if (frequency.Checked)
+                {
+                    _circuit.isAngular = true;
+                }
+                var impedances = _circuit.CalculateImpedance(frequencyList);
+                _impedanceBindingSource.DataSource = impedances;
+                var index = 0;
+                foreach (var frequency in frequencyList)
+                {
+                    ImpedanceStorage.Rows[index].Cells[0].Value = frequency;
+                    index++;
+                }
             }
         }
 
@@ -167,7 +192,8 @@ namespace ImpedanceView
         {
             for (var n = _circuit.elements.Count - 1; n >= 0; n--)
             {
-                if (ElementStorage.Rows[_circuit.elements.IndexOf(_circuit.elements[n])].Selected)
+                if (ElementStorage.Rows[_circuit.elements.IndexOf(_circuit.elements[n])]
+                    .Selected)
                 {
                     _elementBindingSource.Remove(_circuit.elements[n]);
                 }
@@ -189,20 +215,14 @@ namespace ImpedanceView
                 case 0:
                     element = new Inductor(value);
                     _elementBindingSource.Add(element);
-                    ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
-                            .Value = element.ToString();
                     break;
                 case 1:
                     element = new Resistor(value);
                     _elementBindingSource.Add(element);
-                    ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
-                            .Value = element.ToString();
                     break;
                 case 2:
                     element = new Capacitor(value);
                     _elementBindingSource.Add(element);
-                    ElementStorage.Rows[ElementStorage.Rows.Count - 1].Cells[0]
-                            .Value = element.ToString();
                     break;
             }
         }
@@ -223,7 +243,6 @@ namespace ImpedanceView
                     var element = ModifyForm.NewElement;
                     _elementBindingSource.Remove(_circuit.elements[index]);
                     _elementBindingSource.Insert(index, element);
-                    ElementStorage.Rows[index].Cells[0].Value = element.ToString();
                 }
             }
             catch (ArgumentException exception)
@@ -245,54 +264,49 @@ namespace ImpedanceView
                 {
                     _circuit.elements.Add(new Resistor(1.1));
                     _circuit.elements.Add(new Inductor(1.16));
-                    _circuit.elements.Add(new Capacitor(1.5663));
+                    _circuit.elements.Add(new Capacitor(1.66));
                     break;
                 }
                 case 1:
                 {
                     _circuit.elements.Add(new Resistor(2.1));
                     _circuit.elements.Add(new Resistor(2.16));
-                    _circuit.elements.Add(new Capacitor(2.5663));
+                    _circuit.elements.Add(new Capacitor(2.53));
                     _circuit.elements.Add(new Inductor(2.16));
                     _circuit.elements.Add(new Resistor(2.1));
-                    _circuit.elements.Add(new Capacitor(2.5663));
+                    _circuit.elements.Add(new Capacitor(2.56));
                     break;
                 }
                 case 2:
                 {
-                    _circuit.elements.Add(new Inductor(0.16));
-                    _circuit.elements.Add(new Resistor(5.1));
-                    _circuit.elements.Add(new Inductor(0.16));
-                    _circuit.elements.Add(new Resistor(5.1));
-                    _circuit.elements.Add(new Capacitor(1.5663));
+                    _circuit.elements.Add(new Inductor(3.16));
+                    _circuit.elements.Add(new Resistor(3.1));
+                    _circuit.elements.Add(new Inductor(3.36));
+                    _circuit.elements.Add(new Resistor(3.1));
+                    _circuit.elements.Add(new Capacitor(3.63));
                     break;
                 }
                 case 3:
                 {
-                    _circuit.elements.Add(new Resistor(5.1));
-                    _circuit.elements.Add(new Resistor(5.1));
-                    _circuit.elements.Add(new Resistor(5.1));
-                    _circuit.elements.Add(new Resistor(5.1));
+                    _circuit.elements.Add(new Resistor(4.1));
+                    _circuit.elements.Add(new Resistor(4.1));
+                    _circuit.elements.Add(new Resistor(4.1));
+                    _circuit.elements.Add(new Resistor(4.1));
                     break;
                 }
                 case 4:
                 {
-                    _circuit.elements.Add(new Capacitor(1.5663));
-                    _circuit.elements.Add(new Inductor(0.16));
-                    _circuit.elements.Add(new Inductor(0.16));
+                    _circuit.elements.Add(new Capacitor(5.73));
+                    _circuit.elements.Add(new Inductor(5.89));
+                    _circuit.elements.Add(new Inductor(5.56));
                     _circuit.elements.Add(new Resistor(5.1));
-                    _circuit.elements.Add(new Inductor(0.16));
+                    _circuit.elements.Add(new Inductor(5.16));
                     break;
                 }
                 case 5: break;
             }
             _elementBindingSource.DataSource = null;
             _elementBindingSource.DataSource = _circuit.elements;
-            for (var n = 0; n <= _elementBindingSource.Count - 1; n++)
-            {
-                ElementStorage.Rows[n].Cells[0].Value =
-                    _circuit.elements[n].ToString();
-            }
         }
 
         /// <summary>
@@ -305,20 +319,5 @@ namespace ImpedanceView
         }
 
         #endregion
-
-        /// <summary>
-        ///     Подсказка, ввсплывающая при наведении на ячейку с номиналом элемента
-        /// </summary>
-        private void ElementStorage_CellFormatting(object sender,
-            DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value != null)
-            {
-                DataGridViewCell cell = ElementStorage.Rows[ElementStorage.Rows.Count - 1]
-                    .Cells[1];
-                cell.ToolTipText = "Кликните один раз для выделения элемента с целью дальнейшего удаления." +
-                                   "\nКликните дважды для вызова окна редактирования элемента.";
-            }
-        }
     }
 }

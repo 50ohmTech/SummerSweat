@@ -20,6 +20,11 @@ namespace ImpedanceModel
         #region -- Свойства --
 
         /// <summary>
+        ///     Свойство для работы с типом пассивных элементов
+        /// </summary>
+        public string Type => "Катушка индуктивности";
+
+        /// <summary>
         ///     Свойство для работы с параметрами.
         /// </summary>
         public double Parameter
@@ -52,14 +57,6 @@ namespace ImpedanceModel
         public Complex CalculateImpedance(double frequency)
         {
             return new Complex(0, 2 * Math.PI * frequency * _inductance);
-        }
-
-        /// <summary>
-        ///     Переопределение ToString для вывода названия элемента
-        /// </summary>
-        public override string ToString()
-        {
-            return "Катушка индуктивности";
         }
 
         #endregion

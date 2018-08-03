@@ -11,13 +11,18 @@ namespace ImpedanceModel
         #region -- Поля --
 
         /// <summary>
-        ///     Сопротивление конденсатора.
+        ///     Емкость конденсатора.
         /// </summary>
         private double _capacitance;
 
         #endregion
 
         #region -- Свойства --
+
+        /// <summary>
+        ///     Свойство для работы с типом пассивных элементов
+        /// </summary>
+        public string Type => "Конденсатор";
 
         /// <summary>
         ///     Свойство для работы с параметрами.
@@ -44,7 +49,7 @@ namespace ImpedanceModel
             Parameter = capacitanceValue;
         }
 
-        /// <summary>
+       /// <summary>
         ///     Рассчет комплексного сопротивления
         /// </summary>
         /// <param name="frequency"> Частота </param>
@@ -52,14 +57,6 @@ namespace ImpedanceModel
         public Complex CalculateImpedance(double frequency)
         {
             return new Complex(0, -1 / (2 * Math.PI * frequency * _capacitance));
-        }
-
-        /// <summary>
-        ///     Переопределение ToString для вывода названия элемента
-        /// </summary>
-        public override string ToString()
-        {
-            return "Конденсатор";
         }
 
         #endregion

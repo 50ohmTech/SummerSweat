@@ -81,7 +81,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button OKButton;
         private EnterElementControl addFormControl;
     }
