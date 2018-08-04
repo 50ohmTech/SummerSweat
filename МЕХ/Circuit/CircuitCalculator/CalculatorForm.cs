@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using CircuitCalculator.Validation;
 using CircuitElements;
@@ -20,7 +19,6 @@ namespace CircuitCalculator
 		public CalculatorForm()
 		{
 			InitializeComponent();
-			InitializeCircuits();
 
 			_redactorForm = new CircuitEditorForm();
 			_redactorForm.Show();
@@ -41,6 +39,8 @@ namespace CircuitCalculator
 
 			//Подписывается на событие изменения значения одного из элементов цепи
 			_redactorForm.CircuitValueChanged += ElementChanged;
+
+			_redactorForm.CircuitChanged += CalculateButton_CircuitChanged;
 		}
 
 		#endregion – – Публичные методы – –
@@ -53,16 +53,6 @@ namespace CircuitCalculator
 		private readonly CircuitEditorForm _redactorForm;
 
 		/// <summary>
-		///     Список доступных цепей
-		/// </summary>
-		private List<Circuit> _circuitList;
-
-		/// <summary>
-		///     Выбранная цепь
-		/// </summary>
-		private Circuit _currentCircuit;
-
-		/// <summary>
 		///     Список частот, для которых производятся расчеты
 		/// </summary>
 		private double[] _frequencies;
@@ -71,74 +61,9 @@ namespace CircuitCalculator
 
 		#region – – Приватные методы – – 
 
-		/// <summary>
-		///     Инициализация тестовых цепей
-		/// </summary>
-		private void InitializeCircuits()
+		private void CalculateButton_CircuitChanged()
 		{
-			_circuitList = new List<Circuit>();
-			var circuitElements1 = new List<ElementBase>
-			{
-				new Capacitor("C1", 10),
-				new Inductor("L1", 5),
-				new Resistor("R1", 20)
-			};
-
-			var circuit1 = new Circuit(circuitElements1);
-			_circuitList.Add(circuit1);
-
-			var circuitElements2 = new List<ElementBase>
-			{
-				new Capacitor("C1", 10),
-				new Capacitor("C2", 5),
-				new Resistor("R1", 20),
-				new Resistor("R2", 20),
-				new Resistor("R3", 20),
-				new Resistor("R4", 20)
-			};
-
-			var circuit2 = new Circuit(circuitElements2);
-			_circuitList.Add(circuit2);
-
-			var circuitElements3 = new List<ElementBase>
-			{
-				new Inductor("L1", 10),
-				new Capacitor("C1", 5),
-				new Resistor("R1", 20),
-				new Inductor("L2", 20),
-				new Resistor("R2", 20),
-				new Capacitor("C2", 20)
-			};
-
-			var circuit3 = new Circuit(circuitElements3);
-			_circuitList.Add(circuit3);
-
-			var circuitElements4 = new List<ElementBase>
-			{
-				new Inductor("L1", 10)
-			};
-
-			var circuit4 = new Circuit(circuitElements4);
-			_circuitList.Add(circuit4);
-
-			var circuitElements5 = new List<ElementBase>
-			{
-				new Capacitor("C1", 10),
-				new Capacitor("C2", 5),
-				new Resistor("R1", 20),
-				new Resistor("R2", 20),
-				new Resistor("R3", 20),
-				new Inductor("I1", 20)
-			};
-
-			var circuit5 = new Circuit(circuitElements5);
-			_circuitList.Add(circuit5);
-
-			foreach (var circuit in _circuitList)
-			{
-				circuitListComboBox.Items.Add("Тестовая цепь №" +
-				                              (_circuitList.IndexOf(circuit) + 1));
-			}
+			calculateButton.Text = "Расчитать";
 		}
 
 		/// <summary>
@@ -148,7 +73,7 @@ namespace CircuitCalculator
 		/// <param name="changedElement"> измененный элемент </param>
 		private void ElementChanged(double newValue, ElementBase changedElement)
 		{
-			foreach (var element in _currentCircuit.Elements)
+			foreach (var element in _redactorForm.CurrentCircuit.Elements)
 			{
 				if (element == changedElement)
 				{
@@ -199,7 +124,7 @@ namespace CircuitCalculator
 		/// <param name="e"></param>
 		private void CalculateButton_Click(object sender, EventArgs e)
 		{
-			if (_currentCircuit == null)
+			if (_redactorForm.CurrentCircuit == null)
 			{
 				MessageBox.Show("Выберите цепь", "Ошибка", MessageBoxButtons.OK,
 					MessageBoxIcon.Information);
@@ -214,7 +139,7 @@ namespace CircuitCalculator
 						.ToString().Replace('.', ','));
 				}
 
-				var impedance = _currentCircuit.CalculateZ(_frequencies);
+				var impedance = _redactorForm.CurrentCircuit.CalculateZ(_frequencies);
 
 				for (var i = 0; i < frequenciesGridView.RowCount - 1; i++)
 				{
@@ -229,17 +154,6 @@ namespace CircuitCalculator
 
 				calculateButton.Text = "Пересчитать";
 			}
-		}
-
-		/// <summary>
-		///     Выбор цепи
-		/// </summary>
-		private void CircuitListComboBox_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			_currentCircuit = _circuitList[circuitListComboBox.SelectedIndex];
-			_redactorForm.DisplayingCircuit = _currentCircuit;
-
-			calculateButton.Text = "Расчитать";
 		}
 
 		/// <summary>
