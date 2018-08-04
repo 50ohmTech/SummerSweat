@@ -34,6 +34,11 @@ namespace CircuitUI
         private double _oldValueElement;
 
         /// <summary>
+        /// Monitoring changes in the current electrical circuit
+        /// </summary>
+        private bool _isCircuitChange = false;
+
+        /// <summary>
         /// The minimum value that the cell takes
         /// </summary>
         private const double _minValue = 0.0000001;
@@ -42,7 +47,7 @@ namespace CircuitUI
         /// The Maximum value that the cell takes
         /// </summary>
         private const double _maxValue = 100000000000000;
-
+       
         #endregion -- Private Fields --        
 
         #region -- Public Methods --
@@ -65,9 +70,10 @@ namespace CircuitUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
-        {
+        {            
             InitializeCircuits();
-            MainFormInitialize();
+            InitializeComboBox();
+            MainFormInitialize();           
         }
 
         /// <summary>
@@ -75,15 +81,15 @@ namespace CircuitUI
         /// </summary>
         private void InitializeCircuits()
         {
+            _circuits?.Clear();
             _circuits = new List<Circuit>();
 
             var itsCircuit = new Circuit(new List<IElement>());
             _circuits.Add(itsCircuit);
-            circuitsComboBox.Items.Add("Your electrical circuit");
 
             var firstCircuit = new Circuit(new List<IElement>
             {
-                new Indutor("I1", 0.000001),
+                new Indutor("I1", 99.13),
                 new Indutor("I2", 0.1),
                 new Capacitor("C1", 10),
                 new Resistor("R1", 5),
@@ -115,7 +121,7 @@ namespace CircuitUI
             var fourCircuit = new Circuit(new List<IElement>
             {
                 new Indutor("I1", 0.333),
-                new Indutor("I2", 0.123),
+                new Indutor("I2", 4.123),
                 new Resistor("R1", 52.333),
                 new Capacitor("C1", 10),
                 new Resistor("R2", 32.12)
@@ -127,7 +133,14 @@ namespace CircuitUI
                 new Resistor("R1", 9.25)
             });
             _circuits.Add(fifthCircuit);
+        }
 
+        /// <summary>
+        /// Initialization components ComboBox
+        /// </summary>
+        private void InitializeComboBox()
+        {
+            circuitsComboBox.Items.Add("New electrical circuit");
             for (int i = 1; i < _circuits.Count; i++)
             {
                 circuitsComboBox.Items.Add("Test electric circuit № " + i);
@@ -140,15 +153,15 @@ namespace CircuitUI
         private void MainFormInitialize()
         {
             #if !DEBUG
-            randomElementButton.Visible = false;
-            elementsGridView.Size = new Size(elementsGridView.Size.Width,
-                elementsGridView.Size.Height + 20);
+            randomElementtoolStripMenu.Visible = false;
+            randomElementtoolStripMenu.Enabled = false;
             #endif            
             circuitsComboBox.SelectedIndex = 0;
 
             elementsGridView.DataSource = bindingSourceContainer;            
             elementsGridView.Columns[0].ReadOnly = true;
             elementsGridView.Columns[1].ReadOnly = false;
+            ((DataGridViewTextBoxColumn) elementsGridView.Columns[1]).MaxInputLength = 15;
 
             elementsGridView.Columns[0].ToolTipText = @"Element name";
             elementsGridView.Columns[1].ToolTipText =
@@ -162,8 +175,32 @@ namespace CircuitUI
         /// <param name="e"></param>
         private void CircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_isCircuitChange)
+            {                
+                InitializeCircuits();
+            }
             _currentCircuit = _circuits[circuitsComboBox.SelectedIndex];
-            bindingSourceContainer.DataSource = _currentCircuit.Elements;
+            bindingSourceContainer.DataSource = _currentCircuit.Elements;            
+        }
+
+        /// <summary>
+        /// The event fires when the content changes '_currentCircuit'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BindingSourceContainer_ListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
+        {            
+            _isCircuitChange = true;
+        }
+
+        /// <summary>
+        /// The event occurs when you change the "DataSource" ( if you change the "_current Circuit" )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BindingSourceContainer_DataSourceChanged(object sender, EventArgs e)
+        {
+            _isCircuitChange = false;
         }
 
         /// <summary>
@@ -171,7 +208,7 @@ namespace CircuitUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RandomElementButton_Click(object sender, EventArgs e)
+        private void RandomElementtoolStripMenu_Click(object sender, EventArgs e)
         {
             RandomElement randomElementCircuit = new RandomElement();
             bindingSourceContainer.Add(randomElementCircuit.CreateRandomElement());
@@ -206,6 +243,11 @@ namespace CircuitUI
                 calculationForm.SetCircuit = _currentCircuit;
                 calculationForm.ShowDialog();
             }
+            else
+            {
+                MessageBox.Show(@"The electrical circuit is empty!", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>
@@ -216,13 +258,8 @@ namespace CircuitUI
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (elementsGridView.CurrentRow != null)
-            {
-                int rowToDelete = elementsGridView.CurrentRow.Index;
-
-                if (rowToDelete > -1)
-                {
-                    bindingSourceContainer.RemoveAt(rowToDelete);
-                }
+            {                
+                elementsGridView.Rows.Remove(elementsGridView.CurrentRow);
             }
         }
 
@@ -233,7 +270,7 @@ namespace CircuitUI
         /// <param name="e"></param>
         private void DeleteAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bindingSourceContainer.Clear();
+            bindingSourceContainer.Clear();            
         }
 
         /// <summary>
@@ -257,7 +294,7 @@ namespace CircuitUI
         /// <param name="e"></param>
         private void ElementsGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            _newValueElement = new TextBox();
+            _newValueElement = new TextBox();           
             _oldValueElement = Convert.ToDouble(elementsGridView.CurrentCell.Value);
         }
 
@@ -299,7 +336,7 @@ namespace CircuitUI
             e.Handled = !EditTextBoxValue.IsCorrectionTextBoxValue_Edit(_newValueElement.Text, e.KeyChar);
         }
 
-        #endregion -- Private Methods --
+        #endregion -- Private Methods --              
     }
 }
 
