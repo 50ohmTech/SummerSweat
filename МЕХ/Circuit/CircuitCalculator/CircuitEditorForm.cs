@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using CircuitCalculator.Controls;
@@ -13,15 +14,6 @@ namespace CircuitCalculator
 	/// </summary>
 	public partial class CircuitEditorForm : Form
 	{
-		#region – – Поля – – 
-
-		/// <summary>
-		///     Отображаемая цепь
-		/// </summary>
-		private Circuit _displayingCircuit;
-
-		#endregion – – Поля – –
-
 		#region – – Публичные методы – – 
 
 		/// <summary>
@@ -31,6 +23,7 @@ namespace CircuitCalculator
 		{
 			InitializeComponent();
 
+			InitializeCircuits();
 		#if !DEBUG
 			testButton.Visible = false;
 #endif
@@ -43,11 +36,12 @@ namespace CircuitCalculator
 		/// <summary>
 		///     Задание отображаемой цепи
 		/// </summary>
-		public Circuit DisplayingCircuit
+		public Circuit CurrentCircuit
 		{
+			get => _currentCircuit;
 			set
 			{
-				_displayingCircuit =
+				_currentCircuit =
 					value ?? throw new NullReferenceException(
 						"Попытка передачи Null значенияя вместо отображаемой цепи");
 
@@ -62,11 +56,34 @@ namespace CircuitCalculator
 		#region – – События – – 
 
 		/// <summary>
+		///     Событие, которое загорается при выборе цепи из comboBox'a
+		/// </summary>
+		public event ComboBoxStateHandler CircuitChanged;
+
+		#endregion – – События – –
+
+		#region – – События – – 
+
+		/// <summary>
 		///     Событие изменения значения одного из элементов
 		/// </summary>
 		public event ValueStateHandler CircuitValueChanged;
 
 		#endregion – – События – –
+
+		#region – – Поля – – 
+
+		/// <summary>
+		///     Отображаемая цепь
+		/// </summary>
+		private Circuit _currentCircuit;
+
+		/// <summary>
+		///     Список доступных цепей
+		/// </summary>
+		private List<Circuit> _circuitList;
+
+		#endregion – – Поля – –
 
 		#region – – Приватные методы – – 
 
@@ -75,7 +92,7 @@ namespace CircuitCalculator
 		/// </summary>
 		private void InitializeTestingElements()
 		{
-			if (_displayingCircuit != null)
+			if (_currentCircuit != null)
 			{
 				CleanTable();
 			}
@@ -105,6 +122,92 @@ namespace CircuitCalculator
 		}
 
 		/// <summary>
+		///     Инициализация тестовых цепей
+		/// </summary>
+		private void InitializeCircuits()
+		{
+			_circuitList = new List<Circuit>();
+			var circuitElements1 = new List<ElementBase>
+			{
+				new Capacitor("C1", 10),
+				new Inductor("L1", 5),
+				new Resistor("R1", 20)
+			};
+
+			var circuit1 = new Circuit(circuitElements1);
+			_circuitList.Add(circuit1);
+
+			var circuitElements2 = new List<ElementBase>
+			{
+				new Capacitor("C1", 10),
+				new Capacitor("C2", 5),
+				new Resistor("R1", 20),
+				new Resistor("R2", 20),
+				new Resistor("R3", 20),
+				new Resistor("R4", 20)
+			};
+
+			var circuit2 = new Circuit(circuitElements2);
+			_circuitList.Add(circuit2);
+
+			var circuitElements3 = new List<ElementBase>
+			{
+				new Inductor("L1", 10),
+				new Capacitor("C1", 5),
+				new Resistor("R1", 20),
+				new Inductor("L2", 20),
+				new Resistor("R2", 20),
+				new Capacitor("C2", 20)
+			};
+
+			var circuit3 = new Circuit(circuitElements3);
+			_circuitList.Add(circuit3);
+
+			var circuitElements4 = new List<ElementBase>
+			{
+				new Inductor("L1", 10)
+			};
+
+			var circuit4 = new Circuit(circuitElements4);
+			_circuitList.Add(circuit4);
+
+			var circuitElements5 = new List<ElementBase>
+			{
+				new Capacitor("C1", 10),
+				new Capacitor("C2", 5),
+				new Resistor("R1", 20),
+				new Resistor("R2", 20),
+				new Resistor("R3", 20),
+				new Inductor("I1", 20)
+			};
+
+			var circuit5 = new Circuit(circuitElements5);
+			_circuitList.Add(circuit5);
+
+			foreach (var circuit in _circuitList)
+			{
+				circuitListComboBox.Items.Add("Тестовая цепь №" +
+				                              (_circuitList.IndexOf(circuit) + 1));
+			}
+		}
+
+		/// <summary>
+		///     Выбор цепи
+		/// </summary>
+		private void CircuitListComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (elementGridView.RowCount != 0)
+			{
+				CleanTable();
+			}
+
+			_currentCircuit = _circuitList[circuitListComboBox.SelectedIndex];
+			CurrentCircuit = _currentCircuit;
+
+			CircuitChanged?.Invoke();
+		}
+
+		/// <summary>
 		///     Очистка таблицы
 		/// </summary>
 		private void CleanTable()
@@ -117,7 +220,7 @@ namespace CircuitCalculator
 				}
 			}
 
-			foreach (var element in _displayingCircuit.Elements)
+			foreach (var element in _currentCircuit.Elements)
 			{
 				object[] elementData =
 				{
@@ -180,13 +283,13 @@ namespace CircuitCalculator
 			var formatingString = e.FormattedValue.ToString().Replace('.', ',');
 			if (ValidatingClass.IsCellCorrect(e))
 			{
-				_displayingCircuit.Elements[e.RowIndex].Value =
+				_currentCircuit.Elements[e.RowIndex].Value =
 					Convert.ToDouble(formatingString);
 
 				RefreshRedactor();
 				CircuitValueChanged?.Invoke(
 					Convert.ToDouble(formatingString),
-					_displayingCircuit.Elements[e.RowIndex]);
+					_currentCircuit.Elements[e.RowIndex]);
 			}
 			else
 			{
@@ -228,7 +331,7 @@ namespace CircuitCalculator
 
 			redactorPanel.AddControl(ControlFactory.CreateStartingElementControl());
 
-			foreach (var element in _displayingCircuit.Elements)
+			foreach (var element in _currentCircuit.Elements)
 			{
 				if (element is Resistor)
 				{
@@ -260,4 +363,6 @@ namespace CircuitCalculator
 
 		#endregion – – Приватные методы – –
 	}
+
+	public delegate void ComboBoxStateHandler();
 }
