@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using CircuitLibrary;
 
@@ -34,7 +35,7 @@ namespace CircuitUI
         /// <summary>
         /// The Maximum value that the cell takes
         /// </summary>
-        private const double _maxValue = 100000000000000;
+        private const double _maxValue = 1000000000000;
 
         #endregion -- Fields --
 
@@ -85,7 +86,17 @@ namespace CircuitUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NameTextBox_Leave(object sender, EventArgs e)
-        {
+        {            
+            nameTextBox.Text = nameTextBox.Text.ToUpper();
+            for (int i = 0; i < nameTextBox.TextLength; i++)
+            {
+                char symbol = nameTextBox.Text[i];
+                if (!IsEnglishSymbol(symbol) && !char.IsDigit(symbol))
+                {                    
+                    nameTextBox.Clear();
+                    break;
+                }
+            }   
             _name = nameTextBox.Text;
         }
 
@@ -102,15 +113,15 @@ namespace CircuitUI
         }
 
         /// <summary>
-        /// Event triggered after pressing the key in the "Value" field
+        /// Event triggered when the field is changed 'Value'
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ValueTextBox_KeyUp(object sender, KeyEventArgs e)
+        private void ValueTextBox_TextChanged(object sender, EventArgs e)
         {
             double.TryParse(valueTextBox.Text, out double number);
             OKButton.Enabled = (number >= _minValue && number <= _maxValue) || valueTextBox.Text == "";
-        }
+        }       
 
         /// <summary>
         /// Event when leaving the 'Value' field
@@ -119,6 +130,12 @@ namespace CircuitUI
         /// <param name="e"></param>
         private void ValueTextBox_Leave(object sender, EventArgs e)
         {
+            bool isNumber = double.TryParse(valueTextBox.Text, out double number);
+            OKButton.Enabled = (number >= _minValue && number <= _maxValue) || valueTextBox.Text == "";
+            if (!isNumber)
+            {
+                valueTextBox.Clear();
+            }
             _value = valueTextBox.Text;
         }
 
@@ -213,6 +230,6 @@ namespace CircuitUI
             return symbol >= 'A' && symbol <= 'Z';
         }
 
-        #endregion -- Private Methods --
+        #endregion -- Private Methods --        
     }
 }

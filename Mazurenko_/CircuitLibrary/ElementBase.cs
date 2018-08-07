@@ -73,10 +73,10 @@ namespace CircuitLibrary
                     throw new ArgumentException("The value cannot be less than 0.000001");
                 }
 
-                double maxValue = 100000000000000;
+                double maxValue = 1000000000000;
                 if (value > maxValue)
                 {
-                    throw new ArgumentException("The value cannot be more than 100000000000000");
+                    throw new ArgumentException("The value cannot be more than 1000000000000");
                 }
                 _value = value;
                 ValueChanged?.Invoke(_value, this);

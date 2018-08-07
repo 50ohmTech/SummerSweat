@@ -112,7 +112,7 @@ namespace CircuitUI
                     name += "C";
                     break;
                 case "Inductor":
-                    name += "I";
+                    name += "L";
                     break;
             }
 

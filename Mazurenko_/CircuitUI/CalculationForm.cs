@@ -41,7 +41,7 @@ namespace CircuitUI
         /// <summary>
         /// The Maximum value that the cell takes
         /// </summary>
-        private const double _maxValue = 100000000000000;
+        private const double _maxValue = 1000000000000;
 
         #endregion -- Fields --
 

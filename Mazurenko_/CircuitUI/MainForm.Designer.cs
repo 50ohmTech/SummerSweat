@@ -179,7 +179,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Electrical circuit [ver. 0.1]";
+            this.Text = "Electrical circuit";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();

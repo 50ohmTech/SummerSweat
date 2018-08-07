@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.calculationGridView = new System.Windows.Forms.DataGridView();
-            this.columnFrequenies = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnImpendances = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxButtons = new System.Windows.Forms.GroupBox();
             this.deleteButton = new System.Windows.Forms.Button();
             this.deleteAllButton = new System.Windows.Forms.Button();
             this.calculationButton = new System.Windows.Forms.Button();
+            this.columnFrequenies = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnImpendances = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.calculationGridView)).BeginInit();
             this.groupBoxButtons.SuspendLayout();
             this.SuspendLayout();
@@ -58,22 +58,6 @@
             this.calculationGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.CalculationGridView_CellEnter);
             this.calculationGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.CalculationGridView_CellValidating);
             this.calculationGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.CalculationGridView_EditingControlShowing);
-            // 
-            // columnFrequenies
-            // 
-            this.columnFrequenies.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.columnFrequenies.HeaderText = "Frequenies";
-            this.columnFrequenies.MaxInputLength = 14;
-            this.columnFrequenies.Name = "columnFrequenies";
-            this.columnFrequenies.Width = 84;
-            // 
-            // columnImpendances
-            // 
-            this.columnImpendances.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.columnImpendances.HeaderText = "Impendances";
-            this.columnImpendances.Name = "columnImpendances";
-            this.columnImpendances.ReadOnly = true;
-            this.columnImpendances.ToolTipText = "\"E\" - the exponent means  \"* 10 ^ \" (times ten to the power)";
             // 
             // groupBoxButtons
             // 
@@ -115,6 +99,22 @@
             this.calculationButton.Text = "Сalculation";
             this.calculationButton.UseVisualStyleBackColor = true;
             this.calculationButton.Click += new System.EventHandler(this.СalculationButton_Click);
+            // 
+            // columnFrequenies
+            // 
+            this.columnFrequenies.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.columnFrequenies.HeaderText = "Frequenies";
+            this.columnFrequenies.MaxInputLength = 13;
+            this.columnFrequenies.Name = "columnFrequenies";
+            this.columnFrequenies.Width = 84;
+            // 
+            // columnImpendances
+            // 
+            this.columnImpendances.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.columnImpendances.HeaderText = "Impendances";
+            this.columnImpendances.Name = "columnImpendances";
+            this.columnImpendances.ReadOnly = true;
+            this.columnImpendances.ToolTipText = "\"E\" - the exponent means  \"* 10 ^ \" (times ten to the power)";
             // 
             // CalculationForm
             // 

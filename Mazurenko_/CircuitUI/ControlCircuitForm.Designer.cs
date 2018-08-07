@@ -72,12 +72,12 @@
             // valueTextBox
             // 
             this.valueTextBox.Location = new System.Drawing.Point(88, 83);
-            this.valueTextBox.MaxLength = 15;
+            this.valueTextBox.MaxLength = 13;
             this.valueTextBox.Name = "valueTextBox";
             this.valueTextBox.Size = new System.Drawing.Size(84, 20);
             this.valueTextBox.TabIndex = 3;
+            this.valueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
             this.valueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValueTextBox_KeyPress);
-            this.valueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ValueTextBox_KeyUp);
             this.valueTextBox.Leave += new System.EventHandler(this.ValueTextBox_Leave);
             // 
             // nameTextBox
