@@ -46,7 +46,7 @@ namespace CircuitUI
         /// <summary>
         /// The Maximum value that the cell takes
         /// </summary>
-        private const double _maxValue = 100000000000000;
+        private const double _maxValue = 1000000000000;
        
         #endregion -- Private Fields --        
 
@@ -161,7 +161,7 @@ namespace CircuitUI
             elementsGridView.DataSource = bindingSourceContainer;            
             elementsGridView.Columns[0].ReadOnly = true;
             elementsGridView.Columns[1].ReadOnly = false;
-            ((DataGridViewTextBoxColumn) elementsGridView.Columns[1]).MaxInputLength = 15;
+            ((DataGridViewTextBoxColumn) elementsGridView.Columns[1]).MaxInputLength = 13;
 
             elementsGridView.Columns[0].ToolTipText = @"Element name";
             elementsGridView.Columns[1].ToolTipText =
