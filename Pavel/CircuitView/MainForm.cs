@@ -154,6 +154,30 @@ namespace CircuitView
                 };
                 Update(elements, 3, 0, 2);
             }
+            else if (CircuitComboBox.SelectedIndex == 4)
+            {
+                var elements = new List<ElementBase>
+                {
+                    new Resistor("C1",155),
+                    new Resistor("R1", 1),
+                    new Resistor("C2",5.6),
+                    new Inductor("I1",7),
+                    new Inductor("I2",9.1)
+                };
+                Update(elements, 1, 2, 2);
+            }
+            else if (CircuitComboBox.SelectedIndex == 5)
+            {
+                var elements = new List<ElementBase>
+                {
+                    new Resistor("R1",55),
+                    new Resistor("R2",23.3),
+                    new Resistor("R3",22),
+                    new Inductor("R4",21),
+                    new Inductor("I2",7.3)
+                };
+                Update(elements, 4, 0, 1);
+            }
         }
         /// <summary>
         /// Обновление цепи

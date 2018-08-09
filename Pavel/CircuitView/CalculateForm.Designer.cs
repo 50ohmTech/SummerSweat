@@ -65,7 +65,7 @@
             this.FrequenciesGridView.ReadOnly = true;
             this.FrequenciesGridView.RowHeadersVisible = false;
             this.FrequenciesGridView.RowTemplate.Height = 24;
-            this.FrequenciesGridView.Size = new System.Drawing.Size(354, 249);
+            this.FrequenciesGridView.Size = new System.Drawing.Size(354, 244);
             this.FrequenciesGridView.TabIndex = 0;
             // 
             // Column1
@@ -85,9 +85,9 @@
             // CalculateFreqButton
             // 
             this.CalculateFreqButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.CalculateFreqButton.Location = new System.Drawing.Point(12, 212);
+            this.CalculateFreqButton.Location = new System.Drawing.Point(12, 198);
             this.CalculateFreqButton.Name = "CalculateFreqButton";
-            this.CalculateFreqButton.Size = new System.Drawing.Size(157, 23);
+            this.CalculateFreqButton.Size = new System.Drawing.Size(157, 26);
             this.CalculateFreqButton.TabIndex = 1;
             this.CalculateFreqButton.Text = "Расчитать";
             this.CalculateFreqButton.UseVisualStyleBackColor = true;
@@ -97,9 +97,9 @@
             // 
             this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CloseButton.Location = new System.Drawing.Point(12, 238);
+            this.CloseButton.Location = new System.Drawing.Point(12, 230);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(157, 23);
+            this.CloseButton.Size = new System.Drawing.Size(157, 26);
             this.CloseButton.TabIndex = 2;
             this.CloseButton.Text = "Закрыть";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             // StartValueBox
             // 
             this.StartValueBox.DecimalPlaces = 1;
-            this.StartValueBox.Location = new System.Drawing.Point(6, 60);
+            this.StartValueBox.Location = new System.Drawing.Point(9, 60);
             this.StartValueBox.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -130,7 +130,7 @@
             // IntervalBox
             // 
             this.IntervalBox.DecimalPlaces = 2;
-            this.IntervalBox.Location = new System.Drawing.Point(6, 105);
+            this.IntervalBox.Location = new System.Drawing.Point(9, 105);
             this.IntervalBox.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -152,7 +152,7 @@
             // 
             // AmountBox
             // 
-            this.AmountBox.Location = new System.Drawing.Point(6, 150);
+            this.AmountBox.Location = new System.Drawing.Point(9, 150);
             this.AmountBox.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -182,7 +182,7 @@
             this.groupBox1.Controls.Add(this.IntervalBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(157, 194);
+            this.groupBox1.Size = new System.Drawing.Size(157, 181);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Введите диапазон частот";
@@ -218,12 +218,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 273);
+            this.ClientSize = new System.Drawing.Size(541, 268);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.CalculateFreqButton);
             this.Controls.Add(this.FrequenciesGridView);
-            this.MinimumSize = new System.Drawing.Size(559, 320);
+            this.MinimumSize = new System.Drawing.Size(559, 315);
             this.Name = "CalculateForm";
             this.Text = "Расчет импеданса";
             ((System.ComponentModel.ISupportInitialize)(this.FrequenciesGridView)).EndInit();

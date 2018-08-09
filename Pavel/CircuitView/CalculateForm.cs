@@ -44,11 +44,16 @@ namespace CircuitView
             var interval = double.Parse(IntervalBox.Text);
             var count = uint.Parse(AmountBox.Text);
 
-            FrequenciesGridView.Rows.Clear();
-
             for (var index = 0; index < count; index++)
             {
                 _frequencies.Add(startValue + index * interval);
+            }
+
+            if (FrequenciesGridView.Rows.Count > 1000)
+            {
+                MessageBox.Show("Общее количество частот должно быть меньше 1000", "Error",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             var circuit = ((MainForm)Owner).Circuit;
