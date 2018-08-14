@@ -75,9 +75,11 @@
             // ImpedanceStorage
             // 
             this.ImpedanceStorage.AllowUserToAddRows = false;
+            this.ImpedanceStorage.AllowUserToDeleteRows = false;
             this.ImpedanceStorage.AllowUserToResizeRows = false;
             this.ImpedanceStorage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImpedanceStorage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.ImpedanceStorage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ImpedanceStorage.Location = new System.Drawing.Point(442, 290);
             this.ImpedanceStorage.Name = "ImpedanceStorage";
@@ -110,7 +112,7 @@
             "Своя цепь"});
             this.circuitType.Location = new System.Drawing.Point(442, 35);
             this.circuitType.Name = "circuitType";
-            this.circuitType.Size = new System.Drawing.Size(185, 21);
+            this.circuitType.Size = new System.Drawing.Size(191, 21);
             this.circuitType.TabIndex = 15;
             this.circuitType.SelectionChangeCommitted += new System.EventHandler(this.CircuitType_SelectionChangeCommitted);
             // 
@@ -213,27 +215,27 @@
             this.CalculateButton.Text = "Рассчитать";
             this.CalculateButton.UseVisualStyleBackColor = true;
             this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
-#if DEBUG
             // 
             // RandomButton
             // 
             this.RandomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RandomButton.Location = new System.Drawing.Point(442, 62);
             this.RandomButton.Name = "RandomButton";
-            this.RandomButton.Size = new System.Drawing.Size(185, 27);
+            this.RandomButton.Size = new System.Drawing.Size(191, 27);
             this.RandomButton.TabIndex = 10;
             this.RandomButton.Text = "Сгенерировать элемент";
             this.RandomButton.UseVisualStyleBackColor = true;
             this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
-#endif
             // 
             // ElementStorage
             // 
             this.ElementStorage.AllowUserToAddRows = false;
+            this.ElementStorage.AllowUserToDeleteRows = false;
             this.ElementStorage.AllowUserToResizeRows = false;
             this.ElementStorage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ElementStorage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.ElementStorage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ElementStorage.Location = new System.Drawing.Point(6, 19);
             this.ElementStorage.Name = "ElementStorage";
