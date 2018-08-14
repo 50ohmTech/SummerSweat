@@ -213,6 +213,7 @@
             this.CalculateButton.Text = "Рассчитать";
             this.CalculateButton.UseVisualStyleBackColor = true;
             this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
+#if DEBUG
             // 
             // RandomButton
             // 
@@ -224,6 +225,7 @@
             this.RandomButton.Text = "Сгенерировать элемент";
             this.RandomButton.UseVisualStyleBackColor = true;
             this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
+#endif
             // 
             // ElementStorage
             // 
