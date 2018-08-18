@@ -48,15 +48,16 @@
             // 
             // mainMenuStrip
             // 
+            this.mainMenuStrip.BackColor = System.Drawing.SystemColors.ControlLight;
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addElementToolStripMenuItem,
             this.randomElementtoolStripMenu,
+            this.addElementToolStripMenuItem,
             this.clearToolStripMenuItem,
             this.calculationToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.ShowItemToolTips = true;
-            this.mainMenuStrip.Size = new System.Drawing.Size(255, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(351, 24);
             this.mainMenuStrip.TabIndex = 1;
             this.mainMenuStrip.Text = "Strip";
             // 
@@ -127,11 +128,11 @@
             this.elementsGridView.AllowUserToResizeRows = false;
             this.elementsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.elementsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.elementsGridView.Location = new System.Drawing.Point(12, 56);
+            this.elementsGridView.Location = new System.Drawing.Point(15, 74);
             this.elementsGridView.MultiSelect = false;
             this.elementsGridView.Name = "elementsGridView";
             this.elementsGridView.RowHeadersVisible = false;
-            this.elementsGridView.Size = new System.Drawing.Size(236, 207);
+            this.elementsGridView.Size = new System.Drawing.Size(320, 320);
             this.elementsGridView.TabIndex = 2;
             this.elementsGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.ElementsGridView_CellBeginEdit);
             this.elementsGridView.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ElementsGridView_CellMouseEnter);
@@ -148,7 +149,7 @@
             this.circuitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.circuitsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.circuitsComboBox.FormattingEnabled = true;
-            this.circuitsComboBox.Location = new System.Drawing.Point(68, 27);
+            this.circuitsComboBox.Location = new System.Drawing.Point(79, 37);
             this.circuitsComboBox.Name = "circuitsComboBox";
             this.circuitsComboBox.Size = new System.Drawing.Size(154, 23);
             this.circuitsComboBox.TabIndex = 1;
@@ -157,7 +158,7 @@
             // currentCircuitLabel
             // 
             this.currentCircuitLabel.AutoSize = true;
-            this.currentCircuitLabel.Location = new System.Drawing.Point(12, 32);
+            this.currentCircuitLabel.Location = new System.Drawing.Point(12, 42);
             this.currentCircuitLabel.Name = "currentCircuitLabel";
             this.currentCircuitLabel.Size = new System.Drawing.Size(50, 13);
             this.currentCircuitLabel.TabIndex = 5;
@@ -167,7 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 273);
+            this.ClientSize = new System.Drawing.Size(351, 410);
             this.Controls.Add(this.currentCircuitLabel);
             this.Controls.Add(this.circuitsComboBox);
             this.Controls.Add(this.elementsGridView);
