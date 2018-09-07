@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Model.Events
+namespace Model.Elements.Events
 {
     /// <summary>
     ///     Класс для обработчика события ValueChanged
@@ -19,11 +19,6 @@ namespace Model.Events
         /// </summary>
         private double _newValue;
 
-        /// <summary>
-        ///     Старое значение
-        /// </summary>
-        private double _oldValue;
-
         #endregion
 
         #region Public
@@ -32,26 +27,11 @@ namespace Model.Events
         ///     Конструктор
         /// </summary>
         /// <param name="name">Сообщение</param>
-        /// <param name="oldValue">Старое значение</param>
         /// <param name="newValue">Новое значение</param>
-        public ElementValueEventArgs(string name, double oldValue, double newValue)
+        public ElementValueEventArgs(string name, double newValue)
         {
             Name = name;
-            OldValue = oldValue;
             NewValue = newValue;
-        }
-
-        /// <summary>
-        ///     Старое значение
-        /// </summary>
-        public double OldValue
-        {
-            set
-            {
-                Calculations.Calculations.CheckFrequencies(value);
-                _oldValue = value;
-            }
-            get => _oldValue;
         }
 
         /// <summary>
@@ -61,7 +41,6 @@ namespace Model.Events
         {
             set
             {
-                Calculations.Calculations.CheckFrequencies(value);
                 _newValue = value;
             }
             get => _newValue;

@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
-using Model.ComboBoxType;
-using Model.Events;
+using Model.Elements.Events;
 
 namespace Model.Elements
 {
     /// <summary>
     ///     Базовый элемент эл. элементов
     /// </summary>
-    public abstract class ElementBase
+    public abstract class ElementBase : INode
     {
         #region Protected
 
@@ -26,25 +26,6 @@ namespace Model.Elements
         #endregion
 
         #region Public
-
-        /// <summary>
-        ///     Возвращает символ номинала
-        /// </summary>
-        /// <returns>Обозначение номинала</returns>
-        public static string GetSymbol(ElementType elementType)
-        {
-            switch (elementType)
-            {
-                case ElementType.Resistor:
-                    return "R";
-                case ElementType.Inductor:
-                    return "L";
-                case ElementType.Capacitor:
-                    return "C";
-                default:
-                    return null;
-            }
-        }
 
         /// <summary>
         ///     Имя элемента
@@ -75,13 +56,17 @@ namespace Model.Elements
                     throw new ArgumentOutOfRangeException(nameof(Value));
                 }
 
-                double oldValue = _value;
                 _value = value;
                 ValueChanged?.Invoke(this, new ElementValueEventArgs
-                    (Name, oldValue, _value));
+                    (Name, _value));
             }
             get => _value;
         }
+
+        /// <summary>
+        ///     Дочерние узлы
+        /// </summary>
+        public List<INode> Nodes { get; } = new List<INode>();
 
         /// <summary>
         ///     Событие на изменение номинала
