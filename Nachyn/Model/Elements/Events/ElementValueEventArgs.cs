@@ -39,10 +39,7 @@ namespace Model.Elements.Events
         /// </summary>
         public double NewValue
         {
-            set
-            {
-                _newValue = value;
-            }
+            set => _newValue = value;
             get => _newValue;
         }
 

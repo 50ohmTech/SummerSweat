@@ -6,7 +6,7 @@ namespace Model.Elements
     /// <summary>
     ///     Подцепь
     /// </summary>
-    internal abstract class Subcircuit : INode
+    public abstract class Subcircuit : INode
     {
         /// <summary>
         ///     Уникальный идентификатор

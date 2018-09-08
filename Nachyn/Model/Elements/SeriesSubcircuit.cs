@@ -1,12 +1,12 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
+using Model.Elements.Checks;
 
 namespace Model.Elements
 {
     /// <summary>
     ///     Последовательная подцепь
     /// </summary>
-    internal class Series : Subcircuit
+    public class SeriesSubcircuit : Subcircuit
     {
         /// <summary>
         ///     Рассчитать импеданс
@@ -15,7 +15,16 @@ namespace Model.Elements
         /// <returns>Импеданс</returns>
         public override Complex CalculateZ(double frequency)
         {
-            throw new NotImplementedException();
+            Calculations.CheckFrequencies(frequency);
+
+            Complex resistance = Complex.Zero;
+
+            foreach (INode node in Nodes)
+            {
+                resistance += node.CalculateZ(frequency);
+            }
+
+            return resistance;
         }
     }
 }
