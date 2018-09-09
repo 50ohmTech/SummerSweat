@@ -8,10 +8,29 @@ namespace Model.Elements
     /// </summary>
     public abstract class Subcircuit : INode
     {
+        #region Fields
+
+        #region Static fields
+
         /// <summary>
         ///     Уникальный идентификатор
         /// </summary>
         private static int _id;
+
+        #endregion
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Уникальный идентификатор
+        /// </summary>
+        public int Id { get; } = _id;
+
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         ///     Конструктор
@@ -21,10 +40,12 @@ namespace Model.Elements
             _id++;
         }
 
+        #endregion
+
         /// <summary>
-        ///     Уникальный идентификатор
+        ///     Родитель
         /// </summary>
-        private int Id { get; } = _id;
+        public INode Parent { get; set; }
 
         /// <summary>
         ///     Дочерние узлы

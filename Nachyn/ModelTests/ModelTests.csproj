@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElementBaseTests.cs" />
-    <Compile Include="NodeTests.cs" />
+    <Compile Include="CircuitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

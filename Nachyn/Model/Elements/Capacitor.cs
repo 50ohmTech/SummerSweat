@@ -16,7 +16,7 @@ namespace Model.Elements
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="capacity">Емкость</param>
-        public Capacitor(string name, double capacity = 0) : base(name, capacity)
+        public Capacitor(string name, double capacity) : base(name, capacity)
         {
         }
 

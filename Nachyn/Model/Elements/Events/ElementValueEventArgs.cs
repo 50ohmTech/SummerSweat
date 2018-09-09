@@ -17,7 +17,7 @@ namespace Model.Elements.Events
         /// <summary>
         ///     Новое значение
         /// </summary>
-        private double _newValue;
+        private double _value;
 
         #endregion
 
@@ -27,20 +27,28 @@ namespace Model.Elements.Events
         ///     Конструктор
         /// </summary>
         /// <param name="name">Сообщение</param>
-        /// <param name="newValue">Новое значение</param>
-        public ElementValueEventArgs(string name, double newValue)
+        /// <param name="value">Новое значение</param>
+        public ElementValueEventArgs(string name, double value)
         {
             Name = name;
-            NewValue = newValue;
+            Value = value;
         }
 
         /// <summary>
         ///     Новое значение
         /// </summary>
-        public double NewValue
+        public double Value
         {
-            set => _newValue = value;
-            get => _newValue;
+            set
+            {
+                if (_value < 0)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+
+                _value = value;
+            }
+            get => _value;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Model.Elements.Checks;
 
 namespace Model.Elements
@@ -8,6 +9,8 @@ namespace Model.Elements
     /// </summary>
     public class ParallelSubcircuit : Subcircuit
     {
+        #region Public methods
+
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>
@@ -16,6 +19,11 @@ namespace Model.Elements
         public override Complex CalculateZ(double frequency)
         {
             Calculations.CheckFrequencies(frequency);
+            if (Nodes.Count <= 1)
+            {
+                throw new Exception(
+                    "Для расчета параллельного соединения необходимо минимум 2 ноды");
+            }
 
             Complex resistance = Complex.Zero;
 
@@ -26,5 +34,7 @@ namespace Model.Elements
 
             return 1 / resistance;
         }
+
+        #endregion
     }
 }

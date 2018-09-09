@@ -8,6 +8,8 @@ namespace Model.Elements
     /// </summary>
     public class SeriesSubcircuit : Subcircuit
     {
+        #region Public methods
+
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>
@@ -26,5 +28,7 @@ namespace Model.Elements
 
             return resistance;
         }
+
+        #endregion
     }
 }

@@ -10,6 +10,8 @@ namespace Model.Elements
     /// </summary>
     public abstract class ElementBase : INode
     {
+        #region Public methods
+
         #region Protected
 
         /// <summary>
@@ -22,6 +24,8 @@ namespace Model.Elements
             Name = name;
             Value = value;
         }
+
+        #endregion
 
         #endregion
 
@@ -43,6 +47,11 @@ namespace Model.Elements
                 _name = value;
             }
         }
+
+        /// <summary>
+        ///     Родитель
+        /// </summary>
+        public INode Parent { get; set; }
 
         /// <summary>
         ///     Номинал
@@ -71,7 +80,7 @@ namespace Model.Elements
         /// <summary>
         ///     Событие на изменение номинала
         /// </summary>
-        public event ValueChangedEventHandler ValueChanged;
+        public event EventHandler<ElementValueEventArgs> ValueChanged;
 
         /// <summary>
         ///     Расчитать комплексное сопротивление

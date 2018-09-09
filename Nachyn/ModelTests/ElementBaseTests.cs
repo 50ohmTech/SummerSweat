@@ -8,6 +8,8 @@ namespace ModelTests
     [Description("Класс проверки базовых элементов цепи")]
     internal class ElementBaseTests
     {
+        #region Public methods
+
         [TestCase(20)]
         [TestCase(200)]
         [TestCase(20000)]
@@ -68,5 +70,20 @@ namespace ModelTests
 
             Assert.AreEqual(expected, inductor.CalculateZ(frequency).Imaginary);
         }
+
+        [Test(Description = "Тест на вызов события")]
+        public void EventHandlerTest()
+        {
+            Inductor inductor = new Inductor("Name", 40);
+            bool test = false;
+
+            inductor.ValueChanged += (sender, argument) => { test = true; };
+
+            inductor.Value = 50;
+
+            Assert.AreEqual(true, test);
+        }
+
+        #endregion
     }
 }

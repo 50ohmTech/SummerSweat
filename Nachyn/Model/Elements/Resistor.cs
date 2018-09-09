@@ -15,7 +15,7 @@ namespace Model.Elements
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="resistance">Сопротивление</param>
-        public Resistor(string name, double resistance = 0) : base(name, resistance)
+        public Resistor(string name, double resistance) : base(name, resistance)
         {
         }
 
