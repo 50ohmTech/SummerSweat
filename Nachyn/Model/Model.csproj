@@ -56,12 +56,13 @@
     <Compile Include="Elements\Checks\Calculations.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Events\ElementValueEventArgs.cs" />
+    <Compile Include="Elements\Events\SubcircuitParentEventArgs.cs" />
     <Compile Include="Elements\Inductor.cs" />
     <Compile Include="Elements\INode.cs" />
     <Compile Include="Elements\ParallelSubcircuit.cs" />
-    <Compile Include="Elements\Subcircuit.cs" />
+    <Compile Include="Elements\SubcircuitBase.cs" />
     <Compile Include="Elements\SeriesSubcircuit.cs" />
-    <Compile Include="Elements\Types\ConnectionType.cs" />
+    <Compile Include="Elements\Enums\ConnectionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\Resistor.cs" />
   </ItemGroup>

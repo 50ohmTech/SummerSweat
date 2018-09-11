@@ -4,17 +4,17 @@ using Model.Elements.Checks;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Последовательная подцепь
+    ///     Последовательная подцепь.
     /// </summary>
-    public class SeriesSubcircuit : Subcircuit
+    public class SeriesSubcircuit : SubcircuitBase
     {
         #region Public methods
 
         /// <summary>
-        ///     Рассчитать импеданс
+        ///     Рассчитать импеданс.
         /// </summary>
-        /// <param name="frequency">Частота</param>
-        /// <returns>Импеданс</returns>
+        /// <param name="frequency">Частота.</param>
+        /// <returns>Импеданс.</returns>
         public override Complex CalculateZ(double frequency)
         {
             Calculations.CheckFrequencies(frequency);

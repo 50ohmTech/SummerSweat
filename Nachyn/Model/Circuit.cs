@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Numerics;
 using Model.Elements;
 using Model.Elements.Checks;
-using Model.Elements.Types;
+using Model.Elements.Enums;
 
 #endregion
 
 namespace Model
 {
     /// <summary>
-    ///     Цепь
+    ///     Цепь.
     /// </summary>
     public class Circuit
     {
@@ -21,7 +21,7 @@ namespace Model
         #region Private fields
 
         /// <summary>
-        ///     Корень цепи
+        ///     Корень цепи.
         /// </summary>
         private INode _root;
 
@@ -32,17 +32,17 @@ namespace Model
         #region Public methods
 
         /// <summary>
-        ///     Рассчитать импедансы
+        ///     Рассчитать импедансы.
         /// </summary>
-        /// <param name="frequencies">Частоты</param>
-        /// <returns>Импедансы</returns>
-        public List<Complex> CalcualteZ(double[] frequencies)
+        /// <param name="frequencies">Частоты.</param>
+        /// <returns>Импедансы.</returns>
+        public List<Complex> CalculateZ(double[] frequencies)
         {
             Calculations.CheckFrequencies(frequencies);
 
             if (_root == null)
             {
-                throw new NullReferenceException("В цепи нет элементов");
+                throw new NullReferenceException("В цепи нет элементов.");
             }
 
             List<Complex> impedances = new List<Complex>();
@@ -56,23 +56,34 @@ namespace Model
         }
 
         /// <summary>
-        ///     Удалить элемент
+        ///     Удалить элемент.
         /// </summary>
-        /// <param name="element">Элемент</param>
-        /// <returns>Удален ли элемент</returns>
-        public bool Delete(ElementBase element)
+        /// <param name="element">Элемент.</param>
+        /// <returns>Удален ли элемент.</returns>
+        public bool Remove(ElementBase element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             if (_root == null)
             {
-                throw new NullReferenceException("В цепи нет элементов");
+                throw new NullReferenceException("В цепи нет элементов.");
             }
 
             if (element.Parent == _root)
             {
+                if (_root.Nodes == null)
+                {
+                    throw new NullReferenceException("Дети корня были null.");
+                }
+
                 return _root.Nodes.Remove(element);
             }
 
-            if (element.Parent is Subcircuit subcircuit && subcircuit.Nodes.Count == 2 &&
+            if (element.Parent is SubcircuitBase subcircuit &&
+                subcircuit.Nodes.Count == 2 &&
                 element.Parent != _root)
             {
                 foreach (INode children in subcircuit.Nodes)
@@ -81,7 +92,7 @@ namespace Model
                     {
                         if (!subcircuit.Parent.Nodes.Remove(subcircuit))
                         {
-                            throw new Exception("Ошибка удаления");
+                            throw new Exception("Ошибка удаления.");
                         }
 
                         subcircuit.Parent.Nodes.Add(children);
@@ -90,13 +101,13 @@ namespace Model
                         {
                             childrenElementBase.Parent = subcircuit.Parent;
                         }
-                        else if (children is Subcircuit childrenSubcircuit)
+                        else if (children is SubcircuitBase childrenSubcircuit)
                         {
                             childrenSubcircuit.Parent = subcircuit.Parent;
                         }
                         else
                         {
-                            throw new Exception("Неизвестный родитель");
+                            throw new Exception("Неизвестный родитель.");
                         }
 
                         return true;
@@ -106,6 +117,24 @@ namespace Model
 
             if (element.Parent.Nodes.Count == 1 && element.Parent != _root)
             {
+                if (element.Parent == null)
+                {
+                    throw new NullReferenceException(
+                        "Родитель удаляемого элемента был null.");
+                }
+
+                if (element.Parent.Parent == null)
+                {
+                    throw new NullReferenceException(
+                        "Родитель родителя удаляемого элемента был null.");
+                }
+
+                if (element.Parent.Parent.Nodes == null)
+                {
+                    throw new NullReferenceException(
+                        "Дети родителя родителя удаляемого элемента был null.");
+                }
+
                 return element.Parent.Parent.Nodes.Remove(element.Parent);
             }
 
@@ -114,11 +143,11 @@ namespace Model
 
         /// <summary>
         ///     Добавить после элемента.
-        ///     Если в цепи нет элементов, то element = null и ConnectionType = Любой
+        ///     Если в цепи нет элементов, то element = null и ConnectionType = Любой.
         /// </summary>
-        /// <param name="element">Элемент после которого добавляется новый элемент</param>
-        /// <param name="newElement">Новый элемент</param>
-        /// <param name="connection">Тип соединения</param>
+        /// <param name="element">Элемент после которого добавляется новый элемент.</param>
+        /// <param name="newElement">Новый элемент.</param>
+        /// <param name="connection">Тип соединения.</param>
         public void AddAfter(ElementBase element, ElementBase newElement,
             ConnectionType connection)
         {
@@ -132,7 +161,8 @@ namespace Model
 
             if (element == null || newElement == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(
+                    nameof(element) + " или " + nameof(newElement));
             }
 
             switch (connection)
@@ -162,10 +192,10 @@ namespace Model
                             break;
                         }
 
-                        throw new Exception(element.Name + " не был удален из родителя");
+                        throw new Exception($"{element.Name} не был удален из родителя.");
                     }
 
-                    throw new Exception($"У {element.Name} неизвестный родитель");
+                    throw new Exception($"У {element.Name} неизвестный родитель.");
                 }
 
                 case ConnectionType.Parallel:
@@ -192,10 +222,10 @@ namespace Model
                             break;
                         }
 
-                        throw new Exception(element.Name + " не был удален из родителя");
+                        throw new Exception(element.Name + " не был удален из родителя.");
                     }
 
-                    throw new Exception($"У {element.Name} неизвестный родитель");
+                    throw new Exception($"У {element.Name} неизвестный родитель.");
                 }
             }
         }

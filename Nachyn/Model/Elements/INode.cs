@@ -4,19 +4,19 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Узел
+    ///     Узел.
     /// </summary>
     public interface INode
     {
         #region Properties
 
         /// <summary>
-        ///     Дочерние узлы
+        ///     Дочерние узлы.
         /// </summary>
         List<INode> Nodes { get; }
 
         /// <summary>
-        ///     Родитель
+        ///     Родитель.
         /// </summary>
         INode Parent { get; }
 
@@ -25,10 +25,10 @@ namespace Model.Elements
         #region Public methods
 
         /// <summary>
-        ///     Рассчитать импеданс
+        ///     Рассчитать импеданс.
         /// </summary>
-        /// <param name="frequency">Частота</param>
-        /// <returns>Импеданс</returns>
+        /// <param name="frequency">Частота.</param>
+        /// <returns>Импеданс.</returns>
         Complex CalculateZ(double frequency);
 
         #endregion

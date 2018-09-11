@@ -5,27 +5,27 @@ using Model.Elements.Checks;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Конденсатор
+    ///     Конденсатор.
     /// </summary>
     public class Capacitor : ElementBase
     {
-        #region Public
+        #region Public methods
 
         /// <summary>
-        ///     Конструктор
+        ///     Конструктор.
         /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="capacity">Емкость</param>
+        /// <param name="name">Имя.</param>
+        /// <param name="capacity">Емкость.</param>
         public Capacitor(string name, double capacity) : base(name, capacity)
         {
         }
 
         /// <summary>
         ///     Расчет комплексного сопротивления
-        ///     данного элемента
+        ///     данного элемента.
         /// </summary>
-        /// <param name="frequency">Частоста</param>
-        /// <returns>Комплексное сопротивление</returns>
+        /// <param name="frequency">Частоста.</param>
+        /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
             Calculations.CheckFrequencies(frequency);

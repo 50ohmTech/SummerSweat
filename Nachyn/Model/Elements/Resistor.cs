@@ -4,27 +4,27 @@ using Model.Elements.Checks;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Резистор
+    ///     Резистор.
     /// </summary>
     public class Resistor : ElementBase
     {
-        #region Public
+        #region Public methods
 
         /// <summary>
-        ///     Конструктор
+        ///     Конструктор.
         /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="resistance">Сопротивление</param>
+        /// <param name="name">Имя.</param>
+        /// <param name="resistance">Сопротивление.</param>
         public Resistor(string name, double resistance) : base(name, resistance)
         {
         }
 
         /// <summary>
         ///     Расчет комплексного сопротивления
-        ///     данного элемента
+        ///     данного элемента.
         /// </summary>
-        /// <param name="frequency">Частоста</param>
-        /// <returns>Комплексное сопротивление</returns>
+        /// <param name="frequency">Частоста.</param>
+        /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
             Calculations.CheckFrequencies(frequency);

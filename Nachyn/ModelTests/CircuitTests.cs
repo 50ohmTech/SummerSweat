@@ -1,6 +1,7 @@
-﻿using Model;
+﻿using System;
+using Model;
 using Model.Elements;
-using Model.Elements.Types;
+using Model.Elements.Enums;
 using NUnit.Framework;
 
 namespace ModelTests
@@ -57,11 +58,11 @@ namespace ModelTests
             Resistor resistorR = new Resistor("R-R", 20);
             circuit.AddAfter(resistorE, resistorR, ConnectionType.Serial);
 
-            Assert.AreEqual(30, circuit.CalcualteZ(new double[] {1})[0].Real);
+            Assert.AreEqual(30, circuit.CalculateZ(new double[] {1})[0].Real);
         }
 
         [Test(Description = "Тест на удаление элемента из цепи")]
-        public void DeleteTest()
+        public void RemoveTest()
         {
             Circuit circuit = new Circuit();
             Resistor resistorRoot = new Resistor("R-Root", 20);
@@ -79,11 +80,31 @@ namespace ModelTests
             Resistor resistorR = new Resistor("R-R", 20);
             circuit.AddAfter(resistorE, resistorR, ConnectionType.Serial);
 
-            circuit.Delete(resistorR);
-            circuit.Delete(resistorE);
-            circuit.Delete(resistorW);
+            circuit.Remove(resistorR);
+            circuit.Remove(resistorE);
+            circuit.Remove(resistorW);
 
-            Assert.AreEqual(40, circuit.CalcualteZ(new double[] {1})[0].Real);
+            Assert.AreEqual(40, circuit.CalculateZ(new double[] {1})[0].Real);
+        }
+
+        [Test(Description = "Тест на пустой корень при вычислении")]
+        public void CircuitCalcualteEmptyRootTest()
+        {
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                Circuit circuit = new Circuit();
+                circuit.CalculateZ(new double[] {1});
+            });
+        }
+
+        [Test(Description = "Тест на пустой корень при удалении")]
+        public void CircuitDeleteEmptyRootTest()
+        {
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                Circuit circuit = new Circuit();
+                circuit.Remove(new Resistor("Message", 20));
+            });
         }
 
         #endregion

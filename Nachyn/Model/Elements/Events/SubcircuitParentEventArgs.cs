@@ -2,10 +2,7 @@
 
 namespace Model.Elements.Events
 {
-    /// <summary>
-    ///     Класс для обработчика события ValueChanged.
-    /// </summary>
-    public class ElementValueEventArgs : EventArgs
+    public class SubcircuitParentEventArgs
     {
         #region Fields
 
@@ -16,11 +13,6 @@ namespace Model.Elements.Events
         /// </summary>
         private string _message;
 
-        /// <summary>
-        ///     Новое значение.
-        /// </summary>
-        private double _value;
-
         #endregion
 
         #endregion
@@ -30,19 +22,7 @@ namespace Model.Elements.Events
         /// <summary>
         ///     Новое значение.
         /// </summary>
-        public double Value
-        {
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(Value));
-                }
-
-                _value = value;
-            }
-            get => _value;
-        }
+        public INode Parent { get; }
 
         /// <summary>
         ///     Сообщение.
@@ -69,11 +49,11 @@ namespace Model.Elements.Events
         ///     Конструктор.
         /// </summary>
         /// <param name="message">Сообщение.</param>
-        /// <param name="value">Новое значение.</param>
-        public ElementValueEventArgs(string message, double value)
+        /// <param name="parent">Родитель</param>
+        public SubcircuitParentEventArgs(string message, INode parent)
         {
             Message = message;
-            Value = value;
+            Parent = parent;
         }
 
         #endregion

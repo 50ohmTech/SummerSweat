@@ -5,27 +5,27 @@ using Model.Elements.Checks;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Катушка индуктивности
+    ///     Катушка индуктивности.
     /// </summary>
     public class Inductor : ElementBase
     {
-        #region Public
+        #region Public methods
 
         /// <summary>
-        ///     Конструктор
+        ///     Конструктор.
         /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="inductance">Индуктивность</param>
+        /// <param name="name">Имя.</param>
+        /// <param name="inductance">Индуктивность.</param>
         public Inductor(string name, double inductance) : base(name, inductance)
         {
         }
 
         /// <summary>
         ///     Расчет комплексного сопротивления
-        ///     данного элемента
+        ///     данного элемента.
         /// </summary>
-        /// <param name="frequency">Частоста</param>
-        /// <returns>Комплексное сопротивление</returns>
+        /// <param name="frequency">Частоста.</param>
+        /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
             Calculations.CheckFrequencies(frequency);
