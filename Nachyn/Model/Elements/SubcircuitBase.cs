@@ -38,7 +38,7 @@ namespace Model.Elements
         ///     Уникальный идентификатор.
         /// </summary>
         public int Id { get; } = _id;
-
+     
         /// <summary>
         ///     Родитель.
         /// </summary>

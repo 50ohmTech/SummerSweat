@@ -38,6 +38,14 @@ namespace Model
         }
 
         /// <summary>
+        ///     Очистить цепь.
+        /// </summary>
+        public void Clear()
+        {
+            _root = null;
+        }
+
+        /// <summary>
         ///     Рассчитать импедансы.
         /// </summary>
         /// <param name="frequencies">Частоты.</param>
@@ -150,18 +158,23 @@ namespace Model
         public void AddAfter(ElementBase element, ElementBase newElement,
             ConnectionType connection)
         {
+            if (element == null || newElement == null)
+            {
+                throw new ArgumentNullException(
+                    nameof(element) + " или " + nameof(newElement));
+            }
+
+            if (element == newElement)
+            {
+                throw new ArgumentException($"{nameof(element)} и {nameof(newElement)} были равны.");
+            }
+
             if (IsEmpty())
             {
                 _root = new SeriesSubcircuit();
                 _root.Nodes.Add(newElement);
                 newElement.Parent = _root;
                 return;
-            }
-
-            if (element == null || newElement == null)
-            {
-                throw new ArgumentNullException(
-                    nameof(element) + " или " + nameof(newElement));
             }
 
             switch (connection)
