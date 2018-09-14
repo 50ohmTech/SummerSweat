@@ -13,16 +13,12 @@ namespace Model
     /// </summary>
     public class Circuit
     {
-        #region Fields
-
-        #region Private fields
+        #region Properties
 
         /// <summary>
-        ///     Корень цепи.
+        ///     Корень.
         /// </summary>
-        private INode _root;
-
-        #endregion
+        public INode Root { get; private set; }
 
         #endregion
 
@@ -34,7 +30,7 @@ namespace Model
         /// <returns>Пустая ли цепь.</returns>
         public bool IsEmpty()
         {
-            return _root == null || _root.Nodes.Count < 1;
+            return Root == null || Root.Nodes.Count < 1;
         }
 
         /// <summary>
@@ -42,7 +38,7 @@ namespace Model
         /// </summary>
         public void Clear()
         {
-            _root = null;
+            Root = null;
         }
 
         /// <summary>
@@ -54,12 +50,12 @@ namespace Model
         {
             Calculations.CheckFrequencies(frequencies);
 
-            if (_root == null)
+            if (Root == null)
             {
                 throw new NullReferenceException("В цепи нет элементов.");
             }
 
-            return frequencies.Select(frequency => _root.CalculateZ(frequency)).ToList();
+            return frequencies.Select(frequency => Root.CalculateZ(frequency)).ToList();
         }
 
         /// <summary>
@@ -79,19 +75,19 @@ namespace Model
                 throw new NullReferenceException("В цепи нет элементов.");
             }
 
-            if (element.Parent == _root)
+            if (element.Parent == Root)
             {
-                if (_root.Nodes == null)
+                if (Root.Nodes == null)
                 {
                     throw new NullReferenceException("Дети корня были null.");
                 }
 
-                return _root.Nodes.Remove(element);
+                return Root.Nodes.Remove(element);
             }
 
             if (element.Parent is SubcircuitBase subcircuit &&
                 subcircuit.Nodes.Count == 2 &&
-                element.Parent != _root)
+                element.Parent != Root)
             {
                 foreach (INode children in subcircuit.Nodes)
                 {
@@ -122,7 +118,7 @@ namespace Model
                 }
             }
 
-            if (element.Parent != _root && element.Parent.Nodes.Count == 1)
+            if (element.Parent != Root && element.Parent.Nodes.Count == 1)
             {
                 if (element.Parent == null)
                 {
@@ -158,6 +154,19 @@ namespace Model
         public void AddAfter(ElementBase element, ElementBase newElement,
             ConnectionType connection)
         {
+            if (IsEmpty())
+            {
+                if (newElement == null)
+                {
+                    throw new ArgumentNullException(nameof(newElement));
+                }
+
+                Root = new SeriesSubcircuit();
+                Root.Nodes.Add(newElement);
+                newElement.Parent = Root;
+                return;
+            }
+
             if (element == null || newElement == null)
             {
                 throw new ArgumentNullException(
@@ -169,13 +178,6 @@ namespace Model
                 throw new ArgumentException($"{nameof(element)} и {nameof(newElement)} были равны.");
             }
 
-            if (IsEmpty())
-            {
-                _root = new SeriesSubcircuit();
-                _root.Nodes.Add(newElement);
-                newElement.Parent = _root;
-                return;
-            }
 
             switch (connection)
             {

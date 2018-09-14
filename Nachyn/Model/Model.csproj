@@ -58,6 +58,7 @@
     <Compile Include="Elements\Enums\ElementType.cs" />
     <Compile Include="Elements\Events\ElementValueEventArgs.cs" />
     <Compile Include="Elements\Events\SubcircuitParentEventArgs.cs" />
+    <Compile Include="Elements\Factories\ElementFactory.cs" />
     <Compile Include="Elements\Inductor.cs" />
     <Compile Include="Elements\INode.cs" />
     <Compile Include="Elements\ParallelSubcircuit.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Elements\Enums\ConnectionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\Resistor.cs" />
+    <Compile Include="TreeView\NodeTreeNode.cs" />
     <Compile Include="ViewHelpers\ConnectionTypeComboBoxItem.cs" />
     <Compile Include="ViewHelpers\ElementTypeComboBoxItem.cs" />
     <Compile Include="ViewHelpers\Enums\InitialCircuitType.cs" />

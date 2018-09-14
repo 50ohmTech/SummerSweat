@@ -1,5 +1,4 @@
-﻿using System;
-using Model.Elements;
+﻿using Model.Elements;
 using Model.Elements.Enums;
 using Model.ViewHelpers.Enums;
 
@@ -21,7 +20,7 @@ namespace Model.ViewHelpers
         {
             if (circuit == null)
             {
-                throw new ArgumentNullException(nameof(circuit));
+                circuit = new Circuit();
             }
 
             circuit.Clear();

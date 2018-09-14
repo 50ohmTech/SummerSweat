@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Model.Elements.Enums;
 using Model.Elements.Events;
 
 namespace Model.Elements
@@ -105,6 +106,25 @@ namespace Model.Elements
         {
             Name = name;
             Value = value;
+        }
+
+        /// <summary>
+        ///     Возвращает символ элемента
+        /// </summary>
+        /// <returns>Тип Элемента</returns>
+        public static string GetSymbol(ElementType elementType)
+        {
+            switch (elementType)
+            {
+                case ElementType.Resistor:
+                    return "R";
+                case ElementType.Inductor:
+                    return "L";
+                case ElementType.Capacitor:
+                    return "C";
+                default:
+                    return null;
+            }
         }
 
         #endregion
