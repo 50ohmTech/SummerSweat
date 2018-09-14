@@ -21,7 +21,7 @@ namespace Model.Elements
             Calculations.CheckFrequencies(frequency);
             if (Nodes.Count <= 1)
             {
-                throw new Exception(
+                throw new InvalidOperationException(
                     "Для расчета параллельного соединения необходимо минимум 2 ноды");
             }
 

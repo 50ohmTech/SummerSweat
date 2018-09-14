@@ -9,7 +9,7 @@ namespace Model.Elements.Events
         #region Private fields
 
         /// <summary>
-        ///     Имя.
+        ///     Сообщение.
         /// </summary>
         private string _message;
 

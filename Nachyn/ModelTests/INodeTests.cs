@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Numerics;
 using Model.Elements;
-using Model.Elements.Checks;
 using Model.Elements.Events;
 using NUnit.Framework;
 
@@ -81,10 +80,7 @@ namespace ModelTests
         public void NegativeFrequencyTest(double frequency)
         {
             ElementBase elementBase = new Capacitor("Message", 20);
-            Assert.Throws<ArgumentException>(() =>
-            {
-                elementBase.CalculateZ(frequency);
-            });
+            Assert.Throws<ArgumentException>(() => { elementBase.CalculateZ(frequency); });
         }
 
         [TestCase(20)]
@@ -125,17 +121,23 @@ namespace ModelTests
             Assert.AreEqual(true, test);
         }
 
-
+        [TestCase(1)]
+        [TestCase(2345)]
+        [TestCase(1000)]
         [Test(Description = "Тест номинала у аргумента события")]
         public void EventArgsValueTest(
-            [Random(Calculations.MIN_FREQUENCY, Calculations.MAX_FREQUENCY, 10)]
             double value)
         {
             ElementValueEventArgs args = new ElementValueEventArgs("Message", value);
         }
 
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10230)]
+        [TestCase(-2000.2)]
+        [TestCase(-100000000000)]
         [Test(Description = "Негативный Тест номинала у аргумента события")]
-        public void NegativeEventArgsValueTest([Random(-1000000d, 0d, 10)] double value)
+        public void NegativeEventArgsValueTest(double value)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -167,7 +169,7 @@ namespace ModelTests
         {
             ParallelSubcircuit parallel = new ParallelSubcircuit();
             parallel.Nodes.Add(new Resistor("Message", 20));
-            Assert.Throws<Exception>(() => { parallel.CalculateZ(20); });
+            Assert.Throws<InvalidOperationException>(() => { parallel.CalculateZ(20); });
         }
 
 

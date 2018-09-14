@@ -1,13 +1,10 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Model.Elements;
 using Model.Elements.Checks;
 using Model.Elements.Enums;
-
-#endregion
 
 namespace Model
 {
@@ -32,6 +29,15 @@ namespace Model
         #region Public methods
 
         /// <summary>
+        ///     Пустая ли цепь.
+        /// </summary>
+        /// <returns>Пустая ли цепь.</returns>
+        public bool IsEmpty()
+        {
+            return _root == null || _root.Nodes.Count < 1;
+        }
+
+        /// <summary>
         ///     Рассчитать импедансы.
         /// </summary>
         /// <param name="frequencies">Частоты.</param>
@@ -45,14 +51,7 @@ namespace Model
                 throw new NullReferenceException("В цепи нет элементов.");
             }
 
-            List<Complex> impedances = new List<Complex>();
-
-            foreach (double frequency in frequencies)
-            {
-                impedances.Add(_root.CalculateZ(frequency));
-            }
-
-            return impedances;
+            return frequencies.Select(frequency => _root.CalculateZ(frequency)).ToList();
         }
 
         /// <summary>
@@ -60,14 +59,14 @@ namespace Model
         /// </summary>
         /// <param name="element">Элемент.</param>
         /// <returns>Удален ли элемент.</returns>
-        public bool Remove(ElementBase element)
+        public bool TryRemove(ElementBase element)
         {
             if (element == null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
 
-            if (_root == null)
+            if (IsEmpty())
             {
                 throw new NullReferenceException("В цепи нет элементов.");
             }
@@ -115,7 +114,7 @@ namespace Model
                 }
             }
 
-            if (element.Parent.Nodes.Count == 1 && element.Parent != _root)
+            if (element.Parent != _root && element.Parent.Nodes.Count == 1)
             {
                 if (element.Parent == null)
                 {
@@ -151,7 +150,7 @@ namespace Model
         public void AddAfter(ElementBase element, ElementBase newElement,
             ConnectionType connection)
         {
-            if (_root == null)
+            if (IsEmpty())
             {
                 _root = new SeriesSubcircuit();
                 _root.Nodes.Add(newElement);

@@ -66,32 +66,6 @@ namespace Model.Elements
             get => _value;
         }
 
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        ///     Событие на изменение номинала.
-        /// </summary>
-        public event EventHandler<ElementValueEventArgs> ValueChanged;
-
-        #endregion
-
-        #region Public methods
-
-        /// <summary>
-        ///     Конструктор.
-        /// </summary>
-        /// <param name="name">Имя.</param>
-        /// <param name="value">Номинал.</param>
-        protected ElementBase(string name, double value = 0)
-        {
-            Name = name;
-            Value = value;
-        }
-
-        #endregion
-
         /// <summary>
         ///     Родитель.
         /// </summary>
@@ -102,11 +76,37 @@ namespace Model.Elements
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Событие на изменение номинала.
+        /// </summary>
+        public event EventHandler<ElementValueEventArgs> ValueChanged;
+
         /// <summary>
         ///     Расчитать комплексное сопротивление.
         /// </summary>
         /// <param name="frequency">Частота.</param>
         /// <returns></returns>
         public abstract Complex CalculateZ(double frequency);
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        ///     Конструктор.
+        /// </summary>
+        /// <param name="name">Имя.</param>
+        /// <param name="value">Номинал.</param>
+        protected ElementBase(string name, double value)
+        {
+            Name = name;
+            Value = value;
+        }
+
+        #endregion
     }
 }
