@@ -12,7 +12,7 @@ namespace Model.Elements
     /// </summary>
     public class Resistor : ElementBase
     {
-        #region Public methods
+        #region Constructor
 
         /// <summary>
         ///     Конструктор класса Resistor
@@ -23,6 +23,10 @@ namespace Model.Elements
         {
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
         ///     Расчет импеданса
         /// </summary>
@@ -32,7 +36,8 @@ namespace Model.Elements
         {
             if (frequency <= 0)
             {
-                throw new ArgumentOutOfRangeException("Частота не может быть меньше нуля");
+                throw new ArgumentOutOfRangeException(
+                    "Частота не может быть меньше нуля");
             }
 
             return new Complex(Value, 0);
