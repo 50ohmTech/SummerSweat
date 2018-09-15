@@ -29,10 +29,10 @@ namespace Model.ViewHelpers
             {
                 case InitialCircuitType.A:
                 {
-                    Inductor inductor1 = new Inductor("I1", 20);
+                    Inductor inductor1 = new Inductor("L1", 20);
                     Resistor resistor2 = new Resistor("R2", 20);
                     Resistor resistor3 = new Resistor("R3", 20);
-                    Inductor inductor4 = new Inductor("I4", 20);
+                    Inductor inductor4 = new Inductor("L4", 20);
 
                     circuit.AddAfter(null, inductor1, ConnectionType.Serial);
                     circuit.AddAfter(inductor1, resistor2, ConnectionType.Serial);
@@ -44,9 +44,9 @@ namespace Model.ViewHelpers
                 case InitialCircuitType.B:
                 {
                     Capacitor capacitor1 = new Capacitor("C1", 20);
-                    Inductor inductor2 = new Inductor("I2", 20);
+                    Inductor inductor2 = new Inductor("L2", 20);
                     Resistor resistor3 = new Resistor("R3", 20);
-                    Inductor inductor4 = new Inductor("I4", 20);
+                    Inductor inductor4 = new Inductor("L4", 20);
 
                     circuit.AddAfter(null, capacitor1, ConnectionType.Serial);
                     circuit.AddAfter(capacitor1, inductor2, ConnectionType.Parallel);
@@ -60,12 +60,12 @@ namespace Model.ViewHelpers
                 case InitialCircuitType.C:
                 {
                     Resistor resistor1 = new Resistor("R1", 20);
-                    Inductor inductor2 = new Inductor("I2", 20);
-                    Inductor inductor3 = new Inductor("I3", 20);
-                    Inductor inductor4 = new Inductor("I4", 20);
+                    Inductor inductor2 = new Inductor("L2", 20);
+                    Inductor inductor3 = new Inductor("L3", 20);
+                    Inductor inductor4 = new Inductor("L4", 20);
                     Resistor resistor5 = new Resistor("R5", 20);
                     Resistor resistor6 = new Resistor("R6", 20);
-                    Inductor inductor7 = new Inductor("I7", 20);
+                    Inductor inductor7 = new Inductor("L7", 20);
 
                     circuit.AddAfter(null, resistor1, ConnectionType.Serial);
                     circuit.AddAfter(resistor1, inductor2, ConnectionType.Parallel);
@@ -84,9 +84,9 @@ namespace Model.ViewHelpers
                     Resistor resistor1 = new Resistor("R1", 1);
                     Capacitor capacitor2 = new Capacitor("C2", 20);
                     Resistor resistor3 = new Resistor("R3", 20);
-                    Inductor inductor4 = new Inductor("I4", 20);
+                    Inductor inductor4 = new Inductor("L4", 20);
                     Resistor resistor5 = new Resistor("R5", 20);
-                    Inductor inductor6 = new Inductor("I6", 20);
+                    Inductor inductor6 = new Inductor("L6", 20);
 
                     circuit.AddAfter(null, resistor1, ConnectionType.Serial);
                     circuit.AddAfter(resistor1, capacitor2, ConnectionType.Serial);
@@ -104,11 +104,11 @@ namespace Model.ViewHelpers
                     Resistor resistor1 = new Resistor("R1", 20);
                     Capacitor capacitor2 = new Capacitor("C2", 20);
                     Resistor resistor3 = new Resistor("R3", 20);
-                    Inductor inductor4 = new Inductor("I4", 20);
+                    Inductor inductor4 = new Inductor("L4", 20);
                     Resistor resistor5 = new Resistor("R5", 20);
-                    Inductor inductor6 = new Inductor("I6", 20);
+                    Inductor inductor6 = new Inductor("L6", 20);
                     Resistor resistor7 = new Resistor("R7", 20);
-                    Inductor inductor8 = new Inductor("I8", 20);
+                    Inductor inductor8 = new Inductor("L8", 20);
 
                     circuit.AddAfter(null, resistor1, ConnectionType.Serial);
                     circuit.AddAfter(resistor1, capacitor2, ConnectionType.Serial);
