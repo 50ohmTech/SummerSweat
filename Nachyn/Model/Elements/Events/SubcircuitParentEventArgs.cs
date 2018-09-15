@@ -2,6 +2,9 @@
 
 namespace Model.Elements.Events
 {
+    /// <summary>
+    ///     Аргументы события на изменение родителя.
+    /// </summary>
     public class SubcircuitParentEventArgs
     {
         #region Fields

@@ -39,10 +39,12 @@
             this._buttonAddElement = new System.Windows.Forms.Button();
             this._buttonRemoveElement = new System.Windows.Forms.Button();
             this._buttonCalculateFormShow = new System.Windows.Forms.Button();
-            this._pictureBoxCircuit = new System.Windows.Forms.PictureBox();
             this._textBoxAddElementName = new System.Windows.Forms.TextBox();
             this._buttonOpenEditForm = new System.Windows.Forms.Button();
+            this._pictureBoxCircuit = new System.Windows.Forms.PictureBox();
+            this._panelCircuit = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxCircuit)).BeginInit();
+            this._panelCircuit.SuspendLayout();
             this.SuspendLayout();
             // 
             // _comboBoxSelectCircuit
@@ -149,14 +151,6 @@
             this._buttonCalculateFormShow.UseVisualStyleBackColor = true;
             this._buttonCalculateFormShow.Click += new System.EventHandler(this.ButtonCalculateFormShow_Click);
             // 
-            // _pictureBoxCircuit
-            // 
-            this._pictureBoxCircuit.Location = new System.Drawing.Point(211, 12);
-            this._pictureBoxCircuit.Name = "_pictureBoxCircuit";
-            this._pictureBoxCircuit.Size = new System.Drawing.Size(437, 425);
-            this._pictureBoxCircuit.TabIndex = 11;
-            this._pictureBoxCircuit.TabStop = false;
-            // 
             // _textBoxAddElementName
             // 
             this._textBoxAddElementName.ForeColor = System.Drawing.SystemColors.GrayText;
@@ -177,13 +171,31 @@
             this._buttonOpenEditForm.UseVisualStyleBackColor = true;
             this._buttonOpenEditForm.Click += new System.EventHandler(this.ButtonOpenEditForm_Click);
             // 
+            // _pictureBoxCircuit
+            // 
+            this._pictureBoxCircuit.Location = new System.Drawing.Point(0, 0);
+            this._pictureBoxCircuit.Name = "_pictureBoxCircuit";
+            this._pictureBoxCircuit.Size = new System.Drawing.Size(75, 50);
+            this._pictureBoxCircuit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this._pictureBoxCircuit.TabIndex = 14;
+            this._pictureBoxCircuit.TabStop = false;
+            // 
+            // _panelCircuit
+            // 
+            this._panelCircuit.AutoScroll = true;
+            this._panelCircuit.Controls.Add(this._pictureBoxCircuit);
+            this._panelCircuit.Location = new System.Drawing.Point(211, 12);
+            this._panelCircuit.Name = "_panelCircuit";
+            this._panelCircuit.Size = new System.Drawing.Size(433, 425);
+            this._panelCircuit.TabIndex = 15;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(656, 449);
+            this.Controls.Add(this._panelCircuit);
             this.Controls.Add(this._buttonOpenEditForm);
-            this.Controls.Add(this._pictureBoxCircuit);
             this.Controls.Add(this._textBoxAddElementName);
             this.Controls.Add(this._buttonCalculateFormShow);
             this.Controls.Add(this._buttonRemoveElement);
@@ -203,6 +215,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Калькулятор импедансов.";
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxCircuit)).EndInit();
+            this._panelCircuit.ResumeLayout(false);
+            this._panelCircuit.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,9 +235,10 @@
         private System.Windows.Forms.Button _buttonAddElement;
         private System.Windows.Forms.Button _buttonRemoveElement;
         private System.Windows.Forms.Button _buttonCalculateFormShow;
-        private System.Windows.Forms.PictureBox _pictureBoxCircuit;
         private System.Windows.Forms.TextBox _textBoxAddElementName;
         private System.Windows.Forms.Button _buttonOpenEditForm;
+        private System.Windows.Forms.PictureBox _pictureBoxCircuit;
+        private System.Windows.Forms.Panel _panelCircuit;
     }
 }
 

@@ -11,12 +11,16 @@ namespace View
     {
         #region Fields
 
-        #region Private fields
+        #region Readonly fields
 
         /// <summary>
         ///     Элемент
         /// </summary>
         private readonly ElementBase _element;
+
+        #endregion
+
+        #region Private fields
 
         /// <summary>
         ///     Номинал

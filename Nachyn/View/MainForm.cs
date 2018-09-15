@@ -26,6 +26,11 @@ namespace View
         /// </summary>
         private readonly Circuit _circuit;
 
+        /// <summary>
+        ///     Рисовальщик цепи.
+        /// </summary>
+        private readonly Drawer _drawer;
+
         #endregion
 
         #region Private fields
@@ -126,7 +131,6 @@ namespace View
         {
             _treeViewCircuit.Nodes.Clear();
             _currentNodeTreeNode = null;
-            _pictureBoxCircuit.Image = null;
         }
 
         /// <summary>
@@ -175,8 +179,8 @@ namespace View
 
         private void ButtonClearCircuit_Click(object sender, EventArgs e)
         {
-            ClearTreeViewCircuit();
             _circuit.Clear();
+            UpdateViewCircuit();
         }
 
         private void ComboBoxSelectCircuit_SelectedIndexChanged(object sender, EventArgs e)
@@ -259,8 +263,8 @@ namespace View
         /// </summary>
         private void UpdateViewCircuit()
         {
-            //Нарисовать цепь
             UpdateTreeView();
+            DrawCircuit();
         }
 
         private void ButtonCalculateFormShow_Click(object sender, EventArgs e)
@@ -316,7 +320,22 @@ namespace View
             InitializeComboBoxesType();
             InitializePlaceholders();
             _circuit = new Circuit();
+            _drawer = new Drawer(_pictureBoxCircuit, _circuit);
             _buttonAddElement.Enabled = false;
+        }
+
+        /// <summary>
+        ///     Нарисовать цепь.
+        /// </summary>
+        public void DrawCircuit()
+        {
+            _pictureBoxCircuit.Image = null;
+            if (_circuit == null || _circuit.IsEmpty())
+            {
+                return;
+            }
+
+            _drawer.DrawCircuit();
         }
 
         #endregion
