@@ -18,7 +18,7 @@ namespace Model.Elements
         /// <returns>Импеданс.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Calculations.CheckFrequencies(frequency);
+            Calculation.CheckFrequencies(frequency);
             if (Nodes.Count <= 1)
             {
                 throw new InvalidOperationException(

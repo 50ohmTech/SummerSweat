@@ -27,7 +27,7 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Calculations.CheckFrequencies(frequency);
+            Calculation.CheckFrequencies(frequency);
 
             return new Complex(Value, 0);
         }

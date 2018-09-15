@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="Circuit.cs" />
     <Compile Include="Elements\Capacitor.cs" />
-    <Compile Include="Elements\Checks\Calculations.cs" />
+    <Compile Include="Elements\Checks\Calculation.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Enums\ElementType.cs" />
     <Compile Include="Elements\Events\ElementValueEventArgs.cs" />

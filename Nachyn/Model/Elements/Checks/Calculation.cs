@@ -5,7 +5,7 @@ namespace Model.Elements.Checks
     /// <summary>
     ///     Вычисления.
     /// </summary>
-    public class Calculations
+    public class Calculation
     {
         #region Constants
 
@@ -18,6 +18,20 @@ namespace Model.Elements.Checks
         ///     Минимально допустимая частота.
         /// </summary>
         public const double MIN_FREQUENCY = 1;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Визуальный импеданс
+        /// </summary>
+        public string Impedance { get; set; }
+
+        /// <summary>
+        ///     Визуальная частота
+        /// </summary>
+        public string Frequency { get; set; }
 
         #endregion
 

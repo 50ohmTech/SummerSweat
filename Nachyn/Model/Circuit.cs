@@ -48,7 +48,7 @@ namespace Model
         /// <returns>Импедансы.</returns>
         public List<Complex> CalculateZ(double[] frequencies)
         {
-            Calculations.CheckFrequencies(frequencies);
+            Calculation.CheckFrequencies(frequencies);
 
             if (Root == null)
             {

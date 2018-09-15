@@ -87,9 +87,9 @@
             this._labelAddElement.AutoSize = true;
             this._labelAddElement.Location = new System.Drawing.Point(12, 260);
             this._labelAddElement.Name = "_labelAddElement";
-            this._labelAddElement.Size = new System.Drawing.Size(103, 13);
+            this._labelAddElement.Size = new System.Drawing.Size(106, 13);
             this._labelAddElement.TabIndex = 4;
-            this._labelAddElement.Text = "Добавить элемент";
+            this._labelAddElement.Text = "Добавить элемент:";
             // 
             // _comboBoxAddElementType
             // 
@@ -196,8 +196,12 @@
             this.Controls.Add(this._buttonClearCircuit);
             this.Controls.Add(this._labelSelectCircuit);
             this.Controls.Add(this._comboBoxSelectCircuit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Калькулятор импедансов.";
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxCircuit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -130,9 +130,9 @@ namespace View
         }
 
         /// <summary>
-        ///     Обновить дерево и схему
+        ///     Обновить дерево
         /// </summary>
-        private void UpdateViewCircuit()
+        private void UpdateTreeView()
         {
             ClearTreeViewCircuit();
             if (_circuit == null || _circuit.IsEmpty())
@@ -141,7 +141,6 @@ namespace View
             }
 
             _treeViewCircuit.BeginUpdate();
-
 
             void AddNodeTreeNodes(INode node, TreeNode treeNode)
             {
@@ -191,9 +190,9 @@ namespace View
 
         private void ButtonAddElement_Click(object sender, EventArgs e)
         {
-            if (_currentNodeTreeNode == null && !_circuit.IsEmpty())
+            if (GetCurrentElementBase() == null && !_circuit.IsEmpty())
             {
-                MessageBox.Show("Выберите элемент перед которым происходит добавление.");
+                MessageBox.Show("Выберите элемент перед которым ходите добавить новый элемент.");
             }
             else
             {
@@ -203,22 +202,13 @@ namespace View
                 ConnectionTypeComboBoxItem connectionTypeComboBoxItem =
                     _comboBoxAddElementConnectionType.SelectedItem as ConnectionTypeComboBoxItem;
 
-                ElementBase element = _currentNodeTreeNode?.Value as ElementBase;
-
-                if (_currentNodeTreeNode?.Value is SubcircuitBase)
+                if (elementTypeComboBoxItem != null && connectionTypeComboBoxItem != null)
                 {
-                    MessageBox.Show("Элементом не может быть тип соединения.");
-                }
-                else
-                {
-                    if (elementTypeComboBoxItem != null && connectionTypeComboBoxItem != null)
-                    {
-                        _circuit.AddAfter(element,
-                            ElementFactory.GetInstance(elementTypeComboBoxItem.Value, _textBoxAddElementName.Text,
-                                _value), connectionTypeComboBoxItem.Value);
+                    _circuit.AddAfter(GetCurrentElementBase(),
+                        ElementFactory.GetInstance(elementTypeComboBoxItem.Value, _textBoxAddElementName.Text,
+                            _value), connectionTypeComboBoxItem.Value);
 
-                        UpdateViewCircuit();
-                    }
+                    UpdateViewCircuit();
                 }
             }
         }
@@ -250,21 +240,41 @@ namespace View
 
         private void ButtonOpenEditForm_Click(object sender, EventArgs e)
         {
-            //EditForm
+            if (GetCurrentElementBase() != null)
+            {
+                DialogResult result = new EditForm(GetCurrentElementBase()).ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    UpdateViewCircuit();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент, который хотите изменить.");
+            }
+        }
+
+        /// <summary>
+        ///     Обновить дерево и картинку цепи.
+        /// </summary>
+        private void UpdateViewCircuit()
+        {
+            //Нарисовать цепь
+            UpdateTreeView();
         }
 
         private void ButtonCalculateFormShow_Click(object sender, EventArgs e)
         {
-            //CalcForm
+            new ImpedanceForm(_circuit).ShowDialog();
         }
 
         private void ButtonRemoveElement_Click(object sender, EventArgs e)
         {
-            if (_currentNodeTreeNode?.Value is ElementBase element)
+            if (GetCurrentElementBase() != null)
             {
                 try
                 {
-                    _circuit.TryRemove(element);
+                    _circuit.TryRemove(GetCurrentElementBase());
                 }
                 catch (Exception exception)
                 {
@@ -273,6 +283,24 @@ namespace View
 
                 UpdateViewCircuit();
             }
+            else
+            {
+                MessageBox.Show("Выберите элемент, который хотите удалить.");
+            }
+        }
+
+        /// <summary>
+        ///     Получить текущий элемент из TreeView
+        /// </summary>
+        /// <returns></returns>
+        private ElementBase GetCurrentElementBase()
+        {
+            if (_currentNodeTreeNode?.Value is ElementBase element)
+            {
+                return element;
+            }
+
+            return null;
         }
 
         #endregion
