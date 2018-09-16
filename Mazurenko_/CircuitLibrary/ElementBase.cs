@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using CircuitLibrary.Events;
@@ -6,29 +7,29 @@ using CircuitLibrary.Events;
 namespace CircuitLibrary
 {
     /// <summary>
-    /// Abstract class containing general data of all
-    /// elements of the electrical circuit
+    ///     Abstract class containing general data of all
+    ///     elements of the electrical circuit
     /// </summary>
-    public abstract class ElementBase: IElement
+    public abstract class ElementBase : INode
     {
-        #region -- Fields --
+        #region Private fields
 
         /// <summary>
-        /// The name of the element of an electric circuit  
-        /// </summary>        
+        ///     The name of the element of an electric circuit
+        /// </summary>
         private string _name;
 
         /// <summary>
-        /// The value of the electrical circuit element
+        ///     The value of the electrical circuit element
         /// </summary>
         private double _value;
 
-        #endregion -- Fields --
+        #endregion
 
-        #region -- Properties --
+        #region Properties
 
         /// <summary>
-        /// The name of the element of an electric circuit
+        ///     The name of the element of an electric circuit
         /// </summary>
         public string Name
         {
@@ -42,7 +43,8 @@ namespace CircuitLibrary
 
                 if (value.Contains(' '))
                 {
-                    throw new FormatException("There should not be a space inside the name");
+                    throw new FormatException(
+                        "There should not be a space inside the name");
                 }
 
                 value = value.ToUpper();
@@ -50,12 +52,13 @@ namespace CircuitLibrary
                 {
                     throw new FormatException("Name entered incorrectly !");
                 }
+
                 _name = value;
             }
         }
 
         /// <summary>
-        /// The value of the electrical circuit element
+        ///     The value of the electrical circuit element
         /// </summary>
         public double Value
         {
@@ -67,7 +70,7 @@ namespace CircuitLibrary
                     throw new ArgumentException("The value is not a real number");
                 }
 
-                double minValue = 0.000001;
+                var minValue = 0.000001;
                 if (value < minValue)
                 {
                     throw new ArgumentException("The value cannot be less than 0.000001");
@@ -76,30 +79,40 @@ namespace CircuitLibrary
                 double maxValue = 1000000000000;
                 if (value > maxValue)
                 {
-                    throw new ArgumentException("The value cannot be more than 1000000000000");
+                    throw new ArgumentException(
+                        "The value cannot be more than 1000000000000");
                 }
+
                 _value = value;
                 ValueChanged?.Invoke(_value, this);
             }
         }
 
-        #endregion -- Properties --
-
-        #region -- Public Methods --
-
         /// <summary>
-        /// Calculation of impedance
+        ///     List of child nodes
         /// </summary>
-        /// <param name="f"></param>
-        /// <returns></returns>
-        public abstract Complex CalculateZ(double f);
-
-        #endregion -- Public Methods --
-
-        #region -- Protected Methods --
+        public List<INode> Nodes { get; set; }
 
         /// <summary>
-        /// Constructor
+        ///     Parent node
+        /// </summary>
+        public INode Parent { get; set; }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Signal changes in the nominal value of the electrical circuit element
+        /// </summary>
+        public event ValueStateEventHandler ValueChanged;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        ///     Constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -109,12 +122,12 @@ namespace CircuitLibrary
             Value = value;
         }
 
-        #endregion -- Protected Methods --
+        #endregion
 
-        #region -- Private Methods --
+        #region Private methods
 
         /// <summary>
-        /// Name validation
+        ///     Name validation
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
@@ -130,26 +143,28 @@ namespace CircuitLibrary
 
             return true;
         }
-        
+
         /// <summary>
-        /// Checking for the symbol of the English alphabet
+        ///     Checking for the symbol of the English alphabet
         /// </summary>
         /// <param name="symbol"></param>
         /// <returns></returns>
         private static bool IsEnglishLetter(char symbol)
         {
-            return (symbol >= 'A' && symbol <= 'Z');
+            return symbol >= 'A' && symbol <= 'Z';
         }
 
-        #endregion -- Private Methods --
+        #endregion
 
-        #region -- Events --
+        #region Public methods
 
         /// <summary>
-        /// Signal changes in the nominal value of the electrical circuit element
+        ///     Calculation of impedance
         /// </summary>
-        public event ValueStateEventHandler ValueChanged;
+        /// <param name="f"></param>
+        /// <returns></returns>
+        public abstract Complex CalculateZ(double f);
 
-        #endregion -- Events --
+        #endregion
     }
 }

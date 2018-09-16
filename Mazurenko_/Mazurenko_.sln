@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitLibrary", "CircuitLibrary\CircuitLibrary.csproj", "{00CFA415-989C-4C53-B92B-DDA9A58048F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitUI", "CircuitUI\CircuitUI.csproj", "{C2990BA0-9FC1-4D73-B118-C9D092ABEB8F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{00CFA415-989C-4C53-B92B-DDA9A58048F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00CFA415-989C-4C53-B92B-DDA9A58048F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00CFA415-989C-4C53-B92B-DDA9A58048F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2990BA0-9FC1-4D73-B118-C9D092ABEB8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2990BA0-9FC1-4D73-B118-C9D092ABEB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2990BA0-9FC1-4D73-B118-C9D092ABEB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2990BA0-9FC1-4D73-B118-C9D092ABEB8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

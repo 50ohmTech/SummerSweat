@@ -6,42 +6,46 @@ using CircuitLibrary.Events;
 namespace CircuitLibrary
 {
     /// <summary>
-    /// Electrical circuit
+    ///     Electrical circuit
     /// </summary>
     public class Circuit
     {
-        #region -- Properties --
+        #region Private fields
 
         /// <summary>
-        /// List of electrical circuit elements
+        ///     Electrical circuit root
         /// </summary>
-        public List<IElement> Elements { get; set; }
+        private INode _root;
 
-        #endregion -- Properties --
+        #endregion
 
-        #region -- Events --
+        #region Properties
 
         /// <summary>
-        /// Event, when changing one of the elements of the electrical circuit
+        ///     List of electrical circuit elements
+        /// </summary>
+        public List<ElementBase> Elements { get; set; }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Event, when changing one of the elements of the electrical circuit
         /// </summary>
         public event ValueStateEventHandler CircuitChanged;
 
-        #endregion -- Events --
+        #endregion
 
-        #region -- Public Methods --
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Circuit() { }
+        #region Constructor
 
         /// <summary>
-        /// Constructor with parameters
+        ///     Constructor with parameters
         /// </summary>
         /// <param name="elements"></param>
-        public Circuit(List<IElement> elements)
+        public Circuit(List<ElementBase> elements)
         {
-            Elements = elements.Any() ? elements : new List<IElement>();
+            Elements = elements.Any() ? elements : new List<ElementBase>();
             if (Elements != null)
             {
                 foreach (var element in Elements)
@@ -51,15 +55,19 @@ namespace CircuitLibrary
             }
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
-        /// Calculation of complex resistance
+        ///     Calculation of complex resistance
         /// </summary>
         /// <param name="frequencies"></param>
         /// <returns></returns>
         public Complex[] CalculateZ(double[] frequencies)
         {
             var result = new Complex[frequencies.Length];
-            for (int i = 0; i < frequencies.Length; i++)
+            for (var i = 0; i < frequencies.Length; i++)
             {
                 foreach (var element in Elements)
                 {
@@ -71,6 +79,6 @@ namespace CircuitLibrary
             return result;
         }
 
-        #endregion -- Public Methods --
+        #endregion
     }
 }

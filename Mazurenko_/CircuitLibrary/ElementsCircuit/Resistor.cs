@@ -3,24 +3,27 @@
 namespace CircuitLibrary
 {
     /// <summary>
-    /// The resistor part of the circuit
+    ///     The resistor part of the circuit
     /// </summary>
     public sealed class Resistor : ElementBase
     {
-        #region -- Public Methods --
+        #region Constructor
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
         public Resistor(string name, double value) : base(name, value)
         {
-
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
-        /// Calculation of impedance
+        ///     Calculation of impedance
         /// </summary>
         /// <param name="frequency"></param>
         /// <returns></returns>
@@ -29,6 +32,6 @@ namespace CircuitLibrary
             return new Complex(Value, 0);
         }
 
-        #endregion -- Public Methods --    
+        #endregion
     }
 }

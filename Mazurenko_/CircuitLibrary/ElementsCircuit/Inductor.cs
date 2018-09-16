@@ -4,24 +4,27 @@ using System.Numerics;
 namespace CircuitLibrary
 {
     /// <summary>
-    /// Inductance coil, element of the electrical circuit
+    ///     Inductance coil, element of the electrical circuit
     /// </summary>
-    public sealed class Indutor : ElementBase
+    public sealed class Inductor : ElementBase
     {
-        #region -- Public Methods --
+        #region Constructor
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public Indutor(string name, double value) : base(name, value)
+        public Inductor(string name, double value) : base(name, value)
         {
-
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
-        /// Calculation of impedance
+        ///     Calculation of impedance
         /// </summary>
         /// <param name="frequency"></param>
         /// <returns></returns>
@@ -30,6 +33,6 @@ namespace CircuitLibrary
             return new Complex(0, 2 * Math.PI * frequency * Value);
         }
 
-        #endregion -- Public Methods --
+        #endregion
     }
 }
