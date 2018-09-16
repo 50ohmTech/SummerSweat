@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitView", "MainForm\CircuitView.csproj", "{BAE7E8DD-7CBD-44D1-ABAB-623EBD52EFF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{BAE7E8DD-7CBD-44D1-ABAB-623EBD52EFF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{BB547FD5-1A3E-4E20-BF48-0B45332A3675}"
 EndProject
