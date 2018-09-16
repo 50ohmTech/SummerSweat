@@ -18,7 +18,7 @@ namespace Model.Elements
     /// <summary>
     ///     Элемент цепи
     /// </summary>
-    public abstract class ElementBase
+    public abstract class ElementBase : INode
     {
         #region Events
 
@@ -73,7 +73,7 @@ namespace Model.Elements
             get => _value;
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException("Значение должно быть больше нуля");
                 }
