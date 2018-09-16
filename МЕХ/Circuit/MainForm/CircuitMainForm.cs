@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace MainForm
 {
+	/// <summary>
+	/// Главная форма программы на которой происходит редактирование цепи
+	/// </summary>
     public partial class MainForm : Form
     {
         public MainForm()
         {
             InitializeComponent();
         }
-    }
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+
+		}
+	}
 }

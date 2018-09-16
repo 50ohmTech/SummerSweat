@@ -28,7 +28,7 @@ namespace CircuitElements
 	/// <summary>
 	///     Делегат, хранящий сигнатуру методов, подписанных на событие ValueChanged
 	/// </summary>
-	/// <param name="value"> Изменившееся значение </param>
+	/// <param name="newValue"> Изменившееся значение </param>
 	/// <param name="valueOwner"> объект, который изменился </param>
 	public delegate void ElementStateHandler(object newValue, ElementBase valueOwner);
 }

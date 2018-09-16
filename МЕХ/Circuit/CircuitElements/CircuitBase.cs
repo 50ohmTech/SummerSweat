@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace CircuitElements.ParentClasses
+namespace CircuitElements
 {
 	public abstract class CircuitBase : ICircuitElement
 	{
@@ -28,13 +28,13 @@ namespace CircuitElements.ParentClasses
 				if (value == null)
 				{
 					throw new NullReferenceException(
-						"An attempt to assign a null value to the Elements property");
+						"An attempt to assign a null value to the " + nameof(Elements));
 				}
 
 				if (value.Count == 0)
 				{
 					throw new ArgumentException(
-						"An attempt to assign an empty List to the Elements property");
+						"An attempt to assign an empty List to the " + nameof(Elements));
 				}
 
 				_elements = value;

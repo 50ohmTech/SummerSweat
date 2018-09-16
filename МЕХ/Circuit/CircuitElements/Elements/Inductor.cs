@@ -26,11 +26,11 @@ namespace CircuitElements.Elements
 		/// <summary>
 		///     Расчитать импаденс по входной частоте
 		/// </summary>
-		/// <param name="frequence"> Частота сигнала </param>
+		/// <param name="frequency"> Частота сигнала </param>
 		/// <returns>Импеданс элемента в комплексной форме</returns>
-		public override Complex CalculateZ(double frequence)
+		public override Complex CalculateZ(double frequency)
 		{
-			return new Complex(0, 2 * Math.PI * frequence * Value);
+			return new Complex(0, 2 * Math.PI * frequency * Value);
 		}
 
 		#endregion

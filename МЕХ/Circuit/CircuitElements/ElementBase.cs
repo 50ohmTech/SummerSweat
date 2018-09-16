@@ -35,12 +35,13 @@ namespace CircuitElements
 			{
 				if (string.IsNullOrWhiteSpace(value))
 				{
-					throw new NullReferenceException("Имя не может быть null или Empty.");
+					throw new NullReferenceException(
+						nameof(Name) + " не может быть null или Empty.");
 				}
 
 				if (value.Contains(' '))
 				{
-					throw new ArgumentException("Имя не должно содержать пробелы.");
+					throw new ArgumentException(nameof(Name) + " не должно содержать пробелы.");
 				}
 
 				_name = value;
@@ -59,14 +60,14 @@ namespace CircuitElements
 			{
 				if (double.IsNaN(value) || double.IsInfinity(value))
 				{
-					throw new ArgumentException("Значение" + value +
-					                            " не является вещесвенным числом.");
+					throw new ArgumentException(
+						value + " не является вещесвенным числом.");
 				}
 
 				if (value <= 0)
 				{
 					throw new ArgumentException(
-						"Значение" + value + " не может быть меньше или равно 0.");
+						"Значение " + nameof(Value) + " не может быть меньше или равно 0.");
 				}
 
 				_value = value;

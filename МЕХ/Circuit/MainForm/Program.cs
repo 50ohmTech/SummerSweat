@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace MainForm
 {
+	/// <summary>
+	/// Расчет импедансов электрических цепей
+	/// </summary>
     static class Program
     {
         /// <summary>

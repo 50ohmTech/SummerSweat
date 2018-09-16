@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
-using CircuitElements.ParentClasses;
 
-namespace CircuitElements.Elements
+namespace CircuitElements.Circuits
 {
 	/// <summary>
-	///     Электрическая цепь
+	/// Последовательное электрическое соединение
 	/// </summary>
 	public class SerialCircuit : CircuitBase
 	{
