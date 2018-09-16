@@ -28,8 +28,7 @@ namespace Model
         {
             if (frequency <= 0)
             {
-                throw new ArgumentOutOfRangeException(
-                    "Частота не может быть меньше нуля");
+                throw new ArgumentOutOfRangeException("Частота должна быть больше нуля");
             }
 
             return new Complex(Value, 0);

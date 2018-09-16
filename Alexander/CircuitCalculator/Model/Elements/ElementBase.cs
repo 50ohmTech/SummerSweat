@@ -5,26 +5,10 @@ using System.Numerics;
 namespace Model
 {
     /// <summary>
-    ///     Делегат хранящий подписчиков события ValueChanged
-    /// </summary>
-    /// <param name="value">Изменившееся значение</param>
-    /// <param name="сhangedElement">Изменившийся элемент</param>
-    public delegate void ValueEventHandler(object value, object сhangedElement);
-
-    /// <summary>
     ///     Элемент цепи
     /// </summary>
-    public abstract class ElementBase
+    public abstract class ElementBase:INode
     {
-        #region Events
-        
-        /// <summary>
-        ///     Событие, возникающее при изменении номинала элемента.
-        /// </summary>
-        public event ValueEventHandler ValueChanged;
-
-        #endregion
-
         #region Private fields
 
         /// <summary>
@@ -68,7 +52,7 @@ namespace Model
             get => _value;
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException("Значение должно быть больше нуля");
                 }
@@ -96,7 +80,7 @@ namespace Model
         /// </summary>
         /// <param name="name"> Имя элемента. </param>
         /// <param name="value"> Номинал элемента. </param>
-        public ElementBase(string name, double value)
+        protected ElementBase(string name, double value)
         {
             Name = name;
             Value = value;
