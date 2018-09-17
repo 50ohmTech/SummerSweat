@@ -26,26 +26,8 @@ namespace ModelTests
         [Test(Description = "Тест имени у базового элемента")]
         public void BaseElementNameTest()
         {
-            string name = Guid.NewGuid().ToString();
+            string name = Guid.NewGuid().ToString().Substring(0, 5);
             ElementBase elementBase = new Resistor(name, 40);
-        }
-
-        [Test(Description = "Тест детей INode на not null")]
-        public void NodeChildrenNotNullTest()
-        {
-            void ChildrenNotNullTest(INode node)
-            {
-                if (node.Nodes == null)
-                {
-                    throw new Exception("Nodes был null");
-                }
-            }
-
-            ChildrenNotNullTest(new SeriesSubcircuit());
-            ChildrenNotNullTest(new ParallelSubcircuit());
-            ChildrenNotNullTest(new Resistor("Message", 1));
-            ChildrenNotNullTest(new Capacitor("Message", 1));
-            ChildrenNotNullTest(new Inductor("Message", 1));
         }
 
         [TestCase(20)]
@@ -54,7 +36,7 @@ namespace ModelTests
         [Description("Тест номинала на разные частоты")]
         public void ResistorTest(double frequency)
         {
-            Resistor resistor = new Resistor("Message", 20);
+            Resistor resistor = new Resistor("R", 20);
 
             Complex expected = new Complex(20, 0);
 
@@ -79,7 +61,7 @@ namespace ModelTests
         [Description("Негативный тест на отрицательную частоту")]
         public void NegativeFrequencyTest(double frequency)
         {
-            ElementBase elementBase = new Capacitor("Message", 20);
+            ElementBase elementBase = new Capacitor("C", 20);
             Assert.Throws<ArgumentException>(() => { elementBase.CalculateZ(frequency); });
         }
 
@@ -89,7 +71,7 @@ namespace ModelTests
         [Description("Тест номинала на разные частоты")]
         public void CapacitorTest(double frequency)
         {
-            Capacitor capacitor = new Capacitor("Message", 50);
+            Capacitor capacitor = new Capacitor("C", 50);
             double expected = 1 / (2 * Math.PI * frequency * 50);
 
 
@@ -102,7 +84,7 @@ namespace ModelTests
         [Description("Тест номинала на разные частоты")]
         public void InductorTest(double frequency)
         {
-            Inductor inductor = new Inductor("Message", 50);
+            Inductor inductor = new Inductor("I", 50);
             double expected = 2 * Math.PI * frequency * 50;
 
             Assert.AreEqual(expected, inductor.CalculateZ(frequency).Imaginary, 0.001);
@@ -111,7 +93,7 @@ namespace ModelTests
         [Test(Description = "Тест на вызов события")]
         public void EventHandlerTest()
         {
-            Inductor inductor = new Inductor("Message", 40);
+            Inductor inductor = new Inductor("I", 40);
             bool test = false;
 
             inductor.ValueChanged += (sender, argument) => { test = true; };
@@ -168,7 +150,7 @@ namespace ModelTests
         public void NegativeParallelSubcircuitCalculateTest()
         {
             ParallelSubcircuit parallel = new ParallelSubcircuit();
-            parallel.Nodes.Add(new Resistor("Message", 20));
+            parallel.Nodes.Add(new Resistor("R", 20));
             Assert.Throws<InvalidOperationException>(() => { parallel.CalculateZ(20); });
         }
 

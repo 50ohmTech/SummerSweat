@@ -98,6 +98,11 @@ namespace Model
                 throw new ArgumentNullException(nameof(newNode), "Новый узел не может быть не определен.");
             }
 
+            if (node == newNode)
+            {
+                throw new ArgumentOutOfRangeException("Узел был равен новому узлу");
+            }
+
             if (IsEmpty())
             {
                 Root = newNode;
