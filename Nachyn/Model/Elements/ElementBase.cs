@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Model.Elements.Checks;
 using Model.Elements.Enums;
 using Model.Elements.Events;
 
@@ -41,9 +42,19 @@ namespace Model.Elements
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(Name));
+                    throw new ArgumentOutOfRangeException(nameof(Name),"Имя не может быть пустым.");
                 }
 
+                if (value.Contains(" "))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Name), "Имя не может содержать пробелы.");
+                }
+
+                if (value.Length > 5)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Name), "Имя не может содержать более 5 символов.");
+                }
+               
                 _name = value;
             }
         }
@@ -60,6 +71,7 @@ namespace Model.Elements
                     throw new ArgumentOutOfRangeException(nameof(Value));
                 }
 
+                Calculation.CheckFrequencies(value);
                 _value = value;
                 ValueChanged?.Invoke(this, new ElementValueEventArgs
                     (Name, _value));
@@ -109,21 +121,21 @@ namespace Model.Elements
         }
 
         /// <summary>
-        ///     Возвращает символ элемента
+        ///     Возвращает символ элемента.
         /// </summary>
-        /// <returns>Тип Элемента</returns>
-        public static string GetSymbol(ElementType elementType)
+        /// <returns>Тип узла.</returns>
+        public static string GetSymbol(NodeType nodeType)
         {
-            switch (elementType)
+            switch (nodeType)
             {
-                case ElementType.Resistor:
+                case NodeType.Resistor:
                     return "R";
-                case ElementType.Inductor:
+                case NodeType.Inductor:
                     return "L";
-                case ElementType.Capacitor:
+                case NodeType.Capacitor:
                     return "C";
                 default:
-                    return null;
+                    return "?";
             }
         }
 

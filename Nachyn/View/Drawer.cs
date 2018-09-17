@@ -15,18 +15,26 @@ namespace View
     {
         #region Fields
 
-        #region Private fields
+        #region Readonly fields
 
         /// <summary>
         ///     Цепь.
         /// </summary>
         private readonly Circuit _circuit;
 
+        /// <summary>
+        ///     Картинка
+        /// </summary>
+        private readonly PictureBox _picture;
+
+        #endregion
+
+        #region Private fields
 
         /// <summary>
         ///     Формат текста.
         /// </summary>
-        private Font _font = new Font(new FontFamily("Calibri"), 12, FontStyle.Regular);
+        private Font _font = new Font(new FontFamily("Calibri"), 10, FontStyle.Regular);
 
         /// <summary>
         ///     Поверхность рисования.
@@ -37,11 +45,6 @@ namespace View
         ///     Ручка.
         /// </summary>
         private Pen _pen = new Pen(Color.Black);
-
-        /// <summary>
-        ///     Картинка
-        /// </summary>
-        private readonly PictureBox _picture;
 
         #endregion
 
@@ -85,9 +88,9 @@ namespace View
         /// <returns>Размер поддерева.</returns>
         private Point DrawCircuit(INode root, Point displacement)
         {
-            if (root.Nodes.Count == 0)
+            if (root is ElementBase element)
             {
-                DrawElement(_graphics, Pen, (ElementBase) root, displacement);
+                DrawElement(_graphics, Pen, element, displacement);
                 return new Point(1, 1);
             }
 

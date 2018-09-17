@@ -21,8 +21,7 @@ namespace Model.Elements
             Calculation.CheckFrequencies(frequency);
             if (Nodes.Count <= 1)
             {
-                throw new InvalidOperationException(
-                    "Для расчета параллельного соединения необходимо минимум 2 ноды");
+                throw new InvalidOperationException($"В параллельном соединении (Id: {Id}) необходимо минимум 2 узла.");
             }
 
             Complex resistance = Complex.Zero;

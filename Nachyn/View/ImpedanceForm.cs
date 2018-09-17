@@ -52,10 +52,30 @@ namespace View
         /// <returns></returns>
         private List<double> ParseFrequencies()
         {
+            _errorProvider.Clear();
             _labelCount.Text = $"Количество расчетов: {_trackBarCount.Value.ToString()}";
             _calculationBindingSource.Clear();
-            if (!double.TryParse(_textBoxStart.Text, out _start) || !double.TryParse(_textBoxStep.Text, out _step))
+            if (!double.TryParse(_textBoxStart.Text, out _start))
             {
+                _errorProvider.SetError(_textBoxStart, "Поле не является числом.");
+                return null;
+            }
+
+            if (!double.TryParse(_textBoxStep.Text, out _step))
+            {
+                _errorProvider.SetError(_textBoxStep, "Поле не является числом.");
+                return null;
+            }
+
+            if (_textBoxStart.Text.Contains(" "))
+            {
+                _errorProvider.SetError(_textBoxStart, "Поле не должно содержать пробелы.");
+                return null;
+            }
+
+            if (_textBoxStep.Text.Contains(" "))
+            {
+                _errorProvider.SetError(_textBoxStep, "Поле не должно содержать пробелы.");
                 return null;
             }
 
