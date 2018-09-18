@@ -12,6 +12,11 @@ namespace CircuitElements
 		#region Private fields
 
 		/// <summary>
+		///     Уникальный идентификатор.
+		/// </summary>
+		private static int _elementId;
+
+		/// <summary>
 		///     Имя элемента
 		/// </summary>
 		private string _name;
@@ -20,10 +25,15 @@ namespace CircuitElements
 		///     Значение элемента
 		/// </summary>
 		private double _value;
-
+		
 		#endregion
 
 		#region Properties
+
+		/// <summary>
+		/// ID элемента
+		/// </summary>
+		public int ElementId { get; } = _elementId;
 
 		/// <summary>
 		///     Возвращает и задает имя элемента
@@ -109,6 +119,7 @@ namespace CircuitElements
 
 			Name = name;
 			Value = value;
+			_elementId++;
 		}
 
 		#endregion

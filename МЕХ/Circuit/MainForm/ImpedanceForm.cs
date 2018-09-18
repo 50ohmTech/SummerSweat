@@ -16,5 +16,11 @@ namespace MainForm
         {
             InitializeComponent();
         }
-    }
+
+		private void ImpedanceForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			Visible = false;
+			e.Cancel = true;
+		}
+	}
 }

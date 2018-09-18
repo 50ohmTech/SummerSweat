@@ -13,9 +13,19 @@ namespace CircuitElements
 		/// </summary>
 		private List<ICircuitElement> _elements;
 
+		/// <summary>
+		///     Уникальный идентификатор.
+		/// </summary>
+		private static int _circuitId;
+
 		#endregion
 
 		#region Properties
+
+		/// <summary>
+		/// ID элемента
+		/// </summary>
+		public int ElementId { get; } = _circuitId;
 
 		/// <summary>
 		///     Список элементов электрической цепи
@@ -25,19 +35,8 @@ namespace CircuitElements
 			get => new List<ICircuitElement>(_elements);
 			set
 			{
-				if (value == null)
-				{
-					throw new NullReferenceException(
-						"An attempt to assign a null value to the " + nameof(Elements));
-				}
-
-				if (value.Count == 0)
-				{
-					throw new ArgumentException(
-						"An attempt to assign an empty List to the " + nameof(Elements));
-				}
-
-				_elements = value;
+				_elements = value ?? throw new NullReferenceException(
+					            "An attempt to assign a null value to the " + nameof(Elements));
 
 				foreach (var element in _elements)
 				{
@@ -66,6 +65,7 @@ namespace CircuitElements
 		public CircuitBase(List<ICircuitElement> elements)
 		{
 			Elements = elements;
+			_circuitId++;
 		}
 
 		#endregion
