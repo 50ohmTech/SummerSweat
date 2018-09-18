@@ -13,6 +13,8 @@ namespace MainForm
 	/// </summary>
 	public static class Drawer
 	{
+		#region Constants
+
 		/// <summary>
 		///     Высота нижней части конденсатора.
 		/// </summary>
@@ -32,7 +34,7 @@ namespace MainForm
 		///     Сжатие элементов по Y.
 		/// </summary>
 		private const int _compressionElementY = 20;
-		
+
 		/// <summary>
 		///     Позиция элемента по Y от линии.
 		/// </summary>
@@ -57,11 +59,16 @@ namespace MainForm
 		///     Радиус катушки.
 		/// </summary>
 		private const int _radiusInductor = 10;
-		
+
+		#endregion
+
+		#region Static fields
+
 		/// <summary>
 		///     Формат текста.
 		/// </summary>
-		private static Font _font = new Font(new FontFamily("Calibri"), 10, FontStyle.Regular);
+		private static Font _font =
+			new Font(new FontFamily("Calibri"), 10, FontStyle.Regular);
 
 		/// <summary>
 		///     Поверхность рисования.
@@ -72,7 +79,11 @@ namespace MainForm
 		///     Ручка.
 		/// </summary>
 		private static Pen _pen = new Pen(Color.Black);
-		
+
+		#endregion
+
+		#region Properties
+
 		/// <summary>
 		///     Отступ.
 		/// </summary>
@@ -97,7 +108,10 @@ namespace MainForm
 			set => _pen = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
-		
+		#endregion
+
+		#region Private methods
+
 		/// <summary>
 		///     Рисовать схему электрической цепи.
 		/// </summary>
@@ -112,17 +126,19 @@ namespace MainForm
 				return new Point(1, 1);
 			}
 
-			int maxCount = 0;
-			List<int> steps = new List<int>();
+			var maxCount = 0;
+			var steps = new List<int>();
 
 			if (root is ParallelCircuit parallelCircuit)
 			{
-				_graphics.DrawLine(Pen, new Point(displacement.X, _elementPositionY + displacement.Y),
-					new Point(_elementPositionY + displacement.X, _elementPositionY + displacement.Y));
+				_graphics.DrawLine(Pen,
+					new Point(displacement.X, _elementPositionY + displacement.Y),
+					new Point(_elementPositionY + displacement.X,
+						_elementPositionY + displacement.Y));
 
-				for (int i = 0; i < parallelCircuit.Elements.Count; i++)
+				for (var i = 0; i < parallelCircuit.Elements.Count; i++)
 				{
-					Point count = DrawCircuit(parallelCircuit.Elements[i],
+					var count = DrawCircuit(parallelCircuit.Elements[i],
 						new Point(_elementPositionY + displacement.X,
 							steps.Sum() * _lineSpacingElementWidth + displacement.Y));
 
@@ -130,14 +146,20 @@ namespace MainForm
 
 					if (maxCount < count.X)
 					{
-						int step = 0;
-						for (int j = 0; j < i; j++)
+						var step = 0;
+						for (var j = 0; j < i; j++)
 						{
 							_graphics.DrawLine(Pen,
-								new Point(_elementPositionY + maxCount * _lineSpacingAfterElement + displacement.X,
-									_elementPositionY + step * _lineSpacingElementWidth + displacement.Y),
-								new Point(_elementPositionY + count.X * _lineSpacingAfterElement + displacement.X,
-									_elementPositionY + step * _lineSpacingElementWidth + displacement.Y));
+								new Point(
+									_elementPositionY +
+									maxCount * _lineSpacingAfterElement + displacement.X,
+									_elementPositionY + step * _lineSpacingElementWidth +
+									displacement.Y),
+								new Point(
+									_elementPositionY +
+									count.X * _lineSpacingAfterElement + displacement.X,
+									_elementPositionY + step * _lineSpacingElementWidth +
+									displacement.Y));
 
 							step += steps[j];
 						}
@@ -146,35 +168,52 @@ namespace MainForm
 					}
 					else
 					{
-						int step = 0;
-						for (int j = 0; j < i; j++)
+						var step = 0;
+						for (var j = 0; j < i; j++)
 						{
 							step += steps[j];
 						}
 
 						_graphics.DrawLine(Pen,
-							new Point(_elementPositionY + count.X * _lineSpacingAfterElement + displacement.X,
-								_elementPositionY + step * _lineSpacingElementWidth + displacement.Y),
-							new Point(_elementPositionY + maxCount * _lineSpacingAfterElement + displacement.X,
-								_elementPositionY + step * _lineSpacingElementWidth + displacement.Y));
+							new Point(
+								_elementPositionY + count.X * _lineSpacingAfterElement +
+								displacement.X,
+								_elementPositionY + step * _lineSpacingElementWidth +
+								displacement.Y),
+							new Point(
+								_elementPositionY + maxCount * _lineSpacingAfterElement +
+								displacement.X,
+								_elementPositionY + step * _lineSpacingElementWidth +
+								displacement.Y));
 					}
 				}
 
 				_graphics.DrawLine(Pen,
-					new Point(_elementPositionY + maxCount * _lineSpacingAfterElement + displacement.X, _elementPositionY + displacement.Y),
-					new Point(_lineSpacingAfterElement + maxCount * _lineSpacingAfterElement + displacement.X, _elementPositionY + displacement.Y));
+					new Point(
+						_elementPositionY + maxCount * _lineSpacingAfterElement +
+						displacement.X, _elementPositionY + displacement.Y),
+					new Point(
+						_lineSpacingAfterElement + maxCount * _lineSpacingAfterElement +
+						displacement.X, _elementPositionY + displacement.Y));
 
 
 				_graphics.DrawLine(Pen,
-					new Point(_elementPositionY + displacement.X, _elementPositionY + displacement.Y),
 					new Point(_elementPositionY + displacement.X,
-						_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) * _lineSpacingElementWidth +
+						_elementPositionY + displacement.Y),
+					new Point(_elementPositionY + displacement.X,
+						_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) *
+						_lineSpacingElementWidth +
 						displacement.Y));
 
 				_graphics.DrawLine(Pen,
-					new Point(_elementPositionY + maxCount * _lineSpacingAfterElement + displacement.X, _elementPositionY + displacement.Y),
-					new Point(_elementPositionY + maxCount * _lineSpacingAfterElement + displacement.X,
-						_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) * _lineSpacingElementWidth +
+					new Point(
+						_elementPositionY + maxCount * _lineSpacingAfterElement +
+						displacement.X, _elementPositionY + displacement.Y),
+					new Point(
+						_elementPositionY + maxCount * _lineSpacingAfterElement +
+						displacement.X,
+						_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) *
+						_lineSpacingElementWidth +
 						displacement.Y));
 
 				return new Point(maxCount + 1, steps.Sum());
@@ -182,10 +221,11 @@ namespace MainForm
 
 			if (root is SerialCircuit serialCircuit)
 			{
-				foreach (ICircuitElement child in serialCircuit.Elements)
+				foreach (var child in serialCircuit.Elements)
 				{
-					Point count = DrawCircuit(child,
-						new Point(steps.Sum() * _lineSpacingAfterElement + displacement.X, displacement.Y));
+					var count = DrawCircuit(child,
+						new Point(steps.Sum() * _lineSpacingAfterElement + displacement.X,
+							displacement.Y));
 
 					steps.Add(count.X);
 
@@ -210,92 +250,129 @@ namespace MainForm
 		private static void DrawElement(Graphics graphics, Pen pen, ElementBase element,
 			Point displacement)
 		{
-			SolidBrush brush = new SolidBrush(Color.Black);
+			var brush = new SolidBrush(Color.Black);
 			switch (element)
-			{case Resistor _:
+			{
+				case Resistor _:
 					graphics.DrawLine(pen,
-						new Point(_radiusInductor + displacement.X, _compressionElementY + displacement.Y),
-						new Point(_radiusInductor + displacement.X, _compressionElementX + displacement.Y));
+						new Point(_radiusInductor + displacement.X,
+							_compressionElementY + displacement.Y),
+						new Point(_radiusInductor + displacement.X,
+							_compressionElementX + displacement.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_radiusInductor + displacement.X, _compressionElementX + displacement.Y),
-						new Point(_lineSpacingElementWidth + displacement.X, _compressionElementX + displacement.Y));
+						new Point(_radiusInductor + displacement.X,
+							_compressionElementX + displacement.Y),
+						new Point(_lineSpacingElementWidth + displacement.X,
+							_compressionElementX + displacement.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X, _compressionElementY + displacement.Y),
-						new Point(_lineSpacingElementWidth + displacement.X, _compressionElementX + displacement.Y));
+						new Point(_lineSpacingElementWidth + displacement.X,
+							_compressionElementY + displacement.Y),
+						new Point(_lineSpacingElementWidth + displacement.X,
+							_compressionElementX + displacement.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X, _compressionElementY + displacement.Y),
-						new Point(_radiusInductor + displacement.X, _compressionElementY + displacement.Y));
+						new Point(_lineSpacingElementWidth + displacement.X,
+							_compressionElementY + displacement.Y),
+						new Point(_radiusInductor + displacement.X,
+							_compressionElementY + displacement.Y));
 
 					graphics.DrawLine(pen,
 						new Point(0 + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_radiusInductor + displacement.X, _elementPositionY + displacement.Y));
+						new Point(_radiusInductor + displacement.X,
+							_elementPositionY + displacement.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_lineSpacingAfterElement + displacement.X, _elementPositionY + displacement.Y));
-					graphics.DrawString(element.Name, Font, brush, _capacitorPositionY + displacement.X,
+						new Point(_lineSpacingElementWidth + displacement.X,
+							_elementPositionY + displacement.Y),
+						new Point(_lineSpacingAfterElement + displacement.X,
+							_elementPositionY + displacement.Y));
+
+					graphics.DrawString(element.Name, Font, brush,
+						_capacitorPositionY + displacement.X,
 						_lineSpacingElementWidth + displacement.Y);
 
 					break;
 				case Capacitor _:
 					graphics.DrawLine(pen,
-						new Point(_compressionElementY + displacement.X, _capacitorPositionY + displacement.Y),
-						new Point(_compressionElementY + displacement.X, _bottomHeightCapacitor + displacement.Y));
+						new Point(_compressionElementY + displacement.X,
+							_capacitorPositionY + displacement.Y),
+						new Point(_compressionElementY + displacement.X,
+							_bottomHeightCapacitor + displacement.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_compressionElementX + displacement.X, _capacitorPositionY + displacement.Y),
-						new Point(_compressionElementX + displacement.X, _bottomHeightCapacitor + displacement.Y));
+						new Point(_compressionElementX + displacement.X,
+							_capacitorPositionY + displacement.Y),
+						new Point(_compressionElementX + displacement.X,
+							_bottomHeightCapacitor + displacement.Y));
 
 					graphics.DrawLine(pen,
 						new Point(0 + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_compressionElementY + displacement.X, _elementPositionY + displacement.Y));
+						new Point(_compressionElementY + displacement.X,
+							_elementPositionY + displacement.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_compressionElementX + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_lineSpacingAfterElement + displacement.X, _elementPositionY + displacement.Y));
+						new Point(_compressionElementX + displacement.X,
+							_elementPositionY + displacement.Y),
+						new Point(_lineSpacingAfterElement + displacement.X,
+							_elementPositionY + displacement.Y));
 
-					graphics.DrawString(element.Name, Font, brush, _capacitorPositionY + displacement.X,
+					graphics.DrawString(element.Name, Font, brush,
+						_capacitorPositionY + displacement.X,
 						_lineSpacingElementWidth + displacement.Y);
 
 					break;
 				case Inductor _:
-					graphics.DrawArc(pen, _radiusInductor + displacement.X, _compressionElementY + displacement.Y,
-						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees, _inductorPartСircleDegrees);
+					graphics.DrawArc(pen, _radiusInductor + displacement.X,
+						_compressionElementY + displacement.Y,
+						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees,
+						_inductorPartСircleDegrees);
 
-					graphics.DrawArc(pen, _compressionElementY + displacement.X, _compressionElementY + displacement.Y,
-						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees, _inductorPartСircleDegrees);
+					graphics.DrawArc(pen, _compressionElementY + displacement.X,
+						_compressionElementY + displacement.Y,
+						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees,
+						_inductorPartСircleDegrees);
 
-					graphics.DrawArc(pen, _compressionElementX + displacement.X, _compressionElementY + displacement.Y,
-						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees, _inductorPartСircleDegrees);
+					graphics.DrawArc(pen, _compressionElementX + displacement.X,
+						_compressionElementY + displacement.Y,
+						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees,
+						_inductorPartСircleDegrees);
 
 					graphics.DrawLine(pen,
 						new Point(0 + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_radiusInductor + displacement.X, _elementPositionY + displacement.Y));
+						new Point(_radiusInductor + displacement.X,
+							_elementPositionY + displacement.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_lineSpacingAfterElement + displacement.X, _elementPositionY + displacement.Y));
+						new Point(_lineSpacingElementWidth + displacement.X,
+							_elementPositionY + displacement.Y),
+						new Point(_lineSpacingAfterElement + displacement.X,
+							_elementPositionY + displacement.Y));
 
-					graphics.DrawString(element.Name, Font, brush, _capacitorPositionY + displacement.X,
+					graphics.DrawString(element.Name, Font, brush,
+						_capacitorPositionY + displacement.X,
 						_lineSpacingElementWidth + displacement.Y);
 
 					break;
 			}
 		}
 
-		
-			/// <summary>
+		#endregion
+
+		#region Public methods
+
+		/// <summary>
 		///     Нарисовать цепь.
 		/// </summary>
 		public static Bitmap DrawCircuit(CircuitBase circuit)
 		{
-			Bitmap bitmap = new Bitmap(1000, 1000);
+			var bitmap = new Bitmap(1000, 1000);
 			_graphics = Graphics.FromImage(bitmap);
 			DrawCircuit(circuit, Margin);
 			return bitmap;
 		}
+
+		#endregion
 	}
 }

@@ -4,7 +4,7 @@ using System.Numerics;
 namespace CircuitElements.Circuits
 {
 	/// <summary>
-	/// Последовательное электрическое соединение
+	///     Последовательное электрическое соединение
 	/// </summary>
 	public class SerialCircuit : CircuitBase
 	{

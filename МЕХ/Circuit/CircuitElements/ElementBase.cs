@@ -9,12 +9,16 @@ namespace CircuitElements
 	/// </summary>
 	public abstract class ElementBase : ICircuitElement
 	{
-		#region Private fields
+		#region Static fields
 
 		/// <summary>
 		///     Уникальный идентификатор.
 		/// </summary>
 		private static int _elementId;
+
+		#endregion
+
+		#region Private fields
 
 		/// <summary>
 		///     Имя элемента
@@ -25,15 +29,10 @@ namespace CircuitElements
 		///     Значение элемента
 		/// </summary>
 		private double _value;
-		
+
 		#endregion
 
 		#region Properties
-
-		/// <summary>
-		/// ID элемента
-		/// </summary>
-		public int ElementId { get; } = _elementId;
 
 		/// <summary>
 		///     Возвращает и задает имя элемента
@@ -51,7 +50,8 @@ namespace CircuitElements
 
 				if (value.Contains(' '))
 				{
-					throw new ArgumentException(nameof(Name) + " не должно содержать пробелы.");
+					throw new ArgumentException(
+						nameof(Name) + " не должно содержать пробелы.");
 				}
 
 				_name = value;
@@ -77,13 +77,19 @@ namespace CircuitElements
 				if (value <= 0)
 				{
 					throw new ArgumentException(
-						"Значение " + nameof(Value) + " не может быть меньше или равно 0.");
+						"Значение " + nameof(Value) +
+						" не может быть меньше или равно 0.");
 				}
 
 				_value = value;
 				ElementChanged?.Invoke(_value, this);
 			}
 		}
+
+		/// <summary>
+		///     ID элемента
+		/// </summary>
+		public int ElementId { get; } = _elementId;
 
 		#endregion
 

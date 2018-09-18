@@ -6,12 +6,7 @@ namespace CircuitElements
 {
 	public abstract class CircuitBase : ICircuitElement
 	{
-		#region Private fields
-
-		/// <summary>
-		///     Список элементов цепи
-		/// </summary>
-		private List<ICircuitElement> _elements;
+		#region Static fields
 
 		/// <summary>
 		///     Уникальный идентификатор.
@@ -20,12 +15,16 @@ namespace CircuitElements
 
 		#endregion
 
-		#region Properties
+		#region Private fields
 
 		/// <summary>
-		/// ID элемента
+		///     Список элементов цепи
 		/// </summary>
-		public int ElementId { get; } = _circuitId;
+		private List<ICircuitElement> _elements;
+
+		#endregion
+
+		#region Properties
 
 		/// <summary>
 		///     Список элементов электрической цепи
@@ -36,7 +35,8 @@ namespace CircuitElements
 			set
 			{
 				_elements = value ?? throw new NullReferenceException(
-					            "An attempt to assign a null value to the " + nameof(Elements));
+					            "An attempt to assign a null value to the " +
+					            nameof(Elements));
 
 				foreach (var element in _elements)
 				{
@@ -44,6 +44,11 @@ namespace CircuitElements
 				}
 			}
 		}
+
+		/// <summary>
+		///     ID элемента
+		/// </summary>
+		public int ElementId { get; } = _circuitId;
 
 		#endregion
 

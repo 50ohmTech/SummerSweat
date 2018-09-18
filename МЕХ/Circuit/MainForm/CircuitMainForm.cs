@@ -1,12 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CircuitElements;
 using CircuitElements.Circuits;
@@ -15,29 +8,53 @@ using CircuitElements.Elements;
 namespace MainForm
 {
 	/// <summary>
-	/// Главная форма программы на которой происходит редактирование цепи
+	///     Главная форма программы на которой происходит редактирование цепи
 	/// </summary>
-    public partial class MainForm : Form
+	public partial class MainForm : Form
 	{
-		private List<CircuitBase> _circuits;
+		#region Readonly fields
 
-		private CircuitBase _currentCircuit;
-
+		/// <summary>
+		///     Форма расчета импедансов
+		/// </summary>
 		private readonly ImpedanceForm _impedanceForm;
 
-		private void InitializeTreeView()
+		#endregion
+
+		#region Private fields
+
+		/// <summary>
+		///     Список начальных цепей
+		/// </summary>
+		private List<CircuitBase> _circuits;
+
+		/// <summary>
+		///     Выбранная цепь
+		/// </summary>
+		private CircuitBase _currentCircuit;
+
+		#endregion
+
+		#region Constructor
+
+		public MainForm()
 		{
-			//treeView.BeginUpdate();
-			//treeView.Nodes.Add("Parent");
-			//treeView.Nodes[0].Nodes.Add("Child 1");
-			//treeView.Nodes[0].Nodes.Add("Child 2");
-			//treeView.Nodes[0].Nodes[0].Nodes.Add("Grandchild");
-			//treeView.Nodes[0].Nodes[0].Nodes.Add("Grandchild");
-			//treeView.Nodes[0].Nodes[0].Nodes.Add("Grandchild");
-			//treeView.Nodes[0].Nodes[0].Nodes[2].Nodes.Add("Great Grandchild");
-			//treeView.EndUpdate();
+			InitializeComponent();
+
+			_impedanceForm = new ImpedanceForm();
+			_impedanceForm.Show();
+			_impedanceForm.Visible = false;
+
+			InitializeCircuits();
 		}
 
+		#endregion
+
+		#region Private methods
+
+		/// <summary>
+		///     Заполнить дерево текущей цепью
+		/// </summary>
 		private void FillTreeView()
 		{
 			treeView.Nodes.Clear();
@@ -52,10 +69,14 @@ namespace MainForm
 					switch (circuit)
 					{
 						case ParallelCircuit subcircuit:
-							treeView.Nodes[treeView.Nodes.Count-1].Nodes.Add("[Паралл] (id " + subcircuit.ElementId + ')');
+							treeView.Nodes[treeView.Nodes.Count - 1].Nodes
+								.Add("[Паралл] (id " + subcircuit.ElementId + ')');
+
 							break;
 						case SerialCircuit subcircuit:
-							treeView.Nodes[treeView.Nodes.Count - 1].Nodes.Add("[Послед] (id " + subcircuit.ElementId + ')');
+							treeView.Nodes[treeView.Nodes.Count - 1].Nodes
+								.Add("[Послед] (id " + subcircuit.ElementId + ')');
+
 							break;
 					}
 
@@ -66,34 +87,40 @@ namespace MainForm
 					switch (circuitElement)
 					{
 						case Resistor element:
-							treeView.Nodes[treeView.Nodes.Count - 1].Nodes.Add("[R] [" + element.Value + "] (" + element.Name + ')');
+							treeView.Nodes[treeView.Nodes.Count - 1].Nodes
+								.Add("[R] [" + element.Value + "] (" + element.Name +
+								     ')');
+
 							break;
 
 						case Inductor element:
-							treeView.Nodes[treeView.Nodes.Count - 1].Nodes.Add("[I] [" + element.Value + "] (" + element.Name + ')');
+							treeView.Nodes[treeView.Nodes.Count - 1].Nodes
+								.Add("[I] [" + element.Value + "] (" + element.Name +
+								     ')');
+
 							break;
 
 						case Capacitor element:
-							treeView.Nodes[treeView.Nodes.Count - 1].Nodes.Add("[C] [" + element.Value + "] (" + element.Name + ')');
+							treeView.Nodes[treeView.Nodes.Count - 1].Nodes
+								.Add("[C] [" + element.Value + "] (" + element.Name +
+								     ')');
+
 							break;
 					}
 				}
-
 			}
 
 			treeView.EndUpdate();
 			treeView.ExpandAll();
 		}
-		//treeView.BeginUpdate();
-		//treeView.Nodes.Add("Parent");
-		//treeView.Nodes[0].Nodes.Add("Child 1");
-		//treeView.Nodes[0].Nodes.Add("Child 2");
-		//treeView.Nodes[0].Nodes[0].Nodes.Add("Grandchild");
-		//treeView.Nodes[0].Nodes[0].Nodes.Add("Grandchild");
-		//treeView.Nodes[0].Nodes[0].Nodes.Add("Grandchild");
-		//treeView.Nodes[0].Nodes[0].Nodes[2].Nodes.Add("Great Grandchild");
-		//treeView.EndUpdate();
-		private void FillSubcircuitInTreeView(TreeNodeCollection newLevel, CircuitBase subcircuit)
+
+		/// <summary>
+		///     Функция для обхода и добавления в TreeView подцепей
+		/// </summary>
+		/// <param name="newLevel">уровень добавляемой подцепи</param>
+		/// <param name="subcircuit">подцепь</param>
+		private void FillSubcircuitInTreeView(TreeNodeCollection newLevel,
+			CircuitBase subcircuit)
 		{
 			foreach (var circuitElement in subcircuit.Elements)
 			{
@@ -105,11 +132,13 @@ namespace MainForm
 							newLevel[newLevel.Count - 1].Nodes
 								.Add("[Паралл] (id " +
 								     paralelCircuit.ElementId + ')');
+
 							break;
 						case SerialCircuit serialCircuit:
 							newLevel[newLevel.Count - 1].Nodes
 								.Add("[Послед] (id " +
 								     serialCircuit.ElementId + ')');
+
 							break;
 					}
 
@@ -117,66 +146,51 @@ namespace MainForm
 				}
 				else
 				{
-					try
+					switch (circuitElement)
 					{
-						switch (circuitElement)
-						{
-							case Resistor element:
-								newLevel[newLevel.Count - 1].Nodes
-									.Add("[R] [" + element.Value + "] (" + element.Name +
-									     ')');
-								break;
+						case Resistor element:
+							newLevel[newLevel.Count - 1].Nodes
+								.Add("[R] [" + element.Value + "] (" + element.Name +
+								     ')');
 
-							case Inductor element:
-								newLevel[newLevel.Count - 1].Nodes
-									.Add("[I] [" + element.Value + "] (" + element.Name +
-									     ')');
-								break;
+							break;
 
-							case Capacitor element:
-								newLevel[newLevel.Count - 1].Nodes
-									.Add("[C] [" + element.Value + "] (" + element.Name +
-									     ')');
-								break;
-						}
-					}
-					catch (Exception e)
-					{
-						MessageBox.Show("error: " + e.Message);
+						case Inductor element:
+							newLevel[newLevel.Count - 1].Nodes
+								.Add("[I] [" + element.Value + "] (" + element.Name +
+								     ')');
+
+							break;
+
+						case Capacitor element:
+							newLevel[newLevel.Count - 1].Nodes
+								.Add("[C] [" + element.Value + "] (" + element.Name +
+								     ')');
+
+							break;
 					}
 				}
-
 			}
 		}
 
-		public MainForm()
-        {
-            InitializeComponent();
-	        _impedanceForm = new ImpedanceForm();
-			_impedanceForm.Show();
-	        _impedanceForm.Visible = false;
+		/// <summary>
+		///     Инициализация цепей
+		/// </summary>
+		private void InitializeCircuits()
+		{
+			_circuits = new List<CircuitBase>();
 
-	        InitializeTreeView();
-
-			InitializeCircuits();
-	        CircuitDraw.VerticalScroll.Enabled = true;
-	        CircuitDraw.HorizontalScroll.Enabled = true;
-		}
-
-	    private void InitializeCircuits()
-	    {
-		    _circuits = new List<CircuitBase>();
-			
-			List<ICircuitElement> circuitElements1 = new List<ICircuitElement>
-		    {
-			    new Capacitor("C1", 10),
-			    new Inductor("L1", 5),
-			    new Resistor("R1", 20)
+			var circuitElements1 = new List<ICircuitElement>
+			{
+				new Capacitor("C1", 10),
+				new Inductor("L1", 5),
+				new Resistor("R1", 20)
 			};
+
 			_circuits.Add(new SerialCircuit(circuitElements1));
 
-		    List<ICircuitElement> circuitElements2 = new List<ICircuitElement>
-		    {
+			var circuitElements2 = new List<ICircuitElement>
+			{
 				new ParallelCircuit(new List<ICircuitElement>
 				{
 					new Capacitor("C1", 10),
@@ -184,28 +198,30 @@ namespace MainForm
 					new Resistor("R1", 20)
 				})
 			};
+
 			_circuits.Add(new ParallelCircuit(circuitElements2));
 
-		    List<ICircuitElement> circuitElements3 = new List<ICircuitElement>
-		    {
-			    new Capacitor("C4", 10),
+			var circuitElements3 = new List<ICircuitElement>
+			{
+				new Capacitor("C4", 10),
 				new ParallelCircuit(new List<ICircuitElement>
-			    {
+				{
 					new ParallelCircuit(new List<ICircuitElement>
-				    {
-					    new Capacitor("C2", 10),
-						new Inductor("L3", 5),
-				    }),
-				    new Capacitor("C1", 10),
+					{
+						new Capacitor("C2", 10),
+						new Inductor("L3", 5)
+					}),
+					new Capacitor("C1", 10),
 					new Resistor("R1", 20)
-			    }),
-			    new Inductor("L4", 5),
-			    new Resistor("R2", 20)
+				}),
+				new Inductor("L4", 5),
+				new Resistor("R2", 20)
 			};
+
 			_circuits.Add(new SerialCircuit(circuitElements3));
 
-		    List<ICircuitElement> circuitElements4 = new List<ICircuitElement>
-		    {
+			var circuitElements4 = new List<ICircuitElement>
+			{
 				new Capacitor("C2", 10),
 				new Inductor("L2", 5),
 				new ParallelCircuit(new List<ICircuitElement>
@@ -215,50 +231,55 @@ namespace MainForm
 				}),
 				new Resistor("R2", 20)
 			};
+
 			_circuits.Add(new SerialCircuit(circuitElements4));
 
-		    List<ICircuitElement> circuitElements5 = new List<ICircuitElement>
-		    {
+			var circuitElements5 = new List<ICircuitElement>
+			{
 				new ParallelCircuit(new List<ICircuitElement>
-			    {
-				    new Capacitor("C1", 10),
-				    new Inductor("L1", 5),
-				    new ParallelCircuit(new List<ICircuitElement>
-				    {
-					    new Inductor("L3", 5),
+				{
+					new Capacitor("C1", 10),
+					new Inductor("L1", 5),
+					new ParallelCircuit(new List<ICircuitElement>
+					{
+						new Inductor("L3", 5),
 
 						new SerialCircuit(new List<ICircuitElement>
-					    {
-						    new Capacitor("C2", 10),
-						    new Inductor("L2", 5)
-
-					    })
-				    }),
+						{
+							new Capacitor("C2", 10),
+							new Inductor("L2", 5)
+						})
+					}),
 					new Resistor("R1", 20)
-			    }),
-			    new Capacitor("C4", 10),
-			    new Inductor("L4", 5),
-			    new Resistor("R2", 20)
-		    };
-			_circuits.Add(new SerialCircuit(circuitElements5));
-		    foreach (var circuit in _circuits)
-		    {
-			    SelectingCircuitComboBox.Items.Add("Тестовая цепь №" +
-			                                  (_circuits.IndexOf(circuit) + 1));
-		    }
+				}),
+				new Capacitor("C4", 10),
+				new Inductor("L4", 5),
+				new Resistor("R2", 20)
+			};
 
-		    List<ICircuitElement> emptyCircuitElements = new List<ICircuitElement>();
+			_circuits.Add(new SerialCircuit(circuitElements5));
+			foreach (var circuit in _circuits)
+			{
+				SelectingCircuitComboBox.Items.Add("Тестовая цепь №" +
+				                                   (_circuits.IndexOf(circuit) + 1));
+			}
+
+			var emptyCircuitElements = new List<ICircuitElement>();
 			_circuits.Add(new SerialCircuit(emptyCircuitElements));
 
 			SelectingCircuitComboBox.Items.Add("Пустая цепь");
 		}
 
-		private void SelectingCircuitComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		/// <summary>
+		///     Смена выбранной цепи в комбобоксе
+		/// </summary>
+		private void SelectingCircuitComboBox_SelectedIndexChanged(object sender,
+			EventArgs e)
 		{
-			if(SelectingCircuitComboBox.SelectedIndex!=6)
+			if (SelectingCircuitComboBox.SelectedIndex != 6)
 			{
 				CircuitDraw.BackgroundImage =
-				Drawer.DrawCircuit(_circuits[SelectingCircuitComboBox.SelectedIndex]);
+					Drawer.DrawCircuit(_circuits[SelectingCircuitComboBox.SelectedIndex]);
 
 				_currentCircuit = _circuits[SelectingCircuitComboBox.SelectedIndex];
 				FillTreeView();
@@ -269,10 +290,14 @@ namespace MainForm
 			}
 		}
 
+		/// <summary>
+		///     Нажатие на кнопку расчета импедансов
+		/// </summary>
 		private void CalculateImpedanceButton_Click(object sender, EventArgs e)
 		{
 			_impedanceForm.Visible = !_impedanceForm.Visible;
 		}
 
+		#endregion
 	}
 }
