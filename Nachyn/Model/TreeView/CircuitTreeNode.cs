@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Windows.Forms;
+using Model.Circuits;
 using Model.Elements;
 
 namespace Model.TreeView
 {
-    //TODO: Неудачное название. Лучше тогда CircuitTreeNode
+    //TODO: Неудачное название. Лучше тогда CircuitTreeNode(+)
     /// <summary>
     ///     Узел TreeView содержащий INode.
     /// </summary>
-    public class NodeTreeNode : TreeNode
+    public class CircuitTreeNode : TreeNode
     {
         #region Properties
 
         /// <summary>
         ///     Значение.
         /// </summary>
-        public INode Value { get; }
+        public ICircuitNode Value { get; }
 
         #endregion
 
@@ -25,7 +26,7 @@ namespace Model.TreeView
         ///     Конструктор.
         /// </summary>
         /// <param name="node">Нода.</param>
-        public NodeTreeNode(INode node)
+        public CircuitTreeNode(ICircuitNode node)
         {
             Value = node ?? throw new ArgumentNullException(nameof(node));
 

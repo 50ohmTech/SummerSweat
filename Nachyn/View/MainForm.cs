@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Model;
+using Model.Checks;
+using Model.Circuits;
 using Model.Elements;
-using Model.Elements.Checks;
-using Model.Elements.Enums;
 using Model.Elements.Factories;
+using Model.Enums;
 using Model.TreeView;
-using Model.ViewHelpers;
-using Model.ViewHelpers.Enums;
+using View.Helpers;
+using View.Helpers.Enums;
 
 namespace View
 {
@@ -36,7 +36,7 @@ namespace View
 
         #region Private fields
 
-        private INode _currentNode;
+        private ICircuitNode _currentNode;
 
         /// <summary>
         ///     Номинал нового элемента
@@ -54,14 +54,15 @@ namespace View
         /// </summary>
         private void InitializeComboBoxesType()
         {
-            List<InitialCircuitTypeComboBoxItem> initialCircuitTypes = new List<InitialCircuitTypeComboBoxItem>
-            {
-                new InitialCircuitTypeComboBoxItem(InitialCircuitType.A),
-                new InitialCircuitTypeComboBoxItem(InitialCircuitType.B),
-                new InitialCircuitTypeComboBoxItem(InitialCircuitType.C),
-                new InitialCircuitTypeComboBoxItem(InitialCircuitType.D),
-                new InitialCircuitTypeComboBoxItem(InitialCircuitType.E)
-            };
+            List<InitialTemplateCircuitTypeComboBoxItem> initialCircuitTypes =
+                new List<InitialTemplateCircuitTypeComboBoxItem>
+                {
+                    new InitialTemplateCircuitTypeComboBoxItem(InitialTemplateCircuitType.A),
+                    new InitialTemplateCircuitTypeComboBoxItem(InitialTemplateCircuitType.B),
+                    new InitialTemplateCircuitTypeComboBoxItem(InitialTemplateCircuitType.C),
+                    new InitialTemplateCircuitTypeComboBoxItem(InitialTemplateCircuitType.D),
+                    new InitialTemplateCircuitTypeComboBoxItem(InitialTemplateCircuitType.E)
+                };
 
             _comboBoxSelectCircuit.DataSource = initialCircuitTypes;
             _comboBoxSelectCircuit.ValueMember = "Value";
@@ -139,16 +140,16 @@ namespace View
 
             _treeViewCircuit.BeginUpdate();
 
-            void AddNodeTreeNodes(INode node, TreeNode treeNode)
+            void AddNodeTreeNodes(ICircuitNode node, TreeNode treeNode)
             {
                 if (node is ElementBase)
                 {
                     return;
                 }
 
-                foreach (INode children in node.Nodes)
+                foreach (ICircuitNode children in node.Nodes)
                 {
-                    NodeTreeNode newTreeNode = new NodeTreeNode(children);
+                    CircuitTreeNode newTreeNode = new CircuitTreeNode(children);
                     treeNode.Nodes.Add(newTreeNode);
                     AddNodeTreeNodes(children, newTreeNode);
                 }
@@ -161,7 +162,7 @@ namespace View
 
             _treeViewCircuit.Nodes.Clear();
 
-            NodeTreeNode root = new NodeTreeNode(_circuit.Root);
+            CircuitTreeNode root = new CircuitTreeNode(_circuit.Root);
             _treeViewCircuit.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
 
@@ -178,9 +179,9 @@ namespace View
 
         private void ComboBoxSelectCircuit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_comboBoxSelectCircuit.SelectedItem is InitialCircuitTypeComboBoxItem initialCircuitType)
+            if (_comboBoxSelectCircuit.SelectedItem is InitialTemplateCircuitTypeComboBoxItem initialCircuitType)
             {
-                InitialCircuitInitializer.Initialize(_circuit, initialCircuitType.Value);
+                InitialTemplateCircuitInitializer.Initialize(_circuit, initialCircuitType.Value);
                 UpdateTreeView();
                 DrawCircuit();
                 _buttonDrawCircuit.Visible = false;
@@ -258,7 +259,7 @@ namespace View
                 return;
             }
 
-            if (_value < Calculation.MIN_FREQUENCY || _value > Calculation.MAX_FREQUENCY)
+            if (_value < Check.MIN_FREQUENCY || _value > Check.MAX_FREQUENCY)
             {
                 _buttonAddElement.Enabled = false;
                 _errorProvider.SetError(_textBoxAddElementValue,
@@ -273,7 +274,7 @@ namespace View
 
         private void TreeViewCircuit_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node is NodeTreeNode treeNode)
+            if (e.Node is CircuitTreeNode treeNode)
             {
                 _currentNode = treeNode.Value;
             }
@@ -377,7 +378,7 @@ namespace View
                 return;
             }
 
-            _drawer.DrawCircuit();
+            _pictureBoxCircuit.Image = _drawer.DrawCircuit(_circuit);
         }
 
         private void ButtonDrawCircuit_Click(object sender, EventArgs e)
@@ -444,7 +445,7 @@ namespace View
             InitializeComboBoxesType();
             InitializePlaceholders();
             _circuit = new Circuit();
-            _drawer = new Drawer(_pictureBoxCircuit, _circuit);
+            _drawer = new Drawer();
             _buttonAddElement.Enabled = false;
         }
 

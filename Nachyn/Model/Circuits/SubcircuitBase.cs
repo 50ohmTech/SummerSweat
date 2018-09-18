@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Model.Elements.Events;
+using Model.Elements;
+using Model.Events;
 
-namespace Model.Elements
+namespace Model.Circuits
 {
-    //TODO: цепи - это тоже не элементы. Должны быть в отдельной папке
+    //TODO: цепи - это тоже не элементы. Должны быть в отдельной папке(+)
     /// <summary>
     ///     Подцепь.
     /// </summary>
-    public abstract class SubcircuitBase : INode
+    public abstract class SubcircuitBase : ICircuitNode
     {
         #region Fields
 
@@ -27,7 +28,7 @@ namespace Model.Elements
         /// <summary>
         ///     Родитель
         /// </summary>
-        public INode _parent;
+        public ICircuitNode _parent;
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace Model.Elements
         /// <summary>
         ///     Родитель.
         /// </summary>
-        public INode Parent
+        public ICircuitNode Parent
         {
             get => _parent;
             set
@@ -57,7 +58,7 @@ namespace Model.Elements
         /// <summary>
         ///     Дочерние узлы.
         /// </summary>
-        public List<INode> Nodes { get; } = new List<INode>();
+        public List<ICircuitNode> Nodes { get; } = new List<ICircuitNode>();
 
         #endregion
 

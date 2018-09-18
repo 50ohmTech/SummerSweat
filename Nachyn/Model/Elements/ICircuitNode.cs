@@ -3,23 +3,23 @@ using System.Numerics;
 
 namespace Model.Elements
 {
-    //TODO: INode - слишком общее. Лучше ICircuitNode
+    //TODO: INode - слишком общее. Лучше ICircuitNode(+)
     /// <summary>
     ///     Узел.
     /// </summary>
-    public interface INode
+    public interface ICircuitNode
     {
         #region Properties
 
         /// <summary>
         ///     Дочерние узлы.
         /// </summary>
-        List<INode> Nodes { get; }
+        List<ICircuitNode> Nodes { get; }
 
         /// <summary>
         ///     Родитель.
         /// </summary>
-        INode Parent { get; }
+        ICircuitNode Parent { get; }
 
         #endregion
 

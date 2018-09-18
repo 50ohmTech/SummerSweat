@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Model.Elements.Checks;
-using Model.Elements.Enums;
-using Model.Elements.Events;
+using Model.Checks;
+using Model.Enums;
+using Model.Events;
 
 namespace Model.Elements
 {
     /// <summary>
     ///     Базовый элемент эл. элементов.
     /// </summary>
-    public abstract class ElementBase : INode
+    public abstract class ElementBase : ICircuitNode
     {
         #region Fields
 
@@ -71,7 +71,7 @@ namespace Model.Elements
                     throw new ArgumentOutOfRangeException(nameof(Value));
                 }
 
-                Calculation.CheckFrequencies(value);
+                Checks.Check.CheckFrequencies(value);
                 _value = value;
                 ValueChanged?.Invoke(this, new ElementValueEventArgs
                     (Name, _value));
@@ -82,12 +82,12 @@ namespace Model.Elements
         /// <summary>
         ///     Родитель.
         /// </summary>
-        public INode Parent { get; set; }
+        public ICircuitNode Parent { get; set; }
 
         /// <summary>
         ///     Дочерние узлы.
         /// </summary>
-        public List<INode> Nodes { get; } = new List<INode>();
+        public List<ICircuitNode> Nodes { get; } = new List<ICircuitNode>();
 
         #endregion
 

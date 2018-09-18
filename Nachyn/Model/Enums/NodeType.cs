@@ -1,4 +1,4 @@
-﻿namespace Model.Elements.Enums
+﻿namespace Model.Enums
 {
     /// <summary>
     ///     Тип соединения.

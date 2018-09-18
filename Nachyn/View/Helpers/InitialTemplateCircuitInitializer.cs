@@ -1,12 +1,13 @@
-﻿using Model.Elements;
-using Model.ViewHelpers.Enums;
+﻿using Model.Circuits;
+using Model.Elements;
+using View.Helpers.Enums;
 
-namespace Model.ViewHelpers
+namespace View.Helpers
 {
     /// <summary>
-    ///     Инициализирует цепь изначально заданными элементами.
+    ///     Инициализирует шаблон цепи с изначально заданными элементами.
     /// </summary>
-    public static class InitialCircuitInitializer
+    public static class InitialTemplateCircuitInitializer
     {
         #region Public methods
 
@@ -14,8 +15,8 @@ namespace Model.ViewHelpers
         ///     Инициализировать цепь.
         /// </summary>
         /// <param name="circuit">Цепь.</param>
-        /// <param name="initialCircuitType">Тип изначально заданной цепи.</param>
-        public static void Initialize(Circuit circuit, InitialCircuitType initialCircuitType)
+        /// <param name="initialTemplateCircuitType">Тип шаблона.</param>
+        public static void Initialize(Circuit circuit, InitialTemplateCircuitType initialTemplateCircuitType)
         {
             if (circuit == null)
             {
@@ -24,9 +25,9 @@ namespace Model.ViewHelpers
 
             circuit.Clear();
 
-            switch (initialCircuitType)
+            switch (initialTemplateCircuitType)
             {
-                case InitialCircuitType.A:
+                case InitialTemplateCircuitType.A:
                 {
                     Inductor inductor1 = new Inductor("L1", 20);
                     Resistor resistor2 = new Resistor("R2", 20);
@@ -38,7 +39,6 @@ namespace Model.ViewHelpers
                     inductor1.Parent = seriesSubcircuit1;
                     seriesSubcircuit1.Nodes.Add(resistor2);
                     resistor2.Parent = seriesSubcircuit1;
-
 
                     ParallelSubcircuit parallelSubcircuit1 = new ParallelSubcircuit();
                     seriesSubcircuit1.Nodes.Add(parallelSubcircuit1);
@@ -52,7 +52,7 @@ namespace Model.ViewHelpers
                     break;
                 }
 
-                case InitialCircuitType.B:
+                case InitialTemplateCircuitType.B:
                 {
                     Capacitor capacitor1 = new Capacitor("C1", 20);
                     Inductor inductor2 = new Inductor("L2", 20);
@@ -84,7 +84,7 @@ namespace Model.ViewHelpers
                 }
 
 
-                case InitialCircuitType.C:
+                case InitialTemplateCircuitType.C:
                 {
                     Resistor resistor1 = new Resistor("R1", 20);
                     Inductor inductor2 = new Inductor("L2", 20);
@@ -131,7 +131,7 @@ namespace Model.ViewHelpers
                 }
 
 
-                case InitialCircuitType.D:
+                case InitialTemplateCircuitType.D:
                 {
                     Resistor resistor1 = new Resistor("R1", 1);
                     Capacitor capacitor2 = new Capacitor("C2", 20);
@@ -166,7 +166,7 @@ namespace Model.ViewHelpers
                 }
 
 
-                case InitialCircuitType.E:
+                case InitialTemplateCircuitType.E:
                 {
                     Resistor resistor1 = new Resistor("R1", 20);
                     Capacitor capacitor2 = new Capacitor("C2", 20);

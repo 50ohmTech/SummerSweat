@@ -54,9 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="INodeTests.cs" />
+    <Compile Include="CapacitorTests.cs" />
+    <Compile Include="ElementValueEventArgsTests.cs" />
+    <Compile Include="ICircuitNodeTests.cs" />
+    <Compile Include="InductorTests.cs" />
     <Compile Include="CircuitTests.cs" />
+    <Compile Include="ParallelSubcircuitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResistorTests.cs" />
+    <Compile Include="SeriesSubcircuitTest.cs" />
+    <Compile Include="SubcircuitBaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

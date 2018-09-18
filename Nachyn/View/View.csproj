@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Calculation.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="EditForm.cs">
       <SubType>Form</SubType>
@@ -54,6 +55,10 @@
     <Compile Include="EditForm.Designer.cs">
       <DependentUpon>EditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Enums\InitialTemplateCircuitType.cs" />
+    <Compile Include="Helpers\InitialTemplateCircuitInitializer.cs" />
+    <Compile Include="Helpers\InitialTemplateCircuitTypeComboBoxItem.cs" />
+    <Compile Include="Helpers\NodeTypeComboBoxItem.cs" />
     <Compile Include="ImpedanceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,7 +91,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Properties\DataSources\Model.Elements.Checks.Calculation.datasource" />
+    <None Include="Properties\DataSources\Calculation.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

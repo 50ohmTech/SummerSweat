@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Numerics;
-using Model.Elements.Checks;
+using Model.Checks;
+using Model.Elements;
 
-namespace Model.Elements
+namespace Model.Circuits
 {
     /// <summary>
     ///     Последовательная подцепь.
@@ -22,11 +23,11 @@ namespace Model.Elements
             {
                 throw new InvalidOperationException($"В последовательном соединении (Id: {Id}) нет узлов.");
             }
-            Calculation.CheckFrequencies(frequency);
+            Checks.Check.CheckFrequencies(frequency);
 
             Complex resistance = Complex.Zero;
 
-            foreach (INode node in Nodes)
+            foreach (ICircuitNode node in Nodes)
             {
                 resistance += node.CalculateZ(frequency);
             }

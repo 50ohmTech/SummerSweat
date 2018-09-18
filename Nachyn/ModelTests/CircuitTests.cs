@@ -1,43 +1,15 @@
 ﻿using System;
-using Model;
+using Model.Circuits;
 using Model.Elements;
 using NUnit.Framework;
 
 namespace ModelTests
 {
-    //TODO: Для разных классов логики разные классы тестов!
-    [Description("Класс проверки цепей")]
+    //TODO: Для разных классов логики разные классы тестов! (+)
+    [Description("Тесты класса Circuit")]
     internal class CircuitTests
     {
         #region Public methods
-
-        [Test(Description = "Тест правильности расчета сложной цепи")]
-        public void NodeTest()
-        {
-            SeriesSubcircuit seriesRoot = new SeriesSubcircuit();
-            SeriesSubcircuit seriesLeftOne = new SeriesSubcircuit();
-            SeriesSubcircuit seriesRightOne = new SeriesSubcircuit();
-
-            ParallelSubcircuit parallelLeftOne = new ParallelSubcircuit();
-            ParallelSubcircuit parallelLeftTwo = new ParallelSubcircuit();
-
-            seriesRoot.Nodes.Add(parallelLeftOne);
-            seriesRoot.Nodes.Add(seriesRightOne);
-
-            parallelLeftOne.Nodes.Add(new Resistor("R", 20));
-            parallelLeftOne.Nodes.Add(seriesLeftOne);
-
-            seriesLeftOne.Nodes.Add(new Resistor("R", 10));
-            seriesLeftOne.Nodes.Add(parallelLeftTwo);
-
-            parallelLeftTwo.Nodes.Add(new Resistor("R", 20));
-            parallelLeftTwo.Nodes.Add(new Resistor("R", 20));
-
-            seriesRightOne.Nodes.Add(new Resistor("R", 20));
-            seriesRightOne.Nodes.Add(new Resistor("R", 20));
-
-            Assert.AreEqual(50, seriesRoot.CalculateZ(1).Real, 0.01);
-        }
 
         [Test(Description = "Тест на добавление элемента в цепь")]
         public void AddAfterTest()
@@ -71,7 +43,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест 2 на удаление элемента из цепи")]
-        public void TryRemoveTestTwo()
+        public void RemoveRootTest()
         {
             Circuit circuit = new Circuit();
             SeriesSubcircuit seriesSubcircuit = new SeriesSubcircuit();
@@ -85,7 +57,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест на пустой корень при вычислении")]
-        public void CircuitCalculateEmptyRootTest()
+        public void CalculateEmptyRootTest()
         {
             Assert.Throws<NullReferenceException>(() =>
             {
@@ -95,7 +67,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест на пустой корень при удалении")]
-        public void CircuitDeleteEmptyRootTest()
+        public void RemoveEmptyRootTest()
         {
             Assert.Throws<InvalidOperationException>(() =>
             {

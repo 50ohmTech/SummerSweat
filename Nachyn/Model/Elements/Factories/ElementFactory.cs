@@ -1,5 +1,5 @@
 ﻿using System;
-using Model.Elements.Enums;
+using Model.Enums;
 
 namespace Model.Elements.Factories
 {

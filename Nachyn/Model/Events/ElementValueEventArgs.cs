@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Model.Elements.Events
+namespace Model.Events
 {
     /// <summary>
     ///     Класс для обработчика события ValueChanged.

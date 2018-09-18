@@ -1,9 +1,9 @@
 ﻿using System;
-using Model.Elements.Enums;
+using Model.Enums;
 
-namespace Model.ViewHelpers
+namespace View.Helpers
 {
-    //TODO: все эти классы должны быть не в проекте Model
+    //TODO: все эти классы должны быть не в проекте Model(+)
     /// <summary>
     ///     Тип элемента в ComboBox'е.
     /// </summary>

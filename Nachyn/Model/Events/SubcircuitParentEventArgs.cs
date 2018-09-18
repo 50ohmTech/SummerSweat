@@ -1,6 +1,7 @@
 ﻿using System;
+using Model.Elements;
 
-namespace Model.Elements.Events
+namespace Model.Events
 {
     /// <summary>
     ///     Аргументы события на изменение родителя.
@@ -25,7 +26,7 @@ namespace Model.Elements.Events
         /// <summary>
         ///     Новое значение.
         /// </summary>
-        public INode Parent { get; }
+        public ICircuitNode Parent { get; }
 
         /// <summary>
         ///     Сообщение.
@@ -53,7 +54,7 @@ namespace Model.Elements.Events
         /// </summary>
         /// <param name="message">Сообщение.</param>
         /// <param name="parent">Родитель</param>
-        public SubcircuitParentEventArgs(string message, INode parent)
+        public SubcircuitParentEventArgs(string message, ICircuitNode parent)
         {
             Message = message;
             Parent = parent;

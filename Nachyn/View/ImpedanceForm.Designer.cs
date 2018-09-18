@@ -1,4 +1,7 @@
-﻿namespace View
+﻿using Model.Checks;
+using View.Helpers;
+
+namespace View
 {
     partial class ImpedanceForm
     {
@@ -33,18 +36,20 @@
             this._labelStep = new System.Windows.Forms.Label();
             this._textBoxStart = new System.Windows.Forms.TextBox();
             this._textBoxStep = new System.Windows.Forms.TextBox();
-            this._dataGridView = new System.Windows.Forms.DataGridView();
-            this._calculationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.impedanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.frequencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._trackBarCount = new System.Windows.Forms.TrackBar();
             this._labelCount = new System.Windows.Forms.Label();
             this._labelError = new System.Windows.Forms.Label();
             this._errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Impedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._calculationBindingSource)).BeginInit();
+            this._dataGridView = new System.Windows.Forms.DataGridView();
+            this.frequencyDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.impedanceDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._calculationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._trackBarCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._calculationBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // _labelStart
@@ -81,31 +86,19 @@
             this._textBoxStep.TabIndex = 4;
             this._textBoxStep.TextChanged += new System.EventHandler(this.Control_TextChanged);
             // 
-            // _dataGridView
+            // impedanceDataGridViewTextBoxColumn
             // 
-            this._dataGridView.AllowUserToAddRows = false;
-            this._dataGridView.AllowUserToDeleteRows = false;
-            this._dataGridView.AllowUserToResizeColumns = false;
-            this._dataGridView.AllowUserToResizeRows = false;
-            this._dataGridView.AutoGenerateColumns = false;
-            this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Frequency,
-            this.Impedance});
-            this._dataGridView.DataSource = this._calculationBindingSource;
-            this._dataGridView.EnableHeadersVisualStyles = false;
-            this._dataGridView.Location = new System.Drawing.Point(15, 99);
-            this._dataGridView.MultiSelect = false;
-            this._dataGridView.Name = "_dataGridView";
-            this._dataGridView.ReadOnly = true;
-            this._dataGridView.RowHeadersVisible = false;
-            this._dataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this._dataGridView.Size = new System.Drawing.Size(218, 173);
-            this._dataGridView.TabIndex = 6;
+            this.impedanceDataGridViewTextBoxColumn.DataPropertyName = "Impedance";
+            this.impedanceDataGridViewTextBoxColumn.HeaderText = "Impedance";
+            this.impedanceDataGridViewTextBoxColumn.Name = "impedanceDataGridViewTextBoxColumn";
+            this.impedanceDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // _calculationBindingSource
+            // frequencyDataGridViewTextBoxColumn
             // 
-            this._calculationBindingSource.DataSource = typeof(Model.Elements.Checks.Calculation);
+            this.frequencyDataGridViewTextBoxColumn.DataPropertyName = "Frequency";
+            this.frequencyDataGridViewTextBoxColumn.HeaderText = "Frequency";
+            this.frequencyDataGridViewTextBoxColumn.Name = "frequencyDataGridViewTextBoxColumn";
+            this.frequencyDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // _trackBarCount
             // 
@@ -122,7 +115,7 @@
             // _labelCount
             // 
             this._labelCount.AutoSize = true;
-            this._labelCount.Location = new System.Drawing.Point(12, 83);
+            this._labelCount.Location = new System.Drawing.Point(12, 90);
             this._labelCount.Name = "_labelCount";
             this._labelCount.Size = new System.Drawing.Size(127, 13);
             this._labelCount.TabIndex = 8;
@@ -133,7 +126,7 @@
             this._labelError.AutoSize = true;
             this._labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this._labelError.ForeColor = System.Drawing.Color.Red;
-            this._labelError.Location = new System.Drawing.Point(33, 275);
+            this._labelError.Location = new System.Drawing.Point(32, 266);
             this._labelError.Name = "_labelError";
             this._labelError.Size = new System.Drawing.Size(183, 24);
             this._labelError.TabIndex = 9;
@@ -145,32 +138,57 @@
             this._errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this._errorProvider.ContainerControl = this;
             // 
-            // Frequency
+            // _dataGridView
             // 
-            this.Frequency.DataPropertyName = "Frequency";
-            this.Frequency.Frozen = true;
-            this.Frequency.HeaderText = "Частота";
-            this.Frequency.Name = "Frequency";
-            this.Frequency.ReadOnly = true;
-            this.Frequency.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this._dataGridView.AllowUserToAddRows = false;
+            this._dataGridView.AllowUserToDeleteRows = false;
+            this._dataGridView.AllowUserToResizeColumns = false;
+            this._dataGridView.AllowUserToResizeRows = false;
+            this._dataGridView.AutoGenerateColumns = false;
+            this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.frequencyDataGridViewTextBoxColumn1,
+            this.impedanceDataGridViewTextBoxColumn1});
+            this._dataGridView.DataSource = this._calculationBindingSource;
+            this._dataGridView.Location = new System.Drawing.Point(15, 106);
+            this._dataGridView.MultiSelect = false;
+            this._dataGridView.Name = "_dataGridView";
+            this._dataGridView.RowHeadersVisible = false;
+            this._dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this._dataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this._dataGridView.Size = new System.Drawing.Size(218, 157);
+            this._dataGridView.TabIndex = 10;
             // 
-            // Impedance
+            // frequencyDataGridViewTextBoxColumn1
             // 
-            this.Impedance.DataPropertyName = "Impedance";
-            this.Impedance.Frozen = true;
-            this.Impedance.HeaderText = "Импеданс";
-            this.Impedance.Name = "Impedance";
-            this.Impedance.ReadOnly = true;
-            this.Impedance.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.frequencyDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.frequencyDataGridViewTextBoxColumn1.DataPropertyName = "Frequency";
+            this.frequencyDataGridViewTextBoxColumn1.HeaderText = "Частота";
+            this.frequencyDataGridViewTextBoxColumn1.Name = "frequencyDataGridViewTextBoxColumn1";
+            this.frequencyDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.frequencyDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // impedanceDataGridViewTextBoxColumn1
+            // 
+            this.impedanceDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.impedanceDataGridViewTextBoxColumn1.DataPropertyName = "Impedance";
+            this.impedanceDataGridViewTextBoxColumn1.HeaderText = "Импеданс";
+            this.impedanceDataGridViewTextBoxColumn1.Name = "impedanceDataGridViewTextBoxColumn1";
+            this.impedanceDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.impedanceDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // _calculationBindingSource
+            // 
+            this._calculationBindingSource.DataSource = typeof(Calculation);
             // 
             // ImpedanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 304);
+            this.ClientSize = new System.Drawing.Size(253, 293);
+            this.Controls.Add(this._dataGridView);
             this.Controls.Add(this._labelError);
             this.Controls.Add(this._labelCount);
-            this.Controls.Add(this._dataGridView);
             this.Controls.Add(this._trackBarCount);
             this.Controls.Add(this._textBoxStep);
             this.Controls.Add(this._textBoxStart);
@@ -183,10 +201,10 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Расчеты";
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._calculationBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._trackBarCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._calculationBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,13 +216,15 @@
         private System.Windows.Forms.Label _labelStep;
         private System.Windows.Forms.TextBox _textBoxStart;
         private System.Windows.Forms.TextBox _textBoxStep;
-        private System.Windows.Forms.DataGridView _dataGridView;
         private System.Windows.Forms.TrackBar _trackBarCount;
         private System.Windows.Forms.Label _labelCount;
         private System.Windows.Forms.Label _labelError;
-        private System.Windows.Forms.BindingSource _calculationBindingSource;
         private System.Windows.Forms.ErrorProvider _errorProvider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Frequency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Impedance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn impedanceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn frequencyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource _calculationBindingSource;
+        private System.Windows.Forms.DataGridView _dataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn frequencyDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn impedanceDataGridViewTextBoxColumn1;
     }
 }

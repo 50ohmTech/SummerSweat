@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Numerics;
-using Model.Elements.Checks;
+using Model.Checks;
 
-//TODO: цепи и элементы должны быть в разных папках
+//TODO: цепи и элементы должны быть в разных папках(+)
 namespace Model.Elements
 {
     /// <summary>
@@ -29,7 +29,7 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Calculation.CheckFrequencies(frequency);
+            Checks.Check.CheckFrequencies(frequency);
             double valueZ = 1 / (2 * Math.PI * frequency * Value);
             return new Complex(0, valueZ);
         }

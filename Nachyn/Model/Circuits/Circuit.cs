@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using Model.Checks;
 using Model.Elements;
-using Model.Elements.Checks;
-using Model.Elements.Enums;
 
-namespace Model
+namespace Model.Circuits
 {
     /// <summary>
     ///     Цепь.
@@ -18,7 +17,7 @@ namespace Model
         /// <summary>
         ///     Корень.
         /// </summary>
-        public INode Root { get; private set; }
+        public ICircuitNode Root { get; private set; }
 
         #endregion
 
@@ -48,7 +47,7 @@ namespace Model
         /// <returns>Импедансы.</returns>
         public List<Complex> CalculateZ(double[] frequencies)
         {
-            Calculation.CheckFrequencies(frequencies);
+            Checks.Check.CheckFrequencies(frequencies);
 
             if (Root == null)
             {
@@ -63,7 +62,7 @@ namespace Model
         /// </summary>
         /// <param name="node">Узел.</param>
         /// <returns>Удален ли узел.</returns>
-        public void Remove(INode node)
+        public void Remove(ICircuitNode node)
         {
             if (IsEmpty())
             {
@@ -91,7 +90,7 @@ namespace Model
         /// <param name="node">Узел в который добавляют детей.</param>
         /// <param name="newNode">Новый узел.</param>
         /// <param name="nodeType">Тип узла.</param>
-        public void AddAfter(INode node, INode newNode)
+        public void AddAfter(ICircuitNode node, ICircuitNode newNode)
         {
             if (newNode == null)
             {
@@ -111,12 +110,13 @@ namespace Model
 
             if (!IsEmpty() && node == null)
             {
-                throw new ArgumentNullException(nameof(newNode), "Выберите узел относительно которого будет происходить добавление. Для добавления нового корня сделайте очистку цепи или удалите корень.");
+                throw new ArgumentNullException(nameof(newNode),
+                    "Выберите узел относительно которого будет происходить добавление. Для добавления нового корня сделайте очистку цепи или удалите корень.");
             }
 
             if (node is ElementBase)
             {
-                throw new ArgumentException("Узел не может быть элементом.");              
+                throw new ArgumentException("Узел не может быть элементом.");
             }
 
             if (node is SubcircuitBase subcircuit)
@@ -125,12 +125,14 @@ namespace Model
                 {
                     throw new InvalidOperationException("Дети узла были null");
                 }
+
                 subcircuit.Nodes.Add(newNode);
 
                 if (newNode is SubcircuitBase newSubcircuit)
                 {
                     newSubcircuit.Parent = subcircuit;
-;                }
+                    ;
+                }
 
                 if (newNode is ElementBase newElementBase)
                 {

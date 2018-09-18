@@ -1,5 +1,5 @@
 ﻿using System.Numerics;
-using Model.Elements.Checks;
+using Model.Checks;
 
 namespace Model.Elements
 {
@@ -27,7 +27,7 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Calculation.CheckFrequencies(frequency);
+            Checks.Check.CheckFrequencies(frequency);
 
             return new Complex(Value, 0);
         }

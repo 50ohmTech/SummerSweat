@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Numerics;
-using Model.Elements.Checks;
+using Model.Checks;
+using Model.Elements;
 
-namespace Model.Elements
+namespace Model.Circuits
 {
     /// <summary>
     ///     Параллельная подцепь.
@@ -18,7 +19,7 @@ namespace Model.Elements
         /// <returns>Импеданс.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Calculation.CheckFrequencies(frequency);
+            Checks.Check.CheckFrequencies(frequency);
             if (Nodes.Count <= 1)
             {
                 throw new InvalidOperationException($"В параллельном соединении (Id: {Id}) необходимо минимум 2 узла.");
@@ -26,7 +27,7 @@ namespace Model.Elements
 
             Complex resistance = Complex.Zero;
 
-            foreach (INode node in Nodes)
+            foreach (ICircuitNode node in Nodes)
             {
                 resistance += 1 / node.CalculateZ(frequency);
             }

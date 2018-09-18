@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Model.Elements.Checks
+namespace Model.Checks
 {
-    //TODO: Проверка частот - это не часть элементов. Не должно быть в этом пространстве имён
+    //TODO: Проверка частот - это не часть элементов. Не должно быть в этом пространстве имён(+)
     /// <summary>
-    ///     Вычисления.
+    ///     Проверки.
     /// </summary>
-    public class Calculation
+    public class Check
     {
         #region Constants
 
@@ -19,22 +19,6 @@ namespace Model.Elements.Checks
         ///     Минимально допустимая частота.
         /// </summary>
         public const double MIN_FREQUENCY = 1;
-
-        #endregion
-
-        #region Properties
-
-        //TODO: ЧТО ЗА ВИЗУАЛЬНЫЙ ИМПЕДАНС?????
-        /// <summary>
-        ///     Визуальный импеданс
-        /// </summary>
-        public string Impedance { get; set; }
-
-        //TODO: ЧТО ЗА ВИЗУАЛЬНАЯ ЧАСТОТА?????
-        /// <summary>
-        ///     Визуальная частота
-        /// </summary>
-        public string Frequency { get; set; }
 
         #endregion
 

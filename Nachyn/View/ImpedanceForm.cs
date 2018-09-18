@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Windows.Forms;
-using Model;
-using Model.Elements.Checks;
+using Model.Checks;
+using Model.Circuits;
+using View.Helpers;
 
 namespace View
 {
@@ -24,11 +25,6 @@ namespace View
         #endregion
 
         #region Private fields
-
-        /// <summary>
-        ///     Визуально оформленные импедансы.
-        /// </summary>
-        private List<string> _impedances = new List<string>();
 
         /// <summary>
         ///     Начальное значение.
@@ -89,9 +85,9 @@ namespace View
 
             try
             {
-                Calculation.CheckFrequencies(_start);
-                Calculation.CheckFrequencies(_step);
-                Calculation.CheckFrequencies(maxValue);
+                Check.CheckFrequencies(_start);
+                Check.CheckFrequencies(_step);
+                Check.CheckFrequencies(maxValue);
                 _labelError.Visible = false;
             }
             catch (ArgumentException)
@@ -125,15 +121,15 @@ namespace View
                 return;
             }
 
-            //TODO: нужен индексатор - используй for
-            int count = 0;
-            foreach (Complex impedance in impedances)
+            //TODO: нужен индексатор - используй for(+)
+
+            for (int i = 0; i < impedances.Count; i++)
             {
                 Calculation calculation = new Calculation
                 {
-                    //TODO: Complex.ToString()?
-                    Impedance = $"R:{Math.Round(impedance.Real, 3)} I:{Math.Round(impedance.Imaginary, 3)}",
-                    Frequency = $"{Math.Round(frequencies[count++], 3)}"
+                    //TODO: Complex.ToString()? (нет)
+                    Impedance = $"R:{Math.Round(impedances[i].Real, 3)} I:{Math.Round(impedances[i].Imaginary, 3)}",
+                    Frequency = $"{Math.Round(frequencies[i], 3)}"
                 };
 
                 _calculationBindingSource.Add(calculation);
