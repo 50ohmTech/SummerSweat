@@ -6,12 +6,13 @@ namespace CircuitElements
 {
 	public abstract class CircuitBase : ICircuitElement
 	{
-		#region Static fields
+        #region Static fields
 
-		/// <summary>
-		///     Уникальный идентификатор.
-		/// </summary>
-		private static int _circuitId;
+        //TODO: то есть у цепей собственные idшники? Хотя id находится под одним интерфейсом
+        /// <summary>
+        ///     Уникальный идентификатор.
+        /// </summary>
+        private static int _circuitId;
 
 		#endregion
 
@@ -40,7 +41,8 @@ namespace CircuitElements
 
 				foreach (var element in _elements)
 				{
-					element.ElementChanged += ElementChanged;
+                    //TODO: Не пойму на что ты здесь подписался? На событие? Справа должно быть имя метода, а не события! А в методе уже инвоук события, не?
+                    element.ElementChanged += ElementChanged;
 				}
 			}
 		}

@@ -8,10 +8,11 @@ using CircuitElements.Elements;
 
 namespace MainForm
 {
-	/// <summary>
-	///     Рисовальщик цепи.
-	/// </summary>
-	public static class Drawer
+    //TODO: -> Отрисовщик
+    /// <summary>
+    ///     Рисовальщик цепи.
+    /// </summary>
+    public static class Drawer
 	{
 		#region Constants
 
@@ -25,10 +26,11 @@ namespace MainForm
 		/// </summary>
 		private const int _capacitorPositionY = 15;
 
-		/// <summary>
-		///     Сжатие элементов по X.
-		/// </summary>
-		private const int _compressionElementX = 30;
+        //TODO: Сжатие или размеры?
+        /// <summary>
+        ///     Сжатие элементов по X.
+        /// </summary>
+        private const int _compressionElementX = 30;
 
 		/// <summary>
 		///     Сжатие элементов по Y.
@@ -108,17 +110,18 @@ namespace MainForm
 			set => _pen = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
-		#endregion
+        #endregion
 
-		#region Private methods
+        #region Private methods
 
-		/// <summary>
-		///     Рисовать схему электрической цепи.
-		/// </summary>
-		/// <param name="root">Корень поддерева.</param>
-		/// <param name="displacement">Смещение.</param>
-		/// <returns>Размер поддерева.</returns>
-		private static Point DrawCircuit(ICircuitElement root, Point displacement)
+        //TODO: Если возвращается размер, то надо использовать Size, а не Point
+        /// <summary>
+        ///     Рисовать схему электрической цепи.
+        /// </summary>
+        /// <param name="root">Корень поддерева.</param>
+        /// <param name="displacement">Смещение.</param>
+        /// <returns>Размер поддерева.</returns>
+        private static Point DrawCircuit(ICircuitElement root, Point displacement)
 		{
 			if (root is ElementBase element)
 			{
@@ -131,7 +134,8 @@ namespace MainForm
 
 			if (root is ParallelCircuit parallelCircuit)
 			{
-				_graphics.DrawLine(Pen,
+                //TODO: портянку разбить на подметоды, всё закомментировать
+                _graphics.DrawLine(Pen,
 					new Point(displacement.X, _elementPositionY + displacement.Y),
 					new Point(_elementPositionY + displacement.X,
 						_elementPositionY + displacement.Y));
@@ -239,15 +243,15 @@ namespace MainForm
 			return new Point(steps.Sum(), maxCount);
 		}
 
-
-		/// <summary>
-		///     Рисовать элемент электрической цепи.
-		/// </summary>
-		/// <param name="graphics">Поверхность рисования.</param>
-		/// <param name="pen">Ручка.</param>
-		/// <param name="element">Элемент электрической цепи.</param>
-		/// <param name="displacement">Смещение.</param>
-		private static void DrawElement(Graphics graphics, Pen pen, ElementBase element,
+        //TODO: displacement -> margin
+        /// <summary>
+        ///     Рисовать элемент электрической цепи.
+        /// </summary>
+        /// <param name="graphics">Поверхность рисования.</param>
+        /// <param name="pen">Ручка.</param>
+        /// <param name="element">Элемент электрической цепи.</param>
+        /// <param name="displacement">Смещение.</param>
+        private static void DrawElement(Graphics graphics, Pen pen, ElementBase element,
 			Point displacement)
 		{
 			var brush = new SolidBrush(Color.Black);

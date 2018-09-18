@@ -173,10 +173,11 @@ namespace MainForm
 			}
 		}
 
-		/// <summary>
-		///     Инициализация цепей
-		/// </summary>
-		private void InitializeCircuits()
+        //TODO: генерацию тестовых цепей в отдельный класс - это не задача главной формы, это отладочная вспомогательная задача
+        /// <summary>
+        ///     Инициализация цепей
+        /// </summary>
+        private void InitializeCircuits()
 		{
 			_circuits = new List<CircuitBase>();
 
@@ -278,7 +279,8 @@ namespace MainForm
 		{
 			if (SelectingCircuitComboBox.SelectedIndex != 6)
 			{
-				CircuitDraw.BackgroundImage =
+                //TODO: PictureBox было бы логичнее использовать
+                CircuitDraw.BackgroundImage =
 					Drawer.DrawCircuit(_circuits[SelectingCircuitComboBox.SelectedIndex]);
 
 				_currentCircuit = _circuits[SelectingCircuitComboBox.SelectedIndex];
