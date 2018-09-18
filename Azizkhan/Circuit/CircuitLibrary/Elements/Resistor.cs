@@ -1,11 +1,7 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Numerics;
 
-#endregion
-
-namespace Model.Elements
+namespace CircuitLibrary
 {
     /// <summary>
     ///     Резистор
@@ -31,13 +27,13 @@ namespace Model.Elements
         ///     Расчет импеданса
         /// </summary>
         /// <param name="frequency">Частота сигнала</param>
-        /// <returns>Комплекное сопротивление</returns>
+        /// <returns>Комплексное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (frequency <= 0)
             {
                 throw new ArgumentOutOfRangeException(
-                    "Частота не может быть меньше нуля");
+                    "Частота не может быть меньше или равна нулю");
             }
 
             return new Complex(Value, 0);

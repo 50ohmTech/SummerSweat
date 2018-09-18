@@ -1,35 +1,14 @@
-﻿#region
-
-using System;
-using System.Numerics;
+﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 
-#endregion
-
-namespace Model.Elements
+namespace Model
 {
-    /// <summary>
-    ///     Делегат хранящий подписчиков события ValueChanged
-    /// </summary>
-    /// <param name="value">Изменившееся значение</param>
-    /// <param name="сhangedElement">Изменившийся элемент</param>
-    public delegate void ValueEventHandler(object value, object сhangedElement);
-
     /// <summary>
     ///     Элемент цепи
     /// </summary>
-    public abstract class ElementBase : INode
+    public abstract class ElementBase:INode
     {
-        #region Events
-
-
-        /// <summary>
-        ///     Событие, возникающее при изменении номинала элемента.
-        /// </summary>
-        public event ValueEventHandler ValueChanged;
-
-        #endregion
-
         #region Private fields
 
         /// <summary>
@@ -58,7 +37,7 @@ namespace Model.Elements
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException(
-                        "Название элемента не может быть пустым или заполненным символами-разделителями");
+                        "Название элемента не может быть пустым или быть заполненным символами-разделителями");
                 }
 
                 _name = value;
@@ -101,7 +80,7 @@ namespace Model.Elements
         /// </summary>
         /// <param name="name"> Имя элемента. </param>
         /// <param name="value"> Номинал элемента. </param>
-        public ElementBase(string name, double value)
+        protected ElementBase(string name, double value)
         {
             Name = name;
             Value = value;

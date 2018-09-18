@@ -1,11 +1,7 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Model.Elements;
-
-#endregion
+using Model;
 
 namespace Model
 {

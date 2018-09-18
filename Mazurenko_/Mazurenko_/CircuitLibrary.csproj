@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6DC2BA59-7139-40A8-A912-5E88E9894230}</ProjectGuid>
+    <ProjectGuid>{ECAA417C-06FA-44BD-865A-7831923D09D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Model</RootNamespace>
-    <AssemblyName>Model</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>CircuitLibrary</RootNamespace>
+    <AssemblyName>CircuitLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circuit.cs" />
-    <Compile Include="Elements\Capacitor.cs" />
-    <Compile Include="Elements\ElementBase.cs" />
-    <Compile Include="Elements\Inductor.cs" />
-    <Compile Include="Elements\INode.cs" />
-    <Compile Include="Elements\Resistor.cs" />
+    <Compile Include="ElementBase.cs" />
+    <Compile Include="ElementsCircuit\Capacitor.cs" />
+    <Compile Include="ElementsCircuit\Inductor.cs" />
+    <Compile Include="ElementsCircuit\Resistor.cs" />
+    <Compile Include="Event\ValueChangedEventHandler.cs" />
+    <Compile Include="INode.cs" />
+    <Compile Include="NodeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

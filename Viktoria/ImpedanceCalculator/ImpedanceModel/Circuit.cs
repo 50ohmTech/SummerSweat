@@ -1,39 +1,30 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Model.Elements;
 
-#endregion
-
-namespace Model
+namespace ImpedanceModel
 {
     /// <summary>
     ///     Цепь.
     /// </summary>
     public class Circuit
     {
-        #region Fields
-
         #region Private fields
 
         /// <summary>
-        ///     Корень цепи.
+        ///     Начало цепи.
         /// </summary>
-        private INode _root;
-
-        #endregion
+        private Subcircuit _root;
 
         #endregion
 
         #region Public methods
 
         /// <summary>
-        ///     Расчитать импедансы цепи для списка частот.
+        ///     Рассчет комплексного сопротивления цепи для диапазона частот.
         /// </summary>
-        /// <param name="frequencies">Список частот сигнала.</param>
-        /// <returns>Список импедансов цепи.</returns>
+        /// <param name="frequencies"> Диапазон частот. </param>
+        /// <returns> Список сопротивлений для каждой частоты из заданного диапазона. </returns>
         public List<Complex> CalculateZ(double[] frequencies)
         {
             if (frequencies == null)
