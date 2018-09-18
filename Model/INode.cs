@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Model
 {
-    internal interface INode
+    public interface INode
     {
         #region Properties
 

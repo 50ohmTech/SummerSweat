@@ -4,6 +4,9 @@ using System.Numerics;
 
 namespace Model
 {
+    /// <summary>
+    /// Цепь.
+    /// </summary>
     public class Circuit
     {
         #region Fields

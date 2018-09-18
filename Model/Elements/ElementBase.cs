@@ -1,9 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Model.Elements
 {
-    public abstract class ElementBase
+    /// <summary>
+    ///     Делегат хранящий подписчиков события ValueChanged
+    /// </summary>
+    /// <param name="value">Изменившееся значение</param>
+    /// <param name="сhangedElement">Изменившийся элемент</param>
+    public delegate void ValueEventHandler(object value, object сhangedElement);
+
+    public abstract class ElementBase : INode
     {
         #region Fields
 
@@ -66,6 +74,32 @@ namespace Model.Elements
             }
         }
 
+        /// <summary>
+        ///     Родитель.
+        /// </summary>
+        public INode Parent { get; }
+
+        /// <summary>
+        ///     Дочерние узлы.
+        /// </summary>
+        public List<INode> Nodes { get; } = new List<INode>();
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Событие, возникающее при изменении номинала элемента.
+        /// </summary>
+        public event ValueEventHandler ValueChanged;
+
+        /// <summary>
+        ///     Расчет комплексного сопротивления.
+        /// </summary>
+        /// <param name="frequency"></param>
+        /// <returns>Комплексное сопротивление</returns>
+        public abstract Complex CalculateZ(double frequency);
+
         #endregion
 
         #region Constructor
@@ -80,17 +114,6 @@ namespace Model.Elements
             Name = name;
             Value = value;
         }
-
-        #endregion
-
-        #region Public methods
-
-        /// <summary>
-        ///     Расчет комплексного сопротивления.
-        /// </summary>
-        /// <param name="frequency"></param>
-        /// <returns>Комплексное сопротивление</returns>
-        public abstract Complex CalculateZ(double frequency);
 
         #endregion
     }
