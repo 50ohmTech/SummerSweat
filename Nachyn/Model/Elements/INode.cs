@@ -3,6 +3,7 @@ using System.Numerics;
 
 namespace Model.Elements
 {
+    //TODO: INode - слишком общее. Лучше ICircuitNode
     /// <summary>
     ///     Узел.
     /// </summary>

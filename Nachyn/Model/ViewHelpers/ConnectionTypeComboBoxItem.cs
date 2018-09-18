@@ -3,6 +3,7 @@ using Model.Elements.Enums;
 
 namespace Model.ViewHelpers
 {
+    //TODO: все эти классы должны быть не в проекте Model
     /// <summary>
     ///     Тип элемента в ComboBox'е.
     /// </summary>

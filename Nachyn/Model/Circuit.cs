@@ -95,6 +95,7 @@ namespace Model
                     {
                         if (!subcircuit.Parent.Nodes.Remove(subcircuit))
                         {
+                            //TODO: надо использовать конкретный тип исключения, а не базовый
                             throw new Exception("Ошибка удаления.");
                         }
 
@@ -110,6 +111,7 @@ namespace Model
                         }
                         else
                         {
+                            //TODO: поменять на конкретный тип исключения
                             throw new Exception("Неизвестный родитель.");
                         }
 
@@ -120,6 +122,7 @@ namespace Model
 
             if (element.Parent != Root && element.Parent.Nodes.Count == 1)
             {
+                //TODO: проверки родителей второго уровня обязательны?
                 if (element.Parent == null)
                 {
                     throw new NullReferenceException(
@@ -167,6 +170,8 @@ namespace Model
                 return;
             }
 
+            //TODO: это должны быть раздельные проверки
+            //TODO: проверка nullElement должна быть в самом начале
             if (element == null || newElement == null)
             {
                 throw new ArgumentNullException(
@@ -183,7 +188,8 @@ namespace Model
             {
                 case ConnectionType.Serial:
                 {
-                    if (element.Parent is SeriesSubcircuit series)
+                        //TODO: большая вложенность. Код под кейсами в отдельные методы
+                        if (element.Parent is SeriesSubcircuit series)
                     {
                         series.Nodes.Add(newElement);
                         newElement.Parent = series;
@@ -235,11 +241,11 @@ namespace Model
                             newElement.Parent = newParallelSubcircuit;
                             break;
                         }
-
-                        throw new Exception(element.Name + " не был удален из родителя.");
+                            //TODO: конкретный тип исключения
+                            throw new Exception(element.Name + " не был удален из родителя.");
                     }
-
-                    throw new Exception($"У {element.Name} неизвестный родитель.");
+                        //TODO: конкретный тип исключения
+                        throw new Exception($"У {element.Name} неизвестный родитель.");
                 }
             }
         }

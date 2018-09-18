@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace ModelTests
 {
+    //TODO: Для разных классов логики разные классы тестов!
     [Description("Класс проверки цепей")]
     internal class CircuitTests
     {

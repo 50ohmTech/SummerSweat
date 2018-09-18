@@ -4,6 +4,7 @@ using Model.Elements;
 
 namespace Model.TreeView
 {
+    //TODO: Неудачное название. Лучше тогда CircuitTreeNode
     /// <summary>
     ///     Узел TreeView содержащий INode.
     /// </summary>

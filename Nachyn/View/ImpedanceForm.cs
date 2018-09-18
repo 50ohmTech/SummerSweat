@@ -105,11 +105,13 @@ namespace View
                 return;
             }
 
+            //TODO: нужен индексатор - используй for
             int count = 0;
             foreach (Complex impedance in impedances)
             {
                 Calculation calculation = new Calculation
                 {
+                    //TODO: Complex.ToString()?
                     Impedance = $"R:{Math.Round(impedance.Real, 3)} I:{Math.Round(impedance.Imaginary, 3)}",
                     Frequency = $"{Math.Round(frequencies[count++], 3)}"
                 };

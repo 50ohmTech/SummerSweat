@@ -49,6 +49,7 @@ namespace View
 
         #region Properties
 
+        //TODO: Правильнее называть Location, Margin, Padding 
         /// <summary>
         ///     Отступ.
         /// </summary>
@@ -82,6 +83,7 @@ namespace View
         /// </summary>
         /// <param name="root">Корень поддерева.</param>
         /// <param name="displacement">Смещение.</param>
+        //TODO: Возвращается размер или положение? Для размера неправильно выбран тип данных Point 
         /// <returns>Размер поддерева.</returns>
         private Point DrawCircuit(INode root, Point displacement)
         {
@@ -96,6 +98,7 @@ namespace View
 
             if (root is ParallelSubcircuit)
             {
+                //TODO: магические числа вынести в именованные константы
                 _graphics.DrawLine(Pen, new Point(displacement.X, 25 + displacement.Y),
                     new Point(25 + displacement.X, 25 + displacement.Y));
 
@@ -189,6 +192,7 @@ namespace View
             SolidBrush brush = new SolidBrush(Color.Black);
             switch (element)
             {
+                //TODO: магические числа в именованные константы
                 case Resistor _:
                     graphics.DrawLine(pen,
                         new Point(10 + displacement.X, 20 + displacement.Y),
@@ -213,7 +217,7 @@ namespace View
                     graphics.DrawLine(pen,
                         new Point(40 + displacement.X, 25 + displacement.Y),
                         new Point(50 + displacement.X, 25 + displacement.Y));
-
+                    //TODO: подпись одинаковая для всех элементов - вынести из-под switch
                     graphics.DrawString(element.Name, Font, brush, 15 + displacement.X,
                         40 + displacement.Y);
 
@@ -268,6 +272,7 @@ namespace View
 
         #region Public methods
 
+        //TODO: зачем тебе pictureBox, если достаточно только graphics?
         public Drawer(PictureBox picture, Circuit circuit)
         {
             _picture = picture ?? throw new ArgumentNullException(nameof(picture));
@@ -279,6 +284,8 @@ namespace View
         /// </summary>
         public void DrawCircuit()
         {
+            //TODO: а нужно ли в таком случае постоянно хранить graphics и circuit?
+            //TODO: может, сделать circuit входным аргументом, a graphics/bitmap выходным?
             Bitmap bitmap = new Bitmap(1000, 1000);
             _graphics = Graphics.FromImage(bitmap);
             DrawCircuit(_circuit.Root, Displacement);

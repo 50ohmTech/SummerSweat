@@ -5,6 +5,7 @@ using Model.Elements.Events;
 
 namespace Model.Elements
 {
+    //TODO: цепи - это тоже не элементы. Должны быть в отдельной папке
     /// <summary>
     ///     Подцепь.
     /// </summary>

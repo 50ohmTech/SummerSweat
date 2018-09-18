@@ -2,6 +2,7 @@
 
 namespace Model.Elements.Checks
 {
+    //TODO: Проверка частот - это не часть элементов. Не должно быть в этом пространстве имён
     /// <summary>
     ///     Вычисления.
     /// </summary>
@@ -23,11 +24,13 @@ namespace Model.Elements.Checks
 
         #region Properties
 
+        //TODO: ЧТО ЗА ВИЗУАЛЬНЫЙ ИМПЕДАНС?????
         /// <summary>
         ///     Визуальный импеданс
         /// </summary>
         public string Impedance { get; set; }
 
+        //TODO: ЧТО ЗА ВИЗУАЛЬНАЯ ЧАСТОТА?????
         /// <summary>
         ///     Визуальная частота
         /// </summary>

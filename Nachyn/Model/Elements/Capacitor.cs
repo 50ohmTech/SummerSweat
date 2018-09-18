@@ -2,6 +2,7 @@
 using System.Numerics;
 using Model.Elements.Checks;
 
+//TODO: цепи и элементы должны быть в разных папках
 namespace Model.Elements
 {
     /// <summary>
