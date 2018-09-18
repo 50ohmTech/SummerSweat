@@ -8,68 +8,39 @@ namespace Model.Elements.Factories
     /// </summary>
     public static class ElementFactory
     {
-        #region Fields
-
-        #region Static fields
-
+ 
         /// <summary>
-        ///     Рандом
+        ///     Получить элемент
         /// </summary>
-        private static readonly Random _random = new Random();
-
-
-        public static uint NumberRandomElement = 1;
-
-        #endregion
-
-        #endregion
-
-        #region Public methods
-
-        /// <summary>
-        ///     Получить сущность
-        /// </summary>
-        /// <param name="elementType">Тип элемента</param>
-        /// <param name="name">Имя элемента</param>
+        /// <param name="nodeType">Тип узла</param>
+        /// <param name="name">Имя</param>
         /// <param name="value">Номинал</param>
         /// <returns>Элемент</returns>
-        public static ElementBase GetInstance(ElementType elementType, string name,
+        public static ElementBase GetInstance(NodeType nodeType, string name,
             double value)
         {
             ElementBase newElement;
-            switch (elementType)
+            switch (nodeType)
             {
-                case ElementType.Resistor:
+                case NodeType.Resistor:
                     newElement = new Resistor(name, value);
 
                     break;
-                case ElementType.Inductor:
+                case NodeType.Inductor:
                     newElement = new Inductor(name, value);
 
                     break;
-                case ElementType.Capacitor:
+                case NodeType.Capacitor:
                     newElement = new Capacitor(name, value);
 
                     break;
                 default:
-                    throw new ArgumentException();
+                    throw new ArgumentException("Некорректный тип узла.");
             }
 
             return newElement;
         }
+        
 
-        /// <summary>
-        ///     Получить рандомную сущность типа ElementBase
-        /// </summary>
-        /// <returns>Элемент</returns>
-        public static ElementBase GetRandomInstance()
-        {
-            ElementType elementType = (ElementType) _random.Next(3);
-            string name = ElementBase.GetSymbol(elementType) + NumberRandomElement++;
-            double value = Math.Round(_random.NextDouble(), 3) + _random.Next(100) + 1;
-            return GetInstance(elementType, name, value);
-        }
-
-        #endregion
     }
 }

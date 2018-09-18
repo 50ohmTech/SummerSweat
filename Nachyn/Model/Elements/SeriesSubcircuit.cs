@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Model.Elements.Checks;
 
 namespace Model.Elements
@@ -17,6 +18,10 @@ namespace Model.Elements
         /// <returns>Импеданс.</returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (Nodes.Count < 1)
+            {
+                throw new InvalidOperationException($"В последовательном соединении (Id: {Id}) нет узлов.");
+            }
             Calculation.CheckFrequencies(frequency);
 
             Complex resistance = Complex.Zero;

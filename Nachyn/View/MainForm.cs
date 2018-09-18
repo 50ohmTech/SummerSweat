@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Model;
 using Model.Elements;
+using Model.Elements.Checks;
 using Model.Elements.Enums;
 using Model.Elements.Factories;
 using Model.TreeView;
@@ -35,7 +36,7 @@ namespace View
 
         #region Private fields
 
-        private NodeTreeNode _currentNodeTreeNode;
+        private INode _currentNode;
 
         /// <summary>
         ///     Номинал нового элемента
@@ -53,17 +54,6 @@ namespace View
         /// </summary>
         private void InitializeComboBoxesType()
         {
-            List<ElementTypeComboBoxItem> elementTypes = new List<ElementTypeComboBoxItem>
-            {
-                new ElementTypeComboBoxItem(ElementType.Resistor),
-                new ElementTypeComboBoxItem(ElementType.Inductor),
-                new ElementTypeComboBoxItem(ElementType.Capacitor)
-            };
-
-            _comboBoxAddElementType.DataSource = elementTypes;
-            _comboBoxAddElementType.ValueMember = "Value";
-            _comboBoxAddElementType.DisplayMember = "Description";
-
             List<InitialCircuitTypeComboBoxItem> initialCircuitTypes = new List<InitialCircuitTypeComboBoxItem>
             {
                 new InitialCircuitTypeComboBoxItem(InitialCircuitType.A),
@@ -77,15 +67,18 @@ namespace View
             _comboBoxSelectCircuit.ValueMember = "Value";
             _comboBoxSelectCircuit.DisplayMember = "Description";
 
-            List<ConnectionTypeComboBoxItem> connectionTypes = new List<ConnectionTypeComboBoxItem>
+            List<NodeTypeComboBoxItem> connectionTypes = new List<NodeTypeComboBoxItem>
             {
-                new ConnectionTypeComboBoxItem(ConnectionType.Serial),
-                new ConnectionTypeComboBoxItem(ConnectionType.Parallel)
+                new NodeTypeComboBoxItem(NodeType.Resistor),
+                new NodeTypeComboBoxItem(NodeType.Capacitor),
+                new NodeTypeComboBoxItem(NodeType.Inductor),
+                new NodeTypeComboBoxItem(NodeType.Series),
+                new NodeTypeComboBoxItem(NodeType.Parallel)
             };
 
-            _comboBoxAddElementConnectionType.DataSource = connectionTypes;
-            _comboBoxAddElementConnectionType.ValueMember = "Value";
-            _comboBoxAddElementConnectionType.DisplayMember = "Description";
+            _comboBoxAddNodeType.DataSource = connectionTypes;
+            _comboBoxAddNodeType.ValueMember = "Value";
+            _comboBoxAddNodeType.DisplayMember = "Description";
         }
 
         /// <summary>
@@ -130,7 +123,7 @@ namespace View
         private void ClearTreeViewCircuit()
         {
             _treeViewCircuit.Nodes.Clear();
-            _currentNodeTreeNode = null;
+            _currentNode = null;
         }
 
         /// <summary>
@@ -170,7 +163,6 @@ namespace View
 
             NodeTreeNode root = new NodeTreeNode(_circuit.Root);
             _treeViewCircuit.Nodes.Add(root);
-            root.Text = "Корень";
             AddNodeTreeNodes(_circuit.Root, root);
 
             _treeViewCircuit.EndUpdate();
@@ -180,7 +172,8 @@ namespace View
         private void ButtonClearCircuit_Click(object sender, EventArgs e)
         {
             _circuit.Clear();
-            UpdateViewCircuit();
+            UpdateTreeView();
+            DrawCircuit();
         }
 
         private void ComboBoxSelectCircuit_SelectedIndexChanged(object sender, EventArgs e)
@@ -188,49 +181,93 @@ namespace View
             if (_comboBoxSelectCircuit.SelectedItem is InitialCircuitTypeComboBoxItem initialCircuitType)
             {
                 InitialCircuitInitializer.Initialize(_circuit, initialCircuitType.Value);
-                UpdateViewCircuit();
+                UpdateTreeView();
+                DrawCircuit();
+                _buttonDrawCircuit.Visible = false;
+                _buttonCalculateFormShow.Visible = true;
             }
         }
 
         private void ButtonAddElement_Click(object sender, EventArgs e)
         {
-            if (GetCurrentElementBase() == null && !_circuit.IsEmpty())
+            if (_comboBoxAddNodeType.SelectedItem is NodeTypeComboBoxItem type)
             {
-                MessageBox.Show("Выберите элемент перед которым ходите добавить новый элемент.");
-            }
-            else
-            {
-                ElementTypeComboBoxItem elementTypeComboBoxItem =
-                    _comboBoxAddElementType.SelectedItem as ElementTypeComboBoxItem;
-
-                ConnectionTypeComboBoxItem connectionTypeComboBoxItem =
-                    _comboBoxAddElementConnectionType.SelectedItem as ConnectionTypeComboBoxItem;
-
-                if (elementTypeComboBoxItem != null && connectionTypeComboBoxItem != null)
+                try
                 {
-                    _circuit.AddAfter(GetCurrentElementBase(),
-                        ElementFactory.GetInstance(elementTypeComboBoxItem.Value, _textBoxAddElementName.Text,
-                            _value), connectionTypeComboBoxItem.Value);
+                    switch (type.Value)
+                    {
+                        case NodeType.Series:
+                            _circuit.AddAfter(_currentNode, new SeriesSubcircuit());
+                            break;
+                        case NodeType.Parallel:
+                            _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
+                            break;
+                        default:
+                            _circuit.AddAfter(_currentNode,
+                                ElementFactory.GetInstance(type.Value, _textBoxAddElementName.Text, _value));
 
-                    UpdateViewCircuit();
+                            break;
+                    }
+
+                    ClearCircuit();
+                    UpdateTreeView();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
                 }
             }
         }
 
         private void TextBoxAddElementValue_TextChanged(object sender, EventArgs e)
         {
+            _errorProvider.Clear();
+
             if (string.IsNullOrWhiteSpace(_textBoxAddElementName.Text))
             {
                 _buttonAddElement.Enabled = false;
+                _errorProvider.SetError(_textBoxAddElementName, "Имя не может быть пустым.");
+                return;
+            }
+
+            if (_textBoxAddElementName.Text.Contains(" "))
+            {
+                _buttonAddElement.Enabled = false;
+                _errorProvider.SetError(_textBoxAddElementName, "Имя не может содержать пробелы.");
+                return;
+            }
+
+            if (_textBoxAddElementName.Text.Length > 5)
+            {
+                _buttonAddElement.Enabled = false;
+                _errorProvider.SetError(_textBoxAddElementName, "Имя не может содержать более 5 символов.");
+                return;
+            }
+
+            if (_textBoxAddElementValue.Text.Contains(" "))
+            {
+                _buttonAddElement.Enabled = false;
+                _errorProvider.SetError(_textBoxAddElementName, "Значение не может содержать пробелы.");
                 return;
             }
 
             if (!double.TryParse(_textBoxAddElementValue.Text, out _value))
             {
                 _buttonAddElement.Enabled = false;
+                _errorProvider.SetError(_textBoxAddElementValue, "Значение не является числом.");
                 return;
             }
 
+            if (_value < Calculation.MIN_FREQUENCY || _value > Calculation.MAX_FREQUENCY)
+            {
+                _buttonAddElement.Enabled = false;
+                _errorProvider.SetError(_textBoxAddElementValue,
+                    "Частота может принимать значение только от 1 Гц. до 1 ТГц..");
+
+                return;
+            }
+
+            _errorProvider.Clear();
             _buttonAddElement.Enabled = true;
         }
 
@@ -238,18 +275,25 @@ namespace View
         {
             if (e.Node is NodeTreeNode treeNode)
             {
-                _currentNodeTreeNode = treeNode;
+                _currentNode = treeNode.Value;
             }
         }
 
         private void ButtonOpenEditForm_Click(object sender, EventArgs e)
         {
-            if (GetCurrentElementBase() != null)
+            if (_currentNode != null)
             {
-                DialogResult result = new EditForm(GetCurrentElementBase()).ShowDialog();
-                if (result == DialogResult.OK)
+                if (_currentNode is ElementBase element)
                 {
-                    UpdateViewCircuit();
+                    DialogResult result = new EditForm(element).ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        UpdateTreeView();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выбранный вами узел не является элементом.");
                 }
             }
             else
@@ -258,53 +302,133 @@ namespace View
             }
         }
 
+
         /// <summary>
-        ///     Обновить дерево и картинку цепи.
+        ///     Корректна ли цепь.
         /// </summary>
-        private void UpdateViewCircuit()
+        /// <returns>Корректна ли цепь.</returns>
+        private bool IsCircuitCorrect()
         {
-            UpdateTreeView();
-            DrawCircuit();
+            try
+            {
+                _circuit.CalculateZ(new double[] {1});
+                return true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                return false;
+            }
         }
+
 
         private void ButtonCalculateFormShow_Click(object sender, EventArgs e)
         {
-            new ImpedanceForm(_circuit).ShowDialog();
+            if (IsCircuitCorrect())
+            {
+                new ImpedanceForm(_circuit).ShowDialog();
+            }
+            else
+            {
+                _buttonCalculateFormShow.Visible = false;
+                _buttonDrawCircuit.Visible = true;
+            }
         }
 
         private void ButtonRemoveElement_Click(object sender, EventArgs e)
         {
-            if (GetCurrentElementBase() != null)
+            if (_currentNode == null)
+            {
+                MessageBox.Show("Выберите элемент, который хотите удалить.");
+            }
+            else
             {
                 try
                 {
-                    _circuit.TryRemove(GetCurrentElementBase());
+                    _circuit.Remove(_currentNode);
+                    UpdateTreeView();
+                    ClearCircuit();
                 }
                 catch (Exception exception)
                 {
                     MessageBox.Show(exception.Message);
                 }
-
-                UpdateViewCircuit();
-            }
-            else
-            {
-                MessageBox.Show("Выберите элемент, который хотите удалить.");
             }
         }
 
         /// <summary>
-        ///     Получить текущий элемент из TreeView
+        ///     Очистить цепь.
         /// </summary>
-        /// <returns></returns>
-        private ElementBase GetCurrentElementBase()
+        private void ClearCircuit()
         {
-            if (_currentNodeTreeNode?.Value is ElementBase element)
+            _pictureBoxCircuit.Image = null;
+            _buttonCalculateFormShow.Visible = false;
+            _buttonDrawCircuit.Visible = true;
+        }
+
+        /// <summary>
+        ///     Нарисовать цепь.
+        /// </summary>
+        private void DrawCircuit()
+        {
+            ClearCircuit();
+            if (_circuit == null || _circuit.IsEmpty())
             {
-                return element;
+                return;
             }
 
-            return null;
+            _drawer.DrawCircuit();
+        }
+
+        private void ButtonDrawCircuit_Click(object sender, EventArgs e)
+        {
+            if (IsCircuitCorrect())
+            {
+                DrawCircuit();
+
+                _buttonCalculateFormShow.Visible = true;
+                _buttonDrawCircuit.Visible = false;
+            }
+            else
+            {
+                _buttonCalculateFormShow.Visible = false;
+                _buttonDrawCircuit.Visible = true;
+            }
+        }
+
+        private void ComboBoxAddNodeType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EnableAddElementControls(false);
+
+            if (_comboBoxAddNodeType.SelectedItem is NodeTypeComboBoxItem item)
+            {
+                switch (item.Value)
+                {
+                    case NodeType.Resistor:
+                        EnableAddElementControls(true);
+                        break;
+                    case NodeType.Capacitor:
+                        EnableAddElementControls(true);
+                        break;
+                    case NodeType.Inductor:
+                        EnableAddElementControls(true);
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Включить контролы для добавления.
+        /// </summary>
+        /// <param name="isEnable">Включить?</param>
+        private void EnableAddElementControls(bool isEnable)
+        {
+            _errorProvider.Clear();
+            _textBoxAddElementName.Enabled = isEnable;
+            _textBoxAddElementValue.Enabled = isEnable;
+            _buttonAddElement.Enabled = !isEnable;
+            _textBoxAddElementName.Text = "Имя..";
+            _textBoxAddElementValue.Text = "Номинал..";
         }
 
         #endregion
@@ -322,20 +446,6 @@ namespace View
             _circuit = new Circuit();
             _drawer = new Drawer(_pictureBoxCircuit, _circuit);
             _buttonAddElement.Enabled = false;
-        }
-
-        /// <summary>
-        ///     Нарисовать цепь.
-        /// </summary>
-        public void DrawCircuit()
-        {
-            _pictureBoxCircuit.Image = null;
-            if (_circuit == null || _circuit.IsEmpty())
-            {
-                return;
-            }
-
-            _drawer.DrawCircuit();
         }
 
         #endregion

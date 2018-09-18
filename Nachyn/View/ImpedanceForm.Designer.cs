@@ -38,11 +38,13 @@
             this._trackBarCount = new System.Windows.Forms.TrackBar();
             this._labelCount = new System.Windows.Forms.Label();
             this._labelError = new System.Windows.Forms.Label();
+            this._errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Impedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._calculationBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._trackBarCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // _labelStart
@@ -138,6 +140,11 @@
             this._labelError.Text = "Максимальная частота может принимать\r\nзначение только от 1 Гц. до 1 ТГц..";
             this._labelError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // _errorProvider
+            // 
+            this._errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errorProvider.ContainerControl = this;
+            // 
             // Frequency
             // 
             this.Frequency.DataPropertyName = "Frequency";
@@ -160,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 304);
+            this.ClientSize = new System.Drawing.Size(254, 304);
             this.Controls.Add(this._labelError);
             this.Controls.Add(this._labelCount);
             this.Controls.Add(this._dataGridView);
@@ -179,6 +186,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._calculationBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._trackBarCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,6 +203,7 @@
         private System.Windows.Forms.Label _labelCount;
         private System.Windows.Forms.Label _labelError;
         private System.Windows.Forms.BindingSource _calculationBindingSource;
+        private System.Windows.Forms.ErrorProvider _errorProvider;
         private System.Windows.Forms.DataGridViewTextBoxColumn Frequency;
         private System.Windows.Forms.DataGridViewTextBoxColumn Impedance;
     }

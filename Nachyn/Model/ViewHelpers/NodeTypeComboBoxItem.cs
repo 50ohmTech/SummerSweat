@@ -7,14 +7,14 @@ namespace Model.ViewHelpers
     /// <summary>
     ///     Тип элемента в ComboBox'е.
     /// </summary>
-    public sealed class ConnectionTypeComboBoxItem
+    public sealed class NodeTypeComboBoxItem
     {
         #region Properties
 
         /// <summary>
         ///     Тип элемента.
         /// </summary>
-        public ConnectionType Value { get; }
+        public NodeType Value { get; }
 
         /// <summary>
         ///     Описание.
@@ -25,10 +25,16 @@ namespace Model.ViewHelpers
             {
                 switch (Value)
                 {
-                    case ConnectionType.Parallel:
+                    case NodeType.Parallel:
                         return "Параллельное соединение";
-                    case ConnectionType.Serial:
+                    case NodeType.Series:
                         return "Последовательное соединение";
+                    case NodeType.Resistor:
+                        return "Резистор";
+                    case NodeType.Capacitor:
+                        return "Конденсатор";
+                    case NodeType.Inductor:
+                        return "Катушка";
                     default:
                         throw new ArgumentException();
                 }
@@ -43,7 +49,7 @@ namespace Model.ViewHelpers
         ///     Конструктор.
         /// </summary>
         /// <param name="value">Тип элемента.</param>
-        public ConnectionTypeComboBoxItem(ConnectionType value)
+        public NodeTypeComboBoxItem(NodeType value)
         {
             Value = value;
         }

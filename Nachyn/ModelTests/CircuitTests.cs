@@ -1,7 +1,6 @@
 ﻿using System;
 using Model;
 using Model.Elements;
-using Model.Elements.Enums;
 using NUnit.Framework;
 
 namespace ModelTests
@@ -44,47 +43,30 @@ namespace ModelTests
         public void AddAfterTest()
         {
             Circuit circuit = new Circuit();
-            Resistor resistorRoot = new Resistor("R-Root", 20);
-            circuit.AddAfter(null, resistorRoot, ConnectionType.Serial);
-
-            Resistor resistorQ = new Resistor("R-Q", 20);
-            circuit.AddAfter(resistorRoot, resistorQ, ConnectionType.Serial);
-
-            Resistor resistorW = new Resistor("R-W", 40);
-            circuit.AddAfter(resistorQ, resistorW, ConnectionType.Parallel);
-
-            Resistor resistorE = new Resistor("R-E", 20);
-            circuit.AddAfter(resistorW, resistorE, ConnectionType.Parallel);
-
-            Resistor resistorR = new Resistor("R-R", 20);
-            circuit.AddAfter(resistorE, resistorR, ConnectionType.Serial);
-
-            Assert.AreEqual(30, circuit.CalculateZ(new double[] {1})[0].Real, 0.01);
+            SeriesSubcircuit seriesSubcircuit = new SeriesSubcircuit();
+            ParallelSubcircuit parallelSubcircuit = new ParallelSubcircuit();
+            circuit.AddAfter(null, seriesSubcircuit);
+            circuit.AddAfter(seriesSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(seriesSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(parallelSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(parallelSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(seriesSubcircuit, parallelSubcircuit);
+            Assert.AreEqual(50, circuit.CalculateZ(new double[] {1})[0].Real, 0.01);
         }
 
         [Test(Description = "Тест на удаление элемента из цепи")]
-        public void TryRemoveTest()
+        public void RemoveTest()
         {
             Circuit circuit = new Circuit();
-            Resistor resistorRoot = new Resistor("R-Root", 20);
-            circuit.AddAfter(null, resistorRoot, ConnectionType.Serial);
-
-            Resistor resistorQ = new Resistor("R-Q", 20);
-            circuit.AddAfter(resistorRoot, resistorQ, ConnectionType.Serial);
-
-            Resistor resistorW = new Resistor("R-W", 40);
-            circuit.AddAfter(resistorQ, resistorW, ConnectionType.Parallel);
-
-            Resistor resistorE = new Resistor("R-E", 20);
-            circuit.AddAfter(resistorW, resistorE, ConnectionType.Parallel);
-
-            Resistor resistorR = new Resistor("R-R", 20);
-            circuit.AddAfter(resistorE, resistorR, ConnectionType.Serial);
-
-            circuit.TryRemove(resistorR);
-            circuit.TryRemove(resistorE);
-            circuit.TryRemove(resistorW);
-
+            SeriesSubcircuit seriesSubcircuit = new SeriesSubcircuit();
+            ParallelSubcircuit parallelSubcircuit = new ParallelSubcircuit();
+            circuit.AddAfter(null, seriesSubcircuit);
+            circuit.AddAfter(seriesSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(seriesSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(parallelSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(parallelSubcircuit, new Resistor("R", 20));
+            circuit.AddAfter(seriesSubcircuit, parallelSubcircuit);
+            circuit.Remove(parallelSubcircuit);
             Assert.AreEqual(40, circuit.CalculateZ(new double[] {1})[0].Real, 0.01);
         }
 
@@ -92,18 +74,14 @@ namespace ModelTests
         public void TryRemoveTestTwo()
         {
             Circuit circuit = new Circuit();
+            SeriesSubcircuit seriesSubcircuit = new SeriesSubcircuit();
 
-            Resistor resistorQ = new Resistor("Q", 20);
-
-            circuit.AddAfter(null, resistorQ, ConnectionType.Parallel);
-            Assert.AreEqual(20, circuit.CalculateZ(new double[] {1})[0].Real, 0.01);
-
-            circuit.TryRemove(resistorQ);
-            Assert.AreEqual(0, circuit.CalculateZ(new double[] {1})[0].Real, 0.01);
-
-            circuit.AddAfter(null, resistorQ, ConnectionType.Parallel);
-            circuit.AddAfter(resistorQ, new Resistor("W", 20), ConnectionType.Parallel);
-            Assert.AreEqual(10, circuit.CalculateZ(new double[] {1})[0].Real, 0.01);
+            circuit.AddAfter(null, seriesSubcircuit);
+            circuit.Remove(seriesSubcircuit);
+            if (circuit.Root != null)
+            {
+                throw new Exception("Корень был null");
+            }
         }
 
         [Test(Description = "Тест на пустой корень при вычислении")]
@@ -119,10 +97,10 @@ namespace ModelTests
         [Test(Description = "Тест на пустой корень при удалении")]
         public void CircuitDeleteEmptyRootTest()
         {
-            Assert.Throws<NullReferenceException>(() =>
+            Assert.Throws<InvalidOperationException>(() =>
             {
                 Circuit circuit = new Circuit();
-                circuit.TryRemove(new Resistor("Message", 20));
+                circuit.Remove(new Resistor("R", 20));
             });
         }
 

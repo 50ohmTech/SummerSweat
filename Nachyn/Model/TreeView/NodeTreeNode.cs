@@ -34,19 +34,19 @@ namespace Model.TreeView
             switch (node)
             {
                 case SeriesSubcircuit series:
-                    Text = "[Послед]";
+                    Text = $"[Послед] (Id:{series.Id})";
                     break;
                 case ParallelSubcircuit parallel:
-                    Text = "[Паралл]";
+                    Text = $"[Паралл] (Id:{parallel.Id})";
                     break;
                 case Resistor resistor:
-                    Text = $"[R] ({resistor.Value}) ({resistor.Name})";
+                    Text = $"[R] [{resistor.Value}] ({resistor.Name})";
                     break;
                 case Capacitor capacitor:
-                    Text = $"[C] ({capacitor.Value}) ({capacitor.Name})";
+                    Text = $"[C] [{capacitor.Value}] ({capacitor.Name})";
                     break;
                 case Inductor inductor:
-                    Text = $"[L] ({inductor.Value}) ({inductor.Name})";
+                    Text = $"[L] [{inductor.Value}] ({inductor.Name})";
                     break;
                 default:
                     throw new InvalidOperationException(nameof(node));
