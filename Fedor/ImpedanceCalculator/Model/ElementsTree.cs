@@ -109,24 +109,26 @@ namespace Model
             var elementNode = Search(Root, elementName);
             var parent = elementNode.Parent;
 
-            if (parent == Root)
-            {
-                parent.Brood.Remove(elementNode);
-
-                ElementsChanged?.Invoke(this,
-                    new ChangedEventArgs(elementNode.Element, ChangeType.Delete));
-
-                return;
-            }
-
-            if (parent.Brood.Count == 2)
+            if (parent != Root && parent.Brood.Count == 2)
             {
                 var brother = parent.Brood[0] == elementNode
                     ? parent.Brood[1]
                     : parent.Brood[0];
 
-                brother.Parent = parent.Parent;
-                parent.Parent.Brood.Add(brother);
+                if (brother.Element != null)
+                {
+                    brother.Parent = parent.Parent;
+                    parent.Parent.Brood.Add(brother);
+                }
+                else
+                {
+                    foreach (var child in brother.Brood)
+                    {
+                        child.Parent = parent.Parent;
+                        parent.Parent.Brood.Add(child);
+                    }
+                }
+
                 parent.Parent.Brood.Remove(parent);
             }
             else
