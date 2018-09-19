@@ -4,9 +4,10 @@ namespace ModelTests
 {
 	internal class CircuitTests
 	{
-		#region Public methods
+        #region Public methods
 
-		[Test(Description = "Тест правильности расчета сложной цепи")]
+        //TODO: как боженька тесты пишешь
+        [Test(Description = "Тест правильности расчета сложной цепи")]
 		public void NodeTest()
 		{
 		}
