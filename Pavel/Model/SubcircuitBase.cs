@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Model.Elements;
+using Model.Events;
 
 namespace Model
 {
-    /// <summary>
-    ///     Делегат хранящий подписчиков события ValueChanged
-    /// </summary>
-    /// <param name="value">Изменившееся значение</param>
-    /// <param name="сhangedElement">Изменившийся элемент</param>
-    public delegate void SubcircuitEventHandler(object value, object сhangedElement);
-
     /// <summary>
     ///     Подцепь.
     /// </summary>
@@ -30,7 +25,7 @@ namespace Model
         #region Ordinary fields
 
         /// <summary>
-        ///     Родитель
+        ///     Родитель.
         /// </summary>
         public INode _parent;
 
@@ -51,7 +46,12 @@ namespace Model
         public INode Parent
         {
             get => _parent;
-            set => _parent = value;
+            set
+            {
+                _parent = value;
+                ParentChanged?.Invoke(this,
+                    new SubcircuitEventArgs("Родитель изменен", value));
+            }
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Model
         /// <summary>
         ///     Событие на изменение родителя.
         /// </summary>
-        public event SubcircuitEventHandler ParentChanged;
+        public event EventHandler<SubcircuitEventArgs> ParentChanged;
 
         /// <summary>
         ///     Рассчитать импеданс.

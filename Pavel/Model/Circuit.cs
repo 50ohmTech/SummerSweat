@@ -27,18 +27,21 @@ namespace Model
 
         #endregion
 
+        #region Properties
 
         /// <summary>
         ///     Корень.
         /// </summary>
         public INode Root { get; private set; }
 
+        #endregion
+
         #region Public methods
 
         /// <summary>
         ///     Проверка на наличие элементов в цепи.
         /// </summary>
-        /// <returns>Есть ли в цепи элементы</returns>
+        /// <returns>Есть ли в цепи элементы.</returns>
         public bool IsEmpty()
         {
             return Root == null;
@@ -89,7 +92,8 @@ namespace Model
 
             if (node == null)
             {
-                throw new ArgumentNullException(nameof(node), "Узел не может быть null, потому что в цепи есть узлы.");
+                throw new ArgumentNullException(nameof(node),
+                    "Попытка передачи неопределенного элемента в функцию.");
             }
 
             if (node == Root)
@@ -103,7 +107,6 @@ namespace Model
 
         /// <summary>
         ///     Добавить новый узел в дочерний элемент узла.
-        ///     
         /// </summary>
         /// <param name="node">Узел в который добавляют дочерние элемнты.</param>
         /// <param name="newNode">Новый узел.</param>
@@ -112,7 +115,8 @@ namespace Model
         {
             if (newNode == null)
             {
-                throw new ArgumentNullException(nameof(newNode), "Новый узел не может быть не определен.");
+                throw new ArgumentNullException(nameof(newNode),
+                    "Новый узел не может быть не определен.");
             }
 
             if (node == newNode)
@@ -128,7 +132,8 @@ namespace Model
 
             if (!IsEmpty() && node == null)
             {
-                throw new ArgumentNullException(nameof(newNode), "Выберите узел относительно которого будет происходить добавление. Для добавления нового корня сделайте очистку цепи или удалите корень.");
+                throw new ArgumentNullException(nameof(newNode),
+                    "Выберите узел относительно которого будет происходить добавление. Для добавления нового корня сделайте очистку цепи или удалите корень.");
             }
 
             if (node is ElementBase)
@@ -142,6 +147,7 @@ namespace Model
                 {
                     throw new InvalidOperationException("Дети узла были null");
                 }
+
                 subcircuit.Nodes.Add(newNode);
 
                 if (newNode is SubcircuitBase newSubcircuit)

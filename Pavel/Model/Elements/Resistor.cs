@@ -8,17 +8,17 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Резистор
+    ///     Резистор.
     /// </summary>
     public class Resistor : ElementBase
     {
         #region Constructor
 
         /// <summary>
-        ///     Конструктор класса Resistor
+        ///     Конструктор класса Resistor.
         /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="value">Номинал</param>
+        /// <param name="name">Имя.</param>
+        /// <param name="value">Номинал.</param>
         public Resistor(string name, double value) : base(name, value)
         {
         }
@@ -28,10 +28,10 @@ namespace Model.Elements
         #region Public methods
 
         /// <summary>
-        ///     Расчет импеданса
+        ///     Расчет импеданса.
         /// </summary>
-        /// <param name="frequency">Частота сигнала</param>
-        /// <returns>Комплекное сопротивление</returns>
+        /// <param name="frequency">Частота сигнала.</param>
+        /// <returns>Комплекное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (frequency <= 0)

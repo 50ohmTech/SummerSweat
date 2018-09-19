@@ -4,31 +4,36 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Конденсатор
+    ///     Конденсатор.
     /// </summary>
     public class Capacitor : ElementBase
     {
-        #region Public methods
+        #region Constructor
 
         /// <summary>
-        ///     Конструктор класса Capacitor
+        ///     Конструктор класса Capacitor.
         /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="value">Номинал</param>
+        /// <param name="name">Имя.</param>
+        /// <param name="value">Номинал.</param>
         public Capacitor(string name, double value) : base(name, value)
         {
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
-        ///     Расчет импеданса
+        ///     Расчет импеданса.
         /// </summary>
-        /// <param name="frequency">Частота сигнала</param>
+        /// <param name="frequency">Частота сигнала.</param>
         /// <returns></returns>
         public override Complex CalculateZ(double frequency)
         {
             if (frequency <= 0)
             {
-                throw new ArgumentOutOfRangeException("Частота не может быть меньше нуля");
+                throw new ArgumentOutOfRangeException(
+                    "Частота не может быть меньше нуля");
             }
 
             return new Complex(0, -1 / (2 * Math.PI * frequency * Value));
