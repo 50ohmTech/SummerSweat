@@ -9,15 +9,6 @@ namespace CircuitElements
 	/// </summary>
 	public abstract class ElementBase : ICircuitElement
 	{
-		#region Static fields
-
-		/// <summary>
-		///     Уникальный идентификатор.
-		/// </summary>
-		private static int _elementId;
-
-		#endregion
-
 		#region Private fields
 
 		/// <summary>
@@ -86,11 +77,6 @@ namespace CircuitElements
 			}
 		}
 
-		/// <summary>
-		///     ID элемента
-		/// </summary>
-		public int ElementId { get; } = _elementId;
-
 		#endregion
 
 		#region Events
@@ -114,18 +100,19 @@ namespace CircuitElements
 			if (string.IsNullOrWhiteSpace(name))
 			{
 				throw new ArgumentNullException(
-					"An attempt to commit a null or empty name to the element\'s constructor");
+					"An attempt to commit a null or empty name to the " +
+					nameof(ElementBase) + "\'s constructor");
 			}
 
 			if (value < 0.000000001)
 			{
 				throw new ArgumentOutOfRangeException(
-					"An attempt to commit an invalid value to the element\'s constructor. Value must be bigger than 0");
+					"An attempt to commit an invalid value to the " +
+					nameof(ElementBase) + "\'s constructor. Value must be bigger than 0");
 			}
 
 			Name = name;
 			Value = value;
-			_elementId++;
 		}
 
 		#endregion

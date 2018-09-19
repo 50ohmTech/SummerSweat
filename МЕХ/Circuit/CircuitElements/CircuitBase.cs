@@ -11,7 +11,7 @@ namespace CircuitElements
 		/// <summary>
 		///     Уникальный идентификатор.
 		/// </summary>
-		private static int _circuitId;
+		private static int _uniqueId;
 
 		#endregion
 
@@ -31,7 +31,7 @@ namespace CircuitElements
 		/// </summary>
 		public List<ICircuitElement> Elements
 		{
-			get => new List<ICircuitElement>(_elements);
+			get => _elements;
 			set
 			{
 				_elements = value ?? throw new NullReferenceException(
@@ -40,7 +40,7 @@ namespace CircuitElements
 
 				foreach (var element in _elements)
 				{
-					element.ElementChanged += ElementChanged;
+					element.ElementChanged += ChangedElementInvoke;
 				}
 			}
 		}
@@ -48,7 +48,7 @@ namespace CircuitElements
 		/// <summary>
 		///     ID элемента
 		/// </summary>
-		public int ElementId { get; } = _circuitId;
+		public int Id { get; }
 
 		#endregion
 
@@ -64,18 +64,105 @@ namespace CircuitElements
 		#region Constructor
 
 		/// <summary>
-		///     Конструктор
+		///     Конструктор без цепи
+		/// </summary>
+		public CircuitBase()
+		{
+			Elements = new List<ICircuitElement>();
+			Id = _uniqueId;
+			_uniqueId++;
+		}
+
+		/// <summary>
+		///     Конструктор c цепью
 		/// </summary>
 		/// <param name="elements"> Список элементов электрической цепи </param>
 		public CircuitBase(List<ICircuitElement> elements)
 		{
 			Elements = elements;
-			_circuitId++;
+			Id = _uniqueId;
+			_uniqueId++;
+		}
+
+		#endregion
+
+		#region Private methods
+
+		/// <summary>
+		/// </summary>
+		/// <param name="newValue"></param>
+		/// <param name="valueOwner"></param>
+		private void ChangedElementInvoke(object newValue, ElementBase valueOwner)
+		{
+			ElementChanged?.Invoke(newValue, valueOwner);
 		}
 
 		#endregion
 
 		#region Public methods
+
+		/// <summary>
+		///     Получить количество элементов в длинну
+		/// </summary>
+		/// <returns>количество элементов в длинну</returns>
+		public abstract int GetCircuitLength();
+
+		/// <summary>
+		///     Получить количество элементов в ширину
+		/// </summary>
+		/// <returns>количество элементов в длинну</returns>
+		public abstract int GetCircuitWidth();
+
+		/// <summary>
+		///     Получить подцепь по ее ID
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>цепь</returns>
+		public CircuitBase GetCircuitById(int id)
+		{
+			if (Id == id)
+			{
+				return this;
+			}
+
+			foreach (var element in Elements)
+			{
+				if (element is CircuitBase circuit)
+				{
+					if (circuit.Id == id)
+					{
+						return circuit;
+					}
+
+					return GetCircuitById(id, circuit);
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		///     Получить подцепь по ее ID
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>цепь</returns>
+		public CircuitBase GetCircuitById(int id, CircuitBase childCircuit)
+		{
+			foreach (var element in childCircuit.Elements)
+			{
+				if (element is CircuitBase circuit)
+				{
+					if (circuit.Id == id)
+					{
+						return circuit;
+					}
+
+					return GetCircuitById(id, circuit);
+				}
+			}
+
+			return null;
+		}
 
 		/// <summary>
 		///     Расчитать импаденс по входной частоте

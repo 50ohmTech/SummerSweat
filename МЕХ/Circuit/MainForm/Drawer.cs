@@ -9,7 +9,7 @@ using CircuitElements.Elements;
 namespace MainForm
 {
 	/// <summary>
-	///     Рисовальщик цепи.
+	///     Отрисовщик цепи.
 	/// </summary>
 	public static class Drawer
 	{
@@ -26,14 +26,14 @@ namespace MainForm
 		private const int _capacitorPositionY = 15;
 
 		/// <summary>
-		///     Сжатие элементов по X.
+		///     Размеры элементов по X.
 		/// </summary>
-		private const int _compressionElementX = 30;
+		private const int _sizeElementX = 30;
 
 		/// <summary>
-		///     Сжатие элементов по Y.
+		///     Размеры элементов по Y.
 		/// </summary>
-		private const int _compressionElementY = 20;
+		private const int _sizeElementY = 20;
 
 		/// <summary>
 		///     Позиция элемента по Y от линии.
@@ -115,130 +115,160 @@ namespace MainForm
 		/// <summary>
 		///     Рисовать схему электрической цепи.
 		/// </summary>
-		/// <param name="root">Корень поддерева.</param>
-		/// <param name="displacement">Смещение.</param>
-		/// <returns>Размер поддерева.</returns>
-		private static Point DrawCircuit(ICircuitElement root, Point displacement)
+		/// <param name="root">рисуемая цепь</param>
+		/// <param name="margin">смещение</param>
+		/// <returns>Размер подцепи</returns>
+		private static Size DrawCircuit(ICircuitElement root, Point margin)
 		{
 			if (root is ElementBase element)
 			{
-				DrawElement(_graphics, Pen, element, displacement);
-				return new Point(1, 1);
+				DrawElement(_graphics, Pen, element, margin);
+				return new Size(1, 1);
 			}
-
-			var maxCount = 0;
-			var steps = new List<int>();
 
 			if (root is ParallelCircuit parallelCircuit)
 			{
-				_graphics.DrawLine(Pen,
-					new Point(displacement.X, _elementPositionY + displacement.Y),
-					new Point(_elementPositionY + displacement.X,
-						_elementPositionY + displacement.Y));
-
-				for (var i = 0; i < parallelCircuit.Elements.Count; i++)
-				{
-					var count = DrawCircuit(parallelCircuit.Elements[i],
-						new Point(_elementPositionY + displacement.X,
-							steps.Sum() * _lineSpacingElementWidth + displacement.Y));
-
-					steps.Add(count.Y);
-
-					if (maxCount < count.X)
-					{
-						var step = 0;
-						for (var j = 0; j < i; j++)
-						{
-							_graphics.DrawLine(Pen,
-								new Point(
-									_elementPositionY +
-									maxCount * _lineSpacingAfterElement + displacement.X,
-									_elementPositionY + step * _lineSpacingElementWidth +
-									displacement.Y),
-								new Point(
-									_elementPositionY +
-									count.X * _lineSpacingAfterElement + displacement.X,
-									_elementPositionY + step * _lineSpacingElementWidth +
-									displacement.Y));
-
-							step += steps[j];
-						}
-
-						maxCount = count.X;
-					}
-					else
-					{
-						var step = 0;
-						for (var j = 0; j < i; j++)
-						{
-							step += steps[j];
-						}
-
-						_graphics.DrawLine(Pen,
-							new Point(
-								_elementPositionY + count.X * _lineSpacingAfterElement +
-								displacement.X,
-								_elementPositionY + step * _lineSpacingElementWidth +
-								displacement.Y),
-							new Point(
-								_elementPositionY + maxCount * _lineSpacingAfterElement +
-								displacement.X,
-								_elementPositionY + step * _lineSpacingElementWidth +
-								displacement.Y));
-					}
-				}
-
-				_graphics.DrawLine(Pen,
-					new Point(
-						_elementPositionY + maxCount * _lineSpacingAfterElement +
-						displacement.X, _elementPositionY + displacement.Y),
-					new Point(
-						_lineSpacingAfterElement + maxCount * _lineSpacingAfterElement +
-						displacement.X, _elementPositionY + displacement.Y));
-
-
-				_graphics.DrawLine(Pen,
-					new Point(_elementPositionY + displacement.X,
-						_elementPositionY + displacement.Y),
-					new Point(_elementPositionY + displacement.X,
-						_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) *
-						_lineSpacingElementWidth +
-						displacement.Y));
-
-				_graphics.DrawLine(Pen,
-					new Point(
-						_elementPositionY + maxCount * _lineSpacingAfterElement +
-						displacement.X, _elementPositionY + displacement.Y),
-					new Point(
-						_elementPositionY + maxCount * _lineSpacingAfterElement +
-						displacement.X,
-						_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) *
-						_lineSpacingElementWidth +
-						displacement.Y));
-
-				return new Point(maxCount + 1, steps.Sum());
+				return DrawParallelCircuit(parallelCircuit, margin);
 			}
 
-			if (root is SerialCircuit serialCircuit)
-			{
-				foreach (var child in serialCircuit.Elements)
-				{
-					var count = DrawCircuit(child,
-						new Point(steps.Sum() * _lineSpacingAfterElement + displacement.X,
-							displacement.Y));
-
-					steps.Add(count.X);
-
-					if (maxCount < count.Y)
-					{
-						maxCount = count.Y;
-					}
-				}
-			}
-
-			return new Point(steps.Sum(), maxCount);
+			return DrawSerialCircuit(root as SerialCircuit, margin);
 		}
 
+		/// <summary>
+		///     Отрисовка последовательного соединения
+		/// </summary>
+		/// <param name="serialCircuit">рисуемая цепь</param>
+		/// <param name="margin">смещение</param>
+		/// <returns>Размер подцепи</returns>
+		private static Size DrawSerialCircuit(SerialCircuit serialCircuit,
+			Point margin)
+		{
+			var maxCount = 0;
+			var steps = new List<int>();
+
+			foreach (var child in serialCircuit.Elements)
+			{
+				var count = DrawCircuit(child,
+					new Point(steps.Sum() * _lineSpacingAfterElement + margin.X,
+						margin.Y));
+
+				steps.Add(count.Width);
+
+				if (maxCount < count.Height)
+				{
+					maxCount = count.Height;
+				}
+			}
+
+			return new Size(steps.Sum(), maxCount);
+		}
+
+		/// <summary>
+		///     Отрисовка параллельного соединения
+		/// </summary>
+		/// <param name="parallelCircuit">рисуемая цепь</param>
+		/// <param name="margin">смещение</param>
+		/// <returns>Размер подцепи</returns>
+		private static Size DrawParallelCircuit(ParallelCircuit parallelCircuit,
+			Point margin)
+		{
+			var maxCount = 0;
+			var steps = new List<int>();
+
+			//Линия перед параллельным соединением
+			_graphics.DrawLine(Pen,
+				new Point(margin.X, _elementPositionY + margin.Y),
+				new Point(_elementPositionY + margin.X,
+					_elementPositionY + margin.Y));
+
+			for (var i = 0; i < parallelCircuit.Elements.Count; i++)
+			{
+				var count = DrawCircuit(parallelCircuit.Elements[i],
+					new Point(_elementPositionY + margin.X,
+						steps.Sum() * _lineSpacingElementWidth + margin.Y));
+
+				steps.Add(count.Height);
+
+				//Дорисовка линий в параллельном соединении, где над или под линией есть элементы а само соединение между другими
+				if (maxCount < count.Width)
+				{
+					var step = 0;
+
+					for (var j = 0; j < i; j++)
+					{
+						_graphics.DrawLine(Pen,
+							new Point(
+								_elementPositionY +
+								maxCount * _lineSpacingAfterElement + margin.X,
+								_elementPositionY + step * _lineSpacingElementWidth +
+								margin.Y),
+							new Point(
+								_elementPositionY +
+								count.Width * _lineSpacingAfterElement + margin.X,
+								_elementPositionY + step * _lineSpacingElementWidth +
+								margin.Y));
+
+						step += steps[j];
+					}
+
+					maxCount = count.Width;
+				}
+
+				//Дорисовка линий в параллельном соединении, где над или под линией есть элементы а само соединение скраю
+				else
+				{
+					var step = 0;
+					for (var j = 0; j < i; j++)
+					{
+						step += steps[j];
+					}
+
+					_graphics.DrawLine(Pen,
+						new Point(
+							_elementPositionY + count.Width * _lineSpacingAfterElement +
+							margin.X,
+							_elementPositionY + step * _lineSpacingElementWidth +
+							margin.Y),
+						new Point(
+							_elementPositionY + maxCount * _lineSpacingAfterElement +
+							margin.X,
+							_elementPositionY + step * _lineSpacingElementWidth +
+							margin.Y));
+				}
+			}
+
+			//Линия после параллельного соединения
+			_graphics.DrawLine(Pen,
+				new Point(
+					_elementPositionY + maxCount * _lineSpacingAfterElement +
+					margin.X, _elementPositionY + margin.Y),
+				new Point(
+					_lineSpacingAfterElement + maxCount * _lineSpacingAfterElement +
+					margin.X, _elementPositionY + margin.Y));
+
+			//Левая крайняя линия параллельного соединения
+			_graphics.DrawLine(Pen,
+				new Point(_elementPositionY + margin.X,
+					_elementPositionY + margin.Y),
+				new Point(_elementPositionY + margin.X,
+					_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) *
+					_lineSpacingElementWidth +
+					margin.Y));
+
+			//Правая крайняя линия параллельного соединения
+			_graphics.DrawLine(Pen,
+				new Point(
+					_elementPositionY + maxCount * _lineSpacingAfterElement +
+					margin.X, _elementPositionY + margin.Y),
+				new Point(
+					_elementPositionY + maxCount * _lineSpacingAfterElement +
+					margin.X,
+					_elementPositionY + (steps.Sum() - steps[steps.Count - 1]) *
+					_lineSpacingElementWidth +
+					margin.Y));
+
+			return new Size(maxCount + 1, steps.Sum());
+		}
 
 		/// <summary>
 		///     Рисовать элемент электрической цепи.
@@ -246,113 +276,113 @@ namespace MainForm
 		/// <param name="graphics">Поверхность рисования.</param>
 		/// <param name="pen">Ручка.</param>
 		/// <param name="element">Элемент электрической цепи.</param>
-		/// <param name="displacement">Смещение.</param>
+		/// <param name="margin">Смещение.</param>
 		private static void DrawElement(Graphics graphics, Pen pen, ElementBase element,
-			Point displacement)
+			Point margin)
 		{
 			var brush = new SolidBrush(Color.Black);
 			switch (element)
 			{
 				case Resistor _:
 					graphics.DrawLine(pen,
-						new Point(_radiusInductor + displacement.X,
-							_compressionElementY + displacement.Y),
-						new Point(_radiusInductor + displacement.X,
-							_compressionElementX + displacement.Y));
+						new Point(_radiusInductor + margin.X,
+							_sizeElementY + margin.Y),
+						new Point(_radiusInductor + margin.X,
+							_sizeElementX + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_radiusInductor + displacement.X,
-							_compressionElementX + displacement.Y),
-						new Point(_lineSpacingElementWidth + displacement.X,
-							_compressionElementX + displacement.Y));
+						new Point(_radiusInductor + margin.X,
+							_sizeElementX + margin.Y),
+						new Point(_lineSpacingElementWidth + margin.X,
+							_sizeElementX + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X,
-							_compressionElementY + displacement.Y),
-						new Point(_lineSpacingElementWidth + displacement.X,
-							_compressionElementX + displacement.Y));
+						new Point(_lineSpacingElementWidth + margin.X,
+							_sizeElementY + margin.Y),
+						new Point(_lineSpacingElementWidth + margin.X,
+							_sizeElementX + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X,
-							_compressionElementY + displacement.Y),
-						new Point(_radiusInductor + displacement.X,
-							_compressionElementY + displacement.Y));
+						new Point(_lineSpacingElementWidth + margin.X,
+							_sizeElementY + margin.Y),
+						new Point(_radiusInductor + margin.X,
+							_sizeElementY + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(0 + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_radiusInductor + displacement.X,
-							_elementPositionY + displacement.Y));
+						new Point(0 + margin.X, _elementPositionY + margin.Y),
+						new Point(_radiusInductor + margin.X,
+							_elementPositionY + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X,
-							_elementPositionY + displacement.Y),
-						new Point(_lineSpacingAfterElement + displacement.X,
-							_elementPositionY + displacement.Y));
+						new Point(_lineSpacingElementWidth + margin.X,
+							_elementPositionY + margin.Y),
+						new Point(_lineSpacingAfterElement + margin.X,
+							_elementPositionY + margin.Y));
 
 					graphics.DrawString(element.Name, Font, brush,
-						_capacitorPositionY + displacement.X,
-						_lineSpacingElementWidth + displacement.Y);
+						_capacitorPositionY + margin.X,
+						_lineSpacingElementWidth + margin.Y);
 
 					break;
 				case Capacitor _:
 					graphics.DrawLine(pen,
-						new Point(_compressionElementY + displacement.X,
-							_capacitorPositionY + displacement.Y),
-						new Point(_compressionElementY + displacement.X,
-							_bottomHeightCapacitor + displacement.Y));
+						new Point(_sizeElementY + margin.X,
+							_capacitorPositionY + margin.Y),
+						new Point(_sizeElementY + margin.X,
+							_bottomHeightCapacitor + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_compressionElementX + displacement.X,
-							_capacitorPositionY + displacement.Y),
-						new Point(_compressionElementX + displacement.X,
-							_bottomHeightCapacitor + displacement.Y));
+						new Point(_sizeElementX + margin.X,
+							_capacitorPositionY + margin.Y),
+						new Point(_sizeElementX + margin.X,
+							_bottomHeightCapacitor + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(0 + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_compressionElementY + displacement.X,
-							_elementPositionY + displacement.Y));
+						new Point(0 + margin.X, _elementPositionY + margin.Y),
+						new Point(_sizeElementY + margin.X,
+							_elementPositionY + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_compressionElementX + displacement.X,
-							_elementPositionY + displacement.Y),
-						new Point(_lineSpacingAfterElement + displacement.X,
-							_elementPositionY + displacement.Y));
+						new Point(_sizeElementX + margin.X,
+							_elementPositionY + margin.Y),
+						new Point(_lineSpacingAfterElement + margin.X,
+							_elementPositionY + margin.Y));
 
 					graphics.DrawString(element.Name, Font, brush,
-						_capacitorPositionY + displacement.X,
-						_lineSpacingElementWidth + displacement.Y);
+						_capacitorPositionY + margin.X,
+						_lineSpacingElementWidth + margin.Y);
 
 					break;
 				case Inductor _:
-					graphics.DrawArc(pen, _radiusInductor + displacement.X,
-						_compressionElementY + displacement.Y,
+					graphics.DrawArc(pen, _radiusInductor + margin.X,
+						_sizeElementY + margin.Y,
 						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees,
 						_inductorPartСircleDegrees);
 
-					graphics.DrawArc(pen, _compressionElementY + displacement.X,
-						_compressionElementY + displacement.Y,
+					graphics.DrawArc(pen, _sizeElementY + margin.X,
+						_sizeElementY + margin.Y,
 						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees,
 						_inductorPartСircleDegrees);
 
-					graphics.DrawArc(pen, _compressionElementX + displacement.X,
-						_compressionElementY + displacement.Y,
+					graphics.DrawArc(pen, _sizeElementX + margin.X,
+						_sizeElementY + margin.Y,
 						_radiusInductor, _radiusInductor, _inductorPartСircleDegrees,
 						_inductorPartСircleDegrees);
 
 					graphics.DrawLine(pen,
-						new Point(0 + displacement.X, _elementPositionY + displacement.Y),
-						new Point(_radiusInductor + displacement.X,
-							_elementPositionY + displacement.Y));
+						new Point(0 + margin.X, _elementPositionY + margin.Y),
+						new Point(_radiusInductor + margin.X,
+							_elementPositionY + margin.Y));
 
 					graphics.DrawLine(pen,
-						new Point(_lineSpacingElementWidth + displacement.X,
-							_elementPositionY + displacement.Y),
-						new Point(_lineSpacingAfterElement + displacement.X,
-							_elementPositionY + displacement.Y));
+						new Point(_lineSpacingElementWidth + margin.X,
+							_elementPositionY + margin.Y),
+						new Point(_lineSpacingAfterElement + margin.X,
+							_elementPositionY + margin.Y));
 
 					graphics.DrawString(element.Name, Font, brush,
-						_capacitorPositionY + displacement.X,
-						_lineSpacingElementWidth + displacement.Y);
+						_capacitorPositionY + margin.X,
+						_lineSpacingElementWidth + margin.Y);
 
 					break;
 			}
@@ -367,7 +397,9 @@ namespace MainForm
 		/// </summary>
 		public static Bitmap DrawCircuit(CircuitBase circuit)
 		{
-			var bitmap = new Bitmap(1000, 1000);
+			var bitmap = new Bitmap(circuit.GetCircuitLength() * _sizeElementX * 2,
+				(circuit.GetCircuitWidth() + 1) * _sizeElementY * 2);
+
 			_graphics = Graphics.FromImage(bitmap);
 			DrawCircuit(circuit, Margin);
 			return bitmap;

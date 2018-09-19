@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace CircuitElements.Elements
+namespace CircuitElements.Circuits
 {
 	/// <summary>
 	///     Элемент паралельной цепи
@@ -11,10 +11,17 @@ namespace CircuitElements.Elements
 		#region Constructor
 
 		/// <summary>
-		///     Конструктор
+		///     Конструктор с цепью
 		/// </summary>
 		/// <param name="elements"> Список элементов электрической цепи </param>
 		public ParallelCircuit(List<ICircuitElement> elements) : base(elements)
+		{
+		}
+
+		/// <summary>
+		///     Конструктор без цепи
+		/// </summary>
+		public ParallelCircuit()
 		{
 		}
 
@@ -42,6 +49,46 @@ namespace CircuitElements.Elements
 			}
 
 			return Complex.Divide(numerator, denominator);
+		}
+
+		/// <summary>
+		///     Получить количество элементов в длинну
+		/// </summary>
+		/// <returns>количество элементов в длинну</returns>
+		public override int GetCircuitLength()
+		{
+			var count = 1;
+			foreach (var element in Elements)
+			{
+				if (element is CircuitBase circuitBase)
+				{
+					count += circuitBase.GetCircuitLength();
+				}
+			}
+
+			return count;
+		}
+
+		/// <summary>
+		///     Получить количество элементов в ширину
+		/// </summary>
+		/// <returns>количество элементов в длинну</returns>
+		public override int GetCircuitWidth()
+		{
+			var count = 1;
+			foreach (var element in Elements)
+			{
+				if (element is ParallelCircuit parallelCircuit)
+				{
+					count += parallelCircuit.GetCircuitWidth();
+				}
+				else
+				{
+					count++;
+				}
+			}
+
+			return count;
 		}
 
 		#endregion

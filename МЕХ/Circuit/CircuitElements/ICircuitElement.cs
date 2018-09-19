@@ -4,15 +4,6 @@ namespace CircuitElements
 {
 	public interface ICircuitElement
 	{
-		#region Properties
-
-		/// <summary>
-		///     ID элемента
-		/// </summary>
-		int ElementId { get; }
-
-		#endregion
-
 		#region Events
 
 		/// <summary>
