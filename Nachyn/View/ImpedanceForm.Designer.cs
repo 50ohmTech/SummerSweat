@@ -1,5 +1,4 @@
-﻿using Model.Checks;
-using View.Helpers;
+﻿using View.Helpers;
 
 namespace View
 {

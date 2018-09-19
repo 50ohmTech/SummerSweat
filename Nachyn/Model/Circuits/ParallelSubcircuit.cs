@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
-using Model.Checks;
 using Model.Elements;
+using Model.Validators;
 
 namespace Model.Circuits
 {
@@ -19,10 +19,11 @@ namespace Model.Circuits
         /// <returns>Импеданс.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Checks.Check.CheckFrequencies(frequency);
+            Check.CheckFrequencies(frequency);
             if (Nodes.Count <= 1)
             {
-                throw new InvalidOperationException($"В параллельном соединении (Id: {Id}) необходимо минимум 2 узла.");
+                throw new InvalidOperationException(
+                    $"В параллельном соединении (Id: {Id}) необходимо минимум 2 узла.");
             }
 
             Complex resistance = Complex.Zero;

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Model.Checks;
-using Model.Enums;
 using Model.Events;
+using Model.Validators;
 
 namespace Model.Elements
 {
@@ -12,24 +11,6 @@ namespace Model.Elements
     /// </summary>
     public abstract class ElementBase : ICircuitNode
     {
-        #region Fields
-
-        #region Private fields
-
-        /// <summary>
-        ///     Имя.
-        /// </summary>
-        private string _name;
-
-        /// <summary>
-        ///     Номинал.
-        /// </summary>
-        private double _value;
-
-        #endregion
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -42,19 +23,22 @@ namespace Model.Elements
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(Name),"Имя не может быть пустым.");
+                    throw new ArgumentOutOfRangeException(nameof(Name),
+                        "Имя не может быть пустым.");
                 }
 
                 if (value.Contains(" "))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(Name), "Имя не может содержать пробелы.");
+                    throw new ArgumentOutOfRangeException(nameof(Name),
+                        "Имя не может содержать пробелы.");
                 }
 
                 if (value.Length > 5)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(Name), "Имя не может содержать более 5 символов.");
+                    throw new ArgumentOutOfRangeException(nameof(Name),
+                        "Имя не может содержать более 5 символов.");
                 }
-               
+
                 _name = value;
             }
         }
@@ -71,7 +55,7 @@ namespace Model.Elements
                     throw new ArgumentOutOfRangeException(nameof(Value));
                 }
 
-                Checks.Check.CheckFrequencies(value);
+                Check.CheckFrequencies(value);
                 _value = value;
                 ValueChanged?.Invoke(this, new ElementValueEventArgs
                     (Name, _value));
@@ -98,16 +82,9 @@ namespace Model.Elements
         /// </summary>
         public event EventHandler<ElementValueEventArgs> ValueChanged;
 
-        /// <summary>
-        ///     Расчитать комплексное сопротивление.
-        /// </summary>
-        /// <param name="frequency">Частота.</param>
-        /// <returns></returns>
-        public abstract Complex CalculateZ(double frequency);
-
         #endregion
 
-        #region Public methods
+        #region Constructor
 
         /// <summary>
         ///     Конструктор.
@@ -120,24 +97,40 @@ namespace Model.Elements
             Value = value;
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
         ///     Возвращает символ элемента.
         /// </summary>
         /// <returns>Тип узла.</returns>
-        public static string GetSymbol(NodeType nodeType)
-        {
-            switch (nodeType)
-            {
-                case NodeType.Resistor:
-                    return "R";
-                case NodeType.Inductor:
-                    return "L";
-                case NodeType.Capacitor:
-                    return "C";
-                default:
-                    return "?";
-            }
-        }
+        public abstract string GetSymbol();
+
+        /// <summary>
+        ///     Расчитать комплексное сопротивление.
+        /// </summary>
+        /// <param name="frequency">Частота.</param>
+        /// <returns></returns>
+        public abstract Complex CalculateZ(double frequency);
+
+        #endregion
+
+        #region Fields
+
+        #region Private fields
+
+        /// <summary>
+        ///     Имя.
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        ///     Номинал.
+        /// </summary>
+        private double _value;
+
+        #endregion
 
         #endregion
     }

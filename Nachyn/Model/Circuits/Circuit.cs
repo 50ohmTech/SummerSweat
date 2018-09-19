@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Model.Checks;
 using Model.Elements;
+using Model.Validators;
 
 namespace Model.Circuits
 {
@@ -47,7 +47,7 @@ namespace Model.Circuits
         /// <returns>Импедансы.</returns>
         public List<Complex> CalculateZ(double[] frequencies)
         {
-            Checks.Check.CheckFrequencies(frequencies);
+            Check.CheckFrequencies(frequencies);
 
             if (Root == null)
             {
@@ -71,7 +71,8 @@ namespace Model.Circuits
 
             if (node == null)
             {
-                throw new ArgumentNullException(nameof(node), "Узел не может быть null, потому что в цепи есть узлы.");
+                throw new ArgumentNullException(nameof(node),
+                    "Узел не может быть null, потому что в цепи есть узлы.");
             }
 
             if (node == Root)
@@ -85,21 +86,20 @@ namespace Model.Circuits
 
         /// <summary>
         ///     Добавить новый узел в дети узла.
-        ///     
         /// </summary>
         /// <param name="node">Узел в который добавляют детей.</param>
         /// <param name="newNode">Новый узел.</param>
-        /// <param name="nodeType">Тип узла.</param>
         public void AddAfter(ICircuitNode node, ICircuitNode newNode)
         {
             if (newNode == null)
             {
-                throw new ArgumentNullException(nameof(newNode), "Новый узел не может быть не определен.");
+                throw new ArgumentNullException(nameof(newNode),
+                    "Новый узел не может быть не определен.");
             }
 
             if (node == newNode)
             {
-                throw new ArgumentOutOfRangeException("Узел был равен новому узлу");
+                throw new ArgumentOutOfRangeException("Узел был равен новому узлу.");
             }
 
             if (IsEmpty())

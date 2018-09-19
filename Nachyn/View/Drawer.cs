@@ -82,7 +82,6 @@ namespace View
 
         #region Properties
 
-        //TODO: Правильнее называть Location, Margin, Padding 
         /// <summary>
         ///     Отступ.
         /// </summary>
@@ -131,7 +130,6 @@ namespace View
 
             if (root is ParallelSubcircuit)
             {
-                //TODO: магические числа вынести в именованные константы(+)
                 graphics.DrawLine(Pen, new Point(displacement.X, _elementPositionY + displacement.Y),
                     new Point(_elementPositionY + displacement.X, _elementPositionY + displacement.Y));
 
@@ -228,7 +226,6 @@ namespace View
             SolidBrush brush = new SolidBrush(Color.Black);
             switch (element)
             {
-                //TODO: магические числа в именованные константы
                 case Resistor _:
                     graphics.DrawLine(pen,
                         new Point(_radiusInductor + displacement.X, _compressionElementY + displacement.Y),
@@ -295,7 +292,6 @@ namespace View
                     break;
             }
 
-            //TODO: подпись одинаковая для всех элементов - вынести из-под switch(+)
             graphics.DrawString(element.Name, Font, brush, _CapacitorPositionY + displacement.X,
                 _lineSpacingElementWidth + displacement.Y);
         }
@@ -313,9 +309,6 @@ namespace View
             {
                 throw new ArgumentNullException(nameof(circuit));
             }
-
-            //TODO: а нужно ли в таком случае постоянно хранить graphics и circuit? (+)
-            //TODO: может, сделать circuit входным аргументом, a graphics/bitmap выходным? (+)
             Bitmap bitmap = new Bitmap(1000, 1000);
             DrawCircuit(circuit.Root, Displacement, Graphics.FromImage(bitmap));
             return bitmap;

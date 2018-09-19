@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="Circuits\Circuit.cs" />
     <Compile Include="Elements\Capacitor.cs" />
-    <Compile Include="Checks\Check.cs" />
+    <Compile Include="Validators\Check.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Events\ElementValueEventArgs.cs" />
     <Compile Include="Events\SubcircuitParentEventArgs.cs" />

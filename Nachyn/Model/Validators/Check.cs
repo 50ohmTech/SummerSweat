@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace Model.Checks
+namespace Model.Validators
 {
-    //TODO: Проверка частот - это не часть элементов. Не должно быть в этом пространстве имён(+)
     /// <summary>
     ///     Проверки.
     /// </summary>

@@ -7,24 +7,6 @@ namespace Model.Events
     /// </summary>
     public class ElementValueEventArgs : EventArgs
     {
-        #region Fields
-
-        #region Private fields
-
-        /// <summary>
-        ///     Сообщение.
-        /// </summary>
-        private string _message;
-
-        /// <summary>
-        ///     Новое значение.
-        /// </summary>
-        private double _value;
-
-        #endregion
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -63,7 +45,7 @@ namespace Model.Events
 
         #endregion
 
-        #region Public methods
+        #region Constructor
 
         /// <summary>
         ///     Конструктор.
@@ -75,6 +57,24 @@ namespace Model.Events
             Message = message;
             Value = value;
         }
+
+        #endregion
+
+        #region Fields
+
+        #region Private fields
+
+        /// <summary>
+        ///     Сообщение.
+        /// </summary>
+        private string _message;
+
+        /// <summary>
+        ///     Новое значение.
+        /// </summary>
+        private double _value;
+
+        #endregion
 
         #endregion
     }

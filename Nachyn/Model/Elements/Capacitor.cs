@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Numerics;
-using Model.Checks;
+using Model.Validators;
 
-//TODO: цепи и элементы должны быть в разных папках(+)
 namespace Model.Elements
 {
     /// <summary>
@@ -29,10 +28,16 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Checks.Check.CheckFrequencies(frequency);
+            Check.CheckFrequencies(frequency);
             double valueZ = 1 / (2 * Math.PI * frequency * Value);
             return new Complex(0, valueZ);
         }
+
+        /// <summary>
+        ///     Возвращает символ элемента.
+        /// </summary>
+        /// <returns>Тип узла.</returns>
+        public override string GetSymbol() => "C";
 
         #endregion
     }

@@ -8,16 +8,12 @@ namespace Model.Events
     /// </summary>
     public class SubcircuitParentEventArgs
     {
-        #region Fields
-
         #region Private fields
 
         /// <summary>
         ///     Сообщение.
         /// </summary>
         private string _message;
-
-        #endregion
 
         #endregion
 
@@ -47,7 +43,7 @@ namespace Model.Events
 
         #endregion
 
-        #region Public methods
+        #region Constructor
 
         /// <summary>
         ///     Конструктор.

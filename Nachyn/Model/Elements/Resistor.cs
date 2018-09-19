@@ -1,5 +1,5 @@
 ﻿using System.Numerics;
-using Model.Checks;
+using Model.Validators;
 
 namespace Model.Elements
 {
@@ -8,7 +8,7 @@ namespace Model.Elements
     /// </summary>
     public class Resistor : ElementBase
     {
-        #region Public methods
+        #region Constructor
 
         /// <summary>
         ///     Конструктор.
@@ -19,6 +19,10 @@ namespace Model.Elements
         {
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
         ///     Расчет комплексного сопротивления
         ///     данного элемента.
@@ -27,9 +31,18 @@ namespace Model.Elements
         /// <returns>Комплексное сопротивление.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            Checks.Check.CheckFrequencies(frequency);
+            Check.CheckFrequencies(frequency);
 
             return new Complex(Value, 0);
+        }
+
+        /// <summary>
+        ///     Возвращает символ элемента.
+        /// </summary>
+        /// <returns>Тип узла.</returns>
+        public override string GetSymbol()
+        {
+            return "R";
         }
 
         #endregion

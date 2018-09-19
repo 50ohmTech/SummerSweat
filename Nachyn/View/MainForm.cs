@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Model.Checks;
 using Model.Circuits;
 using Model.Elements;
 using Model.Elements.Factories;
 using Model.Enums;
 using Model.TreeView;
+using Model.Validators;
 using View.Helpers;
 using View.Helpers.Enums;
 

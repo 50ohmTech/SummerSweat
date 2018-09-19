@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Windows.Forms;
-using Model.Checks;
 using Model.Circuits;
+using Model.Validators;
 using View.Helpers;
 
 namespace View
@@ -121,13 +121,10 @@ namespace View
                 return;
             }
 
-            //TODO: нужен индексатор - используй for(+)
-
             for (int i = 0; i < impedances.Count; i++)
             {
                 Calculation calculation = new Calculation
                 {
-                    //TODO: Complex.ToString()? (нет)
                     Impedance = $"R:{Math.Round(impedances[i].Real, 3)} I:{Math.Round(impedances[i].Imaginary, 3)}",
                     Frequency = $"{Math.Round(frequencies[i], 3)}"
                 };

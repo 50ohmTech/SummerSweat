@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
-using Model.Checks;
 using Model.Elements;
+using Model.Validators;
 
 namespace Model.Circuits
 {
@@ -21,9 +21,11 @@ namespace Model.Circuits
         {
             if (Nodes.Count < 1)
             {
-                throw new InvalidOperationException($"В последовательном соединении (Id: {Id}) нет узлов.");
+                throw new InvalidOperationException(
+                    $"В последовательном соединении (Id: {Id}) нет узлов.");
             }
-            Checks.Check.CheckFrequencies(frequency);
+
+            Check.CheckFrequencies(frequency);
 
             Complex resistance = Complex.Zero;
 

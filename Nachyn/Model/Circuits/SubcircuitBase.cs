@@ -6,14 +6,11 @@ using Model.Events;
 
 namespace Model.Circuits
 {
-    //TODO: цепи - это тоже не элементы. Должны быть в отдельной папке(+)
     /// <summary>
     ///     Подцепь.
     /// </summary>
     public abstract class SubcircuitBase : ICircuitNode
     {
-        #region Fields
-
         #region Static fields
 
         /// <summary>
@@ -23,14 +20,12 @@ namespace Model.Circuits
 
         #endregion
 
-        #region Ordinary fields
+        #region Private fields
 
         /// <summary>
         ///     Родитель
         /// </summary>
-        public ICircuitNode _parent;
-
-        #endregion
+        private ICircuitNode _parent;
 
         #endregion
 
@@ -40,7 +35,7 @@ namespace Model.Circuits
         ///     Уникальный идентификатор.
         /// </summary>
         public int Id { get; } = _id;
-     
+
         /// <summary>
         ///     Родитель.
         /// </summary>
@@ -69,16 +64,9 @@ namespace Model.Circuits
         /// </summary>
         public event EventHandler<SubcircuitParentEventArgs> ParentChanged;
 
-        /// <summary>
-        ///     Рассчитать импеданс.
-        /// </summary>
-        /// <param name="frequency">Частота.</param>
-        /// <returns>Импеданс.</returns>
-        public abstract Complex CalculateZ(double frequency);
-
         #endregion
 
-        #region Public methods
+        #region Constructor
 
         /// <summary>
         ///     Конструктор.
@@ -87,6 +75,17 @@ namespace Model.Circuits
         {
             _id++;
         }
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        ///     Рассчитать импеданс.
+        /// </summary>
+        /// <param name="frequency">Частота.</param>
+        /// <returns>Импеданс.</returns>
+        public abstract Complex CalculateZ(double frequency);
 
         #endregion
     }
