@@ -59,7 +59,6 @@
 			// 
 			// DeleteButton
 			// 
-			this.DeleteButton.Enabled = false;
 			this.DeleteButton.Location = new System.Drawing.Point(157, 552);
 			this.DeleteButton.Margin = new System.Windows.Forms.Padding(4);
 			this.DeleteButton.Name = "DeleteButton";
@@ -67,6 +66,7 @@
 			this.DeleteButton.TabIndex = 1;
 			this.DeleteButton.Text = "Удалить";
 			this.DeleteButton.UseVisualStyleBackColor = true;
+			this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
 			// 
 			// CalculateImpedanceButton
 			// 
@@ -171,7 +171,6 @@
 			// 
 			// ModufyButton
 			// 
-			this.ModufyButton.Enabled = false;
 			this.ModufyButton.Location = new System.Drawing.Point(12, 552);
 			this.ModufyButton.Margin = new System.Windows.Forms.Padding(4);
 			this.ModufyButton.Name = "ModufyButton";

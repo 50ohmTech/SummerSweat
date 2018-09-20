@@ -324,6 +324,9 @@ namespace MainForm
 			}
 		}
 
+		/// <summary>
+		/// Нарисовать цепь
+		/// </summary>
 		private void DrawCircuit()
 		{
 			_pictureBox.Image = Drawer.DrawCircuit(_currentCircuit);
@@ -507,12 +510,12 @@ namespace MainForm
 		/// <summary>
 		///     Получить ID цепи из дерева
 		/// </summary>
-		/// <param name="Node"></param>
+		/// <param name="node"></param>
 		/// <returns></returns>
-		private int GetCircuitId(TreeNode Node)
+		private static int GetCircuitId(TreeNode node)
 		{
 			var number = "";
-			foreach (var symbol in Node.Text)
+			foreach (var symbol in node.Text)
 			{
 				if (char.IsDigit(symbol))
 				{
@@ -606,5 +609,42 @@ namespace MainForm
 		}
 
 		#endregion
+
+		private void DeleteButton_Click(object sender, EventArgs e)
+		{
+			if (treeView.SelectedNode == null)
+			{
+				MessageBox.Show("Выберите элемент который хотите удалить");
+			}
+			else
+			{
+				if (treeView.SelectedNode.Text[1] != 'П')
+				{
+					_currentCircuit
+						.GetCircuitById(GetCircuitId(treeView.SelectedNode.Parent))
+						.Elements
+						.Remove(_currentCircuit.GetCircuitById(
+							GetCircuitId(treeView.SelectedNode)));
+				}
+
+				//_currentCircuit.GetCircuitById(GetCircuitId(treeView.SelectedNode)).Elements.Remove();
+			}
+		}
+
+		private ElementBase StringToElement(string elementSignature)
+		{
+			switch (elementSignature[1])
+			{
+				case 'R':
+					return new Resistor(elementSignature);
+				case 'I':
+					break;
+				case 'C':
+					break;
+			}
+			return null;
+		}
+
+
 	}
 }
