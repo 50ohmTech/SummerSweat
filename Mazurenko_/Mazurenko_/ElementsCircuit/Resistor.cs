@@ -23,7 +23,7 @@ namespace CircuitLibrary
         ///     Calculation of impedance
         /// </summary>
         /// <param name="R"></param>
-        /// <returns></returns>
+        /// <returns>The complex impedance value</returns>
         public override Complex CalculateZ(double R)
         {
             return new Complex(R, 0);
