@@ -4,22 +4,27 @@ using System.Numerics;
 namespace ElementsLibrary
 {
     /// <summary>
-    /// Класс резистор <see cref="Resistor"/>
+    ///     Класс резистор <see cref="Resistor" />
     /// </summary>
     public class Resistor : ElementBase
     {
-        /// <summary>   
-        /// Конструктор класса <see cref="Resistor"/>
+        #region Constructor
+
+        /// <summary>
+        ///     Конструктор класса <see cref="Resistor" />
         /// </summary>
         /// <param name="value">Значение элемента</param>
         /// <param name="name">Имя элемента</param>
         public Resistor(double value, string name) : base(name, value)
         {
-
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
-        /// Метод расчета импеданса в резисторе <see cref="CalculateZ"/>
+        ///     Метод расчета импеданса в резисторе <see cref="CalculateZ" />
         /// </summary>
         /// <param name="frequency">Частота</param>
         /// <returns>Комплексное значение импеданса</returns>
@@ -29,7 +34,10 @@ namespace ElementsLibrary
             {
                 throw new ArgumentOutOfRangeException(nameof(frequency));
             }
-            return new Complex(Value , 0);
+
+            return new Complex(Value, 0);
         }
+
+        #endregion
     }
 }
