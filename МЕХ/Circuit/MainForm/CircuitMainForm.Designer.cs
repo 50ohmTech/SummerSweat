@@ -177,6 +177,7 @@
 			this.ModufyButton.TabIndex = 16;
 			this.ModufyButton.Text = "Изменить";
 			this.ModufyButton.UseVisualStyleBackColor = true;
+			this.ModufyButton.Click += new System.EventHandler(this.ModufyButton_Click);
 			// 
 			// errorProvider
 			// 

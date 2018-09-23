@@ -64,6 +64,7 @@ namespace CircuitElements
 					throw new ArgumentException(
 						value + " не является вещесвенным числом.");
 				}
+
 				if (value <= 0)
 				{
 					throw new ArgumentException(

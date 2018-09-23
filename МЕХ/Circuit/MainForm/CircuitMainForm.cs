@@ -554,6 +554,7 @@ namespace MainForm
 				MessageBox.Show("Ошибка отрисовки! Соединение с id " +
 				                _currentCircuit.Id +
 				                " должно хранить в себе минимум два элемента");
+
 				return false;
 			}
 
@@ -591,6 +592,7 @@ namespace MainForm
 				MessageBox.Show("Ошибка отрисовки! Соединение с id " +
 				                circuit.Id +
 				                " должно хранить в себе минимум два элемента");
+
 				return false;
 			}
 
@@ -620,10 +622,8 @@ namespace MainForm
 			}
 		}
 
-		#endregion
-
 		/// <summary>
-		/// Удаление элемента цепи
+		///     Удаление элемента цепи
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -636,9 +636,10 @@ namespace MainForm
 
 				return;
 			}
-			
+
 			var costumasingCircuit =
-				_currentCircuit.GetCircuitById(GetCircuitId(treeView.SelectedNode.Parent));
+				_currentCircuit.GetCircuitById(
+					GetCircuitId(treeView.SelectedNode.Parent));
 
 			if (costumasingCircuit == null)
 			{
@@ -654,33 +655,39 @@ namespace MainForm
 				return;
 			}
 
-			costumasingCircuit.RemoveElement(GetElementFromTreeView(treeView.SelectedNode).Name);
+			costumasingCircuit.RemoveElement(GetElementFromTreeView(treeView.SelectedNode)
+				.Name);
 
 			CalculateImpedanceButton.Text = "Нарисовать цепь";
 			FillTreeView();
 		}
 
 		/// <summary>
-		/// Создание элемента по параметрам указанным в ноде TreeView
+		///     Создание элемента по параметрам указанным в ноде TreeView
 		/// </summary>
 		/// <param name="node"></param>
 		/// <returns></returns>
 		private ElementBase GetElementFromTreeView(TreeNode node)
 		{
 			//1-тип элемента 4-номинал 7-имя
-			char[] delimiter = " []()".ToCharArray();
+			var delimiter = " []()".ToCharArray();
 			var split = node.Text.Split(delimiter);
 
 			switch (split[1])
 			{
 				case "C":
-					return new Capacitor(split[7],Convert.ToInt64(split[4]));
+					return new Capacitor(split[7], Convert.ToInt64(split[4]));
 				case "R":
 					return new Resistor(split[7], Convert.ToInt64(split[4]));
 				default:
 					return new Inductor(split[7], Convert.ToInt64(split[4]));
 			}
-			
 		}
+
+		private void ModufyButton_Click(object sender, EventArgs e)
+		{
+		}
+
+		#endregion
 	}
 }
