@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using CircuitElements;
@@ -507,12 +508,12 @@ namespace MainForm
 		/// <summary>
 		///     Получить ID цепи из дерева
 		/// </summary>
-		/// <param name="Node"></param>
+		/// <param name="node"></param>
 		/// <returns></returns>
-		private int GetCircuitId(TreeNode Node)
+		private int GetCircuitId(TreeNode node)
 		{
 			var number = "";
-			foreach (var symbol in Node.Text)
+			foreach (var symbol in node.Text)
 			{
 				if (char.IsDigit(symbol))
 				{
@@ -621,9 +622,65 @@ namespace MainForm
 
 		#endregion
 
+		/// <summary>
+		/// Удаление элемента цепи
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void DeleteButton_Click(object sender, EventArgs e)
 		{
+			if (treeView.SelectedNode == null)
+			{
+				MessageBox.Show(
+					"Выберите соединение или элемент, которое хотите удалить ");
 
+				return;
+			}
+			
+			var costumasingCircuit =
+				_currentCircuit.GetCircuitById(GetCircuitId(treeView.SelectedNode.Parent));
+
+			if (costumasingCircuit == null)
+			{
+				_currentCircuit.Elements = new List<ICircuitElement>();
+				return;
+			}
+
+			if (treeView.SelectedNode.Text.Contains("id"))
+			{
+				_currentCircuit.RemoveElement(GetCircuitId(treeView.SelectedNode));
+				CalculateImpedanceButton.Text = "Нарисовать цепь";
+				FillTreeView();
+				return;
+			}
+
+			costumasingCircuit.RemoveElement(GetElementFromTreeView(treeView.SelectedNode).Name);
+
+			CalculateImpedanceButton.Text = "Нарисовать цепь";
+			FillTreeView();
+		}
+
+		/// <summary>
+		/// Создание элемента по параметрам указанным в ноде TreeView
+		/// </summary>
+		/// <param name="node"></param>
+		/// <returns></returns>
+		private ElementBase GetElementFromTreeView(TreeNode node)
+		{
+			//1-тип элемента 4-номинал 7-имя
+			char[] delimiter = " []()".ToCharArray();
+			var split = node.Text.Split(delimiter);
+
+			switch (split[1])
+			{
+				case "C":
+					return new Capacitor(split[7],Convert.ToInt64(split[4]));
+				case "R":
+					return new Resistor(split[7], Convert.ToInt64(split[4]));
+				default:
+					return new Inductor(split[7], Convert.ToInt64(split[4]));
+			}
+			
 		}
 	}
 }

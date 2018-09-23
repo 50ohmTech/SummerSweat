@@ -183,6 +183,10 @@ namespace CircuitElements
 		/// <param name="id"></param>
 		public void RemoveElement(int id)
 		{
+			if (Id == id)
+			{
+				Elements = new List<ICircuitElement>();
+			}
 			foreach (var element in Elements)
 			{
 				if (element is CircuitBase circuit)
