@@ -174,7 +174,7 @@ namespace View
                     if (isElementsNotEmpty)
                     {
                         Circuit.Elements.Add(new Resistor(
-                                "R" + Circuit.Elements.ResistorCount,
+                                "R" + (Circuit.Elements.ResistorCount + 1),
                                 double.Parse(valueBox.Text)),
                             elementGridView.SelectedRows[0].Cells[0].Value.ToString(),
                             connectionComboBox.SelectedIndex == 0);
@@ -182,7 +182,7 @@ namespace View
                     else
                     {
                         Circuit.Elements.Add(new Resistor(
-                            "R" + Circuit.Elements.ResistorCount,
+                            "R" + (Circuit.Elements.ResistorCount + 1),
                             double.Parse(valueBox.Text)));
                     }
 
@@ -191,7 +191,7 @@ namespace View
                     if (isElementsNotEmpty)
                     {
                         Circuit.Elements.Add(new Capacitor(
-                                "C" + Circuit.Elements.CapacitorCount,
+                                "C" + (Circuit.Elements.CapacitorCount + 1),
                                 double.Parse(valueBox.Text)),
                             elementGridView.SelectedRows[0].Cells[0].Value.ToString(),
                             connectionComboBox.SelectedIndex == 0);
@@ -199,7 +199,7 @@ namespace View
                     else
                     {
                         Circuit.Elements.Add(new Capacitor(
-                            "C" + Circuit.Elements.CapacitorCount,
+                            "C" + (Circuit.Elements.CapacitorCount + 1),
                             double.Parse(valueBox.Text)));
                     }
 
@@ -208,7 +208,7 @@ namespace View
                     if (isElementsNotEmpty)
                     {
                         Circuit.Elements.Add(new Inductor(
-                                "I" + Circuit.Elements.InductorCount,
+                                "I" + (Circuit.Elements.InductorCount + 1),
                                 double.Parse(valueBox.Text)),
                             elementGridView.SelectedRows[0].Cells[0].Value.ToString(),
                             connectionComboBox.SelectedIndex == 0);
@@ -216,7 +216,7 @@ namespace View
                     else
                     {
                         Circuit.Elements.Add(new Inductor(
-                            "I" + Circuit.Elements.InductorCount,
+                            "I" + (Circuit.Elements.InductorCount + 1),
                             double.Parse(valueBox.Text)));
                     }
 
