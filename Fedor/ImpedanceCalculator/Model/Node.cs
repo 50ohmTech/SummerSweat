@@ -10,6 +10,7 @@ namespace Model
     {
         #region - - Поля - -
 
+        //TODO: Childs вместо Brood - brood это понятие из другой сферы
         /// <summary>
         /// Список дочерних ячеек.
         /// </summary>
@@ -38,6 +39,7 @@ namespace Model
         /// </summary>
         public ElementBase Element { get; }
 
+        //TODO: Для таких вещей надо делать перечисления, а не булевы флаги
         /// <summary>
         /// Тип соединения.
         /// </summary>

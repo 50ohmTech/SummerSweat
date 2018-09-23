@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 namespace View
 {
+    //TODO: Переименовать класс
     /// <summary>
     /// Таблица.
     /// </summary>

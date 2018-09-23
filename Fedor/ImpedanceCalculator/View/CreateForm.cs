@@ -50,6 +50,8 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void CircuitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //TODO: вынести создание тестовых цепей в отдельный класс.
+            //TODO: Цепи не должны создаваться/пересоздаваться при смене комбобокса!
             switch (circuitComboBox.SelectedItem)
             {
                 case "Создать цепь":

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 namespace View
 {
+    //TODO: Должно быть единство именования с ConstraintTools
     /// <summary>
     /// Обработчик элемента управления для чисел.
     /// </summary>

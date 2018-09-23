@@ -72,6 +72,7 @@ namespace View
         public static Point DrawCircuit(Node root,
             Point displacement)
         {
+            //TODO: разбить на подметоды
             if (root.Brood.Count == 0)
             {
                 DrawElement(Graphics, Pen, root.Element, displacement);
@@ -83,6 +84,7 @@ namespace View
 
             if (root.IsSerial)
             {
+                //TODO: магические числа вынести в именованные константы класса
                 Graphics.DrawLine(Pen, new Point(displacement.X, 25 + displacement.Y),
                     new Point(25 + displacement.X, 25 + displacement.Y));
 
@@ -176,6 +178,7 @@ namespace View
         private static void DrawElement(Graphics graphics, Pen pen, ElementBase element,
             Point displacement)
         {
+            //TODO: разбить на подметоды
             var brush = new SolidBrush(Color.Black);
             switch (element)
             {

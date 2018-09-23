@@ -45,6 +45,7 @@ namespace Model
         /// </summary>
         public ElementsTree()
         {
+            //TODO: а нельзя сразу инициализировать поле при объявлении?
             Root = new Node(null, null, false);
         }
 
@@ -151,6 +152,7 @@ namespace Model
                 new ChangedEventArgs(ChangeType.Clear));
         }
 
+        //TODO: Search - искать, Find - найти
         /// <summary>
         /// Найти ячейку в дереве по имени элемента.
         /// </summary>
@@ -205,6 +207,7 @@ namespace Model
             return count;
         }
 
+        //TODO: Так метод меняет имя или удаляет элемент? Разберись с именами переменных и комментариями
         /// <summary>
         /// Обновить имя элемента цепи.
         /// </summary>
