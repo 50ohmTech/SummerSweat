@@ -134,7 +134,10 @@ namespace CircuitElements
 						return circuit;
 					}
 
-					return GetCircuitById(id, circuit);
+					if (GetCircuitById(id, circuit) != null)
+					{
+						return GetCircuitById(id, circuit);
+					}
 				}
 			}
 
@@ -144,9 +147,10 @@ namespace CircuitElements
 		/// <summary>
 		///     Получить подцепь по ее ID
 		/// </summary>
-		/// <param name="id"></param>
+		/// <param name="id">id искомой цепи</param>
+		/// <param name="childCircuit">дочерняя подцепь</param>
 		/// <returns>цепь</returns>
-		public CircuitBase GetCircuitById(int id, CircuitBase childCircuit)
+		private CircuitBase GetCircuitById(int id, CircuitBase childCircuit)
 		{
 			foreach (var element in childCircuit.Elements)
 			{
@@ -156,8 +160,10 @@ namespace CircuitElements
 					{
 						return circuit;
 					}
-
-					return GetCircuitById(id, circuit);
+					if (GetCircuitById(id, circuit) != null)
+					{
+						return GetCircuitById(id, circuit);
+					}
 				}
 			}
 
@@ -170,6 +176,51 @@ namespace CircuitElements
 		/// <param name="frequence">Частоты сигнала</param>
 		/// <returns></returns>
 		public abstract Complex CalculateZ(double frequence);
+
+		/// <summary>
+		/// Удаление из цепи подцепи по ее id
+		/// </summary>
+		/// <param name="id"></param>
+		public void RemoveElement(int id)
+		{
+			foreach (var element in Elements)
+			{
+				if (element is CircuitBase circuit)
+				{
+					if (circuit.Id == id)
+					{
+						Elements.Remove(element);
+						return;
+					}
+
+					circuit.RemoveElement(id);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Удаление элемента по его названию
+		/// </summary>
+		/// <param name="elementName"></param>
+		public void RemoveElement(string elementName)
+		{
+			foreach (var element in Elements)
+			{
+				if (element is ElementBase currentElement)
+				{
+					if (currentElement.Name == elementName)
+					{
+						Elements.Remove(element);
+						return;
+					}
+				}
+
+				if (element is CircuitBase circuit)
+				{
+					circuit.RemoveElement(elementName);
+				}
+			}
+		}
 
 		#endregion
 	}

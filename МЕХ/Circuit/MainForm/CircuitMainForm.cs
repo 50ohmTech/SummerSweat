@@ -548,6 +548,13 @@ namespace MainForm
 					}
 				}
 			}
+			else
+			{
+				MessageBox.Show("Ошибка отрисовки! Соединение с id " +
+				                _currentCircuit.Id +
+				                " должно хранить в себе минимум два элемента");
+				return false;
+			}
 
 			return true;
 		}
@@ -578,6 +585,13 @@ namespace MainForm
 					}
 				}
 			}
+			else
+			{
+				MessageBox.Show("Ошибка отрисовки! Соединение с id " +
+				                circuit.Id +
+				                " должно хранить в себе минимум два элемента");
+				return false;
+			}
 
 			return true;
 		}
@@ -606,5 +620,10 @@ namespace MainForm
 		}
 
 		#endregion
+
+		private void DeleteButton_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
