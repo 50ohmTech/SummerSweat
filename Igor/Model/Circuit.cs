@@ -1,11 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Model.Elements;
+
+#endregion
 
 namespace Model
 {
     /// <summary>
-    /// Цепь.
+    ///     Цепь.
     /// </summary>
     public class Circuit
     {
@@ -22,14 +27,14 @@ namespace Model
 
         #endregion
 
-        #region Private methods
+        #region Public methods
 
         /// <summary>
-        ///     Расчет комплексного сопротивления цепи для списка частот.
+        ///     Расчитать импедансы цепи для списка частот.
         /// </summary>
         /// <param name="frequencies">Список частот сигнала.</param>
         /// <returns>Список импедансов цепи.</returns>
-        private List<Complex> CalculateZ(double[] frequencies)
+        public List<Complex> CalculateZ(double[] frequencies)
         {
             if (frequencies == null)
             {
