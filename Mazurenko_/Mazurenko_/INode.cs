@@ -13,17 +13,12 @@ namespace CircuitLibrary
         /// <summary>
         ///     List of child nodes
         /// </summary>
-        List<INode> Nodes { get; set; }
+        List<INode> Nodes { get; }
 
         /// <summary>
         ///     Parent node
         /// </summary>
         INode Parent { get; set; }
-
-        /// <summary>
-        ///     Connection type
-        /// </summary>
-        NodeType Type { get; set; }
 
         #endregion
 
@@ -33,7 +28,7 @@ namespace CircuitLibrary
         ///     Calculation of complex resistance
         /// </summary>
         /// <param name="f"></param>
-        /// <returns></returns>
+        /// <returns>The complex impedance value</returns>
         Complex CalculateZ(double f);
 
         #endregion
