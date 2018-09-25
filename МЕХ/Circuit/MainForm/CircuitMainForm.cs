@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using CircuitElements;
 using CircuitElements.Circuits;
@@ -57,6 +58,9 @@ namespace MainForm
 
 		#region Constructor
 
+		/// <summary>
+		///     Конструктор
+		/// </summary>
 		public MainForm()
 		{
 			InitializeComponent();
@@ -325,6 +329,9 @@ namespace MainForm
 			}
 		}
 
+		/// <summary>
+		///     Нарисовать цепь
+		/// </summary>
 		private void DrawCircuit()
 		{
 			_pictureBox.Image = Drawer.DrawCircuit(_currentCircuit);
@@ -344,12 +351,14 @@ namespace MainForm
 				if (IsDrawable())
 				{
 					DrawCircuit();
+					CalculateImpedanceButton.Text = "Расчитать импеданс";
 				}
 			}
 			else
 			{
 				_impedanceForm.Circuit = _currentCircuit;
 				_impedanceForm.Visible = !_impedanceForm.Visible;
+				_impedanceForm.Circuit = _currentCircuit;
 			}
 		}
 
@@ -388,6 +397,7 @@ namespace MainForm
 			    _textBoxAddElementName.Text.Contains(" "))
 			{
 				AddButton.Enabled = false;
+				ModufyButton.Enabled = false;
 				errorProvider.SetError(_textBoxAddElementName,
 					"Имя элемента не может быть пустым или содержать пробелы");
 
@@ -396,6 +406,7 @@ namespace MainForm
 
 			if (_textBoxAddElementName.Text.Length > _maxNameLength)
 			{
+				ModufyButton.Enabled = false;
 				AddButton.Enabled = false;
 				errorProvider.SetError(_textBoxAddElementName,
 					"Масимально допустимая длинна имени - 11 символов");
@@ -405,6 +416,7 @@ namespace MainForm
 
 			if (_textBoxAddElementValue.Text.Contains(" "))
 			{
+				ModufyButton.Enabled = false;
 				AddButton.Enabled = false;
 				errorProvider.SetError(_textBoxAddElementName,
 					"Вводимое значение элемена не должно содержать пробелов");
@@ -414,6 +426,7 @@ namespace MainForm
 
 			if (!double.TryParse(_textBoxAddElementValue.Text, out var value))
 			{
+				ModufyButton.Enabled = false;
 				AddButton.Enabled = false;
 				errorProvider.SetError(_textBoxAddElementValue,
 					"Введенное значение невозможно преобразовать в число");
@@ -423,6 +436,7 @@ namespace MainForm
 
 			if (value < _minFrecuency || value > _maxFrecuency)
 			{
+				ModufyButton.Enabled = false;
 				AddButton.Enabled = false;
 				errorProvider.SetError(_textBoxAddElementValue,
 					"Частота может принимать значение только от 1 Гц. до 1 ТГц");
@@ -432,6 +446,7 @@ namespace MainForm
 
 			errorProvider.Clear();
 			AddButton.Enabled = true;
+			ModufyButton.Enabled = true;
 		}
 
 		/// <summary>
@@ -503,6 +518,11 @@ namespace MainForm
 
 			CalculateImpedanceButton.Text = "Нарисовать цепь";
 			FillTreeView();
+
+			if (_impedanceForm.Visible)
+			{
+				_impedanceForm.Circuit = _currentCircuit;
+			}
 		}
 
 		/// <summary>
@@ -632,7 +652,7 @@ namespace MainForm
 			if (treeView.SelectedNode == null)
 			{
 				MessageBox.Show(
-					"Выберите соединение или элемент, которое хотите удалить ");
+					"Выберите соединение или элемент, который хотите удалить ");
 
 				return;
 			}
@@ -660,6 +680,11 @@ namespace MainForm
 
 			CalculateImpedanceButton.Text = "Нарисовать цепь";
 			FillTreeView();
+
+			if (_impedanceForm.Visible)
+			{
+				_impedanceForm.Circuit = _currentCircuit;
+			}
 		}
 
 		/// <summary>
@@ -684,8 +709,43 @@ namespace MainForm
 			}
 		}
 
+		/// <summary>
+		///     Редактирование элемента цепи
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ModufyButton_Click(object sender, EventArgs e)
 		{
+			if (_textBoxAddElementName.Text == "Имя" ||
+			    _textBoxAddElementValue.Text == "Номинал")
+			{
+				MessageBox.Show("Выберите элемент для редактирования");
+			}
+
+
+			if (_impedanceForm.Visible)
+			{
+				_impedanceForm.Circuit = _currentCircuit;
+			}
+		}
+
+		/// <summary>
+		///     Обработчик выбора нноды treeView
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			if (!treeView.SelectedNode.Text.Contains("id"))
+			{
+				_textBoxAddElementName.Enabled = true;
+				_textBoxAddElementValue.Enabled = true;
+
+				var selectedElement = GetElementFromTreeView(treeView.SelectedNode);
+				_textBoxAddElementName.Text = selectedElement.Name;
+				_textBoxAddElementValue.Text =
+					selectedElement.Value.ToString(CultureInfo.InvariantCulture);
+			}
 		}
 
 		#endregion

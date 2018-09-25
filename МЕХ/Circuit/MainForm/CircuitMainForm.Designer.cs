@@ -107,6 +107,7 @@
 			this.treeView.Name = "treeView";
 			this.treeView.Size = new System.Drawing.Size(265, 392);
 			this.treeView.TabIndex = 6;
+			this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
 			// 
 			// NadeComboBox
 			// 
