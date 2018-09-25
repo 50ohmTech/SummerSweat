@@ -18,9 +18,9 @@ namespace CircuitElements
 		/// <summary>
 		///     Расчитать импаденс по входной частоте
 		/// </summary>
-		/// <param name="frequence"></param>
+		/// <param name="frequency"></param>
 		/// <returns></returns>
-		Complex CalculateZ(double frequence);
+		Complex CalculateZ(double frequency);
 
 		#endregion
 	}

@@ -32,25 +32,34 @@ namespace CircuitElements.Circuits
 		/// <summary>
 		///     Расчитать импаденс по входной частоте
 		/// </summary>
-		/// <param name="frequence">Частоты сигнала</param>
+		/// <param name="frequency">Частоты сигнала</param>
 		/// <returns></returns>
-		public override Complex CalculateZ(double frequence)
+		public override Complex CalculateZ(double frequency)
 		{
-			// числитель
-			var numerator = new Complex();
+			//// числитель
+			//var numerator = new Complex();
 
-			// знаменатель
-			var denominator = new Complex();
+			//// знаменатель
+			//var denominator = new Complex();
+
+			//foreach (var element in Elements)
+			//{
+			//	denominator = Complex.Add(denominator, element.CalculateZ(frequency));
+			//	numerator = Complex.Multiply(numerator, element.CalculateZ(frequency));
+			//}
+
+			//return Complex.Divide(numerator, denominator);
+			var resistance = Complex.Zero;
 
 			foreach (var element in Elements)
 			{
-				denominator = Complex.Add(denominator, element.CalculateZ(frequence));
-				numerator = Complex.Multiply(numerator, element.CalculateZ(frequence));
+				resistance += 1 / element.CalculateZ(frequency);
 			}
 
-			return Complex.Divide(numerator, denominator);
+			return 1 / resistance;
 		}
 
+		/// <inheritdoc />
 		/// <summary>
 		///     Получить количество элементов в длинну
 		/// </summary>
@@ -69,6 +78,7 @@ namespace CircuitElements.Circuits
 			return count;
 		}
 
+		/// <inheritdoc />
 		/// <summary>
 		///     Получить количество элементов в ширину
 		/// </summary>

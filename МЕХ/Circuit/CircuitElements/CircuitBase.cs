@@ -224,9 +224,9 @@ namespace CircuitElements
 		/// <summary>
 		///     Расчитать импаденс по входной частоте
 		/// </summary>
-		/// <param name="frequence">Частоты сигнала</param>
+		/// <param name="frequency">Частоты сигнала</param>
 		/// <returns></returns>
-		public abstract Complex CalculateZ(double frequence);
+		public abstract Complex CalculateZ(double frequency);
 
 		#endregion
 	}

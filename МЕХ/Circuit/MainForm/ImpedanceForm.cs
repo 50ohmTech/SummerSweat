@@ -139,7 +139,7 @@ namespace MainForm
 
 			if (!double.TryParse(initialValue.Text, out _initialValue))
 			{
-				errorProvider.SetError(initialValue, "Поле не является числом.");
+				errorProvider.SetError(initialValue, "Поле не является числом");
 				return false;
 			}
 
@@ -151,7 +151,7 @@ namespace MainForm
 
 			if (!double.TryParse(finalValue.Text, out _finalValue))
 			{
-				errorProvider.SetError(finalValue, "Поле не является числом.");
+				errorProvider.SetError(finalValue, "Поле не является числом");
 				return false;
 			}
 
@@ -163,7 +163,13 @@ namespace MainForm
 
 			if (!double.TryParse(step.Text, out _step))
 			{
-				errorProvider.SetError(step, "Поле не является числом.");
+				errorProvider.SetError(step, "Поле не является числом");
+				return false;
+			}
+
+			if (step.Text[step.TextLength - 1] == ',')
+			{
+				errorProvider.SetError(step, "Поле не должно заканчиваться запятой");
 				return false;
 			}
 
@@ -185,19 +191,6 @@ namespace MainForm
 		}
 
 		/// <summary>
-		///     Выполняется при изменении текста текстбокса step
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void step_TextChanged(object sender, EventArgs e)
-		{
-			if (CanCalculate())
-			{
-				Calculate();
-			}
-		}
-
-		/// <summary>
 		///     Выполняется при изменении текста текстбокса initialValue
 		/// </summary>
 		/// <param name="sender"></param>
@@ -208,6 +201,25 @@ namespace MainForm
 			{
 				Calculate();
 			}
+		}
+
+		private void step_Leave(object sender, EventArgs e)
+		{
+			step.Text = step.Text.Replace(".", ",");
+			if (CanCalculate())
+			{
+				Calculate();
+			}
+		}
+
+		private void finalValue_Leave(object sender, EventArgs e)
+		{
+			finalValue.Text = finalValue.Text.Replace(".", ",");
+		}
+
+		private void initialValue_Leave(object sender, EventArgs e)
+		{
+			initialValue.Text = initialValue.Text.Replace(".", ",");
 		}
 
 		#endregion

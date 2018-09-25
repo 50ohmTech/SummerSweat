@@ -31,15 +31,12 @@ namespace MainForm
 				case 2:
 					var circuitElements2 = new List<ICircuitElement>
 					{
-						new ParallelCircuit(new List<ICircuitElement>
-						{
-							new Capacitor("C1", 10),
-							new Inductor("L1", 5),
-							new Resistor("R1", 20)
-						})
+						new Capacitor("C1", 10),
+						new Inductor("L1", 5),
+						new Resistor("R1", 20)
 					};
 
-					return new SerialCircuit(circuitElements2);
+					return new ParallelCircuit(circuitElements2);
 
 				case 3:
 					var circuitElements3 = new List<ICircuitElement>

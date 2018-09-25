@@ -86,28 +86,24 @@ namespace MainForm
 			treeView.Nodes.Clear();
 			treeView.BeginUpdate();
 
-			treeView.Nodes.Add("[Послед](id " + _currentCircuit.Id + " )");
+			switch (_currentCircuit)
+			{
+				case ParallelCircuit paralelCircuit:
+					treeView.Nodes
+						.Add("[Паралл] (id " +
+						     paralelCircuit.Id + ')');
+
+					break;
+				case SerialCircuit serialCircuit:
+					treeView.Nodes
+						.Add("[Послед] (id " +
+						     serialCircuit.Id + ')');
+
+					break;
+			}
 
 			//Если соединение пустое, просто добавить его
-			if (_currentCircuit.Elements == null || _currentCircuit.Elements.Count == 0)
-			{
-				switch (_currentCircuit)
-				{
-					case ParallelCircuit paralelCircuit:
-						treeView.Nodes[0].Nodes
-							.Add("[Паралл] (id " +
-							     paralelCircuit.Id + ')');
-
-						break;
-					case SerialCircuit serialCircuit:
-						treeView.Nodes[0].Nodes
-							.Add("[Послед] (id " +
-							     serialCircuit.Id + ')');
-
-						break;
-				}
-			}
-			else
+			if (_currentCircuit.Elements != null && _currentCircuit.Elements.Count != 0)
 			{
 				foreach (var circuitElement in _currentCircuit.Elements)
 				{
@@ -320,8 +316,11 @@ namespace MainForm
 						                                      .SelectedIndex + 1);
 
 				DrawCircuit();
-
 				FillTreeView();
+				if (_impedanceForm.Visible)
+				{
+					_impedanceForm.Circuit = _currentCircuit;
+				}
 			}
 			else
 			{
@@ -721,7 +720,6 @@ namespace MainForm
 			{
 				MessageBox.Show("Выберите элемент для редактирования");
 			}
-
 
 			if (_impedanceForm.Visible)
 			{

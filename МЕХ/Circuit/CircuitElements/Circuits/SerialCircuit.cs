@@ -32,15 +32,15 @@ namespace CircuitElements.Circuits
 		/// <summary>
 		///     Расчитать импаденс по входной частоте
 		/// </summary>
-		/// <param name="frequence">Частоты сигнала</param>
+		/// <param name="frequency">Частоты сигнала</param>
 		/// <returns></returns>
-		public override Complex CalculateZ(double frequence)
+		public override Complex CalculateZ(double frequency)
 		{
 			var result = new Complex();
 
 			foreach (var element in Elements)
 			{
-				result = Complex.Add(result, element.CalculateZ(frequence));
+				result = Complex.Add(result, element.CalculateZ(frequency));
 			}
 
 			return result;

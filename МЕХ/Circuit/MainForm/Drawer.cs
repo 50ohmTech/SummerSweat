@@ -397,7 +397,7 @@ namespace MainForm
 		/// </summary>
 		public static Bitmap DrawCircuit(CircuitBase circuit)
 		{
-			var bitmap = new Bitmap(circuit.GetCircuitLength() * _sizeElementX * 2,
+			var bitmap = new Bitmap((circuit.GetCircuitLength() + 1) * _sizeElementX * 2,
 				(circuit.GetCircuitWidth() + 1) * _sizeElementY * 2);
 
 			_graphics = Graphics.FromImage(bitmap);

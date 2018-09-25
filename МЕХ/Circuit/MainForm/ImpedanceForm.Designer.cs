@@ -81,6 +81,7 @@
 			this.initialValue.Size = new System.Drawing.Size(132, 22);
 			this.initialValue.TabIndex = 3;
 			this.initialValue.TextChanged += new System.EventHandler(this.initialValue_TextChanged);
+			this.initialValue.Leave += new System.EventHandler(this.initialValue_Leave);
 			// 
 			// finalValue
 			// 
@@ -90,6 +91,7 @@
 			this.finalValue.Size = new System.Drawing.Size(132, 22);
 			this.finalValue.TabIndex = 4;
 			this.finalValue.TextChanged += new System.EventHandler(this.finalValue_TextChanged);
+			this.finalValue.Leave += new System.EventHandler(this.finalValue_Leave);
 			// 
 			// step
 			// 
@@ -98,7 +100,7 @@
 			this.step.Name = "step";
 			this.step.Size = new System.Drawing.Size(132, 22);
 			this.step.TabIndex = 5;
-			this.step.TextChanged += new System.EventHandler(this.step_TextChanged);
+			this.step.Leave += new System.EventHandler(this.step_Leave);
 			// 
 			// errorProvider
 			// 
