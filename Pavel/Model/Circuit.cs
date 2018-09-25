@@ -110,7 +110,6 @@ namespace Model
         /// </summary>
         /// <param name="node">Узел в который добавляют дочерние элемнты.</param>
         /// <param name="newNode">Новый узел.</param>
-        /// <param name="nodeType">Тип узла.</param>
         public void AddAfter(INode node, INode newNode)
         {
             if (newNode == null)
@@ -152,8 +151,7 @@ namespace Model
 
                 if (newNode is SubcircuitBase newSubcircuit)
                 {
-                    newSubcircuit.Parent = subcircuit;
-                    ;
+                    newSubcircuit.Parent = subcircuit;                
                 }
 
                 if (newNode is ElementBase newElementBase)
