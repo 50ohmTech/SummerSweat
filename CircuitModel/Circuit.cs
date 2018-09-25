@@ -12,6 +12,9 @@ namespace CircuitModel
     /// </summary>
     class Circuit
     {
+        /// <summary>
+        /// Корень дерева.
+        /// </summary>
         private INode _root;
 
         #region ~ Публичные методы ~

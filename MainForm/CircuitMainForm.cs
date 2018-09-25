@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// Главная форма.
+/// </summary>
 namespace MainForm
 {
     public partial class MainForm : Form

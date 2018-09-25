@@ -30,6 +30,11 @@ namespace CircuitModel
         /// <returns> Комплексное сопротивление. </returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (frequency > 1000000000000)
+            {
+                throw new ArgumentOutOfRangeException(
+                   "Значение частоты не должно превышать 10 в 12 степени!");
+            }
             if (frequency <= 0)
             {
                 throw new ArgumentOutOfRangeException(

@@ -49,7 +49,7 @@ namespace CircuitModel
         /// Расчет импеданса.
         /// </summary>
         /// <param name="frequency"> Значение частоты. </param>
-        /// <returns></returns>
+        /// <returns> Комплексное сопротивление. </returns>
         public abstract Complex CalculateZ(double frequency);
 
         #endregion
@@ -66,8 +66,16 @@ namespace CircuitModel
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(Name));
+                    throw new ArgumentOutOfRangeException(nameof(Name),
+                        "Название элемента не может быть пустым.");
                 }
+
+                if (value.Contains(" "))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Name),
+                        "В названии элемента не должны использоваться пробелы.");
+                }
+
                 _name = value;
             }
         }

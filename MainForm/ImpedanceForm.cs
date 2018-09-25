@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// Форма расчета комплексного сопротивления цепи.
+/// </summary>
 namespace MainForm
 {
     public partial class ImpedanceForm : Form

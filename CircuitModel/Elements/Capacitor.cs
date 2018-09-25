@@ -13,7 +13,7 @@ namespace CircuitModel
         /// <summary>
         /// Конструктор класса Capacitor.
         /// </summary>
-        /// <param name="name"> Название элнмента. </param>
+        /// <param name="name"> Название элемента. </param>
         /// <param name="value"> Значение элемента. </param>
         public Capacitor(string name, double value) : base(name, value)
         {
@@ -21,7 +21,7 @@ namespace CircuitModel
 
         #endregion
 
-        #region ~ Публичне методы ~
+        #region ~ Публичные методы ~
 
         /// <summary>
         /// Расчет импеданса.
@@ -30,6 +30,11 @@ namespace CircuitModel
         /// <returns> Комплексное сопротивление. </returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (frequency > 1000000000000)
+            {
+                throw new ArgumentOutOfRangeException(
+                   "Значение частоты не должно превышать 10 в 12 степени!");
+            }
             if (frequency <= 0)
             {
                 throw new ArgumentOutOfRangeException(

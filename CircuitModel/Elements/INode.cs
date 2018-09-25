@@ -11,7 +11,7 @@ namespace CircuitModel
         /// Расчет импеданса.
         /// </summary>
         /// <param name="frequency"> Значение частоты. </param>
-        /// <returns></returns>
+        /// <returns> Комплексное сопротивление. </returns>
         Complex CalculateZ(double frequency);
 
         #endregion
