@@ -41,21 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Capacitor.cs" />
-    <Compile Include="ChangeEventArgs.cs" />
-    <Compile Include="ChangeType.cs" />
+    <Compile Include="Elements\Capacitor.cs" />
+    <Compile Include="EventArgs\ElementChangeEventArgs.cs" />
+    <Compile Include="Enums\ElementsChangeType.cs" />
     <Compile Include="Circuit.cs" />
-    <Compile Include="ElementBase.cs" />
-    <Compile Include="ElementsTree.cs" />
-    <Compile Include="Inductor.cs" />
-    <Compile Include="Node.cs" />
+    <Compile Include="Enums\ConnectionType.cs" />
+    <Compile Include="Elements\ElementBase.cs" />
+    <Compile Include="Tree\ElementsTree.cs" />
+    <Compile Include="Elements\Inductor.cs" />
+    <Compile Include="Tree\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resistor.cs" />
+    <Compile Include="Elements\Resistor.cs" />
+    <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -63,5 +65,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

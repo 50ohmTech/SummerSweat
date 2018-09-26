@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Model
+namespace Model.Elements
 {
     /// <summary>
-    /// Катушка индуктивности.
+    /// Конденсатор.
     /// </summary>
-    public class Inductor : ElementBase
+    public class Capacitor : ElementBase
     {
         #region – – Публичные методы – –
 
         /// <summary>
-        /// Конструктор класса Inductor.
+        /// Конструктор класса Capacitor.
         /// </summary>
         /// <param name="name">Имя элемента.</param>
         /// <param name="value">Номинал элемента.</param>
-        public Inductor(string name, double value) : base(name, value)
+        public Capacitor(string name, double value) : base(name, value)
         {
         }
 
@@ -23,7 +23,7 @@ namespace Model
         /// Расчитать импеданс элемента.
         /// </summary>
         /// <param name="frequency">Частота сигнала.</param>
-        /// <returns> омплексное значение импеданса.</returns>
+        /// <returns>Комплексное значение импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (frequency <= 0)
@@ -31,7 +31,7 @@ namespace Model
                 throw new ArgumentOutOfRangeException(nameof(frequency));
             }
 
-            return new Complex(0, 2 * Math.PI * frequency * Value);
+            return new Complex(0, -1 / (2 * Math.PI * frequency * Value));
         }
 
         #endregion

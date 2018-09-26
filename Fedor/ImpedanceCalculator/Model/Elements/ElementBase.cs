@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Model
+namespace Model.Elements
 {
     //TODO: Элементы и цепи разнести по отдельным подпапкам в проекте для удобной навигации
+    //+
     /// <summary>
     /// Элемент электрической цепи.
     /// </summary>

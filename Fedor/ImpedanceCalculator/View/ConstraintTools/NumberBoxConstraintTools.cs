@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace View
+namespace View.ConstraintTools
 {
     //TODO: Должно быть единство именования с ConstraintTools
+    //+
     /// <summary>
     /// Обработчик элемента управления для чисел.
     /// </summary>
-    public static class NumberBox
+    public static class NumberBoxConstraintTools
     {
         #region - - Публичные методы - -
 

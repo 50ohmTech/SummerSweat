@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.Elements;
+using Model.Enums;
+using Model.EventArgs;
 
-namespace Model
+namespace Model.Tree
 {
     /// <summary>
     /// Дерево элементов электрической цепи.
@@ -10,10 +13,12 @@ namespace Model
     {
         #region - - Свойства - -
 
+        //TODO: а нельзя сразу инициализировать поле при объявлении?
+        //+
         /// <summary>
         /// Корень дерева.
         /// </summary>
-        public Node Root { get; }
+        public Node Root { get; } = new Node(null, null, ConnectionType.Parallel);
 
         /// <summary>
         /// Количество элементов.
@@ -41,30 +46,21 @@ namespace Model
         #region - - Публичные методы - -
 
         /// <summary>
-        /// Конструктор класса ElementsTree.
-        /// </summary>
-        public ElementsTree()
-        {
-            //TODO: а нельзя сразу инициализировать поле при объявлении?
-            Root = new Node(null, null, false);
-        }
-
-        /// <summary>
         /// Добавить первый элемент в дерево.
         /// </summary>
         /// <param name="element">Элемент электрической цепи.</param>
         public void Add(ElementBase element)
         {
-            if (Root.Brood.Count != 0)
+            if (Root.Childs.Count != 0)
             {
                 throw new InvalidCastException(
                     "Метод добавления первого элемента можно использовать только для пустого дерева");
             }
 
-            var node = new Node(element, Root, true);
-            Root.Brood.Add(node);
+            var node = new Node(element, Root, ConnectionType.Serial);
+            Root.Childs.Add(node);
             ElementsChanged?.Invoke(this,
-                new ChangedEventArgs(element, ChangeType.Add));
+                new ElementChangeEventArgs(element, ElementsChangeType.Add));
         }
 
         /// <summary>
@@ -72,33 +68,33 @@ namespace Model
         /// </summary>
         /// <param name="element">Элемент электрической цепи.</param>
         /// <param name="brotherName">Связующий элемент.</param>
-        /// <param name="isSerial">Тип соединения.</param>
-        public void Add(ElementBase element, string brotherName, bool isSerial)
+        /// <param name="connectionType">Тип соединения.</param>
+        public void Add(ElementBase element, string brotherName, ConnectionType connectionType)
         {
             var brother = Search(Root, brotherName);
 
-            if (isSerial == brother.IsSerial)
+            if (connectionType == brother.ConnectionType)
             {
-                var node = new Node(element, brother.Parent, isSerial);
-                brother.Parent.Brood.Add(node);
+                var node = new Node(element, brother.Parent, connectionType);
+                brother.Parent.Childs.Add(node);
             }
             else
             {
-                var parentNode = new Node(null, brother.Parent, brother.IsSerial);
-                var node = new Node(element, parentNode, isSerial);
+                var parentNode = new Node(null, brother.Parent, brother.ConnectionType);
+                var node = new Node(element, parentNode, connectionType);
 
-                brother.Parent.Brood.Remove(brother);
-                brother.Parent.Brood.Add(parentNode);
+                brother.Parent.Childs.Remove(brother);
+                brother.Parent.Childs.Add(parentNode);
 
                 brother.Parent = parentNode;
-                brother.IsSerial = isSerial;
+                brother.ConnectionType = connectionType;
 
-                parentNode.Brood.Add(brother);
-                parentNode.Brood.Add(node);
+                parentNode.Childs.Add(brother);
+                parentNode.Childs.Add(node);
             }
 
             ElementsChanged?.Invoke(this,
-                new ChangedEventArgs(element, ChangeType.Add));
+                new ElementChangeEventArgs(element, ElementsChangeType.Add));
         }
 
         /// <summary>
@@ -110,38 +106,38 @@ namespace Model
             var elementNode = Search(Root, elementName);
             var parent = elementNode.Parent;
 
-            if (parent != Root && parent.Brood.Count == 2)
+            if (parent != Root && parent.Childs.Count == 2)
             {
-                var brother = parent.Brood[0] == elementNode
-                    ? parent.Brood[1]
-                    : parent.Brood[0];
+                var brother = parent.Childs[0] == elementNode
+                    ? parent.Childs[1]
+                    : parent.Childs[0];
 
                 if (brother.Element != null)
                 {
                     brother.Parent = parent.Parent;
-                    parent.Parent.Brood.Add(brother);
+                    parent.Parent.Childs.Add(brother);
                 }
                 else
                 {
-                    foreach (var child in brother.Brood)
+                    foreach (var child in brother.Childs)
                     {
                         child.Parent = parent.Parent;
-                        parent.Parent.Brood.Add(child);
+                        parent.Parent.Childs.Add(child);
                     }
                 }
 
-                parent.Parent.Brood.Remove(parent);
+                parent.Parent.Childs.Remove(parent);
             }
             else
             {
-                parent.Brood.Remove(elementNode);
+                parent.Childs.Remove(elementNode);
             }
 
             UpdateName(Root, elementName);
 
             ElementsChanged?.Invoke(this,
-                new ChangedEventArgs(elementNode.Element,
-                    ChangeType.Delete));
+                new ElementChangeEventArgs(elementNode.Element,
+                    ElementsChangeType.Delete));
         }
 
         /// <summary>
@@ -149,14 +145,15 @@ namespace Model
         /// </summary>
         public void Clear()
         {
-            Root.Brood = new List<Node>();
+            Root.Childs = new List<Node>();
             ElementsChanged?.Invoke(this,
-                new ChangedEventArgs(ChangeType.Clear));
+                new ElementChangeEventArgs(ElementsChangeType.Clear));
         }
 
         //TODO: Search - искать, Find - найти
+        //+
         /// <summary>
-        /// Найти ячейку в дереве по имени элемента.
+        /// Искать ячейку в дереве по имени элемента.
         /// </summary>
         /// <param name="root">Корень поддерева.</param>
         /// <param name="elementName">Имя элемента.</param>
@@ -171,7 +168,7 @@ namespace Model
                 }
             }
 
-            foreach (var child in root.Brood)
+            foreach (var child in root.Childs)
             {
                 var searhNode = Search(child, elementName);
                 if (searhNode != null)
@@ -201,7 +198,7 @@ namespace Model
             }
 
             uint count = 0;
-            foreach (var child in root.Brood)
+            foreach (var child in root.Childs)
             {
                 count += GetCount(child, types);
             }
@@ -210,11 +207,12 @@ namespace Model
         }
 
         //TODO: Так метод меняет имя или удаляет элемент? Разберись с именами переменных и комментариями
+        //+
         /// <summary>
-        /// Обновить имя элемента цепи.
+        /// Обновить имена элементов цепи.
         /// </summary>
         /// <param name="root">Корень поддерева.</param>
-        /// <param name="deleteName">Имя удаляемого элемента.</param>
+        /// <param name="deleteName">Имя удаленного элемента.</param>
         private void UpdateName(Node root, string deleteName)
         {
             if (root.Element != null)
@@ -229,7 +227,7 @@ namespace Model
                 return;
             }
 
-            foreach (var child in root.Brood)
+            foreach (var child in root.Childs)
             {
                 UpdateName(child, deleteName);
             }
@@ -242,7 +240,7 @@ namespace Model
         /// <summary>
         /// Событие, загорающееся при добавлении, удалении, очистке дерева.
         /// </summary>
-        public event EventHandler<ChangedEventArgs> ElementsChanged;
+        public event EventHandler<ElementChangeEventArgs> ElementsChanged;
 
         #endregion
     }

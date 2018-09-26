@@ -2,6 +2,8 @@
 using System;
 using System.Globalization;
 using System.Windows.Forms;
+using Model.Elements;
+using View.ConstraintTools;
 
 namespace View
 {
@@ -58,7 +60,7 @@ namespace View
                 return;
             }
 
-            if (!ConstraintTools.IsCorrectNominal(value))
+            if (!ValueConstraintTools.IsCorrectNominal(value))
             {
                 EditingControl.Text =
                     element.Value.ToString(CultureInfo.InvariantCulture);

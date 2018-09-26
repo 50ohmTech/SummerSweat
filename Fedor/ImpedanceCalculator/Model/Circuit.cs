@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Model.Enums;
+using Model.Tree;
 
 namespace Model
 {
@@ -9,12 +11,25 @@ namespace Model
     /// </summary>
     public class Circuit
     {
+        #region - - Поля - -
+
+        /// <summary>
+        /// Коллекция элементов цепи.
+        /// </summary>
+        private ElementsTree _elements;
+
+        #endregion
+
         #region - - Свойства - -
 
         /// <summary>
         /// Коллекция элементов цепи.
         /// </summary>
-        public ElementsTree Elements { get; }
+        public ElementsTree Elements
+        {
+            get => _elements;
+            set => _elements = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
         #endregion
 
@@ -62,15 +77,15 @@ namespace Model
         /// <returns></returns>
         private Complex CalculateZ(Node root, double frequency)
         {
-            if (root.Brood.Count == 0)
+            if (root.Childs.Count == 0)
             {
                 return root.Element.CalculateZ(frequency);
             }
 
             var impedance = new Complex();
-            if (root.IsSerial)
+            if (root.ConnectionType == ConnectionType.Serial)
             {
-                foreach (var child in root.Brood)
+                foreach (var child in root.Childs)
                 {
                     impedance += 1 / CalculateZ(child, frequency);
                 }
@@ -79,7 +94,7 @@ namespace Model
             }
             else
             {
-                foreach (var child in root.Brood)
+                foreach (var child in root.Childs)
                 {
                     impedance += CalculateZ(child, frequency);
                 }

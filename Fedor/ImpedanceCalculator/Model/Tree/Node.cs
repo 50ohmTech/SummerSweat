@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.Elements;
+using Model.Enums;
 
-namespace Model
+namespace Model.Tree
 {
     /// <summary>
     /// Ячейка дерева.
@@ -10,11 +12,12 @@ namespace Model
     {
         #region - - Поля - -
 
-        //TODO: Childs вместо Brood - brood это понятие из другой сферы
+        //TODO: Childs вместо Childs - brood это понятие из другой сферы
+        //+
         /// <summary>
         /// Список дочерних ячеек.
         /// </summary>
-        private List<Node> _brood;
+        private List<Node> _childs;
 
         #endregion
 
@@ -28,10 +31,10 @@ namespace Model
         /// <summary>
         /// Список дочерних ячеек.
         /// </summary>
-        public List<Node> Brood
+        public List<Node> Childs
         {
-            get => _brood;
-            set => _brood = value ?? throw new ArgumentNullException(nameof(value));
+            get => _childs;
+            set => _childs = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -40,10 +43,11 @@ namespace Model
         public ElementBase Element { get; }
 
         //TODO: Для таких вещей надо делать перечисления, а не булевы флаги
+        //+
         /// <summary>
         /// Тип соединения.
         /// </summary>
-        public bool IsSerial { get; set; }
+        public ConnectionType ConnectionType { get; set; }
 
         #endregion
 
@@ -54,14 +58,14 @@ namespace Model
         /// </summary>
         /// <param name="element">Значение ячейки.</param>
         /// <param name="parent">Родительская ячейка.</param>
-        /// <param name="isSerial">Тип соединения.</param>
-        public Node(ElementBase element, Node parent, bool isSerial)
+        /// <param name="connectionType">Тип соединения.</param>
+        public Node(ElementBase element, Node parent, ConnectionType connectionType)
         {
-            IsSerial = isSerial;
+            ConnectionType = connectionType;
             Element = element;
 
             Parent = parent;
-            Brood = new List<Node>();
+            Childs = new List<Node>();
         }
 
         #endregion

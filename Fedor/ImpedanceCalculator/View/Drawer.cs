@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using Model.Elements;
+using Model.Enums;
+using Model.Tree;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,6 +14,92 @@ namespace View
     public static class Drawer
     {
         #region - - Поля - -
+
+        /// <summary>
+        /// Сдвиг по X для отрисовки имени.
+        /// </summary>
+        private static readonly int _nameDisplasemantX = 15;
+
+        /// <summary>
+        /// Сдвиг по Y для отрисовки имени.
+        /// </summary>
+        private static readonly int _nameDisplasemantY = 40;
+
+        /// <summary>
+        /// Координата X резистора.
+        /// </summary>
+        private static readonly int _resistorPositionX = 10;
+
+        /// <summary>
+        /// Координата Y резистора.
+        /// </summary>
+        private static readonly int _resistorPositionY = 20;
+
+        /// <summary>
+        /// Высота резистора.
+        /// </summary>
+        private static readonly int _resistorHight = 10;
+
+        /// <summary>
+        /// Ширина резистора.
+        /// </summary>
+        private static readonly int _resistorWidth = 30;
+
+        /// <summary>
+        /// Координата X первой пластины конденсатора.
+        /// </summary>
+        private static readonly int _firstPlatePosition = 20;
+
+        /// <summary>
+        /// Координата X второй пластины конденсатора.
+        /// </summary>
+        private static readonly int _secondPlatePosition = 30;
+
+        /// <summary>
+        /// Высота конденсатора.
+        /// </summary>
+        private static readonly int _capacitorHight = 20;
+
+        /// <summary>
+        /// Количество дуг катушки.
+        /// </summary>
+        private static readonly int _arcCount = 3;
+
+        /// <summary>
+        /// Диаметр дуги.
+        /// </summary>
+        private static readonly int _arcDiameter = 10;
+
+        /// <summary>
+        /// Координата X катушки.
+        /// </summary>
+        private static readonly int _inductorPositionX = 10;
+
+        /// <summary>
+        /// Координата Y катушки.
+        /// </summary>
+        private static readonly int _inductorPositionY = 20;
+
+        /// <summary>
+        /// Сдвиг линий по Y.
+        /// </summary>
+        private static readonly int _lineDisplasemantY = 25;
+
+        /// <summary>
+        /// Длинна добавочной линии по X.
+        /// </summary>
+        private static readonly int _lineLengthX = 25;
+
+        /// <summary>
+        /// Длинна добавочной линии по Y.
+        /// </summary>
+        private static readonly int _lineLengthY = 40;
+
+        /// <summary>
+        /// Длинна элемента цепи по X.
+        /// </summary>
+        private static readonly int _elementLengthX = 50;
+
 
         /// <summary>
         /// Формат текста.
@@ -73,85 +161,41 @@ namespace View
             Point displacement)
         {
             //TODO: разбить на подметоды
-            if (root.Brood.Count == 0)
+            //+
+            if (root.Element != null)
             {
-                DrawElement(Graphics, Pen, root.Element, displacement);
+                DrawElement(root.Element, displacement);
                 return new Point(1, 1);
             }
 
+            //TODO: магические числа вынести в именованные константы класса
+            //+
+            return root.ConnectionType == ConnectionType.Serial
+                ? DrawParallelConnection(root, displacement)
+                : DrawSerialConnection(root, displacement);
+        }
+
+        #endregion
+
+        #region - - Приватные методы - -
+
+        /// <summary>
+        /// Рисовать последовательное соединение.
+        /// </summary>
+        /// <param name="root">Корень поддерева.</param>
+        /// <param name="displacement">Смещение.</param>
+        /// <returns>Размер поддерева.</returns>
+        private static Point DrawSerialConnection(Node root,
+            Point displacement)
+        {
             var maxCount = 0;
             var steps = new List<int>();
 
-            if (root.IsSerial)
-            {
-                //TODO: магические числа вынести в именованные константы класса
-                Graphics.DrawLine(Pen, new Point(displacement.X, 25 + displacement.Y),
-                    new Point(25 + displacement.X, 25 + displacement.Y));
-
-                for (var i = 0; i < root.Brood.Count; i++)
-                {
-                    var count = DrawCircuit(root.Brood[i],
-                        new Point(25 + displacement.X,
-                            steps.Sum() * 40 + displacement.Y));
-
-                    steps.Add(count.Y);
-
-                    if (maxCount < count.X)
-                    {
-                        var step = 0;
-                        for (var j = 0; j < i; j++)
-                        {
-                            Graphics.DrawLine(Pen,
-                                new Point(25 + maxCount * 50 + displacement.X,
-                                    25 + step * 40 + displacement.Y),
-                                new Point(25 + count.X * 50 + displacement.X,
-                                    25 + step * 40 + displacement.Y));
-
-                            step += steps[j];
-                        }
-
-                        maxCount = count.X;
-                    }
-                    else
-                    {
-                        var step = 0;
-                        for (var j = 0; j < i; j++)
-                        {
-                            step += steps[j];
-                        }
-
-                        Graphics.DrawLine(Pen,
-                            new Point(25 + count.X * 50 + displacement.X,
-                                25 + step * 40 + displacement.Y),
-                            new Point(25 + maxCount * 50 + displacement.X,
-                                25 + step * 40 + displacement.Y));
-                    }
-                }
-
-                Graphics.DrawLine(Pen,
-                    new Point(25 + maxCount * 50 + displacement.X, 25 + displacement.Y),
-                    new Point(50 + maxCount * 50 + displacement.X, 25 + displacement.Y));
-
-
-                Graphics.DrawLine(Pen,
-                    new Point(25 + displacement.X, 25 + displacement.Y),
-                    new Point(25 + displacement.X,
-                        25 + (steps.Sum() - steps[steps.Count - 1]) * 40 +
-                        displacement.Y));
-
-                Graphics.DrawLine(Pen,
-                    new Point(25 + maxCount * 50 + displacement.X, 25 + displacement.Y),
-                    new Point(25 + maxCount * 50 + displacement.X,
-                        25 + (steps.Sum() - steps[steps.Count - 1]) * 40 +
-                        displacement.Y));
-
-                return new Point(maxCount + 1, steps.Sum());
-            }
-
-            foreach (var child in root.Brood)
+            foreach (var child in root.Childs)
             {
                 var count = DrawCircuit(child,
-                    new Point(steps.Sum() * 50 + displacement.X, displacement.Y));
+                    new Point(steps.Sum() * _elementLengthX + displacement.X,
+                        displacement.Y));
 
                 steps.Add(count.X);
 
@@ -164,97 +208,233 @@ namespace View
             return new Point(steps.Sum(), maxCount);
         }
 
-        #endregion
+        /// <summary>
+        /// Рисовать параллельное соединение.
+        /// </summary>
+        /// <param name="root">Корень поддерева.</param>
+        /// <param name="displacement">Смещение.</param>
+        /// <returns>Размер поддерева.</returns>
+        private static Point DrawParallelConnection(Node root,
+            Point displacement)
+        {
+            var maxCount = 0;
+            var steps = new List<int>();
 
-        #region - - Приватные методы - -
+            Graphics.DrawLine(Pen,
+                    new Point(displacement.X,
+                        _lineDisplasemantY + displacement.Y),
+                    new Point(_lineLengthX + displacement.X,
+                        _lineDisplasemantY + displacement.Y));
+
+            for (var i = 0; i < root.Childs.Count; i++)
+            {
+                var count = DrawCircuit(root.Childs[i],
+                    new Point(_lineLengthX + displacement.X,
+                        steps.Sum() * _lineLengthY + displacement.Y));
+
+                steps.Add(count.Y);
+
+                if (maxCount < count.X)
+                {
+                    var step = 0;
+                    for (var j = 0; j < i; j++)
+                    {
+                        Graphics.DrawLine(Pen,
+                            new Point(
+                                _lineLengthX + maxCount * _elementLengthX +
+                                displacement.X,
+                                _lineDisplasemantY + step * _lineLengthY +
+                                displacement.Y),
+                            new Point(
+                                _lineLengthX + count.X * _elementLengthX +
+                                displacement.X,
+                                _lineDisplasemantY + step * _lineLengthY +
+                                displacement.Y));
+
+                        step += steps[j];
+                    }
+
+                    maxCount = count.X;
+                }
+                else
+                {
+                    var step = 0;
+                    for (var j = 0; j < i; j++)
+                    {
+                        step += steps[j];
+                    }
+
+                    Graphics.DrawLine(Pen,
+                        new Point(
+                            _lineLengthX + count.X * _elementLengthX +
+                            displacement.X,
+                            _lineDisplasemantY + step * _lineLengthY +
+                            displacement.Y),
+                        new Point(
+                            _lineLengthX + maxCount * _elementLengthX +
+                            displacement.X,
+                            _lineDisplasemantY + step * _lineLengthY +
+                            displacement.Y));
+                }
+            }
+
+            Graphics.DrawLine(Pen,
+                new Point(
+                    _lineLengthX + maxCount * _elementLengthX + displacement.X,
+                    _lineDisplasemantY + displacement.Y),
+                new Point(
+                    2 * _lineLengthX + maxCount * _elementLengthX +
+                    displacement.X, _lineDisplasemantY + displacement.Y));
+
+
+            Graphics.DrawLine(Pen,
+                new Point(_lineLengthX + displacement.X,
+                    _lineDisplasemantY + displacement.Y),
+                new Point(_lineLengthX + displacement.X,
+                    _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
+                    _lineLengthY +
+                    displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(
+                    _lineLengthX + maxCount * _elementLengthX + displacement.X,
+                    _lineDisplasemantY + displacement.Y),
+                new Point(
+                    _lineLengthX + maxCount * _elementLengthX + displacement.X,
+                    _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
+                    _lineLengthY +
+                    displacement.Y));
+
+            return new Point(maxCount + 1, steps.Sum());
+        }
 
         /// <summary>
         /// Рисовать элемент электрической цепи.
         /// </summary>
-        /// <param name="graphics">Поверхность рисования.</param>
-        /// <param name="pen">Ручка.</param>
         /// <param name="element">Элемент электрической цепи.</param>
         /// <param name="displacement">Смещение.</param>
-        private static void DrawElement(Graphics graphics, Pen pen, ElementBase element,
+        private static void DrawElement(ElementBase element,
             Point displacement)
         {
             //TODO: разбить на подметоды
+            //+
             var brush = new SolidBrush(Color.Black);
             switch (element)
             {
                 case Resistor _:
-                    graphics.DrawLine(pen,
-                        new Point(10 + displacement.X, 20 + displacement.Y),
-                        new Point(10 + displacement.X, 30 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(10 + displacement.X, 30 + displacement.Y),
-                        new Point(40 + displacement.X, 30 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(40 + displacement.X, 20 + displacement.Y),
-                        new Point(40 + displacement.X, 30 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(40 + displacement.X, 20 + displacement.Y),
-                        new Point(10 + displacement.X, 20 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(0 + displacement.X, 25 + displacement.Y),
-                        new Point(10 + displacement.X, 25 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(40 + displacement.X, 25 + displacement.Y),
-                        new Point(50 + displacement.X, 25 + displacement.Y));
-
-                    graphics.DrawString(element.Name, Font, brush, 15 + displacement.X,
-                        40 + displacement.Y);
-
+                    DrawResistor(displacement);
                     break;
                 case Capacitor _:
-                    graphics.DrawLine(pen,
-                        new Point(20 + displacement.X, 15 + displacement.Y),
-                        new Point(20 + displacement.X, 35 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(30 + displacement.X, 15 + displacement.Y),
-                        new Point(30 + displacement.X, 35 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(0 + displacement.X, 25 + displacement.Y),
-                        new Point(20 + displacement.X, 25 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(30 + displacement.X, 25 + displacement.Y),
-                        new Point(50 + displacement.X, 25 + displacement.Y));
-
-                    graphics.DrawString(element.Name, Font, brush, 15 + displacement.X,
-                        40 + displacement.Y);
-
+                    DrawCapacitor(displacement);
                     break;
                 case Inductor _:
-                    graphics.DrawArc(pen, 10 + displacement.X, 20 + displacement.Y,
-                        10, 10, 180, 180);
-
-                    graphics.DrawArc(pen, 20 + displacement.X, 20 + displacement.Y,
-                        10, 10, 180, 180);
-
-                    graphics.DrawArc(pen, 30 + displacement.X, 20 + displacement.Y,
-                        10, 10, 180, 180);
-
-                    graphics.DrawLine(pen,
-                        new Point(0 + displacement.X, 25 + displacement.Y),
-                        new Point(10 + displacement.X, 25 + displacement.Y));
-
-                    graphics.DrawLine(pen,
-                        new Point(40 + displacement.X, 25 + displacement.Y),
-                        new Point(50 + displacement.X, 25 + displacement.Y));
-
-                    graphics.DrawString(element.Name, Font, brush, 15 + displacement.X,
-                        40 + displacement.Y);
-
+                    DrawInductor(displacement);
                     break;
             }
+
+            Graphics.DrawString(element.Name, Font, brush,
+                _nameDisplasemantX + displacement.X,
+                _nameDisplasemantY + displacement.Y);
+        }
+
+        /// <summary>
+        /// Рисовать резистор.
+        /// </summary>
+        /// <param name="displacement">Смещение.</param>
+        private static void DrawResistor(Point displacement)
+        {
+            Graphics.DrawLine(Pen,
+                new Point(_resistorPositionX + displacement.X,
+                    _resistorPositionY + displacement.Y),
+                new Point(_resistorPositionX + displacement.X,
+                    _resistorPositionY + _resistorHight + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(_resistorPositionX + displacement.X,
+                    _resistorPositionY + _resistorHight + displacement.Y),
+                new Point(_resistorPositionX + _resistorWidth + displacement.X,
+                    _resistorPositionY + _resistorHight + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(_resistorPositionX + _resistorWidth + displacement.X,
+                    _resistorPositionY + displacement.Y),
+                new Point(_resistorPositionX + _resistorWidth + displacement.X,
+                    _resistorPositionY + _resistorHight + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(_resistorPositionX + _resistorWidth + displacement.X,
+                    _resistorPositionY + displacement.Y),
+                new Point(_resistorPositionX + displacement.X,
+                    _resistorPositionY + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(displacement.X, _lineDisplasemantY + displacement.Y),
+                new Point(_resistorPositionX + displacement.X,
+                    _lineDisplasemantY + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(_resistorPositionX + _resistorWidth + displacement.X,
+                    _lineDisplasemantY + displacement.Y),
+                new Point(_elementLengthX + displacement.X,
+                    _lineDisplasemantY + displacement.Y));
+        }
+
+        /// <summary>
+        /// Рисовать конденсатор.
+        /// </summary>
+        /// <param name="displacement">Смещение.</param>
+        private static void DrawCapacitor(Point displacement)
+        {
+            Graphics.DrawLine(Pen,
+                new Point(_firstPlatePosition + displacement.X,
+                    _lineDisplasemantY - _capacitorHight / 2 + displacement.Y),
+                new Point(_firstPlatePosition + displacement.X,
+                    _lineDisplasemantY + _capacitorHight / 2 + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(_secondPlatePosition + displacement.X,
+                    _lineDisplasemantY - _capacitorHight / 2 + displacement.Y),
+                new Point(_secondPlatePosition + displacement.X,
+                    _lineDisplasemantY + _capacitorHight / 2 + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(displacement.X, _lineDisplasemantY + displacement.Y),
+                new Point(_firstPlatePosition + displacement.X,
+                    _lineDisplasemantY + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(_secondPlatePosition + displacement.X,
+                    _lineDisplasemantY + displacement.Y),
+                new Point(_elementLengthX + displacement.X,
+                    _lineDisplasemantY + displacement.Y));
+        }
+
+        /// <summary>
+        /// Рисовать катушку.
+        /// </summary>
+        /// <param name="displacement">Смещение.</param>
+        private static void DrawInductor(Point displacement)
+        {
+            for (var i = 0; i < _arcCount; i++)
+            {
+                Graphics.DrawArc(Pen,
+                    _inductorPositionX + i * _arcDiameter + displacement.X,
+                    _inductorPositionY + displacement.Y,
+                    _arcDiameter, _arcDiameter, 0, -180);
+            }
+
+            Graphics.DrawLine(Pen,
+                new Point(displacement.X, _lineDisplasemantY + displacement.Y),
+                new Point(_inductorPositionX + displacement.X,
+                    _lineDisplasemantY + displacement.Y));
+
+            Graphics.DrawLine(Pen,
+                new Point(
+                    _inductorPositionX + _arcCount * _arcDiameter +
+                    displacement.X,
+                    _lineDisplasemantY + displacement.Y),
+                new Point(_elementLengthX + displacement.X,
+                    _lineDisplasemantY + displacement.Y));
         }
 
         #endregion

@@ -1,12 +1,15 @@
 ﻿using System;
+using Model.Elements;
+using Model.Enums;
 
-namespace Model
+namespace Model.EventArgs
 {
     //TODO: Название типа данных не описывает изменения чего она отражает
+    //+
     /// <summary>
-    /// Аргументы события Changed.
+    /// Аргументы события ElementChange.
     /// </summary>
-    public class ChangedEventArgs : EventArgs
+    public class ElementChangeEventArgs : System.EventArgs
     {
         #region - - Поля - -
 
@@ -19,7 +22,7 @@ namespace Model
         /// <summary>
         /// Тип изменения.
         /// </summary>
-        public ChangeType Type { get; }
+        public ElementsChangeType Type { get; }
 
         /// <summary>
         /// Добавленный элемент.
@@ -35,21 +38,21 @@ namespace Model
         #region – – Публичные методы – –
 
         /// <summary>
-        /// Конструктор класса ChangedEventArgs.
+        /// Конструктор класса ChangeEventArgs.
         /// </summary>
         /// <param name="element">Изменяемый элемент.</param>
         /// <param name="type">Тип изменения.</param>
-        public ChangedEventArgs(ElementBase element, ChangeType type)
+        public ElementChangeEventArgs(ElementBase element, ElementsChangeType type)
         {
             Element = element;
             Type = type;
         }
 
         /// <summary>
-        /// Конструктор класса ChangedEventArgs.
+        /// Конструктор класса ChangeEventArgs.
         /// </summary>
         /// <param name="type">Тип изменения.</param>
-        public ChangedEventArgs(ChangeType type)
+        public ElementChangeEventArgs(ElementsChangeType type)
         {
             Type = type;
         }

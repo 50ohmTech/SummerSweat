@@ -1,8 +1,13 @@
 ﻿using Model;
+using Model.Elements;
+using Model.Enums;
+using Model.EventArgs;
+using Model.Tree;
 using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using View.ConstraintTools;
 
 namespace View
 {
@@ -18,6 +23,11 @@ namespace View
         /// </summary>
         public Circuit Circuit { get; }
 
+        /// <summary>
+        /// Создатель деревьев элементов.
+        /// </summary>
+        public TreesCreator TreesCreator { get; }
+
         #endregion
 
         #region - - Публичные методы - -
@@ -29,9 +39,13 @@ namespace View
         {
             InitializeComponent();
             
-            Circuit = new Circuit(new ElementsTree());
+            TreesCreator = new TreesCreator();
+            Circuit = new Circuit(TreesCreator.Trees[0]);
 
-            Circuit.Elements.ElementsChanged += Circuit_ElementsChanged;
+            for (var i = 0; i < 6; i++)
+            {
+                TreesCreator.Trees[i].ElementsChanged += Circuit_ElementsChanged;
+            }
 
             valueBox.ContextMenu = new ContextMenu();
             circuitComboBox.SelectedIndex = 0;
@@ -51,72 +65,36 @@ namespace View
         private void CircuitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //TODO: вынести создание тестовых цепей в отдельный класс.
+            //+
             //TODO: Цепи не должны создаваться/пересоздаваться при смене комбобокса!
-            switch (circuitComboBox.SelectedItem)
+            //+
+            if (circuitComboBox.SelectedIndex >= 0 && circuitComboBox.SelectedIndex < 6)
             {
-                case "Создать цепь":
-                    Circuit.Elements.Clear();
+                Circuit.Elements = TreesCreator.Trees[circuitComboBox.SelectedIndex];
+                Circuit_ElementsChanged(Circuit.Elements,
+                    new ElementChangeEventArgs(ElementsChangeType.ChangeTree));
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
 
-                    break;
-                case "Цепь 1":
-                    Circuit.Elements.Clear();
+        /// <summary>
+        /// Обновить данные о элементах цепи в таблице.
+        /// </summary>
+        /// <param name="root">Корень поддерева.</param>
+        private void RefreshGridView(Node root)
+        {
+            if (root.Element != null)
+            {
+                elementGridView.Rows.Add(root.Element.Name, root.Element.Value);
+                return;
+            }
 
-                    Circuit.Elements.Add(new Resistor("R1", 5));
-                    Circuit.Elements.Add(new Resistor("R2", 10), "R1", false);
-                    Circuit.Elements.Add(new Resistor("R3", 20), "R1", true);
-                    Circuit.Elements.Add(new Resistor("R4", 5), "R1", true);
-                    Circuit.Elements.Add(new Resistor("R5", 5), "R1", false);
-                    Circuit.Elements.Add(new Resistor("R6", 20), "R5", true);
-                    Circuit.Elements.Add(new Resistor("R7", 5), "R4", false);
-                    Circuit.Elements.Add(new Resistor("R8", 10), "R4", false);
-                    Circuit.Elements.Add(new Resistor("R9", 15), "R7", false);
-                    Circuit.Elements.Add(new Resistor("R10", 10), "R7", true);
-
-                    break;
-                case "Цепь 2":
-                    Circuit.Elements.Clear();
-
-                    Circuit.Elements.Add(new Capacitor("C1", 66.666));
-                    Circuit.Elements.Add(new Inductor("I1", 0.02), "C1", false);
-                    Circuit.Elements.Add(new Resistor("R1", 20.56), "I1", true);
-                    Circuit.Elements.Add(new Inductor("I2", 0.7), "C1", false);
-
-                    break;
-                case "Цепь 3":
-                    Circuit.Elements.Clear();
-
-                    Circuit.Elements.Add(new Resistor("R1", 95));
-                    Circuit.Elements.Add(new Capacitor("C1", 38), "R1", false);
-                    Circuit.Elements.Add(new Inductor("I1", 0.5), "C1", true);
-                    Circuit.Elements.Add(new Capacitor("C2", 32.8), "R1", true);
-                    Circuit.Elements.Add(new Resistor("R2", 20), "I1", false);
-                    Circuit.Elements.Add(new Capacitor("C3", 66.666), "C2", false);
-                    Circuit.Elements.Add(new Resistor("R3", 222), "C2", false);
-
-                    break;
-                case "Цепь 4":
-                    Circuit.Elements.Clear();
-
-                    Circuit.Elements.Add(new Inductor("I1", 0.02));
-                    Circuit.Elements.Add(new Resistor("R1", 38), "I1", true);
-                    Circuit.Elements.Add(new Capacitor("C1", 59.9), "I1", false);
-                    Circuit.Elements.Add(new Inductor("I2", 0.28), "C1", true);
-                    Circuit.Elements.Add(new Resistor("R2", 80.98), "I2", false);
-                    Circuit.Elements.Add(new Capacitor("C2", 25), "R2", true);
-
-                    break;
-                case "Цепь 5":
-                    Circuit.Elements.Clear();
-
-                    Circuit.Elements.Add(new Resistor("R1", 33.5));
-                    Circuit.Elements.Add(new Capacitor("C1", 10), "R1", false);
-                    Circuit.Elements.Add(new Inductor("I1", 0.003), "C1", true);
-                    Circuit.Elements.Add(new Resistor("R2", 20), "I1", true);
-                    Circuit.Elements.Add(new Resistor("R3", 43.21), "R2", false);
-
-                    break;
-                default:
-                    throw new InvalidOperationException();
+            foreach (var child in root.Childs)
+            {
+                RefreshGridView(child);
             }
         }
 
@@ -152,11 +130,11 @@ namespace View
                 return;
             }
 
-            NumberBox.ChangeSeparator(valueBox);
+            NumberBoxConstraintTools.ChangeSeparator(valueBox);
 
             var value = double.Parse(valueBox.Text);
 
-            if (!ConstraintTools.IsCorrectNominal(value)) return;
+            if (!ValueConstraintTools.IsCorrectNominal(value)) return;
 
             var isElementsNotEmpty = Circuit.Elements.Count != 0;
             AddElement(isElementsNotEmpty);
@@ -177,7 +155,7 @@ namespace View
                                 "R" + (Circuit.Elements.ResistorCount + 1),
                                 double.Parse(valueBox.Text)),
                             elementGridView.SelectedRows[0].Cells[0].Value.ToString(),
-                            connectionComboBox.SelectedIndex == 0);
+                            (ConnectionType)connectionComboBox.SelectedIndex);
                     }
                     else
                     {
@@ -194,7 +172,7 @@ namespace View
                                 "C" + (Circuit.Elements.CapacitorCount + 1),
                                 double.Parse(valueBox.Text)),
                             elementGridView.SelectedRows[0].Cells[0].Value.ToString(),
-                            connectionComboBox.SelectedIndex == 0);
+                            (ConnectionType)connectionComboBox.SelectedIndex);
                     }
                     else
                     {
@@ -211,7 +189,7 @@ namespace View
                                 "I" + (Circuit.Elements.InductorCount + 1),
                                 double.Parse(valueBox.Text)),
                             elementGridView.SelectedRows[0].Cells[0].Value.ToString(),
-                            connectionComboBox.SelectedIndex == 0);
+                            (ConnectionType)connectionComboBox.SelectedIndex);
                     }
                     else
                     {
@@ -275,7 +253,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void Cell_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumberBox.PressDouble(e,
+            NumberBoxConstraintTools.PressDouble(e,
                 ((DataGridViewTextBoxEditingControl)sender).Text);
         }
 
@@ -300,7 +278,7 @@ namespace View
                 return;
             }
 
-            if (!ConstraintTools.IsCorrectNominal(value))
+            if (!ValueConstraintTools.IsCorrectNominal(value))
             {
                 ((DataGridViewTextBoxEditingControl) sender).Text =
                     element.Value.ToString(CultureInfo.InvariantCulture);
@@ -320,7 +298,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void ValueBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumberBox.PressDouble(e, ((TextBox)sender).Text);
+            NumberBoxConstraintTools.PressDouble(e, ((TextBox)sender).Text);
         }
 
         /// <summary>
@@ -330,7 +308,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void ValueBox_Enter(object sender, EventArgs e)
         {
-            NumberBox.Enter(sender);
+            NumberBoxConstraintTools.Enter(sender);
         }
 
         /// <summary>
@@ -340,7 +318,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void ValueBox_Leave(object sender, EventArgs e)
         {
-            NumberBox.Leave(sender);
+            NumberBoxConstraintTools.Leave(sender);
         }
 
         /// <summary>
@@ -348,7 +326,7 @@ namespace View
         /// </summary>
         /// <param name="sender">Отправитель события.</param>
         /// <param name="e">Параметры события.</param>
-        private void Circuit_ElementsChanged(object sender, ChangedEventArgs e)
+        private void Circuit_ElementsChanged(object sender, ElementChangeEventArgs e)
         {
             var isElementsNotEmpty = Circuit.Elements.Count != 0;
             label4.Visible = isElementsNotEmpty;
@@ -357,14 +335,18 @@ namespace View
 
             switch (e.Type)
             {
-                case ChangeType.Add:
+                case ElementsChangeType.ChangeTree:
+                    elementGridView.Rows.Clear();
+                    RefreshGridView(Circuit.Elements.Root);
+                    break;
+                case ElementsChangeType.Add:
                     elementGridView.Rows.Add(e.Element.Name, e.Element.Value);
                     break;
-                case ChangeType.Delete:
+                case ElementsChangeType.Delete:
                     UpdateNameGrid();
                     elementGridView.Rows.Remove(elementGridView.SelectedRows[0]);
                     break;
-                case ChangeType.Clear:
+                case ElementsChangeType.Clear:
                     elementGridView.Rows.Clear();
                     break;
                 default:
@@ -377,7 +359,7 @@ namespace View
             Drawer.Pen = new Pen(Color.Black, 1);
             Drawer.Font = Font;
 
-            var displacement = new Point(50, 40);
+            var displacement = new Point(15, 0);
             Drawer.DrawCircuit(Circuit.Elements.Root, displacement);
 
             circuitPictureBox.Image = bitmapBackground;
@@ -388,17 +370,25 @@ namespace View
         /// </summary>
         private void UpdateNameGrid()
         {
-            var symbol = elementGridView.SelectedRows[0].Cells[0].Value.ToString()[0];
-            var number = uint.Parse(elementGridView.SelectedRows[0].Cells[0].Value
+            var deleteSymbol =
+                elementGridView.SelectedRows[0].Cells[0].Value.ToString()[0];
+
+            var deleteNumber = uint.Parse(elementGridView.SelectedRows[0].Cells[0].Value
                 .ToString().Substring(1));
 
-            for (var i = elementGridView.SelectedRows[0].Index + 1;
+            for (var i = 0;
                 i < elementGridView.Rows.Count;
                 i++)
             {
-                if (elementGridView.Rows[i].Cells[0].Value.ToString()[0] == symbol)
+                var changeNumber = uint.Parse(elementGridView.Rows[i].Cells[0].Value
+                    .ToString().Substring(1));
+
+                if (elementGridView.Rows[i].Cells[0].Value.ToString()[0] ==
+                    deleteSymbol &&
+                    changeNumber > deleteNumber)
                 {
-                    elementGridView.Rows[i].Cells[0].Value = symbol + number++.ToString();
+                    elementGridView.Rows[i].Cells[0].Value =
+                        deleteSymbol + (changeNumber - 1).ToString();
                 }
             }
         }

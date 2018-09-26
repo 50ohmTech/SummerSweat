@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Numerics;
+using System.Windows.Forms;
+using View.ConstraintTools;
 
 namespace View
 {
@@ -49,15 +50,15 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void CreateFrequencyButton_Click(object sender, EventArgs e)
         {
-            NumberBox.ChangeSeparator(startValueBox);
-            NumberBox.ChangeSeparator(intervalBox);
-            NumberBox.ChangeSeparator(countBox);
+            NumberBoxConstraintTools.ChangeSeparator(startValueBox);
+            NumberBoxConstraintTools.ChangeSeparator(intervalBox);
+            NumberBoxConstraintTools.ChangeSeparator(countBox);
 
             var startValue = double.Parse(startValueBox.Text);
             var interval = double.Parse(intervalBox.Text);
             var count = uint.Parse(countBox.Text);
 
-            if (!ConstraintTools.IsCorrectFrequency(startValue, interval, count)) return;
+            if (!ValueConstraintTools.IsCorrectFrequency(startValue, interval, count)) return;
 
             _frequencies = new List<double>();
 
@@ -84,7 +85,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void TextBox_Enter(object sender, EventArgs e)
         {
-            NumberBox.Enter(sender);
+            NumberBoxConstraintTools.Enter(sender);
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void TextBox_Leave(object sender, EventArgs e)
         {
-            NumberBox.Leave(sender);
+            NumberBoxConstraintTools.Leave(sender);
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void DoubleTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumberBox.PressDouble(e, ((TextBox)sender).Text);
+            NumberBoxConstraintTools.PressDouble(e, ((TextBox)sender).Text);
         }
 
         /// <summary>
@@ -114,7 +115,7 @@ namespace View
         /// <param name="e">Параметры события.</param>
         private void IntTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumberBox.PressInt(sender, e);
+            NumberBoxConstraintTools.PressInt(sender, e);
         }
 
         #endregion

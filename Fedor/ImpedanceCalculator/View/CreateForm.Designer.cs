@@ -44,14 +44,14 @@ namespace View
             this.valueBox = new System.Windows.Forms.TextBox();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
+            this.circuitGroupBox = new System.Windows.Forms.GroupBox();
             this.elementGridView = new View.MyDataGridView();
             this.nameColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valueColomn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.circuitGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
             this.addGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
             this.circuitGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // circuitComboBox
@@ -208,6 +208,21 @@ namespace View
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // circuitGroupBox
+            // 
+            this.circuitGroupBox.Controls.Add(this.calculateButton);
+            this.circuitGroupBox.Controls.Add(this.elementGridView);
+            this.circuitGroupBox.Controls.Add(this.circuitComboBox);
+            this.circuitGroupBox.Controls.Add(this.label1);
+            this.circuitGroupBox.Controls.Add(this.addButton);
+            this.circuitGroupBox.Controls.Add(this.addGroupBox);
+            this.circuitGroupBox.Controls.Add(this.deleteButton);
+            this.circuitGroupBox.Location = new System.Drawing.Point(12, 6);
+            this.circuitGroupBox.Name = "circuitGroupBox";
+            this.circuitGroupBox.Size = new System.Drawing.Size(251, 682);
+            this.circuitGroupBox.TabIndex = 9;
+            this.circuitGroupBox.TabStop = false;
+            // 
             // elementGridView
             // 
             this.elementGridView.AllowUserToAddRows = false;
@@ -236,7 +251,7 @@ namespace View
             this.nameColomn.HeaderText = "Name";
             this.nameColomn.Name = "nameColomn";
             this.nameColomn.ReadOnly = true;
-            this.nameColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.nameColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.nameColomn.Width = 70;
             // 
             // valueColomn
@@ -247,21 +262,6 @@ namespace View
             this.valueColomn.Name = "valueColomn";
             this.valueColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.valueColomn.Width = 110;
-            // 
-            // circuitGroupBox
-            // 
-            this.circuitGroupBox.Controls.Add(this.calculateButton);
-            this.circuitGroupBox.Controls.Add(this.elementGridView);
-            this.circuitGroupBox.Controls.Add(this.circuitComboBox);
-            this.circuitGroupBox.Controls.Add(this.label1);
-            this.circuitGroupBox.Controls.Add(this.addButton);
-            this.circuitGroupBox.Controls.Add(this.addGroupBox);
-            this.circuitGroupBox.Controls.Add(this.deleteButton);
-            this.circuitGroupBox.Location = new System.Drawing.Point(12, 6);
-            this.circuitGroupBox.Name = "circuitGroupBox";
-            this.circuitGroupBox.Size = new System.Drawing.Size(251, 682);
-            this.circuitGroupBox.TabIndex = 9;
-            this.circuitGroupBox.TabStop = false;
             // 
             // CreateForm
             // 
@@ -278,9 +278,9 @@ namespace View
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
             this.addGroupBox.ResumeLayout(false);
             this.addGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
             this.circuitGroupBox.ResumeLayout(false);
             this.circuitGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.elementGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -302,9 +302,9 @@ namespace View
         private ComboBox connectionComboBox;
         private Label label4;
         private ComboBox elementComboBox;
+        private GroupBox circuitGroupBox;
         private DataGridViewTextBoxColumn nameColomn;
         private DataGridViewTextBoxColumn valueColomn;
-        private GroupBox circuitGroupBox;
     }
 }
 

@@ -1,11 +1,11 @@
 ﻿using System.Windows.Forms;
 
-namespace View
+namespace View.ConstraintTools
 {
     /// <summary>
     /// Класс, определяющий коректность значений.
     /// </summary>
-    public static class ConstraintTools
+    public static class ValueConstraintTools
     {
         #region -- Публичные статичные методы --
 

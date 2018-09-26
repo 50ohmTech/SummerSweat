@@ -52,7 +52,8 @@
     <Compile Include="CalculateForm.Designer.cs">
       <DependentUpon>CalculateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConstraintTools.cs" />
+    <Compile Include="TreesCreator.cs" />
+    <Compile Include="ConstraintTools\ValueConstraintTools.cs" />
     <Compile Include="CreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,7 +64,7 @@
     <Compile Include="MyDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NumberBox.cs" />
+    <Compile Include="ConstraintTools\NumberBoxConstraintTools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CalculateForm.resx">
