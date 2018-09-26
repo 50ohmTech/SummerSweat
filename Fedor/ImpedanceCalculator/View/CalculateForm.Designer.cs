@@ -162,7 +162,7 @@ namespace View
             // frequencyColomn
             // 
             this.frequencyColomn.Frozen = true;
-            this.frequencyColomn.HeaderText = "Frequency";
+            this.frequencyColomn.HeaderText = "Частота";
             this.frequencyColomn.Name = "frequencyColomn";
             this.frequencyColomn.ReadOnly = true;
             this.frequencyColomn.Width = 120;
@@ -170,7 +170,7 @@ namespace View
             // impedanceColomn
             // 
             this.impedanceColomn.Frozen = true;
-            this.impedanceColomn.HeaderText = "Impedance";
+            this.impedanceColomn.HeaderText = "Импеданс";
             this.impedanceColomn.Name = "impedanceColomn";
             this.impedanceColomn.ReadOnly = true;
             this.impedanceColomn.Width = 310;

@@ -1,6 +1,6 @@
-﻿using System;
-using Model.Elements;
+﻿using Model.Elements;
 using Model.Enums;
+using System;
 
 namespace Model.EventArgs
 {

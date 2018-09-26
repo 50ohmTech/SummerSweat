@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Model.Elements;
+﻿using Model.Elements;
 using Model.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace Model.Tree
 {

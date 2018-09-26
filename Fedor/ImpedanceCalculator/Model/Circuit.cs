@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Model.Enums;
+using Model.Tree;
+using Model.Validators;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Model.Enums;
-using Model.Tree;
 
 namespace Model
 {
@@ -50,10 +51,7 @@ namespace Model
         /// <returns>Список импедансов цепи.</returns>
         public List<Complex> CalculateZ(List<double> frequencies)
         {
-            if (frequencies == null)
-            {
-                throw new ArgumentNullException(nameof(frequencies));
-            }
+            Validator.CheckFrequencies(frequencies);
 
             var impedances = new List<Complex>();
 
@@ -74,9 +72,16 @@ namespace Model
         /// </summary>
         /// <param name="root">Корень поддерева.</param>
         /// <param name="frequency">Частота сигнала.</param>
-        /// <returns></returns>
+        /// <returns>Импеданс цепи.</returns>
         private Complex CalculateZ(Node root, double frequency)
         {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
+            Validator.CheckFrequency(frequency);
+
             if (root.Childs.Count == 0)
             {
                 return root.Element.CalculateZ(frequency);
@@ -92,15 +97,13 @@ namespace Model
 
                 return 1 / impedance;
             }
-            else
-            {
-                foreach (var child in root.Childs)
-                {
-                    impedance += CalculateZ(child, frequency);
-                }
 
-                return impedance;
+            foreach (var child in root.Childs)
+            {
+                impedance += CalculateZ(child, frequency);
             }
+
+            return impedance;
         }
 
         #endregion

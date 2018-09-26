@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Validators;
+using System;
 using System.Numerics;
 
 namespace Model.Elements
@@ -26,10 +27,7 @@ namespace Model.Elements
         /// <returns> омплексное значение импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
-            if (frequency <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(frequency));
-            }
+            Validator.CheckFrequency(frequency);
 
             return new Complex(0, 2 * Math.PI * frequency * Value);
         }

@@ -248,7 +248,7 @@ namespace View
             // 
             this.nameColomn.DataPropertyName = "Name";
             this.nameColomn.Frozen = true;
-            this.nameColomn.HeaderText = "Name";
+            this.nameColomn.HeaderText = "Имя";
             this.nameColomn.Name = "nameColomn";
             this.nameColomn.ReadOnly = true;
             this.nameColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -258,7 +258,7 @@ namespace View
             // 
             this.valueColomn.DataPropertyName = "Value";
             this.valueColomn.Frozen = true;
-            this.valueColomn.HeaderText = "Value";
+            this.valueColomn.HeaderText = "Значение";
             this.valueColomn.Name = "valueColomn";
             this.valueColomn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.valueColomn.Width = 110;

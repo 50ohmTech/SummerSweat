@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Model.Elements;
+﻿using Model.Elements;
 using Model.Enums;
 using Model.EventArgs;
+using System;
+using System.Collections.Generic;
 
 namespace Model.Tree
 {
@@ -51,6 +51,11 @@ namespace Model.Tree
         /// <param name="element">Элемент электрической цепи.</param>
         public void Add(ElementBase element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             if (Root.Childs.Count != 0)
             {
                 throw new InvalidCastException(
@@ -71,6 +76,11 @@ namespace Model.Tree
         /// <param name="connectionType">Тип соединения.</param>
         public void Add(ElementBase element, string brotherName, ConnectionType connectionType)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             var brother = Search(Root, brotherName);
 
             if (connectionType == brother.ConnectionType)
@@ -160,6 +170,11 @@ namespace Model.Tree
         /// <returns>Ячейка дерева.</returns>
         public Node Search(Node root, string elementName)
         {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
             if (root.Element != null)
             {
                 if (root.Element.Name == elementName)
@@ -192,6 +207,11 @@ namespace Model.Tree
         /// <returns>Количество элементов.</returns>
         private uint GetCount(Node root, ICollection<Type> types)
         {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
             if (root.Element != null)
             {
                 return types.Contains(root.Element.GetType()) ? 1 : (uint) 0;
@@ -215,6 +235,11 @@ namespace Model.Tree
         /// <param name="deleteName">Имя удаленного элемента.</param>
         private void UpdateName(Node root, string deleteName)
         {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
             if (root.Element != null)
             {
                 var number = uint.Parse(root.Element.Name.Substring(1));

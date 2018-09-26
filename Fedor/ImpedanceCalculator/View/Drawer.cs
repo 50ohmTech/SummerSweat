@@ -160,6 +160,16 @@ namespace View
         public static Point DrawCircuit(Node root,
             Point displacement)
         {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
+            if (displacement == null)
+            {
+                throw new ArgumentNullException(nameof(displacement));
+            }
+
             //TODO: разбить на подметоды
             //+
             if (root.Element != null)
@@ -188,6 +198,16 @@ namespace View
         private static Point DrawSerialConnection(Node root,
             Point displacement)
         {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
+            if (displacement == null)
+            {
+                throw new ArgumentNullException(nameof(displacement));
+            }
+
             var maxCount = 0;
             var steps = new List<int>();
 
@@ -217,6 +237,16 @@ namespace View
         private static Point DrawParallelConnection(Node root,
             Point displacement)
         {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
+            if (displacement == null)
+            {
+                throw new ArgumentNullException(nameof(displacement));
+            }
+
             var maxCount = 0;
             var steps = new List<int>();
 
@@ -316,6 +346,16 @@ namespace View
         private static void DrawElement(ElementBase element,
             Point displacement)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
+            if (displacement == null)
+            {
+                throw new ArgumentNullException(nameof(displacement));
+            }
+
             //TODO: разбить на подметоды
             //+
             var brush = new SolidBrush(Color.Black);
@@ -343,6 +383,11 @@ namespace View
         /// <param name="displacement">Смещение.</param>
         private static void DrawResistor(Point displacement)
         {
+            if (displacement == null)
+            {
+                throw new ArgumentNullException(nameof(displacement));
+            }
+
             Graphics.DrawLine(Pen,
                 new Point(_resistorPositionX + displacement.X,
                     _resistorPositionY + displacement.Y),
@@ -385,6 +430,11 @@ namespace View
         /// <param name="displacement">Смещение.</param>
         private static void DrawCapacitor(Point displacement)
         {
+            if (displacement == null)
+            {
+                throw new ArgumentNullException(nameof(displacement));
+            }
+
             Graphics.DrawLine(Pen,
                 new Point(_firstPlatePosition + displacement.X,
                     _lineDisplasemantY - _capacitorHight / 2 + displacement.Y),
@@ -415,6 +465,11 @@ namespace View
         /// <param name="displacement">Смещение.</param>
         private static void DrawInductor(Point displacement)
         {
+            if (displacement == null)
+            {
+                throw new ArgumentNullException(nameof(displacement));
+            }
+
             for (var i = 0; i < _arcCount; i++)
             {
                 Graphics.DrawArc(Pen,
