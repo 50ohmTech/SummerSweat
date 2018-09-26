@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.Subcircuits
 {
     /// <summary>
     ///     Последовательное соединение
@@ -16,14 +16,14 @@ namespace CircuitLibrary
         /// <returns>Импеданс</returns>
         public override Complex CalculateZ(double frequency)
         {
-            var resistance = Complex.Zero;
+            var impedance = Complex.Zero;
 
             foreach (var node in Nodes)
             {
-                resistance += node.CalculateZ(frequency);
+                impedance += node.CalculateZ(frequency);
             }
 
-            return resistance;
+            return impedance;
         }
 
         #endregion

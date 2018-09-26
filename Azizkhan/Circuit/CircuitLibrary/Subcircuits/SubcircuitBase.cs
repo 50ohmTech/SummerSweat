@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
+using CircuitLibrary.Events;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.Subcircuits
 {
     /// <summary>
     ///     Базовый класс ноды соединения
@@ -15,7 +17,16 @@ namespace CircuitLibrary
         /// <summary>
         ///     Уникальный идентификатор.
         /// </summary>
-        private static int _id;
+        private static uint _id;
+
+        #endregion
+
+        #region Ordinary fields
+
+        /// <summary>
+        ///     Родитель.
+        /// </summary>
+        public INode _parent;
 
         #endregion
 
@@ -26,17 +37,35 @@ namespace CircuitLibrary
         /// <summary>
         ///     Уникальный идентификатор.
         /// </summary>
-        public int Id { get; } = _id;
+        public uint Id { get; } = _id;
 
         /// <summary>
         ///     Родитель.
         /// </summary>
-        public INode Parent { get; set; }
+        public INode Parent
+        {
+            get => _parent;
+            set
+            {
+                _parent = value;
+                SubcircuitChanged?.Invoke(this,
+                    new SubcircuitChangedEventArgs("Родитель изменен", value));
+            }
+        }
 
         /// <summary>
         ///     Дочерние узлы.
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Событие на изменение родителя.
+        /// </summary>
+        public event EventHandler<SubcircuitChangedEventArgs> SubcircuitChanged;
 
         #endregion
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.Elements
 {
     /// <summary>
     ///     Конденсатор

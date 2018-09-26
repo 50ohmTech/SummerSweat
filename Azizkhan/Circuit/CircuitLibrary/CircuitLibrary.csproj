@@ -46,12 +46,14 @@
     <Compile Include="Circuit.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Inductor.cs" />
+    <Compile Include="Events\SubcircuitChangedEventArgs.cs" />
     <Compile Include="INode.cs" />
     <Compile Include="Subcircuits\ParallelSubcircuit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\Resistor.cs" />
     <Compile Include="Subcircuits\SeriesSubcircuit.cs" />
     <Compile Include="Subcircuits\SubcircuitBase.cs" />
+    <Compile Include="Events\ValueChangedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

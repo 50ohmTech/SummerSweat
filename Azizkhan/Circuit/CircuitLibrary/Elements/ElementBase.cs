@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using CircuitLibrary.Events;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.Elements
 {
     /// <summary>
     ///     Базовый класс элемента
@@ -54,12 +55,27 @@ namespace CircuitLibrary
             get => _value;
             set
             {
-                if (value <= 0)
+                if (double.IsNaN(value) || double.IsInfinity(value))
                 {
                     throw new ArgumentException(nameof(value));
                 }
 
+                var minValue = 0.000001;
+                if (value < minValue)
+                {
+                    throw new ArgumentException(nameof(value));
+                }
+
+                double maxValue = 1000000000000;
+                if (value > maxValue)
+                {
+                    throw new ArgumentException(
+                        nameof(value));
+                }
+
                 _value = value;
+                ValueChanged?.Invoke(this, new ValueChangedEventArgs
+                    (Name, _value));
             }
         }
 
@@ -72,6 +88,15 @@ namespace CircuitLibrary
         ///     Родитель
         /// </summary>
         public INode Parent { get; set; }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Событие изменения номинала элемента
+        /// </summary>
+        public event EventHandler<ValueChangedEventArgs> ValueChanged;
 
         #endregion
 

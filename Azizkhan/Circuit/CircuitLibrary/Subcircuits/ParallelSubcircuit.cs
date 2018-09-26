@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.Subcircuits
 {
     /// <summary>
     ///     Параллельное соединение
@@ -23,15 +23,16 @@ namespace CircuitLibrary
                     "Для расчета параллельного соединения необходимо минимум 2 ноды");
             }
 
-            var resistance = Complex.Zero;
+            var impedance = Complex.Zero;
 
             foreach (var node in Nodes)
             {
-                resistance += 1 / node.CalculateZ(frequency);
+                impedance += 1 / node.CalculateZ(frequency);
             }
 
-            return 1 / resistance;
+            return 1 / impedance;
         }
 
         #endregion
     }
+}
