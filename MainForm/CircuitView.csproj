@@ -87,5 +87,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CircuitModel\CircuitModel.csproj">
+      <Project>{ca1175d7-5c7f-4a0d-b505-bdb7b5246400}</Project>
+      <Name>CircuitModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
