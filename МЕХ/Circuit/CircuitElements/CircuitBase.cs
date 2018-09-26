@@ -221,6 +221,46 @@ namespace CircuitElements
 			}
 		}
 
+		public void ModifyElement(string elementName, string newElementName)
+		{
+			foreach (var element in Elements)
+			{
+				if (element is ElementBase currentElement)
+				{
+					if (currentElement.Name == elementName)
+					{
+						currentElement.Name = newElementName;
+						return;
+					}
+				}
+
+				if (element is CircuitBase circuit)
+				{
+					circuit.ModifyElement(elementName, newElementName);
+				}
+			}
+		}
+
+		public void ModifyElement(string elementName, double newElementValue)
+		{
+			foreach (var element in Elements)
+			{
+				if (element is ElementBase currentElement)
+				{
+					if (currentElement.Name == elementName)
+					{
+						currentElement.Value = newElementValue;
+						return;
+					}
+				}
+
+				if (element is CircuitBase circuit)
+				{
+					circuit.ModifyElement(elementName, newElementValue);
+				}
+			}
+		}
+
 		/// <summary>
 		///     Расчитать импаденс по входной частоте
 		/// </summary>

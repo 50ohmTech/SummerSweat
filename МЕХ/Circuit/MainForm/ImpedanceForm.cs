@@ -66,7 +66,7 @@ namespace MainForm
 		#endregion
 
 		#region Private methods
-
+		
 		/// <summary>
 		///     Обработчик события закрытия формы
 		/// </summary>

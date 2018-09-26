@@ -32,7 +32,7 @@ namespace MainForm
 		private const int _minFrecuency = 1;
 
 		#endregion
-
+		
 		#region Readonly fields
 
 		/// <summary>
@@ -721,6 +721,17 @@ namespace MainForm
 				MessageBox.Show("Выберите элемент для редактирования");
 			}
 
+			if (treeView.SelectedNode.Text.Contains("id"))
+			{
+				MessageBox.Show("Изменять названия подцепей нельзя.");
+				return;
+			}
+
+			_currentCircuit.ModifyElement(GetElementFromTreeView(treeView.SelectedNode).Name, _textBoxAddElementName.Text);
+			_currentCircuit.ModifyElement(GetElementFromTreeView(treeView.SelectedNode).Name, Convert.ToDouble(_textBoxAddElementValue.Text));
+			FillTreeView();
+			DrawCircuit();
+
 			if (_impedanceForm.Visible)
 			{
 				_impedanceForm.Circuit = _currentCircuit;
@@ -743,6 +754,11 @@ namespace MainForm
 				_textBoxAddElementName.Text = selectedElement.Name;
 				_textBoxAddElementValue.Text =
 					selectedElement.Value.ToString(CultureInfo.InvariantCulture);
+			}
+			else
+			{
+				_textBoxAddElementName.Text = GetCircuitId(treeView.SelectedNode).ToString();
+				_textBoxAddElementValue.Text = "id";
 			}
 		}
 
