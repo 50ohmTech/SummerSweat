@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace Model
+namespace Model.Elements
 {
     /// <summary>
     ///     Узел.

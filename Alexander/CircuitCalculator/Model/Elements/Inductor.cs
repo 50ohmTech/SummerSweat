@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Model
+namespace Model.Elements
 {
     /// <summary>
     ///     Катушка индуктивности.

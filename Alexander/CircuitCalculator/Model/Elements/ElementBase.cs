@@ -1,23 +1,24 @@
-﻿using System;
+﻿using Model.Events;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Model
+namespace Model.Elements
 {
     /// <summary>
-    ///     Элемент цепи
+    ///     Элемент цепи.
     /// </summary>
     public abstract class ElementBase:INode
     {
         #region Private fields
 
         /// <summary>
-        ///     Название элемента
+        ///     Название элемента.
         /// </summary>
         private string _name;
 
         /// <summary>
-        ///     Значение элемента
+        ///     Значение элемента.
         /// </summary>
         private double _value;
 
@@ -26,7 +27,7 @@ namespace Model
         #region Properties
 
         /// <summary>
-        ///     Возвращает и задает название элемента
+        ///     Возвращает и задает название элемента.
         /// </summary>
         public string Name
         {
@@ -45,7 +46,7 @@ namespace Model
         }
 
         /// <summary>
-        ///     Возвращает и задает значение элемента
+        ///     Возвращает и задает значение элемента.
         /// </summary>
         public double Value
         {
@@ -58,6 +59,7 @@ namespace Model
                 }
 
                 _value = value;
+                ValueChanged?.Invoke(this, new ElementEventArgs(Name, _value));
             }
         }
 
@@ -73,25 +75,34 @@ namespace Model
 
         #endregion
 
-        #region Public methods
+        #region Events
+
+        /// <summary>
+        ///     Событие, возникающее при изменении номинала элемента.
+        /// </summary>
+        public event EventHandler<ElementEventArgs> ValueChanged;
+
+        /// <summary>
+        ///     Рассчет импеданса.
+        /// </summary>
+        /// <param name="frequency">Частота сигнала.</param>
+        /// <returns></returns>
+        public abstract Complex CalculateZ(double frequency);
+
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         ///     Конструктор класса Element.
         /// </summary>
         /// <param name="name"> Имя элемента. </param>
         /// <param name="value"> Номинал элемента. </param>
-        protected ElementBase(string name, double value)
+        public ElementBase(string name, double value)
         {
             Name = name;
             Value = value;
         }
-
-        /// <summary>
-        ///     Рассчет импеданса
-        /// </summary>
-        /// <param name="frequency">Частота сигнала</param>
-        /// <returns></returns>
-        public abstract Complex CalculateZ(double frequency);
 
         #endregion
     }
