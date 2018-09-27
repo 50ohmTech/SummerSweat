@@ -6,7 +6,7 @@ using CircuitLibrary.Events;
 namespace CircuitLibrary.Subcircuits
 {
     /// <summary>
-    ///     Базовый класс ноды соединения
+    ///     Базовый класс узла подцепи
     /// </summary>
     public abstract class SubcircuitBase : INode
     {

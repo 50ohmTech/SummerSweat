@@ -58,12 +58,12 @@ namespace CircuitLibrary
         /// <summary>
         ///     Удаление ноды
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node">Удаляемый узел дерева</param>
         public void Remove(INode node)
         {
             if (node == null)
             {
-                throw new ArgumentNullException(nameof(node), "Пустая нода!");
+                throw new ArgumentNullException(nameof(node), "Пустой узел дерева!");
             }
 
             if (node == Root)

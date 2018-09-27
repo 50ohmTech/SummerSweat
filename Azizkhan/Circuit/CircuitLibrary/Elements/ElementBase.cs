@@ -10,6 +10,20 @@ namespace CircuitLibrary.Elements
     /// </summary>
     public abstract class ElementBase : INode
     {
+        #region Constants
+
+        /// <summary>
+        ///     Минимальное значение номинала элемента
+        /// </summary>
+        private const double _MINVALUE = 0.000001;
+
+        /// <summary>
+        ///     Максимальное значение номинала элемента
+        /// </summary>
+        private const double _MAXVALUE = 1000000000000;
+
+        #endregion
+
         #region Fields
 
         #region Private fields
@@ -60,22 +74,23 @@ namespace CircuitLibrary.Elements
                     throw new ArgumentException(nameof(value));
                 }
 
-                var minValue = 0.000001;
-                if (value < minValue)
+                if (value < _MINVALUE)
                 {
                     throw new ArgumentException(nameof(value));
                 }
 
-                double maxValue = 1000000000000;
-                if (value > maxValue)
+                if (value > _MAXVALUE)
                 {
                     throw new ArgumentException(
                         nameof(value));
                 }
 
-                _value = value;
-                ValueChanged?.Invoke(this, new ValueChangedEventArgs
-                    (Name, _value));
+                if (value != _value)
+                {
+                    _value = value;
+                    ValueChanged?.Invoke(this, new ValueChangedEventArgs
+                        (Name, _value));
+                }
             }
         }
 
