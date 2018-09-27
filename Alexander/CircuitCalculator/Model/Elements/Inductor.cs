@@ -4,26 +4,26 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Катушка индуктивности.
+    /// Катушка индуктивности.
     /// </summary>
     public class Inductor : ElementBase
     {
         #region Public methods
 
         /// <summary>
-        ///     Конструктор.
+        /// Конструктор.
         /// </summary>
         /// <param name="name">Имя.</param>
-        /// <param name="inductance">Индуктивность.</param>
+        /// <param name="inductance">Номинал индуктивноси.</param>
         public Inductor(string name, double inductance) : base(name, inductance)
         {
         }
 
         /// <summary>
-        ///     Расчет импеданса.
+        /// Расчет импеданса.
         /// </summary>
         /// <param name="frequency">Частоста сигнала.</param>
-        /// <returns>Импеданс.</returns>
+        /// <returns>Номинал импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (frequency <= 0)

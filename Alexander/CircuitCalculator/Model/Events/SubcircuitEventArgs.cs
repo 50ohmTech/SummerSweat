@@ -4,7 +4,7 @@ using Model.Elements;
 namespace Model.Events
 {
     /// <summary>
-    ///     Аргументы события на изменение родителя.
+    /// Аргументы события на изменение родителя.
     /// </summary>
     public class SubcircuitEventArgs
     {
@@ -13,7 +13,7 @@ namespace Model.Events
         #region Private fields
 
         /// <summary>
-        ///     Сообщение.
+        /// Сообщение.
         /// </summary>
         private string _message;
 
@@ -24,15 +24,16 @@ namespace Model.Events
         #region Properties
 
         /// <summary>
-        ///     Новое значение.
+        /// Новое значение.
         /// </summary>
         public INode Parent { get; }
 
         /// <summary>
-        ///     Сообщение.
+        /// Сообщение.
         /// </summary>
         public string Message
         {
+            get => _message;
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -42,7 +43,6 @@ namespace Model.Events
 
                 _message = value;
             }
-            get => _message;
         }
 
         #endregion
@@ -50,14 +50,14 @@ namespace Model.Events
         #region Constructor
 
         /// <summary>
-        ///     Конструктор.
+        /// Конструктор.
         /// </summary>
         /// <param name="message">Сообщение.</param>
         /// <param name="parent">Родитель</param>
         public SubcircuitEventArgs(string message, INode parent)
         {
-            Message = message;
             Parent = parent;
+            Message = message;
         }
 
         #endregion

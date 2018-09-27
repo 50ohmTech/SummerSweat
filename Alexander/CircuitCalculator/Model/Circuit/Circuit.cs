@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Numerics;
 using Model.Elements;
 
-namespace Model
+namespace Model.Circuit
 {
     /// <summary>
-    ///     Цепь.
+    /// Цепь.
     /// </summary>
     public class Circuit
     {
@@ -15,7 +15,7 @@ namespace Model
         #region Private fields
 
         /// <summary>
-        ///     Корень цепи.
+        /// Корень цепи.
         /// </summary>
         private INode _root;
 
@@ -26,7 +26,7 @@ namespace Model
         #region Properties
 
         /// <summary>
-        ///     Корень.
+        /// Корень.
         /// </summary>
         public INode Root { get; private set; }
 
@@ -35,16 +35,16 @@ namespace Model
         #region Public methods
 
         /// <summary>
-        ///     Проверка на наличие элементов в цепи.
+        /// Проверка на наличие элементов в цепи.
         /// </summary>
-        /// <returns>Есть ли в цепи элементы.</returns>
+        /// <returns>Наличие элементов в цепи.</returns>
         public bool IsEmpty()
         {
             return Root == null;
         }
 
         /// <summary>
-        ///     Очистка цепи.
+        /// Очистка цепи.
         /// </summary>
         public void Clear()
         {
@@ -53,7 +53,7 @@ namespace Model
 
 
         /// <summary>
-        ///     Расчитать импедансы цепи для списка частот.
+        /// Расчитать импеданс цепи для списка частот.
         /// </summary>
         /// <param name="frequencies">Список частот сигнала.</param>
         /// <returns>Список импедансов цепи.</returns>
@@ -75,7 +75,7 @@ namespace Model
         }
 
         /// <summary>
-        ///     Удалить узел.
+        /// Удалить узел.
         /// </summary>
         /// <param name="node">Узел.</param>
         /// <returns>Удален ли узел.</returns>
@@ -83,7 +83,7 @@ namespace Model
         {
             if (IsEmpty())
             {
-                throw new InvalidOperationException("Цепь пуста. Удалять нечего.");
+                throw new InvalidOperationException("Удалять нечего. Цепь пуста.");
             }
 
             if (node == null)
@@ -102,7 +102,7 @@ namespace Model
         }
 
         /// <summary>
-        ///     Добавить новый узел в дочерний элемент узла.
+        /// Добавить новый узел в дочерний элемент узла.
         /// </summary>
         /// <param name="node">Узел в который добавляют дочерние элемнты.</param>
         /// <param name="newNode">Новый узел.</param>
@@ -111,12 +111,12 @@ namespace Model
             if (newNode == null)
             {
                 throw new ArgumentNullException(nameof(newNode),
-                    "Новый узел не может быть не определен.");
+                    "Новый узел не может быть неопределенным.");
             }
 
             if (node == newNode)
             {
-                throw new ArgumentOutOfRangeException("Узел был равен новому узлу");
+                throw new ArgumentOutOfRangeException("Узел равен новому узлу.");
             }
 
             if (IsEmpty())
@@ -128,7 +128,7 @@ namespace Model
             if (!IsEmpty() && node == null)
             {
                 throw new ArgumentNullException(nameof(newNode),
-                    "Выберите узел относительно которого будет происходить добавление. Для добавления нового корня сделайте очистку цепи или удалите корень.");
+                    "Выберите узел. Для добавления нового корня очистите цепь или удалите корень.");
             }
 
             if (node is ElementBase)
@@ -140,7 +140,7 @@ namespace Model
             {
                 if (subcircuit.Nodes == null)
                 {
-                    throw new InvalidOperationException("Дети узла были null");
+                    throw new InvalidOperationException("Дети узла равны null.");
                 }
 
                 subcircuit.Nodes.Add(newNode);

@@ -4,17 +4,17 @@ using System.Numerics;
 namespace Model.Circuit
 {
     /// <summary>
-    ///     Последовательная подцепь.
+    /// Последовательная подцепь.
     /// </summary>
     public class SeriesSubcircuit : SubcircuitBase
     {
         #region Public methods
 
         /// <summary>
-        ///     Рассчитать импеданс.
+        /// Рассчитать импеданс.
         /// </summary>
         /// <param name="frequency">Частота.</param>
-        /// <returns>Импеданс.</returns>
+        /// <returns>Номинал импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (Nodes.Count < 1)

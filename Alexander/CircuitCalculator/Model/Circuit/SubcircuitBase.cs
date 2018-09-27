@@ -7,7 +7,7 @@ using Model.Events;
 namespace Model.Circuit
 {
     /// <summary>
-    ///     Подцепь.
+    /// Подцепь.
     /// </summary>
     public abstract class SubcircuitBase : INode
     {
@@ -16,7 +16,7 @@ namespace Model.Circuit
         #region Static fields
 
         /// <summary>
-        ///     Уникальный идентификатор.
+        /// Уникальный идентификатор.
         /// </summary>
         private static int _id;
 
@@ -25,7 +25,7 @@ namespace Model.Circuit
         #region Ordinary fields
 
         /// <summary>
-        ///     Родитель.
+        /// Родитель.
         /// </summary>
         public INode _parent;
 
@@ -36,12 +36,12 @@ namespace Model.Circuit
         #region Properties
 
         /// <summary>
-        ///     Уникальный идентификатор.
+        /// Уникальный идентификатор.
         /// </summary>
         public int Id { get; } = _id;
 
         /// <summary>
-        ///     Родитель.
+        /// Родитель.
         /// </summary>
         public INode Parent
         {
@@ -50,12 +50,12 @@ namespace Model.Circuit
             {
                 _parent = value;
                 ParentChanged?.Invoke(this,
-                    new SubcircuitEventArgs("Родитель изменен", value));
+                    new SubcircuitEventArgs("Изменен родитель", value));
             }
         }
 
         /// <summary>
-        ///     Дочерние узлы.
+        /// Дочерние узлы.
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
@@ -64,15 +64,15 @@ namespace Model.Circuit
         #region Events
 
         /// <summary>
-        ///     Событие на изменение родителя.
+        /// Событие на изменение родителя.
         /// </summary>
         public event EventHandler<SubcircuitEventArgs> ParentChanged;
 
         /// <summary>
-        ///     Рассчитать импеданс.
+        /// Рассчитать импеданс.
         /// </summary>
         /// <param name="frequency">Частота.</param>
-        /// <returns>Импеданс.</returns>
+        /// <returns>Номинал импеданса.</returns>
         public abstract Complex CalculateZ(double frequency);
 
         #endregion
@@ -80,7 +80,7 @@ namespace Model.Circuit
         #region Constructor
 
         /// <summary>
-        ///     Конструктор.
+        /// Конструктор.
         /// </summary>
         protected SubcircuitBase()
         {

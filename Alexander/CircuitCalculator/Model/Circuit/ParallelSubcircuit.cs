@@ -4,23 +4,23 @@ using System.Numerics;
 namespace Model.Circuit
 {
     /// <summary>
-    ///     Параллельная подцепь.
+    /// Параллельная подцепь.
     /// </summary>
     public class ParallelSubcircuit : SubcircuitBase
     {
         #region Public methods
 
         /// <summary>
-        ///     Рассчитать импеданс.
+        /// Рассчитать импеданс.
         /// </summary>
         /// <param name="frequency">Частота.</param>
-        /// <returns>Импеданс.</returns>
+        /// <returns>Номинал импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (Nodes.Count <= 1)
             {
                 throw new InvalidOperationException(
-                    $"В параллельном соединении (Id: {Id}) необходимо минимум 2 узла.");
+                    $"В параллельном соединении (Id: {Id}) необходимо минимум два узла.");
             }
 
             var resistance = Complex.Zero;

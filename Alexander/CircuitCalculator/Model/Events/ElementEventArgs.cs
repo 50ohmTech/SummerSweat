@@ -3,7 +3,7 @@
 namespace Model.Events
 {
     /// <summary>
-    ///     Класс для обработчика события ValueChanged.
+    /// Класс для обработчика события ValueChanged.
     /// </summary>
     public class ElementEventArgs : EventArgs
     {
@@ -12,12 +12,12 @@ namespace Model.Events
         #region Private fields
 
         /// <summary>
-        ///     Сообщение.
+        /// Сообщение.
         /// </summary>
         private string _message;
 
         /// <summary>
-        ///     Новое значение.
+        /// Новое значение.
         /// </summary>
         private double _value;
 
@@ -28,10 +28,11 @@ namespace Model.Events
         #region Properties
 
         /// <summary>
-        ///     Новое значение.
+        /// Новое значение.
         /// </summary>
         public double Value
         {
+            get => _value;
             private set
             {
                 if (value <= 0)
@@ -41,14 +42,14 @@ namespace Model.Events
 
                 _value = value;
             }
-            get => _value;
         }
 
         /// <summary>
-        ///     Сообщение.
+        /// Сообщение.
         /// </summary>
         public string Message
         {
+            get => _message;
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -58,7 +59,6 @@ namespace Model.Events
 
                 _message = value;
             }
-            get => _message;
         }
 
         #endregion
@@ -66,14 +66,14 @@ namespace Model.Events
         #region Constructor
 
         /// <summary>
-        ///     Конструктор.
+        /// Конструктор.
         /// </summary>
         /// <param name="message">Сообщение.</param>
         /// <param name="value">Новое значение.</param>
         public ElementEventArgs(string message, double value)
         {
-            Message = message;
             Value = value;
+            Message = message;
         }
 
         #endregion

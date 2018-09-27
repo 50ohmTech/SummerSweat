@@ -4,26 +4,26 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Резистор.
+    /// Резистор.
     /// </summary>
     public class Resistor : ElementBase
     {
         #region Public methods
 
         /// <summary>
-        ///     Конструктор.
+        /// Конструктор.
         /// </summary>
         /// <param name="name">Имя.</param>
-        /// <param name="resistance">Сопротивление.</param>
+        /// <param name="resistance">Номинал сопротивления.</param>
         public Resistor(string name, double resistance) : base(name, resistance)
         {
         }
 
         /// <summary>
-        ///     Расчет импеданса.
+        /// Расчет импеданса.
         /// </summary>
         /// <param name="frequency">Частоста сигнала.</param>
-        /// <returns>Импеданс.</returns>
+        /// <returns>Номинал импеданса.</returns>
         public override Complex CalculateZ(double frequency)
         {
             if (frequency <= 0)

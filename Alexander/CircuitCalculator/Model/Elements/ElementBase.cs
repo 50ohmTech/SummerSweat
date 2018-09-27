@@ -6,19 +6,19 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    ///     Элемент цепи.
+    /// Элемент.
     /// </summary>
     public abstract class ElementBase:INode
     {
         #region Private fields
 
         /// <summary>
-        ///     Название элемента.
+        /// Название элемента.
         /// </summary>
         private string _name;
 
         /// <summary>
-        ///     Значение элемента.
+        /// Значение элемента.
         /// </summary>
         private double _value;
 
@@ -27,12 +27,11 @@ namespace Model.Elements
         #region Properties
 
         /// <summary>
-        ///     Возвращает и задает название элемента.
+        /// Возвращает и задает название элемента.
         /// </summary>
         public string Name
         {
             get => _name;
-
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -46,7 +45,7 @@ namespace Model.Elements
         }
 
         /// <summary>
-        ///     Возвращает и задает значение элемента.
+        /// Возвращает и задает значение элемента.
         /// </summary>
         public double Value
         {
@@ -64,12 +63,12 @@ namespace Model.Elements
         }
 
         /// <summary>
-        ///     Родитель.
+        /// Родитель.
         /// </summary>
         public INode Parent { get; set; }
 
         /// <summary>
-        ///     Дочерние узлы.
+        /// Дочерние узлы.
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
@@ -78,12 +77,12 @@ namespace Model.Elements
         #region Events
 
         /// <summary>
-        ///     Событие, возникающее при изменении номинала элемента.
+        /// Событие на изменение номинала элемента.
         /// </summary>
         public event EventHandler<ElementEventArgs> ValueChanged;
 
         /// <summary>
-        ///     Рассчет импеданса.
+        /// Рассчет импеданса.
         /// </summary>
         /// <param name="frequency">Частота сигнала.</param>
         /// <returns></returns>
@@ -94,14 +93,14 @@ namespace Model.Elements
         #region Constructor
 
         /// <summary>
-        ///     Конструктор класса Element.
+        /// Конструктор класса Element.
         /// </summary>
-        /// <param name="name"> Имя элемента. </param>
-        /// <param name="value"> Номинал элемента. </param>
+        /// <param name="name">Имя элемента.</param>
+        /// <param name="value">Номинал элемента.</param>
         public ElementBase(string name, double value)
         {
-            Name = name;
             Value = value;
+            Name = name;
         }
 
         #endregion
