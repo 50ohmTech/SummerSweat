@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Xml;
 
 namespace ElementsLibrary
 {
+
     /// <summary>
     /// Класс электрическая цепь Circuit
     /// </summary>
    public class Circuit
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public INode Root { get; private set; }
+
         /// <summary>
         /// Список элементов цепи
         /// </summary>
