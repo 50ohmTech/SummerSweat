@@ -1,14 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using CircuitLibrary.Events;
 
-namespace CircuitLibrary
+namespace CircuitLibrary.Elements
 {
     /// <summary>
     ///     Базовый класс элемента
     /// </summary>
     public abstract class ElementBase : INode
     {
+        #region Constants
+
+        /// <summary>
+        ///     Минимальное значение номинала элемента
+        /// </summary>
+        private const double _MINVALUE = 0.000001;
+
+        /// <summary>
+        ///     Максимальное значение номинала элемента
+        /// </summary>
+        private const double _MAXVALUE = 1000000000000;
+
+        #endregion
+
         #region Fields
 
         #region Private fields
@@ -54,12 +69,28 @@ namespace CircuitLibrary
             get => _value;
             set
             {
-                if (value <= 0)
+                if (double.IsNaN(value) || double.IsInfinity(value))
                 {
                     throw new ArgumentException(nameof(value));
                 }
 
-                _value = value;
+                if (value < _MINVALUE)
+                {
+                    throw new ArgumentException(nameof(value));
+                }
+
+                if (value > _MAXVALUE)
+                {
+                    throw new ArgumentException(
+                        nameof(value));
+                }
+
+                if (value != _value)
+                {
+                    _value = value;
+                    ValueChanged?.Invoke(this, new ValueChangedEventArgs
+                        (Name, _value));
+                }
             }
         }
 
@@ -72,6 +103,15 @@ namespace CircuitLibrary
         ///     Родитель
         /// </summary>
         public INode Parent { get; set; }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Событие изменения номинала элемента
+        /// </summary>
+        public event EventHandler<ValueChangedEventArgs> ValueChanged;
 
         #endregion
 
