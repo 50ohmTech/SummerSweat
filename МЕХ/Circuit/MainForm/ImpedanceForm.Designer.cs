@@ -28,92 +28,146 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.StartLabel = new System.Windows.Forms.Label();
-            this.EndLabel = new System.Windows.Forms.Label();
-            this.StepLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // StartLabel
-            // 
-            this.StartLabel.AutoSize = true;
-            this.StartLabel.Location = new System.Drawing.Point(12, 9);
-            this.StartLabel.Name = "StartLabel";
-            this.StartLabel.Size = new System.Drawing.Size(44, 13);
-            this.StartLabel.TabIndex = 0;
-            this.StartLabel.Text = "Начало";
-            // 
-            // EndLabel
-            // 
-            this.EndLabel.AutoSize = true;
-            this.EndLabel.Location = new System.Drawing.Point(12, 35);
-            this.EndLabel.Name = "EndLabel";
-            this.EndLabel.Size = new System.Drawing.Size(38, 13);
-            this.EndLabel.TabIndex = 1;
-            this.EndLabel.Text = "Конец";
-            // 
-            // StepLabel
-            // 
-            this.StepLabel.AutoSize = true;
-            this.StepLabel.Location = new System.Drawing.Point(12, 61);
-            this.StepLabel.Name = "StepLabel";
-            this.StepLabel.Size = new System.Drawing.Size(27, 13);
-            this.StepLabel.TabIndex = 2;
-            this.StepLabel.Text = "Шаг";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(89, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(89, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(89, 58);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
-            // 
-            // dataGridView
-            // 
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(15, 84);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(174, 116);
-            this.dataGridView.TabIndex = 6;
-            // 
-            // ImpedanceForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 212);
-            this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.StepLabel);
-            this.Controls.Add(this.EndLabel);
-            this.Controls.Add(this.StartLabel);
-            this.MinimumSize = new System.Drawing.Size(220, 251);
-            this.Name = "ImpedanceForm";
-            this.Text = "ImpedanceForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			this.components = new System.ComponentModel.Container();
+			this.StartLabel = new System.Windows.Forms.Label();
+			this.EndLabel = new System.Windows.Forms.Label();
+			this.StepLabel = new System.Windows.Forms.Label();
+			this.initialValue = new System.Windows.Forms.TextBox();
+			this.finalValue = new System.Windows.Forms.TextBox();
+			this.step = new System.Windows.Forms.TextBox();
+			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+			this._dataGridView = new System.Windows.Forms.DataGridView();
+			this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Impedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// StartLabel
+			// 
+			this.StartLabel.AutoSize = true;
+			this.StartLabel.Location = new System.Drawing.Point(16, 11);
+			this.StartLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.StartLabel.Name = "StartLabel";
+			this.StartLabel.Size = new System.Drawing.Size(58, 17);
+			this.StartLabel.TabIndex = 0;
+			this.StartLabel.Text = "Начало";
+			// 
+			// EndLabel
+			// 
+			this.EndLabel.AutoSize = true;
+			this.EndLabel.Location = new System.Drawing.Point(16, 43);
+			this.EndLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.EndLabel.Name = "EndLabel";
+			this.EndLabel.Size = new System.Drawing.Size(49, 17);
+			this.EndLabel.TabIndex = 1;
+			this.EndLabel.Text = "Конец";
+			// 
+			// StepLabel
+			// 
+			this.StepLabel.AutoSize = true;
+			this.StepLabel.Location = new System.Drawing.Point(16, 75);
+			this.StepLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.StepLabel.Name = "StepLabel";
+			this.StepLabel.Size = new System.Drawing.Size(32, 17);
+			this.StepLabel.TabIndex = 2;
+			this.StepLabel.Text = "Шаг";
+			// 
+			// initialValue
+			// 
+			this.initialValue.Location = new System.Drawing.Point(119, 7);
+			this.initialValue.Margin = new System.Windows.Forms.Padding(4);
+			this.initialValue.Name = "initialValue";
+			this.initialValue.Size = new System.Drawing.Size(132, 22);
+			this.initialValue.TabIndex = 3;
+			this.initialValue.TextChanged += new System.EventHandler(this.initialValue_TextChanged);
+			this.initialValue.Leave += new System.EventHandler(this.initialValue_Leave);
+			// 
+			// finalValue
+			// 
+			this.finalValue.Location = new System.Drawing.Point(119, 39);
+			this.finalValue.Margin = new System.Windows.Forms.Padding(4);
+			this.finalValue.Name = "finalValue";
+			this.finalValue.Size = new System.Drawing.Size(132, 22);
+			this.finalValue.TabIndex = 4;
+			this.finalValue.TextChanged += new System.EventHandler(this.finalValue_TextChanged);
+			this.finalValue.Leave += new System.EventHandler(this.finalValue_Leave);
+			// 
+			// step
+			// 
+			this.step.Location = new System.Drawing.Point(119, 71);
+			this.step.Margin = new System.Windows.Forms.Padding(4);
+			this.step.Name = "step";
+			this.step.Size = new System.Drawing.Size(132, 22);
+			this.step.TabIndex = 5;
+			this.step.Leave += new System.EventHandler(this.step_Leave);
+			// 
+			// errorProvider
+			// 
+			this.errorProvider.ContainerControl = this;
+			// 
+			// _dataGridView
+			// 
+			this._dataGridView.AllowUserToAddRows = false;
+			this._dataGridView.AllowUserToDeleteRows = false;
+			this._dataGridView.AllowUserToResizeColumns = false;
+			this._dataGridView.AllowUserToResizeRows = false;
+			this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Frequency,
+            this.Impedance});
+			this._dataGridView.EnableHeadersVisualStyles = false;
+			this._dataGridView.Location = new System.Drawing.Point(13, 101);
+			this._dataGridView.Margin = new System.Windows.Forms.Padding(4);
+			this._dataGridView.MultiSelect = false;
+			this._dataGridView.Name = "_dataGridView";
+			this._dataGridView.ReadOnly = true;
+			this._dataGridView.RowHeadersVisible = false;
+			this._dataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this._dataGridView.Size = new System.Drawing.Size(348, 147);
+			this._dataGridView.TabIndex = 7;
+			// 
+			// Frequency
+			// 
+			this.Frequency.DataPropertyName = "Frequency";
+			this.Frequency.Frozen = true;
+			this.Frequency.HeaderText = "Частота";
+			this.Frequency.Name = "Frequency";
+			this.Frequency.ReadOnly = true;
+			this.Frequency.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			// 
+			// Impedance
+			// 
+			this.Impedance.DataPropertyName = "Impedance";
+			this.Impedance.Frozen = true;
+			this.Impedance.HeaderText = "Импеданс";
+			this.Impedance.Name = "Impedance";
+			this.Impedance.ReadOnly = true;
+			this.Impedance.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.Impedance.Width = 200;
+			// 
+			// ImpedanceForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(374, 261);
+			this.Controls.Add(this._dataGridView);
+			this.Controls.Add(this.step);
+			this.Controls.Add(this.finalValue);
+			this.Controls.Add(this.initialValue);
+			this.Controls.Add(this.StepLabel);
+			this.Controls.Add(this.EndLabel);
+			this.Controls.Add(this.StartLabel);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Margin = new System.Windows.Forms.Padding(4);
+			this.MinimumSize = new System.Drawing.Size(287, 298);
+			this.Name = "ImpedanceForm";
+			this.Text = "ImpedanceForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImpedanceForm_FormClosing);
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -122,9 +176,12 @@
         private System.Windows.Forms.Label StartLabel;
         private System.Windows.Forms.Label EndLabel;
         private System.Windows.Forms.Label StepLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.DataGridView dataGridView;
-    }
+        private System.Windows.Forms.TextBox initialValue;
+        private System.Windows.Forms.TextBox finalValue;
+        private System.Windows.Forms.TextBox step;
+		private System.Windows.Forms.ErrorProvider errorProvider;
+		private System.Windows.Forms.DataGridView _dataGridView;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Frequency;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Impedance;
+	}
 }

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Windows.Forms;
 using Model.Elements;
 
 #endregion
@@ -131,8 +132,10 @@ namespace Model
 
             if (!IsEmpty() && node == null)
             {
-                throw new ArgumentNullException(nameof(newNode),
-                    "Выберите узел относительно которого будет происходить добавление. Для добавления нового корня сделайте очистку цепи или удалите корень.");
+                MessageBox.Show(
+                    "Выберите узел относительно которого будет происходить добавление. Для добавления нового корня сделайте очистку цепи или удалите корень.",
+                    "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
 
             if (node is ElementBase)
@@ -151,7 +154,7 @@ namespace Model
 
                 if (newNode is SubcircuitBase newSubcircuit)
                 {
-                    newSubcircuit.Parent = subcircuit;                
+                    newSubcircuit.Parent = subcircuit;
                 }
 
                 if (newNode is ElementBase newElementBase)
