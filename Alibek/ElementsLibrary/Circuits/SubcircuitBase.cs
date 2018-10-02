@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
+
 namespace ElementsLibrary.Circuits
 {
+    /// <summary>
+    /// Базовый класс подцепи <see cref="SubcircuitBase"/>
+    /// </summary>
     public abstract class SubcircuitBase : INode
     {
         #region Static fields
@@ -19,7 +23,7 @@ namespace ElementsLibrary.Circuits
         /// <summary>
         ///     Идентификатор
         /// </summary>
-        public uint uniqueID { get; }
+        public uint UniqueID { get; }
 
         /// <summary>
         ///     Главный узел
@@ -45,7 +49,7 @@ namespace ElementsLibrary.Circuits
         /// </summary>
         public SubcircuitBase()
         {
-            uniqueID = _globalID;
+            UniqueID = _globalID;
             _globalID++;
         }
 
@@ -56,7 +60,7 @@ namespace ElementsLibrary.Circuits
         /// <summary>
         ///     Расчет импеданса <see cref="CalculateZ" />
         /// </summary>
-        /// <param name="frequency"></param>
+        /// <param name="frequency">Частота</param>
         /// <returns></returns>
         public abstract Complex CalculateZ(double frequency);
 

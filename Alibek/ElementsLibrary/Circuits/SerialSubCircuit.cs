@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Numerics;
 
+
 namespace ElementsLibrary.Circuits
 {
+    /// <summary>
+    /// Последовательное соединение цепи <see cref="SerlialSubcircuit"/>
+    /// </summary>
     public abstract class SerlialSubcircuit : SubcircuitBase
     {
         #region Public methods
@@ -14,6 +18,11 @@ namespace ElementsLibrary.Circuits
         /// <returns>Комплексное значение импеданса</returns>
         public override Complex CalculateZ(double frequency)
         {
+            if ((frequency <= 0) || (frequency > 1000000000000))
+            {
+                throw new ArgumentOutOfRangeException(nameof(frequency));
+            }
+
             var resistance = Complex.Zero;
 
             foreach (var nodeElements in Nodes)

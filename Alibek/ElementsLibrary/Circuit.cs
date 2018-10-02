@@ -1,38 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Xml;
+
 
 namespace ElementsLibrary
 {
-
     /// <summary>
-    /// Класс электрическая цепь Circuit
+    ///     Класс электрическая цепь Circuit <see cref="Circuit" />
     /// </summary>
-   public class Circuit
+    public class Circuit
     {
+        #region Private fields
+
         /// <summary>
-        /// 
+        ///     Список элементов цепи
+        /// </summary>
+        private List<ElementBase> _elements;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Корень дерева
         /// </summary>
         public INode Root { get; private set; }
 
         /// <summary>
-        /// Список элементов цепи
-        /// </summary>
-        private List<ElementBase> _elements;
-
-        /// <summary>
-        /// Конструктор класса <see cref="Circuit"/>
-        /// </summary>
-        /// <param name="elements">Элементы</param>
-        public Circuit(List<ElementBase> elements)
-        {
-            Elements = elements;
-        }
-
-        /// <summary>
-        /// Свойство для возвращения и задачи элементов в цепи
+        ///     Свойство для возвращения и задачи элементов в цепи
         /// </summary>
         public List<ElementBase> Elements
         {
@@ -46,8 +41,25 @@ namespace ElementsLibrary
             }
         }
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
-        /// Метод расчета полного импеданса цепи
+        ///     Конструктор класса <see cref="Circuit" />
+        /// </summary>
+        /// <param name="elements">Элементы</param>
+        public Circuit(List<ElementBase> elements)
+        {
+            Elements = elements;
+        }
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        ///     Метод расчета полного импеданса цепи
         /// </summary>
         /// <param name="frequencies">Частота</param>
         /// <returns>Импеданс всей цепи</returns>
@@ -62,6 +74,7 @@ namespace ElementsLibrary
             {
                 throw new ArgumentNullException(nameof(frequencies));
             }
+
             var counter = 0;
             var impedance = new List<Complex>();
             foreach (var element in Elements)
@@ -72,7 +85,10 @@ namespace ElementsLibrary
                     counter++;
                 }
             }
+
             return impedance;
         }
+
+        #endregion
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Numerics;
 
+
 namespace ElementsLibrary
 {
     /// <summary>
-    ///     Базовый класс элемента
+    ///     Базовый класс элемента <see cref="ElementBase"/>
     /// </summary>
     public abstract class ElementBase
     {

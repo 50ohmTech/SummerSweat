@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Numerics;
 
+
 namespace ElementsLibrary.Circuits
 {
+    /// <summary>
+    /// Параллельное соединение цепи <see cref="ParallelSubcircuit"/>
+    /// </summary>
     public abstract class ParallelSubcircuit : SubcircuitBase
     {
         #region Public methods
@@ -14,6 +18,11 @@ namespace ElementsLibrary.Circuits
         /// <returns>Комплексное значение импеданса</returns>
         public override Complex CalculateZ(double frequency)
         {
+            if ((frequency <= 0) || (frequency > 1000000000000))
+            {
+                throw new ArgumentOutOfRangeException(nameof(frequency));
+            }
+
             if (Nodes.Count <= 1)
             {
                 throw new
