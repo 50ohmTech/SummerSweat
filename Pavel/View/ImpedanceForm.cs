@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace View
+namespace MainForm
 {
-    public partial class Form1 : Form
+    public partial class ImpedanceForm : Form
     {
-        public Form1()
+        public ImpedanceForm()
         {
             InitializeComponent();
         }
