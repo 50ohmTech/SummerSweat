@@ -49,6 +49,7 @@
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Inductor.cs" />
     <Compile Include="Elements\INode.cs" />
+    <Compile Include="Enums\NodeTypes.cs" />
     <Compile Include="Events\ElementEventArgs.cs" />
     <Compile Include="Events\SubcircuitEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

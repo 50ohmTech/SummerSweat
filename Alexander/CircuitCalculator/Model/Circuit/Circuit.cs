@@ -128,12 +128,12 @@ namespace Model.Circuit
             if (!IsEmpty() && node == null)
             {
                 throw new ArgumentNullException(nameof(newNode),
-                    "Выберите узел. Для добавления нового корня очистите цепь или удалите корень.");
+                    "Выберите узел.");
             }
 
             if (node is ElementBase)
             {
-                throw new ArgumentException("Узел не может быть элементом.");
+                throw new ArgumentException("Выберите узел, а не элемент.");
             }
 
             if (node is SubcircuitBase subcircuit)
