@@ -15,7 +15,7 @@ namespace Model
         /// <summary>
         ///     Родитель.
         /// </summary>
-        INode Parent { get; }
+        INode Parent { get; set; }
 
         #endregion
 

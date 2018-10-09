@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+//using System.Reflection.Metadata;
 using Model.Elements;
 
 #endregion
@@ -21,7 +22,7 @@ namespace Model
         /// <summary>
         ///     Корень цепи.
         /// </summary>
-        private INode _root;
+        public INode Root { get; private set; }
 
         #endregion
 
@@ -45,12 +46,69 @@ namespace Model
 
             foreach (var frequency in frequencies)
             {
-                impedances.Add(_root.CalculateZ(frequency));
+                impedances.Add(Root.CalculateZ(frequency));
             }
 
             return impedances;
         }
 
+        public bool IsEmpty()
+        {
+            return Root == null;
+        }
+
+        public void AddAfter(INode currentNode, INode newNode)
+        {
+            if (IsEmpty())
+            {
+                Root = newNode;
+                return;
+            }
+
+            if (currentNode is Subcircuit subcircuit)
+            {
+                subcircuit.Nodes.Add(newNode);
+
+                if (newNode is Subcircuit newSubcircuit)
+                {
+                    newSubcircuit.Parent = subcircuit;
+                }
+
+                if (newNode is ElementBase newElementBase)
+                {
+                    newElementBase.Parent = subcircuit;
+                }
+            }
+        }
+
+        public void Remove(INode currentNode)
+        {
+            if (currentNode == Root)
+            {
+                currentNode.Nodes.Clear();
+                Root = null;
+                return;
+            }
+            
+            if (currentNode is Subcircuit subcircuit)
+            {
+                for (int i = 0; i < subcircuit.Nodes.Count; i++)
+                {
+                    subcircuit.Nodes[i].Parent = subcircuit.Parent;
+                }
+                subcircuit.Parent.Nodes.AddRange(subcircuit.Nodes);
+                subcircuit.Parent.Nodes.Remove(subcircuit);
+            }
+            if (currentNode is ElementBase elementBase)
+            {
+                elementBase.Parent.Nodes.Remove(elementBase);
+            }
+        }
+
+        void Clean()
+        {
+
+        }
         #endregion
     }
 }
