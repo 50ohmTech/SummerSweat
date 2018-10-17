@@ -35,6 +35,9 @@ namespace Model
         /// <returns></returns>
         public abstract Complex CalculateZ(double frequency);
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected Subcircuit()
         {
             _id++;

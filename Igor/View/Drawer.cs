@@ -173,8 +173,8 @@ namespace View
             }
 
             return root is SerialSubcircuit
-                ? DrawParallelConnection(root, displacement)
-                : DrawSerialConnection(root, displacement);
+                ? DrawSerialConnection(root, displacement)
+                : DrawParallelConnection(root, displacement);
         }
 
         #endregion

@@ -33,7 +33,6 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
-            this.NameTextBox = new System.Windows.Forms.TextBox();
             this.SelectingCircuitComboBox = new System.Windows.Forms.ComboBox();
             this.SelectingCircuitLabel = new System.Windows.Forms.Label();
             this.treeView = new System.Windows.Forms.TreeView();
@@ -99,18 +98,6 @@
             this.CalculateImpedanceButton.Text = "Рассчитать импеданс";
             this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
             this.CalculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
-            // 
-            // NameTextBox
-            // 
-            this.NameTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.NameTextBox.Location = new System.Drawing.Point(20, 245);
-            this.NameTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(107, 22);
-            this.NameTextBox.TabIndex = 3;
-            this.NameTextBox.Text = "Имя";
-            this.NameTextBox.Enter += new System.EventHandler(this.NameTextBox_Enter);
-            this.NameTextBox.Leave += new System.EventHandler(this.NameTextBox_Leave);
             // 
             // SelectingCircuitComboBox
             // 
@@ -195,7 +182,6 @@
             this.Controls.Add(this.treeView);
             this.Controls.Add(this.SelectingCircuitLabel);
             this.Controls.Add(this.SelectingCircuitComboBox);
-            this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.CalculateImpedanceButton);
@@ -217,7 +203,6 @@
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button CalculateImpedanceButton;
-        private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.ComboBox SelectingCircuitComboBox;
         private System.Windows.Forms.Label SelectingCircuitLabel;
         private System.Windows.Forms.TreeView treeView;

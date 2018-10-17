@@ -19,15 +19,17 @@ namespace View
 
         #region Private fields
 
+        private int _count;
+
         private INode _currentNode;
+
+        private Dictionary<char, int> nameOfElements;
 
         #endregion
 
         #endregion
 
         #region Constructor
-
-        //private List<string> _elements;
 
         public MainForm()
         {
@@ -40,6 +42,8 @@ namespace View
             SelectingCircuitComboBox.Items.Add("Цепь №5");
             SelectingCircuitComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            _count = 0;
+
             var elements = new List<string>();
             for (NodeType i = 0; i < (NodeType) 5; i++)
             {
@@ -51,7 +55,8 @@ namespace View
             _circuit = new Circuit();
 
             NominalTextBox.Enter += NominalTextBox_Enter;
-            NameTextBox.Enter += NameTextBox_Enter;
+
+            var nameOfElements = new Dictionary<char, int>();
         }
 
         #endregion
@@ -63,13 +68,6 @@ namespace View
             NominalTextBox.ForeColor = SystemColors.WindowText;
             NominalTextBox.Text = "";
             NominalTextBox.TextAlign = HorizontalAlignment.Center;
-        }
-
-        private void NameTextBox_Enter(object sender, EventArgs e)
-        {
-            NameTextBox.ForeColor = SystemColors.WindowText;
-            NameTextBox.Text = "";
-            NameTextBox.TextAlign = HorizontalAlignment.Center;
         }
 
         private void NominalTextBox_Leave(object sender, EventArgs e)
@@ -84,21 +82,6 @@ namespace View
             else
             {
                 NominalTextBox.Enter -= NominalTextBox_Enter;
-            }
-        }
-
-        private void NameTextBox_Leave(object sender, EventArgs e)
-        {
-            if (NameTextBox.Text == "")
-            {
-                NameTextBox.ForeColor = SystemColors.WindowFrame;
-                NameTextBox.Enter += NameTextBox_Enter;
-                NameTextBox.Text = "Имя";
-                NameTextBox.TextAlign = HorizontalAlignment.Center;
-            }
-            else
-            {
-                NameTextBox.Enter -= NameTextBox_Enter;
             }
         }
 
@@ -324,11 +307,28 @@ namespace View
             circuitPictureBox.Image = bitmapBackground;
         }
 
+        private bool IsCorrectAdd()
+        {
+            if (!(_currentNode is Subcircuit) && treeView.Nodes.Count > 0)
+            {
+                MessageBox.Show(
+                    "Для добавление элемента в цепь, требуеться выдбрать " +
+                    "последовательность (параллельная, последовательная)");
+
+                return true;
+            }
+
+            return false;
+        }
+
         private void AddButton_Click(object sender, EventArgs e)
         {
             var selectedState = NadeComboBox.SelectedItem.ToString();
+
+
             try
             {
+                string nameElement;
                 switch (selectedState)
                 {
                     case "Последовательное":
@@ -338,20 +338,38 @@ namespace View
                         _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
                         break;
                     case "Резистор":
+                        if (IsCorrectAdd())
+                        {
+                            return;
+                        }
+                        _count++;
+                        nameElement = "R" + _count;
                         _circuit.AddAfter(_currentNode,
-                            new Resistor(NameTextBox.Text,
+                            new Resistor(nameElement,
                                 double.Parse(NominalTextBox.Text)));
 
                         break;
                     case "Катушка":
+                        if (IsCorrectAdd())
+                        {
+                            return;
+                        }
+                        _count++;
+                        nameElement = "L" + _count;
                         _circuit.AddAfter(_currentNode,
-                            new Inductor(NameTextBox.Text,
+                            new Inductor(nameElement,
                                 double.Parse(NominalTextBox.Text)));
 
                         break;
                     case "Конденсатор":
+                        if (IsCorrectAdd())
+                        {
+                            return;
+                        }
+                        _count++;
+                        nameElement = "C" + _count;
                         _circuit.AddAfter(_currentNode,
-                            new Capacitor(NameTextBox.Text,
+                            new Capacitor(nameElement,
                                 double.Parse(NominalTextBox.Text)));
 
                         break;
