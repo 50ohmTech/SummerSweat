@@ -42,12 +42,14 @@ namespace View
 
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
+            //TODO: присваивать dialogResult!
             _element.Value = _value;
             Close();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
+            //TODO: Присваивать DialogResult!
             Close();
         }
 
@@ -58,7 +60,7 @@ namespace View
                 _buttonEdit.Enabled = false;
                 return;
             }
-
+            //TODO: заменить на экспоненциальную форму числа
             if (_value <= 0 || _value > 1000000000000)
             {
                 _buttonEdit.Enabled = false;

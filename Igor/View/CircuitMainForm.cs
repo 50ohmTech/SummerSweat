@@ -45,6 +45,7 @@ namespace View
             _count = 0;
 
             var elements = new List<string>();
+            //TODO: заменить преобразование enum к int на метод Enum.GetValues()
             for (NodeType i = 0; i < (NodeType) 5; i++)
             {
                 elements.Add(ToolsNodeType.GetDescription(i));
@@ -53,9 +54,9 @@ namespace View
             NadeComboBox.DataSource = elements;
             NadeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _circuit = new Circuit();
-
+            //TODO: подписка должна быть в дизайнере
             NominalTextBox.Enter += NominalTextBox_Enter;
-
+            //TODO: зачем словарь?
             var nameOfElements = new Dictionary<char, int>();
         }
 
@@ -72,6 +73,8 @@ namespace View
 
         private void NominalTextBox_Leave(object sender, EventArgs e)
         {
+            //TODO: вот такие решения, особенно в которых происходит
+            //подписка и отписка - надо комментировать - что делается и для чего
             if (NominalTextBox.Text == "")
             {
                 NominalTextBox.ForeColor = SystemColors.WindowFrame;
@@ -87,10 +90,11 @@ namespace View
 
         private void SelectingCircuitComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
-        {
+        {//TODO: Переименовать SelectingCircuitComboBox в CircuitsComboBox
             var selectedState = SelectingCircuitComboBox.SelectedItem.ToString();
             if (selectedState == "Цепь №1")
             {
+                //TODO: генерацию тестовых цепей вынести в отдельный класс
                 var resistor = new Resistor("R1", 10);
                 var inductor = new Inductor("L1", 50);
                 var capacitor = new Capacitor("C1", 15);
@@ -296,6 +300,7 @@ namespace View
             treeView.ExpandAll();
 
             circuitPictureBox.Image = null;
+            //TODO: Создание битмапа и инициализация шрифтов и ручек должна быть в Drawer
             var bitmapBackground = new Bitmap(1000, 1000);
             Drawer.Graphics = Graphics.FromImage(bitmapBackground);
             Drawer.Pen = new Pen(Color.Black, 1);
@@ -345,7 +350,7 @@ namespace View
                         _count++;
                         nameElement = "R" + _count;
                         _circuit.AddAfter(_currentNode,
-                            new Resistor(nameElement,
+                            new Resistor(nameElement, //TODO: парсить лучше до свича - сократишь код в каждом кейсе
                                 double.Parse(NominalTextBox.Text)));
 
                         break;
