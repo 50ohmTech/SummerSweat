@@ -1,4 +1,4 @@
-﻿namespace MainForm
+﻿namespace CircuitView
 {
     partial class MainForm
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.PaintGroupBox = new System.Windows.Forms.GroupBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
@@ -38,6 +39,8 @@
             this.treeView = new System.Windows.Forms.TreeView();
             this.NadeComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // PaintGroupBox
@@ -59,6 +62,7 @@
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // DeleteButton
             // 
@@ -68,6 +72,7 @@
             this.DeleteButton.TabIndex = 1;
             this.DeleteButton.Text = "Удалить";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // CalculateImpedanceButton
             // 
@@ -77,6 +82,7 @@
             this.CalculateImpedanceButton.TabIndex = 2;
             this.CalculateImpedanceButton.Text = "Рассчитать импеданс";
             this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
+            this.CalculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
             // 
             // NominalTextBox
             // 
@@ -84,9 +90,12 @@
             this.NominalTextBox.Name = "NominalTextBox";
             this.NominalTextBox.Size = new System.Drawing.Size(170, 20);
             this.NominalTextBox.TabIndex = 3;
+            this.NominalTextBox.TextChanged += new System.EventHandler(this.NominalTextBox_TextChanged);
+            this.NominalTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.NominalTextBox_Validating);
             // 
             // SelectingCircuitComboBox
             // 
+            this.SelectingCircuitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SelectingCircuitComboBox.FormattingEnabled = true;
             this.SelectingCircuitComboBox.Location = new System.Drawing.Point(85, 9);
             this.SelectingCircuitComboBox.Name = "SelectingCircuitComboBox";
@@ -112,11 +121,13 @@
             // 
             // NadeComboBox
             // 
+            this.NadeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.NadeComboBox.FormattingEnabled = true;
             this.NadeComboBox.Location = new System.Drawing.Point(15, 173);
             this.NadeComboBox.Name = "NadeComboBox";
             this.NadeComboBox.Size = new System.Drawing.Size(170, 21);
             this.NadeComboBox.TabIndex = 7;
+            this.NadeComboBox.SelectedIndexChanged += new System.EventHandler(this.NadeComboBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -145,6 +156,7 @@
             this.MinimumSize = new System.Drawing.Size(554, 341);
             this.Name = "MainForm";
             this.Text = "CircuitMainForm";
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,6 +174,7 @@
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.ComboBox NadeComboBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

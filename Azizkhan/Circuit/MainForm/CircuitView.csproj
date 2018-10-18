@@ -6,11 +6,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BAE7E8DD-7CBD-44D1-ABAB-623EBD52EFF9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MainForm</RootNamespace>
-    <AssemblyName>MainForm</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>CircuitView</RootNamespace>
+    <AssemblyName>CircuitView</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +52,7 @@
     <Compile Include="CircuitMainForm.Designer.cs">
       <DependentUpon>CircuitMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTools.cs" />
     <Compile Include="ImpedanceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,8 +91,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CircuitLibrary\CircuitLibrary.csproj">
-      <Project>{64a12286-4b78-42e7-8929-4e6664cb5d43}</Project>
+    <ProjectReference Include="..\CircuitLibraby\CircuitLibrary.csproj">
+      <Project>{8d7c81df-977d-46db-8f28-1be9dbb9ec00}</Project>
       <Name>CircuitLibrary</Name>
     </ProjectReference>
   </ItemGroup>
