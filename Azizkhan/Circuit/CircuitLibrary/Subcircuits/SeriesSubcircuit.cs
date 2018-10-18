@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace CircuitLibrary.Subcircuits
 {
@@ -16,6 +17,12 @@ namespace CircuitLibrary.Subcircuits
         /// <returns>Импеданс</returns>
         public override Complex CalculateZ(double frequency)
         {
+            if (Nodes.Count < 1)
+            {
+                throw new InvalidOperationException(
+                    $"В последовательном соединении (Id: {Id}) нет узлов.");
+            }
+
             var impedance = Complex.Zero;
 
             foreach (var node in Nodes)

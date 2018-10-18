@@ -68,6 +68,7 @@ namespace CircuitLibrary
 
             if (node == Root)
             {
+                node.Nodes.Clear();
                 Root = null;
                 return;
             }

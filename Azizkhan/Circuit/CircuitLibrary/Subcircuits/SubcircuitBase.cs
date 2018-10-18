@@ -21,6 +21,15 @@ namespace CircuitLibrary.Subcircuits
 
         #endregion
 
+        #region Readonly fields
+
+        /// <summary>
+        ///     Глобальный ID
+        /// </summary>
+        private readonly int _global;
+
+        #endregion
+
         #region Ordinary fields
 
         /// <summary>
