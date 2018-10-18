@@ -12,6 +12,8 @@ namespace CircuitLibrary.Elements
     {
         #region Constants
 
+        //NOTE: А в чем проблема сделать константы открытыми ?
+
         /// <summary>
         ///     Минимальное значение номинала элемента
         /// </summary>
@@ -84,7 +86,9 @@ namespace CircuitLibrary.Elements
                     throw new ArgumentException(
                         nameof(value));
                 }
-
+                //NOTE: А у тебя с какой точностью программа работает ?
+                // 1 == 1 ? А 1/1 == 1 ?
+                // Double лучше через ABS сравнивать.
                 if (value != _value)
                 {
                     _value = value;
@@ -94,6 +98,7 @@ namespace CircuitLibrary.Elements
             }
         }
 
+        //NOTE: Можно взять xml комментарий из интерфейса.
         /// <summary>
         ///     Дочерние узлы
         /// </summary>
@@ -117,6 +122,7 @@ namespace CircuitLibrary.Elements
 
         #region Constructor
 
+        //NOTE: XMl ?
         /// <summary>
         ///     Конструктор базового элемента
         /// </summary>
@@ -132,6 +138,7 @@ namespace CircuitLibrary.Elements
 
         #region Public methods
 
+        //NOTE:XML?
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>

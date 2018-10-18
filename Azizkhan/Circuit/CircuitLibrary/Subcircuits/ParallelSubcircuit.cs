@@ -19,6 +19,7 @@ namespace CircuitLibrary.Subcircuits
         {
             if (Nodes.Count <= 1)
             {
+                //NOTE: А по одному элементу нельзя вычислить ? 
                 throw new InvalidOperationException(
                     "Для расчета параллельного соединения необходимо минимум 2 ноды");
             }

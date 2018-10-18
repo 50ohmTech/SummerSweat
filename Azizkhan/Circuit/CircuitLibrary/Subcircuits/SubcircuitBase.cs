@@ -82,7 +82,7 @@ namespace CircuitLibrary.Subcircuits
         #endregion
 
         #region Public methods
-
+        //NOTE: XML ?
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>
