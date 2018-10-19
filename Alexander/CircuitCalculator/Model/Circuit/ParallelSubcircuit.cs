@@ -4,14 +4,14 @@ using System.Numerics;
 namespace Model.Circuit
 {
     /// <summary>
-    /// Параллельная подцепь.
+    ///     Параллельная подцепь.
     /// </summary>
     public class ParallelSubcircuit : SubcircuitBase
     {
         #region Public methods
 
         /// <summary>
-        /// Рассчитать импеданс.
+        ///     Рассчитать импеданс.
         /// </summary>
         /// <param name="frequency">Частота.</param>
         /// <returns>Номинал импеданса.</returns>

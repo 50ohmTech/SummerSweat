@@ -4,14 +4,14 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    /// Катушка индуктивности.
+    ///     Катушка индуктивности.
     /// </summary>
     public class Inductor : ElementBase
     {
-        #region Public methods
+        #region Constructor
 
         /// <summary>
-        /// Конструктор.
+        ///     Конструктор.
         /// </summary>
         /// <param name="name">Имя.</param>
         /// <param name="inductance">Номинал индуктивноси.</param>
@@ -19,8 +19,12 @@ namespace Model.Elements
         {
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
-        /// Расчет импеданса.
+        ///     Расчет импеданса.
         /// </summary>
         /// <param name="frequency">Частоста сигнала.</param>
         /// <returns>Номинал импеданса.</returns>

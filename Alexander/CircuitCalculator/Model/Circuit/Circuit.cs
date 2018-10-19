@@ -6,18 +6,22 @@ using Model.Elements;
 namespace Model.Circuit
 {
     /// <summary>
-    /// Цепь.
+    ///     Цепь.
     /// </summary>
     public class Circuit
     {
+        #region Private fields
+
         #region Fields
 
         #region Private fields
 
         /// <summary>
-        /// Корень цепи.
+        ///     Корень цепи.
         /// </summary>
         private INode _root;
+
+        #endregion
 
         #endregion
 
@@ -26,7 +30,7 @@ namespace Model.Circuit
         #region Properties
 
         /// <summary>
-        /// Корень.
+        ///     Корень.
         /// </summary>
         public INode Root { get; private set; }
 
@@ -35,7 +39,7 @@ namespace Model.Circuit
         #region Public methods
 
         /// <summary>
-        /// Проверка на наличие элементов в цепи.
+        ///     Проверка на наличие элементов в цепи.
         /// </summary>
         /// <returns>Наличие элементов в цепи.</returns>
         public bool IsEmpty()
@@ -44,7 +48,7 @@ namespace Model.Circuit
         }
 
         /// <summary>
-        /// Очистка цепи.
+        ///     Очистка цепи.
         /// </summary>
         public void Clear()
         {
@@ -53,7 +57,7 @@ namespace Model.Circuit
 
 
         /// <summary>
-        /// Расчитать импеданс цепи для списка частот.
+        ///     Расчитать импеданс цепи для списка частот.
         /// </summary>
         /// <param name="frequencies">Список частот сигнала.</param>
         /// <returns>Список импедансов цепи.</returns>
@@ -75,7 +79,7 @@ namespace Model.Circuit
         }
 
         /// <summary>
-        /// Удалить узел.
+        ///     Удалить узел.
         /// </summary>
         /// <param name="node">Узел.</param>
         /// <returns>Удален ли узел.</returns>
@@ -102,7 +106,7 @@ namespace Model.Circuit
         }
 
         /// <summary>
-        /// Добавить новый узел в дочерний элемент узла.
+        ///     Добавить новый узел в дочерний элемент узла.
         /// </summary>
         /// <param name="node">Узел в который добавляют дочерние элемнты.</param>
         /// <param name="newNode">Новый узел.</param>

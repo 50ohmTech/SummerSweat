@@ -1,24 +1,24 @@
-﻿using Model.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Model.Events;
 
 namespace Model.Elements
 {
     /// <summary>
-    /// Элемент.
+    ///     Элемент.
     /// </summary>
-    public abstract class ElementBase:INode
+    public abstract class ElementBase : INode
     {
         #region Private fields
 
         /// <summary>
-        /// Название элемента.
+        ///     Название элемента.
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// Значение элемента.
+        ///     Значение элемента.
         /// </summary>
         private double _value;
 
@@ -27,7 +27,7 @@ namespace Model.Elements
         #region Properties
 
         /// <summary>
-        /// Возвращает и задает название элемента.
+        ///     Возвращает и задает название элемента.
         /// </summary>
         public string Name
         {
@@ -45,7 +45,7 @@ namespace Model.Elements
         }
 
         /// <summary>
-        /// Возвращает и задает значение элемента.
+        ///     Возвращает и задает значение элемента.
         /// </summary>
         public double Value
         {
@@ -54,7 +54,8 @@ namespace Model.Elements
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException("Значение должно быть больше нуля");
+                    throw new ArgumentOutOfRangeException(
+                        "Значение должно быть больше нуля");
                 }
 
                 _value = value;
@@ -63,12 +64,12 @@ namespace Model.Elements
         }
 
         /// <summary>
-        /// Родитель.
+        ///     Родитель.
         /// </summary>
         public INode Parent { get; set; }
 
         /// <summary>
-        /// Дочерние узлы.
+        ///     Дочерние узлы.
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
@@ -77,23 +78,16 @@ namespace Model.Elements
         #region Events
 
         /// <summary>
-        /// Событие на изменение номинала элемента.
+        ///     Событие на изменение номинала элемента.
         /// </summary>
         public event EventHandler<ElementEventArgs> ValueChanged;
-
-        /// <summary>
-        /// Рассчет импеданса.
-        /// </summary>
-        /// <param name="frequency">Частота сигнала.</param>
-        /// <returns></returns>
-        public abstract Complex CalculateZ(double frequency);
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// Конструктор класса Element.
+        ///     Конструктор класса Element.
         /// </summary>
         /// <param name="name">Имя элемента.</param>
         /// <param name="value">Номинал элемента.</param>
@@ -102,6 +96,17 @@ namespace Model.Elements
             Value = value;
             Name = name;
         }
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        ///     Рассчет импеданса.
+        /// </summary>
+        /// <param name="frequency">Частота сигнала.</param>
+        /// <returns></returns>
+        public abstract Complex CalculateZ(double frequency);
 
         #endregion
     }

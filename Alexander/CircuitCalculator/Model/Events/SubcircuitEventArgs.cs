@@ -4,18 +4,22 @@ using Model.Elements;
 namespace Model.Events
 {
     /// <summary>
-    /// Аргументы события на изменение родителя.
+    ///     Аргументы события на изменение родителя.
     /// </summary>
     public class SubcircuitEventArgs
     {
+        #region Private fields
+
         #region Fields
 
         #region Private fields
 
         /// <summary>
-        /// Сообщение.
+        ///     Сообщение.
         /// </summary>
         private string _message;
+
+        #endregion
 
         #endregion
 
@@ -24,12 +28,12 @@ namespace Model.Events
         #region Properties
 
         /// <summary>
-        /// Новое значение.
+        ///     Новое значение.
         /// </summary>
         public INode Parent { get; }
 
         /// <summary>
-        /// Сообщение.
+        ///     Сообщение.
         /// </summary>
         public string Message
         {
@@ -50,7 +54,7 @@ namespace Model.Events
         #region Constructor
 
         /// <summary>
-        /// Конструктор.
+        ///     Конструктор.
         /// </summary>
         /// <param name="message">Сообщение.</param>
         /// <param name="parent">Родитель</param>

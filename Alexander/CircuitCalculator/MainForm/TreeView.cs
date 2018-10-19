@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Windows.Forms;
-using Model.Elements;
 using Model.Circuit;
+using Model.Elements;
 
-namespace MainForm
+namespace View
 {
     /// <summary>
-    /// Узел TreeView содержащий INode.
+    ///     Узел TreeView содержащий INode.
     /// </summary>
     public class CircuitTreeNode : TreeNode
     {
         #region Properties
 
         /// <summary>
-        /// Значение.
+        ///     Значение.
         /// </summary>
         public INode Value { get; }
 
@@ -22,7 +22,7 @@ namespace MainForm
         #region Constructor
 
         /// <summary>
-        /// Конструктор.
+        ///     Конструктор.
         /// </summary>
         /// <param name="node">Узел.</param>
         public CircuitTreeNode(INode node)

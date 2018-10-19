@@ -4,14 +4,14 @@ using System.Numerics;
 namespace Model.Elements
 {
     /// <summary>
-    /// Конденсатор.
+    ///     Конденсатор.
     /// </summary>
     public class Capacitor : ElementBase
     {
-        #region Public methods
+        #region Constructor
 
         /// <summary>
-        /// Конструктор.
+        ///     Конструктор.
         /// </summary>
         /// <param name="name">Имя.</param>
         /// <param name="capacity">Номинал емкости.</param>
@@ -19,8 +19,12 @@ namespace Model.Elements
         {
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
-        /// Расчет импеданса.
+        ///     Расчет импеданса.
         /// </summary>
         /// <param name="frequency">Частоста сигнала.</param>
         /// <returns>Номинал импеданса.</returns>

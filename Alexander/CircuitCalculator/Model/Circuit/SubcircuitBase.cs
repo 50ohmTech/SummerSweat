@@ -7,41 +7,19 @@ using Model.Events;
 namespace Model.Circuit
 {
     /// <summary>
-    /// Подцепь.
+    ///     Подцепь.
     /// </summary>
     public abstract class SubcircuitBase : INode
     {
-        #region Fields
-
-        #region Static fields
-
-        /// <summary>
-        /// Уникальный идентификатор.
-        /// </summary>
-        private static int _id;
-
-        #endregion
-
-        #region Ordinary fields
-
-        /// <summary>
-        /// Родитель.
-        /// </summary>
-        public INode _parent;
-
-        #endregion
-
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// Уникальный идентификатор.
+        ///     Уникальный идентификатор.
         /// </summary>
         public int Id { get; } = _id;
 
         /// <summary>
-        /// Родитель.
+        ///     Родитель.
         /// </summary>
         public INode Parent
         {
@@ -55,7 +33,7 @@ namespace Model.Circuit
         }
 
         /// <summary>
-        /// Дочерние узлы.
+        ///     Дочерние узлы.
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
@@ -64,12 +42,28 @@ namespace Model.Circuit
         #region Events
 
         /// <summary>
-        /// Событие на изменение родителя.
+        ///     Событие на изменение родителя.
         /// </summary>
         public event EventHandler<SubcircuitEventArgs> ParentChanged;
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
-        /// Рассчитать импеданс.
+        ///     Конструктор.
+        /// </summary>
+        protected SubcircuitBase()
+        {
+            _id++;
+        }
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        ///     Рассчитать импеданс.
         /// </summary>
         /// <param name="frequency">Частота.</param>
         /// <returns>Номинал импеданса.</returns>
@@ -77,15 +71,25 @@ namespace Model.Circuit
 
         #endregion
 
-        #region Constructor
+        #region Fields
+
+        #region Static fields
 
         /// <summary>
-        /// Конструктор.
+        ///     Уникальный идентификатор.
         /// </summary>
-        protected SubcircuitBase()
-        {
-            _id++;
-        }
+        private static int _id;
+
+        #endregion
+
+        #region Ordinary fields
+
+        /// <summary>
+        ///     Родитель.
+        /// </summary>
+        public INode _parent;
+
+        #endregion
 
         #endregion
     }
