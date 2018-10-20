@@ -33,11 +33,11 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
-            this.NominalTextBox = new System.Windows.Forms.TextBox();
+            this.ValueTextBox = new System.Windows.Forms.TextBox();
             this.SelectingCircuitComboBox = new System.Windows.Forms.ComboBox();
             this.SelectingCircuitLabel = new System.Windows.Forms.Label();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.NadeComboBox = new System.Windows.Forms.ComboBox();
+            this.NodeComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -82,16 +82,13 @@
             this.CalculateImpedanceButton.TabIndex = 2;
             this.CalculateImpedanceButton.Text = "Рассчитать импеданс";
             this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
-            this.CalculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
             // 
-            // NominalTextBox
+            // ValueTextBox
             // 
-            this.NominalTextBox.Location = new System.Drawing.Point(15, 200);
-            this.NominalTextBox.Name = "NominalTextBox";
-            this.NominalTextBox.Size = new System.Drawing.Size(170, 20);
-            this.NominalTextBox.TabIndex = 3;
-            this.NominalTextBox.TextChanged += new System.EventHandler(this.NominalTextBox_TextChanged);
-            this.NominalTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.NominalTextBox_Validating);
+            this.ValueTextBox.Location = new System.Drawing.Point(15, 200);
+            this.ValueTextBox.Name = "ValueTextBox";
+            this.ValueTextBox.Size = new System.Drawing.Size(170, 20);
+            this.ValueTextBox.TabIndex = 3;
             // 
             // SelectingCircuitComboBox
             // 
@@ -101,6 +98,7 @@
             this.SelectingCircuitComboBox.Name = "SelectingCircuitComboBox";
             this.SelectingCircuitComboBox.Size = new System.Drawing.Size(100, 21);
             this.SelectingCircuitComboBox.TabIndex = 4;
+            this.SelectingCircuitComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectingCircuitComboBox_SelectedIndexChanged);
             // 
             // SelectingCircuitLabel
             // 
@@ -118,16 +116,16 @@
             this.treeView.Name = "treeView";
             this.treeView.Size = new System.Drawing.Size(170, 111);
             this.treeView.TabIndex = 6;
+            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
-            // NadeComboBox
+            // NodeComboBox
             // 
-            this.NadeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.NadeComboBox.FormattingEnabled = true;
-            this.NadeComboBox.Location = new System.Drawing.Point(15, 173);
-            this.NadeComboBox.Name = "NadeComboBox";
-            this.NadeComboBox.Size = new System.Drawing.Size(170, 21);
-            this.NadeComboBox.TabIndex = 7;
-            this.NadeComboBox.SelectedIndexChanged += new System.EventHandler(this.NadeComboBox_SelectedIndexChanged);
+            this.NodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.NodeComboBox.FormattingEnabled = true;
+            this.NodeComboBox.Location = new System.Drawing.Point(15, 173);
+            this.NodeComboBox.Name = "NodeComboBox";
+            this.NodeComboBox.Size = new System.Drawing.Size(170, 21);
+            this.NodeComboBox.TabIndex = 7;
             // 
             // label2
             // 
@@ -143,16 +141,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 302);
+            this.Controls.Add(this.PaintGroupBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.NadeComboBox);
+            this.Controls.Add(this.NodeComboBox);
             this.Controls.Add(this.treeView);
             this.Controls.Add(this.SelectingCircuitLabel);
             this.Controls.Add(this.SelectingCircuitComboBox);
-            this.Controls.Add(this.NominalTextBox);
+            this.Controls.Add(this.ValueTextBox);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.CalculateImpedanceButton);
-            this.Controls.Add(this.PaintGroupBox);
             this.MinimumSize = new System.Drawing.Size(554, 341);
             this.Name = "MainForm";
             this.Text = "CircuitMainForm";
@@ -168,11 +166,11 @@
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button CalculateImpedanceButton;
-        private System.Windows.Forms.TextBox NominalTextBox;
+        private System.Windows.Forms.TextBox ValueTextBox;
         private System.Windows.Forms.ComboBox SelectingCircuitComboBox;
         private System.Windows.Forms.Label SelectingCircuitLabel;
         private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.ComboBox NadeComboBox;
+        private System.Windows.Forms.ComboBox NodeComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource bindingSource1;
     }
