@@ -31,8 +31,8 @@
             this.StartLabel = new System.Windows.Forms.Label();
             this.EndLabel = new System.Windows.Forms.Label();
             this.StepLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.StartTextBox = new System.Windows.Forms.TextBox();
+            this.FinishTextBox = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -65,19 +65,19 @@
             this.StepLabel.TabIndex = 2;
             this.StepLabel.Text = "Шаг";
             // 
-            // textBox1
+            // StartTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(89, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.StartTextBox.Location = new System.Drawing.Point(89, 6);
+            this.StartTextBox.Name = "StartTextBox";
+            this.StartTextBox.Size = new System.Drawing.Size(100, 20);
+            this.StartTextBox.TabIndex = 3;
             // 
-            // textBox2
+            // FinishTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(89, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.FinishTextBox.Location = new System.Drawing.Point(89, 32);
+            this.FinishTextBox.Name = "FinishTextBox";
+            this.FinishTextBox.Size = new System.Drawing.Size(100, 20);
+            this.FinishTextBox.TabIndex = 4;
             // 
             // textBox3
             // 
@@ -103,8 +103,8 @@
             this.ClientSize = new System.Drawing.Size(204, 212);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.FinishTextBox);
+            this.Controls.Add(this.StartTextBox);
             this.Controls.Add(this.StepLabel);
             this.Controls.Add(this.EndLabel);
             this.Controls.Add(this.StartLabel);
@@ -122,8 +122,8 @@
         private System.Windows.Forms.Label StartLabel;
         private System.Windows.Forms.Label EndLabel;
         private System.Windows.Forms.Label StepLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox StartTextBox;
+        private System.Windows.Forms.TextBox FinishTextBox;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DataGridView dataGridView;
     }

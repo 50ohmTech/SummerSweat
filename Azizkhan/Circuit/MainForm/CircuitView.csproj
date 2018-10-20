@@ -52,6 +52,7 @@
     <Compile Include="CircuitMainForm.Designer.cs">
       <DependentUpon>CircuitMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Drawer.cs" />
     <Compile Include="FormTools.cs" />
     <Compile Include="ImpedanceForm.cs">
       <SubType>Form</SubType>

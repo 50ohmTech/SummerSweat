@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using CircuitLibraby;
 using CircuitLibrary;
 using CircuitLibrary.Elements;
 using CircuitLibrary.Subcircuits;
+using MainForm;
 
 namespace CircuitView
 {
@@ -50,8 +52,6 @@ namespace CircuitView
             _resistorIterator = 0;
             _capacitorIterator = 0;
             _inductorIterator = 0;
-
-
         }
 
         #endregion
@@ -100,6 +100,9 @@ namespace CircuitView
 
             treeView.EndUpdate();
             treeView.ExpandAll();
+
+            circuitPictureBox.Image = null;
+            circuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
         }
 
 
@@ -115,7 +118,7 @@ namespace CircuitView
             _circuit.Clear();
             UpdateTreeView();
 
-            if (SelectingCircuitComboBox.SelectedIndex == 1)
+            if (SelectingCircuitComboBox.SelectedIndex == 0)
             {
                 _circuit.AddAfter(_currentNode, seriesSubcircuit);
                 _circuit.AddAfter(seriesSubcircuit,
@@ -129,7 +132,7 @@ namespace CircuitView
                     new Resistor("R" + _resistorIterator++, 6.2));
             }
 
-            if (SelectingCircuitComboBox.SelectedIndex == 2)
+            if (SelectingCircuitComboBox.SelectedIndex == 1)
             {
                 _circuit.AddAfter(_currentNode, seriesSubcircuit);
                 _circuit.AddAfter(seriesSubcircuit,
@@ -142,7 +145,7 @@ namespace CircuitView
                     new Inductor("L" + _inductorIterator++, 6.2));
             }
 
-            if (SelectingCircuitComboBox.SelectedIndex == 3)
+            if (SelectingCircuitComboBox.SelectedIndex == 2)
             {
                 _circuit.AddAfter(_currentNode, seriesSubcircuit);
                 _circuit.AddAfter(seriesSubcircuit, parallelSubcircuit);
@@ -156,7 +159,7 @@ namespace CircuitView
                     new Resistor("R" + _resistorIterator++, 33.3));
             }
 
-            if (SelectingCircuitComboBox.SelectedIndex == 4)
+            if (SelectingCircuitComboBox.SelectedIndex == 3)
             {
                 _circuit.AddAfter(_currentNode, seriesSubcircuit);
                 _circuit.AddAfter(seriesSubcircuit,
@@ -172,7 +175,7 @@ namespace CircuitView
                     new Resistor("R" + _resistorIterator++, 11.34));
             }
 
-            if (SelectingCircuitComboBox.SelectedIndex == 5)
+            if (SelectingCircuitComboBox.SelectedIndex == 4)
             {
                 _circuit.AddAfter(_currentNode, seriesSubcircuit);
                 _circuit.AddAfter(seriesSubcircuit,
@@ -202,35 +205,45 @@ namespace CircuitView
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            if (NodeComboBox.SelectedItem.ToString() == "Resistor")
+            try
             {
-                _circuit.AddAfter(_currentNode, new Resistor("R" + _resistorIterator++,
-                    Convert.ToDouble(ValueTextBox.Text)));
-            }
+                if (NodeComboBox.SelectedItem.ToString() == "Resistor")
+                {
+                    _circuit.AddAfter(_currentNode, new Resistor(
+                        "R" + _resistorIterator++,
+                        Convert.ToDouble(ValueTextBox.Text)));
+                }
 
-            if (NodeComboBox.SelectedItem.ToString() == "Capacitor")
+                if (NodeComboBox.SelectedItem.ToString() == "Capacitor")
+                {
+                    _circuit.AddAfter(_currentNode, new Capacitor(
+                        "C" + _capacitorIterator++,
+                        Convert.ToDouble(ValueTextBox.Text)));
+                }
+
+                if (NodeComboBox.SelectedItem.ToString() == "Inductor")
+                {
+                    _circuit.AddAfter(_currentNode, new Inductor(
+                        "L" + _inductorIterator++,
+                        Convert.ToDouble(ValueTextBox.Text)));
+                }
+
+                if (NodeComboBox.SelectedItem.ToString() == "Parallel")
+                {
+                    _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
+                }
+
+                if (NodeComboBox.SelectedItem.ToString() == "Serial")
+                {
+                    _circuit.AddAfter(_currentNode, new SerialSubcircuit());
+                }
+
+                UpdateTreeView();
+            }
+            catch (Exception exception)
             {
-                _circuit.AddAfter(_currentNode, new Capacitor("C" + _capacitorIterator++,
-                    Convert.ToDouble(ValueTextBox.Text)));
+                MessageBox.Show(exception.Message);
             }
-
-            if (NodeComboBox.SelectedItem.ToString() == "Inductor")
-            {
-                _circuit.AddAfter(_currentNode, new Inductor("L" + _inductorIterator++,
-                    Convert.ToDouble(ValueTextBox.Text)));
-            }
-
-            if (NodeComboBox.SelectedItem.ToString() == "Parallel")
-            {
-                _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
-            }
-
-            if (NodeComboBox.SelectedItem.ToString() == "Serial")
-            {
-                _circuit.AddAfter(_currentNode, new SerialSubcircuit());
-            }
-
-            UpdateTreeView();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -266,6 +279,34 @@ namespace CircuitView
                     MessageBox.Show(exception.Message);
                 }
             }
+        }
+
+        private void ValueTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            FormTools.TextBoxCheck(ValueTextBox, e);
+        }
+
+        private void ValueTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (NodeComboBox.SelectedIndex > 1)
+            {
+                AddButton.Enabled = ValueTextBox.Text.Length != 0;
+            }
+        }
+
+        private void NodeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (NodeComboBox.SelectedIndex > 1)
+            {
+                AddButton.Enabled = ValueTextBox.Text.Length != 0;
+            }
+        }
+
+        private void CalculateImpedanceButton_Click(object sender, EventArgs e)
+        {
+            var impedanceForm = new ImpedanceForm();
+            impedanceForm.Circuit = _circuit;
+            impedanceForm.ShowDialog();
         }
 
         #endregion

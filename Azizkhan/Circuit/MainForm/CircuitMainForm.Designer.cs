@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.PaintGroupBox = new System.Windows.Forms.GroupBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
@@ -40,19 +39,10 @@
             this.NodeComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.circuitPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // PaintGroupBox
-            // 
-            this.PaintGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PaintGroupBox.Location = new System.Drawing.Point(191, 12);
-            this.PaintGroupBox.Name = "PaintGroupBox";
-            this.PaintGroupBox.Size = new System.Drawing.Size(330, 276);
-            this.PaintGroupBox.TabIndex = 0;
-            this.PaintGroupBox.TabStop = false;
             // 
             // AddButton
             // 
@@ -82,6 +72,7 @@
             this.CalculateImpedanceButton.TabIndex = 2;
             this.CalculateImpedanceButton.Text = "Рассчитать импеданс";
             this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
+            this.CalculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
             // 
             // ValueTextBox
             // 
@@ -89,6 +80,8 @@
             this.ValueTextBox.Name = "ValueTextBox";
             this.ValueTextBox.Size = new System.Drawing.Size(170, 20);
             this.ValueTextBox.TabIndex = 3;
+            this.ValueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
+            this.ValueTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValueTextBox_Validating);
             // 
             // SelectingCircuitComboBox
             // 
@@ -126,6 +119,7 @@
             this.NodeComboBox.Name = "NodeComboBox";
             this.NodeComboBox.Size = new System.Drawing.Size(170, 21);
             this.NodeComboBox.TabIndex = 7;
+            this.NodeComboBox.SelectedIndexChanged += new System.EventHandler(this.NodeComboBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -136,12 +130,20 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Добавить элемент";
             // 
+            // circuitPictureBox
+            // 
+            this.circuitPictureBox.Location = new System.Drawing.Point(192, 13);
+            this.circuitPictureBox.Name = "circuitPictureBox";
+            this.circuitPictureBox.Size = new System.Drawing.Size(334, 275);
+            this.circuitPictureBox.TabIndex = 9;
+            this.circuitPictureBox.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 302);
-            this.Controls.Add(this.PaintGroupBox);
+            this.Controls.Add(this.circuitPictureBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NodeComboBox);
             this.Controls.Add(this.treeView);
@@ -155,14 +157,13 @@
             this.Name = "MainForm";
             this.Text = "CircuitMainForm";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox PaintGroupBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button CalculateImpedanceButton;
@@ -173,6 +174,7 @@
         private System.Windows.Forms.ComboBox NodeComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.PictureBox circuitPictureBox;
     }
 }
 
