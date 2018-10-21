@@ -23,7 +23,9 @@ namespace CircuitView
         #endregion
 
         #region Private fields
-
+        /// <summary>
+        /// Текущий узел
+        /// </summary>
         private INode _currentNode;
 
         #endregion
