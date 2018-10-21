@@ -22,8 +22,6 @@ namespace View
 
         #region Constructor
 
-        //TODO: заменить входной аргумент конструктора на свойство внутри формы.
-        // Иначе ограничиваешь варианты использования формы
         public ImpedanceForm(Circuit circuit)
         {
             InitializeComponent();
@@ -87,7 +85,7 @@ namespace View
             if (Tools.IsCellCorrect(textBox.Text) != true)
             {
                 Tools.ShowError(textBox);
-
+                textBox.Text = null;
                 textBox.Clear();
             }
 
@@ -104,26 +102,33 @@ namespace View
 
         private void StartTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (StartTextBox.Text != null)
+            if (StartTextBox.Text.Length > 0)
             {
                 ValidatigTextBox(StartTextBox);
             }
+
+            Tools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
+            Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
         }
 
         private void FinishTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (FinishTextBox.Text != null)
+            if (FinishTextBox.Text.Length > 0)
             {
                 ValidatigTextBox(FinishTextBox);
             }
+
+            Tools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
+            Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
         }
 
         private void StepTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (StartTextBox.Text != null)
+            if (StartTextBox.Text.Length > 0)
             {
                 ValidatigTextBox(StepTextBox);
             }
+            Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
         }
 
         #endregion

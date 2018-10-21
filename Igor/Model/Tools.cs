@@ -145,6 +145,39 @@ namespace Model
             ;
         }
 
+        public static void IsCorrectStartFinish(TextBox startTextBox,
+            TextBox finishTextBox)
+        {
+            if (startTextBox.Text.Length != 0 && finishTextBox.Text.Length != 0)
+            {
+                if ((double.Parse(startTextBox.Text) > double.Parse(finishTextBox.Text)))
+                {
+                    MessageBox.Show("Начало должно быть меньше границы!");
+                    startTextBox.Text = null;
+                    finishTextBox.Text = null;
+                }
+            }
+        }
+
+        public static void IsCorrectStep(TextBox startTextBox, TextBox finishTextBox,
+            TextBox stepTextBox)
+        {
+            if (startTextBox.Text.Length != 0 && finishTextBox.Text.Length != 0 &&
+                stepTextBox.Text.Length != 0)
+            {
+                if ((double.Parse(finishTextBox.Text) - double.Parse(startTextBox.Text) <
+                     double.Parse(stepTextBox.Text)))
+                {
+                    MessageBox.Show(
+                        "Разница между началом и концов по модулю не может быть меньше шага!");
+                    startTextBox.Text = null;
+                    finishTextBox.Text = null;
+                    stepTextBox.Text = null;
+
+                }
+            }
+        }
+
         #endregion
     }
 }

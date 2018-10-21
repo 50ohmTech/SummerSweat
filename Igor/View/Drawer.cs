@@ -8,7 +8,6 @@ using Model;
 
 namespace View
 {
-    //TODO: ЭТО НЕ ПРОВЕРЯТЬ!
     /// <summary>
     /// Рисовальщик цепи.
     /// </summary>
@@ -298,24 +297,27 @@ namespace View
                     2 * _lineLengthX + maxCount * _elementLengthX +
                     displacement.X, _lineDisplasemantY + displacement.Y));
 
+            if (steps.Count != 0)
+            {
+                Graphics.DrawLine(Pen,
+                    new Point(_lineLengthX + displacement.X,
+                        _lineDisplasemantY + displacement.Y),
+                    new Point(_lineLengthX + displacement.X,
+                        _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
+                        _lineLengthY +
+                        displacement.Y));
 
-            Graphics.DrawLine(Pen,
-                new Point(_lineLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y),
-                new Point(_lineLengthX + displacement.X,
-                    _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
-                    _lineLengthY +
-                    displacement.Y));
 
-            Graphics.DrawLine(Pen,
-                new Point(
-                    _lineLengthX + maxCount * _elementLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y),
-                new Point(
-                    _lineLengthX + maxCount * _elementLengthX + displacement.X,
-                    _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
-                    _lineLengthY +
-                    displacement.Y));
+                Graphics.DrawLine(Pen,
+                    new Point(
+                        _lineLengthX + maxCount * _elementLengthX + displacement.X,
+                        _lineDisplasemantY + displacement.Y),
+                    new Point(
+                        _lineLengthX + maxCount * _elementLengthX + displacement.X,
+                        _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
+                        _lineLengthY +
+                        displacement.Y));
+            }
 
             return new Point(maxCount + 1, steps.Sum());
         }
@@ -471,7 +473,6 @@ namespace View
                 new Point(_elementLengthX + displacement.X,
                     _lineDisplasemantY + displacement.Y));
         }
-
         #endregion
     }
 }

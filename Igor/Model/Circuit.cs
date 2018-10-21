@@ -57,7 +57,7 @@ namespace Model
             return Root == null;
         }
 
-        public void AddAfter(INode currentNode, INode newNode)
+        public void Add(INode currentNode, INode newNode)
         {
             if (IsEmpty())
             {

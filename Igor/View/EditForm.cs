@@ -43,6 +43,7 @@ namespace View
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
             _element.Value = _value;
+            Close();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)

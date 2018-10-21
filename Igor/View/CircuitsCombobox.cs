@@ -7,7 +7,7 @@ namespace View
     /// <summary>
     /// Класс для создание готовых цепей
     /// </summary>
-    public class CircuitsCombobox
+    public class CircuitsComboBox
     {
         #region Public methods
 
@@ -39,7 +39,7 @@ namespace View
                 resistor.Parent = serialSubcircuit;
 
                 circuit.Clean();
-                circuit.AddAfter(null, serialSubcircuit);
+                circuit.Add(null, serialSubcircuit);
             }
 
             if (selectedState == "Цепь №2")
@@ -76,7 +76,7 @@ namespace View
                 serialSubcircuit1.Nodes.Add(parallelSubcircuit2);
                 parallelSubcircuit2.Parent = serialSubcircuit1;
                 circuit.Clean();
-                circuit.AddAfter(null, parallelSubcircuit1);
+                circuit.Add(null, parallelSubcircuit1);
             }
 
             if (selectedState == "Цепь №3")
@@ -132,7 +132,7 @@ namespace View
                 parallelSubcircuit3.Nodes.Add(inductor7);
                 inductor7.Parent = parallelSubcircuit3;
                 circuit.Clean();
-                circuit.AddAfter(null, parallelSubcircuit1);
+                circuit.Add(null, parallelSubcircuit1);
             }
 
             if (selectedState == "Цепь №4")
@@ -173,7 +173,7 @@ namespace View
                 parallelSubcircuit2.Nodes.Add(inductor6);
                 inductor6.Parent = parallelSubcircuit2;
                 circuit.Clean();
-                circuit.AddAfter(null, serialSubcircuit1);
+                circuit.Add(null, serialSubcircuit1);
             }
 
             if (selectedState == "Цепь №5")
@@ -229,7 +229,7 @@ namespace View
                 serialSubcircuit1.Nodes.Add(resistor3);
                 resistor3.Parent = serialSubcircuit1;
                 circuit.Clean();
-                circuit.AddAfter(null, serialSubcircuit1);
+                circuit.Add(null, serialSubcircuit1);
             }
         }
 

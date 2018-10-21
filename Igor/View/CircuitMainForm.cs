@@ -13,18 +13,33 @@ namespace View
 
         #region Readonly fields
 
+        /// <summary>
+        /// Цепь.
+        /// </summary>
         private readonly Circuit _circuit;
 
-        private readonly CircuitsCombobox _circuitsCombobox;
+        /// <summary>
+        /// Объект готовых цепей.
+        /// </summary>
+        private readonly CircuitsComboBox _circuitsComboBox;
 
+        /// <summary>
+        /// Лист, который хранит имена всех элементов.
+        /// </summary>
         private readonly List<Tools.Pair<char, int>> _vectorOfElements;
 
         #endregion
 
         #region Private fields
 
+        /// <summary>
+        /// Количество элементов.
+        /// </summary>
         private int _count;
 
+        /// <summary>
+        /// Выбранная нода.
+        /// </summary>
         private INode _currentNode;
 
         #endregion
@@ -37,17 +52,18 @@ namespace View
         {
             InitializeComponent();
 
-            CircuitsComboBox.Items.Add("Цепь №1");
-            CircuitsComboBox.Items.Add("Цепь №2");
-            CircuitsComboBox.Items.Add("Цепь №3");
-            CircuitsComboBox.Items.Add("Цепь №4");
-            CircuitsComboBox.Items.Add("Цепь №5");
+            var circuits = new List<string>();
+            for (int i = 1; i < 6; i++)
+            {
+                circuits.Add("Цепь №" + i);
+            }
+
+            CircuitsComboBox.DataSource = circuits;
             CircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             _count = 0;
 
             var elements = new List<string>();
-            //TODO: заменить преобразование enum к int на метод Enum.GetValues()
             for (NodeType i = 0; i < (NodeType) 5; i++)
             {
                 elements.Add(Tools.GetDescription(i));
@@ -59,7 +75,9 @@ namespace View
 
             _vectorOfElements = new List<Tools.Pair<char, int>>();
 
-            _circuitsCombobox = new CircuitsCombobox();
+            _circuitsComboBox = new CircuitsComboBox();
+
+            circuitPictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
         }
 
         #endregion
@@ -100,11 +118,16 @@ namespace View
         private void SelectingCircuitsComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
         {
-            var selectedState = CircuitsComboBox.SelectedItem.ToString();
-            _circuitsCombobox.CreateCircuit(selectedState, _vectorOfElements,
-                _circuit);
+            if (_circuitsComboBox != null)
+            {
+                var selectedState = CircuitsComboBox.SelectedItem.ToString();
+                _circuitsComboBox.CreateCircuit(selectedState, _vectorOfElements,
+                    _circuit);
 
-            UpdateTreeView();
+                _count = _vectorOfElements.Count;
+
+                UpdateTreeView();
+            }
         }
 
         /// <summary>
@@ -112,6 +135,7 @@ namespace View
         /// </summary>
         private void UpdateTreeView()
         {
+
             void AddNodeTreeNodes(INode node, TreeNode treeNode)
             {
                 if (node == null)
@@ -141,7 +165,7 @@ namespace View
             treeView.ExpandAll();
 
             circuitPictureBox.Image = null;
-            //TODO: Создание битмапа и инициализация шрифтов и ручек должна быть в Drawer
+
             var bitmapBackground = new Bitmap(1000, 1000);
             Drawer.Graphics = Graphics.FromImage(bitmapBackground);
             Drawer.Pen = new Pen(Color.Black, 1);
@@ -174,16 +198,20 @@ namespace View
         private void AddButton_Click(object sender, EventArgs e)
         {
             var selectedState = NadeComboBox.SelectedItem.ToString();
-
+            if (_vectorOfElements.Count > 18)
+            {
+                MessageBox.Show("Максимальное количество элементов в цепи 18!");
+                return;
+            }
             try
             {
                 switch (selectedState)
                 {
                     case "Последовательное":
-                        _circuit.AddAfter(_currentNode, new SerialSubcircuit());
+                        _circuit.Add(_currentNode, new SerialSubcircuit());
                         break;
                     case "Параллельное":
-                        _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
+                        _circuit.Add(_currentNode, new ParallelSubcircuit());
                         break;
                     case "Резистор":
                         if (IsCorrectAdd())
@@ -192,7 +220,7 @@ namespace View
                         }
 
                         _vectorOfElements.Add(Tools.CreateName('R', _vectorOfElements));
-                        _circuit.AddAfter(_currentNode,
+                        _circuit.Add(_currentNode,
                             new Resistor(
                                 _vectorOfElements[_count].First +
                                 _vectorOfElements[_count]
@@ -209,8 +237,8 @@ namespace View
                         }
 
                         _vectorOfElements.Add(Tools.CreateName('L', _vectorOfElements));
-                        _circuit.AddAfter(_currentNode,
-                            new Resistor(
+                        _circuit.Add(_currentNode,
+                            new Inductor(
                                 _vectorOfElements[_count].First +
                                 _vectorOfElements[_count]
                                     .Second.ToString(),
@@ -226,8 +254,8 @@ namespace View
                         }
 
                         _vectorOfElements.Add(Tools.CreateName('C', _vectorOfElements));
-                        _circuit.AddAfter(_currentNode,
-                            new Resistor(
+                        _circuit.Add(_currentNode,
+                            new Capacitor(
                                 _vectorOfElements[_count].First +
                                 _vectorOfElements[_count]
                                     .Second.ToString(),

@@ -40,8 +40,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.NominalTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.PaintGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PaintGroupBox
@@ -49,20 +51,20 @@
             this.PaintGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PaintGroupBox.Controls.Add(this.circuitPictureBox);
+            this.PaintGroupBox.Controls.Add(this.panel1);
             this.PaintGroupBox.Location = new System.Drawing.Point(255, 15);
             this.PaintGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.PaintGroupBox.Name = "PaintGroupBox";
             this.PaintGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.PaintGroupBox.Size = new System.Drawing.Size(440, 356);
+            this.PaintGroupBox.Size = new System.Drawing.Size(645, 362);
             this.PaintGroupBox.TabIndex = 0;
             this.PaintGroupBox.TabStop = false;
             // 
             // circuitPictureBox
             // 
-            this.circuitPictureBox.Location = new System.Drawing.Point(4, 19);
+            this.circuitPictureBox.Location = new System.Drawing.Point(3, 9);
             this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(429, 337);
+            this.circuitPictureBox.Size = new System.Drawing.Size(629, 334);
             this.circuitPictureBox.TabIndex = 0;
             this.circuitPictureBox.TabStop = false;
             // 
@@ -99,7 +101,7 @@
             this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
             this.CalculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
             // 
-            // SelectingCircuitComboBox
+            // CircuitsComboBox
             // 
             this.CircuitsComboBox.FormattingEnabled = true;
             this.CircuitsComboBox.Location = new System.Drawing.Point(113, 11);
@@ -170,11 +172,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.EditButton_Click);
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.circuitPictureBox);
+            this.panel1.Location = new System.Drawing.Point(7, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(633, 343);
+            this.panel1.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(717, 388);
+            this.ClientSize = new System.Drawing.Size(922, 394);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.NominalTextBox);
             this.Controls.Add(this.label2);
@@ -193,6 +204,7 @@
             this.Text = "Расчет комплексного сопротивления";
             this.PaintGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,6 +224,7 @@
         private System.Windows.Forms.TextBox NominalTextBox;
         private System.Windows.Forms.PictureBox circuitPictureBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
