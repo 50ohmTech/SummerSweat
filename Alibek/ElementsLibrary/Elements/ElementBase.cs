@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 
@@ -7,7 +8,7 @@ namespace ElementsLibrary
     /// <summary>
     ///     Базовый класс элемента <see cref="ElementBase"/>
     /// </summary>
-    public abstract class ElementBase
+    public abstract class ElementBase : INode
     {
         #region Private fields
 
@@ -50,6 +51,16 @@ namespace ElementsLibrary
             get => _name;
             set => _name = value ?? throw new ArgumentNullException("Задайте имя!");
         }
+
+        /// <summary>
+        ///     Родитель.
+        /// </summary>
+        public INode Parent { get; set; }
+
+        /// <summary>
+        ///     Дочерние узлы.
+        /// </summary>
+        public List<INode> Nodes { get; } = new List<INode>();
 
         #endregion
 

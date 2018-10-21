@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ElementsLibrary;
 
 namespace MainForm
 {
@@ -16,7 +17,7 @@ namespace MainForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImpedanceCalculator());
+            Application.Run(new CircuitForm());
         }
     }
 }

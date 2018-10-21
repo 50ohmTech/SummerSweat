@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.CalculatorDataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.StartValueTextBox = new System.Windows.Forms.TextBox();
+            this.EndValueTextBox = new System.Windows.Forms.TextBox();
+            this.StepValueTextBox = new System.Windows.Forms.TextBox();
+            this.CalculateButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.CalculatorDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // CalculatorDataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 112);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(195, 150);
-            this.dataGridView1.TabIndex = 0;
+            this.CalculatorDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CalculatorDataGridView.Location = new System.Drawing.Point(10, 94);
+            this.CalculatorDataGridView.Name = "CalculatorDataGridView";
+            this.CalculatorDataGridView.Size = new System.Drawing.Size(183, 150);
+            this.CalculatorDataGridView.TabIndex = 0;
             // 
             // label1
             // 
@@ -73,42 +74,52 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Шаг";
             // 
-            // textBox1
+            // StartValueTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(93, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
+            this.StartValueTextBox.Location = new System.Drawing.Point(93, 13);
+            this.StartValueTextBox.Name = "StartValueTextBox";
+            this.StartValueTextBox.Size = new System.Drawing.Size(100, 20);
+            this.StartValueTextBox.TabIndex = 4;
             // 
-            // textBox2
+            // EndValueTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(93, 40);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
+            this.EndValueTextBox.Location = new System.Drawing.Point(93, 40);
+            this.EndValueTextBox.Name = "EndValueTextBox";
+            this.EndValueTextBox.Size = new System.Drawing.Size(100, 20);
+            this.EndValueTextBox.TabIndex = 5;
             // 
-            // textBox3
+            // StepValueTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(93, 68);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 6;
+            this.StepValueTextBox.Location = new System.Drawing.Point(93, 68);
+            this.StepValueTextBox.Name = "StepValueTextBox";
+            this.StepValueTextBox.Size = new System.Drawing.Size(100, 20);
+            this.StepValueTextBox.TabIndex = 6;
             // 
-            // Form1
+            // CalculateButton
+            // 
+            this.CalculateButton.Location = new System.Drawing.Point(10, 250);
+            this.CalculateButton.Name = "CalculateButton";
+            this.CalculateButton.Size = new System.Drawing.Size(183, 23);
+            this.CalculateButton.TabIndex = 7;
+            this.CalculateButton.Text = "Расчитать";
+            this.CalculateButton.UseVisualStyleBackColor = true;
+            // 
+            // ImpedanceCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 280);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(202, 280);
+            this.Controls.Add(this.CalculateButton);
+            this.Controls.Add(this.StepValueTextBox);
+            this.Controls.Add(this.EndValueTextBox);
+            this.Controls.Add(this.StartValueTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "Form1";
+            this.Controls.Add(this.CalculatorDataGridView);
+            this.Name = "ImpedanceCalculator";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CalculatorDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,13 +127,14 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView CalculatorDataGridView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox StartValueTextBox;
+        private System.Windows.Forms.TextBox EndValueTextBox;
+        private System.Windows.Forms.TextBox StepValueTextBox;
+        private System.Windows.Forms.Button CalculateButton;
     }
 }
 

@@ -7,7 +7,7 @@ namespace ElementsLibrary.Circuits
     /// <summary>
     /// Параллельное соединение цепи <see cref="ParallelSubcircuit"/>
     /// </summary>
-    public abstract class ParallelSubcircuit : SubcircuitBase
+    public class ParallelSubcircuit : SubcircuitBase
     {
         #region Public methods
 

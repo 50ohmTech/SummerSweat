@@ -38,7 +38,7 @@ namespace ElementsLibrary.Circuits
         /// <summary>
         ///     Тип подключения
         /// </summary>
-        public NodeType ConnectionType { get; set; }
+        public NodeType NodeType { get; set; }
 
         #endregion
 

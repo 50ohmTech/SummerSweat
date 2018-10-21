@@ -7,7 +7,7 @@ namespace ElementsLibrary.Circuits
     /// <summary>
     /// Последовательное соединение цепи <see cref="SerlialSubcircuit"/>
     /// </summary>
-    public abstract class SerlialSubcircuit : SubcircuitBase
+    public class SerialSubcircuit : SubcircuitBase
     {
         #region Public methods
 

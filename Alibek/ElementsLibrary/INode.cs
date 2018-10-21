@@ -7,14 +7,9 @@ namespace ElementsLibrary
     /// <summary>
     ///     Интерфейс узла дерева <see cref="INode" />
     /// </summary>
-    public interface INode
+    public interface INode 
     {
         #region Properties
-
-        /// <summary>
-        ///     Главный узел
-        /// </summary>
-        INode Parent { get; }
 
         /// <summary>
         ///     Дочерние узлы
@@ -22,9 +17,14 @@ namespace ElementsLibrary
         List<INode> Nodes { get; }
 
         /// <summary>
+        ///     Главный узел
+        /// </summary>
+        INode Parent { get; set; }
+
+        /// <summary>
         ///     Тип подключения
         /// </summary>
-        NodeType ConnectionType { get; set; }
+       // NodeType NodeType { get; set; }
 
         #endregion
 
