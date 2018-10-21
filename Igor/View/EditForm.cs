@@ -42,32 +42,29 @@ namespace View
 
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
-            //TODO: присваивать dialogResult!
             _element.Value = _value;
-            Close();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            //TODO: Присваивать DialogResult!
-            Close();
+            DialogResult = DialogResult.Cancel;
         }
 
         private void TextBoxValue_TextChanged(object sender, EventArgs e)
        {
             if (!double.TryParse(_textBoxValue.Text, out _value))
             {
-                _buttonEdit.Enabled = false;
-                return;
-            }
-            //TODO: заменить на экспоненциальную форму числа
-            if (_value <= 0 || _value > 1000000000000)
-            {
-                _buttonEdit.Enabled = false;
+                buttonEdit.Enabled = false;
                 return;
             }
 
-            _buttonEdit.Enabled = true;
+            if (_value <= 0.1 || _value >= 1e12)
+            {
+                buttonEdit.Enabled = false;
+                return;
+            }
+
+            buttonEdit.Enabled = true;
         }
 
         #endregion
@@ -84,6 +81,9 @@ namespace View
             InitializeComponent();
             Text = "Элемент: " + element.Name;
             _textBoxValue.Text = element.Value.ToString();
+
+            DialogResult = DialogResult.Yes;
+            buttonCancel.DialogResult = DialogResult.Cancel;
         }
 
         #endregion

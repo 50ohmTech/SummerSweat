@@ -75,7 +75,7 @@ namespace Model
 
             //Если число входит в рамки входных данных
             if (double.TryParse(formatingString, out var newValue) 
-                && !(newValue < 1.7E-308) && newValue <= 1.7E+308)
+                && !(newValue < 0.1) && newValue <= 1e12)
             {
                 //Если число начинаеться с нуля и после нуля нету запятой
                 if (formatingString.Length > 1 && formatingString[0] == '0' &&

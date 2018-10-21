@@ -15,6 +15,10 @@ namespace View
 
         private readonly Circuit _circuit;
 
+        private readonly CircuitsCombobox _circuitsCombobox;
+
+        private readonly List<Tools.Pair<char, int>> _vectorOfElements;
+
         #endregion
 
         #region Private fields
@@ -22,8 +26,6 @@ namespace View
         private int _count;
 
         private INode _currentNode;
-
-        private Dictionary<char, int> nameOfElements;
 
         #endregion
 
@@ -35,12 +37,12 @@ namespace View
         {
             InitializeComponent();
 
-            SelectingCircuitComboBox.Items.Add("Цепь №1");
-            SelectingCircuitComboBox.Items.Add("Цепь №2");
-            SelectingCircuitComboBox.Items.Add("Цепь №3");
-            SelectingCircuitComboBox.Items.Add("Цепь №4");
-            SelectingCircuitComboBox.Items.Add("Цепь №5");
-            SelectingCircuitComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            CircuitsComboBox.Items.Add("Цепь №1");
+            CircuitsComboBox.Items.Add("Цепь №2");
+            CircuitsComboBox.Items.Add("Цепь №3");
+            CircuitsComboBox.Items.Add("Цепь №4");
+            CircuitsComboBox.Items.Add("Цепь №5");
+            CircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             _count = 0;
 
@@ -48,16 +50,16 @@ namespace View
             //TODO: заменить преобразование enum к int на метод Enum.GetValues()
             for (NodeType i = 0; i < (NodeType) 5; i++)
             {
-                elements.Add(ToolsNodeType.GetDescription(i));
+                elements.Add(Tools.GetDescription(i));
             }
 
             NadeComboBox.DataSource = elements;
             NadeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _circuit = new Circuit();
-            //TODO: подписка должна быть в дизайнере
-            NominalTextBox.Enter += NominalTextBox_Enter;
-            //TODO: зачем словарь?
-            var nameOfElements = new Dictionary<char, int>();
+
+            _vectorOfElements = new List<Tools.Pair<char, int>>();
+
+            _circuitsCombobox = new CircuitsCombobox();
         }
 
         #endregion
@@ -71,10 +73,10 @@ namespace View
             NominalTextBox.TextAlign = HorizontalAlignment.Center;
         }
 
+
         private void NominalTextBox_Leave(object sender, EventArgs e)
         {
-            //TODO: вот такие решения, особенно в которых происходит
-            //подписка и отписка - надо комментировать - что делается и для чего
+            //Если поле для заполнения пустое, редактируется
             if (NominalTextBox.Text == "")
             {
                 NominalTextBox.ForeColor = SystemColors.WindowFrame;
@@ -82,193 +84,32 @@ namespace View
                 NominalTextBox.Text = "Значение";
                 NominalTextBox.TextAlign = HorizontalAlignment.Center;
             }
+            //Если поле заполнилось, то проверяем значение
             else
             {
                 NominalTextBox.Enter -= NominalTextBox_Enter;
+                if (Tools.IsCellCorrect(NominalTextBox.Text) == false)
+                {
+                    Tools.ShowError(NominalTextBox);
+
+                    NominalTextBox.Clear();
+                }
             }
         }
 
-        private void SelectingCircuitComboBox_SelectedIndexChanged(object sender,
+        private void SelectingCircuitsComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
-        {//TODO: Переименовать SelectingCircuitComboBox в CircuitsComboBox
-            var selectedState = SelectingCircuitComboBox.SelectedItem.ToString();
-            if (selectedState == "Цепь №1")
-            {
-                //TODO: генерацию тестовых цепей вынести в отдельный класс
-                var resistor = new Resistor("R1", 10);
-                var inductor = new Inductor("L1", 50);
-                var capacitor = new Capacitor("C1", 15);
-
-                var parallelSubcircuit = new ParallelSubcircuit();
-                parallelSubcircuit.Nodes.Add(capacitor);
-                parallelSubcircuit.Nodes.Add(inductor);
-                inductor.Parent = parallelSubcircuit;
-                capacitor.Parent = parallelSubcircuit;
-
-                var serialSubcircuit = new SerialSubcircuit();
-                serialSubcircuit.Nodes.Add(parallelSubcircuit);
-                serialSubcircuit.Nodes.Add(resistor);
-                parallelSubcircuit.Parent = serialSubcircuit;
-                resistor.Parent = serialSubcircuit;
-
-                _circuit.AddAfter(null, serialSubcircuit);
-                UpdateTreeView();
-            }
-
-            if (selectedState == "Цепь №2")
-            {
-                var capacitor1 = new Capacitor("C1", 20);
-                var inductor2 = new Inductor("L1", 20);
-                var resistor3 = new Resistor("R1", 20);
-                var inductor4 = new Inductor("L2", 20);
-
-                var parallelSubcircuit1 = new ParallelSubcircuit();
-                parallelSubcircuit1.Nodes.Add(capacitor1);
-                capacitor1.Parent = parallelSubcircuit1;
-
-                var serialSubcircuit1 = new SerialSubcircuit();
-                parallelSubcircuit1.Nodes.Add(serialSubcircuit1);
-                serialSubcircuit1.Parent = parallelSubcircuit1;
-
-                serialSubcircuit1.Nodes.Add(inductor2);
-                inductor2.Parent = serialSubcircuit1;
-
-                var parallelSubcircuit2 = new ParallelSubcircuit();
-                parallelSubcircuit2.Nodes.Add(resistor3);
-                resistor3.Parent = parallelSubcircuit2;
-                parallelSubcircuit2.Nodes.Add(inductor4);
-                inductor4.Parent = parallelSubcircuit2;
-
-                serialSubcircuit1.Nodes.Add(parallelSubcircuit2);
-                parallelSubcircuit2.Parent = serialSubcircuit1;
-                _circuit.AddAfter(null, parallelSubcircuit1);
-            }
-
-            if (selectedState == "Цепь №3")
-            {
-                var resistor1 = new Resistor("R1", 20);
-                var inductor2 = new Inductor("L1", 20);
-                var inductor3 = new Inductor("L2", 20);
-                var inductor4 = new Inductor("L3", 20);
-                var resistor5 = new Resistor("R1", 20);
-                var resistor6 = new Resistor("R1", 20);
-                var inductor7 = new Inductor("L4", 20);
-
-                var parallelSubcircuit1 = new ParallelSubcircuit();
-
-                var serialSubcircuit1 = new SerialSubcircuit();
-                var serialSubcircuit2 = new SerialSubcircuit();
-
-                parallelSubcircuit1.Nodes.Add(serialSubcircuit1);
-                serialSubcircuit1.Parent = parallelSubcircuit1;
-                parallelSubcircuit1.Nodes.Add(serialSubcircuit2);
-                serialSubcircuit2.Parent = parallelSubcircuit1;
-
-                var parallelSubcircuit2 = new ParallelSubcircuit();
-                var parallelSubcircuit3 = new ParallelSubcircuit();
-
-                serialSubcircuit1.Nodes.Add(inductor3);
-                inductor3.Parent = serialSubcircuit1;
-                serialSubcircuit1.Nodes.Add(parallelSubcircuit2);
-                parallelSubcircuit2.Parent = serialSubcircuit1;
-                parallelSubcircuit2.Nodes.Add(resistor1);
-                resistor1.Parent = parallelSubcircuit2;
-                parallelSubcircuit2.Nodes.Add(inductor4);
-                inductor4.Parent = parallelSubcircuit2;
-
-                serialSubcircuit2.Nodes.Add(inductor2);
-                inductor2.Parent = serialSubcircuit2;
-                serialSubcircuit2.Nodes.Add(resistor5);
-                resistor5.Parent = serialSubcircuit2;
-                serialSubcircuit2.Nodes.Add(parallelSubcircuit3);
-                parallelSubcircuit3.Parent = serialSubcircuit2;
-                parallelSubcircuit3.Nodes.Add(resistor6);
-                resistor6.Parent = parallelSubcircuit3;
-                parallelSubcircuit3.Nodes.Add(inductor7);
-                inductor7.Parent = parallelSubcircuit3;
-                _circuit.AddAfter(null, parallelSubcircuit1);
-            }
-
-            if (selectedState == "Цепь №4")
-            {
-                var resistor1 = new Resistor("R1", 1);
-                var capacitor2 = new Capacitor("C2", 20);
-                var resistor3 = new Resistor("R3", 20);
-                var inductor4 = new Inductor("L4", 20);
-                var resistor5 = new Resistor("R5", 20);
-                var inductor6 = new Inductor("L6", 20);
-
-                var serialSubcircuit1 = new SerialSubcircuit();
-                var parallelSubcircuit1 = new ParallelSubcircuit();
-                var parallelSubcircuit2 = new ParallelSubcircuit();
-
-                serialSubcircuit1.Nodes.Add(parallelSubcircuit1);
-                parallelSubcircuit1.Parent = serialSubcircuit1;
-                serialSubcircuit1.Nodes.Add(parallelSubcircuit2);
-                parallelSubcircuit2.Parent = serialSubcircuit1;
-                serialSubcircuit1.Nodes.Add(resistor3);
-                resistor3.Parent = serialSubcircuit1;
-                parallelSubcircuit1.Nodes.Add(resistor1);
-                resistor1.Parent = parallelSubcircuit1;
-                parallelSubcircuit1.Nodes.Add(inductor4);
-                inductor4.Parent = parallelSubcircuit1;
-                parallelSubcircuit2.Nodes.Add(capacitor2);
-                capacitor2.Parent = parallelSubcircuit2;
-                parallelSubcircuit2.Nodes.Add(resistor5);
-                resistor5.Parent = parallelSubcircuit2;
-                parallelSubcircuit2.Nodes.Add(inductor6);
-                inductor6.Parent = parallelSubcircuit2;
-                _circuit.AddAfter(null, serialSubcircuit1);
-            }
-
-            if (selectedState == "Цепь №5")
-            {
-                var resistor1 = new Resistor("R1", 20);
-                var capacitor2 = new Capacitor("C2", 20);
-                var resistor3 = new Resistor("R3", 20);
-                var inductor4 = new Inductor("L4", 20);
-                var resistor5 = new Resistor("R5", 20);
-                var inductor6 = new Inductor("L6", 20);
-                var resistor7 = new Resistor("R7", 20);
-                var inductor8 = new Inductor("L8", 20);
-
-                var serialSubcircuit1 = new SerialSubcircuit();
-                var serialSubcircuit2 = new SerialSubcircuit();
-                var parallelSubcircuit1 = new ParallelSubcircuit();
-                var parallelSubcircuit2 = new ParallelSubcircuit();
-                var parallelSubcircuit3 = new ParallelSubcircuit();
-                serialSubcircuit1.Nodes.Add(parallelSubcircuit1);
-                parallelSubcircuit1.Parent = serialSubcircuit1;
-                parallelSubcircuit1.Nodes.Add(resistor1);
-                resistor1.Parent = parallelSubcircuit1;
-                parallelSubcircuit1.Nodes.Add(inductor4);
-                inductor4.Parent = parallelSubcircuit1;
-
-                serialSubcircuit1.Nodes.Add(parallelSubcircuit2);
-                parallelSubcircuit2.Parent = serialSubcircuit1;
-                parallelSubcircuit2.Nodes.Add(capacitor2);
-                capacitor2.Parent = parallelSubcircuit2;
-                parallelSubcircuit2.Nodes.Add(serialSubcircuit2);
-                serialSubcircuit2.Parent = parallelSubcircuit2;
-                serialSubcircuit2.Nodes.Add(parallelSubcircuit3);
-                parallelSubcircuit3.Parent = serialSubcircuit2;
-                serialSubcircuit2.Nodes.Add(resistor7);
-                resistor7.Parent = serialSubcircuit2;
-                parallelSubcircuit3.Nodes.Add(resistor5);
-                resistor5.Parent = parallelSubcircuit3;
-                parallelSubcircuit3.Nodes.Add(inductor8);
-                inductor8.Parent = parallelSubcircuit3;
-                parallelSubcircuit2.Nodes.Add(inductor6);
-                inductor6.Parent = parallelSubcircuit2;
-                serialSubcircuit1.Nodes.Add(resistor3);
-                resistor3.Parent = serialSubcircuit1;
-
-                _circuit.AddAfter(null, serialSubcircuit1);
-            }
+        {
+            var selectedState = CircuitsComboBox.SelectedItem.ToString();
+            _circuitsCombobox.CreateCircuit(selectedState, _vectorOfElements,
+                _circuit);
 
             UpdateTreeView();
         }
 
+        /// <summary>
+        ///     Обновление TreeView
+        /// </summary>
         private void UpdateTreeView()
         {
             void AddNodeTreeNodes(INode node, TreeNode treeNode)
@@ -312,12 +153,16 @@ namespace View
             circuitPictureBox.Image = bitmapBackground;
         }
 
+        /// <summary>
+        ///     Проверка, того что выбрал пользователь в TreeView
+        /// </summary>
+        /// <returns></returns>
         private bool IsCorrectAdd()
         {
             if (!(_currentNode is Subcircuit) && treeView.Nodes.Count > 0)
             {
                 MessageBox.Show(
-                    "Для добавление элемента в цепь, требуеться выдбрать " +
+                    "Для добавление элемента в цепь, требуеться выбрать " +
                     "последовательность (параллельная, последовательная)");
 
                 return true;
@@ -330,10 +175,8 @@ namespace View
         {
             var selectedState = NadeComboBox.SelectedItem.ToString();
 
-
             try
             {
-                string nameElement;
                 switch (selectedState)
                 {
                     case "Последовательное":
@@ -347,11 +190,16 @@ namespace View
                         {
                             return;
                         }
-                        _count++;
-                        nameElement = "R" + _count;
+
+                        _vectorOfElements.Add(Tools.CreateName('R', _vectorOfElements));
                         _circuit.AddAfter(_currentNode,
-                            new Resistor(nameElement, //TODO: парсить лучше до свича - сократишь код в каждом кейсе
+                            new Resistor(
+                                _vectorOfElements[_count].First +
+                                _vectorOfElements[_count]
+                                    .Second.ToString(),
                                 double.Parse(NominalTextBox.Text)));
+
+                        _count++;
 
                         break;
                     case "Катушка":
@@ -359,11 +207,16 @@ namespace View
                         {
                             return;
                         }
-                        _count++;
-                        nameElement = "L" + _count;
+
+                        _vectorOfElements.Add(Tools.CreateName('L', _vectorOfElements));
                         _circuit.AddAfter(_currentNode,
-                            new Inductor(nameElement,
+                            new Resistor(
+                                _vectorOfElements[_count].First +
+                                _vectorOfElements[_count]
+                                    .Second.ToString(),
                                 double.Parse(NominalTextBox.Text)));
+
+                        _count++;
 
                         break;
                     case "Конденсатор":
@@ -371,11 +224,16 @@ namespace View
                         {
                             return;
                         }
-                        _count++;
-                        nameElement = "C" + _count;
+
+                        _vectorOfElements.Add(Tools.CreateName('C', _vectorOfElements));
                         _circuit.AddAfter(_currentNode,
-                            new Capacitor(nameElement,
+                            new Resistor(
+                                _vectorOfElements[_count].First +
+                                _vectorOfElements[_count]
+                                    .Second.ToString(),
                                 double.Parse(NominalTextBox.Text)));
+
+                        _count++;
 
                         break;
                 }
@@ -403,7 +261,26 @@ namespace View
                 _circuit.Remove(_currentNode);
                 treeView.Nodes.Clear();
                 circuitPictureBox.Image = null;
+                _count = 0;
+                _vectorOfElements.Clear();
                 return;
+            }
+
+            if (_currentNode is ElementBase currentNode)
+            {
+                var deletedElement = new Tools.Pair<char, int>(currentNode.Name[0],
+                    (int) char.GetNumericValue(currentNode.Name[1]));
+
+                for (var i = 0; i < _vectorOfElements.Count; i++)
+                {
+                    if (_vectorOfElements[i].First == deletedElement.First &&
+                        _vectorOfElements[i].Second == deletedElement.Second)
+                    {
+                        _vectorOfElements.Remove(_vectorOfElements[i]);
+                    }
+                }
+
+                _count--;
             }
 
             _circuit.Remove(_currentNode);
