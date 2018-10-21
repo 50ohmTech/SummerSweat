@@ -1,17 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
     public abstract class Subcircuit : INode
     {
-        private readonly int _global;
+        #region Fields
+
+        #region Static fields
 
         private static int _id;
+
+        #endregion
+
+        #region Readonly fields
+
+        private readonly int _global;
+
+        #endregion
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Идентификатор.
+        /// </summary>
+        public int Id { get; } = _id;
 
         /// <summary>
         ///     Родитель.
@@ -23,10 +38,9 @@ namespace Model
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
-        /// <summary>ё
-        /// Идентификатор.
-        /// </summary>
-        public int Id { get; } = _id;
+        #endregion
+
+        #region Events
 
         /// <summary>
         ///     Рассчет импеданса.
@@ -35,12 +49,18 @@ namespace Model
         /// <returns></returns>
         public abstract Complex CalculateZ(double frequency);
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
-        /// 
+        ///     Конструктор для изменение id.
         /// </summary>
         protected Subcircuit()
         {
             _id++;
         }
+
+        #endregion
     }
 }

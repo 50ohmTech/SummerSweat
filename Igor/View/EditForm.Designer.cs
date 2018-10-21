@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this._buttonEdit = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this._textBoxValue = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // _buttonEdit
+            // buttonEdit
             // 
-            this._buttonEdit.Location = new System.Drawing.Point(12, 78);
-            this._buttonEdit.Name = "_buttonEdit";
-            this._buttonEdit.Size = new System.Drawing.Size(130, 23);
-            this._buttonEdit.TabIndex = 0;
-            this._buttonEdit.Text = "Изменить";
-            this._buttonEdit.UseVisualStyleBackColor = true;
-            this._buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
+            this.buttonEdit.Location = new System.Drawing.Point(12, 78);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(130, 23);
+            this.buttonEdit.TabIndex = 0;
+            this.buttonEdit.Text = "Изменить";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
-            // button2
+            // buttonCancel
             // 
-            this.button2.Location = new System.Drawing.Point(12, 120);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(130, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Отмена";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.ButtonClose_Click);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 120);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(130, 23);
+            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // _textBoxValue
             // 
@@ -78,10 +78,10 @@
             this.ClientSize = new System.Drawing.Size(150, 164);
             this.Controls.Add(this.label1);
             this.Controls.Add(this._textBoxValue);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this._buttonEdit);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonEdit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EditForm";
-            this.Text = "EditForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,8 +89,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button _buttonEdit;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TextBox _textBoxValue;
         private System.Windows.Forms.Label label1;
     }

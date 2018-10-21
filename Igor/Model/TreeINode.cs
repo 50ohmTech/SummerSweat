@@ -29,7 +29,6 @@ namespace Model
                 return;
 
             }
-            Value = node ?? throw new ArgumentNullException(nameof(node));
 
             Value = node;
 

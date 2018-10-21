@@ -105,9 +105,9 @@ namespace Model
             }
         }
 
-        void Clean()
+        public void  Clean()
         {
-
+            Root = null;
         }
         #endregion
     }

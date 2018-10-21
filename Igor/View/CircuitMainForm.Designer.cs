@@ -33,7 +33,7 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
-            this.SelectingCircuitComboBox = new System.Windows.Forms.ComboBox();
+            this.CircuitsComboBox = new System.Windows.Forms.ComboBox();
             this.SelectingCircuitLabel = new System.Windows.Forms.Label();
             this.treeView = new System.Windows.Forms.TreeView();
             this.NadeComboBox = new System.Windows.Forms.ComboBox();
@@ -68,10 +68,10 @@
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(140, 275);
+            this.AddButton.Location = new System.Drawing.Point(146, 275);
             this.AddButton.Margin = new System.Windows.Forms.Padding(4);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(105, 63);
+            this.AddButton.Size = new System.Drawing.Size(99, 60);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -79,10 +79,10 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(19, 275);
+            this.DeleteButton.Location = new System.Drawing.Point(20, 275);
             this.DeleteButton.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(108, 28);
+            this.DeleteButton.Size = new System.Drawing.Size(105, 30);
             this.DeleteButton.TabIndex = 1;
             this.DeleteButton.Text = "Удалить";
             this.DeleteButton.UseVisualStyleBackColor = true;
@@ -101,13 +101,13 @@
             // 
             // SelectingCircuitComboBox
             // 
-            this.SelectingCircuitComboBox.FormattingEnabled = true;
-            this.SelectingCircuitComboBox.Location = new System.Drawing.Point(113, 11);
-            this.SelectingCircuitComboBox.Margin = new System.Windows.Forms.Padding(4);
-            this.SelectingCircuitComboBox.Name = "SelectingCircuitComboBox";
-            this.SelectingCircuitComboBox.Size = new System.Drawing.Size(132, 24);
-            this.SelectingCircuitComboBox.TabIndex = 4;
-            this.SelectingCircuitComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectingCircuitComboBox_SelectedIndexChanged);
+            this.CircuitsComboBox.FormattingEnabled = true;
+            this.CircuitsComboBox.Location = new System.Drawing.Point(113, 11);
+            this.CircuitsComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.CircuitsComboBox.Name = "CircuitsComboBox";
+            this.CircuitsComboBox.Size = new System.Drawing.Size(132, 24);
+            this.CircuitsComboBox.TabIndex = 4;
+            this.CircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectingCircuitsComboBox_SelectedIndexChanged);
             // 
             // SelectingCircuitLabel
             // 
@@ -141,7 +141,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 193);
+            this.label2.Location = new System.Drawing.Point(17, 192);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(131, 17);
@@ -151,10 +151,10 @@
             // NominalTextBox
             // 
             this.NominalTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.NominalTextBox.Location = new System.Drawing.Point(140, 245);
+            this.NominalTextBox.Location = new System.Drawing.Point(20, 245);
             this.NominalTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.NominalTextBox.Name = "NominalTextBox";
-            this.NominalTextBox.Size = new System.Drawing.Size(105, 22);
+            this.NominalTextBox.Size = new System.Drawing.Size(225, 22);
             this.NominalTextBox.TabIndex = 9;
             this.NominalTextBox.Text = "Значение";
             this.NominalTextBox.Enter += new System.EventHandler(this.NominalTextBox_Enter);
@@ -162,9 +162,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(20, 310);
+            this.button1.Location = new System.Drawing.Point(20, 305);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 28);
+            this.button1.Size = new System.Drawing.Size(105, 30);
             this.button1.TabIndex = 10;
             this.button1.Text = "Изменить";
             this.button1.UseVisualStyleBackColor = true;
@@ -181,15 +181,16 @@
             this.Controls.Add(this.NadeComboBox);
             this.Controls.Add(this.treeView);
             this.Controls.Add(this.SelectingCircuitLabel);
-            this.Controls.Add(this.SelectingCircuitComboBox);
+            this.Controls.Add(this.CircuitsComboBox);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.CalculateImpedanceButton);
             this.Controls.Add(this.PaintGroupBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(733, 409);
             this.Name = "MainForm";
-            this.Text = "CircuitMainForm";
+            this.Text = "Расчет комплексного сопротивления";
             this.PaintGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -203,7 +204,7 @@
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button CalculateImpedanceButton;
-        private System.Windows.Forms.ComboBox SelectingCircuitComboBox;
+        private System.Windows.Forms.ComboBox CircuitsComboBox;
         private System.Windows.Forms.Label SelectingCircuitLabel;
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.ComboBox NadeComboBox;

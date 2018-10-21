@@ -6,7 +6,7 @@ using Model;
 namespace View
 {
     /// <summary>
-    /// Форма для расчета имеданса
+    ///     Форма для расчета имеданса
     /// </summary>
     public partial class ImpedanceForm : Form
     {
@@ -40,69 +40,58 @@ namespace View
             var finish = double.Parse(FinishTextBox.Text.Replace('.', ','));
             var step = double.Parse(StepTextBox.Text.Replace('.', ','));
 
-            var frequence = new double[1];
+            var frequency = new double[1];
 
             var j = 0;
             for (var i = start; i <= finish; i += step)
             {
-                frequence[j] = i;
+                frequency[j] = i;
                 j++;
                 if (!(finish - i == 0))
                 {
-                    Array.Resize(ref frequence, frequence.Length + 1);
+                    Array.Resize(ref frequency, frequency.Length + 1);
                 }
             }
 
-            if (frequence[frequence.Length - 1] == 0)
+            if (frequency[frequency.Length - 1] == 0)
             {
-                Array.Resize(ref frequence, frequence.Length - 1);
+                Array.Resize(ref frequency, frequency.Length - 1);
             }
 
-            var impedances = _circuit.CalculateZ(frequence);
-            var impd = new List<string>();
+            var impedances = _circuit.CalculateZ(frequency);
+            var correctListOfImpedances = new List<string>();
 
             for (var i = 0; i < impedances.Count; i++)
             {
-                impd.Add(
+                correctListOfImpedances.Add(
                     $"R:{Math.Round(impedances[i].Real, 3)} " +
                     $"I:{Math.Round(impedances[i].Imaginary, 3)}");
             }
 
             for (var i = 0; i < impedances.Count; i++)
             {
-                dataGridView.Rows.Add(Math.Round(frequence[i], 3), impd[i]);
+                dataGridView.Rows.Add(Math.Round(frequency[i], 3),
+                    correctListOfImpedances[i]);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CalculateButton_Click(object sender, EventArgs e)
         {
             CalculateImpedance();
         }
 
         private void ValidatigTextBox(TextBox textBox)
         {
-            if (IsCellCorrect(textBox.Text) == false)
+            if (Tools.IsCellCorrect(textBox.Text) != true)
             {
-                MessageBox.Show(
-                    "Вы ввели: " + textBox.Text + "\n" +
-                    "Вводимое значение должно удовлетворять следующим условиям:\n " +
-                    "-быть положительным числом\n " +
-                    "-быть вещественным или натуральным числом\n " +
-                    "-быть большим 0.000 000 1 по модулю\n " +
-                    "-быть меньше 1 000 000 000\n " +
-                    "-запись не должна содержать пробелов\n " +
-                    "-запись должна начинаться с цифры\n " +
-                    "-использование экспоненциальной записи не допускается\n " +
-                    "-eсли первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
-                    "Ошибка ввода значения частоты", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                Tools.ShowError(textBox);
 
                 textBox.Clear();
             }
 
-            if (IsCellCorrect(StartTextBox.Text) == false ||
-                IsCellCorrect(FinishTextBox.Text) == false ||
-                IsCellCorrect(StepTextBox.Text) == false)
+            if (Tools.IsCellCorrect(StartTextBox.Text) != true ||
+                Tools.IsCellCorrect(FinishTextBox.Text) != true ||
+                Tools.IsCellCorrect(StepTextBox.Text) != true)
             {
                 CalculateButton.Enabled = false;
                 return;
@@ -133,39 +122,6 @@ namespace View
             {
                 ValidatigTextBox(StepTextBox);
             }
-        }
-
-        #endregion
-
-        #region Public methods
-
-        public static bool IsCellCorrect(string e)
-        {
-            var formatingString = e.Replace('.', ',');
-            if (double.TryParse(formatingString,
-                    out var newValue) && !(newValue < 0.0000001) &&
-                newValue <= 1000000000)
-            {
-                if (formatingString.Length > 1 && formatingString[0] == '0' &&
-                    formatingString[1] != ',')
-                {
-                    return false;
-                }
-
-                if (formatingString[0] == ',' || formatingString[0] == '.')
-                {
-                    return false;
-                }
-
-                if (e.Contains(" "))
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-            return false;
         }
 
         #endregion

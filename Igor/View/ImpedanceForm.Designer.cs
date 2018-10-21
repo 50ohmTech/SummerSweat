@@ -136,7 +136,7 @@
             this.CalculateButton.TabIndex = 7;
             this.CalculateButton.Text = "Расчитать";
             this.CalculateButton.UseVisualStyleBackColor = true;
-            this.CalculateButton.Click += new System.EventHandler(this.button1_Click);
+            this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
             // ImpedanceForm
             // 
@@ -151,10 +151,11 @@
             this.Controls.Add(this.StepLabel);
             this.Controls.Add(this.EndLabel);
             this.Controls.Add(this.StartLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(287, 298);
             this.Name = "ImpedanceForm";
-            this.Text = "ImpedanceForm";
+            this.Text = "Расчет импеданса";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
