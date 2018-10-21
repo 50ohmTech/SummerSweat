@@ -14,17 +14,17 @@ namespace View
         #region Readonly fields
 
         /// <summary>
-        /// Цепь.
+        ///     Цепь.
         /// </summary>
         private readonly Circuit _circuit;
 
         /// <summary>
-        /// Объект готовых цепей.
+        ///     Объект готовых цепей.
         /// </summary>
         private readonly CircuitsComboBox _circuitsComboBox;
 
         /// <summary>
-        /// Лист, который хранит имена всех элементов.
+        ///     Лист, который хранит имена всех элементов.
         /// </summary>
         private readonly List<Tools.Pair<char, int>> _vectorOfElements;
 
@@ -33,14 +33,16 @@ namespace View
         #region Private fields
 
         /// <summary>
-        /// Количество элементов.
+        ///     Количество элементов.
         /// </summary>
         private int _count;
 
         /// <summary>
-        /// Выбранная нода.
+        ///     Выбранная нода.
         /// </summary>
         private INode _currentNode;
+
+        private ImpedanceForm impedanceForm;
 
         #endregion
 
@@ -53,7 +55,7 @@ namespace View
             InitializeComponent();
 
             var circuits = new List<string>();
-            for (int i = 1; i < 6; i++)
+            for (var i = 1; i < 6; i++)
             {
                 circuits.Add("Цепь №" + i);
             }
@@ -62,21 +64,14 @@ namespace View
             CircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             _count = 0;
+            NadeComboBox.DataSource = Enum.GetValues(typeof(NodeType));
 
-            var elements = new List<string>();
-            for (NodeType i = 0; i < (NodeType) 5; i++)
-            {
-                elements.Add(Tools.GetDescription(i));
-            }
-
-            NadeComboBox.DataSource = elements;
             NadeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _circuit = new Circuit();
 
             _vectorOfElements = new List<Tools.Pair<char, int>>();
 
             _circuitsComboBox = new CircuitsComboBox();
-
             circuitPictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
         }
 
@@ -135,7 +130,6 @@ namespace View
         /// </summary>
         private void UpdateTreeView()
         {
-
             void AddNodeTreeNodes(INode node, TreeNode treeNode)
             {
                 if (node == null)
@@ -203,6 +197,7 @@ namespace View
                 MessageBox.Show("Максимальное количество элементов в цепи 18!");
                 return;
             }
+
             try
             {
                 switch (selectedState)
@@ -317,7 +312,9 @@ namespace View
 
         private void CalculateImpedanceButton_Click(object sender, EventArgs e)
         {
-            new ImpedanceForm(_circuit).ShowDialog();
+            impedanceForm = new ImpedanceForm();
+            impedanceForm.Circuit = _circuit;
+            impedanceForm.ShowDialog();
         }
 
         private void EditButton_Click(object sender, EventArgs e)

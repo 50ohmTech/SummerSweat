@@ -12,20 +12,31 @@ namespace View
     {
         #region Fields
 
-        #region Readonly fields
+        #region Private fields
 
-        private readonly Circuit _circuit;
+        /// <summary>
+        ///     Поле для цепи.
+        /// </summary>
+        private Circuit _circuit;
 
         #endregion
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Свойство для цепи.
+        /// </summary>
+        public Circuit Circuit { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public ImpedanceForm(Circuit circuit)
+        public ImpedanceForm()
         {
             InitializeComponent();
-            _circuit = circuit;
             dataGridView.RowHeadersVisible = false;
             CalculateButton.Enabled = false;
         }
@@ -36,6 +47,7 @@ namespace View
 
         private void CalculateImpedance()
         {
+            _circuit = Circuit;
             var start = double.Parse(StartTextBox.Text.Replace('.', ','));
             var finish = double.Parse(FinishTextBox.Text.Replace('.', ','));
             var step = double.Parse(StepTextBox.Text.Replace('.', ','));
@@ -128,6 +140,7 @@ namespace View
             {
                 ValidatigTextBox(StepTextBox);
             }
+
             Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
         }
 
