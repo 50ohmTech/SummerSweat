@@ -30,11 +30,7 @@ namespace CircuitLibrary.Elements
         /// <returns>Комплексное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
-            if (frequency <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    "Частота не может быть меньше или равна нулю");
-            }
+            CheckFrequency.CheckFrequencies(frequency);
 
             return new Complex(0, 1 / (2 * Math.PI * frequency * Value));
         }

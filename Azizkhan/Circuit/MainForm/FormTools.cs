@@ -32,7 +32,7 @@ namespace CircuitView
         /// <param name="e"></param>
         public static void TextBoxCheck(TextBox textBox, CancelEventArgs e)
         {
-            if (textBox.Text != "")
+            if (!string.IsNullOrWhiteSpace(textBox.Text))
             {
                 e.Cancel = !CheckStringForDouble(textBox.Text);
 

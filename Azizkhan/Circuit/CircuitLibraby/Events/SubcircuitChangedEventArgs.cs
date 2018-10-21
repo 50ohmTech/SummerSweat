@@ -55,8 +55,8 @@ namespace CircuitLibrary.Events
         /// <param name="parent">Родитель</param>
         public SubcircuitChangedEventArgs(string message, INode parent)
         {
-            Message = message;
-            Parent = parent;
+            Message = message ?? throw new ArgumentNullException(nameof(message));
+            Parent = parent ?? throw new ArgumentNullException(nameof(parent));
         }
 
         #endregion

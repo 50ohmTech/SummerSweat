@@ -17,7 +17,7 @@ namespace CircuitLibrary.Subcircuits
         /// <summary>
         ///     Уникальный идентификатор.
         /// </summary>
-        private static uint _id;
+        public static uint _id;
 
         #endregion
 

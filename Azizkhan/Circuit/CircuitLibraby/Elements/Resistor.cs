@@ -1,5 +1,4 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace CircuitLibrary.Elements
 {
@@ -30,11 +29,7 @@ namespace CircuitLibrary.Elements
         /// <returns>Комплексное сопротивление</returns>
         public override Complex CalculateZ(double frequency)
         {
-            if (frequency <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    "Частота не может быть меньше или равна нулю");
-            }
+            CheckFrequency.CheckFrequencies(frequency);
 
             return new Complex(Value, 0);
         }

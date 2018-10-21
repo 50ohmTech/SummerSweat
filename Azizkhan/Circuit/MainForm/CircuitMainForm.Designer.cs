@@ -109,7 +109,7 @@
             this.treeView.Name = "treeView";
             this.treeView.Size = new System.Drawing.Size(170, 111);
             this.treeView.TabIndex = 6;
-            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
+            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
             // 
             // NodeComboBox
             // 

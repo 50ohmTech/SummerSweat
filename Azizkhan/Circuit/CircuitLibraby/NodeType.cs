@@ -1,16 +1,33 @@
-﻿using System.ComponentModel;
-
-namespace CircuitLibrary
+﻿namespace CircuitLibrary
 {
     /// <summary>
     ///     Enum для типов элементов цепи и соединений
     /// </summary>
     public enum NodeType
     {
-        [Description("Параллельное")] Parallel,
-        [Description("Последовательное")] Serial,
-        [Description("Резистор")] Resistor,
-        [Description("Катушка")] Inductor,
-        [Description("Конденсатор")] Capacitor
+        /// <summary>
+        ///     Parallel - параллельное соединение
+        /// </summary>
+        Parallel,
+
+        /// <summary>
+        ///     Serial - последовательное соединение
+        /// </summary>
+        Serial,
+
+        /// <summary>
+        ///     Resistor - резистор
+        /// </summary>
+        Resistor,
+
+        /// <summary>
+        ///     Inductor - катушка индуктивности
+        /// </summary>
+        Inductor,
+
+        /// <summary>
+        ///     Capacitor - конденсатор
+        /// </summary>
+        Capacitor
     }
 }
