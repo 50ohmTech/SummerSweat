@@ -36,7 +36,8 @@ namespace CircuitView
             if (!string.IsNullOrWhiteSpace(textBox.Text))
             {
                 e.Cancel = !CheckStringForDouble(textBox.Text);
-                e.Cancel = (Convert.ToDouble(textBox.Text) <= 0.1 || Convert.ToDouble(textBox.Text) >= 1e12);
+                e.Cancel = Convert.ToDouble(textBox.Text) <= 0.1 ||
+                           Convert.ToDouble(textBox.Text) >= 1e12;
 
 
                 textBox.ForeColor = e.Cancel ? Color.Red : Color.Black;

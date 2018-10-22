@@ -33,9 +33,10 @@
             this.StepLabel = new System.Windows.Forms.Label();
             this.StartTextBox = new System.Windows.Forms.TextBox();
             this.FinishTextBox = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.StepTextBox = new System.Windows.Forms.TextBox();
+            this.impedancesGridView = new System.Windows.Forms.DataGridView();
+            this.calculateButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.impedancesGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // StartLabel
@@ -79,39 +80,50 @@
             this.FinishTextBox.Size = new System.Drawing.Size(100, 20);
             this.FinishTextBox.TabIndex = 4;
             // 
-            // textBox3
+            // StepTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(89, 58);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.StepTextBox.Location = new System.Drawing.Point(89, 58);
+            this.StepTextBox.Name = "StepTextBox";
+            this.StepTextBox.Size = new System.Drawing.Size(100, 20);
+            this.StepTextBox.TabIndex = 5;
             // 
-            // dataGridView
+            // impedancesGridView
             // 
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.impedancesGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(15, 84);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(174, 116);
-            this.dataGridView.TabIndex = 6;
+            this.impedancesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.impedancesGridView.Location = new System.Drawing.Point(15, 117);
+            this.impedancesGridView.Name = "impedancesGridView";
+            this.impedancesGridView.Size = new System.Drawing.Size(174, 258);
+            this.impedancesGridView.TabIndex = 6;
+            // 
+            // calculateButton
+            // 
+            this.calculateButton.Location = new System.Drawing.Point(63, 88);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(75, 23);
+            this.calculateButton.TabIndex = 7;
+            this.calculateButton.Text = "Рассчитать";
+            this.calculateButton.UseVisualStyleBackColor = true;
             // 
             // ImpedanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 212);
-            this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.textBox3);
+            this.ClientSize = new System.Drawing.Size(205, 387);
+            this.Controls.Add(this.calculateButton);
+            this.Controls.Add(this.impedancesGridView);
+            this.Controls.Add(this.StepTextBox);
             this.Controls.Add(this.FinishTextBox);
             this.Controls.Add(this.StartTextBox);
             this.Controls.Add(this.StepLabel);
             this.Controls.Add(this.EndLabel);
             this.Controls.Add(this.StartLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimumSize = new System.Drawing.Size(220, 251);
             this.Name = "ImpedanceForm";
             this.Text = "ImpedanceForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.impedancesGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,7 +136,8 @@
         private System.Windows.Forms.Label StepLabel;
         private System.Windows.Forms.TextBox StartTextBox;
         private System.Windows.Forms.TextBox FinishTextBox;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.TextBox StepTextBox;
+        private System.Windows.Forms.DataGridView impedancesGridView;
+        private System.Windows.Forms.Button calculateButton;
     }
 }

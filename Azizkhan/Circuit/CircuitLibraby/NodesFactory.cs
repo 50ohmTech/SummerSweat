@@ -4,14 +4,28 @@ using CircuitLibrary.Subcircuits;
 
 namespace CircuitLibrary
 {
+    /// <summary>
+    ///     Фабрика узлов цепи
+    /// </summary>
     public class NodesFactory
     {
         #region Fields
 
         #region Static fields
 
+        /// <summary>
+        ///     Итератор для C
+        /// </summary>
         public static uint _capacitorIterator;
+
+        /// <summary>
+        ///     Итератор для I
+        /// </summary>
         public static uint _inductorIterator;
+
+        /// <summary>
+        ///     Итератор для R
+        /// </summary>
         public static uint _resistorIterator;
 
         #endregion
@@ -58,12 +72,20 @@ namespace CircuitLibrary
             return newNode;
         }
 
+        /// <summary>
+        ///     Обнулить все итераторы
+        /// </summary>
         public static void IteratorsToZero()
         {
             SubcircuitBase._id =
                 _inductorIterator = _capacitorIterator = _resistorIterator = 0;
         }
 
+        /// <summary>
+        ///     Получить статически заданную цепь
+        /// </summary>
+        /// <param name="index">Индекс цепи</param>
+        /// <returns>Цепь</returns>
         public static Circuit GetCircuit(int index)
         {
             SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();

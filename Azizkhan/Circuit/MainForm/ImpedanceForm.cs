@@ -19,7 +19,7 @@ namespace MainForm
         public ImpedanceForm()
         {
             InitializeComponent();
-            dataGridView.RowHeadersVisible = false;
+            impedancesGridView.RowHeadersVisible = false;
         }
 
         #endregion

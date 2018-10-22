@@ -10,7 +10,7 @@ using MainForm;
 namespace CircuitView
 {
     /// <summary>
-    /// Главная форма
+    ///     Главная форма
     /// </summary>
     public partial class MainForm : Form
     {
@@ -221,8 +221,6 @@ namespace CircuitView
             impedanceForm.ShowDialog();
         }
 
-        #endregion
-
         private void TreeView_DoubleClick(object sender, EventArgs e)
         {
             if (_currentNode != null)
@@ -245,5 +243,7 @@ namespace CircuitView
                 MessageBox.Show("Выберите элемент, который хотите изменить.");
             }
         }
+
+        #endregion
     }
 }
