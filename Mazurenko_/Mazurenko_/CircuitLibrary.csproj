@@ -48,8 +48,10 @@
     <Compile Include="ElementsCircuit\Resistor.cs" />
     <Compile Include="Event\ValueChangedEventHandler.cs" />
     <Compile Include="INode.cs" />
-    <Compile Include="NodeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subcircuit\ParallelSubcircuit.cs" />
+    <Compile Include="Subcircuit\SeriesSubcircuit.cs" />
+    <Compile Include="Subcircuit\SubcircuitBase.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

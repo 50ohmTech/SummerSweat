@@ -27,7 +27,7 @@ namespace CircuitLibrary
         ///     Calculation of impedance
         /// </summary>
         /// <param name="frequency"></param>
-        /// <returns></returns>
+        /// <returns>The complex impedance value</returns>
         public override Complex CalculateZ(double frequency)
         {
             return new Complex(0, 2 * Math.PI * frequency * Value);

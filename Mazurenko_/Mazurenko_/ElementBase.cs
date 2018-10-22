@@ -10,7 +10,7 @@ namespace CircuitLibrary
     ///     Abstract class containing general data of all
     ///     elements of the electrical circuit
     /// </summary>
-    public abstract class ElementBase
+    public abstract class ElementBase : INode
     {
         #region Private fields
 
@@ -162,7 +162,7 @@ namespace CircuitLibrary
         ///     Calculation of impedance
         /// </summary>
         /// <param name="f"></param>
-        /// <returns></returns>
+        /// <returns>The complex impedance value</returns>
         public abstract Complex CalculateZ(double f);
 
         #endregion

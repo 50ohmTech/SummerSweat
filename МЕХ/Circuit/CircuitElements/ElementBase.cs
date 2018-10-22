@@ -41,7 +41,8 @@ namespace CircuitElements
 
 				if (value.Contains(' '))
 				{
-					throw new ArgumentException(nameof(Name) + " не должно содержать пробелы.");
+					throw new ArgumentException(
+						nameof(Name) + " не должно содержать пробелы.");
 				}
 
 				_name = value;
@@ -67,7 +68,8 @@ namespace CircuitElements
 				if (value <= 0)
 				{
 					throw new ArgumentException(
-						"Значение " + nameof(Value) + " не может быть меньше или равно 0.");
+						"Значение " + nameof(Value) +
+						" не может быть меньше или равно 0.");
 				}
 
 				_value = value;
@@ -98,13 +100,15 @@ namespace CircuitElements
 			if (string.IsNullOrWhiteSpace(name))
 			{
 				throw new ArgumentNullException(
-					"An attempt to commit a null or empty name to the element\'s constructor");
+					"An attempt to commit a null or empty name to the " +
+					nameof(ElementBase) + "\'s constructor");
 			}
 
 			if (value < 0.000000001)
 			{
 				throw new ArgumentOutOfRangeException(
-					"An attempt to commit an invalid value to the element\'s constructor. Value must be bigger than 0");
+					"An attempt to commit an invalid value to the " +
+					nameof(ElementBase) + "\'s constructor. Value must be bigger than 0");
 			}
 
 			Name = name;
@@ -118,9 +122,9 @@ namespace CircuitElements
 		/// <summary>
 		///     Расчитать импаденс по входной частоте
 		/// </summary>
-		/// <param name="frequence"> Частота сигнала </param>
+		/// <param name="frequency"> Частота сигнала </param>
 		/// <returns>Импеданс элемента в комплексной форме</returns>
-		public abstract Complex CalculateZ(double frequence);
+		public abstract Complex CalculateZ(double frequency);
 
 		#endregion
 	}
