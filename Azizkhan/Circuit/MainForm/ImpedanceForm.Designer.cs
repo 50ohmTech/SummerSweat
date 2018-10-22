@@ -35,9 +35,9 @@
             this.FinishTextBox = new System.Windows.Forms.TextBox();
             this.StepTextBox = new System.Windows.Forms.TextBox();
             this.impedancesGridView = new System.Windows.Forms.DataGridView();
-            this.calculateButton = new System.Windows.Forms.Button();
             this.frequencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.impendances = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.calculateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.impedancesGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,7 +74,7 @@
             this.StartTextBox.Name = "StartTextBox";
             this.StartTextBox.Size = new System.Drawing.Size(100, 20);
             this.StartTextBox.TabIndex = 3;
-            this.StartTextBox.TextChanged += new System.EventHandler(this.StartTextBox_TextChanged);
+            this.StartTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
             // 
             // FinishTextBox
             // 
@@ -82,7 +82,7 @@
             this.FinishTextBox.Name = "FinishTextBox";
             this.FinishTextBox.Size = new System.Drawing.Size(100, 20);
             this.FinishTextBox.TabIndex = 4;
-            this.FinishTextBox.TextChanged += new System.EventHandler(this.FinishTextBox_TextChanged);
+            this.FinishTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
             // 
             // StepTextBox
             // 
@@ -90,7 +90,7 @@
             this.StepTextBox.Name = "StepTextBox";
             this.StepTextBox.Size = new System.Drawing.Size(100, 20);
             this.StepTextBox.TabIndex = 5;
-            this.StepTextBox.TextChanged += new System.EventHandler(this.StepTextBox_TextChanged);
+            this.StepTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
             // 
             // impedancesGridView
             // 
@@ -105,16 +105,6 @@
             this.impedancesGridView.Size = new System.Drawing.Size(174, 258);
             this.impedancesGridView.TabIndex = 6;
             // 
-            // calculateButton
-            // 
-            this.calculateButton.Location = new System.Drawing.Point(63, 88);
-            this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(75, 23);
-            this.calculateButton.TabIndex = 7;
-            this.calculateButton.Text = "Рассчитать";
-            this.calculateButton.UseVisualStyleBackColor = true;
-            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
-            // 
             // frequencies
             // 
             this.frequencies.HeaderText = "Частота";
@@ -124,6 +114,16 @@
             // 
             this.impendances.HeaderText = "Импедансы";
             this.impendances.Name = "impendances";
+            // 
+            // calculateButton
+            // 
+            this.calculateButton.Location = new System.Drawing.Point(63, 88);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(75, 23);
+            this.calculateButton.TabIndex = 7;
+            this.calculateButton.Text = "Рассчитать";
+            this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
             // ImpedanceForm
             // 

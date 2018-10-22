@@ -78,7 +78,7 @@ namespace CircuitLibrary
         public static void IteratorsToZero()
         {
             SubcircuitBase._id =
-                _inductorIterator = _capacitorIterator = _resistorIterator = 0;
+                _inductorIterator = _capacitorIterator = _resistorIterator = 1;
         }
 
         /// <summary>

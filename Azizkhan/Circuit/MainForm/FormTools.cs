@@ -46,8 +46,7 @@ namespace CircuitView
                 textBox.ForeColor = e.Cancel ? Color.Red : Color.Black;
                 if (e.Cancel)
                 {
-                    MessageBox.Show(
-                        "Введённое значение не соответствует правильному формату!");
+                    ShowError(textBox);
                 }
             }
         }
@@ -115,42 +114,6 @@ namespace CircuitView
                     stepTextBox.Text = null;
                 }
             }
-        }
-
-        /// <summary>
-        ///     Проверка на корректность введенных данных
-        /// </summary>
-        /// <param name="cellText">строка в ячейке</param>
-        /// <returns>True, если верно заполнена. False, если некорректно</returns>
-        public static bool IsCellCorrect(string cellText)
-        {
-            var formatingString = cellText.Replace('.', ',');
-
-            //Если число входит в рамки входных данных
-            if (double.TryParse(formatingString, out var newValue)
-                && !(newValue < 0.1) && newValue <= 1e12)
-            {
-                //Если число начинаеться с нуля и после нуля нету запятой
-                if (formatingString.Length > 1 && formatingString[0] == '0' &&
-                    formatingString[1] != ',')
-                {
-                    return false;
-                }
-
-                if (formatingString[0] == ',' || formatingString[0] == '.')
-                {
-                    return false;
-                }
-
-                if (cellText.Contains(" "))
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-            return false;
         }
 
         #endregion

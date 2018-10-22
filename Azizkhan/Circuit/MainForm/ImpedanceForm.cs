@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using CircuitLibrary;
 using CircuitView;
@@ -39,7 +40,7 @@ namespace MainForm
         {
             InitializeComponent();
             impedancesGridView.RowHeadersVisible = false;
-            calculateButton.Enabled = false;
+            calculateButton.Enabled = true;
         }
 
         #endregion
@@ -48,43 +49,61 @@ namespace MainForm
 
         private void CalculateImpedance()
         {
-            _circuit = Circuit;
-            var start = double.Parse(StartTextBox.Text.Replace('.', ','));
-            var finish = double.Parse(FinishTextBox.Text.Replace('.', ','));
-            var step = double.Parse(StepTextBox.Text.Replace('.', ','));
-
-            var frequency = new double[1];
-
-            var j = 0;
-            for (var i = start; i <= finish; i += step)
+            try
             {
-                frequency[j] = i;
-                j++;
-                if (!(finish - i == 0))
+                if (StartTextBox.Text == "" || FinishTextBox.Text == "" ||
+                    StepTextBox.Text == "")
                 {
-                    Array.Resize(ref frequency, frequency.Length + 1);
+                    MessageBox.Show(
+                        "Вы заполнили не все значения! Заполните всё и попробуйте ещё раз!");
+
+                    return;
+                }
+
+                _circuit = Circuit;
+                FormTools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
+                FormTools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
+                var start = Convert.ToDouble(StartTextBox.Text);
+                var finish = Convert.ToDouble(FinishTextBox.Text);
+                var step = Convert.ToDouble(StepTextBox.Text);
+
+                var frequency = new double[1];
+
+                var j = 0;
+                for (var i = start; i <= finish; i += step)
+                {
+                    frequency[j] = i;
+                    j++;
+                    if (!(finish - i == 0))
+                    {
+                        Array.Resize(ref frequency, frequency.Length + 1);
+                    }
+                }
+
+                if (frequency[frequency.Length - 1] == 0)
+                {
+                    Array.Resize(ref frequency, frequency.Length - 1);
+                }
+
+                var impedances = _circuit.CalculateZ(frequency);
+                var correctListOfImpedances = new List<string>();
+
+                for (var i = 0; i < impedances.Count; i++)
+                {
+                    correctListOfImpedances.Add(
+                        $"R:{Math.Round(impedances[i].Real, 3)} " +
+                        $"I:{Math.Round(impedances[i].Imaginary, 3)}");
+                }
+
+                for (var i = 0; i < impedances.Count; i++)
+                {
+                    impedancesGridView.Rows.Add(Math.Round(frequency[i], 3),
+                        correctListOfImpedances[i]);
                 }
             }
-
-            if (frequency[frequency.Length - 1] == 0)
+            catch (Exception exception)
             {
-                Array.Resize(ref frequency, frequency.Length - 1);
-            }
-
-            var impedances = _circuit.CalculateZ(frequency);
-            var correctListOfImpedances = new List<string>();
-
-            for (var i = 0; i < impedances.Count; i++)
-            {
-                correctListOfImpedances.Add(
-                    $"R:{Math.Round(impedances[i].Real, 3)} " +
-                    $"I:{Math.Round(impedances[i].Imaginary, 3)}");
-            }
-
-            for (var i = 0; i < impedances.Count; i++)
-            {
-                impedancesGridView.Rows.Add(Math.Round(frequency[i], 3),
-                    correctListOfImpedances[i]);
+                MessageBox.Show(exception.Message);
             }
         }
 
@@ -93,56 +112,12 @@ namespace MainForm
             CalculateImpedance();
         }
 
-        private void ValidatigTextBox(TextBox textBox)
+        private void TextBox_Validating(object sender, CancelEventArgs e)
         {
-            if (FormTools.IsCellCorrect(textBox.Text) != true)
+            if (sender is TextBox textBox)
             {
-                FormTools.ShowError(textBox);
-                textBox.Text = null;
-                textBox.Clear();
+                FormTools.TextBoxCheck(textBox, e);
             }
-
-            if (FormTools.IsCellCorrect(StartTextBox.Text) != true ||
-                FormTools.IsCellCorrect(FinishTextBox.Text) != true ||
-                FormTools.IsCellCorrect(StepTextBox.Text) != true)
-            {
-                calculateButton.Enabled = false;
-                return;
-            }
-
-            calculateButton.Enabled = true;
-        }
-
-        private void StartTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (StartTextBox.Text.Length > 0)
-            {
-                ValidatigTextBox(StartTextBox);
-            }
-
-            FormTools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
-            FormTools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
-        }
-
-        private void FinishTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (FinishTextBox.Text.Length > 0)
-            {
-                ValidatigTextBox(FinishTextBox);
-            }
-
-            FormTools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
-            FormTools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
-        }
-
-        private void StepTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (StartTextBox.Text.Length > 0)
-            {
-                ValidatigTextBox(StepTextBox);
-            }
-
-            FormTools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
         }
 
         #endregion

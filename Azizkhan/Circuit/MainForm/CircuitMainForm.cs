@@ -28,11 +28,6 @@ namespace CircuitView
         /// </summary>
         private INode _currentNode;
 
-        /// <summary>
-        ///     true = элемент, false = не элемент
-        /// </summary>
-        private bool _isElement;
-
         #endregion
 
         #endregion
@@ -43,7 +38,6 @@ namespace CircuitView
         {
             InitializeComponent();
             _circuit = new Circuit();
-            _isElement = true;
             SelectingCircuitComboBox.Items.Add("Цепь №1");
             SelectingCircuitComboBox.Items.Add("Цепь №2");
             SelectingCircuitComboBox.Items.Add("Цепь №3");
@@ -61,7 +55,7 @@ namespace CircuitView
         /// <summary>
         ///     Обновить дерево
         /// </summary>
-        private void UpdateTreeView(bool isElement)
+        private void UpdateTreeView()
         {
             TreeView.Nodes.Clear();
             _currentNode = null;
@@ -89,7 +83,7 @@ namespace CircuitView
 
             if (_circuit == null)
             {
-                throw new InvalidOperationException("Цепь была null");
+                throw new InvalidOperationException("Цепь была пуста");
             }
 
             TreeView.Nodes.Clear();
@@ -100,11 +94,9 @@ namespace CircuitView
 
             TreeView.EndUpdate();
             TreeView.ExpandAll();
-            if (isElement)
-            {
-                circuitPictureBox.Image = null;
-                circuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
-            }
+
+            circuitPictureBox.Image = null;
+            circuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
         }
 
 
@@ -115,10 +107,10 @@ namespace CircuitView
             SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();
             SubcircuitBase seriesSubcircuit = new SerialSubcircuit();
             _circuit.Clear();
-            UpdateTreeView(_isElement);
+            UpdateTreeView();
             _circuit = NodesFactory.GetCircuit(SelectingCircuitComboBox.SelectedIndex);
 
-            UpdateTreeView(_isElement);
+            UpdateTreeView();
         }
 
         private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -135,7 +127,9 @@ namespace CircuitView
             Enum.TryParse(NodeComboBox.SelectedValue.ToString(), out nodeType);
             if (_currentNode == null && _circuit.Root != null)
             {
-                MessageBox.Show("Выберите узел, к которому хотите добавить!");
+                MessageBox.Show(
+                    "Выберите узел, к которому хотите добавить элемент/соединение!");
+
                 return;
             }
 
@@ -145,18 +139,23 @@ namespace CircuitView
                 {
                     _circuit.AddAfter(_currentNode,
                         NodesFactory.GetNode(nodeType, 0));
-
-                    _isElement = false;
                 }
                 else
                 {
-                    _circuit.AddAfter(_currentNode,
-                        NodesFactory.GetNode(nodeType,
-                            Convert.ToDouble(ValueTextBox.Text)));
+                    if (_circuit.Root != null)
+                    {
+                        _circuit.AddAfter(_currentNode,
+                            NodesFactory.GetNode(nodeType,
+                                Convert.ToDouble(ValueTextBox.Text)));
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Сначала добавьте узел Serial или Parallel, только после этого можно будет добавлять элементы. R,I,C не могут быть корнем цепи!");
+                    }
                 }
 
-                UpdateTreeView(_isElement);
-                _isElement = true;
+                UpdateTreeView();
             }
             catch (Exception exception)
             {
@@ -196,7 +195,7 @@ namespace CircuitView
                     }
 
                     _circuit.Remove(_currentNode);
-                    UpdateTreeView(_isElement);
+                    UpdateTreeView();
                 }
                 catch (Exception exception)
                 {
@@ -242,7 +241,7 @@ namespace CircuitView
                     var result = new EditForm(element).ShowDialog();
                     if (result == DialogResult.Cancel)
                     {
-                        UpdateTreeView(_isElement);
+                        UpdateTreeView();
                     }
                 }
                 else
