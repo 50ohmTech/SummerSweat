@@ -267,10 +267,7 @@ namespace CircuitView
 
             var maxCount = 0;
             var steps = new List<int>();
-            if (root.Nodes.Count < 2)
-            {
-                return new Point(maxCount + 1, steps.Sum());
-            }
+
 
             Graphics.DrawLine(Pen,
                 new Point(displacement.X,
@@ -328,6 +325,11 @@ namespace CircuitView
                             _lineDisplasemantY + step * _lineLengthY +
                             displacement.Y));
                 }
+            }
+
+            if (root.Nodes.Count < 2)
+            {
+                return new Point(maxCount + 1, steps.Sum());
             }
 
             Graphics.DrawLine(Pen,
