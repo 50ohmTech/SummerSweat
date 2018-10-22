@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,12 @@
     <Compile Include="CircuitForm.Designer.cs">
       <DependentUpon>CircuitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditValuesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditValuesForm.Designer.cs">
+      <DependentUpon>EditValuesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImpedanceCalculator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,8 +66,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueValidators.cs" />
     <EmbeddedResource Include="CircuitForm.resx">
       <DependentUpon>CircuitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditValuesForm.resx">
+      <DependentUpon>EditValuesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImpedanceCalculator.resx">
       <DependentUpon>ImpedanceCalculator.cs</DependentUpon>
@@ -73,7 +84,18 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\ElementsLibrary.Capacitor.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.Circuit.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.Circuits.ParallelSubcircuit.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.Circuits.SerialSubcircuit.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.Circuits.SubcircuitBase.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.ElementBase.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.Inductor.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.INode.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.Resistor.datasource" />
+    <None Include="Properties\DataSources\ElementsLibrary.TreeViewNode.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +114,21 @@
       <Project>{dab5faf4-d55e-460f-89ad-77d7ad018d40}</Project>
       <Name>ElementsLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Цепь 1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Цепь 2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Цепь 3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Цепь 4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Цепь 5.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

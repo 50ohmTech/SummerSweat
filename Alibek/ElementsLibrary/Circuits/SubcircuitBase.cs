@@ -23,7 +23,7 @@ namespace ElementsLibrary.Circuits
         /// <summary>
         ///     Идентификатор
         /// </summary>
-        public uint UniqueID { get; }
+        public uint uniqueID { get; }
 
         /// <summary>
         ///     Главный узел
@@ -49,7 +49,7 @@ namespace ElementsLibrary.Circuits
         /// </summary>
         public SubcircuitBase()
         {
-            UniqueID = _globalID;
+            uniqueID = _globalID;
             _globalID++;
         }
 

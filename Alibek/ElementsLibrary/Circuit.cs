@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-
+using ElementsLibrary.Circuits;
 
 namespace ElementsLibrary
 {
@@ -22,71 +22,80 @@ namespace ElementsLibrary
         #region Properties
 
         /// <summary>
-        /// Корень дерева
+        ///     Корень дерева
         /// </summary>
         public INode Root { get; private set; }
-
-        /// <summary>
-        ///     Свойство для возвращения и задачи элементов в цепи
-        /// </summary>
-        public List<ElementBase> Elements
-        {
-            get => _elements;
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-            }
-        }
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        ///     Конструктор класса <see cref="Circuit" />
-        /// </summary>
-        /// <param name="elements">Элементы</param>
-        public Circuit(List<ElementBase> elements)
-        {
-            Elements = elements;
-        }
 
         #endregion
 
         #region Public methods
 
         /// <summary>
+        ///     Метод очистки
+        /// </summary>
+        public void Clean()
+        {
+            Root = null;
+        }
+
+        /// <summary>
         ///     Метод расчета полного импеданса цепи
         /// </summary>
         /// <param name="frequencies">Частота</param>
         /// <returns>Импеданс всей цепи</returns>
-        public List<Complex> CalculateZ(List<double> frequencies)
+        public List<Complex> CalculateZ(double[] frequencies)
         {
-            if (_elements == null)
-            {
-                throw new ArgumentNullException(nameof(frequencies));
-            }
-
             if (frequencies == null)
             {
                 throw new ArgumentNullException(nameof(frequencies));
             }
 
-            var counter = 0;
             var impedance = new List<Complex>();
-            foreach (var element in Elements)
+
+            foreach (var frequency in frequencies)
             {
-                foreach (var frequency in frequencies)
-                {
-                    impedance[counter] = element.CalculateZ(frequency);
-                    counter++;
-                }
+                impedance.Add(Root.CalculateZ(frequency));
             }
 
             return impedance;
+        }
+
+        /// <summary>
+        /// Функция добавления
+        /// </summary>
+        /// <param name="currentNode"></param>
+        /// <param name="newNode"></param>
+        public void AddAfter(INode currentNode, INode newNode)
+        {
+            if (IsEmpty())
+            {
+                Root = newNode;
+                return;
+            }
+
+            if (currentNode is SubcircuitBase subcircuit)
+            {
+                subcircuit.Nodes.Add(newNode);
+
+                if (newNode is SubcircuitBase newSubcircuit)
+                {
+                    newSubcircuit.Parent = subcircuit;
+                }
+
+                if (newNode is ElementBase newElementBase)
+                {
+                    newElementBase.Parent = subcircuit;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Проверка на null
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmpty()
+        {
+            return Root == null;
         }
 
         #endregion

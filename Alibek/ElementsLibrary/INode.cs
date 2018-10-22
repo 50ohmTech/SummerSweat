@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-
 namespace ElementsLibrary
 {
     /// <summary>
     ///     Интерфейс узла дерева <see cref="INode" />
     /// </summary>
-    public interface INode 
+    public interface INode
     {
         #region Properties
 
@@ -20,11 +19,6 @@ namespace ElementsLibrary
         ///     Главный узел
         /// </summary>
         INode Parent { get; set; }
-
-        /// <summary>
-        ///     Тип подключения
-        /// </summary>
-       // NodeType NodeType { get; set; }
 
         #endregion
 
