@@ -9,22 +9,22 @@ using MainForm;
 
 namespace CircuitView
 {
+    /// <summary>
+    /// Главная форма
+    /// </summary>
     public partial class MainForm : Form
     {
         #region Fields
 
-        #region Readonly fields
+        #region Private fields
 
         /// <summary>
         ///     Цепь
         /// </summary>
         private Circuit _circuit;
 
-        #endregion
-
-        #region Private fields
         /// <summary>
-        /// Текущий узел
+        ///     Текущий узел
         /// </summary>
         private INode _currentNode;
 
@@ -182,6 +182,7 @@ namespace CircuitView
                     {
                         NodesFactory.IteratorsToZero();
                     }
+
                     _circuit.Remove(_currentNode);
                     UpdateTreeView();
                 }
@@ -221,5 +222,28 @@ namespace CircuitView
         }
 
         #endregion
+
+        private void TreeView_DoubleClick(object sender, EventArgs e)
+        {
+            if (_currentNode != null)
+            {
+                if (_currentNode is ElementBase element)
+                {
+                    var result = new EditForm(element).ShowDialog();
+                    if (result == DialogResult.Cancel)
+                    {
+                        UpdateTreeView();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выбранный вами узел не является элементом.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент, который хотите изменить.");
+            }
+        }
     }
 }

@@ -60,7 +60,8 @@ namespace CircuitLibrary
 
         public static void IteratorsToZero()
         {
-            SubcircuitBase._id =_inductorIterator = _capacitorIterator = _resistorIterator = 0;
+            SubcircuitBase._id =
+                _inductorIterator = _capacitorIterator = _resistorIterator = 0;
         }
 
         public static Circuit GetCircuit(int index)

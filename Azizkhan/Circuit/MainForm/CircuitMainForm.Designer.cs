@@ -70,7 +70,7 @@
             this.CalculateImpedanceButton.Name = "CalculateImpedanceButton";
             this.CalculateImpedanceButton.Size = new System.Drawing.Size(170, 23);
             this.CalculateImpedanceButton.TabIndex = 2;
-            this.CalculateImpedanceButton.Text = "Рассчитать импеданс";
+            this.CalculateImpedanceButton.Text = "Открыть калькулятор";
             this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
             this.CalculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
             // 
@@ -110,6 +110,7 @@
             this.treeView.Size = new System.Drawing.Size(170, 111);
             this.treeView.TabIndex = 6;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
+            this.treeView.DoubleClick += new System.EventHandler(this.TreeView_DoubleClick);
             // 
             // NodeComboBox
             // 

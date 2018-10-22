@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -35,8 +36,15 @@ namespace CircuitView
             if (!string.IsNullOrWhiteSpace(textBox.Text))
             {
                 e.Cancel = !CheckStringForDouble(textBox.Text);
+                e.Cancel = (Convert.ToDouble(textBox.Text) <= 0.1 || Convert.ToDouble(textBox.Text) >= 1e12);
+
 
                 textBox.ForeColor = e.Cancel ? Color.Red : Color.Black;
+                if (e.Cancel)
+                {
+                    MessageBox.Show(
+                        "Введённое значение не соответствует правильному формату или не находится в диапазоне допустимых значений!");
+                }
             }
         }
 

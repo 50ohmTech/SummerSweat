@@ -3,6 +3,9 @@ using CircuitLibrary;
 
 namespace MainForm
 {
+    /// <summary>
+    ///     Форма расчёта импедансов
+    /// </summary>
     public partial class ImpedanceForm : Form
     {
         #region Properties
