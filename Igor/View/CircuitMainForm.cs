@@ -69,10 +69,13 @@ namespace View
 
             _count = 0;
             List<string> elements = new List<string>();
-            for (NodeType i = NodeType.Parallel; i < (NodeType)5; i++)
+            Array arrayElements = Enum.GetValues(typeof(NodeType));
+
+            foreach (NodeType element in arrayElements)
             {
-                elements.Add(Tools.GetDescription(i));
+                elements.Add(Tools.GetDescription(element));
             }
+            
 
             NadeComboBox.DataSource = elements;
             NadeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
