@@ -165,6 +165,7 @@ namespace CircuitLibrary
                 default:
                     throw new ArgumentException("Некорректный номер цепи.");
             }
+
             return circuit;
         }
 

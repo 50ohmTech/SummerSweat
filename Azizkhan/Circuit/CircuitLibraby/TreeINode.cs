@@ -6,6 +6,9 @@ using CircuitLibrary.Subcircuits;
 
 namespace CircuitLibraby
 {
+    /// <summary>
+    ///     Модифицированный узел для TreeNode
+    /// </summary>
     public class TreeINode : TreeNode
     {
         #region Properties

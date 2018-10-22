@@ -28,6 +28,11 @@ namespace CircuitView
         /// </summary>
         private INode _currentNode;
 
+        /// <summary>
+        ///     true = элемент, false = не элемент
+        /// </summary>
+        private bool _isElement;
+
         #endregion
 
         #endregion
@@ -38,6 +43,7 @@ namespace CircuitView
         {
             InitializeComponent();
             _circuit = new Circuit();
+            _isElement = true;
             SelectingCircuitComboBox.Items.Add("Цепь №1");
             SelectingCircuitComboBox.Items.Add("Цепь №2");
             SelectingCircuitComboBox.Items.Add("Цепь №3");
@@ -55,7 +61,7 @@ namespace CircuitView
         /// <summary>
         ///     Обновить дерево
         /// </summary>
-        private void UpdateTreeView()
+        private void UpdateTreeView(bool isElement)
         {
             TreeView.Nodes.Clear();
             _currentNode = null;
@@ -94,9 +100,11 @@ namespace CircuitView
 
             TreeView.EndUpdate();
             TreeView.ExpandAll();
-
-            circuitPictureBox.Image = null;
-            circuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
+            if (isElement)
+            {
+                circuitPictureBox.Image = null;
+                circuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
+            }
         }
 
 
@@ -107,10 +115,10 @@ namespace CircuitView
             SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();
             SubcircuitBase seriesSubcircuit = new SerialSubcircuit();
             _circuit.Clear();
-            UpdateTreeView();
+            UpdateTreeView(_isElement);
             _circuit = NodesFactory.GetCircuit(SelectingCircuitComboBox.SelectedIndex);
 
-            UpdateTreeView();
+            UpdateTreeView(_isElement);
         }
 
         private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -137,6 +145,8 @@ namespace CircuitView
                 {
                     _circuit.AddAfter(_currentNode,
                         NodesFactory.GetNode(nodeType, 0));
+
+                    _isElement = false;
                 }
                 else
                 {
@@ -145,7 +155,8 @@ namespace CircuitView
                             Convert.ToDouble(ValueTextBox.Text)));
                 }
 
-                UpdateTreeView();
+                UpdateTreeView(_isElement);
+                _isElement = true;
             }
             catch (Exception exception)
             {
@@ -185,7 +196,7 @@ namespace CircuitView
                     }
 
                     _circuit.Remove(_currentNode);
-                    UpdateTreeView();
+                    UpdateTreeView(_isElement);
                 }
                 catch (Exception exception)
                 {
@@ -231,7 +242,7 @@ namespace CircuitView
                     var result = new EditForm(element).ShowDialog();
                     if (result == DialogResult.Cancel)
                     {
-                        UpdateTreeView();
+                        UpdateTreeView(_isElement);
                     }
                 }
                 else
