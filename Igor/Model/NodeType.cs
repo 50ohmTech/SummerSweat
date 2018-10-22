@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public enum NodeType : int
+    public enum NodeType
     {
         [Description("Параллельное")]
         Parallel,

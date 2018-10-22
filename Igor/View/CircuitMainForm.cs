@@ -42,6 +42,9 @@ namespace View
         /// </summary>
         private INode _currentNode;
 
+        /// <summary>
+        /// Форма для расчета импеданса.
+        /// </summary>
         private ImpedanceForm impedanceForm;
 
         #endregion
@@ -55,17 +58,23 @@ namespace View
             InitializeComponent();
 
             var circuits = new List<string>();
+            circuits.Add("Своя цепь");
             for (var i = 1; i < 6; i++)
             {
                 circuits.Add("Цепь №" + i);
             }
 
             CircuitsComboBox.DataSource = circuits;
-            CircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            CircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;    
 
             _count = 0;
-            NadeComboBox.DataSource = Enum.GetValues(typeof(NodeType));
+            List<string> elements = new List<string>();
+            for (NodeType i = NodeType.Parallel; i < (NodeType)5; i++)
+            {
+                elements.Add(Tools.GetDescription(i));
+            }
 
+            NadeComboBox.DataSource = elements;
             NadeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _circuit = new Circuit();
 
@@ -113,9 +122,19 @@ namespace View
         private void SelectingCircuitsComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
         {
+
             if (_circuitsComboBox != null)
             {
                 var selectedState = CircuitsComboBox.SelectedItem.ToString();
+                if (selectedState == "Своя цепь")
+                {
+                    _count = 0;
+                    treeView.Nodes.Clear();
+                    _circuit.Clean();
+                    circuitPictureBox.Image = null;
+                    _vectorOfElements.Clear();
+                    return;
+                }
                 _circuitsComboBox.CreateCircuit(selectedState, _vectorOfElements,
                     _circuit);
 
