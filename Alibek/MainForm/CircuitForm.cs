@@ -47,11 +47,7 @@ namespace MainForm
             TestCircuitsComboBox.Items.Add("Цепь №5");
             TestCircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            var elements = new List<string>();
-            for (NodeType i = 0; i < (NodeType) 5; i++)
-            {
-                elements.Add(GetDescription(i));
-            }
+           
 
             _circuit = new Circuit();
         }
@@ -329,31 +325,6 @@ namespace MainForm
             {
                 _currentNode = treeNode.Value;
             }
-        }
-
-        #endregion
-
-        #region Public methods
-
-        /// <summary>
-        /// Получает описание
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string GetDescription(NodeType value)
-        {
-            var fieldInfo = value.GetType().GetField(value.ToString());
-
-            var attributes =
-                (DescriptionAttribute[]) fieldInfo.GetCustomAttributes(
-                    typeof(DescriptionAttribute), false);
-
-            if (attributes != null && attributes.Length > 0)
-            {
-                return attributes[0].Description;
-            }
-
-            return value.ToString();
         }
 
         #endregion
