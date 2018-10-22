@@ -16,6 +16,26 @@ namespace CircuitView
         #region - - Поля - -
 
         /// <summary>
+        ///     Размер bitmap по X.
+        /// </summary>
+        private static readonly int _sizeX = 1000;
+
+        /// <summary>
+        ///     Размер bitmap по Y.
+        /// </summary>
+        private static readonly int _sizeY = 1000;
+
+        /// <summary>
+        ///     Начальная координата Х.
+        /// </summary>
+        private static readonly int _startX = 1;
+
+        /// <summary>
+        ///     Начальная координата Y.
+        /// </summary>
+        private static readonly int _startY = 1;
+
+        /// <summary>
         ///     Сдвиг по X для отрисовки имени.
         /// </summary>
         private static readonly int _nameDisplasemantX = 15;
@@ -86,17 +106,17 @@ namespace CircuitView
         private static readonly int _lineDisplasemantY = 25;
 
         /// <summary>
-        ///     Длинна добавочной линии по X.
+        ///     Длина добавочной линии по X.
         /// </summary>
         private static readonly int _lineLengthX = 25;
 
         /// <summary>
-        ///     Длинна добавочной линии по Y.
+        ///     Длина добавочной линии по Y.
         /// </summary>
         private static readonly int _lineLengthY = 40;
 
         /// <summary>
-        ///     Длинна элемента цепи по X.
+        ///     Длина элемента цепи по X.
         /// </summary>
         private static readonly int _elementLengthX = 50;
 
@@ -158,7 +178,7 @@ namespace CircuitView
         /// <returns>Изображение электрической цепи</returns>
         public static Bitmap DrawCircuit(Circuit circuit)
         {
-            var bitmapBackground = new Bitmap(1000, 1000);
+            var bitmapBackground = new Bitmap(_sizeX, _sizeY);
             Graphics = Graphics.FromImage(bitmapBackground);
             Pen = new Pen(Color.Black, 1);
             Font = new Font("Arial", 8);
@@ -185,7 +205,7 @@ namespace CircuitView
             if (root is ElementBase elementBase)
             {
                 DrawElement(elementBase, displacement);
-                return new Point(1, 1);
+                return new Point(_startX, _startY);
             }
 
             return root is SerialSubcircuit

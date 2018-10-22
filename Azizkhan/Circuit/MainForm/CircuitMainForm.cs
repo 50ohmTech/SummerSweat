@@ -57,14 +57,14 @@ namespace CircuitView
         /// </summary>
         private void UpdateTreeView()
         {
-            treeView.Nodes.Clear();
+            TreeView.Nodes.Clear();
             _currentNode = null;
             if (_circuit == null || _circuit.IsEmpty())
             {
                 return;
             }
 
-            treeView.BeginUpdate();
+            TreeView.BeginUpdate();
 
             void AddNodeTreeNodes(INode node, TreeNode treeNode)
             {
@@ -86,14 +86,14 @@ namespace CircuitView
                 throw new InvalidOperationException("Цепь была null");
             }
 
-            treeView.Nodes.Clear();
+            TreeView.Nodes.Clear();
 
             var root = new TreeINode(_circuit.Root);
-            treeView.Nodes.Add(root);
+            TreeView.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
 
-            treeView.EndUpdate();
-            treeView.ExpandAll();
+            TreeView.EndUpdate();
+            TreeView.ExpandAll();
 
             circuitPictureBox.Image = null;
             circuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
@@ -103,6 +103,7 @@ namespace CircuitView
         private void SelectingCircuitComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
         {
+            NodesFactory.IteratorsToZero();
             SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();
             SubcircuitBase seriesSubcircuit = new SerialSubcircuit();
             _circuit.Clear();

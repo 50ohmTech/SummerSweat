@@ -3,7 +3,7 @@
 namespace CircuitLibrary.Events
 {
     /// <summary>
-    ///     Класс для обработчика события ValueChanged.
+    ///     Класс для обработчика события ValueChanged
     /// </summary>
     public class ValueChangedEventArgs : EventArgs
     {

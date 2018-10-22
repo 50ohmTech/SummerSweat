@@ -15,12 +15,12 @@ namespace CircuitLibrary.Elements
         /// <summary>
         ///     Минимальное значение номинала элемента
         /// </summary>
-        public const double _MINVALUE = 0.000001;
+        public const double MINVALUE = 0.000001;
 
         /// <summary>
         ///     Максимальное значение номинала элемента
         /// </summary>
-        public const double _MAXVALUE = 1000000000000;
+        public const double MAXVALUE = 1000000000000;
 
         #endregion
 
@@ -74,12 +74,12 @@ namespace CircuitLibrary.Elements
                     throw new ArgumentException(nameof(value));
                 }
 
-                if (value < _MINVALUE)
+                if (value < MINVALUE)
                 {
                     throw new ArgumentException(nameof(value));
                 }
 
-                if (value > _MAXVALUE)
+                if (value > MAXVALUE)
                 {
                     throw new ArgumentException(
                         nameof(value));

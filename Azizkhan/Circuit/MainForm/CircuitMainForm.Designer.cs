@@ -28,19 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
             this.ValueTextBox = new System.Windows.Forms.TextBox();
             this.SelectingCircuitComboBox = new System.Windows.Forms.ComboBox();
             this.SelectingCircuitLabel = new System.Windows.Forms.Label();
-            this.treeView = new System.Windows.Forms.TreeView();
+            this.TreeView = new System.Windows.Forms.TreeView();
             this.NodeComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.circuitPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,15 +99,15 @@
             this.SelectingCircuitLabel.TabIndex = 5;
             this.SelectingCircuitLabel.Text = "Выбор цепи";
             // 
-            // treeView
+            // TreeView
             // 
-            this.treeView.Location = new System.Drawing.Point(15, 36);
-            this.treeView.MinimumSize = new System.Drawing.Size(170, 111);
-            this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(170, 111);
-            this.treeView.TabIndex = 6;
-            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
-            this.treeView.DoubleClick += new System.EventHandler(this.TreeView_DoubleClick);
+            this.TreeView.Location = new System.Drawing.Point(15, 36);
+            this.TreeView.MinimumSize = new System.Drawing.Size(170, 111);
+            this.TreeView.Name = "TreeView";
+            this.TreeView.Size = new System.Drawing.Size(170, 111);
+            this.TreeView.TabIndex = 6;
+            this.TreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
+            this.TreeView.DoubleClick += new System.EventHandler(this.TreeView_DoubleClick);
             // 
             // NodeComboBox
             // 
@@ -147,7 +144,7 @@
             this.Controls.Add(this.circuitPictureBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NodeComboBox);
-            this.Controls.Add(this.treeView);
+            this.Controls.Add(this.TreeView);
             this.Controls.Add(this.SelectingCircuitLabel);
             this.Controls.Add(this.SelectingCircuitComboBox);
             this.Controls.Add(this.ValueTextBox);
@@ -160,7 +157,6 @@
             this.MinimumSize = new System.Drawing.Size(554, 341);
             this.Name = "MainForm";
             this.Text = "CircuitMainForm";
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -174,10 +170,9 @@
         private System.Windows.Forms.TextBox ValueTextBox;
         private System.Windows.Forms.ComboBox SelectingCircuitComboBox;
         private System.Windows.Forms.Label SelectingCircuitLabel;
-        private System.Windows.Forms.TreeView treeView;
+        private System.Windows.Forms.TreeView TreeView;
         private System.Windows.Forms.ComboBox NodeComboBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.PictureBox circuitPictureBox;
     }
 }

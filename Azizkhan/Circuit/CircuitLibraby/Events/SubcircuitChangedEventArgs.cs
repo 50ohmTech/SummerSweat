@@ -3,7 +3,7 @@
 namespace CircuitLibrary.Events
 {
     /// <summary>
-    ///     Класс для обработчика события SubcircuitChanged.
+    ///     Класс для обработчика события SubcircuitChanged
     /// </summary>
     public class SubcircuitChangedEventArgs : EventArgs
     {

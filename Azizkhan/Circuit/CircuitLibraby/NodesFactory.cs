@@ -84,14 +84,14 @@ namespace CircuitLibrary
         /// <summary>
         ///     Получить статически заданную цепь
         /// </summary>
-        /// <param name="index">Индекс цепи</param>
+        /// <param name="circuitIndex">Индекс цепи</param>
         /// <returns>Цепь</returns>
-        public static Circuit GetCircuit(int index)
+        public static Circuit GetCircuit(int circuitIndex)
         {
             SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();
             SubcircuitBase serialSubcircuit = new SerialSubcircuit();
             var circuit = new Circuit();
-            switch (index)
+            switch (circuitIndex)
             {
                 case 0:
                     circuit.AddAfter(null, serialSubcircuit);
@@ -165,9 +165,6 @@ namespace CircuitLibrary
                 default:
                     throw new ArgumentException("Некорректный номер цепи.");
             }
-
-            IteratorsToZero();
-
             return circuit;
         }
 

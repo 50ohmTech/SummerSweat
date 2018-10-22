@@ -36,6 +36,8 @@
             this.StepTextBox = new System.Windows.Forms.TextBox();
             this.impedancesGridView = new System.Windows.Forms.DataGridView();
             this.calculateButton = new System.Windows.Forms.Button();
+            this.frequencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.impendances = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.impedancesGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +74,7 @@
             this.StartTextBox.Name = "StartTextBox";
             this.StartTextBox.Size = new System.Drawing.Size(100, 20);
             this.StartTextBox.TabIndex = 3;
+            this.StartTextBox.TextChanged += new System.EventHandler(this.StartTextBox_TextChanged);
             // 
             // FinishTextBox
             // 
@@ -79,6 +82,7 @@
             this.FinishTextBox.Name = "FinishTextBox";
             this.FinishTextBox.Size = new System.Drawing.Size(100, 20);
             this.FinishTextBox.TabIndex = 4;
+            this.FinishTextBox.TextChanged += new System.EventHandler(this.FinishTextBox_TextChanged);
             // 
             // StepTextBox
             // 
@@ -86,12 +90,16 @@
             this.StepTextBox.Name = "StepTextBox";
             this.StepTextBox.Size = new System.Drawing.Size(100, 20);
             this.StepTextBox.TabIndex = 5;
+            this.StepTextBox.TextChanged += new System.EventHandler(this.StepTextBox_TextChanged);
             // 
             // impedancesGridView
             // 
             this.impedancesGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.impedancesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.impedancesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.frequencies,
+            this.impendances});
             this.impedancesGridView.Location = new System.Drawing.Point(15, 117);
             this.impedancesGridView.Name = "impedancesGridView";
             this.impedancesGridView.Size = new System.Drawing.Size(174, 258);
@@ -105,6 +113,17 @@
             this.calculateButton.TabIndex = 7;
             this.calculateButton.Text = "Рассчитать";
             this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
+            // 
+            // frequencies
+            // 
+            this.frequencies.HeaderText = "Частота";
+            this.frequencies.Name = "frequencies";
+            // 
+            // impendances
+            // 
+            this.impendances.HeaderText = "Импедансы";
+            this.impendances.Name = "impendances";
             // 
             // ImpedanceForm
             // 
@@ -139,5 +158,7 @@
         private System.Windows.Forms.TextBox StepTextBox;
         private System.Windows.Forms.DataGridView impedancesGridView;
         private System.Windows.Forms.Button calculateButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn frequencies;
+        private System.Windows.Forms.DataGridViewTextBoxColumn impendances;
     }
 }
