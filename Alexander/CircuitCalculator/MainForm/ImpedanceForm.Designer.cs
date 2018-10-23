@@ -33,6 +33,8 @@
             this.EndLabel = new System.Windows.Forms.Label();
             this.StepLabel = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CalculateButton = new System.Windows.Forms.Button();
             this.StartNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.FinishNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -78,11 +80,27 @@
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
             this.dataGridView.Location = new System.Drawing.Point(20, 103);
             this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.Size = new System.Drawing.Size(232, 143);
             this.dataGridView.TabIndex = 6;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Частота";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Импеданс";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // CalculateButton
             // 
@@ -98,28 +116,73 @@
             // 
             this.StartNumericUpDown.DecimalPlaces = 2;
             this.StartNumericUpDown.Location = new System.Drawing.Point(119, 9);
+            this.StartNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.StartNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.StartNumericUpDown.Name = "StartNumericUpDown";
             this.StartNumericUpDown.Size = new System.Drawing.Size(133, 22);
             this.StartNumericUpDown.TabIndex = 8;
             this.StartNumericUpDown.ThousandsSeparator = true;
+            this.StartNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             // 
             // FinishNumericUpDown
             // 
             this.FinishNumericUpDown.DecimalPlaces = 2;
             this.FinishNumericUpDown.Location = new System.Drawing.Point(119, 41);
+            this.FinishNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.FinishNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.FinishNumericUpDown.Name = "FinishNumericUpDown";
             this.FinishNumericUpDown.Size = new System.Drawing.Size(133, 22);
             this.FinishNumericUpDown.TabIndex = 9;
             this.FinishNumericUpDown.ThousandsSeparator = true;
+            this.FinishNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             // 
             // StepNumericUpDown
             // 
             this.StepNumericUpDown.DecimalPlaces = 2;
             this.StepNumericUpDown.Location = new System.Drawing.Point(119, 73);
+            this.StepNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.StepNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.StepNumericUpDown.Name = "StepNumericUpDown";
             this.StepNumericUpDown.Size = new System.Drawing.Size(133, 22);
             this.StepNumericUpDown.TabIndex = 10;
             this.StepNumericUpDown.ThousandsSeparator = true;
+            this.StepNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             // 
             // ImpedanceForm
             // 
@@ -139,6 +202,7 @@
             this.MinimumSize = new System.Drawing.Size(290, 331);
             this.Name = "ImpedanceForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ImpedanceForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartNumericUpDown)).EndInit();
@@ -161,5 +225,7 @@
         private System.Windows.Forms.NumericUpDown FinishNumericUpDown;
         private System.Windows.Forms.NumericUpDown StepNumericUpDown;
         private System.Windows.Forms.BindingSource _calculationBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }

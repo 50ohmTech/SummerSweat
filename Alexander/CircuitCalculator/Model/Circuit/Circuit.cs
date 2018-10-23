@@ -72,7 +72,7 @@ namespace Model.Circuit
 
             foreach (var frequency in frequencies)
             {
-                impedances.Add(_root.CalculateZ(frequency));
+                impedances.Add(Root.CalculateZ(frequency));
             }
 
             return impedances;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PaintGroupBox = new System.Windows.Forms.GroupBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
@@ -39,21 +38,10 @@
             this.AddElementLabel = new System.Windows.Forms.Label();
             this.NominalNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.EditButton = new System.Windows.Forms.Button();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.NominalNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // PaintGroupBox
-            // 
-            this.PaintGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PaintGroupBox.Location = new System.Drawing.Point(255, 11);
-            this.PaintGroupBox.Margin = new System.Windows.Forms.Padding(4);
-            this.PaintGroupBox.Name = "PaintGroupBox";
-            this.PaintGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.PaintGroupBox.Size = new System.Drawing.Size(449, 361);
-            this.PaintGroupBox.TabIndex = 0;
-            this.PaintGroupBox.TabStop = false;
             // 
             // AddButton
             // 
@@ -186,11 +174,20 @@
             this.EditButton.UseVisualStyleBackColor = true;
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
+            // PictureBox
+            // 
+            this.PictureBox.Location = new System.Drawing.Point(252, 15);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(453, 356);
+            this.PictureBox.TabIndex = 10;
+            this.PictureBox.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 389);
+            this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.CalculateImpedanceButton);
             this.Controls.Add(this.EditButton);
             this.Controls.Add(this.NominalNumericUpDown);
@@ -201,7 +198,6 @@
             this.Controls.Add(this.SelectingCircuitComboBox);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
-            this.Controls.Add(this.PaintGroupBox);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(735, 436);
             this.Name = "MainForm";
@@ -209,14 +205,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CircuitMainForm";
             ((System.ComponentModel.ISupportInitialize)(this.NominalNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox PaintGroupBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button CalculateImpedanceButton;
@@ -227,6 +222,7 @@
         private System.Windows.Forms.Label AddElementLabel;
         private System.Windows.Forms.NumericUpDown NominalNumericUpDown;
         private System.Windows.Forms.Button EditButton;
+        private System.Windows.Forms.PictureBox PictureBox;
     }
 }
 

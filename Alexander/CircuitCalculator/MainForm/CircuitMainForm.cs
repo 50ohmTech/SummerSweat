@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Model.Circuit;
 using Model.Elements;
+using System.Drawing;
 
 namespace View
 {
     public partial class MainForm : Form
     {
+        #region Properties
+
+        public TestCircuits TestCircuits { get; }
+
+        #endregion
+
         #region Constructor
 
         /// <summary>
@@ -16,9 +24,9 @@ namespace View
         {
             InitializeComponent();
             _circuit = new Circuit();
-            _resistorIterator = 0;
-            _inductorIterator = 0;
-            _capacitorIterator = 0;
+
+            TestCircuits = new TestCircuits();
+            _circuit = TestCircuits.Circuits[0];
         }
 
         #endregion
@@ -26,21 +34,19 @@ namespace View
         #region Private methods
 
         /// <summary>
-        ///     Очистить TreeView.
-        /// </summary>
-        private void ClearTreeView()
-        {
-            treeView.Nodes.Clear();
-            _currentNode = null;
-        }
-
-        /// <summary>
         ///     Обновить дерево.
         /// </summary>
         private void UpdateTreeView()
         {
-            ClearTreeView();
-            if (_circuit == null || _circuit.IsEmpty())
+            treeView.Nodes.Clear();
+            _currentNode = null;
+            
+            if (_circuit == null)
+            {
+                throw new InvalidOperationException("Цепь пуста");
+            }
+
+            if (_circuit.IsEmpty())
             {
                 return;
             }
@@ -62,153 +68,98 @@ namespace View
                 }
             }
 
-            if (_circuit == null)
-            {
-                throw new InvalidOperationException("Цепь была null");
-            }
-
-            treeView.Nodes.Clear();
-
             var root = new CircuitTreeNode(_circuit.Root);
             treeView.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
 
             treeView.EndUpdate();
             treeView.ExpandAll();
-        }
 
+            PictureBox.Image = null;
+
+            var bitmapBackground = new Bitmap(1000, 1000);
+            Drawer.Graphics = Graphics.FromImage(bitmapBackground);
+            Drawer.Pen = new Pen(Color.Black, 1);
+            Drawer.Font = Font;
+
+            var displacement = new Point(15, 0);
+            Drawer.DrawCircuit(_circuit.Root, displacement);
+
+            PictureBox.Image = bitmapBackground;
+        }
+        
         private void AddButton_Click(object sender, EventArgs e)
         {
-            try
+            _countElements = TestCircuits.capacitorIterator +
+                             TestCircuits.inductorIterator +
+                             TestCircuits.resistorIterator;
+            
+            if (_countElements < 8)
             {
-                switch (NodeComboBox.SelectedItem)
+                try
                 {
-                    case "Последовательно":
-                        _circuit.AddAfter(_currentNode, new SeriesSubcircuit());
-                        break;
-                    case "Параллельно":
-                        _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
-                        break;
-                    case "R":
-                        _circuit.AddAfter(_currentNode,
-                            new Resistor("R" + _resistorIterator++,
-                                Convert.ToDouble(NominalNumericUpDown.Text)));
+                    switch (NodeComboBox.SelectedItem)
+                    {
+                        case "Последовательно":
+                            _circuit.AddAfter(_currentNode, new SeriesSubcircuit());
+                            break;
+                        case "Параллельно":
+                            _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
+                            break;
+                        case "R":
+                            _circuit.AddAfter(_currentNode,
+                                new Resistor("R" + TestCircuits.resistorIterator++,
+                                    Convert.ToDouble(NominalNumericUpDown.Text)));
 
-                        break;
-                    case "L":
-                        _circuit.AddAfter(_currentNode,
-                            new Inductor("L" + _inductorIterator++,
-                                Convert.ToDouble(NominalNumericUpDown.Text)));
+                            _countElements++;
+                            break;
+                        case "L":
+                            _circuit.AddAfter(_currentNode,
+                                new Inductor("L" + TestCircuits.inductorIterator++,
+                                    Convert.ToDouble(NominalNumericUpDown.Text)));
 
-                        break;
-                    case "C":
-                        _circuit.AddAfter(_currentNode,
-                            new Capacitor("C" + _capacitorIterator++,
-                                Convert.ToDouble(NominalNumericUpDown.Text)));
+                           _countElements++;
+                            break;
+                        case "C":
+                            _circuit.AddAfter(_currentNode,
+                                new Capacitor("C" + TestCircuits.capacitorIterator++,
+                                    Convert.ToDouble(NominalNumericUpDown.Text)));
 
-                        break;
+                            _countElements++;
+                            break;
+                    }
+
+                    UpdateTreeView();
                 }
-
-                UpdateTreeView();
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
             }
-            catch (Exception exception)
+            else
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Достигнуто максимальное количество элементов в цепи.");
             }
+            
         }
 
         private void SelectingCircuitComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
         {
-            SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();
-            SubcircuitBase seriesSubcircuit = new SeriesSubcircuit();
-
-            _resistorIterator = 0;
-            _capacitorIterator = 0;
-            _inductorIterator = 0;
-            _circuit.Clear();
-            UpdateTreeView();
-
-            switch (SelectingCircuitComboBox.SelectedItem)
+            if (SelectingCircuitComboBox.SelectedIndex == 0)
             {
-                case "Цепь №1":
-                    _circuit.AddAfter(_currentNode, seriesSubcircuit);
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 2.2));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Resistor("R" + _resistorIterator++, 15));
-
-                    _circuit.AddAfter(seriesSubcircuit, parallelSubcircuit);
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Inductor("L" + _inductorIterator++, 20));
-
-                    break;
-                case "Цепь №2":
-                    _circuit.AddAfter(_currentNode, parallelSubcircuit);
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Resistor("R" + _resistorIterator++, 22.1));
-
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Inductor("L" + _inductorIterator++, 1.1));
-
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Inductor("L" + _inductorIterator++, 6));
-
-                    _circuit.AddAfter(parallelSubcircuit, seriesSubcircuit);
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Resistor("R" + _resistorIterator++, 9.9));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Inductor("L" + _inductorIterator++, 5.12));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 11));
-
-                    break;
-                case "Цепь №3":
-                    _circuit.AddAfter(_currentNode, parallelSubcircuit);
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 8.8));
-
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 7.7));
-
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 6.66));
-
-                    break;
-                case "Цепь №4":
-                    _circuit.AddAfter(_currentNode, seriesSubcircuit);
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Inductor("L" + _inductorIterator++, 5));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Resistor("R" + _resistorIterator++, 27.9));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 40));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Resistor("R" + _resistorIterator++, 14));
-
-                    break;
-                case "Цепь №5":
-                    _circuit.AddAfter(_currentNode, parallelSubcircuit);
-                    _circuit.AddAfter(parallelSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 44));
-
-                    _circuit.AddAfter(parallelSubcircuit, seriesSubcircuit);
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Resistor("R" + _resistorIterator++, 99.2));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Capacitor("C" + _capacitorIterator++, 88.8));
-
-                    _circuit.AddAfter(seriesSubcircuit,
-                        new Resistor("R" + _resistorIterator++, 2));
-
-                    break;
+                PictureBox.Image = null;
+                treeView.Nodes.Clear();
+            }
+            if (SelectingCircuitComboBox.SelectedIndex >= 0 &&
+                SelectingCircuitComboBox.SelectedIndex < 6)
+            {
+                _circuit = TestCircuits.Circuits[SelectingCircuitComboBox.SelectedIndex];
+                TestCircuits.GetIterator(SelectingCircuitComboBox.SelectedIndex);
+            }
+            else
+            {
+                throw new InvalidOperationException();
             }
 
             UpdateTreeView();
@@ -232,21 +183,6 @@ namespace View
             {
                 try
                 {
-                    if (_currentNode.GetType() == typeof(Resistor))
-                    {
-                        _resistorIterator--;
-                    }
-
-                    if (_currentNode.GetType() == typeof(Inductor))
-                    {
-                        _inductorIterator--;
-                    }
-
-                    if (_currentNode.GetType() == typeof(Capacitor))
-                    {
-                        _capacitorIterator--;
-                    }
-
                     _circuit.Remove(_currentNode);
                     UpdateTreeView();
                 }
@@ -275,44 +211,16 @@ namespace View
 
         private void CalculateImpedanceButton_Click(object sender, EventArgs e)
         {
+            if (treeView.Nodes.Count == 0)
+            {
+                MessageBox.Show("Добавьте элементы в цепь", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                return;
+            }
+
             new ImpedanceForm(_circuit).ShowDialog();
         }
-
-        #endregion
-
-        #region Fields
-
-        #region Readonly fields
-
-        /// <summary>
-        ///     Цепь.
-        /// </summary>
-        private readonly Circuit _circuit;
-
-        #endregion
-
-        #region Private fields
-
-        private INode _currentNode;
-
-        /// <summary>
-        ///     Индекс резистора.
-        /// </summary>
-        private uint _resistorIterator;
-
-        /// <summary>
-        ///     Индекс конденсатора.
-        /// </summary>
-        private uint _capacitorIterator;
-
-        /// <summary>
-        ///     Индекс индуктора.
-        /// </summary>
-        private uint _inductorIterator;
-
-        #endregion
-
-        #endregion
 
         private void EditButton_Click(object sender, EventArgs e)
         {
@@ -336,5 +244,28 @@ namespace View
                 MessageBox.Show("Выберите элемент, который хотите изменить.");
             }
         }
+
+        #endregion
+
+        #region Fields
+
+        #region Readonly fields
+
+        /// <summary>
+        ///     Цепь.
+        /// </summary>
+        private Circuit _circuit;
+
+        #endregion
+
+        #region Private fields
+
+        private INode _currentNode;
+
+        private uint _countElements = 0;
+
+        #endregion
+
+        #endregion
     }
 }
