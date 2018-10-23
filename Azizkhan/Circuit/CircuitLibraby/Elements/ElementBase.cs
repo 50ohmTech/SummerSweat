@@ -85,10 +85,7 @@ namespace CircuitLibrary.Elements
                         nameof(value));
                 }
 
-                //NOTE: А у тебя с какой точностью программа работает ?
-                // 1 == 1 ? А 1/1 == 1 ?
-                // Double лучше через ABS сравнивать.
-                if (Math.Abs(value - _value) < MINVALUE)
+                if (!(Math.Abs(value - _value) < MINVALUE))
                 {
                     _value = value;
                     ValueChanged?.Invoke(this, new ValueChangedEventArgs

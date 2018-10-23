@@ -76,7 +76,7 @@ namespace MainForm
                 var step = Convert.ToDouble(StepTextBox.Text);
 
                 var frequency = new double[1];
-                if (start == finish && Math.Round(step) == 0)
+                if (start == finish && step == 0)
                 {
                     frequency[0] = start;
                 }
@@ -87,16 +87,15 @@ namespace MainForm
                     {
                         frequency[j] = i;
                         j++;
-                        if (!(Math.Round(finish - i) == 0))
+                        if (!(finish - i == 0))
                         {
                             Array.Resize(ref frequency, frequency.Length + 1);
                         }
                     }
-
-                    if (Math.Round(frequency[frequency.Length - 1]) == 0)
-                    {
-                        Array.Resize(ref frequency, frequency.Length - 1);
-                    }
+                }
+                if (frequency[frequency.Length - 1] == 0)
+                {
+                    Array.Resize(ref frequency, frequency.Length - 1);
                 }
 
 
