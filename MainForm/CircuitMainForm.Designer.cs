@@ -28,38 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PaintGroupBox = new System.Windows.Forms.GroupBox();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
             this.NominalTextBox = new System.Windows.Forms.TextBox();
             this.SelectingCircuitComboBox = new System.Windows.Forms.ComboBox();
-            this.SelectingCircuitLabel = new System.Windows.Forms.Label();
             this.NodeComboBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.AddElementLable = new System.Windows.Forms.Label();
             this.ConnectionComboBox = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.treeView = new System.Windows.Forms.TreeView();
+            this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // PaintGroupBox
-            // 
-            this.PaintGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PaintGroupBox.Location = new System.Drawing.Point(191, 12);
-            this.PaintGroupBox.Name = "PaintGroupBox";
-            this.PaintGroupBox.Size = new System.Drawing.Size(330, 298);
-            this.PaintGroupBox.TabIndex = 0;
-            this.PaintGroupBox.TabStop = false;
-            // 
-            // dataGridView
-            // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(12, 43);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(173, 111);
-            this.dataGridView.TabIndex = 10;
             // 
             // AddButton
             // 
@@ -69,7 +49,6 @@
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
-            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // DeleteButton
             // 
@@ -79,7 +58,6 @@
             this.DeleteButton.TabIndex = 1;
             this.DeleteButton.Text = "Удалить";
             this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // CalculateImpedanceButton
             // 
@@ -102,26 +80,12 @@
             // SelectingCircuitComboBox
             // 
             this.SelectingCircuitComboBox.FormattingEnabled = true;
-            this.SelectingCircuitComboBox.Items.AddRange(new object[] {
-            "Цепь №1",
-            "Цепь №2",
-            "Цепь №3",
-            "Цепь №4",
-            "Цепь №5"});
-            this.SelectingCircuitComboBox.Location = new System.Drawing.Point(85, 9);
+            this.SelectingCircuitComboBox.Location = new System.Drawing.Point(15, 9);
             this.SelectingCircuitComboBox.Name = "SelectingCircuitComboBox";
-            this.SelectingCircuitComboBox.Size = new System.Drawing.Size(100, 21);
+            this.SelectingCircuitComboBox.Size = new System.Drawing.Size(170, 21);
             this.SelectingCircuitComboBox.TabIndex = 4;
+            this.SelectingCircuitComboBox.Text = "Выберите цепь";
             this.SelectingCircuitComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectingCircuitComboBox_SelectedIndexChanged);
-            // 
-            // SelectingCircuitLabel
-            // 
-            this.SelectingCircuitLabel.AutoSize = true;
-            this.SelectingCircuitLabel.Location = new System.Drawing.Point(12, 12);
-            this.SelectingCircuitLabel.Name = "SelectingCircuitLabel";
-            this.SelectingCircuitLabel.Size = new System.Drawing.Size(67, 13);
-            this.SelectingCircuitLabel.TabIndex = 5;
-            this.SelectingCircuitLabel.Text = "Выбор цепи";
             // 
             // NodeComboBox
             // 
@@ -136,14 +100,14 @@
             this.NodeComboBox.TabIndex = 7;
             this.NodeComboBox.Text = "Выберите тип элемента";
             // 
-            // label2
+            // AddElementLable
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 157);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Добавить элемент";
+            this.AddElementLable.AutoSize = true;
+            this.AddElementLable.Location = new System.Drawing.Point(12, 157);
+            this.AddElementLable.Name = "AddElementLable";
+            this.AddElementLable.Size = new System.Drawing.Size(103, 13);
+            this.AddElementLable.TabIndex = 8;
+            this.AddElementLable.Text = "Добавить элемент";
             // 
             // ConnectionComboBox
             // 
@@ -157,44 +121,56 @@
             this.ConnectionComboBox.TabIndex = 9;
             this.ConnectionComboBox.Text = "Выберите тип связи";
             // 
+            // treeView
+            // 
+            this.treeView.Location = new System.Drawing.Point(15, 36);
+            this.treeView.Name = "treeView";
+            this.treeView.Size = new System.Drawing.Size(170, 118);
+            this.treeView.TabIndex = 11;
+            // 
+            // CircuitPictureBox
+            // 
+            this.CircuitPictureBox.Location = new System.Drawing.Point(193, 12);
+            this.CircuitPictureBox.Name = "CircuitPictureBox";
+            this.CircuitPictureBox.Size = new System.Drawing.Size(333, 297);
+            this.CircuitPictureBox.TabIndex = 12;
+            this.CircuitPictureBox.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 324);
-            this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.CircuitPictureBox);
+            this.Controls.Add(this.treeView);
             this.Controls.Add(this.ConnectionComboBox);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.AddElementLable);
             this.Controls.Add(this.NodeComboBox);
-            this.Controls.Add(this.SelectingCircuitLabel);
             this.Controls.Add(this.SelectingCircuitComboBox);
             this.Controls.Add(this.NominalTextBox);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.CalculateImpedanceButton);
-            this.Controls.Add(this.PaintGroupBox);
             this.MinimumSize = new System.Drawing.Size(554, 341);
             this.Name = "MainForm";
             this.Text = "CircuitMainForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox PaintGroupBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button CalculateImpedanceButton;
         private System.Windows.Forms.TextBox NominalTextBox;
         private System.Windows.Forms.ComboBox SelectingCircuitComboBox;
-        private System.Windows.Forms.Label SelectingCircuitLabel;
         private System.Windows.Forms.ComboBox NodeComboBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label AddElementLable;
         private System.Windows.Forms.ComboBox ConnectionComboBox;
-        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.TreeView treeView;
+        private System.Windows.Forms.PictureBox CircuitPictureBox;
     }
 }
 

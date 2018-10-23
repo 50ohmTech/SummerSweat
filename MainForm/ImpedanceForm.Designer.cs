@@ -28,17 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.StartLabel = new System.Windows.Forms.Label();
             this.EndLabel = new System.Windows.Forms.Label();
             this.StepLabel = new System.Windows.Forms.Label();
             this.StartValueTextBox = new System.Windows.Forms.TextBox();
             this.EndValueTextBox = new System.Windows.Forms.TextBox();
             this.StepValueTextBox = new System.Windows.Forms.TextBox();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.CloseButton = new System.Windows.Forms.Button();
             this.CalculateButton = new System.Windows.Forms.Button();
+            this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Impedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Frequency,
+            this.Impedance});
+            this.dataGridView.Location = new System.Drawing.Point(15, 113);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowHeadersVisible = false;
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.Size = new System.Drawing.Size(174, 124);
+            this.dataGridView.TabIndex = 6;
             // 
             // StartLabel
             // 
@@ -73,6 +94,7 @@
             this.StartValueTextBox.Name = "StartValueTextBox";
             this.StartValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.StartValueTextBox.TabIndex = 3;
+            this.StartValueTextBox.Text = "0";
             // 
             // EndValueTextBox
             // 
@@ -80,6 +102,7 @@
             this.EndValueTextBox.Name = "EndValueTextBox";
             this.EndValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.EndValueTextBox.TabIndex = 4;
+            this.EndValueTextBox.Text = "0";
             // 
             // StepValueTextBox
             // 
@@ -87,16 +110,7 @@
             this.StepValueTextBox.Name = "StepValueTextBox";
             this.StepValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.StepValueTextBox.TabIndex = 5;
-            // 
-            // dataGridView
-            // 
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(15, 113);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(174, 124);
-            this.dataGridView.TabIndex = 6;
+            this.StepValueTextBox.Text = "0";
             // 
             // CloseButton
             // 
@@ -118,6 +132,22 @@
             this.CalculateButton.Text = "Расчитать";
             this.CalculateButton.UseVisualStyleBackColor = true;
             this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
+            // 
+            // Frequency
+            // 
+            this.Frequency.Frozen = true;
+            this.Frequency.HeaderText = "Частота";
+            this.Frequency.Name = "Frequency";
+            this.Frequency.ReadOnly = true;
+            this.Frequency.Width = 80;
+            // 
+            // Impedance
+            // 
+            this.Impedance.Frozen = true;
+            this.Impedance.HeaderText = "Импеданс";
+            this.Impedance.Name = "Impedance";
+            this.Impedance.ReadOnly = true;
+            this.Impedance.Width = 94;
             // 
             // ImpedanceForm
             // 
@@ -153,5 +183,7 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button CalculateButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Frequency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Impedance;
     }
 }

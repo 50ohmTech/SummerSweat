@@ -23,6 +23,10 @@ namespace MainForm
 
         #region ~ Публичные методы ~
 
+        /// <summary>
+        /// Конструктор.
+        /// </summary>
+        /// <param name="circuit"> Цепь. </param>
         public ImpedanceForm(Circuit circuit)
         {
             InitializeComponent();

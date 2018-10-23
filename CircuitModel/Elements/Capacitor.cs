@@ -6,7 +6,7 @@ namespace CircuitModel
     /// <summary>
     /// Конденсатор.
     /// </summary>
-    class Capacitor : ElementBase
+    public class Capacitor : ElementBase
     {
         #region ~ Конструктор ~
 

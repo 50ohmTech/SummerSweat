@@ -6,7 +6,7 @@ namespace CircuitModel
     /// <summary>
     /// Модифицируемый узел TreeNode.
     /// </summary>
-    class TreeViewNode : TreeNode
+    public class TreeViewNode : TreeNode
     {
         #region ~ Конструктор ~
 
