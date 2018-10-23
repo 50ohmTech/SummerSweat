@@ -24,7 +24,7 @@ namespace ElementsLibrary
         /// <summary>
         ///     Конструктор
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node">Узел</param>
         public TreeViewNode(INode node)
         {
             if (node == null)

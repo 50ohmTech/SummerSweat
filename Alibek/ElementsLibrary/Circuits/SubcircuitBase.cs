@@ -60,7 +60,7 @@ namespace ElementsLibrary.Circuits
         ///     Расчет импеданса <see cref="CalculateZ" />
         /// </summary>
         /// <param name="frequency">Частота</param>
-        /// <returns></returns>
+        /// <returns>Комплексное значение импеданса</returns>
         public abstract Complex CalculateZ(double frequency);
 
         #endregion

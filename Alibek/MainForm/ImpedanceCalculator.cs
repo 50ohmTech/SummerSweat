@@ -32,7 +32,7 @@ namespace MainForm
         /// <summary>
         ///     Конструктор формы
         /// </summary>
-        /// <param name="circuit"></param>
+        /// <param name="circuit">Цепь</param>
         public ImpedanceCalculator(Circuit circuit)
         {
             InitializeComponent();
@@ -101,8 +101,8 @@ namespace MainForm
         /// <summary>
         ///     Кнопка для расчета импеданса
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             CalculateImpedance();
@@ -111,8 +111,8 @@ namespace MainForm
         /// <summary>
         ///     Событие подготавливающие поле к вводу.
         /// </summary>
-        /// <param name="sender">Отправитель события.</param>
-        /// <param name="e">Параметры события.</param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void TextBox_Enter(object sender, EventArgs e)
         {
             ValueValidators.Enter(sender);
@@ -121,18 +121,18 @@ namespace MainForm
         /// <summary>
         ///     Событие подготавливающие поле к выводу.
         /// </summary>
-        /// <param name="sender">Отправитель события.</param>
-        /// <param name="e">Параметры события.</param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void TextBox_Leave(object sender, EventArgs e)
         {
             ValueValidators.Leave(sender);
         }
 
         /// <summary>
-        ///     Собыите для ограничения ввода символов в текстбокс для double.
+        ///     Событие для ограничения ввода символов в текстбокс для double.
         /// </summary>
-        /// <param name="sender">Отправитель события.</param>
-        /// <param name="e">Параметры события.</param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void DoubleTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValueValidators.PressDouble(e, ((TextBox) sender).Text);
@@ -141,8 +141,8 @@ namespace MainForm
         /// <summary>
         ///     Собыите для ограничения ввода символов в текстбокс для int .
         /// </summary>
-        /// <param name="sender">Отправитель события.</param>
-        /// <param name="e">Параметры события.</param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void IntTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValueValidators.PressInt(sender, e);

@@ -32,7 +32,8 @@ namespace MainForm
         /// <summary>
         ///     Конструктор формы
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="element">Элемент цепи</param>
+        /// <returns>Инициализирует форму</returns>
         public EditValuesForm(ElementBase element)
         {
             _element = element ?? throw new ArgumentNullException(nameof(element));
@@ -46,8 +47,8 @@ namespace MainForm
         /// <summary>
         ///     Событие подготавливающие поле к вводу.
         /// </summary>
-        /// <param name="sender">Отправитель события.</param>
-        /// <param name="e">Параметры события.</param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void TextBox_Enter(object sender, EventArgs e)
         {
             ValueValidators.Enter(sender);
@@ -56,8 +57,8 @@ namespace MainForm
         /// <summary>
         ///     Событие подготавливающие поле к вводу.
         /// </summary>
-        /// <param name="sender">Отправитель события.</param>
-        /// <param name="e">Параметры события.</param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void TextBox_Leave(object sender, EventArgs e)
         {
             ValueValidators.Leave(sender);
@@ -66,8 +67,8 @@ namespace MainForm
         /// <summary>
         ///     Собыите для ограничиния вводв символов в текстбокс для double.
         /// </summary>
-        /// <param name="sender">Отправитель события.</param>
-        /// <param name="e">Параметры события.</param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void DoubleTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValueValidators.PressDouble(e, ((TextBox) sender).Text);
@@ -76,8 +77,8 @@ namespace MainForm
         /// <summary>
         ///     Событие по которому изменяется значение элемента
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void EditValueButton_Click(object sender, EventArgs e)
         {
             _element.Value = Convert.ToDouble(editValuesTextBox.Text);
@@ -87,8 +88,8 @@ namespace MainForm
         /// <summary>
         ///     Событие для выхода из формы
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

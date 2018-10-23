@@ -23,7 +23,7 @@ namespace MainForm
             }
 
             MessageBox.Show(
-                type + " должен (должно) быть\nне менее " + min + " и не более " + max,
+                type + " должно быть\nне менее " + min + " и не более " + max,
                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return false;
@@ -36,8 +36,8 @@ namespace MainForm
         /// <summary>
         ///     Ввод вещественных значений
         /// </summary>
-        /// <param name="e"></param>
-        /// <param name="text"></param>
+        /// <param name="e">Параметры события</param>
+        /// <param name="text">Текст</param>
         public static void PressDouble(KeyPressEventArgs e, string text)
         {
             var separator = NumberFormatInfo.CurrentInfo
@@ -65,8 +65,8 @@ namespace MainForm
         /// <summary>
         ///     Ввод целых значений
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект вызывающий событие</param>
+        /// <param name="e">Параметры события</param>
         public static void PressInt(object sender, KeyPressEventArgs e)
         {
             const double MaxLength = 4;
@@ -83,7 +83,7 @@ namespace MainForm
         /// <summary>
         ///     Функция подготавливающая поле к вводу.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
         public static void Enter(object sender)
         {
             if (!(sender is TextBox textBox))
@@ -100,7 +100,7 @@ namespace MainForm
         /// <summary>
         ///     Функция подготавливающая поле к выводу.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
         public static void Leave(object sender)
         {
             if (!(sender is TextBox textBox))
@@ -117,7 +117,7 @@ namespace MainForm
         /// <summary>
         ///     Заменить символ-разделитель.
         /// </summary>
-        /// <param name="valueBox"></param>
+        /// <param name="valueBox">Значение в текстбоксе</param>
         public static void ChangeSeparator(TextBox valueBox)
         {
             if (valueBox.Text == NumberFormatInfo.CurrentInfo
@@ -130,8 +130,8 @@ namespace MainForm
         /// <summary>
         ///     Проверка значений на границы
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Значение(double)</param>
+        /// <returns>Bool значение</returns>
         public static bool IsCorrectNominal(double value)
         {
             const double minElementValue = 0.000001;
@@ -155,10 +155,10 @@ namespace MainForm
         /// <summary>
         ///     Проверка частоты на границы
         /// </summary>
-        /// <param name="startValue"></param>
-        /// <param name="interval"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
+        /// <param name="startValue">Начальное значение</param>
+        /// <param name="interval">Шаг</param>
+        /// <param name="count">Конечное значение</param>
+        /// <returns>Bool значение</returns>
         public static bool IsCorrectFrequency(double startValue, double interval,
             uint count)
         {

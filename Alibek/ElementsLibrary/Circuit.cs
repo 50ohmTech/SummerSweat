@@ -64,8 +64,8 @@ namespace ElementsLibrary
         /// <summary>
         ///     Функция добавления
         /// </summary>
-        /// <param name="currentNode"></param>
-        /// <param name="newNode"></param>
+        /// <param name="currentNode">Текущая нода</param>
+        /// <param name="newNode">Новая нода</param>
         public void AddAfter(INode currentNode, INode newNode)
         {
             if (IsEmpty())
@@ -93,7 +93,7 @@ namespace ElementsLibrary
         /// <summary>
         ///     Проверка на null
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Возвращает bool значение</returns>
         public bool IsEmpty()
         {
             return Root == null;

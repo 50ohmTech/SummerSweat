@@ -88,8 +88,8 @@ namespace MainForm
         /// <summary>
         ///     Выбор цепи в Combobox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void TestCircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedCircuit = testCircuitsComboBox.SelectedItem.ToString();
@@ -276,8 +276,8 @@ namespace MainForm
         /// <summary>
         ///     Кнопка для открытия калькулятора(другой формы)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             if (_circuit.Root == null)
@@ -294,8 +294,8 @@ namespace MainForm
         /// <summary>
         ///     Событие для изменения значения элемента в TreeView
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void TreeView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (_currentNode != null)
@@ -322,8 +322,8 @@ namespace MainForm
         /// <summary>
         ///     Событие для изменения значения элемента в TreeView
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="e">Параметры события</param>
         private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node is TreeViewNode treeNode)
