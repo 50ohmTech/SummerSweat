@@ -15,7 +15,7 @@ namespace ElementsLibrary.Elements
         /// </summary>
         /// <param name="value">Значение элемента</param>
         /// <param name="name">Имя элемента</param>
-        public Resistor(double value, string name) : base(name, value)
+        public Resistor(string name,double value) : base(name, value)
         {
         }
 

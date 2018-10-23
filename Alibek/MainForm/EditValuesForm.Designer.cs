@@ -28,61 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.editValuesTextBox = new System.Windows.Forms.TextBox();
-            this.editValueButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.editValueFormLabel = new System.Windows.Forms.Label();
+            this._editValuesTextBox = new System.Windows.Forms.TextBox();
+            this._editValueButton = new System.Windows.Forms.Button();
+            this._cancelButton = new System.Windows.Forms.Button();
+            this._editValueFormLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // editValuesTextBox
+            // _editValuesTextBox
             // 
-            this.editValuesTextBox.Location = new System.Drawing.Point(23, 37);
-            this.editValuesTextBox.Name = "editValuesTextBox";
-            this.editValuesTextBox.Size = new System.Drawing.Size(100, 20);
-            this.editValuesTextBox.TabIndex = 0;
-            this.editValuesTextBox.Text = "0";
-            this.editValuesTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
-            this.editValuesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
-            this.editValuesTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
+            this._editValuesTextBox.Location = new System.Drawing.Point(23, 37);
+            this._editValuesTextBox.Name = "_editValuesTextBox";
+            this._editValuesTextBox.Size = new System.Drawing.Size(100, 20);
+            this._editValuesTextBox.TabIndex = 0;
+            this._editValuesTextBox.Text = "0";
+            this._editValuesTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this._editValuesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this._editValuesTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
-            // editValueButton
+            // _editValueButton
             // 
-            this.editValueButton.Location = new System.Drawing.Point(23, 72);
-            this.editValueButton.Name = "editValueButton";
-            this.editValueButton.Size = new System.Drawing.Size(100, 23);
-            this.editValueButton.TabIndex = 1;
-            this.editValueButton.Text = "Изменить";
-            this.editValueButton.UseVisualStyleBackColor = true;
-            this.editValueButton.Click += new System.EventHandler(this.EditValueButton_Click);
+            this._editValueButton.Location = new System.Drawing.Point(23, 72);
+            this._editValueButton.Name = "_editValueButton";
+            this._editValueButton.Size = new System.Drawing.Size(100, 23);
+            this._editValueButton.TabIndex = 1;
+            this._editValueButton.Text = "Изменить";
+            this._editValueButton.UseVisualStyleBackColor = true;
+            this._editValueButton.Click += new System.EventHandler(this.EditValueButton_Click);
             // 
-            // cancelButton
+            // _cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(23, 111);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 23);
-            this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "Выйти";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this._cancelButton.Location = new System.Drawing.Point(23, 111);
+            this._cancelButton.Name = "_cancelButton";
+            this._cancelButton.Size = new System.Drawing.Size(100, 23);
+            this._cancelButton.TabIndex = 2;
+            this._cancelButton.Text = "Выйти";
+            this._cancelButton.UseVisualStyleBackColor = true;
+            this._cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // editValueFormLabel
+            // _editValueFormLabel
             // 
-            this.editValueFormLabel.AutoSize = true;
-            this.editValueFormLabel.Location = new System.Drawing.Point(12, 9);
-            this.editValueFormLabel.Name = "editValueFormLabel";
-            this.editValueFormLabel.Size = new System.Drawing.Size(132, 13);
-            this.editValueFormLabel.TabIndex = 3;
-            this.editValueFormLabel.Text = "Введите новое значение";
+            this._editValueFormLabel.AutoSize = true;
+            this._editValueFormLabel.Location = new System.Drawing.Point(12, 9);
+            this._editValueFormLabel.Name = "_editValueFormLabel";
+            this._editValueFormLabel.Size = new System.Drawing.Size(132, 13);
+            this._editValueFormLabel.TabIndex = 3;
+            this._editValueFormLabel.Text = "Введите новое значение";
             // 
             // EditValuesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(151, 168);
-            this.Controls.Add(this.editValueFormLabel);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.editValueButton);
-            this.Controls.Add(this.editValuesTextBox);
+            this.Controls.Add(this._editValueFormLabel);
+            this.Controls.Add(this._cancelButton);
+            this.Controls.Add(this._editValueButton);
+            this.Controls.Add(this._editValuesTextBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditValuesForm";
@@ -95,9 +95,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox editValuesTextBox;
-        private System.Windows.Forms.Button editValueButton;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Label editValueFormLabel;
+        private System.Windows.Forms.TextBox _editValuesTextBox;
+        private System.Windows.Forms.Button _editValueButton;
+        private System.Windows.Forms.Button _cancelButton;
+        private System.Windows.Forms.Label _editValueFormLabel;
     }
 }

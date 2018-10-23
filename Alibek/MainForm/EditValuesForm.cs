@@ -17,16 +17,7 @@ namespace MainForm
         private readonly ElementBase _element;
 
         #endregion
-
-        #region Private fields
-
-        /// <summary>
-        ///     Значение(номинал) элемента
-        /// </summary>
-        private double _value;
-
-        #endregion
-
+    
         #region Constructor
 
         /// <summary>
@@ -81,7 +72,7 @@ namespace MainForm
         /// <param name="e">Параметры события</param>
         private void EditValueButton_Click(object sender, EventArgs e)
         {
-            _element.Value = Convert.ToDouble(editValuesTextBox.Text);
+            _element.Value = Convert.ToDouble(_editValuesTextBox.Text);
             DialogResult = DialogResult.Cancel;
         }
 

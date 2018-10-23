@@ -11,15 +11,7 @@ namespace ElementsLibrary
     /// </summary>
     public class Circuit
     {
-        #region Private fields
-
-        /// <summary>
-        ///     Список элементов цепи
-        /// </summary>
-        private List<ElementBase> _elements;
-
-        #endregion
-
+      
         #region Properties
 
         /// <summary>
@@ -68,6 +60,11 @@ namespace ElementsLibrary
         /// <param name="newNode">Новая нода</param>
         public void AddAfter(INode currentNode, INode newNode)
         {
+            if (newNode == null)
+            {
+                return;
+            }
+
             if (IsEmpty())
             {
                 Root = newNode;

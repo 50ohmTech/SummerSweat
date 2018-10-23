@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Windows.Forms;
 using ElementsLibrary;
 
@@ -8,7 +9,7 @@ namespace MainForm
     /// <summary>
     ///     Форма под калькулятор
     /// </summary>
-    public partial class ImpedanceCalculator : Form
+    public partial class ImpedanceCalculatorForm : Form
     {
         #region Readonly fields
 
@@ -16,7 +17,7 @@ namespace MainForm
         ///     Цепь
         /// </summary>
         private readonly Circuit _circuit;
-
+      
         #endregion
 
         #region Private fields
@@ -33,12 +34,12 @@ namespace MainForm
         ///     Конструктор формы
         /// </summary>
         /// <param name="circuit">Цепь</param>
-        public ImpedanceCalculator(Circuit circuit)
+        public ImpedanceCalculatorForm(Circuit circuit)
         {
             InitializeComponent();
-            startValueTextBox.ContextMenu = new ContextMenu();
-            stepValueTextBox.ContextMenu = new ContextMenu();
-            endValueTextBox.ContextMenu = new ContextMenu();
+            _startValueTextBox.ContextMenu = new ContextMenu();
+            _stepValueTextBox.ContextMenu = new ContextMenu();
+            _endValueTextBox.ContextMenu = new ContextMenu();
             _circuit = circuit;
         }
 
@@ -51,13 +52,13 @@ namespace MainForm
         /// </summary>
         private void CalculateImpedance()
         {
-            ValueValidators.ChangeSeparator(startValueTextBox);
-            ValueValidators.ChangeSeparator(stepValueTextBox);
-            ValueValidators.ChangeSeparator(endValueTextBox);
+            ValueValidators.ChangeSeparator(_startValueTextBox);
+            ValueValidators.ChangeSeparator(_stepValueTextBox);
+            ValueValidators.ChangeSeparator(_endValueTextBox);
 
-            var start = double.TryParse(startValueTextBox.Text, out _startValue);
-            var step = double.TryParse(stepValueTextBox.Text, out _stepValue);
-            var finish = uint.TryParse(endValueTextBox.Text, out _endValue);
+            var start = double.TryParse(_startValueTextBox.Text, out _startValue);
+            var step = double.TryParse(_stepValueTextBox.Text, out _stepValue);
+            var finish = uint.TryParse(_endValueTextBox.Text, out _endValue);
 
             if (!ValueValidators.IsCorrectFrequency(_startValue, _stepValue, _endValue))
             {
@@ -67,7 +68,7 @@ namespace MainForm
             var frequency = new double[1];
 
             var j = 0;
-            for (var i = _startValue; i <= _endValue; i += _stepValue)
+            for (var i =_startValue; i <= _endValue; i += _stepValue)
             {
                 frequency[j] = i;
                 j++;
@@ -93,7 +94,7 @@ namespace MainForm
 
             for (var i = 0; i < impedances.Count; i++)
             {
-                calculatorDataGridView.Rows.Add(Math.Round(frequency[i], 3),
+                _calculatorDataGridView.Rows.Add(Math.Round(frequency[i], 3),
                     correctListOfImpedances[i]);
             }
         }
@@ -105,6 +106,7 @@ namespace MainForm
         /// <param name="e">Параметры события</param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+            _calculatorDataGridView.Rows.Clear();
             CalculateImpedance();
         }
 

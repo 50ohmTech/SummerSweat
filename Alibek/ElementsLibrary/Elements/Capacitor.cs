@@ -35,7 +35,7 @@ namespace ElementsLibrary.Elements
                 throw new ArgumentOutOfRangeException(nameof(frequency));
             }
 
-            return new Complex(0, -1 / (2 * Math.PI * frequency * Value));
+            return new Complex(0, 1 / (2 * Math.PI * frequency * Value));
         }
 
         #endregion

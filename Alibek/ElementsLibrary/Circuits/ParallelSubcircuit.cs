@@ -34,14 +34,14 @@ namespace ElementsLibrary.Circuits
                     ArgumentException("Для параллельного соединения нужно два элемента!");
             }
 
-            var resistance = Complex.Zero;
+            var impedance = Complex.Zero;
 
             foreach (var nodeElements in Nodes)
             {
-                resistance += 1 / nodeElements.CalculateZ(frequency);
+                 impedance += 1 / nodeElements.CalculateZ(frequency);
             }
 
-            return 1 / resistance;
+            return 1 / impedance;
         }
 
         #endregion

@@ -35,7 +35,7 @@ namespace ElementsLibrary.Circuits
                 resistance += nodeElements.CalculateZ(frequency);
             }
 
-            return 1 / resistance;
+            return  1/resistance;
         }
 
         #endregion

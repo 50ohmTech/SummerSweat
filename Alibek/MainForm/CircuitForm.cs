@@ -17,7 +17,7 @@ namespace MainForm
         /// <summary>
         ///     Цепь
         /// </summary>
-        private readonly Circuit _circuit;
+        public Circuit _circuit;
 
         #endregion
 
@@ -38,15 +38,15 @@ namespace MainForm
         public CircuitForm()
         {
             InitializeComponent();
-
-            testCircuitsComboBox.Items.Add("Цепь №1");
-            testCircuitsComboBox.Items.Add("Цепь №2");
-            testCircuitsComboBox.Items.Add("Цепь №3");
-            testCircuitsComboBox.Items.Add("Цепь №4");
-            testCircuitsComboBox.Items.Add("Цепь №5");
-
-
             _circuit = new Circuit();
+            _testCircuitsComboBox.Items.Add("Цепь №1");
+            _testCircuitsComboBox.Items.Add("Цепь №2");
+            _testCircuitsComboBox.Items.Add("Цепь №3");
+            _testCircuitsComboBox.Items.Add("Цепь №4");
+            _testCircuitsComboBox.Items.Add("Цепь №5");
+
+
+            
         }
 
         #endregion
@@ -78,11 +78,11 @@ namespace MainForm
                 }
             }
 
-            treeView.Nodes.Clear();
+            _treeView.Nodes.Clear();
             var root = new TreeViewNode(_circuit.Root);
-            treeView.Nodes.Add(root);
+            _treeView.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
-            treeView.ExpandAll();
+            _treeView.ExpandAll();
         }
 
         /// <summary>
@@ -92,10 +92,10 @@ namespace MainForm
         /// <param name="e">Параметры события</param>
         private void TestCircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedCircuit = testCircuitsComboBox.SelectedItem.ToString();
+            var selectedCircuit = _testCircuitsComboBox.SelectedItem.ToString();
             if (selectedCircuit == "Цепь №1")
             {
-                ElementBase resistor = new Resistor(13, "R1");
+                ElementBase resistor = new Resistor("R1", 13);
                 ElementBase capacitor = new Capacitor("C1", 91);
                 ElementBase inductor = new Inductor("L1", 32);
 
@@ -112,7 +112,7 @@ namespace MainForm
                 serialCircuit.Nodes.Add(inductor);
                 parallelCircuit.Parent = serialCircuit;
                 inductor.Parent = serialCircuit;
-                circuitPictureBox.Image = Resources.Цепь_1;
+                _circuitPictureBox.Image = Resources.Цепь_1;
                 _circuit.Clean();
                 _circuit.AddAfter(null, parallelCircuit);
             }
@@ -121,7 +121,7 @@ namespace MainForm
             {
                 var capacitor1 = new Capacitor("C1", 12);
                 var inductor1 = new Inductor("L1", 21);
-                var resistor1 = new Resistor(83, "R1");
+                var resistor1 = new Resistor("R1",83);
                 var inductor2 = new Inductor("L2", 73);
 
                 var parallelCircuit1 = new ParallelSubcircuit();
@@ -143,16 +143,16 @@ namespace MainForm
 
                 serialCircuit1.Nodes.Add(parallelCircuit2);
                 parallelCircuit2.Parent = serialCircuit1;
-                circuitPictureBox.Image = Resources.Цепь_2;
+                _circuitPictureBox.Image = Resources.Цепь_2;
                 _circuit.Clean();
                 _circuit.AddAfter(null, parallelCircuit1);
             }
 
             if (selectedCircuit == "Цепь №3")
             {
-                var resistor1 = new Resistor(43, "R1");
-                var resistor2 = new Resistor(10, "R2");
-                var resistor3 = new Resistor(15, "R3");
+                var resistor1 = new Resistor("R1",43);
+                var resistor2 = new Resistor("R2", 10);
+                var resistor3 = new Resistor("R3", 15 );
                 var inductor1 = new Inductor("L3", 25);
                 var capacitor1 = new Capacitor("C1", 15);
                 var capacitor2 = new Capacitor("C2", 19);
@@ -183,17 +183,17 @@ namespace MainForm
                 parallelCircuit2.Nodes.Add(resistor3);
                 resistor3.Parent = parallelCircuit2;
 
-                circuitPictureBox.Image = Resources.Цепь_3;
+                _circuitPictureBox.Image = Resources.Цепь_3;
                 _circuit.Clean();
                 _circuit.AddAfter(null, serialCircuit);
             }
 
             if (selectedCircuit == "Цепь №4")
             {
-                ElementBase resistor1 = new Resistor(13, "R1");
-                ElementBase resistor2 = new Resistor(14, "R2");
-                ElementBase resistor3 = new Resistor(6, "R3");
-                ElementBase resistor4 = new Resistor(9, "R4");
+                ElementBase resistor1 = new Resistor("R1",13);
+                ElementBase resistor2 = new Resistor("R2",14);
+                ElementBase resistor3 = new Resistor("R3",6);
+                ElementBase resistor4 = new Resistor("R4",9);
                 ElementBase capacitor1 = new Capacitor("C1", 12);
                 ElementBase inductor1 = new Inductor("L1", 30);
                 ElementBase inductor2 = new Inductor("L2", 10);
@@ -220,16 +220,16 @@ namespace MainForm
                 resistor3.Parent = parallelCircuit2;
                 parallelCircuit2.Nodes.Add(resistor4);
                 resistor4.Parent = parallelCircuit2;
-                circuitPictureBox.Image = Resources.Цепь_4;
+                _circuitPictureBox.Image = Resources.Цепь_4;
                 _circuit.Clean();
                 _circuit.AddAfter(null, serialCircuit1);
             }
 
             if (selectedCircuit == "Цепь №5")
             {
-                ElementBase resistor = new Resistor(10, "R1");
-                ElementBase resistor1 = new Resistor(10, "R1");
-                ElementBase resistor2 = new Resistor(10, "R1");
+                ElementBase resistor = new Resistor("R1", 10 );
+                ElementBase resistor1 = new Resistor("R2",10 );
+                ElementBase resistor2 = new Resistor ("R3",10);
                 ElementBase capacitor = new Capacitor("C1", 12);
                 ElementBase inductor = new Inductor("L1", 30);
                 ElementBase inductor2 = new Inductor("L1", 23);
@@ -265,7 +265,7 @@ namespace MainForm
                 inductor2.Parent = parallelCircuit2;
                 serialCircuit1.Nodes.Add(resistor);
                 resistor.Parent = serialCircuit1;
-                circuitPictureBox.Image = Resources.Цепь_5;
+                _circuitPictureBox.Image = Resources.Цепь_5;
                 _circuit.Clean();
                 _circuit.AddAfter(null, serialCircuit1);
             }
@@ -288,7 +288,7 @@ namespace MainForm
                 return;
             }
 
-            new ImpedanceCalculator(_circuit).ShowDialog();
+            new ImpedanceCalculatorForm(_circuit).ShowDialog();
         }
 
         /// <summary>

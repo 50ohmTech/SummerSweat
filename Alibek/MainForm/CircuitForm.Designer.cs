@@ -28,77 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeView = new System.Windows.Forms.TreeView();
-            this.testCircuitsComboBox = new System.Windows.Forms.ComboBox();
-            this.calculateButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.circuitPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
+            this._treeView = new System.Windows.Forms.TreeView();
+            this._testCircuitsComboBox = new System.Windows.Forms.ComboBox();
+            this._calculateButton = new System.Windows.Forms.Button();
+            this._selectCircuitLabel = new System.Windows.Forms.Label();
+            this._circuitPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this._circuitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // treeView
+            // _treeView
             // 
-            this.treeView.Location = new System.Drawing.Point(16, 45);
-            this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(169, 114);
-            this.treeView.TabIndex = 0;
-            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
-            this.treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TreeView_MouseDoubleClick);
+            this._treeView.Location = new System.Drawing.Point(16, 45);
+            this._treeView.Name = "_treeView";
+            this._treeView.Size = new System.Drawing.Size(169, 114);
+            this._treeView.TabIndex = 0;
+            this._treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
+            this._treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TreeView_MouseDoubleClick);
             // 
-            // testCircuitsComboBox
+            // _testCircuitsComboBox
             // 
-            this.testCircuitsComboBox.FormattingEnabled = true;
-            this.testCircuitsComboBox.Location = new System.Drawing.Point(86, 9);
-            this.testCircuitsComboBox.Name = "testCircuitsComboBox";
-            this.testCircuitsComboBox.Size = new System.Drawing.Size(99, 21);
-            this.testCircuitsComboBox.TabIndex = 1;
-            this.testCircuitsComboBox.Text = "Выберите цепь";
-            this.testCircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.TestCircuitsComboBox_SelectedIndexChanged);
+            this._testCircuitsComboBox.FormattingEnabled = true;
+            this._testCircuitsComboBox.Location = new System.Drawing.Point(86, 9);
+            this._testCircuitsComboBox.Name = "_testCircuitsComboBox";
+            this._testCircuitsComboBox.Size = new System.Drawing.Size(99, 21);
+            this._testCircuitsComboBox.TabIndex = 1;
+            this._testCircuitsComboBox.Text = "Выберите цепь";
+            this._testCircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.TestCircuitsComboBox_SelectedIndexChanged);
             // 
-            // calculateButton
+            // _calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(16, 165);
-            this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(169, 52);
-            this.calculateButton.TabIndex = 6;
-            this.calculateButton.Text = "Расчитать импеданс";
-            this.calculateButton.UseVisualStyleBackColor = true;
-            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
+            this._calculateButton.Location = new System.Drawing.Point(16, 165);
+            this._calculateButton.Name = "_calculateButton";
+            this._calculateButton.Size = new System.Drawing.Size(169, 52);
+            this._calculateButton.TabIndex = 6;
+            this._calculateButton.Text = "Расчитать импеданс";
+            this._calculateButton.UseVisualStyleBackColor = true;
+            this._calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
-            // label1
+            // _selectCircuitLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Выбор цепи";
+            this._selectCircuitLabel.AutoSize = true;
+            this._selectCircuitLabel.Location = new System.Drawing.Point(13, 12);
+            this._selectCircuitLabel.Name = "_selectCircuitLabel";
+            this._selectCircuitLabel.Size = new System.Drawing.Size(67, 13);
+            this._selectCircuitLabel.TabIndex = 7;
+            this._selectCircuitLabel.Text = "Выбор цепи";
             // 
-            // circuitPictureBox
+            // _circuitPictureBox
             // 
-            this.circuitPictureBox.Location = new System.Drawing.Point(213, 12);
-            this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(318, 233);
-            this.circuitPictureBox.TabIndex = 10;
-            this.circuitPictureBox.TabStop = false;
+            this._circuitPictureBox.Location = new System.Drawing.Point(213, 12);
+            this._circuitPictureBox.Name = "_circuitPictureBox";
+            this._circuitPictureBox.Size = new System.Drawing.Size(318, 233);
+            this._circuitPictureBox.TabIndex = 10;
+            this._circuitPictureBox.TabStop = false;
             // 
             // CircuitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 257);
-            this.Controls.Add(this.circuitPictureBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.calculateButton);
-            this.Controls.Add(this.testCircuitsComboBox);
-            this.Controls.Add(this.treeView);
+            this.Controls.Add(this._circuitPictureBox);
+            this.Controls.Add(this._selectCircuitLabel);
+            this.Controls.Add(this._calculateButton);
+            this.Controls.Add(this._testCircuitsComboBox);
+            this.Controls.Add(this._treeView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CircuitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CircuitForm";
-            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._circuitPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,10 +106,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.ComboBox testCircuitsComboBox;
-        private System.Windows.Forms.Button calculateButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox circuitPictureBox;
+        private System.Windows.Forms.TreeView _treeView;
+        private System.Windows.Forms.ComboBox _testCircuitsComboBox;
+        private System.Windows.Forms.Button _calculateButton;
+        private System.Windows.Forms.Label _selectCircuitLabel;
+        private System.Windows.Forms.PictureBox _circuitPictureBox;
     }
 }
