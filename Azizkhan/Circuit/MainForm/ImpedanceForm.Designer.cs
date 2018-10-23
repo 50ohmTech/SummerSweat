@@ -94,6 +94,7 @@
             // 
             // impedancesGridView
             // 
+            this.impedancesGridView.AllowUserToResizeRows = false;
             this.impedancesGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.impedancesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -102,6 +103,7 @@
             this.impendances});
             this.impedancesGridView.Location = new System.Drawing.Point(15, 117);
             this.impedancesGridView.Name = "impedancesGridView";
+            this.impedancesGridView.ReadOnly = true;
             this.impedancesGridView.Size = new System.Drawing.Size(174, 258);
             this.impedancesGridView.TabIndex = 6;
             // 
