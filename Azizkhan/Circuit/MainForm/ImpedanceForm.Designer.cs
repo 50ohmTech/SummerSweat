@@ -44,7 +44,7 @@
             // StartLabel
             // 
             this.StartLabel.AutoSize = true;
-            this.StartLabel.Location = new System.Drawing.Point(12, 9);
+            this.StartLabel.Location = new System.Drawing.Point(54, 9);
             this.StartLabel.Name = "StartLabel";
             this.StartLabel.Size = new System.Drawing.Size(44, 13);
             this.StartLabel.TabIndex = 0;
@@ -53,7 +53,7 @@
             // EndLabel
             // 
             this.EndLabel.AutoSize = true;
-            this.EndLabel.Location = new System.Drawing.Point(12, 35);
+            this.EndLabel.Location = new System.Drawing.Point(54, 35);
             this.EndLabel.Name = "EndLabel";
             this.EndLabel.Size = new System.Drawing.Size(38, 13);
             this.EndLabel.TabIndex = 1;
@@ -62,7 +62,7 @@
             // StepLabel
             // 
             this.StepLabel.AutoSize = true;
-            this.StepLabel.Location = new System.Drawing.Point(12, 61);
+            this.StepLabel.Location = new System.Drawing.Point(54, 61);
             this.StepLabel.Name = "StepLabel";
             this.StepLabel.Size = new System.Drawing.Size(27, 13);
             this.StepLabel.TabIndex = 2;
@@ -70,27 +70,27 @@
             // 
             // StartTextBox
             // 
-            this.StartTextBox.Location = new System.Drawing.Point(89, 6);
+            this.StartTextBox.Location = new System.Drawing.Point(131, 6);
             this.StartTextBox.Name = "StartTextBox";
             this.StartTextBox.Size = new System.Drawing.Size(100, 20);
             this.StartTextBox.TabIndex = 3;
-            this.StartTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.StartTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.FrequencyTextBox_Validating);
             // 
             // FinishTextBox
             // 
-            this.FinishTextBox.Location = new System.Drawing.Point(89, 32);
+            this.FinishTextBox.Location = new System.Drawing.Point(131, 32);
             this.FinishTextBox.Name = "FinishTextBox";
             this.FinishTextBox.Size = new System.Drawing.Size(100, 20);
             this.FinishTextBox.TabIndex = 4;
-            this.FinishTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.FinishTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.FrequencyTextBox_Validating);
             // 
             // StepTextBox
             // 
-            this.StepTextBox.Location = new System.Drawing.Point(89, 58);
+            this.StepTextBox.Location = new System.Drawing.Point(131, 58);
             this.StepTextBox.Name = "StepTextBox";
             this.StepTextBox.Size = new System.Drawing.Size(100, 20);
             this.StepTextBox.TabIndex = 5;
-            this.StepTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.StepTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StepTextBox_Validating);
             // 
             // impedancesGridView
             // 
@@ -104,22 +104,24 @@
             this.impedancesGridView.Location = new System.Drawing.Point(15, 117);
             this.impedancesGridView.Name = "impedancesGridView";
             this.impedancesGridView.ReadOnly = true;
-            this.impedancesGridView.Size = new System.Drawing.Size(174, 258);
+            this.impedancesGridView.Size = new System.Drawing.Size(249, 258);
             this.impedancesGridView.TabIndex = 6;
             // 
             // frequencies
             // 
             this.frequencies.HeaderText = "Частота";
             this.frequencies.Name = "frequencies";
+            this.frequencies.ReadOnly = true;
             // 
             // impendances
             // 
             this.impendances.HeaderText = "Импедансы";
             this.impendances.Name = "impendances";
+            this.impendances.ReadOnly = true;
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(63, 88);
+            this.calculateButton.Location = new System.Drawing.Point(94, 88);
             this.calculateButton.Name = "calculateButton";
             this.calculateButton.Size = new System.Drawing.Size(75, 23);
             this.calculateButton.TabIndex = 7;
@@ -131,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(205, 387);
+            this.ClientSize = new System.Drawing.Size(276, 387);
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.impedancesGridView);
             this.Controls.Add(this.StepTextBox);

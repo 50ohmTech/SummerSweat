@@ -16,17 +16,17 @@ namespace CircuitLibrary
         /// <summary>
         ///     Итератор для C
         /// </summary>
-        public static uint _capacitorIterator;
+        public static uint CapacitorIterator;
 
         /// <summary>
         ///     Итератор для I
         /// </summary>
-        public static uint _inductorIterator;
+        public static uint InductorIterator;
 
         /// <summary>
         ///     Итератор для R
         /// </summary>
-        public static uint _resistorIterator;
+        public static uint ResistorIterator;
 
         #endregion
 
@@ -38,7 +38,6 @@ namespace CircuitLibrary
         ///     Получить узел
         /// </summary>
         /// <param name="nodeType">Тип узла</param>
-        /// <param name="name">Имя</param>
         /// <param name="value">Номинал</param>
         /// <returns>Элемент</returns>
         public static INode GetNode(NodeType nodeType,
@@ -48,15 +47,15 @@ namespace CircuitLibrary
             switch (nodeType)
             {
                 case NodeType.Resistor:
-                    newNode = new Resistor("R" + _resistorIterator++, value);
+                    newNode = new Resistor("R" + ResistorIterator++, value);
 
                     break;
                 case NodeType.Inductor:
-                    newNode = new Inductor("I" + _inductorIterator++, value);
+                    newNode = new Inductor("I" + InductorIterator++, value);
 
                     break;
                 case NodeType.Capacitor:
-                    newNode = new Capacitor("C" + _capacitorIterator++, value);
+                    newNode = new Capacitor("C" + CapacitorIterator++, value);
 
                     break;
                 case NodeType.Parallel:
@@ -78,7 +77,7 @@ namespace CircuitLibrary
         public static void IteratorsToZero()
         {
             SubcircuitBase._id =
-                _inductorIterator = _capacitorIterator = _resistorIterator = 1;
+                InductorIterator = CapacitorIterator = ResistorIterator = 1;
         }
 
         /// <summary>
@@ -142,32 +141,32 @@ namespace CircuitLibrary
 
                     var parallelSubcircuit1 = new ParallelSubcircuit();
 
-                    var seriesSubcircuit1 = new SerialSubcircuit();
-                    var seriesSubcircuit2 = new SerialSubcircuit();
+                    var serialSubcurcuit = new SerialSubcircuit();
+                    var serialSubcurcuit2 = new SerialSubcircuit();
 
-                    parallelSubcircuit1.Nodes.Add(seriesSubcircuit1);
-                    seriesSubcircuit1.Parent = parallelSubcircuit1;
-                    parallelSubcircuit1.Nodes.Add(seriesSubcircuit2);
-                    seriesSubcircuit2.Parent = parallelSubcircuit1;
+                    parallelSubcircuit1.Nodes.Add(serialSubcurcuit);
+                    serialSubcurcuit.Parent = parallelSubcircuit1;
+                    parallelSubcircuit1.Nodes.Add(serialSubcurcuit2);
+                    serialSubcurcuit2.Parent = parallelSubcircuit1;
 
                     var parallelSubcircuit2 = new ParallelSubcircuit();
                     var parallelSubcircuit3 = new ParallelSubcircuit();
 
-                    seriesSubcircuit1.Nodes.Add(inductor3);
-                    inductor3.Parent = seriesSubcircuit1;
-                    seriesSubcircuit1.Nodes.Add(parallelSubcircuit2);
-                    parallelSubcircuit2.Parent = seriesSubcircuit1;
+                    serialSubcurcuit.Nodes.Add(inductor3);
+                    inductor3.Parent = serialSubcurcuit;
+                    serialSubcurcuit.Nodes.Add(parallelSubcircuit2);
+                    parallelSubcircuit2.Parent = serialSubcurcuit;
                     parallelSubcircuit2.Nodes.Add(resistor1);
                     resistor1.Parent = parallelSubcircuit2;
                     parallelSubcircuit2.Nodes.Add(inductor4);
                     inductor4.Parent = parallelSubcircuit2;
 
-                    seriesSubcircuit2.Nodes.Add(inductor2);
-                    inductor2.Parent = seriesSubcircuit2;
-                    seriesSubcircuit2.Nodes.Add(resistor5);
-                    resistor5.Parent = seriesSubcircuit2;
-                    seriesSubcircuit2.Nodes.Add(parallelSubcircuit3);
-                    parallelSubcircuit3.Parent = seriesSubcircuit2;
+                    serialSubcurcuit2.Nodes.Add(inductor2);
+                    inductor2.Parent = serialSubcurcuit2;
+                    serialSubcurcuit2.Nodes.Add(resistor5);
+                    resistor5.Parent = serialSubcurcuit2;
+                    serialSubcurcuit2.Nodes.Add(parallelSubcircuit3);
+                    parallelSubcircuit3.Parent = serialSubcurcuit2;
                     parallelSubcircuit3.Nodes.Add(resistor6);
                     resistor6.Parent = parallelSubcircuit3;
                     parallelSubcircuit3.Nodes.Add(inductor7);
@@ -184,16 +183,16 @@ namespace CircuitLibrary
                     var resistor5 = GetNode(NodeType.Resistor, 20);
                     var inductor6 = GetNode(NodeType.Inductor, 20);
 
-                    var seriesSubcircuit1 = new SerialSubcircuit();
+                    var serialSubcurcuit = new SerialSubcircuit();
                     var parallelSubcircuit1 = new ParallelSubcircuit();
                     var parallelSubcircuit2 = new ParallelSubcircuit();
 
-                    seriesSubcircuit1.Nodes.Add(parallelSubcircuit1);
-                    parallelSubcircuit1.Parent = seriesSubcircuit1;
-                    seriesSubcircuit1.Nodes.Add(parallelSubcircuit2);
-                    parallelSubcircuit2.Parent = seriesSubcircuit1;
-                    seriesSubcircuit1.Nodes.Add(resistor3);
-                    resistor3.Parent = seriesSubcircuit1;
+                    serialSubcurcuit.Nodes.Add(parallelSubcircuit1);
+                    parallelSubcircuit1.Parent = serialSubcurcuit;
+                    serialSubcurcuit.Nodes.Add(parallelSubcircuit2);
+                    parallelSubcircuit2.Parent = serialSubcurcuit;
+                    serialSubcurcuit.Nodes.Add(resistor3);
+                    resistor3.Parent = serialSubcurcuit;
                     parallelSubcircuit1.Nodes.Add(resistor1);
                     resistor1.Parent = parallelSubcircuit1;
                     parallelSubcircuit1.Nodes.Add(inductor4);
@@ -204,7 +203,7 @@ namespace CircuitLibrary
                     resistor5.Parent = parallelSubcircuit2;
                     parallelSubcircuit2.Nodes.Add(inductor6);
                     inductor6.Parent = parallelSubcircuit2;
-                    circuit.AddAfter(null, seriesSubcircuit1);
+                    circuit.AddAfter(null, serialSubcurcuit);
 
                     break;
                 }
@@ -220,38 +219,38 @@ namespace CircuitLibrary
                     var resistor7 = GetNode(NodeType.Resistor, 20);
                     var inductor8 = GetNode(NodeType.Inductor, 20);
 
-                    var seriesSubcircuit1 = new SerialSubcircuit();
-                    var seriesSubcircuit2 = new SerialSubcircuit();
+                    var serialSubcurcuit1 = new SerialSubcircuit();
+                    var serialSubcurcuit2 = new SerialSubcircuit();
                     var parallelSubcircuit1 = new ParallelSubcircuit();
                     var parallelSubcircuit2 = new ParallelSubcircuit();
                     var parallelSubcircuit3 = new ParallelSubcircuit();
-                    seriesSubcircuit1.Nodes.Add(parallelSubcircuit1);
-                    parallelSubcircuit1.Parent = seriesSubcircuit1;
+                    serialSubcurcuit1.Nodes.Add(parallelSubcircuit1);
+                    parallelSubcircuit1.Parent = serialSubcurcuit1;
                     parallelSubcircuit1.Nodes.Add(resistor1);
                     resistor1.Parent = parallelSubcircuit1;
                     parallelSubcircuit1.Nodes.Add(inductor4);
                     inductor4.Parent = parallelSubcircuit1;
 
-                    seriesSubcircuit1.Nodes.Add(parallelSubcircuit2);
-                    parallelSubcircuit2.Parent = seriesSubcircuit1;
+                    serialSubcurcuit1.Nodes.Add(parallelSubcircuit2);
+                    parallelSubcircuit2.Parent = serialSubcurcuit1;
                     parallelSubcircuit2.Nodes.Add(capacitor2);
                     capacitor2.Parent = parallelSubcircuit2;
-                    parallelSubcircuit2.Nodes.Add(seriesSubcircuit2);
-                    seriesSubcircuit2.Parent = parallelSubcircuit2;
-                    seriesSubcircuit2.Nodes.Add(parallelSubcircuit3);
-                    parallelSubcircuit3.Parent = seriesSubcircuit2;
-                    seriesSubcircuit2.Nodes.Add(resistor7);
-                    resistor7.Parent = seriesSubcircuit2;
+                    parallelSubcircuit2.Nodes.Add(serialSubcurcuit2);
+                    serialSubcurcuit2.Parent = parallelSubcircuit2;
+                    serialSubcurcuit2.Nodes.Add(parallelSubcircuit3);
+                    parallelSubcircuit3.Parent = serialSubcurcuit2;
+                    serialSubcurcuit2.Nodes.Add(resistor7);
+                    resistor7.Parent = serialSubcurcuit2;
                     parallelSubcircuit3.Nodes.Add(resistor5);
                     resistor5.Parent = parallelSubcircuit3;
                     parallelSubcircuit3.Nodes.Add(inductor8);
                     inductor8.Parent = parallelSubcircuit3;
                     parallelSubcircuit2.Nodes.Add(inductor6);
                     inductor6.Parent = parallelSubcircuit2;
-                    seriesSubcircuit1.Nodes.Add(resistor3);
-                    resistor3.Parent = seriesSubcircuit1;
+                    serialSubcurcuit1.Nodes.Add(resistor3);
+                    resistor3.Parent = serialSubcurcuit1;
 
-                    circuit.AddAfter(null, seriesSubcircuit1);
+                    circuit.AddAfter(null, serialSubcurcuit1);
                     break;
                 }
 

@@ -27,8 +27,8 @@ namespace CircuitLibrary
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>
-        /// <param name="frequency"></param>
-        /// <returns></returns>
+        /// <param name="frequency">Частота</param>
+        /// <returns>Импеданс</returns>
         Complex CalculateZ(double frequency);
 
         #endregion

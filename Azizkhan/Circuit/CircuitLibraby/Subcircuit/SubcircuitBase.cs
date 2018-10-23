@@ -47,9 +47,12 @@ namespace CircuitLibrary.Subcircuits
             get => parent;
             set
             {
-                parent = value;
-                SubcircuitChanged?.Invoke(this,
-                    new SubcircuitChangedEventArgs("Родитель изменен", value));
+                if (value != parent)
+                {
+                    parent = value;
+                    SubcircuitChanged?.Invoke(this,
+                        new SubcircuitChangedEventArgs("Родитель изменен", value));
+                }
             }
         }
 

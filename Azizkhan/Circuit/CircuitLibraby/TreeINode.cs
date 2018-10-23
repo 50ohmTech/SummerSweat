@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using CircuitLibrary;
 using CircuitLibrary.Elements;
 using CircuitLibrary.Subcircuits;
 
-namespace CircuitLibraby
+namespace CircuitLibrary
 {
     /// <summary>
-    ///     Модифицированный узел для TreeNode
+    ///     Модифицированный узел для TreeNode.
     /// </summary>
     public class TreeINode : TreeNode
     {
@@ -28,11 +27,6 @@ namespace CircuitLibraby
         /// <param name="node">Нода.</param>
         public TreeINode(INode node)
         {
-            if (node == null)
-            {
-                return;
-            }
-
             Value = node ?? throw new ArgumentNullException(nameof(node));
 
             Value = node;

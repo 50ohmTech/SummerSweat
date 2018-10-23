@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using CircuitLibraby;
 using CircuitLibrary;
 using CircuitLibrary.Elements;
 using CircuitLibrary.Subcircuits;
@@ -166,15 +165,15 @@ namespace CircuitView
                 switch (nodeType)
                 {
                     case NodeType.Resistor:
-                        NodesFactory._resistorIterator--;
+                        NodesFactory.ResistorIterator--;
 
                         break;
                     case NodeType.Inductor:
-                        NodesFactory._inductorIterator--;
+                        NodesFactory.InductorIterator--;
 
                         break;
                     case NodeType.Capacitor:
-                        NodesFactory._capacitorIterator--;
+                        NodesFactory.CapacitorIterator--;
 
                         break;
                 }
