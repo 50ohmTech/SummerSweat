@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using ElementsLibrary;
 using ElementsLibrary.Circuits;
+using ElementsLibrary.Elements;
 using MainForm.Properties;
 
 namespace MainForm
 {
     /// <summary>
-    /// Класс под основную форму
+    ///     Класс под основную форму
     /// </summary>
     public partial class CircuitForm : Form
     {
         #region Readonly fields
 
         /// <summary>
-        /// Цепь
+        ///     Цепь
         /// </summary>
         private readonly Circuit _circuit;
 
@@ -25,7 +24,7 @@ namespace MainForm
         #region Private fields
 
         /// <summary>
-        /// Текущй узел
+        ///     Текущй узел
         /// </summary>
         private INode _currentNode;
 
@@ -34,20 +33,18 @@ namespace MainForm
         #region Constructor
 
         /// <summary>
-        /// Конструктор формы
+        ///     Конструктор формы
         /// </summary>
         public CircuitForm()
         {
             InitializeComponent();
 
-            TestCircuitsComboBox.Items.Add("Цепь №1");
-            TestCircuitsComboBox.Items.Add("Цепь №2");
-            TestCircuitsComboBox.Items.Add("Цепь №3");
-            TestCircuitsComboBox.Items.Add("Цепь №4");
-            TestCircuitsComboBox.Items.Add("Цепь №5");
-            TestCircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            testCircuitsComboBox.Items.Add("Цепь №1");
+            testCircuitsComboBox.Items.Add("Цепь №2");
+            testCircuitsComboBox.Items.Add("Цепь №3");
+            testCircuitsComboBox.Items.Add("Цепь №4");
+            testCircuitsComboBox.Items.Add("Цепь №5");
 
-           
 
             _circuit = new Circuit();
         }
@@ -57,7 +54,7 @@ namespace MainForm
         #region Private methods
 
         /// <summary>
-        /// Функция для обновления информаици в TreeView
+        ///     Функция для обновления информаици в TreeView
         /// </summary>
         private void UpdateTreeView()
         {
@@ -75,27 +72,27 @@ namespace MainForm
 
                 foreach (var child in node.Nodes)
                 {
-                    TreeViewNode newTreeNode = new TreeViewNode(child);
+                    var newTreeNode = new TreeViewNode(child);
                     treeNode.Nodes.Add(newTreeNode);
                     AddNodeTreeNodes(child, newTreeNode);
                 }
             }
 
             treeView.Nodes.Clear();
-            TreeViewNode root = new TreeViewNode(_circuit.Root);
+            var root = new TreeViewNode(_circuit.Root);
             treeView.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
             treeView.ExpandAll();
         }
 
         /// <summary>
-        /// Выбор цепи в Combobox
+        ///     Выбор цепи в Combobox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TestCircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedCircuit = TestCircuitsComboBox.SelectedItem.ToString();
+            var selectedCircuit = testCircuitsComboBox.SelectedItem.ToString();
             if (selectedCircuit == "Цепь №1")
             {
                 ElementBase resistor = new Resistor(13, "R1");
@@ -115,7 +112,7 @@ namespace MainForm
                 serialCircuit.Nodes.Add(inductor);
                 parallelCircuit.Parent = serialCircuit;
                 inductor.Parent = serialCircuit;
-                CircuitPictureBox.Image = Resources.Цепь_1;
+                circuitPictureBox.Image = Resources.Цепь_1;
                 _circuit.Clean();
                 _circuit.AddAfter(null, parallelCircuit);
             }
@@ -146,7 +143,7 @@ namespace MainForm
 
                 serialCircuit1.Nodes.Add(parallelCircuit2);
                 parallelCircuit2.Parent = serialCircuit1;
-                CircuitPictureBox.Image = Resources.Цепь_2;
+                circuitPictureBox.Image = Resources.Цепь_2;
                 _circuit.Clean();
                 _circuit.AddAfter(null, parallelCircuit1);
             }
@@ -186,7 +183,7 @@ namespace MainForm
                 parallelCircuit2.Nodes.Add(resistor3);
                 resistor3.Parent = parallelCircuit2;
 
-                CircuitPictureBox.Image = Resources.Цепь_3;
+                circuitPictureBox.Image = Resources.Цепь_3;
                 _circuit.Clean();
                 _circuit.AddAfter(null, serialCircuit);
             }
@@ -223,7 +220,7 @@ namespace MainForm
                 resistor3.Parent = parallelCircuit2;
                 parallelCircuit2.Nodes.Add(resistor4);
                 resistor4.Parent = parallelCircuit2;
-                CircuitPictureBox.Image = Resources.Цепь_4;
+                circuitPictureBox.Image = Resources.Цепь_4;
                 _circuit.Clean();
                 _circuit.AddAfter(null, serialCircuit1);
             }
@@ -268,7 +265,7 @@ namespace MainForm
                 inductor2.Parent = parallelCircuit2;
                 serialCircuit1.Nodes.Add(resistor);
                 resistor.Parent = serialCircuit1;
-                CircuitPictureBox.Image = Resources.Цепь_5;
+                circuitPictureBox.Image = Resources.Цепь_5;
                 _circuit.Clean();
                 _circuit.AddAfter(null, serialCircuit1);
             }
@@ -277,21 +274,29 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Кнопка для открытия калькулятора(другой формы)
+        ///     Кнопка для открытия калькулятора(другой формы)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+            if (_circuit.Root == null)
+            {
+                MessageBox.Show("Выберите цепь!", "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                return;
+            }
+
             new ImpedanceCalculator(_circuit).ShowDialog();
         }
 
         /// <summary>
-        /// Событие для изменения значения элемента в TreeView
+        ///     Событие для изменения значения элемента в TreeView
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treeView_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void TreeView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (_currentNode != null)
             {
@@ -315,11 +320,11 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Событие для изменения значения элемента в TreeView
+        ///     Событие для изменения значения элемента в TreeView
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node is TreeViewNode treeNode)
             {

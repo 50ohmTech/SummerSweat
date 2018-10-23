@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-
 namespace ElementsLibrary.Circuits
 {
     /// <summary>
-    /// Базовый класс подцепи <see cref="SubcircuitBase"/>
+    ///     Базовый класс подцепи 
     /// </summary>
     public abstract class SubcircuitBase : INode
     {
@@ -14,7 +13,7 @@ namespace ElementsLibrary.Circuits
         /// <summary>
         ///     Идентификатор
         /// </summary>
-        private static uint _globalID;
+        private static uint _globalId;
 
         #endregion
 
@@ -23,7 +22,12 @@ namespace ElementsLibrary.Circuits
         /// <summary>
         ///     Идентификатор
         /// </summary>
-        public uint uniqueID { get; }
+        public uint UniqueId { get; }
+
+        /// <summary>
+        ///     Тип подключения
+        /// </summary>
+        public NodeType NodeType { get; set; }
 
         /// <summary>
         ///     Главный узел
@@ -35,11 +39,6 @@ namespace ElementsLibrary.Circuits
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
-        /// <summary>
-        ///     Тип подключения
-        /// </summary>
-        public NodeType NodeType { get; set; }
-
         #endregion
 
         #region Constructor
@@ -49,8 +48,8 @@ namespace ElementsLibrary.Circuits
         /// </summary>
         public SubcircuitBase()
         {
-            uniqueID = _globalID;
-            _globalID++;
+            UniqueId = _globalId;
+            _globalId++;
         }
 
         #endregion

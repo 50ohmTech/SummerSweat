@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.treeView = new System.Windows.Forms.TreeView();
-            this.TestCircuitsComboBox = new System.Windows.Forms.ComboBox();
-            this.CalculateButton = new System.Windows.Forms.Button();
+            this.testCircuitsComboBox = new System.Windows.Forms.ComboBox();
+            this.calculateButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).BeginInit();
+            this.circuitPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // treeView
@@ -42,30 +42,30 @@
             this.treeView.Name = "treeView";
             this.treeView.Size = new System.Drawing.Size(169, 114);
             this.treeView.TabIndex = 0;
-            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
-            this.treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseDoubleClick);
+            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
+            this.treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TreeView_MouseDoubleClick);
             // 
-            // TestCircuitsComboBox
+            // testCircuitsComboBox
             // 
-            this.TestCircuitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.TestCircuitsComboBox.FormattingEnabled = true;
-            this.TestCircuitsComboBox.Items.AddRange(new object[] {
+            this.testCircuitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.testCircuitsComboBox.FormattingEnabled = true;
+            this.testCircuitsComboBox.Items.AddRange(new object[] {
             "Выберите цепь"});
-            this.TestCircuitsComboBox.Location = new System.Drawing.Point(86, 9);
-            this.TestCircuitsComboBox.Name = "TestCircuitsComboBox";
-            this.TestCircuitsComboBox.Size = new System.Drawing.Size(99, 21);
-            this.TestCircuitsComboBox.TabIndex = 1;
-            this.TestCircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.TestCircuitsComboBox_SelectedIndexChanged);
+            this.testCircuitsComboBox.Location = new System.Drawing.Point(86, 9);
+            this.testCircuitsComboBox.Name = "testCircuitsComboBox";
+            this.testCircuitsComboBox.Size = new System.Drawing.Size(99, 21);
+            this.testCircuitsComboBox.TabIndex = 1;
+            this.testCircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.TestCircuitsComboBox_SelectedIndexChanged);
             // 
-            // CalculateButton
+            // calculateButton
             // 
-            this.CalculateButton.Location = new System.Drawing.Point(16, 165);
-            this.CalculateButton.Name = "CalculateButton";
-            this.CalculateButton.Size = new System.Drawing.Size(167, 30);
-            this.CalculateButton.TabIndex = 6;
-            this.CalculateButton.Text = "Расчитать импеданс";
-            this.CalculateButton.UseVisualStyleBackColor = true;
-            this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
+            this.calculateButton.Location = new System.Drawing.Point(16, 165);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(167, 30);
+            this.calculateButton.TabIndex = 6;
+            this.calculateButton.Text = "Расчитать импеданс";
+            this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
             // label1
             // 
@@ -76,28 +76,28 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Выбор цепи";
             // 
-            // CircuitPictureBox
+            // circuitPictureBox
             // 
-            this.CircuitPictureBox.Location = new System.Drawing.Point(213, 12);
-            this.CircuitPictureBox.Name = "CircuitPictureBox";
-            this.CircuitPictureBox.Size = new System.Drawing.Size(318, 296);
-            this.CircuitPictureBox.TabIndex = 10;
-            this.CircuitPictureBox.TabStop = false;
+            this.circuitPictureBox.Location = new System.Drawing.Point(213, 12);
+            this.circuitPictureBox.Name = "circuitPictureBox";
+            this.circuitPictureBox.Size = new System.Drawing.Size(318, 296);
+            this.circuitPictureBox.TabIndex = 10;
+            this.circuitPictureBox.TabStop = false;
             // 
             // CircuitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 320);
-            this.Controls.Add(this.CircuitPictureBox);
+            this.Controls.Add(this.circuitPictureBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.CalculateButton);
-            this.Controls.Add(this.TestCircuitsComboBox);
+            this.Controls.Add(this.calculateButton);
+            this.Controls.Add(this.testCircuitsComboBox);
             this.Controls.Add(this.treeView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CircuitForm";
             this.Text = "CircuitForm";
-            ((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,9 +106,9 @@
         #endregion
 
         private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.ComboBox TestCircuitsComboBox;
-        private System.Windows.Forms.Button CalculateButton;
+        private System.Windows.Forms.ComboBox testCircuitsComboBox;
+        private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox CircuitPictureBox;
+        private System.Windows.Forms.PictureBox circuitPictureBox;
     }
 }

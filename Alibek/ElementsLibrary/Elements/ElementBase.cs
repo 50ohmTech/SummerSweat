@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-
-namespace ElementsLibrary
+namespace ElementsLibrary.Elements
 {
     /// <summary>
-    ///     Базовый класс элемента <see cref="ElementBase"/>
+    ///     Базовый класс элемента <see cref="ElementBase" />
     /// </summary>
     public abstract class ElementBase : INode
     {

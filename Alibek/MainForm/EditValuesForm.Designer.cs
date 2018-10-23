@@ -28,50 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.EditValuesTextBox = new System.Windows.Forms.TextBox();
-            this.EditValueButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.editValuesTextBox = new System.Windows.Forms.TextBox();
+            this.editValueButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // EditValuesTextBox
+            // editValuesTextBox
             // 
-            this.EditValuesTextBox.Location = new System.Drawing.Point(23, 30);
-            this.EditValuesTextBox.Name = "EditValuesTextBox";
-            this.EditValuesTextBox.Size = new System.Drawing.Size(100, 20);
-            this.EditValuesTextBox.TabIndex = 0;
-            this.EditValuesTextBox.Text = "0";
-            this.EditValuesTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
-            this.EditValuesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
-            this.EditValuesTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
+            this.editValuesTextBox.Location = new System.Drawing.Point(23, 30);
+            this.editValuesTextBox.Name = "editValuesTextBox";
+            this.editValuesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.editValuesTextBox.TabIndex = 0;
+            this.editValuesTextBox.Text = "0";
+            this.editValuesTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.editValuesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this.editValuesTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
-            // EditValueButton
+            // editValueButton
             // 
-            this.EditValueButton.Location = new System.Drawing.Point(23, 72);
-            this.EditValueButton.Name = "EditValueButton";
-            this.EditValueButton.Size = new System.Drawing.Size(100, 23);
-            this.EditValueButton.TabIndex = 1;
-            this.EditValueButton.Text = "Изменить";
-            this.EditValueButton.UseVisualStyleBackColor = true;
-            this.EditValueButton.Click += new System.EventHandler(this.EditValueButton_Click);
+            this.editValueButton.Location = new System.Drawing.Point(23, 72);
+            this.editValueButton.Name = "editValueButton";
+            this.editValueButton.Size = new System.Drawing.Size(100, 23);
+            this.editValueButton.TabIndex = 1;
+            this.editValueButton.Text = "Изменить";
+            this.editValueButton.UseVisualStyleBackColor = true;
+            this.editValueButton.Click += new System.EventHandler(this.EditValueButton_Click);
             // 
-            // CancelButton
+            // cancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(23, 111);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(100, 23);
-            this.CancelButton.TabIndex = 2;
-            this.CancelButton.Text = "Выйти";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.cancelButton.Location = new System.Drawing.Point(23, 111);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(100, 23);
+            this.cancelButton.TabIndex = 2;
+            this.cancelButton.Text = "Выйти";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // EditValuesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(151, 168);
-            this.Controls.Add(this.CancelButton);
-            this.Controls.Add(this.EditValueButton);
-            this.Controls.Add(this.EditValuesTextBox);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.editValueButton);
+            this.Controls.Add(this.editValuesTextBox);
             this.Name = "EditValuesForm";
             this.Text = "EditValuesForm";
             this.ResumeLayout(false);
@@ -81,8 +81,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox EditValuesTextBox;
-        private System.Windows.Forms.Button EditValueButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.TextBox editValuesTextBox;
+        private System.Windows.Forms.Button editValueButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

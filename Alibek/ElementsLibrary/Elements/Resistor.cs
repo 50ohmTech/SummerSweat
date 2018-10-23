@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-
-namespace ElementsLibrary
+namespace ElementsLibrary.Elements
 {
     /// <summary>
     ///     Класс резистор <see cref="Resistor" />

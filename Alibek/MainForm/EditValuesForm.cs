@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
-using ElementsLibrary;
+using ElementsLibrary.Elements;
 
 namespace MainForm
 {
     /// <summary>
-    /// Форма для изменения значений в TreeView
+    ///     Форма для изменения значений в TreeView
     /// </summary>
     public partial class EditValuesForm : Form
     {
         #region Readonly fields
 
         /// <summary>
-        /// Элемент
+        ///     Элемент
         /// </summary>
         private readonly ElementBase _element;
 
@@ -21,7 +21,7 @@ namespace MainForm
         #region Private fields
 
         /// <summary>
-        /// Значение(номинал) элемента
+        ///     Значение(номинал) элемента
         /// </summary>
         private double _value;
 
@@ -30,7 +30,7 @@ namespace MainForm
         #region Constructor
 
         /// <summary>
-        /// Конструктор формы
+        ///     Конструктор формы
         /// </summary>
         /// <param name="element"></param>
         public EditValuesForm(ElementBase element)
@@ -44,7 +44,7 @@ namespace MainForm
         #region Private methods
 
         /// <summary>
-        ///Событие подготавливающие поле к вводу.
+        ///     Событие подготавливающие поле к вводу.
         /// </summary>
         /// <param name="sender">Отправитель события.</param>
         /// <param name="e">Параметры события.</param>
@@ -54,7 +54,7 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Событие подготавливающие поле к вводу.
+        ///     Событие подготавливающие поле к вводу.
         /// </summary>
         /// <param name="sender">Отправитель события.</param>
         /// <param name="e">Параметры события.</param>
@@ -64,7 +64,7 @@ namespace MainForm
         }
 
         /// <summary>
-        ///    Собыите для ограничиния вводв символов в текстбокс для double.
+        ///     Собыите для ограничиния вводв символов в текстбокс для double.
         /// </summary>
         /// <param name="sender">Отправитель события.</param>
         /// <param name="e">Параметры события.</param>
@@ -74,18 +74,18 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Событие по которому изменяется значение элемента
+        ///     Событие по которому изменяется значение элемента
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void EditValueButton_Click(object sender, EventArgs e)
         {
-            _element.Value = Convert.ToDouble(EditValuesTextBox.Text);
+            _element.Value = Convert.ToDouble(editValuesTextBox.Text);
             DialogResult = DialogResult.Cancel;
         }
 
         /// <summary>
-        /// Событие для выхода из формы
+        ///     Событие для выхода из формы
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

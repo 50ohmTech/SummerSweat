@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Numerics;
 using ElementsLibrary.Circuits;
+using ElementsLibrary.Elements;
 
 namespace ElementsLibrary
 {
     /// <summary>
-    ///     Класс электрическая цепь Circuit <see cref="Circuit" />
+    ///     Класс электрическая цепь Circuit
     /// </summary>
     public class Circuit
     {
@@ -61,7 +62,7 @@ namespace ElementsLibrary
         }
 
         /// <summary>
-        /// Функция добавления
+        ///     Функция добавления
         /// </summary>
         /// <param name="currentNode"></param>
         /// <param name="newNode"></param>
@@ -90,7 +91,7 @@ namespace ElementsLibrary
         }
 
         /// <summary>
-        /// Проверка на null
+        ///     Проверка на null
         /// </summary>
         /// <returns></returns>
         public bool IsEmpty()

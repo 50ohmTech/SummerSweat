@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Windows.Forms;
 using ElementsLibrary.Circuits;
+using ElementsLibrary.Elements;
 
 namespace ElementsLibrary
 {
     /// <summary>
-    /// Модифицированный узел для TreeNode
+    ///     Модифицированный узел для TreeNode
     /// </summary>
     public class TreeViewNode : TreeNode
     {
         #region Properties
 
         /// <summary>
-        /// Значение
+        ///     Значение
         /// </summary>
         public INode Value { get; }
 
@@ -21,7 +22,7 @@ namespace ElementsLibrary
         #region Constructor
 
         /// <summary>
-        /// Конструктор
+        ///     Конструктор
         /// </summary>
         /// <param name="node"></param>
         public TreeViewNode(INode node)
@@ -36,10 +37,10 @@ namespace ElementsLibrary
             switch (node)
             {
                 case SerialSubcircuit series:
-                    Text = $"[Послед] (Id:{series.uniqueID})";
+                    Text = $"[Послед] (Id:{series.UniqueId})";
                     break;
                 case ParallelSubcircuit parallel:
-                    Text = $"[Паралл] (Id:{parallel.uniqueID})";
+                    Text = $"[Паралл] (Id:{parallel.UniqueId})";
                     break;
                 case Resistor resistor:
                     Text = $"({resistor.Name}) [{resistor.Value}]";

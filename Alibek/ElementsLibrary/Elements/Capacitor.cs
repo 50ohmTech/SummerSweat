@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Numerics;
 
-
-namespace ElementsLibrary
+namespace ElementsLibrary.Elements
 {
     /// <summary>
-    ///     Класс Конденсатор <see cref="Capacitor" />
+    ///     Класс Конденсатор 
     /// </summary>
     public class Capacitor : ElementBase
     {

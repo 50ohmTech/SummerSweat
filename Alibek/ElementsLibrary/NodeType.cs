@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace ElementsLibrary
+﻿namespace ElementsLibrary
 {
     /// <summary>
-    /// Типы соединения в enumeration <see cref="NodeType"/>
+    ///     Типы соединения в enumeration <see cref="NodeType" />
     /// </summary>
     public enum NodeType
     {
         /// <summary>
-        /// Последовательное соединение
+        ///     Последовательное соединение
         /// </summary>
         Serial,
+
         /// <summary>
-        /// Параллельное соединение
+        ///     Параллельное соединение
         /// </summary>
         Parallel,
+
         /// <summary>
-        /// Катушка индуктивности
+        ///     Катушка индуктивности
         /// </summary>
         Inductor,
+
         /// <summary>
-        /// Конденсатор
+        ///     Конденсатор
         /// </summary>
         Capacitor,
+
         /// <summary>
-        /// Резистор
+        ///     Резистор
         /// </summary>
         Resistor
     }

@@ -5,20 +5,15 @@ using System.Windows.Forms;
 namespace MainForm
 {
     /// <summary>
-    /// Инструменты для валидации текстбоксов
+    ///     Инструменты для валидации текстбоксов
     /// </summary>
     public class ValueValidators
     {
         #region Private methods
 
         /// <summary>
-        /// Проверка на границы значений
+        ///     Проверка на границы значений
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
         private static bool IsCorrectRangeParametr(double value, double min, double max,
             string type)
         {
@@ -39,7 +34,7 @@ namespace MainForm
         #region Public methods
 
         /// <summary>
-        /// Ввод вещественных значений
+        ///     Ввод вещественных значений
         /// </summary>
         /// <param name="e"></param>
         /// <param name="text"></param>
@@ -68,22 +63,25 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Ввод целых значений
+        ///     Ввод целых значений
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public static void PressInt(object sender, KeyPressEventArgs e)
         {
+            const double MaxLength = 4;
+
             if (e.KeyChar == (char) Keys.Back || char.IsDigit(e.KeyChar) &&
-                ((TextBox) sender).Text.Length < 4)
+                ((TextBox) sender).Text.Length < MaxLength)
             {
                 return;
             }
 
             e.Handled = true;
         }
+
         /// <summary>
-        /// Функция подготавливающая поле к вводу.
+        ///     Функция подготавливающая поле к вводу.
         /// </summary>
         /// <param name="sender"></param>
         public static void Enter(object sender)
@@ -100,7 +98,7 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Функция подготавливающая поле к выводу.
+        ///     Функция подготавливающая поле к выводу.
         /// </summary>
         /// <param name="sender"></param>
         public static void Leave(object sender)
@@ -117,7 +115,7 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Заменить символ-разделитель.
+        ///     Заменить символ-разделитель.
         /// </summary>
         /// <param name="valueBox"></param>
         public static void ChangeSeparator(TextBox valueBox)
@@ -130,7 +128,7 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Проверка значений на границы
+        ///     Проверка значений на границы
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -155,7 +153,7 @@ namespace MainForm
         }
 
         /// <summary>
-        /// Проверка частоты на границы
+        ///     Проверка частоты на границы
         /// </summary>
         /// <param name="startValue"></param>
         /// <param name="interval"></param>
