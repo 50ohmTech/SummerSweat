@@ -36,6 +36,9 @@ namespace MainForm
 
         #region Constructor
 
+        /// <summary>
+        ///     Конструктор формы-калькулятора импедансов.
+        /// </summary>
         public ImpedanceForm()
         {
             InitializeComponent();
@@ -47,6 +50,9 @@ namespace MainForm
 
         #region Private methods
 
+        /// <summary>
+        ///     Расчёт импедансов.
+        /// </summary>
         private void CalculateImpedance()
         {
             try

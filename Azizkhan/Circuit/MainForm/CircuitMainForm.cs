@@ -34,6 +34,9 @@ namespace CircuitView
 
         #region Constructor
 
+        /// <summary>
+        ///     Конструктор главной формы
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();

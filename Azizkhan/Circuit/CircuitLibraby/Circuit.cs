@@ -52,6 +52,11 @@ namespace CircuitLibrary
                 throw new NullReferenceException("В цепи нет элементов.");
             }
 
+            if (frequencies == null)
+            {
+                throw new NullReferenceException("Cписок частот пуст.");
+            }
+
             return frequencies.Select(frequency => Root.CalculateZ(frequency)).ToList();
         }
 

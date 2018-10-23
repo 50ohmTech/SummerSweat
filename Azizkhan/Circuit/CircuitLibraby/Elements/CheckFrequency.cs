@@ -30,6 +30,11 @@ namespace CircuitLibrary.Elements
         /// <exception cref="ArgumentException">Исключение, в случае частот вне диапазона от 1 Гц. до 1Тгц.</exception>
         public static void CheckFrequencies(params double[] frequencies)
         {
+            if (frequencies == null)
+            {
+                throw new NullReferenceException("Cписок частот пуст.");
+            }
+
             foreach (var frequency in frequencies)
             {
                 if (frequency < MIN_FREQUENCY || frequency > MAX_FREQUENCY)
