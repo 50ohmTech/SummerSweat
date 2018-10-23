@@ -43,7 +43,7 @@ namespace View
         private INode _currentNode;
 
         /// <summary>
-        /// Форма для расчета импеданса.
+        ///     Форма для расчета импеданса.
         /// </summary>
         private ImpedanceForm impedanceForm;
 
@@ -65,17 +65,17 @@ namespace View
             }
 
             CircuitsComboBox.DataSource = circuits;
-            CircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;    
+            CircuitsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             _count = 0;
-            List<string> elements = new List<string>();
-            Array arrayElements = Enum.GetValues(typeof(NodeType));
+            var elements = new List<string>();
+            var arrayElements = Enum.GetValues(typeof(NodeType));
 
             foreach (NodeType element in arrayElements)
             {
                 elements.Add(Tools.GetDescription(element));
             }
-            
+
 
             NadeComboBox.DataSource = elements;
             NadeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -125,7 +125,6 @@ namespace View
         private void SelectingCircuitsComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
         {
-
             if (_circuitsComboBox != null)
             {
                 var selectedState = CircuitsComboBox.SelectedItem.ToString();
@@ -138,6 +137,7 @@ namespace View
                     _vectorOfElements.Clear();
                     return;
                 }
+
                 _circuitsComboBox.CreateCircuit(selectedState, _vectorOfElements,
                     _circuit);
 
@@ -301,35 +301,38 @@ namespace View
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (_currentNode == _circuit.Root)
+            if (_vectorOfElements.Count != 0)
             {
-                _circuit.Remove(_currentNode);
-                treeView.Nodes.Clear();
-                circuitPictureBox.Image = null;
-                _count = 0;
-                _vectorOfElements.Clear();
-                return;
-            }
-
-            if (_currentNode is ElementBase currentNode)
-            {
-                var deletedElement = new Tools.Pair<char, int>(currentNode.Name[0],
-                    (int) char.GetNumericValue(currentNode.Name[1]));
-
-                for (var i = 0; i < _vectorOfElements.Count; i++)
+                if (_currentNode == _circuit.Root)
                 {
-                    if (_vectorOfElements[i].First == deletedElement.First &&
-                        _vectorOfElements[i].Second == deletedElement.Second)
-                    {
-                        _vectorOfElements.Remove(_vectorOfElements[i]);
-                    }
+                    _circuit.Remove(_currentNode);
+                    treeView.Nodes.Clear();
+                    circuitPictureBox.Image = null;
+                    _count = 0;
+                    _vectorOfElements.Clear();
+                    return;
                 }
 
-                _count--;
-            }
+                if (_currentNode is ElementBase currentNode)
+                {
+                    var deletedElement = new Tools.Pair<char, int>(currentNode.Name[0],
+                        (int) char.GetNumericValue(currentNode.Name[1]));
 
-            _circuit.Remove(_currentNode);
-            UpdateTreeView();
+                    for (var i = 0; i < _vectorOfElements.Count; i++)
+                    {
+                        if (_vectorOfElements[i].First == deletedElement.First &&
+                            _vectorOfElements[i].Second == deletedElement.Second)
+                        {
+                            _vectorOfElements.Remove(_vectorOfElements[i]);
+                        }
+                    }
+
+                    _count--;
+                }
+
+                _circuit.Remove(_currentNode);
+                UpdateTreeView();
+            }
         }
 
         private void CalculateImpedanceButton_Click(object sender, EventArgs e)

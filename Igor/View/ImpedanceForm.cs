@@ -89,6 +89,7 @@ namespace View
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+            Tools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
             CalculateImpedance();
         }
 
@@ -99,6 +100,7 @@ namespace View
                 Tools.ShowError(textBox);
                 textBox.Text = null;
                 textBox.Clear();
+                return;
             }
 
             if (Tools.IsCellCorrect(StartTextBox.Text) != true ||
@@ -109,7 +111,10 @@ namespace View
                 return;
             }
 
-            CalculateButton.Enabled = true;
+            if (Circuit.Root != null)
+            {
+                CalculateButton.Enabled = true;
+            }
         }
 
         private void StartTextBox_TextChanged(object sender, EventArgs e)
@@ -119,7 +124,6 @@ namespace View
                 ValidatigTextBox(StartTextBox);
             }
 
-            Tools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
             Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
         }
 
@@ -130,7 +134,6 @@ namespace View
                 ValidatigTextBox(FinishTextBox);
             }
 
-            Tools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
             Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
         }
 
@@ -145,5 +148,10 @@ namespace View
         }
 
         #endregion
+
+        private void ImpedanceForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Circuit = null;
+        }
     }
 }

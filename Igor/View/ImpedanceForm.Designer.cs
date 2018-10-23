@@ -160,6 +160,7 @@
             this.Name = "ImpedanceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Расчет импеданса";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ImpedanceForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
