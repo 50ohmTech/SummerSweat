@@ -156,6 +156,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.calculatorDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ImpedanceCalculator";
             this.Text = "Impedance calculator";
             ((System.ComponentModel.ISupportInitialize)(this.calculatorDataGridView)).EndInit();

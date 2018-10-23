@@ -61,7 +61,7 @@
             // 
             this.calculateButton.Location = new System.Drawing.Point(16, 165);
             this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(167, 30);
+            this.calculateButton.Size = new System.Drawing.Size(169, 52);
             this.calculateButton.TabIndex = 6;
             this.calculateButton.Text = "Расчитать импеданс";
             this.calculateButton.UseVisualStyleBackColor = true;
@@ -80,7 +80,7 @@
             // 
             this.circuitPictureBox.Location = new System.Drawing.Point(213, 12);
             this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(318, 296);
+            this.circuitPictureBox.Size = new System.Drawing.Size(318, 233);
             this.circuitPictureBox.TabIndex = 10;
             this.circuitPictureBox.TabStop = false;
             // 
@@ -88,13 +88,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 320);
+            this.ClientSize = new System.Drawing.Size(543, 257);
             this.Controls.Add(this.circuitPictureBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.testCircuitsComboBox);
             this.Controls.Add(this.treeView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CircuitForm";
             this.Text = "CircuitForm";
             ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();

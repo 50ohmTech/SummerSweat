@@ -72,6 +72,8 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.editValueButton);
             this.Controls.Add(this.editValuesTextBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditValuesForm";
             this.Text = "EditValuesForm";
             this.ResumeLayout(false);
