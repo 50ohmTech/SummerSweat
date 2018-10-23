@@ -34,7 +34,7 @@ namespace CircuitView
             _element = element ?? throw new ArgumentNullException(nameof(element));
             InitializeComponent();
             Text = "Элемент: " + element.Name;
-            valueTextBox.Text = element.Value.ToString();
+            valueTextBox.Text = Convert.ToString((decimal) element.Value);
 
             DialogResult = DialogResult.Yes;
             cancelButton.DialogResult = DialogResult.Cancel;

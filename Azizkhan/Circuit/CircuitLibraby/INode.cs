@@ -13,7 +13,7 @@ namespace CircuitLibrary
         /// <summary>
         ///     Узел-родитель
         /// </summary>
-        INode Parent { get; }
+        INode Parent { get; set; }
 
         /// <summary>
         ///     Дочерние узлы

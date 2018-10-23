@@ -43,7 +43,7 @@
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(15, 236);
+            this.AddButton.Location = new System.Drawing.Point(15, 330);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(80, 23);
             this.AddButton.TabIndex = 0;
@@ -53,7 +53,7 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(105, 236);
+            this.DeleteButton.Location = new System.Drawing.Point(105, 330);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(80, 23);
             this.DeleteButton.TabIndex = 1;
@@ -63,7 +63,7 @@
             // 
             // CalculateImpedanceButton
             // 
-            this.CalculateImpedanceButton.Location = new System.Drawing.Point(15, 265);
+            this.CalculateImpedanceButton.Location = new System.Drawing.Point(15, 359);
             this.CalculateImpedanceButton.Name = "CalculateImpedanceButton";
             this.CalculateImpedanceButton.Size = new System.Drawing.Size(170, 23);
             this.CalculateImpedanceButton.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             // ValueTextBox
             // 
-            this.ValueTextBox.Location = new System.Drawing.Point(15, 200);
+            this.ValueTextBox.Location = new System.Drawing.Point(15, 294);
             this.ValueTextBox.Name = "ValueTextBox";
             this.ValueTextBox.Size = new System.Drawing.Size(170, 20);
             this.ValueTextBox.TabIndex = 3;
@@ -104,7 +104,7 @@
             this.TreeView.Location = new System.Drawing.Point(15, 36);
             this.TreeView.MinimumSize = new System.Drawing.Size(170, 111);
             this.TreeView.Name = "TreeView";
-            this.TreeView.Size = new System.Drawing.Size(170, 111);
+            this.TreeView.Size = new System.Drawing.Size(170, 212);
             this.TreeView.TabIndex = 6;
             this.TreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
             this.TreeView.DoubleClick += new System.EventHandler(this.TreeView_DoubleClick);
@@ -113,7 +113,7 @@
             // 
             this.NodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.NodeComboBox.FormattingEnabled = true;
-            this.NodeComboBox.Location = new System.Drawing.Point(15, 173);
+            this.NodeComboBox.Location = new System.Drawing.Point(15, 267);
             this.NodeComboBox.Name = "NodeComboBox";
             this.NodeComboBox.Size = new System.Drawing.Size(170, 21);
             this.NodeComboBox.TabIndex = 7;
@@ -122,7 +122,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 157);
+            this.label2.Location = new System.Drawing.Point(12, 251);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 8;
@@ -130,9 +130,9 @@
             // 
             // circuitPictureBox
             // 
-            this.circuitPictureBox.Location = new System.Drawing.Point(192, 13);
+            this.circuitPictureBox.Location = new System.Drawing.Point(191, 13);
             this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(449, 275);
+            this.circuitPictureBox.Size = new System.Drawing.Size(450, 369);
             this.circuitPictureBox.TabIndex = 9;
             this.circuitPictureBox.TabStop = false;
             // 
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 302);
+            this.ClientSize = new System.Drawing.Size(644, 395);
             this.Controls.Add(this.circuitPictureBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NodeComboBox);

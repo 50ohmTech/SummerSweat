@@ -61,6 +61,7 @@ namespace CircuitView
             _currentNode = null;
             if (_circuit == null || _circuit.IsEmpty())
             {
+                circuitPictureBox.Image = null;
                 return;
             }
 

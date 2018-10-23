@@ -91,6 +91,7 @@ namespace CircuitLibrary
             SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();
             SubcircuitBase serialSubcircuit = new SerialSubcircuit();
             var circuit = new Circuit();
+            IteratorsToZero();
             switch (circuitIndex)
             {
                 case 0:
@@ -131,13 +132,13 @@ namespace CircuitLibrary
                 }
                 case 2:
                 {
-                    var resistor1 = new Resistor("R1", 20);
-                    var inductor2 = new Inductor("L2", 20);
-                    var inductor3 = new Inductor("L3", 20);
-                    var inductor4 = new Inductor("L4", 20);
-                    var resistor5 = new Resistor("R5", 20);
-                    var resistor6 = new Resistor("R6", 20);
-                    var inductor7 = new Inductor("L7", 20);
+                    var resistor1 = GetNode(NodeType.Resistor, 20);
+                    var inductor2 = GetNode(NodeType.Inductor, 20);
+                    var inductor3 = GetNode(NodeType.Inductor, 20);
+                    var inductor4 = GetNode(NodeType.Inductor, 20);
+                    var resistor5 = GetNode(NodeType.Resistor, 20);
+                    var resistor6 = GetNode(NodeType.Resistor, 20);
+                    var inductor7 = GetNode(NodeType.Inductor, 20);
 
                     var parallelSubcircuit1 = new ParallelSubcircuit();
 
@@ -176,12 +177,12 @@ namespace CircuitLibrary
                 }
                 case 3:
                 {
-                    var resistor1 = new Resistor("R1", 1);
-                    var capacitor2 = new Capacitor("C2", 20);
-                    var resistor3 = new Resistor("R3", 20);
-                    var inductor4 = new Inductor("L4", 20);
-                    var resistor5 = new Resistor("R5", 20);
-                    var inductor6 = new Inductor("L6", 20);
+                    var resistor1 = GetNode(NodeType.Resistor, 20);
+                    var capacitor2 = GetNode(NodeType.Capacitor, 20);
+                    var resistor3 = GetNode(NodeType.Resistor, 20);
+                    var inductor4 = GetNode(NodeType.Inductor, 20);
+                    var resistor5 = GetNode(NodeType.Resistor, 20);
+                    var inductor6 = GetNode(NodeType.Inductor, 20);
 
                     var seriesSubcircuit1 = new SerialSubcircuit();
                     var parallelSubcircuit1 = new ParallelSubcircuit();
@@ -210,14 +211,14 @@ namespace CircuitLibrary
 
                 case 4:
                 {
-                    var resistor1 = new Resistor("R1", 20);
-                    var capacitor2 = new Capacitor("C2", 20);
-                    var resistor3 = new Resistor("R3", 20);
-                    var inductor4 = new Inductor("L4", 20);
-                    var resistor5 = new Resistor("R5", 20);
-                    var inductor6 = new Inductor("L6", 20);
-                    var resistor7 = new Resistor("R7", 20);
-                    var inductor8 = new Inductor("L8", 20);
+                    var resistor1 = GetNode(NodeType.Resistor, 20);
+                    var capacitor2 = GetNode(NodeType.Capacitor, 20);
+                    var resistor3 = GetNode(NodeType.Resistor, 20);
+                    var inductor4 = GetNode(NodeType.Inductor, 20);
+                    var resistor5 = GetNode(NodeType.Resistor, 20);
+                    var inductor6 = GetNode(NodeType.Inductor, 20);
+                    var resistor7 = GetNode(NodeType.Resistor, 20);
+                    var inductor8 = GetNode(NodeType.Inductor, 20);
 
                     var seriesSubcircuit1 = new SerialSubcircuit();
                     var seriesSubcircuit2 = new SerialSubcircuit();
