@@ -139,6 +139,8 @@
             this.Controls.Add(this.EndLabel);
             this.Controls.Add(this.StartLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(220, 251);
             this.Name = "ImpedanceForm";
             this.Text = "ImpedanceForm";
