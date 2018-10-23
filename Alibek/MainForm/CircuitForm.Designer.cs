@@ -47,14 +47,12 @@
             // 
             // testCircuitsComboBox
             // 
-            this.testCircuitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.testCircuitsComboBox.FormattingEnabled = true;
-            this.testCircuitsComboBox.Items.AddRange(new object[] {
-            "Выберите цепь"});
             this.testCircuitsComboBox.Location = new System.Drawing.Point(86, 9);
             this.testCircuitsComboBox.Name = "testCircuitsComboBox";
             this.testCircuitsComboBox.Size = new System.Drawing.Size(99, 21);
             this.testCircuitsComboBox.TabIndex = 1;
+            this.testCircuitsComboBox.Text = "Выберите цепь";
             this.testCircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.TestCircuitsComboBox_SelectedIndexChanged);
             // 
             // calculateButton
