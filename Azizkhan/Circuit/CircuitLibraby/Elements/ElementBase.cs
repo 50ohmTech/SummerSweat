@@ -95,14 +95,10 @@ namespace CircuitLibrary.Elements
         }
 
 
-        /// <summary>
-        ///     Дочерние узлы
-        /// </summary>
+        /// <inheritdoc />
         public List<INode> Nodes { get; } = new List<INode>();
 
-        /// <summary>
-        ///     Родитель
-        /// </summary>
+        /// <inheritdoc />
         public INode Parent { get; set; }
 
         #endregion
@@ -133,12 +129,7 @@ namespace CircuitLibrary.Elements
 
         #region Public methods
 
-        //NOTE:XML?
-        /// <summary>
-        ///     Рассчитать импеданс
-        /// </summary>
-        /// <param name="frequency">Частота</param>
-        /// <returns>Импеданс</returns>
+        /// <inheritdoc />
         public abstract Complex CalculateZ(double frequency);
 
         #endregion

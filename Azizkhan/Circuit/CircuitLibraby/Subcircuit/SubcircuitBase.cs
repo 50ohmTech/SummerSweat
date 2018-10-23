@@ -39,9 +39,7 @@ namespace CircuitLibrary.Subcircuits
         /// </summary>
         public uint Id { get; } = _id;
 
-        /// <summary>
-        ///     Родитель.
-        /// </summary>
+        /// <inheritdoc />
         public INode Parent
         {
             get => parent;
@@ -56,9 +54,7 @@ namespace CircuitLibrary.Subcircuits
             }
         }
 
-        /// <summary>
-        ///     Дочерние узлы.
-        /// </summary>
+        /// <inheritdoc />
         public List<INode> Nodes { get; } = new List<INode>();
 
         #endregion
@@ -86,11 +82,7 @@ namespace CircuitLibrary.Subcircuits
 
         #region Public methods
 
-        /// <summary>
-        ///     Рассчитать импеданс
-        /// </summary>
-        /// <param name="frequency">Частота</param>
-        /// <returns>Импеданс</returns>
+        /// <inheritdoc />
         public abstract Complex CalculateZ(double frequency);
 
         #endregion
