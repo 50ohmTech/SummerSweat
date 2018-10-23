@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using CircuitLibrary.Events;
 
 namespace CircuitLibrary
 {
@@ -10,12 +9,12 @@ namespace CircuitLibrary
     /// </summary>
     public class Circuit
     {
-        #region Private fields
+        #region Readonly fields
 
         /// <summary>
-        ///     Root node
+        ///     Create element of node
         /// </summary>
-        private INode _root;
+        public readonly NodeCreate NodeCreate;
 
         #endregion
 
@@ -24,16 +23,19 @@ namespace CircuitLibrary
         /// <summary>
         ///     Root node
         /// </summary>
-        public INode Root { get; set; }
+        public INode Root { get; private set; }
 
         #endregion
 
-        #region Events
+        #region Constructor
 
         /// <summary>
-        ///     Event, when changing one of the elements of the electrical circuit
+        ///     Constructor
         /// </summary>
-        public event ValueStateEventHandler CircuitChanged;
+        public Circuit()
+        {
+            NodeCreate = new NodeCreate();
+        }
 
         #endregion
 
@@ -42,21 +44,21 @@ namespace CircuitLibrary
         /// <summary>
         ///     Calculation of complex resistance
         /// </summary>
-        /// <param name="frequencies"></param>
+        /// <param name="frequencies">Frequency</param>
         /// <returns>The complex impedance value</returns>
         public List<Complex> CalculateZ(double[] frequencies)
         {
             if (frequencies == null)
             {
                 throw new ArgumentNullException(nameof(frequencies),
-                    " Frequency list empty");
+                    "Frequency list is empty");
             }
 
             var result = new List<Complex>();
 
             foreach (var frequency in frequencies)
             {
-                result.Add(_root.CalculateZ(frequency));
+                result.Add(Root.CalculateZ(frequency));
             }
 
             return result;
@@ -82,7 +84,7 @@ namespace CircuitLibrary
         /// <summary>
         ///     Removing a node
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node">Node to remove</param>
         public void Remove(INode node)
         {
             if (node == null)
@@ -102,13 +104,13 @@ namespace CircuitLibrary
         /// <summary>
         ///     Adding a new node
         /// </summary>
-        /// <param name="node"></param>
-        /// <param name="newNode"></param>
+        /// <param name="node">The node to which is adding node </param>
+        /// <param name="newNode">New node</param>
         public void AddAfter(INode node, INode newNode)
         {
             if (newNode == null)
             {
-                throw new ArgumentNullException(nameof(newNode), "The node is empty");
+                throw new ArgumentNullException(nameof(newNode), "The newNode is empty");
             }
 
             if (IsEmpty())
@@ -119,7 +121,8 @@ namespace CircuitLibrary
 
             if (node is ElementBase)
             {
-                throw new ArgumentException("Error! Node cannot be an element !");
+                throw new ArgumentException(
+                    "You cannot add to the element of an electric circuit");
             }
 
             if (node is SubcircuitBase subcircuit)

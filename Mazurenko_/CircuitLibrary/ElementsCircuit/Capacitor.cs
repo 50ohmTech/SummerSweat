@@ -13,8 +13,8 @@ namespace CircuitLibrary
         /// <summary>
         ///     Constructor
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">Element name</param>
+        /// <param name="value">Element value</param>
         public Capacitor(string name, double value) : base(name, value)
         {
         }
@@ -26,7 +26,7 @@ namespace CircuitLibrary
         /// <summary>
         ///     Calculation of impedance
         /// </summary>
-        /// <param name="frequency"></param>
+        /// <param name="frequency">Frequency</param>
         /// <returns>The complex impedance value</returns>
         public override Complex CalculateZ(double frequency)
         {

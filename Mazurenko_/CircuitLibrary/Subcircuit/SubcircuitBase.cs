@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
+using CircuitLibrary.Events;
 
 namespace CircuitLibrary
 {
@@ -17,22 +19,49 @@ namespace CircuitLibrary
 
         #endregion
 
+        #region Private fields
+
+        /// <summary>
+        ///     Parent node
+        /// </summary>
+        private INode _parent;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         ///     Unique identifier
         /// </summary>
-        public uint ID { get; } = _id;
+        public uint Id { get; } = _id;
+
+        /// <summary>
+        ///     Parent node
+        /// </summary>
+        public INode Parent
+        {
+            get => _parent;
+            set
+            {
+                _parent = value;
+                SubcircuitChanged?.Invoke(this,
+                    new SubcircuitChangedEventArgs(value, "The parent was changed"));
+            }
+        }
 
         /// <summary>
         ///     Children node
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
+        #endregion
+
+        #region Events
+
         /// <summary>
-        ///     Parent node
+        ///     Event to change the parent
         /// </summary>
-        public INode Parent { get; set; }
+        private event EventHandler<SubcircuitChangedEventArgs> SubcircuitChanged;
 
         #endregion
 
@@ -51,9 +80,9 @@ namespace CircuitLibrary
         #region Public methods
 
         /// <summary>
-        /// Calculation of impedance
+        ///     Calculation of impedance
         /// </summary>
-        /// <param name="frequency"></param>
+        /// <param name="frequency">Frequency</param>
         /// <returns>The complex impedance value</returns>
         public abstract Complex CalculateZ(double frequency);
 

@@ -27,9 +27,9 @@ namespace CircuitLibrary
         /// <summary>
         ///     Calculation of complex resistance
         /// </summary>
-        /// <param name="f"></param>
+        /// <param name="frequency">Frequency</param>
         /// <returns>The complex impedance value</returns>
-        Complex CalculateZ(double f);
+        Complex CalculateZ(double frequency);
 
         #endregion
     }

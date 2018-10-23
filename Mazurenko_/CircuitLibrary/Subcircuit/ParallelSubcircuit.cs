@@ -13,7 +13,7 @@ namespace CircuitLibrary.Subcircuit
         /// <summary>
         ///     Calculation of impedance
         /// </summary>
-        /// <param name="frequency"></param>
+        /// <param name="frequency">Frequency</param>
         /// <returns>The complex impedance value</returns>
         public override Complex CalculateZ(double frequency)
         {
@@ -23,7 +23,7 @@ namespace CircuitLibrary.Subcircuit
                     "At least two nodes are required to count the parallel connection");
             }
 
-            var impedance = new Complex();
+            var impedance = Complex.Zero;
 
             foreach (var node in Nodes)
             {

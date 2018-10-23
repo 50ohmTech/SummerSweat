@@ -9,8 +9,8 @@ namespace CircuitLibrary
         /// <summary>
         ///     Constructor with parameters
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">Element name</param>
+        /// <param name="value">Element value</param>
         public Resistor(string name, double value) : base(name, value)
         {
         }
@@ -22,11 +22,11 @@ namespace CircuitLibrary
         /// <summary>
         ///     Calculation of impedance
         /// </summary>
-        /// <param name="R"></param>
+        /// <param name="frequency">Frequency</param>
         /// <returns>The complex impedance value</returns>
-        public override Complex CalculateZ(double R)
+        public override Complex CalculateZ(double frequency)
         {
-            return new Complex(R, 0);
+            return new Complex(Value, 0);
         }
 
         #endregion
