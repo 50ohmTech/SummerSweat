@@ -327,10 +327,6 @@ namespace CircuitView
                 }
             }
 
-            if (root.Nodes.Count < 2)
-            {
-                return new Point(maxCount + 1, steps.Sum());
-            }
 
             Graphics.DrawLine(Pen,
                 new Point(
@@ -339,6 +335,11 @@ namespace CircuitView
                 new Point(
                     2 * _lineLengthX + maxCount * _elementLengthX +
                     displacement.X, _lineDisplasemantY + displacement.Y));
+
+            if (root.Nodes.Count < 2)
+            {
+                return new Point(maxCount + 1, steps.Sum());
+            }
 
 
             Graphics.DrawLine(Pen,

@@ -132,7 +132,7 @@
             // 
             this.circuitPictureBox.Location = new System.Drawing.Point(191, 13);
             this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(450, 369);
+            this.circuitPictureBox.Size = new System.Drawing.Size(695, 369);
             this.circuitPictureBox.TabIndex = 9;
             this.circuitPictureBox.TabStop = false;
             // 
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 395);
+            this.ClientSize = new System.Drawing.Size(898, 395);
             this.Controls.Add(this.circuitPictureBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NodeComboBox);

@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using CircuitLibrary;
 using CircuitLibrary.Elements;
-using CircuitLibrary.Subcircuits;
 using MainForm;
 
 namespace CircuitView
@@ -107,8 +106,6 @@ namespace CircuitView
             EventArgs e)
         {
             NodesFactory.IteratorsToZero();
-            SubcircuitBase parallelSubcircuit = new ParallelSubcircuit();
-            SubcircuitBase seriesSubcircuit = new SerialSubcircuit();
             _circuit.Clear();
             UpdateTreeView();
             _circuit = NodesFactory.GetCircuit(SelectingCircuitComboBox.SelectedIndex);
