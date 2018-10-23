@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.PaintGroupBox = new System.Windows.Forms.GroupBox();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CalculateImpedanceButton = new System.Windows.Forms.Button();
             this.NominalTextBox = new System.Windows.Forms.TextBox();
             this.SelectingCircuitComboBox = new System.Windows.Forms.ComboBox();
             this.SelectingCircuitLabel = new System.Windows.Forms.Label();
-            this.treeView = new System.Windows.Forms.TreeView();
             this.NodeComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ConnectionComboBox = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // PaintGroupBox
@@ -51,6 +52,14 @@
             this.PaintGroupBox.Size = new System.Drawing.Size(330, 298);
             this.PaintGroupBox.TabIndex = 0;
             this.PaintGroupBox.TabStop = false;
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(12, 43);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(173, 111);
+            this.dataGridView.TabIndex = 10;
             // 
             // AddButton
             // 
@@ -80,6 +89,7 @@
             this.CalculateImpedanceButton.TabIndex = 2;
             this.CalculateImpedanceButton.Text = "Рассчитать импеданс";
             this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
+            this.CalculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
             // 
             // NominalTextBox
             // 
@@ -87,6 +97,7 @@
             this.NominalTextBox.Name = "NominalTextBox";
             this.NominalTextBox.Size = new System.Drawing.Size(170, 20);
             this.NominalTextBox.TabIndex = 3;
+            this.NominalTextBox.Text = "Введите номинал";
             // 
             // SelectingCircuitComboBox
             // 
@@ -112,21 +123,18 @@
             this.SelectingCircuitLabel.TabIndex = 5;
             this.SelectingCircuitLabel.Text = "Выбор цепи";
             // 
-            // treeView
-            // 
-            this.treeView.Location = new System.Drawing.Point(15, 36);
-            this.treeView.MinimumSize = new System.Drawing.Size(170, 111);
-            this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(170, 111);
-            this.treeView.TabIndex = 6;
-            // 
             // NodeComboBox
             // 
             this.NodeComboBox.FormattingEnabled = true;
+            this.NodeComboBox.Items.AddRange(new object[] {
+            "Резистор",
+            "Катушка",
+            "Конденсатор"});
             this.NodeComboBox.Location = new System.Drawing.Point(15, 173);
             this.NodeComboBox.Name = "NodeComboBox";
             this.NodeComboBox.Size = new System.Drawing.Size(170, 21);
             this.NodeComboBox.TabIndex = 7;
+            this.NodeComboBox.Text = "Выберите тип элемента";
             // 
             // label2
             // 
@@ -140,20 +148,24 @@
             // ConnectionComboBox
             // 
             this.ConnectionComboBox.FormattingEnabled = true;
+            this.ConnectionComboBox.Items.AddRange(new object[] {
+            "Последовательно",
+            "Параллельно"});
             this.ConnectionComboBox.Location = new System.Drawing.Point(15, 226);
             this.ConnectionComboBox.Name = "ConnectionComboBox";
             this.ConnectionComboBox.Size = new System.Drawing.Size(170, 21);
             this.ConnectionComboBox.TabIndex = 9;
+            this.ConnectionComboBox.Text = "Выберите тип связи";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 324);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ConnectionComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NodeComboBox);
-            this.Controls.Add(this.treeView);
             this.Controls.Add(this.SelectingCircuitLabel);
             this.Controls.Add(this.SelectingCircuitComboBox);
             this.Controls.Add(this.NominalTextBox);
@@ -164,6 +176,7 @@
             this.MinimumSize = new System.Drawing.Size(554, 341);
             this.Name = "MainForm";
             this.Text = "CircuitMainForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,10 +191,10 @@
         private System.Windows.Forms.TextBox NominalTextBox;
         private System.Windows.Forms.ComboBox SelectingCircuitComboBox;
         private System.Windows.Forms.Label SelectingCircuitLabel;
-        private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.ComboBox NodeComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox ConnectionComboBox;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }
 

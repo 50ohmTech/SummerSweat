@@ -57,16 +57,18 @@ namespace MainForm
         /// </summary>
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if ()
-            {
+            DialogResult result = MessageBox.Show("Удалить?",
+                "Подтвердите",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-            }
-            else
+            if (result == DialogResult.Yes)
             {
-                MessageBox.Show(
-                    "Выберите один элемент из списка",
-                    "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                if (dataGridView.RowCount > 0)
+                {
+                    int index = dataGridView.SelectedCells[0].RowIndex;
+                    dataGridView.Rows.RemoveAt(index);
+                }
             }
         }
 
@@ -74,6 +76,14 @@ namespace MainForm
         /// Событие, срабатывающее при добавлении элемента в цепь.
         /// </summary>
         private void AddButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Событие, срабатывающее при открытии формы расчета импеданса.
+        /// </summary>
+        private void CalculateImpedanceButton_Click(object sender, EventArgs e)
         {
 
         }
