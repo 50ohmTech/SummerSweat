@@ -93,6 +93,7 @@ namespace MainForm
                         }
                     }
                 }
+
                 if (frequency[frequency.Length - 1] == 0)
                 {
                     Array.Resize(ref frequency, frequency.Length - 1);
