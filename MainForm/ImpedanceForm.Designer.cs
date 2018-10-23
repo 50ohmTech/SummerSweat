@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Impedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartLabel = new System.Windows.Forms.Label();
             this.EndLabel = new System.Windows.Forms.Label();
             this.StepLabel = new System.Windows.Forms.Label();
@@ -37,8 +39,6 @@
             this.StepValueTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.CalculateButton = new System.Windows.Forms.Button();
-            this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Impedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +60,22 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(174, 124);
             this.dataGridView.TabIndex = 6;
+            // 
+            // Frequency
+            // 
+            this.Frequency.Frozen = true;
+            this.Frequency.HeaderText = "Частота";
+            this.Frequency.Name = "Frequency";
+            this.Frequency.ReadOnly = true;
+            this.Frequency.Width = 80;
+            // 
+            // Impedance
+            // 
+            this.Impedance.Frozen = true;
+            this.Impedance.HeaderText = "Импеданс";
+            this.Impedance.Name = "Impedance";
+            this.Impedance.ReadOnly = true;
+            this.Impedance.Width = 94;
             // 
             // StartLabel
             // 
@@ -95,6 +111,9 @@
             this.StartValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.StartValueTextBox.TabIndex = 3;
             this.StartValueTextBox.Text = "0";
+            this.StartValueTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.StartValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this.StartValueTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // EndValueTextBox
             // 
@@ -103,6 +122,9 @@
             this.EndValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.EndValueTextBox.TabIndex = 4;
             this.EndValueTextBox.Text = "0";
+            this.EndValueTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.EndValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this.EndValueTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // StepValueTextBox
             // 
@@ -111,6 +133,9 @@
             this.StepValueTextBox.Size = new System.Drawing.Size(100, 20);
             this.StepValueTextBox.TabIndex = 5;
             this.StepValueTextBox.Text = "0";
+            this.StepValueTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.StepValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this.StepValueTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // CloseButton
             // 
@@ -133,22 +158,6 @@
             this.CalculateButton.UseVisualStyleBackColor = true;
             this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
-            // Frequency
-            // 
-            this.Frequency.Frozen = true;
-            this.Frequency.HeaderText = "Частота";
-            this.Frequency.Name = "Frequency";
-            this.Frequency.ReadOnly = true;
-            this.Frequency.Width = 80;
-            // 
-            // Impedance
-            // 
-            this.Impedance.Frozen = true;
-            this.Impedance.HeaderText = "Импеданс";
-            this.Impedance.Name = "Impedance";
-            this.Impedance.ReadOnly = true;
-            this.Impedance.Width = 94;
-            // 
             // ImpedanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,8 +172,10 @@
             this.Controls.Add(this.StepLabel);
             this.Controls.Add(this.EndLabel);
             this.Controls.Add(this.StartLabel);
+            this.MaximumSize = new System.Drawing.Size(220, 410);
             this.MinimumSize = new System.Drawing.Size(220, 310);
             this.Name = "ImpedanceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ImpedanceForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

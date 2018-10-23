@@ -28,7 +28,7 @@ namespace MainForm
             }
 
             MessageBox.Show(
-                type + " должен (должно) быть\nне менее " + min + " и не более " + max,
+                type + " для всех элементов должно быть\nне менее " + min + " и не более " + max + ".",
                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return false;
@@ -120,7 +120,7 @@ namespace MainForm
             const double minStartValue = 1.0;
 
             const double maxInterval = 10000000000.0;
-            const double minInterval = 0.01;
+            const double minInterval = 1.0;
 
             const double maxCount = 1000;
             const double minCount = 1;

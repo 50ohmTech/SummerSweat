@@ -101,6 +101,38 @@ namespace MainForm
             }
         }
 
+        /// <summary>
+        /// Подготавливает поле к вводу.
+        /// </summary>
+        private void TextBox_Enter(object sender, EventArgs e)
+        {
+            ValueValidators.Enter(sender);
+        }
+
+        /// <summary>
+        /// Подготавливает поле к выводу.
+        /// </summary>
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            ValueValidators.Leave(sender);
+        }
+
+        /// <summary>
+        /// Для ограничения ввода символов в текстбокс для double.
+        /// </summary>
+        private void DoubleTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValueValidators.PressDouble(e, ((TextBox)sender).Text);
+        }
+
+        /// <summary>
+        /// Для ограничения ввода символов в текстбокс для int .
+        /// </summary>
+        private void IntTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValueValidators.PressInt(sender, e);
+        }
+
         #endregion
     }
 }

@@ -66,7 +66,6 @@ namespace MainForm
                 ElementBase inductor = new Inductor("L1", 30);
 
                 SubcircuitBase parallelCircuit = new ParallelSubcircuit();
-
                 parallelCircuit.Nodes.Add(resistor);
                 parallelCircuit.Nodes.Add(capacitor);
                 parallelCircuit.Nodes.Add(inductor);

@@ -151,8 +151,10 @@
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.CalculateImpedanceButton);
-            this.MinimumSize = new System.Drawing.Size(554, 341);
+            this.MaximumSize = new System.Drawing.Size(554, 363);
+            this.MinimumSize = new System.Drawing.Size(554, 363);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CircuitMainForm";
             ((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
             this.ResumeLayout(false);
