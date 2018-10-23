@@ -172,7 +172,7 @@ namespace MainForm
             const double minInterval = 0.01;
 
             return IsCorrectRangeParametr(count, minCount,
-                       maxCount, "Количество значений диапазона") &&
+                       maxCount, "Конечное количество диапазона") &&
                    IsCorrectRangeParametr(startValue, minStartValue,
                        maxStartValue, "Начальное значение диапазона") &&
                    IsCorrectRangeParametr(interval, minInterval,

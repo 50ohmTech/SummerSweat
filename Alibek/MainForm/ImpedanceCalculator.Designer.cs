@@ -55,7 +55,7 @@
             this.calculatorDataGridView.Name = "calculatorDataGridView";
             this.calculatorDataGridView.RowHeadersVisible = false;
             this.calculatorDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.calculatorDataGridView.Size = new System.Drawing.Size(195, 150);
+            this.calculatorDataGridView.Size = new System.Drawing.Size(225, 150);
             this.calculatorDataGridView.TabIndex = 0;
             // 
             // label1
@@ -104,7 +104,7 @@
             this.endValueTextBox.TabIndex = 5;
             this.endValueTextBox.Text = "0";
             this.endValueTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
-            this.endValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
+            this.endValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntTextBox_KeyPress);
             this.endValueTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // stepValueTextBox
@@ -115,7 +115,7 @@
             this.stepValueTextBox.TabIndex = 6;
             this.stepValueTextBox.Text = "0";
             this.stepValueTextBox.Enter += new System.EventHandler(this.TextBox_Enter);
-            this.stepValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntTextBox_KeyPress);
+            this.stepValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DoubleTextBox_KeyPress);
             this.stepValueTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // calculateButton
@@ -141,12 +141,13 @@
             this.Impedance.HeaderText = "Импеданс";
             this.Impedance.Name = "Impedance";
             this.Impedance.ReadOnly = true;
+            this.Impedance.Width = 150;
             // 
             // ImpedanceCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 280);
+            this.ClientSize = new System.Drawing.Size(247, 280);
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.stepValueTextBox);
             this.Controls.Add(this.endValueTextBox);
@@ -159,6 +160,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImpedanceCalculator";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Impedance calculator";
             ((System.ComponentModel.ISupportInitialize)(this.calculatorDataGridView)).EndInit();
             this.ResumeLayout(false);
