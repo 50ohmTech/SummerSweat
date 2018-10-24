@@ -50,7 +50,7 @@ namespace CircuitModel
         #region ~ Свойства ~
 
         /// <summary>
-        /// Значение.
+        /// Получить значение.
         /// </summary>
         public INode Value { get; }
 

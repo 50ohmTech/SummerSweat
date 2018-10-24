@@ -55,8 +55,6 @@ namespace MainForm
         /// <summary>
         /// Проверка на ввод вещественных значений.
         /// </summary>
-        /// <param name="e"></param>
-        /// <param name="text"></param>
         public static void PressDouble(KeyPressEventArgs e, string text)
         {
             var separator = NumberFormatInfo.CurrentInfo

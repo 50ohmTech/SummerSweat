@@ -32,9 +32,9 @@ namespace MainForm
             InitializeComponent();
             _circuit = circuit;
 
-            StartValueTextBox.ContextMenu = new ContextMenu();
-            StepValueTextBox.ContextMenu = new ContextMenu();
-            EndValueTextBox.ContextMenu = new ContextMenu();
+            _startValueTextBox.ContextMenu = new ContextMenu();
+            _stepValueTextBox.ContextMenu = new ContextMenu();
+            _endValueTextBox.ContextMenu = new ContextMenu();
         }
 
         #endregion
@@ -54,13 +54,13 @@ namespace MainForm
         /// </summary>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            ValueValidators.ChangeSeparator(StartValueTextBox);
-            ValueValidators.ChangeSeparator(StepValueTextBox);
-            ValueValidators.ChangeSeparator(EndValueTextBox);
+            ValueValidators.ChangeSeparator(_startValueTextBox);
+            ValueValidators.ChangeSeparator(_stepValueTextBox);
+            ValueValidators.ChangeSeparator(_endValueTextBox);
 
-            var start = double.Parse(StartValueTextBox.Text);
-            var step = double.Parse(StepValueTextBox.Text);
-            var finish = uint.Parse(EndValueTextBox.Text);
+            var start = double.Parse(_startValueTextBox.Text);
+            var step = double.Parse(_stepValueTextBox.Text);
+            var finish = uint.Parse(_endValueTextBox.Text);
 
             if (!ValueValidators.IsCorrectFrequency(start, step, finish))
             {
@@ -96,7 +96,7 @@ namespace MainForm
 
             for (var i = 0; i < impedances.Count; i++)
             {
-                dataGridView.Rows.Add(Math.Round(frequency[i], 3),
+                _dataGridView.Rows.Add(Math.Round(frequency[i], 3),
                     correctListOfImpedances[i]);
             }
         }

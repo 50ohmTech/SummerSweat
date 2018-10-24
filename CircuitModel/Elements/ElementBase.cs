@@ -31,6 +31,7 @@ namespace CircuitModel
         #endregion
 
         #region ~ Конструктор ~
+
         /// <summary>
         /// Конструктор базового элемента.
         /// </summary>
@@ -45,6 +46,7 @@ namespace CircuitModel
         #endregion
 
         #region ~ Публичные методы ~
+
         /// <summary>
         /// Расчет импеданса.
         /// </summary>
@@ -105,15 +107,6 @@ namespace CircuitModel
                 _value = value;
             }
         }
-
-        #endregion
-
-        #region ~ События ~
-
-        /// <summary>
-        /// Событие, возникающее при изменении номинала элемента.
-        /// </summary>
-        public event ValueEventHandler ValueChanged;
 
         #endregion
     }

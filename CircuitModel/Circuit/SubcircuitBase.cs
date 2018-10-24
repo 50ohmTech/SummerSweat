@@ -33,22 +33,22 @@ namespace CircuitModel
         #region ~ Свойства ~
 
         /// <summary>
-        /// Идентификатор.
+        /// Получить идентификатор.
         /// </summary>
         public uint uniqueID { get; }
 
         /// <summary>
-        /// Главный узел.
+        /// Получить и возвратить главный узел.
         /// </summary>
         public INode Parent { get; set; }
 
         /// <summary>
-        /// Дочерние узлы.
+        /// Получить дочерние узлы.
         /// </summary>
         public List<INode> Nodes { get; } = new List<INode>();
 
         /// <summary>
-        /// Тип подключения.
+        /// Получить и возвратить тип подключения.
         /// </summary>
         public NodeType NodeType { get; set; }
 

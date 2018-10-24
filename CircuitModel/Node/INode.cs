@@ -22,12 +22,12 @@ namespace CircuitModel
         #region ~ Свойства ~
 
         /// <summary>
-        /// Дочерние узлы.
+        /// Получить дочерние узлы.
         /// </summary>
         List<INode> Nodes { get; }
 
         /// <summary>
-        /// Родитель элемента.
+        /// Получить и вернуть родитель элемента.
         /// </summary>
         INode Parent { get; set; }
 

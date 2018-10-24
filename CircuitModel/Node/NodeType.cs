@@ -31,6 +31,5 @@ namespace CircuitModel
         /// Конденсатор
         /// </summary>
         Capacitor
-
     }
 }

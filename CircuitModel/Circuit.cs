@@ -20,6 +20,9 @@ namespace CircuitModel
 
         #region ~ Свойства ~
 
+        /// <summary>
+        /// Получить корень дерева.
+        /// </summary>
         public INode Root { get; private set; }
 
         #endregion

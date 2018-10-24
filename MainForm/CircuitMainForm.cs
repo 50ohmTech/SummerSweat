@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using MainForm.Properties;
 using CircuitModel;
 
 /// <summary>
@@ -19,15 +18,6 @@ namespace MainForm
 
         #endregion
 
-        #region ~ Приватные переменные ~
-
-        /// <summary>
-        /// Текущий узел.
-        /// </summary>
-        private INode _currentNode;
-
-        #endregion
-
         #region ~ Конструктор ~
 
         public MainForm()
@@ -36,17 +26,17 @@ namespace MainForm
 
             _circuit = new Circuit();
 
-            SelectingCircuitComboBox.Items.Add("Цепь №1");
-            SelectingCircuitComboBox.Items.Add("Цепь №2");
-            SelectingCircuitComboBox.Items.Add("Цепь №3");
-            SelectingCircuitComboBox.Items.Add("Цепь №4");
-            SelectingCircuitComboBox.Items.Add("Цепь №5");
+            _selectingCircuitComboBox.Items.Add("Цепь №1");
+            _selectingCircuitComboBox.Items.Add("Цепь №2");
+            _selectingCircuitComboBox.Items.Add("Цепь №3");
+            _selectingCircuitComboBox.Items.Add("Цепь №4");
+            _selectingCircuitComboBox.Items.Add("Цепь №5");
 
-            AddButton.Enabled = false;
-            DeleteButton.Enabled = false;
-            NodeComboBox.Enabled = false;
-            NominalTextBox.Enabled = false;
-            ConnectionComboBox.Enabled = false;
+            _addButton.Enabled = false;
+            _deleteButton.Enabled = false;
+            _nodeComboBox.Enabled = false;
+            _nominalTextBox.Enabled = false;
+            _connectionComboBox.Enabled = false;
         }
 
         #endregion
@@ -58,7 +48,7 @@ namespace MainForm
         /// </summary>
         private void SelectingCircuitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedCircuit = SelectingCircuitComboBox.SelectedItem.ToString();
+            var selectedCircuit = _selectingCircuitComboBox.SelectedItem.ToString();
             if (selectedCircuit == "Цепь №1")
             {
                 ElementBase resistor = new Resistor("R1", 10);
@@ -251,6 +241,7 @@ namespace MainForm
             }
 
             new ImpedanceForm(_circuit).ShowDialog();
+           
         }
 
         /// <summary>
@@ -260,12 +251,7 @@ namespace MainForm
         {
             void AddNodeTreeNodes(INode node, TreeNode treeNode)
             {
-                if (node == null)
-                {
-                    return;
-                }
-
-                if (node is ElementBase)
+                if (node == null || node is ElementBase)
                 {
                     return;
                 }
@@ -278,11 +264,11 @@ namespace MainForm
                 }
             }
 
-            treeView.Nodes.Clear();
+            _treeView.Nodes.Clear();
             var root = new TreeViewNode(_circuit.Root);
-            treeView.Nodes.Add(root);
+            _treeView.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
-            treeView.ExpandAll();
+            _treeView.ExpandAll();
         }
 
 
