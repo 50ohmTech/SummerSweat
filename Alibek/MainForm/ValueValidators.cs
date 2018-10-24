@@ -7,7 +7,7 @@ namespace MainForm
     /// <summary>
     ///     Инструменты для валидации текстбоксов
     /// </summary>
-    public class ValueValidators
+    public static class ValueValidators
     {
         #region Private methods
 
@@ -84,7 +84,7 @@ namespace MainForm
         /// <summary>
         ///     Функция подготавливающая поле к вводу.
         /// </summary>
-        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="textBox">Обьект который вызвал событие</param>
         public static void Enter(TextBox textBox)
         {
             if (!(textBox is TextBox valueTexBox))
@@ -102,7 +102,7 @@ namespace MainForm
         /// <summary>
         ///     Функция подготавливающая поле к выводу.
         /// </summary>
-        /// <param name="sender">Обьект который вызвал событие</param>
+        /// <param name="textBox">Обьект который вызвал событие</param>
         public static void Leave(TextBox textBox)
         {
             if (!(textBox is TextBox valueTexBox))

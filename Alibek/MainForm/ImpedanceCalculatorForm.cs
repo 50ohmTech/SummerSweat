@@ -20,13 +20,19 @@ namespace MainForm
         /// </summary>
         private readonly Circuit _circuit;
 
-        private List<double> _frequencies;
-
-        private List<Complex> impedances;
 
         #endregion
 
         #region Private fields
+        /// <summary>
+        /// Частоты
+        /// </summary>
+        private List<double> _frequencies;
+
+        /// <summary>
+        /// Импеданс(ы)
+        /// </summary>
+        private List<Complex> _impedances;
 
         //TODO: почему uint только endvalue?
         //по идее это костыль
@@ -63,9 +69,9 @@ namespace MainForm
             ValueValidators.ChangeSeparator(_stepValueTextBox);
             ValueValidators.ChangeSeparator(_endValueTextBox);
 
-            var startValue = double.TryParse(_startValueTextBox.Text, out _startValue);
-            var stepValue = double.TryParse(_stepValueTextBox.Text, out _stepValue);
-            var endValue = uint.TryParse(_endValueTextBox.Text, out _endValue);
+            double.TryParse(_startValueTextBox.Text, out _startValue);
+            double.TryParse(_stepValueTextBox.Text, out _stepValue);
+            uint.TryParse(_endValueTextBox.Text, out _endValue);
 
             if (!ValueValidators.IsCorrectFrequency(_startValue, _stepValue, _endValue))
             {
@@ -83,12 +89,12 @@ namespace MainForm
                 _frequencies.Add(_startValue + counter * _stepValue);
             }
 
-            impedances = _circuit.CalculateZ(_frequencies.ToArray());
+            _impedances = _circuit.CalculateZ(_frequencies.ToArray());
 
-            for (int counter = 0; counter < impedances.Count; counter++)
+            for (int counter = 0; counter < _impedances.Count; counter++)
             {
                 _calculatorDataGridView.Rows.Add(_frequencies[counter],
-                    impedances[counter]);
+                    _impedances[counter]);
             }
 
         }

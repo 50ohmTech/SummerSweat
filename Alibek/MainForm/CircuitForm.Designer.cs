@@ -47,12 +47,12 @@
             // 
             // _testCircuitsComboBox
             // 
+            this._testCircuitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._testCircuitsComboBox.FormattingEnabled = true;
             this._testCircuitsComboBox.Location = new System.Drawing.Point(86, 9);
             this._testCircuitsComboBox.Name = "_testCircuitsComboBox";
             this._testCircuitsComboBox.Size = new System.Drawing.Size(99, 21);
             this._testCircuitsComboBox.TabIndex = 1;
-            this._testCircuitsComboBox.Text = "Выберите цепь";
             this._testCircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.TestCircuitsComboBox_SelectedIndexChanged);
             // 
             // _calculateButton
