@@ -71,6 +71,7 @@
     <Compile Include="CircuitMainForm.Designer.cs">
       <DependentUpon>CircuitMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenerateCircuits.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="EditElementForm.cs">
       <SubType>Form</SubType>
