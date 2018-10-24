@@ -19,6 +19,10 @@ namespace CircuitLibrary
         ///     Дочерние узлы
         /// </summary>
         List<INode> Nodes { get; }
+        /// <summary>
+        /// Тип узла
+        /// </summary>
+        NodeType Type { get; }
 
         #endregion
 

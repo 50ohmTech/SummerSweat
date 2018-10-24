@@ -9,7 +9,8 @@ namespace CircuitLibrary.Elements
     public class Inductor : ElementBase
     {
         #region Constructor
-
+        /// <inheritdoc />
+        public override NodeType Type { get; }
         /// <summary>
         ///     Конструктор класса Inductor
         /// </summary>
@@ -17,6 +18,7 @@ namespace CircuitLibrary.Elements
         /// <param name="value">Номинал</param>
         public Inductor(string name, double value) : base(name, value)
         {
+            Type = NodeType.Inductor;
         }
 
         #endregion

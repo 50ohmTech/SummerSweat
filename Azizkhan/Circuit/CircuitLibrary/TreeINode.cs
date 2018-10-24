@@ -6,14 +6,14 @@ using CircuitLibrary.Subcircuits;
 namespace CircuitLibrary
 {
     /// <summary>
-    ///     Модифицированный узел для TreeNode.
+    ///     Модифицированный узел для TreeNode
     /// </summary>
     public class TreeINode : TreeNode
     {
         #region Properties
 
         /// <summary>
-        ///     Значение.
+        ///     Значение
         /// </summary>
         public INode Value { get; }
 
@@ -22,34 +22,32 @@ namespace CircuitLibrary
         #region Constructor
 
         /// <summary>
-        ///     Конструктор.
+        ///     Конструктор узла TreeView
         /// </summary>
-        /// <param name="node">Нода.</param>
-        public TreeINode(INode node)
+        /// <param name="treeNode">Узел</param>
+        public TreeINode(INode treeNode, NodeType type)
         {
-            Value = node ?? throw new ArgumentNullException(nameof(node));
-
-            Value = node;
-
-            switch (node)
+            Value = treeNode ?? throw new ArgumentNullException(nameof(treeNode));
+            
+            switch (treeNode)
             {
-                case SerialSubcircuit serial:
-                    Text = $"[Послед] (Id:{serial.Id})";
+                case SerialSubcircuit series:
+                    Text = $"[{type.ToString()}] (Id:{series.Id})";
                     break;
                 case ParallelSubcircuit parallel:
-                    Text = $"[Паралл] (Id:{parallel.Id})";
+                    Text = $"[{type.ToString()}] (Id:{parallel.Id})";
                     break;
                 case Resistor resistor:
-                    Text = $"({resistor.Name}) [{resistor.Value}]";
+                    Text = $"[{type.ToString() + resistor.Name[1]}] = {resistor.Value}";
                     break;
                 case Capacitor capacitor:
-                    Text = $"({capacitor.Name}) [{capacitor.Value}]";
+                    Text = $"[{type.ToString() + capacitor.Name[1]}] = {capacitor.Value}";
                     break;
                 case Inductor inductor:
-                    Text = $"({inductor.Name}) [{inductor.Value}]";
+                    Text = $"[{type.ToString() + inductor.Name[1]}] = {inductor.Value}";
                     break;
                 default:
-                    throw new InvalidOperationException(nameof(node));
+                    throw new InvalidOperationException(nameof(treeNode));
             }
         }
 

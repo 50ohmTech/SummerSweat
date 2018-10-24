@@ -77,7 +77,7 @@ namespace CircuitView
 
                 foreach (var children in node.Nodes)
                 {
-                    var newTreeNode = new TreeINode(children);
+                    var newTreeNode = new TreeINode(children, children.Type);
                     treeNode.Nodes.Add(newTreeNode);
                     AddNodeTreeNodes(children, newTreeNode);
                 }
@@ -90,7 +90,7 @@ namespace CircuitView
 
             TreeView.Nodes.Clear();
 
-            var root = new TreeINode(_circuit.Root);
+            var root = new TreeINode(_circuit.Root,_circuit.Root.Type);
             TreeView.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
 

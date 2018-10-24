@@ -9,7 +9,15 @@ namespace CircuitLibrary.Subcircuits
     public class SerialSubcircuit : SubcircuitBase
     {
         #region Public methods
-
+        /// <inheritdoc />
+        public override NodeType Type { get; }
+        /// <summary>
+        ///     Конструктор класса ParallelSubcircuit
+        /// </summary>
+        public SerialSubcircuit() : base()
+        {
+            Type = NodeType.Serial;
+        }
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>

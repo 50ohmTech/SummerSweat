@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using System.Runtime.InteropServices;
 
 namespace CircuitLibrary.Elements
 {
@@ -8,6 +9,9 @@ namespace CircuitLibrary.Elements
     /// </summary>
     public class Capacitor : ElementBase
     {
+        /// <inheritdoc />
+        public override NodeType Type { get; }
+
         #region Constructor
 
         /// <summary>
@@ -17,6 +21,7 @@ namespace CircuitLibrary.Elements
         /// <param name="value">Номинал</param>
         public Capacitor(string name, double value) : base(name, value)
         {
+            Type = NodeType.Capacitor;
         }
 
         #endregion

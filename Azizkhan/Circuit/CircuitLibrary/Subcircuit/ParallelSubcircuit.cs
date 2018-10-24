@@ -9,7 +9,15 @@ namespace CircuitLibrary.Subcircuits
     public class ParallelSubcircuit : SubcircuitBase
     {
         #region Public methods
-
+        /// <inheritdoc />
+        public override NodeType Type { get; }
+        /// <summary>
+        ///     Конструктор класса ParallelSubcircuit
+        /// </summary>
+        public ParallelSubcircuit() : base()
+        {
+            Type = NodeType.Parallel;
+        }
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>
@@ -33,6 +41,7 @@ namespace CircuitLibrary.Subcircuits
 
             return 1 / impedance;
         }
+        
 
         #endregion
     }

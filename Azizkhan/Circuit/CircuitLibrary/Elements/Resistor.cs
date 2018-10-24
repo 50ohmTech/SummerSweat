@@ -8,7 +8,8 @@ namespace CircuitLibrary.Elements
     public class Resistor : ElementBase
     {
         #region Constructor
-
+        /// <inheritdoc />
+        public override NodeType Type { get; }
         /// <summary>
         ///     Конструктор класса Resistor
         /// </summary>
@@ -16,6 +17,7 @@ namespace CircuitLibrary.Elements
         /// <param name="value">Номинал</param>
         public Resistor(string name, double value) : base(name, value)
         {
+            Type = NodeType.Resistor;
         }
 
         #endregion
