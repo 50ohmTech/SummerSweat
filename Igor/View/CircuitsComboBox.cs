@@ -4,8 +4,9 @@ using Model.Elements;
 
 namespace View
 {
+    //TODO: неправильное название. Это не комбобокс. Это генератор тестовых цепей
     /// <summary>
-    ///     Класс для создание готовых цепей
+    /// Класс для создание готовых цепей
     /// </summary>
     public class CircuitsComboBox
     {
@@ -14,6 +15,7 @@ namespace View
         public void CreateCircuit(string selectedState,
             List<Tools.Pair<char, int>> vectorOfElements, Circuit circuit)
         {
+            //TODO: лучше бы, конечно, по индексу, чем по русской строке с номером
             if (selectedState == "Цепь №1")
             {
                 var resistor = new Resistor("R1", 10);

@@ -52,6 +52,9 @@ namespace View
             var finish = double.Parse(FinishTextBox.Text.Replace('.', ','));
             var step = double.Parse(StepTextBox.Text.Replace('.', ','));
 
+            //TODO: Заменить на список, а список преобразовать в массив при передаче в CalculateZ с помощью LINQ-запроса ToArray().
+            // Иначе твоя логика постоянного увеличения массива на один элемент внутри цикла просто отвратительно читается.
+            //TODO: массив хранит не частоту, а частотЫ (много частот). Название переменной неправильное
             var frequency = new double[1];
 
             var j = 0;

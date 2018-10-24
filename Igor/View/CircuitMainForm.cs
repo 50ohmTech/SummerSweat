@@ -351,6 +351,8 @@ namespace View
                     var result = new EditForm(element).ShowDialog();
                     if (result == DialogResult.Cancel)
                     {
+                        //TODO: если результат завершения равен Cancel, тогда обновить дерево,
+                        // а если элемент действительно изменен, то обновлять дерево не нужно?
                         UpdateTreeView();
                     }
                 }
