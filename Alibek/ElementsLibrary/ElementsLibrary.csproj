@@ -42,9 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Circuits\ParallelSubcircuit.cs" />
-    <Compile Include="Circuits\SerialSubcircuit.cs" />
-    <Compile Include="Circuits\SubcircuitBase.cs" />
+    <Compile Include="Circuits\ParallelSubCircuit.cs" />
+    <Compile Include="Circuits\SerialSubCircuit.cs" />
+    <Compile Include="Circuits\SubCircuitBase.cs" />
     <Compile Include="Elements\Capacitor.cs" />
     <Compile Include="Circuit.cs" />
     <Compile Include="Elements\ElementBase.cs" />

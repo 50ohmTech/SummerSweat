@@ -36,10 +36,10 @@ namespace ElementsLibrary
 
             switch (node)
             {
-                case SerialSubcircuit series:
+                case SerialSubCircuit series:
                     Text = $"[Послед] (Id:{series.UniqueId})";
                     break;
-                case ParallelSubcircuit parallel:
+                case ParallelSubCircuit parallel:
                     Text = $"[Паралл] (Id:{parallel.UniqueId})";
                     break;
                 case Resistor resistor:

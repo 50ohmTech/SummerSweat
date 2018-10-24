@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Windows.Forms;
 
 namespace ElementsLibrary.Elements
 {
@@ -63,6 +64,8 @@ namespace ElementsLibrary.Elements
         public List<INode> Nodes { get; } = new List<INode>();
 
         #endregion
+
+        //public event EventHandler<Value> ValueChanged;
 
         #region Constructor
 

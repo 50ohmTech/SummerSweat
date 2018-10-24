@@ -99,7 +99,7 @@ namespace MainForm
                 ElementBase capacitor = new Capacitor("C1", 91);
                 ElementBase inductor = new Inductor("L1", 32);
 
-                SubcircuitBase parallelCircuit = new ParallelSubcircuit();
+                SubCircuitBase parallelCircuit = new ParallelSubCircuit();
 
                 parallelCircuit.Nodes.Add(resistor);
                 parallelCircuit.Nodes.Add(capacitor);
@@ -107,14 +107,14 @@ namespace MainForm
                 inductor.Parent = parallelCircuit;
                 resistor.Parent = parallelCircuit;
 
-                SubcircuitBase serialCircuit = new SerialSubcircuit();
+                SubCircuitBase serialCircuit = new SerialSubCircuit();
                 serialCircuit.Nodes.Add(parallelCircuit);
                 serialCircuit.Nodes.Add(inductor);
                 parallelCircuit.Parent = serialCircuit;
                 inductor.Parent = serialCircuit;
                 _circuitPictureBox.Image = Resources.Цепь_1;
                 _circuit.Clean();
-                _circuit.AddAfter(null, parallelCircuit);
+                _circuit.AddNodes(null, parallelCircuit);
             }
 
             if (selectedCircuit == "Цепь №2")
@@ -124,18 +124,18 @@ namespace MainForm
                 var resistor1 = new Resistor("R1",83);
                 var inductor2 = new Inductor("L2", 73);
 
-                var parallelCircuit1 = new ParallelSubcircuit();
+                var parallelCircuit1 = new ParallelSubCircuit();
                 parallelCircuit1.Nodes.Add(inductor1);
                 inductor1.Parent = parallelCircuit1;
 
-                SubcircuitBase serialCircuit1 = new SerialSubcircuit();
+                SubCircuitBase serialCircuit1 = new SerialSubCircuit();
                 parallelCircuit1.Nodes.Add(serialCircuit1);
                 serialCircuit1.Parent = parallelCircuit1;
 
                 serialCircuit1.Nodes.Add(inductor2);
                 inductor2.Parent = serialCircuit1;
 
-                SubcircuitBase parallelCircuit2 = new ParallelSubcircuit();
+                SubCircuitBase parallelCircuit2 = new ParallelSubCircuit();
                 parallelCircuit2.Nodes.Add(resistor1);
                 resistor1.Parent = parallelCircuit2;
                 parallelCircuit2.Nodes.Add(capacitor1);
@@ -145,7 +145,7 @@ namespace MainForm
                 parallelCircuit2.Parent = serialCircuit1;
                 _circuitPictureBox.Image = Resources.Цепь_2;
                 _circuit.Clean();
-                _circuit.AddAfter(null, parallelCircuit1);
+                _circuit.AddNodes(null, parallelCircuit1);
             }
 
             if (selectedCircuit == "Цепь №3")
@@ -157,10 +157,10 @@ namespace MainForm
                 var capacitor1 = new Capacitor("C1", 15);
                 var capacitor2 = new Capacitor("C2", 19);
 
-                SubcircuitBase serialCircuit = new SerialSubcircuit();
-                SubcircuitBase serialCircuit1 = new SerialSubcircuit();
-                SubcircuitBase parallelCircuit1 = new ParallelSubcircuit();
-                SubcircuitBase parallelCircuit2 = new ParallelSubcircuit();
+                SubCircuitBase serialCircuit = new SerialSubCircuit();
+                SubCircuitBase serialCircuit1 = new SerialSubCircuit();
+                SubCircuitBase parallelCircuit1 = new ParallelSubCircuit();
+                SubCircuitBase parallelCircuit2 = new ParallelSubCircuit();
 
                 serialCircuit.Nodes.Add(capacitor1);
                 capacitor1.Parent = serialCircuit;
@@ -185,7 +185,7 @@ namespace MainForm
 
                 _circuitPictureBox.Image = Resources.Цепь_3;
                 _circuit.Clean();
-                _circuit.AddAfter(null, serialCircuit);
+                _circuit.AddNodes(null, serialCircuit);
             }
 
             if (selectedCircuit == "Цепь №4")
@@ -198,9 +198,9 @@ namespace MainForm
                 ElementBase inductor1 = new Inductor("L1", 30);
                 ElementBase inductor2 = new Inductor("L2", 10);
 
-                SubcircuitBase serialCircuit1 = new SerialSubcircuit();
-                SubcircuitBase parallelCircuit1 = new ParallelSubcircuit();
-                SubcircuitBase parallelCircuit2 = new ParallelSubcircuit();
+                SubCircuitBase serialCircuit1 = new SerialSubCircuit();
+                SubCircuitBase parallelCircuit1 = new ParallelSubCircuit();
+                SubCircuitBase parallelCircuit2 = new ParallelSubCircuit();
 
                 serialCircuit1.Nodes.Add(inductor1);
                 inductor1.Parent = serialCircuit1;
@@ -222,7 +222,7 @@ namespace MainForm
                 resistor4.Parent = parallelCircuit2;
                 _circuitPictureBox.Image = Resources.Цепь_4;
                 _circuit.Clean();
-                _circuit.AddAfter(null, serialCircuit1);
+                _circuit.AddNodes(null, serialCircuit1);
             }
 
             if (selectedCircuit == "Цепь №5")
@@ -234,11 +234,11 @@ namespace MainForm
                 ElementBase inductor = new Inductor("L1", 30);
                 ElementBase inductor2 = new Inductor("L1", 23);
 
-                SubcircuitBase serialCircuit1 = new SerialSubcircuit();
-                SubcircuitBase serialCircuit2 = new SerialSubcircuit();
-                SubcircuitBase parallelCircuit1 = new ParallelSubcircuit();
-                SubcircuitBase parallelCircuit2 = new ParallelSubcircuit();
-                SubcircuitBase parallelCircuit3 = new ParallelSubcircuit();
+                SubCircuitBase serialCircuit1 = new SerialSubCircuit();
+                SubCircuitBase serialCircuit2 = new SerialSubCircuit();
+                SubCircuitBase parallelCircuit1 = new ParallelSubCircuit();
+                SubCircuitBase parallelCircuit2 = new ParallelSubCircuit();
+                SubCircuitBase parallelCircuit3 = new ParallelSubCircuit();
 
                 serialCircuit1.Nodes.Add(parallelCircuit1);
                 parallelCircuit1.Parent = serialCircuit1;
@@ -267,7 +267,7 @@ namespace MainForm
                 resistor.Parent = serialCircuit1;
                 _circuitPictureBox.Image = Resources.Цепь_5;
                 _circuit.Clean();
-                _circuit.AddAfter(null, serialCircuit1);
+                _circuit.AddNodes(null, serialCircuit1);
             }
 
             UpdateTreeView();

@@ -6,7 +6,7 @@ namespace ElementsLibrary.Circuits
     /// <summary>
     ///     Базовый класс подцепи 
     /// </summary>
-    public abstract class SubcircuitBase : INode
+    public abstract class SubCircuitBase : INode
     {
         #region Static fields
 
@@ -46,7 +46,7 @@ namespace ElementsLibrary.Circuits
         /// <summary>
         ///     Конструктор
         /// </summary>
-        public SubcircuitBase()
+        public SubCircuitBase()
         {
             UniqueId = _globalId;
             _globalId++;

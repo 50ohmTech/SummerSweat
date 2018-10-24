@@ -4,9 +4,9 @@ using System.Numerics;
 namespace ElementsLibrary.Circuits
 {
     /// <summary>
-    ///     Параллельное соединение цепи <see cref="ParallelSubcircuit" />
+    ///     Параллельное соединение цепи <see cref="ParallelSubCircuit" />
     /// </summary>
-    public class ParallelSubcircuit : SubcircuitBase
+    public class ParallelSubCircuit : SubCircuitBase
     {
         #region Constants
 

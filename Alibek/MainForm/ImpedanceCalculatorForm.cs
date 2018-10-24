@@ -7,6 +7,7 @@ using ElementsLibrary;
 namespace MainForm
 {
     //TODO: неправильное название файла
+    //сделяль
     /// <summary>
     ///     Форма под калькулятор
     /// </summary>
@@ -19,11 +20,16 @@ namespace MainForm
         /// </summary>
         private readonly Circuit _circuit;
 
+        private List<double> _frequencies;
+
+        private List<Complex> impedances;
+
         #endregion
 
         #region Private fields
 
         //TODO: почему uint только endvalue?
+        //по идее это костыль
         private uint _endValue;
         private double _startValue;
         private double _stepValue;
@@ -40,9 +46,7 @@ namespace MainForm
         {
             InitializeComponent();
             //TODO: зачем ContextMenu?
-            _startValueTextBox.ContextMenu = new ContextMenu();
-            _stepValueTextBox.ContextMenu = new ContextMenu();
-            _endValueTextBox.ContextMenu = new ContextMenu();
+            //сделяль
             _circuit = circuit;
         }
 
@@ -59,9 +63,9 @@ namespace MainForm
             ValueValidators.ChangeSeparator(_stepValueTextBox);
             ValueValidators.ChangeSeparator(_endValueTextBox);
 
-            var start = double.TryParse(_startValueTextBox.Text, out _startValue);
-            var step = double.TryParse(_stepValueTextBox.Text, out _stepValue);
-            var finish = uint.TryParse(_endValueTextBox.Text, out _endValue);
+            var startValue = double.TryParse(_startValueTextBox.Text, out _startValue);
+            var stepValue = double.TryParse(_stepValueTextBox.Text, out _stepValue);
+            var endValue = uint.TryParse(_endValueTextBox.Text, out _endValue);
 
             if (!ValueValidators.IsCorrectFrequency(_startValue, _stepValue, _endValue))
             {
@@ -71,38 +75,22 @@ namespace MainForm
             //TODO: заменить на список, и конвертировать в массив уже при передаче в CalculateZ с помощью LINQ-метода ToArray();
             // Иначе сложночитаемый код, с постоянным динамическим увеличением массива на один элемент в цикле.
             //TODO: Кусок кода Шагаева!!! ВСЁ, что скопировано - удалить, и написать своё!
-            var frequency = new double[1];
+            //Я сделяль
+            _frequencies = new List<double>();
 
-            var j = 0;
-            for (var i =_startValue; i <= _endValue; i += _stepValue)
+            for (int counter = 0; counter < _endValue; counter++)
             {
-                frequency[j] = i;
-                j++;
-                if (!(_endValue - i == 0))
-                {
-                    Array.Resize(ref frequency, frequency.Length + 1);
-                }
+                _frequencies.Add(_startValue + counter * _stepValue);
             }
 
-            if (Math.Abs(frequency[frequency.Length - 1] - 0 ) < 0.0000001)
+            impedances = _circuit.CalculateZ(_frequencies.ToArray());
+
+            for (int counter = 0; counter < impedances.Count; counter++)
             {
-                Array.Resize(ref frequency, frequency.Length - 1);
+                _calculatorDataGridView.Rows.Add(_frequencies[counter],
+                    impedances[counter]);
             }
 
-            var impedances = _circuit.CalculateZ(frequency);
-            var correctListOfImpedances = new List<string>();
-
-            for (var i = 0; i < impedances.Count; i++)
-            {
-                correctListOfImpedances.Add($"R:{Math.Round(impedances[i].Real, 3)} " +
-                                            $"I:{Math.Round(impedances[i].Imaginary, 3)}");
-            }
-
-            for (var i = 0; i < impedances.Count; i++)
-            {
-                _calculatorDataGridView.Rows.Add(Math.Round(frequency[i], 3),
-                    correctListOfImpedances[i]);
-            }
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace ElementsLibrary.Circuits
     /// <summary>
     ///     Последовательное соединение цепи 
     /// </summary>
-    public class SerialSubcircuit : SubcircuitBase
+    public class SerialSubCircuit : SubCircuitBase
     {
         #region Constants
 

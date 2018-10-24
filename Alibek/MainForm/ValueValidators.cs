@@ -136,18 +136,18 @@ namespace MainForm
         /// <returns>Bool значение</returns>
         public static bool IsCorrectNominal(double value)
         {
-            const double minElementValue = 0.000001;
-            const double maxElementValue = 100000.0;
+            const double minValue = 0.000001;
+            const double maxValue = 100000.0;
 
-            if (value >= minElementValue && value <= maxElementValue)
+            if (value >= minValue && value <= maxValue)
             {
                 return true;
             }
 
             MessageBox.Show(
                 "Номинал элемента должен быть\n больше " +
-                minElementValue + " и не превышать " +
-                maxElementValue,
+                minValue + " и не превышать " +
+                maxValue,
                 "Error",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -164,21 +164,21 @@ namespace MainForm
         public static bool IsCorrectFrequency(double startValue, double interval,
             uint count)
         {
-            const double maxCount = 1000;
-            const double minCount = 1;
-
+           
+            const double maxStepValue = 10000000000.0;
+            const double minStepValue = 0.01;
             const double maxStartValue = 1000000000000.0;
             const double minStartValue = 1.0;
+            const double maxEndValue = 1000;
+            const double minEndValue = 1;
 
-            const double maxInterval = 10000000000.0;
-            const double minInterval = 0.01;
 
-            return IsCorrectRangeParametr(count, minCount,
-                       maxCount, "Конечное количество диапазона") &&
+            return IsCorrectRangeParametr(count, minEndValue,
+                       maxEndValue, "Конечное значение интервала") &&
                    IsCorrectRangeParametr(startValue, minStartValue,
-                       maxStartValue, "Начальное значение диапазона") &&
-                   IsCorrectRangeParametr(interval, minInterval,
-                       maxInterval, "Интервал диапазона");
+                       maxStartValue, "Начальное значение интервала") &&
+                   IsCorrectRangeParametr(interval, minStepValue,
+                       maxStepValue, "Шаг диапазона");
         }
 
         #endregion

@@ -74,6 +74,8 @@ namespace MainForm
         {
             _element.Value = Convert.ToDouble(_editValuesTextBox.Text);
             //TODO: Почему Cancel?
+            //долгая история но если поставить DialogResult.OK, то значения не меняются
+            //и я понятия не имею с чем это связано
             DialogResult = DialogResult.Cancel;
         }
 

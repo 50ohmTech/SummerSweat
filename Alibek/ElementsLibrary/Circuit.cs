@@ -8,6 +8,7 @@ namespace ElementsLibrary
 {
     //TODO: ВЖУХ! И 22 октября куча готовых классов и форм за один коммит.
     // Код скопирован и целыми кусками совпадает с кодом Шагаева. Удалить и написать свой
+    //Ну чето попытался переписать, но так как логика одна кардинально ничего не поменялось.
     /// <summary>
     ///     Класс электрическая цепь Circuit
     /// </summary>
@@ -47,8 +48,9 @@ namespace ElementsLibrary
 
             var impedance = new List<Complex>();
 
-            foreach (var frequency in frequencies)
+            for (int index = 0; index < frequencies.Length; index++)
             {
+                double frequency = frequencies[index];
                 impedance.Add(Root.CalculateZ(frequency));
             }
 
@@ -58,33 +60,34 @@ namespace ElementsLibrary
         /// <summary>
         ///     Функция добавления
         /// </summary>
-        /// <param name="currentNode">Текущая нода</param>
-        /// <param name="newNode">Новая нода</param>
-        public void AddAfter(INode currentNode, INode newNode)
+        /// <param name="node">Текущая нода</param>
+        /// <param name="nextNode">Следующая нода</param>
+        public void AddNodes(INode node, INode nextNode)
         {
-            if (newNode == null)
+            if (nextNode == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(nextNode), "Пустая нода!");
             }
-
             if (IsEmpty())
             {
-                Root = newNode;
+                Root = node;
                 return;
             }
 
-            if (currentNode is SubcircuitBase subcircuit)
+            if (node is SubCircuitBase circuit)
             {
-                subcircuit.Nodes.Add(newNode);
-
-                if (newNode is SubcircuitBase newSubcircuit)
+                if (circuit.Nodes == null)
                 {
-                    newSubcircuit.Parent = subcircuit;
+                    throw new InvalidOperationException("Дочерние узлы не должны быть null!");
                 }
-
-                if (newNode is ElementBase newElementBase)
+                circuit.Nodes.Add(nextNode);
+                if (nextNode is SubCircuitBase nextSubcircuit)
                 {
-                    newElementBase.Parent = subcircuit;
+                    nextSubcircuit.Parent = circuit;
+                }
+                if (nextNode is ElementBase nextElementBase)
+                {
+                    nextElementBase.Parent = circuit;
                 }
             }
         }
