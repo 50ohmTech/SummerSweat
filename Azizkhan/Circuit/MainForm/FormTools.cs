@@ -28,6 +28,22 @@ namespace CircuitView
         }
 
         /// <summary>
+        ///     Проверка строки на вхождение корректных значений для номинала элемента
+        /// </summary>
+        /// <param name="value">Строка - номинал элемента</param>
+        /// <returns>Соответствует ли строка корректному значению номинала элемента</returns>
+        public static bool CheckCorrectValue(string value)
+        {
+            if (CheckStringForDouble(value))
+            {
+                return !(Convert.ToDouble(value) <= ElementBase.MINVALUE ||
+                         Convert.ToDouble(value) >= ElementBase.MAXVALUE);
+            }
+
+            return false;
+        }
+
+        /// <summary>
         ///     Проверка ввода корректного Double в TextBox
         /// </summary>
         /// <param name="textBox">TextBox, откуда тащим информацию</param>

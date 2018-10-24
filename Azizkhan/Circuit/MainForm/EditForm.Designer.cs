@@ -40,7 +40,6 @@
             this.valueTextBox.Size = new System.Drawing.Size(129, 20);
             this.valueTextBox.TabIndex = 0;
             this.valueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
-            this.valueTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.valueTextBox_Validating);
             // 
             // okButton
             // 

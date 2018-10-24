@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using CircuitLibrary.Elements;
 
@@ -46,6 +45,13 @@ namespace CircuitView
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            if (!FormTools.CheckCorrectValue(valueTextBox.Text))
+            {
+                FormTools.ShowError(valueTextBox);
+                valueTextBox.Text = "";
+                return;
+            }
+
             _element.Value = Convert.ToDouble(valueTextBox.Text);
             Close();
         }
@@ -58,11 +64,6 @@ namespace CircuitView
         private void ValueTextBox_TextChanged(object sender, EventArgs e)
         {
             okButton.Enabled = valueTextBox.Text.Length != 0;
-        }
-
-        private void valueTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            FormTools.TextBoxCheck(valueTextBox, e);
         }
 
         #endregion
