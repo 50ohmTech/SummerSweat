@@ -29,7 +29,6 @@ namespace Model
                 return;
 
             }
-            Value = node ?? throw new ArgumentNullException(nameof(node));
 
             Value = node;
 
@@ -42,13 +41,13 @@ namespace Model
                     Text = $"[Паралл] (Id:{parallel.Id})";
                     break;
                 case Resistor resistor:
-                    Text = $"[R] [{resistor.Value}] ({resistor.Name})";
+                    Text = $"({resistor.Name}) [{resistor.Value}]";
                     break;
                 case Capacitor capacitor:
-                    Text = $"[C] [{capacitor.Value}] ({capacitor.Name})";
+                    Text = $"({capacitor.Name}) [{capacitor.Value}]";
                     break;
                 case Inductor inductor:
-                    Text = $"[L] [{inductor.Value}] ({inductor.Name})";
+                    Text = $"({inductor.Name}) [{inductor.Value}]";
                     break;
                 default:
                     throw new InvalidOperationException(nameof(node));

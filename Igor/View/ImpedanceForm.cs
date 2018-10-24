@@ -6,26 +6,37 @@ using Model;
 namespace View
 {
     /// <summary>
-    /// Форма для расчета имеданса
+    ///     Форма для расчета имеданса
     /// </summary>
     public partial class ImpedanceForm : Form
     {
         #region Fields
 
-        #region Readonly fields
+        #region Private fields
 
-        private readonly Circuit _circuit;
+        /// <summary>
+        ///     Поле для цепи.
+        /// </summary>
+        private Circuit _circuit;
 
         #endregion
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Свойство для цепи.
+        /// </summary>
+        public Circuit Circuit { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public ImpedanceForm(Circuit circuit)
+        public ImpedanceForm()
         {
             InitializeComponent();
-            _circuit = circuit;
             dataGridView.RowHeadersVisible = false;
             CalculateButton.Enabled = false;
         }
@@ -36,138 +47,112 @@ namespace View
 
         private void CalculateImpedance()
         {
+            _circuit = Circuit;
             var start = double.Parse(StartTextBox.Text.Replace('.', ','));
             var finish = double.Parse(FinishTextBox.Text.Replace('.', ','));
             var step = double.Parse(StepTextBox.Text.Replace('.', ','));
 
-            var frequence = new double[1];
+            //TODO: Заменить на список, а список преобразовать в массив при передаче в CalculateZ с помощью LINQ-запроса ToArray(). \ DONE
+            // Иначе твоя логика постоянного увеличения массива на один элемент внутри цикла просто отвратительно читается. \ DONE
+            //TODO: массив хранит не частоту, а частотЫ (много частот). Название переменной неправильное \ DONE
+            var frequency = new double[1];
+
+            List<double> listOfFrequency = new List<double>();
+
+
 
             var j = 0;
             for (var i = start; i <= finish; i += step)
             {
-                frequence[j] = i;
+                listOfFrequency.Add(i);
                 j++;
-                if (!(finish - i == 0))
-                {
-                    Array.Resize(ref frequence, frequence.Length + 1);
-                }
             }
 
-            if (frequence[frequence.Length - 1] == 0)
-            {
-                Array.Resize(ref frequence, frequence.Length - 1);
-            }
+            var arrayOfElements = new double [listOfFrequency.Count];
+            arrayOfElements = listOfFrequency.ToArray();
 
-            var impedances = _circuit.CalculateZ(frequence);
-            var impd = new List<string>();
+            var impedances = _circuit.CalculateZ(arrayOfElements);
+            var correctListOfImpedances = new List<string>();
 
             for (var i = 0; i < impedances.Count; i++)
             {
-                impd.Add(
+                correctListOfImpedances.Add(
                     $"R:{Math.Round(impedances[i].Real, 3)} " +
                     $"I:{Math.Round(impedances[i].Imaginary, 3)}");
             }
 
             for (var i = 0; i < impedances.Count; i++)
             {
-                dataGridView.Rows.Add(Math.Round(frequence[i], 3), impd[i]);
+                dataGridView.Rows.Add(Math.Round(arrayOfElements[i], 3),
+                    correctListOfImpedances[i]);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CalculateButton_Click(object sender, EventArgs e)
         {
+            Tools.IsCorrectStartFinish(StartTextBox.Text, FinishTextBox.Text);
             CalculateImpedance();
         }
 
         private void ValidatigTextBox(TextBox textBox)
         {
-            if (IsCellCorrect(textBox.Text) == false)
+            if (Tools.IsCellCorrect(textBox.Text) != true)
             {
-                MessageBox.Show(
-                    "Вы ввели: " + textBox.Text + "\n" +
-                    "Вводимое значение должно удовлетворять следующим условиям:\n " +
-                    "-быть положительным числом\n " +
-                    "-быть вещественным или натуральным числом\n " +
-                    "-быть большим 0.000 000 001 по модулю\n " +
-                    "-быть меньше 1 000 000 000 000\n " +
-                    "-запись не должна содержать пробелов\n " +
-                    "-запись должна начинаться с цифры\n " +
-                    "-использование экспоненциальной записи не допускается\n " +
-                    "-eсли первой цифрой числа являтся ноль, значит после него обязательно должна быть запятая.",
-                    "Ошибка ввода значения частоты", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                Tools.ShowError(textBox.Text);
+                textBox.Text = null;
                 textBox.Clear();
+                return;
             }
 
-            if (IsCellCorrect(StartTextBox.Text) == false ||
-                IsCellCorrect(FinishTextBox.Text) == false ||
-                IsCellCorrect(StepTextBox.Text) == false)
+            if (Tools.IsCellCorrect(StartTextBox.Text) != true ||
+                Tools.IsCellCorrect(FinishTextBox.Text) != true ||
+                Tools.IsCellCorrect(StepTextBox.Text) != true)
             {
                 CalculateButton.Enabled = false;
                 return;
             }
 
-            CalculateButton.Enabled = true;
+            if (Circuit.Root != null)
+            {
+                CalculateButton.Enabled = true;
+            }
         }
 
         private void StartTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (StartTextBox.Text != null)
+            if (StartTextBox.Text.Length > 0)
             {
                 ValidatigTextBox(StartTextBox);
             }
+
+            Tools.IsCorrectStep(StartTextBox.Text, FinishTextBox.Text, StepTextBox.Text);
         }
 
         private void FinishTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (FinishTextBox.Text != null)
+            if (FinishTextBox.Text.Length > 0)
             {
                 ValidatigTextBox(FinishTextBox);
             }
+
+            Tools.IsCorrectStep(StartTextBox.Text, FinishTextBox.Text, StepTextBox.Text);
         }
 
         private void StepTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (StartTextBox.Text != null)
+            if (StartTextBox.Text.Length > 0)
             {
                 ValidatigTextBox(StepTextBox);
             }
+
+            Tools.IsCorrectStep(StartTextBox.Text, FinishTextBox.Text, StepTextBox.Text);
         }
 
         #endregion
 
-        #region Public methods
-
-        public static bool IsCellCorrect(string e)
+        private void ImpedanceForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            var formatingString = e.Replace('.', ',');
-            if (double.TryParse(formatingString,
-                    out var newValue) && !(newValue < 0.000000001) &&
-                newValue <= 1000000000000)
-            {
-                if (formatingString.Length > 1 && formatingString[0] == '0' &&
-                    formatingString[1] != ',')
-                {
-                    return false;
-                }
-
-                if (formatingString[0] == ',' || formatingString[0] == '.')
-                {
-                    return false;
-                }
-
-                if (e.Contains(" "))
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-            return false;
+            Circuit = null;
         }
-
-        #endregion
     }
 }
