@@ -78,7 +78,7 @@ namespace MainForm
                 }
             }
 
-            if (frequency[frequency.Length - 1] == 0)
+            if (Math.Abs(frequency[frequency.Length - 1] - 0 ) < 0.0000001)
             {
                 Array.Resize(ref frequency, frequency.Length - 1);
             }
