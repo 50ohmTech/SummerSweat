@@ -64,7 +64,7 @@ namespace CircuitLibrary
 
             var parallelFirst = circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
             var serialParallelFirst =
-                circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
 
             circuit.AddAfter(serial, parallelFirst);
             circuit.AddAfter(parallelFirst, serialParallelFirst);

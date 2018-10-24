@@ -33,11 +33,6 @@ namespace CircuitView
         private double _valueElement;
 
         /// <summary>
-        /// Element count
-        /// </summary>
-        private uint _countElements;
-
-        /// <summary>
         /// Maximum elements count
         /// </summary>
         private uint _maxCount = 15;
@@ -79,8 +74,7 @@ namespace CircuitView
             TreeView.Nodes.Add(root);
             AddTreeNode(_circuit.Root, root);
 
-            TreeView.ExpandAll();
-            _countElements = 0;
+            TreeView.ExpandAll();           
             CircuitPictureBox.Image = Drawer.DrawCircuit(_circuit.Root);   
         }
 
@@ -112,23 +106,22 @@ namespace CircuitView
         /// <returns>Number of elements</returns>
         private uint GetCount(INode root,uint count)
         {
-            if (root == null)
+            if (root != null)
             {
-                throw new ArgumentNullException(nameof(root));
-            }
-
-            foreach (var node in root.Nodes)
-            {
-                if (node is ElementBase)
+                foreach (var node in root.Nodes)
                 {
-                    count++;
+                    if (node is ElementBase)
+                    {
+                        count++;
+                    }
+                    if (node is SubcircuitBase)
+                    {
+                        count = GetCount(node, count);
+                    }
                 }
-                if (node is SubcircuitBase)
-                {
-                    count = GetCount(node, count);
-                }
-            }
 
+            }
+            
             return count;
         }
 
@@ -203,8 +196,9 @@ namespace CircuitView
         /// <returns></returns>
         private bool ValidationCountElements(INode root)
         {
-            _countElements = GetCount(_circuit.Root, _countElements);
-            if (_countElements > _maxCount)
+            uint countElements = 0;
+            countElements = GetCount(_circuit.Root, countElements);
+            if (countElements >= _maxCount)
             {
                 MessageBox.Show(
                     "Maximum number of elements cirucit must not exceed " + _maxCount);
