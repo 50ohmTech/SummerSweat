@@ -97,7 +97,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CircuitLibraby\CircuitLibrary.csproj">
+    <ProjectReference Include="..\CircuitLibrary\CircuitLibrary.csproj">
       <Project>{8d7c81df-977d-46db-8f28-1be9dbb9ec00}</Project>
       <Name>CircuitLibrary</Name>
     </ProjectReference>

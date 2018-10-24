@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitView", "MainForm\CircuitView.csproj", "{BAE7E8DD-7CBD-44D1-ABAB-623EBD52EFF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitLibrary", "CircuitLibraby\CircuitLibrary.csproj", "{8D7C81DF-977D-46DB-8F28-1BE9DBB9EC00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitLibrary", "CircuitLibrary\CircuitLibrary.csproj", "{8D7C81DF-977D-46DB-8F28-1BE9DBB9EC00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
