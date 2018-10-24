@@ -69,8 +69,10 @@ namespace MainForm
                 }
 
                 _circuit = Circuit;
-                FormTools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
-                FormTools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
+                if (!FormTools.IsCorrectInterval(StartTextBox, FinishTextBox, StepTextBox))
+                {
+                    return;
+                }
                 var start = Convert.ToDouble(StartTextBox.Text);
                 var finish = Convert.ToDouble(FinishTextBox.Text);
                 var step = Convert.ToDouble(StepTextBox.Text);

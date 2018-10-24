@@ -36,7 +36,6 @@ namespace CircuitView
             valueTextBox.Text = Convert.ToString((decimal) element.Value);
 
             DialogResult = DialogResult.Yes;
-            cancelButton.DialogResult = DialogResult.Cancel;
         }
 
         #endregion

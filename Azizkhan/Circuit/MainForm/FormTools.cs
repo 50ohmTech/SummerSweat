@@ -89,47 +89,37 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Проверка корректных значений начала и конца интервала
+        ///     Проверка корректных значений введённых в три текстбокса
         /// </summary>
-        /// <param name="startTextBox">начало интервала</param>
-        /// <param name="finishTextBox">конец интервала</param>
-        public static void IsCorrectStartFinish(TextBox startTextBox,
-            TextBox finishTextBox)
+        /// <param name="start">Начало интервала</param>
+        /// <param name="finish">Конец интервала</param>
+        /// <param name="step">Шаг</param>
+        public static bool IsCorrectInterval(TextBox start,
+            TextBox finish, TextBox step)
         {
-            if (startTextBox.Text.Length != 0 && finishTextBox.Text.Length != 0)
+            if (start.Text.Length != 0 && finish.Text.Length != 0 &&
+                step.Text.Length != 0)
             {
-                if (double.Parse(startTextBox.Text) > double.Parse(finishTextBox.Text))
+                if (CheckStringForDouble(start.Text) &&
+                    CheckStringForDouble(finish.Text) &&
+                    CheckStringForDouble(step.Text))
                 {
-                    MessageBox.Show("Начало должно быть меньше границы!");
-                    startTextBox.Text = null;
-                    finishTextBox.Text = null;
+                    if (Convert.ToDouble(finish.Text) - Convert.ToDouble(start.Text) <
+                        0 && Convert.ToDouble(finish.Text) -
+                        Convert.ToDouble(start.Text) < Convert.ToDouble(step.Text))
+                    {
+                        MessageBox.Show(
+                            "Интервал задан не верно!");
+
+                        start.Text = finish.Text = step.Text = "";
+                        return false;
+                    }
+
+                    return true;
                 }
             }
-        }
 
-        /// <summary>
-        ///     Проверка корректного значения шага
-        /// </summary>
-        /// <param name="startTextBox">Начало интервала</param>
-        /// <param name="finishTextBox">Конец интервала</param>
-        /// <param name="stepTextBox">Шаг</param>
-        public static void IsCorrectStep(TextBox startTextBox, TextBox finishTextBox,
-            TextBox stepTextBox)
-        {
-            if (startTextBox.Text.Length != 0 && finishTextBox.Text.Length != 0 &&
-                stepTextBox.Text.Length != 0)
-            {
-                if (double.Parse(finishTextBox.Text) - double.Parse(startTextBox.Text) <
-                    double.Parse(stepTextBox.Text))
-                {
-                    MessageBox.Show(
-                        "Разница между началом и концов по модулю не может быть меньше шага!");
-
-                    startTextBox.Text = null;
-                    finishTextBox.Text = null;
-                    stepTextBox.Text = null;
-                }
-            }
+            return false;
         }
 
         #endregion
