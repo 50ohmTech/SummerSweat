@@ -22,3 +22,4 @@ C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\MainFor
 C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\MainForm.pdb
 C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\CircuitModel.dll
 C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\CircuitModel.pdb
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\MainForm.EditValueForm.resources

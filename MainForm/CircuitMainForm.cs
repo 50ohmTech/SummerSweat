@@ -9,12 +9,25 @@ namespace MainForm
 {
     public partial class MainForm : Form
     {
-        #region ~ Переменные только для чтения ~
+        #region ~ Переменные ~
+
+        #region ~ Только для чтения ~
 
         /// <summary>
         /// Цепь.
         /// </summary>
         private readonly Circuit _circuit;
+
+        #endregion
+
+        #region ~ Приватные переменные ~
+
+        /// <summary>
+        /// Текущий узел.
+        /// </summary>
+        private INode _currentNode;
+
+        #endregion
 
         #endregion
 
@@ -271,10 +284,46 @@ namespace MainForm
             _treeView.ExpandAll();
         }
 
+        /// <summary>
+        /// Открытие фонмы изменения значения элемента.
+        /// </summary>
+        private void _editValueButton_Click(object sender, EventArgs e)
+        {
+            if (_currentNode != null)
+            {
+                if (_currentNode is ElementBase element)
+                {
+                    var result = new EditValueForm(element).ShowDialog();
+                    //DialogResult result = new EditValueForm(element).ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        UpdateTreeView();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выбранный узел не является элементом.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент для изменения.");
+            }
+        }
 
+        /// <summary>
+        /// Событие для изменения значения элемента.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node is TreeViewNode treeNode)
+            {
+                _currentNode = treeNode.Value;
+            }
+        }
 
         #endregion
-
-
     }
 }

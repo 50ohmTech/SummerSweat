@@ -1,4 +1,7 @@
-﻿namespace MainForm
+﻿using System;
+using System.Windows.Forms;
+
+namespace MainForm
 {
     partial class MainForm
     {
@@ -39,6 +42,7 @@
             this._treeView = new System.Windows.Forms.TreeView();
             this._circuitPictureBox = new System.Windows.Forms.PictureBox();
             this._choiceLabel = new System.Windows.Forms.Label();
+            this._editValueButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._circuitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +66,7 @@
             // 
             // _calculateImpedanceButton
             // 
-            this._calculateImpedanceButton.Location = new System.Drawing.Point(15, 287);
+            this._calculateImpedanceButton.Location = new System.Drawing.Point(15, 316);
             this._calculateImpedanceButton.Name = "_calculateImpedanceButton";
             this._calculateImpedanceButton.Size = new System.Drawing.Size(170, 23);
             this._calculateImpedanceButton.TabIndex = 2;
@@ -128,12 +132,13 @@
             this._treeView.Name = "_treeView";
             this._treeView.Size = new System.Drawing.Size(170, 118);
             this._treeView.TabIndex = 11;
+            this._treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
             // 
             // _circuitPictureBox
             // 
             this._circuitPictureBox.Location = new System.Drawing.Point(193, 12);
             this._circuitPictureBox.Name = "_circuitPictureBox";
-            this._circuitPictureBox.Size = new System.Drawing.Size(333, 297);
+            this._circuitPictureBox.Size = new System.Drawing.Size(333, 327);
             this._circuitPictureBox.TabIndex = 12;
             this._circuitPictureBox.TabStop = false;
             // 
@@ -146,11 +151,22 @@
             this._choiceLabel.TabIndex = 13;
             this._choiceLabel.Text = "Выберите цепь";
             // 
+            // _editValueButton
+            // 
+            this._editValueButton.Location = new System.Drawing.Point(15, 287);
+            this._editValueButton.Name = "_editValueButton";
+            this._editValueButton.Size = new System.Drawing.Size(170, 23);
+            this._editValueButton.TabIndex = 14;
+            this._editValueButton.Text = "Изменить элемент";
+            this._editValueButton.UseVisualStyleBackColor = true;
+            this._editValueButton.Click += new System.EventHandler(this._editValueButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 324);
+            this.ClientSize = new System.Drawing.Size(538, 350);
+            this.Controls.Add(this._editValueButton);
             this.Controls.Add(this._choiceLabel);
             this.Controls.Add(this._circuitPictureBox);
             this.Controls.Add(this._treeView);
@@ -162,8 +178,8 @@
             this.Controls.Add(this._addButton);
             this.Controls.Add(this._deleteButton);
             this.Controls.Add(this._calculateImpedanceButton);
-            this.MaximumSize = new System.Drawing.Size(554, 363);
-            this.MinimumSize = new System.Drawing.Size(554, 363);
+            this.MaximumSize = new System.Drawing.Size(554, 389);
+            this.MinimumSize = new System.Drawing.Size(554, 389);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CircuitMainForm";
@@ -185,6 +201,7 @@
         private System.Windows.Forms.TreeView _treeView;
         private System.Windows.Forms.PictureBox _circuitPictureBox;
         private System.Windows.Forms.Label _choiceLabel;
+        private System.Windows.Forms.Button _editValueButton;
     }
 }
 
