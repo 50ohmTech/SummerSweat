@@ -13,16 +13,18 @@ namespace CircuitLibrary.Elements
         #region Constants
 
         //TODO: экспоненциальная форма
+        //+
         /// <summary>
         ///     Минимальное значение номинала элемента
         /// </summary>
-        public const double MINVALUE = 0.000001;
+        public const double MINVALUE = 1e-6;
 
         //TODO: экспоненциальная форма
+        //+
         /// <summary>
         ///     Максимальное значение номинала элемента
         /// </summary>
-        public const double MAXVALUE = 1000000000000;
+        public const double MAXVALUE = 1e+12;
 
         #endregion
 

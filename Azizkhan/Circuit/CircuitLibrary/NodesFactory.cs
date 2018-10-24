@@ -51,8 +51,10 @@ namespace CircuitLibrary
                     newNode = new Resistor("R" + ResistorIterator++, value);
 
                     break; //TODO: неправильное именование элемента
+
+                //+
                 case NodeType.Inductor:
-                    newNode = new Inductor("I" + InductorIterator++, value);
+                    newNode = new Inductor("L" + InductorIterator++, value);
 
                     break;
                 case NodeType.Capacitor:

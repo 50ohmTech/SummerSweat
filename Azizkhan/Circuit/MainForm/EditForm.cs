@@ -11,34 +11,50 @@ namespace CircuitView
     {
         #region Fields
 
-        #region Readonly fields
+        #region Private fields
 
         /// <summary>
         ///     Элемент
         /// </summary>
-        private readonly ElementBase _element;
+        private ElementBase _element;
 
         #endregion
+
+        #endregion
+
+        #region Properties
+
+        public ElementBase Element
+        {
+            get => _element;
+            set
+            {
+                _element = value ?? throw new ArgumentNullException(nameof(_element));
+                Text = "Элемент: " + Element.Name;
+                valueTextBox.Text = Convert.ToString((decimal) Element.Value);
+            }
+        }
 
         #endregion
 
         #region Constructor
 
         //TODO: элемент должен передаваться в форму через свойство, а не аргумент конструктора.
+        //+
         // Иначе ограничиваются варианты использования формы
         /// <summary>
         ///     Конструктор
         /// </summary>
-        /// <param name="element">Элемент</param>
-        public EditForm(ElementBase element)
+        public EditForm()
         {
-            _element = element ?? throw new ArgumentNullException(nameof(element));
             InitializeComponent();
-            Text = "Элемент: " + element.Name;
+
             //TODO: зачем decimal? Преобразование вообще не нужно, как и класс Convert
-            valueTextBox.Text = Convert.ToString((decimal) element.Value);
+            //Странные преобразования для того,
+            //чтобы экспоненциальная форма записи не тянулась с TreeView в форму.
+
             //TODO: DialogResult должен присваиваться перед закрытием формы, а не в конструкторе
-            DialogResult = DialogResult.Yes;
+            //+
         }
 
         #endregion
@@ -55,6 +71,7 @@ namespace CircuitView
             }
 
             _element.Value = Convert.ToDouble(valueTextBox.Text);
+            DialogResult = DialogResult.Yes;
             Close();
         }
 

@@ -122,9 +122,14 @@ namespace CircuitView
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            NodeType nodeType;
             //TODO: не используешь возвращаемое значение метода - неправильно
-            Enum.TryParse(NodeComboBox.SelectedValue.ToString(), out nodeType);
+            //+
+            if (!Enum.TryParse(NodeComboBox.SelectedValue.ToString(),
+                out NodeType nodeType))
+            {
+                MessageBox.Show("Не выбран тип узла!");
+            }
+
             if (_currentNode == null && _circuit.Root != null)
             {
                 MessageBox.Show(
@@ -151,8 +156,8 @@ namespace CircuitView
                     else
                     {
                         MessageBox.Show( //TODO: неправильный текст сообщения
-                            "Сначала добавьте узел Serial или Parallel, " +
-                            "только после этого можно будет добавлять элементы. R,I,C не могут быть корнем цепи!");
+                            //+
+                            "Нельзя добавить в пустую цепь R, L, C! Сначала добавьте узел соединения.");
                     }
                 }
 
@@ -207,7 +212,7 @@ namespace CircuitView
 
         private void ValueTextBox_Validating(object sender, CancelEventArgs e)
         {
-            FormTools.TextBoxCheck(ValueTextBox, e);
+            FormTools.TextBoxValidation(ValueTextBox, e);
         }
 
         private void ValueTextBox_TextChanged(object sender, EventArgs e)
@@ -236,25 +241,30 @@ namespace CircuitView
         private void TreeView_DoubleClick(object sender, EventArgs e)
         {
             //TODO: избавиться от лишней вложенности, инвертировать if
-            if (_currentNode != null)
-            {   //TODO: избавиться от лишней вложенности, инвертировать if
-                if (_currentNode is ElementBase element)
-                {
-                    var result = new EditForm(element).ShowDialog();
-                    //TODO: обновлять только если результат формы "Отмена"?
-                    if (result == DialogResult.Cancel)
-                    {
-                        UpdateTreeView();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Выбранный вами узел не является элементом.");
-                }
+            //+
+            if (_currentNode == null)
+            {
+                MessageBox.Show("Выберите элемент, который хотите изменить.");
             }
             else
             {
-                MessageBox.Show("Выберите элемент, который хотите изменить.");
+                //TODO: избавиться от лишней вложенности, инвертировать if
+                //+
+                if (!(_currentNode is ElementBase element))
+                {
+                    MessageBox.Show("Выбранный вами узел не является элементом.");
+                }
+                else
+                {
+                    var result = new EditForm();
+                    result.Element = element;
+
+                    //TODO: обновлять только если результат формы "Отмена"?
+                    //+
+
+                    result.ShowDialog();
+                    UpdateTreeView();
+                }
             }
         }
 

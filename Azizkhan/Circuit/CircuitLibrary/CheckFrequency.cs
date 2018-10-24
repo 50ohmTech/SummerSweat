@@ -10,10 +10,11 @@ namespace CircuitLibrary.Elements
         #region Constants
 
         //TODO: экспоненциальная форма
+        //+
         /// <summary>
         ///     Максимальное значение частоты  = 1 ТГц
         /// </summary>
-        public const double MAX_FREQUENCY = 1000000000000;
+        public const double MAX_FREQUENCY = 1e+12;
 
         /// <summary>
         ///     Минимальное значение частоты = 1 Гц

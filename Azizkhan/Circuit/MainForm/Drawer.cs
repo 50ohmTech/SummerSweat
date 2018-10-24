@@ -16,149 +16,178 @@ namespace CircuitView
         #region - - Поля - -
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Размер bitmap по X.
         /// </summary>
-        private static readonly int _sizeX = 1000;
+        private const int _sizeX = 1000;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Размер bitmap по Y.
         /// </summary>
-        private static readonly int _sizeY = 1000;
+        private const int _sizeY = 1000;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Начальная координата Х.
         /// </summary>
-        private static readonly int _startX = 1;
+        private const int _startX = 1;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Начальная координата Y.
         /// </summary>
-        private static readonly int _startY = 1;
+        private const int _startY = 1;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         //TODO: ошибка
+        //+
         /// <summary>
         ///     Сдвиг по X для отрисовки имени.
         /// </summary>
-        private static readonly int _nameDisplasemantX = 15;
+        private const int _nameDisplacementX = 15;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         //TODO: ошибка
+        //+
         /// <summary>
         ///     Сдвиг по Y для отрисовки имени.
         /// </summary>
-        private static readonly int _nameDisplasemantY = 40;
+        private const int _nameDisplacementY = 40;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Координата X резистора.
         /// </summary>
-        private static readonly int _resistorPositionX = 10;
+        private const int _resistorPositionX = 10;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Координата Y резистора.
         /// </summary>
-        private static readonly int _resistorPositionY = 20;
+        private const int _resistorPositionY = 20;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         //TODO: ошибка
+        //+
         /// <summary>
         ///     Высота резистора.
         /// </summary>
-        private static readonly int _resistorHight = 10;
+        private const int _resistorHeight = 10;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Ширина резистора.
         /// </summary>
-        private static readonly int _resistorWidth = 30;
+        private const int _resistorWidth = 30;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Координата X первой пластины конденсатора.
         /// </summary>
-        private static readonly int _firstPlatePosition = 20;
+        private const int _firstPlatePosition = 20;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Координата X второй пластины конденсатора.
         /// </summary>
-        private static readonly int _secondPlatePosition = 30;
+        private const int _secondPlatePosition = 30;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         //TODO: ошибка
+        //+
         /// <summary>
         ///     Высота конденсатора.
         /// </summary>
-        private static readonly int _capacitorHight = 20;
+        private const int _capacitorHeight = 20;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Количество дуг катушки.
         /// </summary>
-        private static readonly int _arcCount = 3;
+        private const int _arcCount = 3;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Диаметр дуги.
         /// </summary>
-        private static readonly int _arcDiameter = 10;
+        private const int _arcDiameter = 10;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Координата X катушки.
         /// </summary>
-        private static readonly int _inductorPositionX = 10;
+        private const int _inductorPositionX = 10;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Координата Y катушки.
         /// </summary>
-        private static readonly int _inductorPositionY = 20;
+        private const int _inductorPositionY = 20;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         //TODO: ошибка
+        //+
         /// <summary>
         ///     Сдвиг линий по Y.
         /// </summary>
-        private static readonly int _lineDisplasemantY = 25;
+        private const int _lineDisplacementY = 25;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Длина добавочной линии по X.
         /// </summary>
-        private static readonly int _lineLengthX = 25;
+        private const int _lineLengthX = 25;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Длина добавочной линии по Y.
         /// </summary>
-        private static readonly int _lineLengthY = 40;
+        private const int _lineLengthY = 40;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Длина элемента цепи по X.
         /// </summary>
-        private static readonly int _elementLengthX = 50;
+        private const int _elementLengthX = 50;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Формат текста.
         /// </summary>
         private static Font _font;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Поверхность рисования.
         /// </summary>
         private static Graphics _graphics;
 
         //TODO: статик ридонли - это константа. Поменять
+        //+
         /// <summary>
         ///     Ручка.
         /// </summary>
@@ -292,17 +321,19 @@ namespace CircuitView
             {
                 throw new ArgumentNullException(nameof(displacement));
             }
+
             //TODO: количество чего?
             var maxCount = 0;
+
             //TODO: шаги чего? Почему список?
             var steps = new List<int>();
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(displacement.X,
-                    _lineDisplasemantY + displacement.Y),
+                    _lineDisplacementY + displacement.Y),
                 new Point(_lineLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y));
+                    _lineDisplacementY + displacement.Y));
 
             for (var i = 0; i < root.Nodes.Count; i++)
             {
@@ -310,7 +341,9 @@ namespace CircuitView
                 //TODO: почему наверху макскаунт это int, а здесь каунт это point? Одинаковые имена для разных типов данных - неправильно!
                 var count = DrawSubcircuit(root.Nodes[i],
                     new Point(_lineLengthX + displacement.X,
-                        steps.Sum() * _lineLengthY + displacement.Y)); //TODO: почему степс суммируются?
+                        steps.Sum() * _lineLengthY +
+                        displacement.Y)); //TODO: почему степс суммируются?
+
                 //TODO: почему в шаги добавляется Y какого-то каунта?
                 steps.Add(count.Y);
 
@@ -318,20 +351,23 @@ namespace CircuitView
                 if (maxCount < count.X)
                 {
                     var step = 0;
+
                     //TODO: зачем этот цикл?
                     for (var j = 0; j < i; j++)
-                    {//TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+                    {
+                        //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
                         Graphics.DrawLine(Pen,
                             new Point(
                                 _lineLengthX + maxCount * _elementLengthX +
                                 displacement.X,
-                                _lineDisplasemantY + step * _lineLengthY +
+                                _lineDisplacementY + step * _lineLengthY +
                                 displacement.Y),
                             new Point(
                                 _lineLengthX + count.X * _elementLengthX +
                                 displacement.X,
-                                _lineDisplasemantY + step * _lineLengthY +
+                                _lineDisplacementY + step * _lineLengthY +
                                 displacement.Y));
+
                         //TODO: зачем мы суммируем степы?
                         step += steps[j];
                     }
@@ -346,17 +382,18 @@ namespace CircuitView
                     {
                         step += steps[j];
                     }
+
                     //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
                     Graphics.DrawLine(Pen,
                         new Point(
                             _lineLengthX + count.X * _elementLengthX +
                             displacement.X,
-                            _lineDisplasemantY + step * _lineLengthY +
+                            _lineDisplacementY + step * _lineLengthY +
                             displacement.Y),
                         new Point(
                             _lineLengthX + maxCount * _elementLengthX +
                             displacement.X,
-                            _lineDisplasemantY + step * _lineLengthY +
+                            _lineDisplacementY + step * _lineLengthY +
                             displacement.Y));
                 }
             }
@@ -365,36 +402,43 @@ namespace CircuitView
             Graphics.DrawLine(Pen,
                 new Point(
                     _lineLengthX + maxCount * _elementLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y),
+                    _lineDisplacementY + displacement.Y),
                 new Point(
                     2 * _lineLengthX + maxCount * _elementLengthX +
-                    displacement.X, _lineDisplasemantY + displacement.Y));
+                    displacement.X, _lineDisplacementY + displacement.Y));
 
+            //в случае, когда у ParallelSubcircuit всего 1 элемент, алгоритм неправильно отрабатывает отрисовку, поэтому здесь есть это странное условие.
             if (root.Nodes.Count < 2)
-            { //TODO: что здесь вообще происходит и что за условие?
+            {
+                //TODO: что здесь вообще происходит и что за условие?
+                //выше написал
                 return new Point(maxCount + 1, steps.Sum());
             }
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_lineLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y),
+                    _lineDisplacementY + displacement.Y),
                 new Point(_lineLengthX + displacement.X,
+
                     //TODO: почему сумма шагов, а индекс минус один?
-                    _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
+                    _lineDisplacementY + (steps.Sum() - steps[steps.Count - 1]) *
                     _lineLengthY +
                     displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(
                     _lineLengthX + maxCount * _elementLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y),
+                    _lineDisplacementY + displacement.Y),
                 new Point(
                     _lineLengthX + maxCount * _elementLengthX + displacement.X,
+
                     //TODO: аналогично
-                    _lineDisplasemantY + (steps.Sum() - steps[steps.Count - 1]) *
+                    _lineDisplacementY + (steps.Sum() - steps[steps.Count - 1]) *
                     _lineLengthY +
                     displacement.Y));
+
             //TODO: аналогично
             return new Point(maxCount + 1, steps.Sum());
         }
@@ -408,14 +452,7 @@ namespace CircuitView
             Point displacement)
         {
             //TODO: убрать лишние проверки
-            if (element == null)
-            {
-                throw new ArgumentNullException(nameof(element));
-            }
-            if (displacement == null)
-            {
-                throw new ArgumentNullException(nameof(displacement));
-            }
+            //+
             //TODO: зачем brush, если у тебя есть Pen?
             var brush = new SolidBrush(Color.Black);
             switch (element)
@@ -432,8 +469,8 @@ namespace CircuitView
             }
 
             Graphics.DrawString(element.Name, Font, brush,
-                _nameDisplasemantX + displacement.X,
-                _nameDisplasemantY + displacement.Y);
+                _nameDisplacementX + displacement.X,
+                _nameDisplacementY + displacement.Y);
         }
 
         /// <summary>
@@ -446,42 +483,48 @@ namespace CircuitView
             {
                 throw new ArgumentNullException(nameof(displacement));
             }
+
             //TODO: заменить на метод отрисовки прямоугольника
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_resistorPositionX + displacement.X,
                     _resistorPositionY + displacement.Y),
                 new Point(_resistorPositionX + displacement.X,
-                    _resistorPositionY + _resistorHight + displacement.Y));
+                    _resistorPositionY + _resistorHeight + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_resistorPositionX + displacement.X,
-                    _resistorPositionY + _resistorHight + displacement.Y),
+                    _resistorPositionY + _resistorHeight + displacement.Y),
                 new Point(_resistorPositionX + _resistorWidth + displacement.X,
-                    _resistorPositionY + _resistorHight + displacement.Y));
+                    _resistorPositionY + _resistorHeight + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_resistorPositionX + _resistorWidth + displacement.X,
                     _resistorPositionY + displacement.Y),
                 new Point(_resistorPositionX + _resistorWidth + displacement.X,
-                    _resistorPositionY + _resistorHight + displacement.Y));
+                    _resistorPositionY + _resistorHeight + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_resistorPositionX + _resistorWidth + displacement.X,
                     _resistorPositionY + displacement.Y),
                 new Point(_resistorPositionX + displacement.X,
                     _resistorPositionY + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
-                new Point(displacement.X, _lineDisplasemantY + displacement.Y),
+                new Point(displacement.X, _lineDisplacementY + displacement.Y),
                 new Point(_resistorPositionX + displacement.X,
-                    _lineDisplasemantY + displacement.Y));
+                    _lineDisplacementY + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_resistorPositionX + _resistorWidth + displacement.X,
-                    _lineDisplasemantY + displacement.Y),
+                    _lineDisplacementY + displacement.Y),
                 new Point(_elementLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y));
+                    _lineDisplacementY + displacement.Y));
         }
 
         /// <summary>
@@ -489,34 +532,35 @@ namespace CircuitView
         /// </summary>
         /// <param name="displacement">Смещение.</param>
         private static void DrawCapacitor(Point displacement)
-        {   //TODO: displacement передается внутри класса. Как он может быть null? Избавиться от ненужных проверок
-            if (displacement == null)
-            {
-                throw new ArgumentNullException(nameof(displacement));
-            }
+        {
+            //TODO: displacement передается внутри класса. Как он может быть null? Избавиться от ненужных проверок
+            //+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_firstPlatePosition + displacement.X,
-                    _lineDisplasemantY - _capacitorHight / 2 + displacement.Y),
+                    _lineDisplacementY - _capacitorHeight / 2 + displacement.Y),
                 new Point(_firstPlatePosition + displacement.X,
-                    _lineDisplasemantY + _capacitorHight / 2 + displacement.Y));
+                    _lineDisplacementY + _capacitorHeight / 2 + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_secondPlatePosition + displacement.X,
-                    _lineDisplasemantY - _capacitorHight / 2 + displacement.Y),
+                    _lineDisplacementY - _capacitorHeight / 2 + displacement.Y),
                 new Point(_secondPlatePosition + displacement.X,
-                    _lineDisplasemantY + _capacitorHight / 2 + displacement.Y));
+                    _lineDisplacementY + _capacitorHeight / 2 + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
-                new Point(displacement.X, _lineDisplasemantY + displacement.Y),
+                new Point(displacement.X, _lineDisplacementY + displacement.Y),
                 new Point(_firstPlatePosition + displacement.X,
-                    _lineDisplasemantY + displacement.Y));
+                    _lineDisplacementY + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(_secondPlatePosition + displacement.X,
-                    _lineDisplasemantY + displacement.Y),
+                    _lineDisplacementY + displacement.Y),
                 new Point(_elementLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y));
+                    _lineDisplacementY + displacement.Y));
         }
 
         /// <summary>
@@ -531,25 +575,28 @@ namespace CircuitView
             }
 
             for (var i = 0; i < _arcCount; i++)
-            {//TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            {
+                //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
                 Graphics.DrawArc(Pen,
                     _inductorPositionX + i * _arcDiameter + displacement.X,
                     _inductorPositionY + displacement.Y,
                     _arcDiameter, _arcDiameter, 0, -180);
             }
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
-                new Point(displacement.X, _lineDisplasemantY + displacement.Y),
+                new Point(displacement.X, _lineDisplacementY + displacement.Y),
                 new Point(_inductorPositionX + displacement.X,
-                    _lineDisplasemantY + displacement.Y));
+                    _lineDisplacementY + displacement.Y));
+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
             Graphics.DrawLine(Pen,
                 new Point(
                     _inductorPositionX + _arcCount * _arcDiameter +
                     displacement.X,
-                    _lineDisplasemantY + displacement.Y),
+                    _lineDisplacementY + displacement.Y),
                 new Point(_elementLengthX + displacement.X,
-                    _lineDisplasemantY + displacement.Y));
+                    _lineDisplacementY + displacement.Y));
         }
 
         #endregion

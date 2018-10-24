@@ -13,19 +13,6 @@ namespace CircuitView
     /// </summary>
     public partial class ImpedanceForm : Form
     {
-        #region Fields
-
-        #region Private fields
-        //TODO: зачем поле, если есть свойство?
-        /// <summary>
-        ///     Поле для цепи.
-        /// </summary>
-        private Circuit _circuit;
-
-        #endregion
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -59,8 +46,10 @@ namespace CircuitView
             try
             {
                 //TODO: использовать пустые кавычки неправильно. Заменить на константу из класса string
-                if (StartTextBox.Text == "" || FinishTextBox.Text == "" ||
-                    StepTextBox.Text == "")
+                //+
+                if (StartTextBox.Text == string.Empty ||
+                    FinishTextBox.Text == string.Empty ||
+                    StepTextBox.Text == string.Empty)
                 {
                     MessageBox.Show(
                         "Вы заполнили не все значения! Заполните всё и попробуйте ещё раз!");
@@ -68,7 +57,7 @@ namespace CircuitView
                     return;
                 }
 
-                _circuit = Circuit;
+
                 if (!FormTools.IsCorrectInterval(StartTextBox, FinishTextBox,
                     StepTextBox))
                 {
@@ -78,7 +67,9 @@ namespace CircuitView
                 var start = Convert.ToDouble(StartTextBox.Text);
                 var finish = Convert.ToDouble(FinishTextBox.Text);
                 var step = Convert.ToDouble(StepTextBox.Text);
+
                 //TODO: Всё? Замёл следы ворованного кода? Думаешь, никто не заметит?
+                //А.А. сам сказал исправить это всё.
                 var frequencies = new List<double>();
                 if (Math.Abs(start - finish) < CheckFrequency.MIN_FREQUENCY && step == 0)
                 {
@@ -87,6 +78,7 @@ namespace CircuitView
                 else
                 {
                     //TODO: циклы по double - неправильно. Переделать на int, иначе страдает читаемость кода
+                    //Тогда мы потеряем часть значений. Не могу этого сделать
                     for (var i = start; i <= finish; i += step)
                     {
                         frequencies.Add(i);
@@ -94,15 +86,17 @@ namespace CircuitView
                 }
 
 
-                var impedances = _circuit.CalculateZ(frequencies.ToArray());
+                var impedances = Circuit.CalculateZ(frequencies.ToArray());
                 var correctListOfImpedances = new List<string>();
 
                 for (var i = 0; i < impedances.Count; i++)
-                {//TODO: Надо использовать не Round, а ToString() с форматной строкой,
+                {
+                    //TODO: Надо использовать не Round, а ToString() с форматной строкой,
                     // Иначе не отображаются комплексные значения меньше 1е-3
+                    //+
                     correctListOfImpedances.Add(
-                        $"R:{Math.Round(impedances[i].Real, 3)} " +
-                        $"I:{Math.Round(impedances[i].Imaginary, 3)}");
+                        $"R:{impedances[i].Real:##.#####} " +
+                        $"I:{impedances[i].Imaginary:##.#####}");
                 }
 
                 for (var i = 0; i < impedances.Count; i++)
@@ -130,12 +124,12 @@ namespace CircuitView
             {
                 if (!string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    e.Cancel = !FormTools.CheckStringForDouble(textBox.Text);
+                    e.Cancel = !double.TryParse(textBox.Text, out var checkedValue);
                     if (!e.Cancel)
                     {
-                        e.Cancel = Convert.ToDouble(textBox.Text) <=
+                        e.Cancel = checkedValue <=
                                    CheckFrequency.MIN_FREQUENCY ||
-                                   Convert.ToDouble(textBox.Text) >=
+                                   checkedValue >=
                                    CheckFrequency.MAX_FREQUENCY;
                     }
 
@@ -143,6 +137,7 @@ namespace CircuitView
                     if (e.Cancel)
                     {
                         FormTools.ShowError(textBox);
+
                         //TODO: аналогично
                         textBox.Text = "";
                     }
@@ -156,7 +151,7 @@ namespace CircuitView
             {
                 if (!string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    e.Cancel = !FormTools.CheckStringForDouble(textBox.Text);
+                    e.Cancel = !double.TryParse(textBox.Text, out _);
                     textBox.ForeColor = e.Cancel ? Color.Red : Color.Black;
                     if (e.Cancel)
                     {
@@ -178,5 +173,8 @@ namespace CircuitView
         }
 
         #endregion
+
+        //TODO: зачем поле, если есть свойство?
+        //убрал
     }
 }
