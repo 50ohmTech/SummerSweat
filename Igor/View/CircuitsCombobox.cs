@@ -5,7 +5,7 @@ using Model.Elements;
 namespace View
 {
     /// <summary>
-    /// Класс для создание готовых цепей
+    ///     Класс для создание готовых цепей
     /// </summary>
     public class CircuitsComboBox
     {
