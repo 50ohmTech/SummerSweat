@@ -1,23 +1,35 @@
 ﻿using System;
 using System.Numerics;
+using CircuitLibrary.Subcircuits;
 
-namespace CircuitLibrary.Subcircuits
+namespace CircuitLibrary.Subcircuit
 {
     /// <summary>
     ///     Параллельное соединение
     /// </summary>
     public class ParallelSubcircuit : SubcircuitBase
     {
-        #region Public methods
+        #region Properties
+
         /// <inheritdoc />
         public override NodeType Type { get; }
+
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         ///     Конструктор класса ParallelSubcircuit
         /// </summary>
-        public ParallelSubcircuit() : base()
+        public ParallelSubcircuit()
         {
             Type = NodeType.Parallel;
         }
+
+        #endregion
+
+        #region Public methods
+
         /// <summary>
         ///     Рассчитать импеданс
         /// </summary>
@@ -41,7 +53,6 @@ namespace CircuitLibrary.Subcircuits
 
             return 1 / impedance;
         }
-        
 
         #endregion
     }

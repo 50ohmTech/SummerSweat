@@ -23,8 +23,7 @@ namespace CircuitLibrary.Elements
         public const double MAXVALUE = 1000000000000;
 
         #endregion
-        /// <inheritdoc />
-        public abstract NodeType Type { get; }
+
         #region Fields
 
         #region Private fields
@@ -44,6 +43,9 @@ namespace CircuitLibrary.Elements
         #endregion
 
         #region Properties
+
+        /// <inheritdoc />
+        public abstract NodeType Type { get; }
 
         /// <summary>
         ///     Вернуть/установить название элемента

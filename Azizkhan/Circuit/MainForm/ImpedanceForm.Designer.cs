@@ -1,4 +1,4 @@
-﻿namespace MainForm
+﻿namespace CircuitView
 {
     partial class ImpedanceForm
     {

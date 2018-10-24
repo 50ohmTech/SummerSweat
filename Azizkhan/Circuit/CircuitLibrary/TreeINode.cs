@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CircuitLibrary.Elements;
+using CircuitLibrary.Subcircuit;
 using CircuitLibrary.Subcircuits;
 
 namespace CircuitLibrary
@@ -25,10 +26,11 @@ namespace CircuitLibrary
         ///     Конструктор узла TreeView
         /// </summary>
         /// <param name="treeNode">Узел</param>
+        /// <param name="type">Тип узла</param>
         public TreeINode(INode treeNode, NodeType type)
         {
             Value = treeNode ?? throw new ArgumentNullException(nameof(treeNode));
-            
+
             switch (treeNode)
             {
                 case SerialSubcircuit series:

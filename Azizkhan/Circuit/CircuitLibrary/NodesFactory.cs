@@ -1,5 +1,6 @@
 ﻿using System;
 using CircuitLibrary.Elements;
+using CircuitLibrary.Subcircuit;
 using CircuitLibrary.Subcircuits;
 
 namespace CircuitLibrary

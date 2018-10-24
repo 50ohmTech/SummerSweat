@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using CircuitLibrary;
 using CircuitLibrary.Elements;
-using MainForm;
 
 namespace CircuitView
 {
@@ -90,7 +89,7 @@ namespace CircuitView
 
             TreeView.Nodes.Clear();
 
-            var root = new TreeINode(_circuit.Root,_circuit.Root.Type);
+            var root = new TreeINode(_circuit.Root, _circuit.Root.Type);
             TreeView.Nodes.Add(root);
             AddNodeTreeNodes(_circuit.Root, root);
 
@@ -151,7 +150,8 @@ namespace CircuitView
                     else
                     {
                         MessageBox.Show(
-                            "Сначала добавьте узел Serial или Parallel, только после этого можно будет добавлять элементы. R,I,C не могут быть корнем цепи!");
+                            "Сначала добавьте узел Serial или Parallel, " +
+                            "только после этого можно будет добавлять элементы. R,I,C не могут быть корнем цепи!");
                     }
                 }
 

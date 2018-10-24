@@ -53,8 +53,10 @@ namespace CircuitLibrary.Subcircuits
                 }
             }
         }
+
         /// <inheritdoc />
         public abstract NodeType Type { get; }
+
         /// <inheritdoc />
         public List<INode> Nodes { get; } = new List<INode>();
 

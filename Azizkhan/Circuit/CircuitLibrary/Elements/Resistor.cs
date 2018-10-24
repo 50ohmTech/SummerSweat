@@ -7,9 +7,15 @@ namespace CircuitLibrary.Elements
     /// </summary>
     public class Resistor : ElementBase
     {
-        #region Constructor
+        #region Properties
+
         /// <inheritdoc />
         public override NodeType Type { get; }
+
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         ///     Конструктор класса Resistor
         /// </summary>

@@ -5,9 +5,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using CircuitLibrary;
 using CircuitLibrary.Elements;
-using CircuitView;
 
-namespace MainForm
+namespace CircuitView
 {
     /// <summary>
     ///     Форма расчёта импедансов
@@ -69,10 +68,12 @@ namespace MainForm
                 }
 
                 _circuit = Circuit;
-                if (!FormTools.IsCorrectInterval(StartTextBox, FinishTextBox, StepTextBox))
+                if (!FormTools.IsCorrectInterval(StartTextBox, FinishTextBox,
+                    StepTextBox))
                 {
                     return;
                 }
+
                 var start = Convert.ToDouble(StartTextBox.Text);
                 var finish = Convert.ToDouble(FinishTextBox.Text);
                 var step = Convert.ToDouble(StepTextBox.Text);
