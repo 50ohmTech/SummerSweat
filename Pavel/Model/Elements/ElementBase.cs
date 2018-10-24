@@ -41,7 +41,7 @@ namespace Model.Elements
         {
             get => _name;
 
-            private set
+            set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
