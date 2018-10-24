@@ -24,6 +24,8 @@ namespace CircuitView
 
         #region Constructor
 
+        //TODO: элемент должен передаваться в форму через свойство, а не аргумент конструктора.
+        // Иначе ограничиваются варианты использования формы
         /// <summary>
         ///     Конструктор
         /// </summary>
@@ -33,8 +35,9 @@ namespace CircuitView
             _element = element ?? throw new ArgumentNullException(nameof(element));
             InitializeComponent();
             Text = "Элемент: " + element.Name;
+            //TODO: зачем decimal? Преобразование вообще не нужно, как и класс Convert
             valueTextBox.Text = Convert.ToString((decimal) element.Value);
-
+            //TODO: DialogResult должен присваиваться перед закрытием формы, а не в конструкторе
             DialogResult = DialogResult.Yes;
         }
 

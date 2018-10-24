@@ -12,11 +12,13 @@ namespace CircuitLibrary.Elements
     {
         #region Constants
 
+        //TODO: экспоненциальная форма
         /// <summary>
         ///     Минимальное значение номинала элемента
         /// </summary>
         public const double MINVALUE = 0.000001;
 
+        //TODO: экспоненциальная форма
         /// <summary>
         ///     Максимальное значение номинала элемента
         /// </summary>

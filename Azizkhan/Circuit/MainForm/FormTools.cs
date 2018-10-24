@@ -7,10 +7,13 @@ using CircuitLibrary.Elements;
 
 namespace CircuitView
 {
+    //TODO: в каждом методе один и тот же текст постоянно конвертируется в double.
+    // Исправить, чтобы число конвертировалось только один раз, а затем проходило проверки и валидации
     internal class FormTools
     {
         #region Public methods
 
+        //TODO: избавиться от этого метода, заменить на использование double.TryParse или double.Parse
         /// <summary>
         ///     Метод проверки введёного в TextBox значения
         ///     на корректность для Convert.ToDouble
@@ -43,6 +46,7 @@ namespace CircuitView
             return false;
         }
 
+        //TODO: метод называется Check, а по факту занимается сменой цветов и отменой валидации. Неправильно, переделать
         /// <summary>
         ///     Проверка ввода корректного Double в TextBox
         /// </summary>
@@ -73,7 +77,7 @@ namespace CircuitView
         /// </summary>
         /// <param name="textBox">куда вводятся значения</param>
         public static void ShowError(TextBox textBox)
-        {
+        {//TODO: а этот сворованный кусок сообщения почему не подчистил? Это сообщение тоже по всем репозиториям ходит
             MessageBox.Show(
                 "Вы ввели: \"" + textBox.Text + "\"\n" +
                 "Вводимое значение должно удовлетворять следующим условиям:\n " +

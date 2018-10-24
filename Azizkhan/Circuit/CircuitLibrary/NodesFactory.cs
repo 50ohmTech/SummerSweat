@@ -50,7 +50,7 @@ namespace CircuitLibrary
                 case NodeType.Resistor:
                     newNode = new Resistor("R" + ResistorIterator++, value);
 
-                    break;
+                    break; //TODO: неправильное именование элемента
                 case NodeType.Inductor:
                     newNode = new Inductor("I" + InductorIterator++, value);
 

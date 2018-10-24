@@ -16,7 +16,7 @@ namespace CircuitView
         #region Fields
 
         #region Private fields
-
+        //TODO: зачем поле, если есть свойство?
         /// <summary>
         ///     Поле для цепи.
         /// </summary>
@@ -58,6 +58,7 @@ namespace CircuitView
         {
             try
             {
+                //TODO: использовать пустые кавычки неправильно. Заменить на константу из класса string
                 if (StartTextBox.Text == "" || FinishTextBox.Text == "" ||
                     StepTextBox.Text == "")
                 {
@@ -77,7 +78,7 @@ namespace CircuitView
                 var start = Convert.ToDouble(StartTextBox.Text);
                 var finish = Convert.ToDouble(FinishTextBox.Text);
                 var step = Convert.ToDouble(StepTextBox.Text);
-
+                //TODO: Всё? Замёл следы ворованного кода? Думаешь, никто не заметит?
                 var frequencies = new List<double>();
                 if (Math.Abs(start - finish) < CheckFrequency.MIN_FREQUENCY && step == 0)
                 {
@@ -85,6 +86,7 @@ namespace CircuitView
                 }
                 else
                 {
+                    //TODO: циклы по double - неправильно. Переделать на int, иначе страдает читаемость кода
                     for (var i = start; i <= finish; i += step)
                     {
                         frequencies.Add(i);
@@ -96,7 +98,8 @@ namespace CircuitView
                 var correctListOfImpedances = new List<string>();
 
                 for (var i = 0; i < impedances.Count; i++)
-                {
+                {//TODO: Надо использовать не Round, а ToString() с форматной строкой,
+                    // Иначе не отображаются комплексные значения меньше 1е-3
                     correctListOfImpedances.Add(
                         $"R:{Math.Round(impedances[i].Real, 3)} " +
                         $"I:{Math.Round(impedances[i].Imaginary, 3)}");
@@ -104,6 +107,7 @@ namespace CircuitView
 
                 for (var i = 0; i < impedances.Count; i++)
                 {
+                    //TODO: аналогично
                     impedancesGridView.Rows.Add(Math.Round(frequencies[i], 3),
                         correctListOfImpedances[i]);
                 }
@@ -139,6 +143,7 @@ namespace CircuitView
                     if (e.Cancel)
                     {
                         FormTools.ShowError(textBox);
+                        //TODO: аналогично
                         textBox.Text = "";
                     }
                 }

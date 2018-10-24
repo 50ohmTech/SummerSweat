@@ -123,6 +123,7 @@ namespace CircuitView
         private void AddButton_Click(object sender, EventArgs e)
         {
             NodeType nodeType;
+            //TODO: не используешь возвращаемое значение метода - неправильно
             Enum.TryParse(NodeComboBox.SelectedValue.ToString(), out nodeType);
             if (_currentNode == null && _circuit.Root != null)
             {
@@ -149,7 +150,7 @@ namespace CircuitView
                     }
                     else
                     {
-                        MessageBox.Show(
+                        MessageBox.Show( //TODO: неправильный текст сообщения
                             "Сначала добавьте узел Serial или Parallel, " +
                             "только после этого можно будет добавлять элементы. R,I,C не могут быть корнем цепи!");
                     }
@@ -234,11 +235,13 @@ namespace CircuitView
 
         private void TreeView_DoubleClick(object sender, EventArgs e)
         {
+            //TODO: избавиться от лишней вложенности, инвертировать if
             if (_currentNode != null)
-            {
+            {   //TODO: избавиться от лишней вложенности, инвертировать if
                 if (_currentNode is ElementBase element)
                 {
                     var result = new EditForm(element).ShowDialog();
+                    //TODO: обновлять только если результат формы "Отмена"?
                     if (result == DialogResult.Cancel)
                     {
                         UpdateTreeView();

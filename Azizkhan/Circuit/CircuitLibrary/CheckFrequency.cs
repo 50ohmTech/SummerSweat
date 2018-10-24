@@ -9,6 +9,7 @@ namespace CircuitLibrary.Elements
     {
         #region Constants
 
+        //TODO: экспоненциальная форма
         /// <summary>
         ///     Максимальное значение частоты  = 1 ТГц
         /// </summary>
