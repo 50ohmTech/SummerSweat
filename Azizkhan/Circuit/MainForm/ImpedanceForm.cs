@@ -75,32 +75,21 @@ namespace MainForm
                 var finish = Convert.ToDouble(FinishTextBox.Text);
                 var step = Convert.ToDouble(StepTextBox.Text);
 
-                var frequency = new double[1];
+                var frequencies = new List<double>();
                 if (Math.Abs(start - finish) < CheckFrequency.MIN_FREQUENCY && step == 0)
                 {
-                    frequency[0] = start;
+                    frequencies[0] = start;
                 }
                 else
                 {
-                    var j = 0;
                     for (var i = start; i <= finish; i += step)
                     {
-                        frequency[j] = i;
-                        j++;
-                        if (!(finish - i == 0))
-                        {
-                            Array.Resize(ref frequency, frequency.Length + 1);
-                        }
+                        frequencies.Add(i);
                     }
                 }
 
-                if (frequency[frequency.Length - 1] == 0)
-                {
-                    Array.Resize(ref frequency, frequency.Length - 1);
-                }
 
-
-                var impedances = _circuit.CalculateZ(frequency);
+                var impedances = _circuit.CalculateZ(frequencies.ToArray());
                 var correctListOfImpedances = new List<string>();
 
                 for (var i = 0; i < impedances.Count; i++)
@@ -112,7 +101,7 @@ namespace MainForm
 
                 for (var i = 0; i < impedances.Count; i++)
                 {
-                    impedancesGridView.Rows.Add(Math.Round(frequency[i], 3),
+                    impedancesGridView.Rows.Add(Math.Round(frequencies[i], 3),
                         correctListOfImpedances[i]);
                 }
             }
