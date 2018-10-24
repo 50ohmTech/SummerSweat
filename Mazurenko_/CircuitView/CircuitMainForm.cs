@@ -20,7 +20,7 @@ namespace CircuitView
         /// <summary>
         ///     List of all electrical circuits
         /// </summary>
-        private CircuitsCreate _circuits;
+        private CircuitsCreator _circuits;
 
         /// <summary>
         ///     Current node
@@ -32,6 +32,15 @@ namespace CircuitView
         /// </summary>
         private double _valueElement;
 
+        /// <summary>
+        /// Element count
+        /// </summary>
+        private uint _countElements;
+
+        /// <summary>
+        /// Maximum elements count
+        /// </summary>
+        private uint _maxCount = 15;
         #endregion
 
         #region Constructor
@@ -68,10 +77,11 @@ namespace CircuitView
 
             var root = new TreeINode(_circuit.Root);
             TreeView.Nodes.Add(root);
-            AddNodeTreeNodes(_circuit.Root, root);
+            AddTreeNode(_circuit.Root, root);
 
             TreeView.ExpandAll();
-            CircuitPictureBox.Image = Drawer.DrawCircuit(_circuit.Root);
+            _countElements = 0;
+            CircuitPictureBox.Image = Drawer.DrawCircuit(_circuit.Root);   
         }
 
         /// <summary>
@@ -79,7 +89,7 @@ namespace CircuitView
         /// </summary>
         /// <param name="node">Append of node</param>
         /// <param name="treeNode">Tree node</param>
-        private void AddNodeTreeNodes(INode node, TreeNode treeNode)
+        private void AddTreeNode(INode node, TreeNode treeNode)
         {
             if (node is ElementBase || node == null)
             {
@@ -90,8 +100,36 @@ namespace CircuitView
             {
                 var newTreeNode = new TreeINode(children);
                 treeNode.Nodes.Add(newTreeNode);
-                AddNodeTreeNodes(children, newTreeNode);
+                AddTreeNode(children, newTreeNode);
             }
+        }
+
+        /// <summary>
+        /// Counting the number of elements in the circuit
+        /// </summary>
+        /// <param name="root">Root</param>
+        /// <param name="count">Elements counter</param>
+        /// <returns>Number of elements</returns>
+        private uint GetCount(INode root,uint count)
+        {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
+            foreach (var node in root.Nodes)
+            {
+                if (node is ElementBase)
+                {
+                    count++;
+                }
+                if (node is SubcircuitBase)
+                {
+                    count = GetCount(node, count);
+                }
+            }
+
+            return count;
         }
 
         /// <summary>
@@ -101,7 +139,7 @@ namespace CircuitView
         /// <param name="e">Event parameter</param>
         private void SelectingCircuitComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
-        {
+        {            
             _circuit = _circuits.Circuits[CircuitsComboBox.SelectedIndex];
             UpdateTreeView();
         }
@@ -114,7 +152,7 @@ namespace CircuitView
         private void MainForm_Load(object sender, EventArgs e)
         {
             _circuit = new Circuit();
-            _circuits = new CircuitsCreate();
+            _circuits = new CircuitsCreator();
             CircuitsComboBox.SelectedIndex = 1;
             NodeComboBox.SelectedIndex = 0;
         }
@@ -146,7 +184,7 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Event that occurs when you change the selection of tree elements
+        ///     Triggered when the change the selection of tree elements
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
@@ -156,6 +194,25 @@ namespace CircuitView
             {
                 _currentNode = treeNode.Value;
             }
+        }
+
+        /// <summary>
+        /// Count elements validation
+        /// </summary>
+        /// <param name="root">Root of circuit</param>
+        /// <returns></returns>
+        private bool ValidationCountElements(INode root)
+        {
+            _countElements = GetCount(_circuit.Root, _countElements);
+            if (_countElements > _maxCount)
+            {
+                MessageBox.Show(
+                    "Maximum number of elements cirucit must not exceed " + _maxCount);
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -170,6 +227,11 @@ namespace CircuitView
                 MessageBox.Show("No node is selected for which you want to add a node",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                return;
+            }
+
+            if (ValidationCountElements(_circuit.Root)) 
+            {
                 return;
             }
 
@@ -192,17 +254,17 @@ namespace CircuitView
                     _circuit.NodeCreate.GetElementNode(selectedItem, 0));
             }
             else
-            {
+            {               
+        
                 _circuit.AddAfter(_currentNode,
                     _circuit.NodeCreate.GetElementNode(selectedItem, _valueElement));
             }
-
 
             UpdateTreeView();
         }
 
         /// <summary>
-        ///     Event when you press a key in the 'Value' field
+        ///     Triggered when the press a key in the "Value" field
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
@@ -212,7 +274,7 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Event triggered when the field is changed 'Value'
+        ///     Triggered when the “Value” field changed
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
@@ -223,13 +285,13 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Event when leaving the 'Value' field
+        ///     Triggering by leaving the 'Value' field
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
         private void ValueTextBox_Leave(object sender, EventArgs e)
         {
-            var resultValue = ValueTextBoxTools.Leave(sender);
+            var resultValue = ValueTextBoxTools.TextBoxLeave(sender);
             AddButton.Enabled = resultValue;
 
             if (!string.IsNullOrWhiteSpace(ValueTextBox.Text))
@@ -239,11 +301,9 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Changing the value of an element
+        ///     Opening "EditElementForm" to change the value of the selected item
         /// </summary>
-        /// <param name="sender">Event sender</param>
-        /// <param name="e">Event parameter</param>
-        private void EditValue(object sender, EventArgs e)
+        private void OpenEditElementForm()
         {
             if (_currentNode != null)
             {
@@ -263,6 +323,26 @@ namespace CircuitView
                 MessageBox.Show("Select the item whose \nvalue you want to change",
                     "Attention", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        /// <summary>
+        ///     "Edit" button click
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event parameter</param>
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            OpenEditElementForm();
+        }
+
+        /// <summary>
+        ///     Double click "TreeView"
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event parameter</param>
+        private void TreeView_DoubleClick(object sender, EventArgs e)
+        {
+            OpenEditElementForm();
         }
 
         /// <summary>

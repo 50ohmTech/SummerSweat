@@ -6,7 +6,7 @@ namespace CircuitLibrary
     /// <summary>
     ///     Class for node creation
     /// </summary>
-    public sealed class NodeCreate
+    public sealed class NodeFactory
     {
         #region Private fields
 
@@ -14,6 +14,11 @@ namespace CircuitLibrary
         ///     Capacitor counter
         /// </summary>
         private uint _capacitorCounter;
+
+        /// <summary>
+        ///     Connection id counter
+        /// </summary>
+        private uint _idCounter;
 
         /// <summary>
         ///     Inductor counter
@@ -44,6 +49,11 @@ namespace CircuitLibrary
         /// </summary>
         private string GetNameInductor => "L" + _inductorCounter++;
 
+        /// <summary>
+        ///     Connection id counter
+        /// </summary>
+        private uint IdCounter => _idCounter++;
+
         #endregion
 
         #region Constructor
@@ -51,7 +61,7 @@ namespace CircuitLibrary
         /// <summary>
         ///     Constructor
         /// </summary>
-        public NodeCreate()
+        public NodeFactory()
         {
             ResetCounter();
         }
@@ -68,6 +78,7 @@ namespace CircuitLibrary
             _capacitorCounter = 1;
             _inductorCounter = 1;
             _resistorCounter = 1;
+            _idCounter = 1;
         }
 
         /// <summary>
@@ -82,11 +93,11 @@ namespace CircuitLibrary
             {
                 case NodeType.Parallel:
                 {
-                    return new ParallelSubcircuit();
+                    return new ParallelSubcircuit(IdCounter);
                 }
                 case NodeType.Serial:
                 {
-                    return new SerialSubcircuit();
+                    return new SerialSubcircuit(IdCounter);
                 }
                 case NodeType.Resistor:
                 {

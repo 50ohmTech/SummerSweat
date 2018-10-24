@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+using CircuitLibrary.Validation;
 
 namespace CircuitLibrary
 {
@@ -8,16 +10,6 @@ namespace CircuitLibrary
     public static class FrequencyRange
     {
         #region Constants
-
-        /// <summary>
-        ///     Minimum frequency allowed
-        /// </summary>
-        private const double _minValue = 0.000001;
-
-        /// <summary>
-        ///     Maximum frequency allowed
-        /// </summary>
-        private const double _maxValue = 1000000000000;
 
         /// <summary>
         ///     No step
@@ -36,7 +28,7 @@ namespace CircuitLibrary
         /// <returns>Is the value in the specified range of numbers</returns>
         private static bool IsCorrectValue(string valueName, double value)
         {
-            if (value >= _minValue && value <= _maxValue)
+            if (value >= ConstantValues.MinValue && value <= ConstantValues.MaxValue)
             {
                 return true;
             }
@@ -85,6 +77,13 @@ namespace CircuitLibrary
         /// <returns>Is the value in the specified range of numbers</returns>
         public static bool IsCorrectStartEnd(double startValue, double endValue)
         {
+            if (!ValidationElementValue.IsDouble(startValue) ||
+                !ValidationElementValue.IsDouble(endValue))
+            {
+                throw new ArgumentException(
+                    "The value of element is not a float-point number");
+            }
+
             if (!IsCorrectValue("\"Start value\" ", startValue) ||
                 !IsCorrectValue("\"End value\" ", endValue))
             {
@@ -108,6 +107,14 @@ namespace CircuitLibrary
         /// <returns>Is correct step</returns>
         public static bool IsCorrectStep(double startValue, double endValue, double step)
         {
+            if (!ValidationElementValue.IsDouble(startValue) ||
+                !ValidationElementValue.IsDouble(endValue) ||
+                !ValidationElementValue.IsDouble(step))
+            {
+                throw new ArgumentException(
+                    "The value of element is not a float-point number");
+            }
+
             if (endValue - startValue < step)
             {
                 ShowMessage("The step cannot be greater than the end value.");

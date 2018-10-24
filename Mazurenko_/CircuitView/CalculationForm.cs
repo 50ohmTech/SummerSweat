@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 using CircuitLibrary;
@@ -67,7 +68,7 @@ namespace CircuitView
         /// <param name="e">Event parameter</param>
         private void TextBox_Leave(object sender, EventArgs e)
         {
-            var resultValue = ValueTextBoxTools.Leave(sender);
+            var resultValue = ValueTextBoxTools.TextBoxLeave(sender);
             CalculationButton.Enabled = resultValue;
         }
 
@@ -107,23 +108,24 @@ namespace CircuitView
             {
                 return;
             }
-    
-            _frequencies = new double[1];
 
-            var count = 0;
-            for (var frequency = startValue; frequency <= endValue; frequency += step) 
+            var frequencies = new List<double>();
+
+            for (var frequency = startValue; frequency <= endValue; frequency += step)
             {
-                _frequencies[count] = frequency;
-                count++;
-                if (!(endValue - frequency == 0))
-                {
-                    Array.Resize(ref _frequencies, _frequencies.Length + 1);
-                }
+                frequencies.Add(frequency);
             }
 
-            if (_frequencies[_frequencies.Length - 1] == 0)
+            if (frequencies.Last() == 0)
             {
-                Array.Resize(ref _frequencies, _frequencies.Length - 1);
+                frequencies.Remove(frequencies.Last());
+            }
+
+            _frequencies = new double[frequencies.Count];
+
+            for (var i = 0; i < frequencies.Count; i++)
+            {
+                _frequencies[i] = frequencies.ElementAt(i);
             }
 
             _impedancies = _circuit.CalculateZ(_frequencies);
@@ -149,7 +151,7 @@ namespace CircuitView
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void CloseButton_Click(object sender, EventArgs e)
         {
             Close();
         }

@@ -9,16 +9,12 @@ namespace CircuitLibrary
     /// </summary>
     public class Circuit
     {
-        #region Readonly fields
+        #region Properties
 
         /// <summary>
         ///     Create element of node
         /// </summary>
-        public readonly NodeCreate NodeCreate;
-
-        #endregion
-
-        #region Properties
+        public NodeFactory NodeCreate { get; }
 
         /// <summary>
         ///     Root node
@@ -34,7 +30,7 @@ namespace CircuitLibrary
         /// </summary>
         public Circuit()
         {
-            NodeCreate = new NodeCreate();
+            NodeCreate = new NodeFactory();
         }
 
         #endregion

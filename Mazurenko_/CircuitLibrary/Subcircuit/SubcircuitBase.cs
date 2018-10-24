@@ -10,15 +10,6 @@ namespace CircuitLibrary
     /// </summary>
     public abstract class SubcircuitBase : INode
     {
-        #region Static fields
-
-        /// <summary>
-        ///     Unique identifier
-        /// </summary>
-        private static uint _id;
-
-        #endregion
-
         #region Private fields
 
         /// <summary>
@@ -33,7 +24,7 @@ namespace CircuitLibrary
         /// <summary>
         ///     Unique identifier
         /// </summary>
-        public uint Id { get; } = _id;
+        public uint Id { get; }
 
         /// <summary>
         ///     Parent node
@@ -70,9 +61,9 @@ namespace CircuitLibrary
         /// <summary>
         ///     Constructor
         /// </summary>
-        protected SubcircuitBase()
+        protected SubcircuitBase(uint id)
         {
-            _id++;
+            Id = id;
         }
 
         #endregion

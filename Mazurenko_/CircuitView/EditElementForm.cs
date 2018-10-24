@@ -55,7 +55,7 @@ namespace CircuitView
         #region Private methods
 
         /// <summary>
-        ///     Action with button "OK"
+        ///     "OK" button click
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
@@ -67,7 +67,7 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Action with button "Cancel"
+        ///     "Cancel" button click
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
@@ -78,7 +78,7 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Event when you press a key in the 'Value' field
+        ///     Triggered when the press a key in the "Value" field
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
@@ -88,13 +88,13 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Event when leaving the 'Value' field
+        ///     Triggering by leaving the 'Value' field
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>
         private void ValueTextBox_Leave(object sender, EventArgs e)
         {
-            var resultValue = ValueTextBoxTools.Leave(sender);
+            var resultValue = ValueTextBoxTools.TextBoxLeave(sender);
             OKButton.Enabled = resultValue;
 
             if (!string.IsNullOrWhiteSpace(ValueTextBox.Text))
@@ -104,7 +104,7 @@ namespace CircuitView
         }
 
         /// <summary>
-        ///     Event triggered when the field is changed 'Value'
+        ///     Triggered when the “Value” field changed
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event parameter</param>

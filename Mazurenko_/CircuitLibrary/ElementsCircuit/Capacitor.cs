@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using CircuitLibrary.Validation;
 
 namespace CircuitLibrary
 {
@@ -30,6 +31,8 @@ namespace CircuitLibrary
         /// <returns>The complex impedance value</returns>
         public override Complex CalculateZ(double frequency)
         {
+            ValidationElementValue.ValidationSetValue(frequency);
+
             return new Complex(0, 1 / (2 * Math.PI * frequency * Value));
         }
 

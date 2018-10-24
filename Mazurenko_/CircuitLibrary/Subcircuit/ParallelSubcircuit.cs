@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using CircuitLibrary.Validation;
 
 namespace CircuitLibrary.Subcircuit
 {
@@ -8,6 +9,18 @@ namespace CircuitLibrary.Subcircuit
     /// </summary>
     public sealed class ParallelSubcircuit : SubcircuitBase
     {
+        #region Constructor
+
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="id">ID</param>
+        public ParallelSubcircuit(uint id) : base(id)
+        {
+        }
+
+        #endregion
+
         #region Public methods
 
         /// <summary>
@@ -17,6 +30,8 @@ namespace CircuitLibrary.Subcircuit
         /// <returns>The complex impedance value</returns>
         public override Complex CalculateZ(double frequency)
         {
+            ValidationElementValue.ValidationSetValue(frequency);
+
             if (Nodes.Count < 2)
             {
                 throw new InvalidOperationException(

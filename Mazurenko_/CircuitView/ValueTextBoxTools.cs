@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using CircuitLibrary.Validation;
 
 namespace CircuitView
 {
@@ -9,19 +10,6 @@ namespace CircuitView
     /// </summary>
     public static class ValueTextBoxTools
     {
-        #region Constants
-
-        /// <summary>
-        ///     The minimum value that the element  takes
-        /// </summary>
-        private const double _minValue = 0.000001;
-
-        /// <summary>
-        ///     The maximum value that the element  takes
-        /// </summary>
-        private const double _maxValue = 1000000000000;
-
-        #endregion
 
         #region Private methods
 
@@ -63,7 +51,7 @@ namespace CircuitView
         private static bool IsGreaterThanMaximum(string valueString)
         {
             double.TryParse(valueString, out var number);
-            return number > _maxValue;
+            return number > ConstantValues.MaxValue;
         }
 
         #endregion
@@ -111,18 +99,18 @@ namespace CircuitView
 
             var valueText = textBox.Text;
             double.TryParse(valueText, out var number);
-            var isNumber = number >= _minValue && number <= _maxValue &&
+            var isNumber = number >= ConstantValues.MinValue && number <= ConstantValues.MaxValue &&
                            !string.IsNullOrWhiteSpace(valueText);
 
             return isNumber;
         }
 
         /// <summary>
-        ///     Event when leaving the TextBox
+        ///      Triggering by leaving the TextBox
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <returns></returns>
-        public static bool Leave(object sender)
+        public static bool TextBoxLeave(object sender)
         {
             if (!(sender is TextBox textBox))
             {

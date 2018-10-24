@@ -30,7 +30,6 @@ namespace CircuitView
         /// </summary>
         private void InitializeComponent()
         {
-            this.PaintGroupBox = new System.Windows.Forms.GroupBox();
             this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
@@ -43,30 +42,17 @@ namespace CircuitView
             this.NodeComboBoxLabel = new System.Windows.Forms.Label();
             this.EditButton = new System.Windows.Forms.Button();
             this.ValueLabel = new System.Windows.Forms.Label();
-            this.PaintGroupBox.SuspendLayout();
+            this.PanelCircuit = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).BeginInit();
+            this.PanelCircuit.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // PaintGroupBox
-            // 
-            this.PaintGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PaintGroupBox.Controls.Add(this.CircuitPictureBox);
-            this.PaintGroupBox.Location = new System.Drawing.Point(223, 12);
-            this.PaintGroupBox.Name = "PaintGroupBox";
-            this.PaintGroupBox.Size = new System.Drawing.Size(507, 402);
-            this.PaintGroupBox.TabIndex = 0;
-            this.PaintGroupBox.TabStop = false;
             // 
             // CircuitPictureBox
             // 
-            this.CircuitPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CircuitPictureBox.Location = new System.Drawing.Point(16, 22);
+            this.CircuitPictureBox.Location = new System.Drawing.Point(3, 3);
             this.CircuitPictureBox.Name = "CircuitPictureBox";
-            this.CircuitPictureBox.Size = new System.Drawing.Size(476, 364);
+            this.CircuitPictureBox.Size = new System.Drawing.Size(200, 217);
+            this.CircuitPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.CircuitPictureBox.TabIndex = 0;
             this.CircuitPictureBox.TabStop = false;
             // 
@@ -151,7 +137,7 @@ namespace CircuitView
             this.TreeView.Size = new System.Drawing.Size(198, 127);
             this.TreeView.TabIndex = 2;
             this.TreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
-            this.TreeView.DoubleClick += new System.EventHandler(this.EditValue);
+            this.TreeView.DoubleClick += new System.EventHandler(this.TreeView_DoubleClick);
             // 
             // NodeComboBox
             // 
@@ -189,7 +175,7 @@ namespace CircuitView
             this.EditButton.TabIndex = 7;
             this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
-            this.EditButton.Click += new System.EventHandler(this.EditValue);
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // ValueLabel
             // 
@@ -201,11 +187,21 @@ namespace CircuitView
             this.ValueLabel.TabIndex = 9;
             this.ValueLabel.Text = "Value";
             // 
+            // PanelCircuit
+            // 
+            this.PanelCircuit.AutoScroll = true;
+            this.PanelCircuit.Controls.Add(this.CircuitPictureBox);
+            this.PanelCircuit.Location = new System.Drawing.Point(231, 18);
+            this.PanelCircuit.Name = "PanelCircuit";
+            this.PanelCircuit.Size = new System.Drawing.Size(489, 391);
+            this.PanelCircuit.TabIndex = 11;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 430);
+            this.ClientSize = new System.Drawing.Size(741, 421);
+            this.Controls.Add(this.PanelCircuit);
             this.Controls.Add(this.ValueLabel);
             this.Controls.Add(this.NodeComboBoxLabel);
             this.Controls.Add(this.NodeComboBox);
@@ -217,7 +213,6 @@ namespace CircuitView
             this.Controls.Add(this.EditButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.CalculateImpedanceButton);
-            this.Controls.Add(this.PaintGroupBox);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -226,16 +221,15 @@ namespace CircuitView
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Electrical circuit";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.PaintGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
+            this.PanelCircuit.ResumeLayout(false);
+            this.PanelCircuit.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox PaintGroupBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button CalculateImpedanceButton;
@@ -248,6 +242,7 @@ namespace CircuitView
         private System.Windows.Forms.Button EditButton;
         private System.Windows.Forms.Label ValueLabel;
         private System.Windows.Forms.PictureBox CircuitPictureBox;
+        private System.Windows.Forms.Panel PanelCircuit;
     }
 }
 

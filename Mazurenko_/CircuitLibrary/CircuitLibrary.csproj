@@ -43,17 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circuit.cs" />
-    <Compile Include="CircuitsCreate.cs" />
+    <Compile Include="CircuitsCreator.cs" />
     <Compile Include="ElementsCircuit\ElementBase.cs" />
     <Compile Include="ElementsCircuit\Capacitor.cs" />
     <Compile Include="ElementsCircuit\Inductor.cs" />
     <Compile Include="ElementsCircuit\Resistor.cs" />
     <Compile Include="Events\SubcircuitChangedEventArgs.cs" />
     <Compile Include="Events\ValueChangedEventArgs.cs" />
+    <Compile Include="Validation\ConstantValues.cs" />
     <Compile Include="Validation\ValidationElementValue.cs" />
     <Compile Include="Validation\FrequencyRange.cs" />
     <Compile Include="INode.cs" />
-    <Compile Include="Node\NodeCreate.cs" />
+    <Compile Include="Node\NodeFactory.cs" />
     <Compile Include="Node\NodeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subcircuit\ParallelSubcircuit.cs" />

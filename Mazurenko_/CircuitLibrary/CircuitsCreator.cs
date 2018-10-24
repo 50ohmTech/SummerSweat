@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
-using CircuitLibrary.Subcircuit;
 
 namespace CircuitLibrary
 {
-    public sealed class CircuitsCreate
+    /// <summary>
+    ///     Electrical circuits list class
+    /// </summary>
+    public sealed class CircuitsCreator
     {
-        #region Ordinary fields
+        #region Properties
 
         /// <summary>
         ///     List of all electrical circuits
         /// </summary>
-        public List<Circuit> Circuits;
+        public List<Circuit> Circuits { get; private set; }
 
         #endregion
 
@@ -19,7 +21,7 @@ namespace CircuitLibrary
         /// <summary>
         ///     Constructor
         /// </summary>
-        public CircuitsCreate()
+        public CircuitsCreator()
         {
             InitializeCircuits();
         }
@@ -51,7 +53,8 @@ namespace CircuitLibrary
         private Circuit GetFirstTestCircuit()
         {
             var circuit = new Circuit();
-            SubcircuitBase serial = new SerialSubcircuit();
+            var serial = circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(null, serial);
             circuit.AddAfter(serial,
                 circuit.NodeCreate.GetElementNode(NodeType.Capacitor, 20));
@@ -59,8 +62,9 @@ namespace CircuitLibrary
             circuit.AddAfter(serial,
                 circuit.NodeCreate.GetElementNode(NodeType.Capacitor, 20));
 
-            SubcircuitBase parallelFirst = new ParallelSubcircuit();
-            SubcircuitBase serialParallelFirst = new SerialSubcircuit();
+            var parallelFirst = circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
+            var serialParallelFirst =
+                circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
 
             circuit.AddAfter(serial, parallelFirst);
             circuit.AddAfter(parallelFirst, serialParallelFirst);
@@ -73,7 +77,9 @@ namespace CircuitLibrary
             circuit.AddAfter(serialParallelFirst,
                 circuit.NodeCreate.GetElementNode(NodeType.Inductor, 20));
 
-            SubcircuitBase serialParallelSecond = new SerialSubcircuit();
+            var serialParallelSecond =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelSecond);
             circuit.AddAfter(serialParallelSecond,
                 circuit.NodeCreate.GetElementNode(NodeType.Inductor, 20));
@@ -91,13 +97,15 @@ namespace CircuitLibrary
         private Circuit GetSecondTestCircuit()
         {
             var circuit = new Circuit();
-            SubcircuitBase serial = new SerialSubcircuit();
+            var serial = circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
             circuit.AddAfter(null, serial);
 
-            SubcircuitBase parallelFirst = new ParallelSubcircuit();
+            var parallelFirst = circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
             circuit.AddAfter(serial, parallelFirst);
 
-            SubcircuitBase serialParallelFirst = new SerialSubcircuit();
+            var serialParallelFirst =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelFirst);
             circuit.AddAfter(serialParallelFirst,
                 circuit.NodeCreate.GetElementNode(NodeType.Capacitor, 10));
@@ -105,7 +113,9 @@ namespace CircuitLibrary
             circuit.AddAfter(serialParallelFirst,
                 circuit.NodeCreate.GetElementNode(NodeType.Capacitor, 10));
 
-            SubcircuitBase serialParallelSecond = new SerialSubcircuit();
+            var serialParallelSecond =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelSecond);
             circuit.AddAfter(serialParallelSecond,
                 circuit.NodeCreate.GetElementNode(NodeType.Inductor, 10));
@@ -113,7 +123,9 @@ namespace CircuitLibrary
             circuit.AddAfter(serialParallelSecond,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 10));
 
-            SubcircuitBase serialParallelThird = new SerialSubcircuit();
+            var serialParallelThird =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelThird);
             circuit.AddAfter(serialParallelThird,
                 circuit.NodeCreate.GetElementNode(NodeType.Inductor, 10));
@@ -131,12 +143,14 @@ namespace CircuitLibrary
         private Circuit GetThirdTestCircuit()
         {
             var circuit = new Circuit();
-            SubcircuitBase serial = new SerialSubcircuit();
-            SubcircuitBase parallelFirst = new ParallelSubcircuit();
+            var serial = circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+            var parallelFirst = circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
             circuit.AddAfter(null, serial);
             circuit.AddAfter(serial, parallelFirst);
 
-            SubcircuitBase serialParallelFirst = new SerialSubcircuit();
+            var serialParallelFirst =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelFirst);
             circuit.AddAfter(serialParallelFirst,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 50));
@@ -144,12 +158,16 @@ namespace CircuitLibrary
             circuit.AddAfter(serialParallelFirst,
                 circuit.NodeCreate.GetElementNode(NodeType.Capacitor, 50));
 
-            SubcircuitBase serialParallelSecond = new SerialSubcircuit();
+            var serialParallelSecond =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelSecond);
             circuit.AddAfter(serialParallelSecond,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 50));
 
-            SubcircuitBase serialParallelThird = new SerialSubcircuit();
+            var serialParallelThird =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelThird);
             circuit.AddAfter(serialParallelThird,
                 circuit.NodeCreate.GetElementNode(NodeType.Inductor, 50));
@@ -157,7 +175,9 @@ namespace CircuitLibrary
             circuit.AddAfter(serialParallelThird,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 50));
 
-            SubcircuitBase serialParallelFour = new SerialSubcircuit();
+            var serialParallelFour =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(parallelFirst, serialParallelFour);
             circuit.AddAfter(serialParallelFour,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 50));
@@ -178,10 +198,14 @@ namespace CircuitLibrary
         private Circuit GetFourthTestCircuit()
         {
             var circuit = new Circuit();
-            SubcircuitBase serial = new SerialSubcircuit();
-            SubcircuitBase parallelFirst = new ParallelSubcircuit();
-            SubcircuitBase serialParallelFirst = new SerialSubcircuit();
-            SubcircuitBase serialParallelSecond = new SerialSubcircuit();
+            var serial = circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+            var parallelFirst = circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
+            var serialParallelFirst =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
+            var serialParallelSecond =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(null, serial);
             circuit.AddAfter(serial, parallelFirst);
             circuit.AddAfter(parallelFirst, serialParallelFirst);
@@ -208,24 +232,28 @@ namespace CircuitLibrary
         private Circuit GetFifthTestCircuit()
         {
             var circuit = new Circuit();
-            SubcircuitBase serialFirst = new SerialSubcircuit();
-            SubcircuitBase paralllelFirst = new ParallelSubcircuit();
-            SubcircuitBase serialParallelFirst = new SerialSubcircuit();
+            var serialFirst = circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+            var paralllelFirst = circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
+            var serialParallelFirst =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(null, serialFirst);
             circuit.AddAfter(serialFirst, paralllelFirst);
             circuit.AddAfter(paralllelFirst, serialParallelFirst);
             circuit.AddAfter(serialParallelFirst,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 20));
 
-            SubcircuitBase serialParallelSecond = new SerialSubcircuit();
+            var serialParallelSecond =
+                circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+
             circuit.AddAfter(paralllelFirst, serialParallelSecond);
             circuit.AddAfter(serialParallelSecond,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 10));
 
-            SubcircuitBase subParallel = new ParallelSubcircuit();
+            var subParallel = circuit.NodeCreate.GetElementNode(NodeType.Parallel, 0);
             circuit.AddAfter(serialParallelSecond, subParallel);
-            SubcircuitBase subSerialFirst = new SerialSubcircuit();
-            SubcircuitBase subSerialSecond = new SerialSubcircuit();
+            var subSerialFirst = circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
+            var subSerialSecond = circuit.NodeCreate.GetElementNode(NodeType.Serial, 0);
             circuit.AddAfter(subParallel, subSerialFirst);
             circuit.AddAfter(subSerialFirst,
                 circuit.NodeCreate.GetElementNode(NodeType.Resistor, 20));

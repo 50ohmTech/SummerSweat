@@ -1,39 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CircuitLibrary.Validation
 {
     /// <summary>
-    /// Validation the entered value of the element
+    ///     Validation the entered value of the element
     /// </summary>
     public static class ValidationElementValue
     {
+        #region Public methods
+
         /// <summary>
-        /// Validation the entered value of the element
+        ///     Validation the entered value of the element
         /// </summary>
         /// <param name="value">Value of element</param>
         public static void ValidationSetValue(double value)
         {
-            if (double.IsNaN(value) || double.IsInfinity(value))
+            if (!IsDouble(value))
             {
-                throw new ArgumentException("The value of element is not a float-point number");
+                throw new ArgumentException(
+                    "The value of element is not a float-point number");
             }
 
-            var minValue = 0.000001;
-            if (value < minValue)
+            if (value < ConstantValues.MinValue)
             {
-                throw new ArgumentException("The value of element cannot be less than 1e-6");
+                throw new ArgumentException(
+                    "The value of element cannot be less than 1e-6");
             }
 
-            double maxValue = 1000000000000;
-            if (value > maxValue)
+            if (value > ConstantValues.MaxValue)
             {
                 throw new ArgumentException(
                     "The value of element cannot be more than 1e12");
             }
         }
+
+        /// <summary>
+        ///     Validation whether the value is a double
+        /// </summary>
+        /// <param name="value">Check of value</param>
+        /// <returns></returns>
+        public static bool IsDouble(double value)
+        {
+            return !double.IsNaN(value) && !double.IsInfinity(value);
+        }
+
+        #endregion
     }
 }

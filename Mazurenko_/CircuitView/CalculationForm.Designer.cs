@@ -39,7 +39,7 @@
             this.columnImpedance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ImpedanceGroupBox = new System.Windows.Forms.GroupBox();
             this.CalculationButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.CloseButton = new System.Windows.Forms.Button();
             this.ButtonGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.CalculationGridView)).BeginInit();
             this.ImpedanceGroupBox.SuspendLayout();
@@ -163,20 +163,20 @@
             this.CalculationButton.UseVisualStyleBackColor = true;
             this.CalculationButton.Click += new System.EventHandler(this.CalculationButton_Click);
             // 
-            // CancelButton
+            // CloseButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(6, 56);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(116, 30);
-            this.CancelButton.TabIndex = 5;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CloseButton.Location = new System.Drawing.Point(6, 56);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(116, 30);
+            this.CloseButton.TabIndex = 5;
+            this.CloseButton.Text = "Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // ButtonGroupBox
             // 
             this.ButtonGroupBox.Controls.Add(this.CalculationButton);
-            this.ButtonGroupBox.Controls.Add(this.CancelButton);
+            this.ButtonGroupBox.Controls.Add(this.CloseButton);
             this.ButtonGroupBox.Location = new System.Drawing.Point(12, 175);
             this.ButtonGroupBox.Name = "ButtonGroupBox";
             this.ButtonGroupBox.Size = new System.Drawing.Size(134, 97);
@@ -218,7 +218,7 @@
         private System.Windows.Forms.DataGridView CalculationGridView;
         private System.Windows.Forms.GroupBox ImpedanceGroupBox;
         private System.Windows.Forms.Button CalculationButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFrequency;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnImpedance;
         private System.Windows.Forms.GroupBox ButtonGroupBox;
