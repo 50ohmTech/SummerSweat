@@ -6,6 +6,7 @@ using ElementsLibrary;
 
 namespace MainForm
 {
+    //TODO: неправильное название файла
     /// <summary>
     ///     Форма под калькулятор
     /// </summary>
@@ -17,11 +18,12 @@ namespace MainForm
         ///     Цепь
         /// </summary>
         private readonly Circuit _circuit;
-      
+
         #endregion
 
         #region Private fields
 
+        //TODO: почему uint только endvalue?
         private uint _endValue;
         private double _startValue;
         private double _stepValue;
@@ -37,6 +39,7 @@ namespace MainForm
         public ImpedanceCalculatorForm(Circuit circuit)
         {
             InitializeComponent();
+            //TODO: зачем ContextMenu?
             _startValueTextBox.ContextMenu = new ContextMenu();
             _stepValueTextBox.ContextMenu = new ContextMenu();
             _endValueTextBox.ContextMenu = new ContextMenu();
@@ -65,6 +68,9 @@ namespace MainForm
                 return;
             }
 
+            //TODO: заменить на список, и конвертировать в массив уже при передаче в CalculateZ с помощью LINQ-метода ToArray();
+            // Иначе сложночитаемый код, с постоянным динамическим увеличением массива на один элемент в цикле.
+            //TODO: Кусок кода Шагаева!!! ВСЁ, что скопировано - удалить, и написать своё!
             var frequency = new double[1];
 
             var j = 0;
