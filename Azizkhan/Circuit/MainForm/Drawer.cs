@@ -323,12 +323,16 @@ namespace CircuitView
             }
 
             //TODO: количество чего?
+            //количество шагов(линий) для того, чтобы связать параллельное соединение с основной линией цепи
             var maxCount = 0;
 
             //TODO: шаги чего? Почему список?
+            //шаги до основной линии цепи, со списком удобнее работать
+            //не нужно делать Resize
             var steps = new List<int>();
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //Линия, соединяющая параллельное соединение с остальной цепью
             Graphics.DrawLine(Pen,
                 new Point(displacement.X,
                     _lineDisplacementY + displacement.Y),
@@ -338,24 +342,34 @@ namespace CircuitView
             for (var i = 0; i < root.Nodes.Count; i++)
             {
                 //TODO: что за каунт и чем он отличается от макскаунт?
+                //описал выше
                 //TODO: почему наверху макскаунт это int, а здесь каунт это point? Одинаковые имена для разных типов данных - неправильно!
-                var count = DrawSubcircuit(root.Nodes[i],
+                //endOfSubcurcuit - точка на которой заканчивается рисовка подцепей
+                var endOfSubcurcuit = DrawSubcircuit(root.Nodes[i],
                     new Point(_lineLengthX + displacement.X,
                         steps.Sum() * _lineLengthY +
                         displacement.Y)); //TODO: почему степс суммируются?
 
+                //чтобы правильно рисовать подцепь в высоту/глубину
+
                 //TODO: почему в шаги добавляется Y какого-то каунта?
-                steps.Add(count.Y);
+                //координата по Y, где закончилось рисование подцепи
+                steps.Add(endOfSubcurcuit.Y);
 
                 //TODO: что означает это условие? В чем его смысл? Как это отлаживать?
-                if (maxCount < count.X)
+                //для отрисовки параллельного соединения с двумя и более ветвлениями
+
+                if (maxCount < endOfSubcurcuit.X)
                 {
                     var step = 0;
 
                     //TODO: зачем этот цикл?
+                    //считаем расстояние для того, чтобы корректно провести горизонтальную линию,
+                    //которая будет соединять параллельное соединение с основной линией цепи
                     for (var j = 0; j < i; j++)
                     {
                         //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+                        //Дорисовка линий в параллельном соединении, если соединение между другими соединениями
                         Graphics.DrawLine(Pen,
                             new Point(
                                 _lineLengthX + maxCount * _elementLengthX +
@@ -363,20 +377,23 @@ namespace CircuitView
                                 _lineDisplacementY + step * _lineLengthY +
                                 displacement.Y),
                             new Point(
-                                _lineLengthX + count.X * _elementLengthX +
+                                _lineLengthX + endOfSubcurcuit.X * _elementLengthX +
                                 displacement.X,
                                 _lineDisplacementY + step * _lineLengthY +
                                 displacement.Y));
 
                         //TODO: зачем мы суммируем степы?
+                        //для того, чтобы понять насколько нужно смещать курсор по X для соединения с основной линией цепи
                         step += steps[j];
                     }
 
-                    maxCount = count.X;
+                    maxCount = endOfSubcurcuit.X;
                 }
                 else
                 {
                     //TODO: аналогично
+                    //считаем расстояние для того, чтобы корректно провести вертикальную линию,
+                    //которая будет соединять параллельное соединение с основной линией цепи
                     var step = 0;
                     for (var j = 0; j < i; j++)
                     {
@@ -384,9 +401,10 @@ namespace CircuitView
                     }
 
                     //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+                    //Дорисовка линий в параллельном соединении, если соединение стоит после других соединений
                     Graphics.DrawLine(Pen,
                         new Point(
-                            _lineLengthX + count.X * _elementLengthX +
+                            _lineLengthX + endOfSubcurcuit.X * _elementLengthX +
                             displacement.X,
                             _lineDisplacementY + step * _lineLengthY +
                             displacement.Y),
@@ -399,6 +417,7 @@ namespace CircuitView
             }
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //Линия после параллельного соединения
             Graphics.DrawLine(Pen,
                 new Point(
                     _lineLengthX + maxCount * _elementLengthX + displacement.X,
@@ -416,17 +435,20 @@ namespace CircuitView
             }
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //Крайняя левая линия параллельного соединения
             Graphics.DrawLine(Pen,
                 new Point(_lineLengthX + displacement.X,
                     _lineDisplacementY + displacement.Y),
                 new Point(_lineLengthX + displacement.X,
 
                     //TODO: почему сумма шагов, а индекс минус один?
+                    //Сумма всех элементов - значение последнего элемента
                     _lineDisplacementY + (steps.Sum() - steps[steps.Count - 1]) *
                     _lineLengthY +
                     displacement.Y));
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //Крайняя правая линия параллельного соединения
             Graphics.DrawLine(Pen,
                 new Point(
                     _lineLengthX + maxCount * _elementLengthX + displacement.X,
@@ -435,11 +457,13 @@ namespace CircuitView
                     _lineLengthX + maxCount * _elementLengthX + displacement.X,
 
                     //TODO: аналогично
+                    //Сумма всех элементов - значение последнего элемента
                     _lineDisplacementY + (steps.Sum() - steps[steps.Count - 1]) *
                     _lineLengthY +
                     displacement.Y));
 
             //TODO: аналогично
+            //возвращаем координату точки, где заканчивается параллельное соединение и соединяется с основной линией цепи
             return new Point(maxCount + 1, steps.Sum());
         }
 
@@ -454,6 +478,7 @@ namespace CircuitView
             //TODO: убрать лишние проверки
             //+
             //TODO: зачем brush, если у тебя есть Pen?
+            //метод DrawString не работает с Pen.
             var brush = new SolidBrush(Color.Black);
             switch (element)
             {
@@ -479,47 +504,18 @@ namespace CircuitView
         /// <param name="displacement">Смещение.</param>
         private static void DrawResistor(Point displacement)
         {
-            if (displacement == null)
-            {
-                throw new ArgumentNullException(nameof(displacement));
-            }
-
-            //TODO: заменить на метод отрисовки прямоугольника
-            //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
-            Graphics.DrawLine(Pen,
-                new Point(_resistorPositionX + displacement.X,
-                    _resistorPositionY + displacement.Y),
-                new Point(_resistorPositionX + displacement.X,
-                    _resistorPositionY + _resistorHeight + displacement.Y));
+            Graphics.DrawRectangle(Pen, _resistorPositionX + displacement.X,
+                _resistorPositionY + displacement.Y, _resistorWidth, _resistorHeight);
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
-            Graphics.DrawLine(Pen,
-                new Point(_resistorPositionX + displacement.X,
-                    _resistorPositionY + _resistorHeight + displacement.Y),
-                new Point(_resistorPositionX + _resistorWidth + displacement.X,
-                    _resistorPositionY + _resistorHeight + displacement.Y));
-
-            //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
-            Graphics.DrawLine(Pen,
-                new Point(_resistorPositionX + _resistorWidth + displacement.X,
-                    _resistorPositionY + displacement.Y),
-                new Point(_resistorPositionX + _resistorWidth + displacement.X,
-                    _resistorPositionY + _resistorHeight + displacement.Y));
-
-            //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
-            Graphics.DrawLine(Pen,
-                new Point(_resistorPositionX + _resistorWidth + displacement.X,
-                    _resistorPositionY + displacement.Y),
-                new Point(_resistorPositionX + displacement.X,
-                    _resistorPositionY + displacement.Y));
-
-            //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //Линия до резистора
             Graphics.DrawLine(Pen,
                 new Point(displacement.X, _lineDisplacementY + displacement.Y),
                 new Point(_resistorPositionX + displacement.X,
                     _lineDisplacementY + displacement.Y));
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //Линия после резистора
             Graphics.DrawLine(Pen,
                 new Point(_resistorPositionX + _resistorWidth + displacement.X,
                     _lineDisplacementY + displacement.Y),
@@ -536,6 +532,7 @@ namespace CircuitView
             //TODO: displacement передается внутри класса. Как он может быть null? Избавиться от ненужных проверок
             //+
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //левая вертикальная черта
             Graphics.DrawLine(Pen,
                 new Point(_firstPlatePosition + displacement.X,
                     _lineDisplacementY - _capacitorHeight / 2 + displacement.Y),
@@ -543,6 +540,7 @@ namespace CircuitView
                     _lineDisplacementY + _capacitorHeight / 2 + displacement.Y));
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //правая вертикальная черта
             Graphics.DrawLine(Pen,
                 new Point(_secondPlatePosition + displacement.X,
                     _lineDisplacementY - _capacitorHeight / 2 + displacement.Y),
@@ -550,12 +548,14 @@ namespace CircuitView
                     _lineDisplacementY + _capacitorHeight / 2 + displacement.Y));
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //линия до кондесатора
             Graphics.DrawLine(Pen,
                 new Point(displacement.X, _lineDisplacementY + displacement.Y),
                 new Point(_firstPlatePosition + displacement.X,
                     _lineDisplacementY + displacement.Y));
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //линия после конденсатора
             Graphics.DrawLine(Pen,
                 new Point(_secondPlatePosition + displacement.X,
                     _lineDisplacementY + displacement.Y),
@@ -569,14 +569,10 @@ namespace CircuitView
         /// <param name="displacement">Смещение.</param>
         private static void DrawInductor(Point displacement)
         {
-            if (displacement == null)
-            {
-                throw new ArgumentNullException(nameof(displacement));
-            }
-
             for (var i = 0; i < _arcCount; i++)
             {
                 //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+                //рисует дуги у катушки
                 Graphics.DrawArc(Pen,
                     _inductorPositionX + i * _arcDiameter + displacement.X,
                     _inductorPositionY + displacement.Y,
@@ -584,12 +580,14 @@ namespace CircuitView
             }
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //линия до катушки
             Graphics.DrawLine(Pen,
                 new Point(displacement.X, _lineDisplacementY + displacement.Y),
                 new Point(_inductorPositionX + displacement.X,
                     _lineDisplacementY + displacement.Y));
 
             //TODO: подписать, какую именно линию рисует этот Draw, иначе невозможно отлаживать
+            //линия после катушки
             Graphics.DrawLine(Pen,
                 new Point(
                     _inductorPositionX + _arcCount * _arcDiameter +
