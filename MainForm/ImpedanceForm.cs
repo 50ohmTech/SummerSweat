@@ -12,12 +12,34 @@ namespace MainForm
     public partial class ImpedanceForm : Form
     {
 
-        #region ~ Переменные только для чтения ~
+        #region ~ Переменные  ~
+
+        #region ~ Только для чтения ~
 
         /// <summary>
         /// Цепь.
         /// </summary>
         private readonly Circuit _circuit;
+
+        #endregion
+
+        #region ~ Приватные переменные ~
+
+        /// <summary>
+        /// Список частот.
+        /// </summary>
+        private List<double> _frequencies;
+
+        /// <summary>
+        /// Список импедансов.
+        /// </summary>
+        private List<Complex> _impedances;
+
+        private uint _endValue;
+        private double _startValue;
+        private double _stepValue;
+
+        #endregion 
 
         #endregion
 
@@ -31,17 +53,8 @@ namespace MainForm
         {
             InitializeComponent();
             _circuit = circuit;
-
-<<<<<<< HEAD
-            _startValueTextBox.ContextMenu = new ContextMenu();
-            _stepValueTextBox.ContextMenu = new ContextMenu();
-            _endValueTextBox.ContextMenu = new ContextMenu();
-=======
             //TODO: Зачем ContextMenu?
-            StartValueTextBox.ContextMenu = new ContextMenu();
-            StepValueTextBox.ContextMenu = new ContextMenu();
-            EndValueTextBox.ContextMenu = new ContextMenu();
->>>>>>> 39f4ca1a6ec16c74848e25ab7f714f32790d1aa0
+            //.
         }
 
         #endregion
@@ -61,67 +74,8 @@ namespace MainForm
         /// </summary>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            ValueValidators.ChangeSeparator(_startValueTextBox);
-            ValueValidators.ChangeSeparator(_stepValueTextBox);
-            ValueValidators.ChangeSeparator(_endValueTextBox);
-
-            var start = double.Parse(_startValueTextBox.Text);
-            var step = double.Parse(_stepValueTextBox.Text);
-            var finish = uint.Parse(_endValueTextBox.Text);
-=======
-            //TODO: кусок кода полностью совпадает с кодом Аханова,
-            // который в свою очередь накопировал у Шагаева.
-            // Удалить скопированное и написать своё решение
-            ValueValidators.ChangeSeparator(StartValueTextBox);
-            ValueValidators.ChangeSeparator(StepValueTextBox);
-            ValueValidators.ChangeSeparator(EndValueTextBox);
-
-            //TODO: Почему start и step - double, а finish - uint?
-            var start = double.Parse(StartValueTextBox.Text);
-            var step = double.Parse(StepValueTextBox.Text);
-            var finish = uint.Parse(EndValueTextBox.Text);
->>>>>>> 39f4ca1a6ec16c74848e25ab7f714f32790d1aa0
-
-            if (!ValueValidators.IsCorrectFrequency(start, step, finish))
-            {
-                return;
-            }
-
-            //TODO: Заменить на список вместо массива, 
-            //и конвертировать список в массив уже при вызове CalculateZ() с помощью LINQ-метода ToArray()
-            double[] frequency = new double[1];
-
-            var j = 0;
-            for (var i = start; i <= finish; i += step)
-            {
-                frequency[j] = i;
-                j++;
-                if (!(finish - i == 0))
-                {
-                    Array.Resize(ref frequency, frequency.Length + 1);
-                }
-            }
-
-            if (frequency[frequency.Length - 1] == 0)
-            {
-                Array.Resize(ref frequency, frequency.Length - 1);
-            }
-
-            var impedances = _circuit.CalculateZ(frequency);
-            var correctListOfImpedances = new List<string>();
-
-            for (var i = 0; i < impedances.Count; i++)
-            {
-                correctListOfImpedances.Add($"R:{Math.Round(impedances[i].Real, 3)} " +
-                    $"I:{Math.Round(impedances[i].Imaginary, 3)}");
-            }
-
-            for (var i = 0; i < impedances.Count; i++)
-            {
-                _dataGridView.Rows.Add(Math.Round(frequency[i], 3),
-                    correctListOfImpedances[i]);
-            }
+            _dataGridView.Rows.Clear();
+            CalculateImpedances();
         }
 
         /// <summary>
@@ -154,6 +108,48 @@ namespace MainForm
         private void IntTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValueValidators.PressInt(sender, e);
+        }
+
+        /// <summary>
+        /// Функция подсчета коплексного сопротивления.
+        /// </summary>
+        private void CalculateImpedances()
+        {
+            //TODO: Почему start и step - double, а finish - uint?
+            //.
+            var _start = double.Parse(_startValueTextBox.Text);
+            var _step = double.Parse(_stepValueTextBox.Text);
+            var _finish = double.Parse(_endValueTextBox.Text); 
+
+            //TODO: кусок кода полностью совпадает с кодом Аханова,
+            // который в свою очередь накопировал у Шагаева.
+            // Удалить скопированное и написать своё решение
+            ValueValidators.ChangeSeparator(_startValueTextBox);
+            ValueValidators.ChangeSeparator(_stepValueTextBox);
+            ValueValidators.ChangeSeparator(_endValueTextBox);
+
+            if (!ValueValidators.IsCorrectFrequency(_start, _step, _finish))
+            {
+                return;
+            }
+
+            //TODO: Заменить на список вместо массива, 
+            //и конвертировать список в массив уже при вызове CalculateZ() с помощью LINQ-метода ToArray()
+            //.
+            _frequencies = new List<double>();
+
+            for (var index = 0; index < _finish; index++)
+            {
+                _frequencies.Add(_start + index * _step);
+            }
+
+            _impedances = _circuit.CalculateZ(_frequencies.ToArray());
+            _dataGridView.Rows.Clear();
+
+            for (var index = 0; index < _impedances.Count; index++)
+            {
+                _dataGridView.Rows.Add(_frequencies[index], _impedances[index]);
+            }
         }
 
         #endregion

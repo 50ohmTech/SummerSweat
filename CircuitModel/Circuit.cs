@@ -5,6 +5,7 @@ using System.Numerics;
 namespace CircuitModel
 {
     //TODO: Скопированная реализация?
+    //AddAfter - да. (Добавила пару проверок)
     /// <summary>
     /// Класс цепи.
     /// </summary>
@@ -41,6 +42,17 @@ namespace CircuitModel
             {
                 Root = newNode;
                 return;
+            }
+
+            if (currentNode == newNode)
+            {
+                throw new ArgumentOutOfRangeException("Узел равен новому узлу.");
+            }
+
+            if (newNode == null)
+            {
+                throw new ArgumentNullException(nameof(newNode),
+                    "Новый узел должен быть определен.");
             }
 
             if (currentNode is SubcircuitBase subcircuit)

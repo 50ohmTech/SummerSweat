@@ -82,9 +82,9 @@
             // 
             this._selectingCircuitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._selectingCircuitComboBox.FormattingEnabled = true;
-            this._selectingCircuitComboBox.Location = new System.Drawing.Point(94, 9);
+            this._selectingCircuitComboBox.Location = new System.Drawing.Point(102, 9);
             this._selectingCircuitComboBox.Name = "_selectingCircuitComboBox";
-            this._selectingCircuitComboBox.Size = new System.Drawing.Size(91, 21);
+            this._selectingCircuitComboBox.Size = new System.Drawing.Size(83, 21);
             this._selectingCircuitComboBox.TabIndex = 4;
             this._selectingCircuitComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectingCircuitComboBox_SelectedIndexChanged);
             // 
@@ -142,9 +142,9 @@
             this._choiceLabel.AutoSize = true;
             this._choiceLabel.Location = new System.Drawing.Point(12, 12);
             this._choiceLabel.Name = "_choiceLabel";
-            this._choiceLabel.Size = new System.Drawing.Size(87, 13);
+            this._choiceLabel.Size = new System.Drawing.Size(84, 13);
             this._choiceLabel.TabIndex = 13;
-            this._choiceLabel.Text = "Выберите цепь:";
+            this._choiceLabel.Text = "Выберите цепь";
             // 
             // MainForm
             // 

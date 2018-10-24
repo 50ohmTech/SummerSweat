@@ -112,7 +112,7 @@ namespace MainForm
         /// <param name="count"> Количество значений. </param>
         /// <returns></returns>
         public static bool IsCorrectFrequency(double startValue, double interval,
-            uint count)
+            double count)
         {
             const double maxStartValue = 1000000000000.0;
             const double minStartValue = 1.0;

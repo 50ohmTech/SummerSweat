@@ -104,23 +104,24 @@ namespace CircuitModel
                 {
                     throw new ArgumentException(nameof(value));
                 }
+
+                ValueChanged?.Invoke(this, new ValueEventArgs(Name, _value));
+
                 _value = value;
             }
         }
 
         #endregion
-<<<<<<< HEAD
-=======
 
         #region ~ События ~
 
         //TODO: Событие создано, но нигде не зажигается. Должно зажигаться в сеттере Value
+        //+
         /// <summary>
         /// Событие, возникающее при изменении номинала элемента.
         /// </summary>
         public event ValueEventHandler ValueChanged;
 
         #endregion
->>>>>>> 39f4ca1a6ec16c74848e25ab7f714f32790d1aa0
     }
 }
