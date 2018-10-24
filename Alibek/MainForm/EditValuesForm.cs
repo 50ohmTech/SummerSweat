@@ -42,7 +42,11 @@ namespace MainForm
         /// <param name="e">Параметры события</param>
         private void TextBox_Enter(object sender, EventArgs e)
         {
-            ValueValidators.Enter(sender);
+
+            if (sender is TextBox textBox)
+            {
+                ValueValidators.Enter(textBox);
+            }
         }
 
         /// <summary>
@@ -52,7 +56,10 @@ namespace MainForm
         /// <param name="e">Параметры события</param>
         private void TextBox_Leave(object sender, EventArgs e)
         {
-            ValueValidators.Leave(sender);
+            if (sender is TextBox textBox)
+            {
+                ValueValidators.Leave(textBox);
+            }
         }
 
         /// <summary>

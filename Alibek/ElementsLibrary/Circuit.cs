@@ -70,10 +70,10 @@ namespace ElementsLibrary
             }
             if (IsEmpty())
             {
-                Root = node;
+                Root = nextNode;
                 return;
             }
-
+            
             if (node is SubCircuitBase circuit)
             {
                 if (circuit.Nodes == null)

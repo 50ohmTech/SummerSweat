@@ -85,16 +85,16 @@ namespace MainForm
         ///     Функция подготавливающая поле к вводу.
         /// </summary>
         /// <param name="sender">Обьект который вызвал событие</param>
-        public static void Enter(object sender)
+        public static void Enter(TextBox textBox)
         {
-            if (!(sender is TextBox textBox))
+            if (!(textBox is TextBox valueTexBox))
             {
                 return;
             }
 
-            if (textBox.Text == "0")
+            if (valueTexBox.Text == "0")
             {
-                textBox.Text = string.Empty;
+                valueTexBox.Text = string.Empty;
             }
         }
 
@@ -103,16 +103,16 @@ namespace MainForm
         ///     Функция подготавливающая поле к выводу.
         /// </summary>
         /// <param name="sender">Обьект который вызвал событие</param>
-        public static void Leave(object sender)
+        public static void Leave(TextBox textBox)
         {
-            if (!(sender is TextBox textBox))
+            if (!(textBox is TextBox valueTexBox))
             {
                 return;
             }
 
-            if (textBox.Text == string.Empty)
+            if (valueTexBox.Text == string.Empty)
             {
-                textBox.Text = "0";
+                valueTexBox.Text = "0";
             }
         }
 
