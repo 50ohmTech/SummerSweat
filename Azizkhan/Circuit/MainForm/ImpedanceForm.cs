@@ -76,7 +76,7 @@ namespace MainForm
                 var step = Convert.ToDouble(StepTextBox.Text);
 
                 var frequency = new double[1];
-                if (start == finish && step == 0)
+                if (Math.Abs(start - finish) < CheckFrequency.MIN_FREQUENCY && step == 0)
                 {
                     frequency[0] = start;
                 }
