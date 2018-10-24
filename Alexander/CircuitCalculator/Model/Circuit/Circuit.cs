@@ -128,13 +128,7 @@ namespace Model.Circuit
                 Root = newNode;
                 return;
             }
-
-            if (!IsEmpty() && node == null)
-            {
-                throw new ArgumentNullException(nameof(newNode),
-                    "Выберите узел.");
-            }
-
+            
             if (node is ElementBase)
             {
                 throw new ArgumentException("Выберите узел, а не элемент.");

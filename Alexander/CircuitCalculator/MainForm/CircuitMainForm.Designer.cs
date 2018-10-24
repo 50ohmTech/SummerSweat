@@ -81,7 +81,7 @@
             this.SelectingCircuitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SelectingCircuitComboBox.FormattingEnabled = true;
             this.SelectingCircuitComboBox.Items.AddRange(new object[] {
-            "Новая цепь",
+            "Моя цепь",
             "Цепь №1",
             "Цепь №2",
             "Цепь №3",

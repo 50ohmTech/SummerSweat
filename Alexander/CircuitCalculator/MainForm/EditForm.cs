@@ -5,16 +5,16 @@ using Model.Elements;
 namespace View
 {
     /// <summary>
-    ///     Форма редактирования элементов
+    ///     Форма редактирования элементов.
     /// </summary>
     public partial class EditForm : Form
     {
         #region Constructor
 
         /// <summary>
-        ///     Конструктор
+        ///     Конструктор.
         /// </summary>
-        /// <param name="element">Элемент</param>
+        /// <param name="element">Элемент.</param>
         public EditForm(ElementBase element)
         {
             _element = element ?? throw new ArgumentNullException(nameof(element));
@@ -27,17 +27,32 @@ namespace View
 
         #region Private methods
 
+        /// <summary>
+        ///     Закрыть форму.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        ///     Изменить номинал элемента.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void EditButton_Click(object sender, EventArgs e)
         {
             _element.Value = _value;
             Close();
         }
 
+        /// <summary>
+        ///     Считать данные с NumericUpDown.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void EditNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             _value = Convert.ToDouble(EditNumericUpDown.Text);
@@ -50,7 +65,7 @@ namespace View
         #region Readonly fields
 
         /// <summary>
-        ///     Элемент
+        ///     Элемент.
         /// </summary>
         private readonly ElementBase _element;
 
@@ -59,7 +74,7 @@ namespace View
         #region Private fields
 
         /// <summary>
-        ///     Номинал
+        ///     Номинал.
         /// </summary>
         private double _value;
 

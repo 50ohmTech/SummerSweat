@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Model.Elements;
 using Model.Circuit;
+using Model.Elements;
 
 namespace View
 {
@@ -63,7 +63,7 @@ namespace View
         ///     Длинна добавочной линии по Y.
         /// </summary>
         private static readonly int _lineLengthY = 40;
-        
+
 
         /// <summary>
         ///     Сдвиг по X для отрисовки имени.

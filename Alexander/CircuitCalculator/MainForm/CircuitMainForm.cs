@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Model.Circuit;
 using Model.Elements;
-using System.Drawing;
 
 namespace View
 {
+    /// <summary>
+    ///     Главная форма для работы с цепями.
+    /// </summary>
     public partial class MainForm : Form
     {
         #region Properties
 
+        /// <summary>
+        ///     Создатель тестовых цепей.
+        /// </summary>
         public TestCircuits TestCircuits { get; }
 
         #endregion
@@ -40,7 +45,7 @@ namespace View
         {
             treeView.Nodes.Clear();
             _currentNode = null;
-            
+
             if (_circuit == null)
             {
                 throw new InvalidOperationException("Цепь пуста");
@@ -87,17 +92,44 @@ namespace View
 
             PictureBox.Image = bitmapBackground;
         }
-        
+
+        /// <summary>
+        ///     Обработать добавление элемента.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void AddButton_Click(object sender, EventArgs e)
         {
-            _countElements = TestCircuits.capacitorIterator +
-                             TestCircuits.inductorIterator +
-                             TestCircuits.resistorIterator;
-            
-            if (_countElements < 8)
+            if (NodeComboBox.SelectedItem == null)
             {
-                try
+                MessageBox.Show("Выберите то, что хотите добавить");
+            }
+            
+            if (treeView.Nodes.Count == 0 && NodeComboBox.SelectedItem == "Параллельно")
+            {
+                _circuit.AddAfter(_currentNode, new ParallelSubcircuit());
+            }
+            else if (treeView.Nodes.Count == 0 && NodeComboBox.SelectedItem == "Последовательно")
+            {
+                _circuit.AddAfter(_currentNode, new SeriesSubcircuit());
+            }
+            else if (NodeComboBox.SelectedItem != null && _currentNode == null)
+            {
+                MessageBox.Show("Выберите узел");
+            }
+            
+            if (_currentNode is SubcircuitBase subcircuit)
+            {
+                if (subcircuit.Nodes.Count < 7)
                 {
+                    if (subcircuit is SeriesSubcircuit && ReferenceEquals(NodeComboBox.SelectedItem, "Последовательно")
+                    || subcircuit is ParallelSubcircuit && ReferenceEquals(NodeComboBox.SelectedItem, "Параллельно"))
+                    {
+                        MessageBox.Show(
+                            "Нельзя создавать в параллельном/последовательном узле параллельный/последовательный узел");
+                        return;
+                    }
+
                     switch (NodeComboBox.SelectedItem)
                     {
                         case "Последовательно":
@@ -108,41 +140,42 @@ namespace View
                             break;
                         case "R":
                             _circuit.AddAfter(_currentNode,
-                                new Resistor("R" + TestCircuits.resistorIterator++,
+                                new Resistor("R" + TestCircuits.ResistorIterator++,
                                     Convert.ToDouble(NominalNumericUpDown.Text)));
 
-                            _countElements++;
                             break;
                         case "L":
                             _circuit.AddAfter(_currentNode,
-                                new Inductor("L" + TestCircuits.inductorIterator++,
+                                new Inductor("L" + TestCircuits.InductorIterator++,
                                     Convert.ToDouble(NominalNumericUpDown.Text)));
 
-                           _countElements++;
                             break;
                         case "C":
                             _circuit.AddAfter(_currentNode,
-                                new Capacitor("C" + TestCircuits.capacitorIterator++,
+                                new Capacitor("C" + TestCircuits.CapacitorIterator++,
                                     Convert.ToDouble(NominalNumericUpDown.Text)));
 
-                            _countElements++;
                             break;
                     }
 
                     UpdateTreeView();
+
                 }
-                catch (Exception exception)
+                else
                 {
-                    MessageBox.Show(exception.Message);
+                    MessageBox.Show("Достигнуто максимальное количество элементов.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("Достигнуто максимальное количество элементов в цепи.");
-            }
-            
+
+            UpdateTreeView();
         }
 
+        /// <summary>
+        ///     Выбрать цепь.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void SelectingCircuitComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
         {
@@ -150,7 +183,9 @@ namespace View
             {
                 PictureBox.Image = null;
                 treeView.Nodes.Clear();
+                
             }
+
             if (SelectingCircuitComboBox.SelectedIndex >= 0 &&
                 SelectingCircuitComboBox.SelectedIndex < 6)
             {
@@ -165,6 +200,11 @@ namespace View
             UpdateTreeView();
         }
 
+        /// <summary>
+        ///     Выбрать текущую ноду.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node is CircuitTreeNode treeNode)
@@ -173,6 +213,11 @@ namespace View
             }
         }
 
+        /// <summary>
+        ///     Удалить узел или элемент.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             if (_currentNode == null)
@@ -191,8 +236,19 @@ namespace View
                     MessageBox.Show(exception.Message);
                 }
             }
+
+            if (_circuit.Root == null)
+            {
+                PictureBox.Image = null;
+                treeView.Nodes.Clear();
+            }
         }
 
+        /// <summary>
+        ///     Выбрать узел или элемент.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void NodeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (NodeComboBox.Text == "Параллельно")
@@ -209,6 +265,11 @@ namespace View
             }
         }
 
+        /// <summary>
+        ///     Рассчитать импедансы цепи.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void CalculateImpedanceButton_Click(object sender, EventArgs e)
         {
             if (treeView.Nodes.Count == 0)
@@ -222,6 +283,11 @@ namespace View
             new ImpedanceForm(_circuit).ShowDialog();
         }
 
+        /// <summary>
+        ///     Изменить номинал элемента.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void EditButton_Click(object sender, EventArgs e)
         {
             if (_currentNode != null)
@@ -260,10 +326,11 @@ namespace View
 
         #region Private fields
 
+        /// <summary>
+        ///     Выбранная нода.
+        /// </summary>
         private INode _currentNode;
-
-        private uint _countElements = 0;
-
+        
         #endregion
 
         #endregion

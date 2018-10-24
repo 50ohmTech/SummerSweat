@@ -1,21 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model;
+﻿using System.Collections.Generic;
 using Model.Circuit;
 using Model.Elements;
 
 namespace View
 {
     /// <summary>
-    /// Класс для создания тестовых цепей
+    ///     Класс для создания тестовых цепей.
     /// </summary>
     public class TestCircuits
     {
+        #region Private fields
+
+        /// <summary>
+        ///     Выбранная нода.
+        /// </summary>
+        private INode _currentNode;
+
+        #endregion
+
+        #region Ordinary fields
+
+        /// <summary>
+        ///     Индекс конденсатора.
+        /// </summary>
+        public uint CapacitorIterator;
+
+        /// <summary>
+        ///     Индекс индуктора.
+        /// </summary>
+        public uint InductorIterator;
+
+        /// <summary>
+        ///     Индекс резистора.
+        /// </summary>
+        public uint ResistorIterator;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Возвращает и задает список цепей.
+        /// </summary>
         public List<Circuit> Circuits { get; }
 
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        ///     Конструктор.
+        /// </summary>
         public TestCircuits()
         {
             SubcircuitBase parallelSubcircuit1 = new ParallelSubcircuit();
@@ -33,7 +68,7 @@ namespace View
             {
                 Circuits.Add(new Circuit());
             }
-            
+
             Circuits[1].AddAfter(_currentNode, seriesSubcircuit1);
             Circuits[1].AddAfter(seriesSubcircuit1,
                 new Capacitor("C0", 2.2));
@@ -107,60 +142,52 @@ namespace View
                 new Capacitor("C1", 88.8));
 
             Circuits[5].AddAfter(seriesSubcircuit5,
-                new Resistor("R1", 2));                   
+                new Resistor("R1", 2));
         }
 
-        private INode _currentNode;
+        #endregion
+
+        #region Public methods
 
         /// <summary>
-        ///     Индекс резистора.
+        ///     Подсчет элементов в цепях.
         /// </summary>
-        public uint resistorIterator;
-
-        /// <summary>
-        ///     Индекс конденсатора.
-        /// </summary>
-        public uint capacitorIterator;
-
-        /// <summary>
-        ///     Индекс индуктора.
-        /// </summary>
-        public uint inductorIterator;
-
+        /// <param name="CurrentCircuit"></param>
         public void GetIterator(int CurrentCircuit)
         {
-            resistorIterator = 0;
-            capacitorIterator = 0;
-            inductorIterator = 0;
+            ResistorIterator = 0;
+            CapacitorIterator = 0;
+            InductorIterator = 0;
 
             if (CurrentCircuit == 1)
             {
-                resistorIterator = 2;
-                capacitorIterator = 1;
-                inductorIterator = 1;
+                ResistorIterator = 2;
+                CapacitorIterator = 1;
+                InductorIterator = 1;
             }
             else if (CurrentCircuit == 2)
             {
-                resistorIterator = 2;
-                capacitorIterator = 1;
-                inductorIterator = 3;
+                ResistorIterator = 2;
+                CapacitorIterator = 1;
+                InductorIterator = 3;
             }
             else if (CurrentCircuit == 3)
             {
-               capacitorIterator = 3;
+                CapacitorIterator = 3;
             }
             else if (CurrentCircuit == 4)
             {
-                resistorIterator = 2;
-                capacitorIterator = 1;
-                inductorIterator = 1;
+                ResistorIterator = 2;
+                CapacitorIterator = 1;
+                InductorIterator = 1;
             }
             else if (CurrentCircuit == 5)
             {
-                resistorIterator = 2;
-                capacitorIterator = 2;
+                ResistorIterator = 2;
+                CapacitorIterator = 2;
             }
         }
 
+        #endregion
     }
 }

@@ -33,13 +33,13 @@
             this.EndLabel = new System.Windows.Forms.Label();
             this.StepLabel = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CalculateButton = new System.Windows.Forms.Button();
             this.StartNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.FinishNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.StepNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this._calculationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FinishNumericUpDown)).BeginInit();
@@ -89,18 +89,6 @@
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.Size = new System.Drawing.Size(232, 143);
             this.dataGridView.TabIndex = 6;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Частота";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Импеданс";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
             // 
             // CalculateButton
             // 
@@ -183,6 +171,19 @@
             0,
             0,
             131072});
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Частота";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Импеданс";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 125;
             // 
             // ImpedanceForm
             // 

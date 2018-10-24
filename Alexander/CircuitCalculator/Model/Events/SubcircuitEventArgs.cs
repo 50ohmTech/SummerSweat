@@ -57,7 +57,7 @@ namespace Model.Events
         ///     Конструктор.
         /// </summary>
         /// <param name="message">Сообщение.</param>
-        /// <param name="parent">Родитель</param>
+        /// <param name="parent">Родитель.</param>
         public SubcircuitEventArgs(string message, INode parent)
         {
             Parent = parent;

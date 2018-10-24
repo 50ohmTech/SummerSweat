@@ -12,15 +12,24 @@ namespace View
     public partial class ImpedanceForm : Form
     {
         #region Readonly fields
-
+        
+        /// <summary>
+        ///     Поле для цепи.
+        /// </summary>
         private readonly Circuit _circuit;
 
         #endregion
 
         #region Private fields
 
+        /// <summary>
+        ///     Список частот.
+        /// </summary>
         private List<double> _frequencies;
 
+        /// <summary>
+        ///     Список импедансов.
+        /// </summary>
         private List<Complex> _impedancies;
 
         #endregion
@@ -40,11 +49,12 @@ namespace View
         #endregion
 
         #region Private methods
-
+        
         /// <summary>
         ///     Расчет импедансов.
         /// </summary>
-        /// <param name="frequencies"></param>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Параметры события.</param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             var start = double.Parse(StartNumericUpDown.Text);
