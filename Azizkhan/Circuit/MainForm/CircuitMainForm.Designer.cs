@@ -36,9 +36,9 @@
             this.SelectingCircuitLabel = new System.Windows.Forms.Label();
             this.TreeView = new System.Windows.Forms.TreeView();
             this.NodeComboBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.circuitPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).BeginInit();
+            this.Label = new System.Windows.Forms.Label();
+            this.СircuitPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.СircuitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // AddButton
@@ -121,28 +121,28 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 251);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Добавить элемент";
+            this.Label.AutoSize = true;
+            this.Label.Location = new System.Drawing.Point(12, 251);
+            this.Label.Name = "Label";
+            this.Label.Size = new System.Drawing.Size(103, 13);
+            this.Label.TabIndex = 8;
+            this.Label.Text = "Добавить элемент";
             // 
             // circuitPictureBox
             // 
-            this.circuitPictureBox.Location = new System.Drawing.Point(191, 13);
-            this.circuitPictureBox.Name = "circuitPictureBox";
-            this.circuitPictureBox.Size = new System.Drawing.Size(695, 369);
-            this.circuitPictureBox.TabIndex = 9;
-            this.circuitPictureBox.TabStop = false;
+            this.СircuitPictureBox.Location = new System.Drawing.Point(191, 13);
+            this.СircuitPictureBox.Name = "СircuitPictureBox";
+            this.СircuitPictureBox.Size = new System.Drawing.Size(695, 369);
+            this.СircuitPictureBox.TabIndex = 9;
+            this.СircuitPictureBox.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(898, 395);
-            this.Controls.Add(this.circuitPictureBox);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.СircuitPictureBox);
+            this.Controls.Add(this.Label);
             this.Controls.Add(this.NodeComboBox);
             this.Controls.Add(this.TreeView);
             this.Controls.Add(this.SelectingCircuitLabel);
@@ -157,7 +157,7 @@
             this.MinimumSize = new System.Drawing.Size(554, 341);
             this.Name = "MainForm";
             this.Text = "CircuitMainForm";
-            ((System.ComponentModel.ISupportInitialize)(this.circuitPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.СircuitPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,8 +172,8 @@
         private System.Windows.Forms.Label SelectingCircuitLabel;
         private System.Windows.Forms.TreeView TreeView;
         private System.Windows.Forms.ComboBox NodeComboBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox circuitPictureBox;
+        private System.Windows.Forms.Label Label;
+        private System.Windows.Forms.PictureBox СircuitPictureBox;
     }
 }
 

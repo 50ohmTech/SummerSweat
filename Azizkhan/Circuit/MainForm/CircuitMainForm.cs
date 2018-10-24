@@ -62,7 +62,7 @@ namespace CircuitView
             _currentNode = null;
             if (_circuit == null || _circuit.IsEmpty())
             {
-                circuitPictureBox.Image = null;
+                СircuitPictureBox.Image = null;
                 return;
             }
 
@@ -97,8 +97,8 @@ namespace CircuitView
             TreeView.EndUpdate();
             TreeView.ExpandAll();
 
-            circuitPictureBox.Image = null;
-            circuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
+            СircuitPictureBox.Image = null;
+            СircuitPictureBox.Image = Drawer.DrawCircuit(_circuit);
         }
 
 
