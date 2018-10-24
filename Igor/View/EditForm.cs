@@ -49,6 +49,8 @@ namespace View
         private void ButtonClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            //TODO: А Close() зачем убрал?
+            //TODO: Либо здесь Close(), либо этот обработчик вообще не нужен
         }
 
         private void TextBoxValue_TextChanged(object sender, EventArgs e)
@@ -72,6 +74,8 @@ namespace View
 
         #region Public methods
 
+        //TODO: ЕЩЕ РАЗ! элемент должен быть открытым свойством, а не входным аргументом конструктора!
+        //TODO: НЕЛЬЗЯ ПРОСТО ТАК УДАЛЯТЬ TODO!!!
         /// <summary>
         ///     Конструктор
         /// </summary>
@@ -83,7 +87,9 @@ namespace View
             Text = "Элемент: " + element.Name;
             _textBoxValue.Text = element.Value.ToString();
 
+            //TODO: Результат диалога должен присваиваться в обработчиках, закрывающих форму, а не в конструкторе
             DialogResult = DialogResult.Yes;
+            //TODO: Зачем кнопке присваивать DialogResult?
             buttonCancel.DialogResult = DialogResult.Cancel;
         }
 

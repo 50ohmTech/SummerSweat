@@ -4,6 +4,8 @@ using System.Windows.Forms;
 
 namespace Model
 {
+    //TODO: Класс нарушает принципы ООП: Один класс - одна задача!
+    // Здесь же солянка методов для разных классов без какого-либо принципа
     /// <summary>
     ///     Функции для NodeType
     /// </summary>
@@ -11,6 +13,7 @@ namespace Model
     {
         #region Nested class
 
+        //TODO: Для этого существует стандартный класс Tuple
         /// <summary>
         ///     Тип данных, который хранит 2 переменных.
         ///     На подобие vector<pair> из C++.
@@ -100,6 +103,7 @@ namespace Model
             return false;
         }
 
+        //TODO: Почему класс бизнес-логики знает что-то про пользовательский интерфейс?
         public static void ShowError(TextBox textBox)
         {
             if (textBox.Text != "")
@@ -148,6 +152,7 @@ namespace Model
             ;
         }
 
+        //TODO: бизнес-логика использует GUI - неправильно!
         public static void IsCorrectStartFinish(TextBox startTextBox,
             TextBox finishTextBox)
         {
