@@ -36,6 +36,7 @@ namespace MainForm
 
         //TODO: почему uint только endvalue?
         //по идее это костыль
+        //ТАК СДЕЛАЙ БЕЗ КОСТЫЛЯ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         private uint _endValue;
         private double _startValue;
         private double _stepValue;
@@ -44,6 +45,7 @@ namespace MainForm
 
         #region Constructor
 
+        //TODO: цепь должна передаваться через открытое свойство, а не аргумент конструктора
         /// <summary>
         ///     Конструктор формы
         /// </summary>

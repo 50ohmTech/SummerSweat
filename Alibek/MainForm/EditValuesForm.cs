@@ -17,9 +17,10 @@ namespace MainForm
         private readonly ElementBase _element;
 
         #endregion
-    
+
         #region Constructor
 
+        //TODO: элемент должен передаваться через открытое свойство, а не аргумент конструктора
         /// <summary>
         ///     Конструктор формы
         /// </summary>
@@ -83,6 +84,7 @@ namespace MainForm
             //TODO: Почему Cancel?
             //долгая история но если поставить DialogResult.OK, то значения не меняются
             //и я понятия не имею с чем это связано
+            // РАЗБЕРИСЬ И СДЕЛАЙ ЧЕРЕЗ OK, А НЕ ПРОСТО КОПИРУЙ КОД
             DialogResult = DialogResult.Cancel;
         }
 
