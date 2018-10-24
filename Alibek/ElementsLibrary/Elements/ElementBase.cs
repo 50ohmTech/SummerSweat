@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace ElementsLibrary.Elements
 {
+    //TODO: По заданию в минимальной версии должны быть еще событие ValueChanged!
     /// <summary>
     ///     Базовый класс элемента <see cref="ElementBase" />
     /// </summary>

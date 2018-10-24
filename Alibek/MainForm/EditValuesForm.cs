@@ -73,6 +73,7 @@ namespace MainForm
         private void EditValueButton_Click(object sender, EventArgs e)
         {
             _element.Value = Convert.ToDouble(_editValuesTextBox.Text);
+            //TODO: Почему Cancel?
             DialogResult = DialogResult.Cancel;
         }
 
