@@ -65,10 +65,7 @@ namespace MainForm
         /// </summary>
         private void CalculateImpedance()
         {
-            ValueValidators.ChangeSeparator(_startValueTextBox);
-            ValueValidators.ChangeSeparator(_stepValueTextBox);
-            ValueValidators.ChangeSeparator(_endValueTextBox);
-
+            
             double.TryParse(_startValueTextBox.Text, out _startValue);
             double.TryParse(_stepValueTextBox.Text, out _stepValue);
             uint.TryParse(_endValueTextBox.Text, out _endValue);

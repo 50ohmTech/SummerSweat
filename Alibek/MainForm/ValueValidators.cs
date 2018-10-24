@@ -116,19 +116,7 @@ namespace MainForm
             }
         }
 
-        /// <summary>
-        ///     Заменить символ-разделитель.
-        /// </summary>
-        /// <param name="valueBox">Значение в текстбоксе</param>
-        public static void ChangeSeparator(TextBox valueBox)
-        {
-            if (valueBox.Text == NumberFormatInfo.CurrentInfo
-                    .NumberDecimalSeparator)
-            {
-                valueBox.Text = "0";
-            }
-        }
-
+       
         /// <summary>
         ///     Проверка значений на границы
         /// </summary>
