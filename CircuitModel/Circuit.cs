@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace CircuitModel
 {
+    //TODO: Скопированная реализация?
     /// <summary>
     /// Класс цепи.
     /// </summary>

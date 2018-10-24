@@ -32,9 +32,16 @@ namespace MainForm
             InitializeComponent();
             _circuit = circuit;
 
+<<<<<<< HEAD
             _startValueTextBox.ContextMenu = new ContextMenu();
             _stepValueTextBox.ContextMenu = new ContextMenu();
             _endValueTextBox.ContextMenu = new ContextMenu();
+=======
+            //TODO: Зачем ContextMenu?
+            StartValueTextBox.ContextMenu = new ContextMenu();
+            StepValueTextBox.ContextMenu = new ContextMenu();
+            EndValueTextBox.ContextMenu = new ContextMenu();
+>>>>>>> 39f4ca1a6ec16c74848e25ab7f714f32790d1aa0
         }
 
         #endregion
@@ -54,6 +61,7 @@ namespace MainForm
         /// </summary>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             ValueValidators.ChangeSeparator(_startValueTextBox);
             ValueValidators.ChangeSeparator(_stepValueTextBox);
             ValueValidators.ChangeSeparator(_endValueTextBox);
@@ -61,12 +69,27 @@ namespace MainForm
             var start = double.Parse(_startValueTextBox.Text);
             var step = double.Parse(_stepValueTextBox.Text);
             var finish = uint.Parse(_endValueTextBox.Text);
+=======
+            //TODO: кусок кода полностью совпадает с кодом Аханова,
+            // который в свою очередь накопировал у Шагаева.
+            // Удалить скопированное и написать своё решение
+            ValueValidators.ChangeSeparator(StartValueTextBox);
+            ValueValidators.ChangeSeparator(StepValueTextBox);
+            ValueValidators.ChangeSeparator(EndValueTextBox);
+
+            //TODO: Почему start и step - double, а finish - uint?
+            var start = double.Parse(StartValueTextBox.Text);
+            var step = double.Parse(StepValueTextBox.Text);
+            var finish = uint.Parse(EndValueTextBox.Text);
+>>>>>>> 39f4ca1a6ec16c74848e25ab7f714f32790d1aa0
 
             if (!ValueValidators.IsCorrectFrequency(start, step, finish))
             {
                 return;
             }
 
+            //TODO: Заменить на список вместо массива, 
+            //и конвертировать список в массив уже при вызове CalculateZ() с помощью LINQ-метода ToArray()
             double[] frequency = new double[1];
 
             var j = 0;
