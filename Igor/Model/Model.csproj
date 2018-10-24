@@ -54,6 +54,7 @@
     <Compile Include="SerialSubcircuit.cs" />
     <Compile Include="Subcircuit.cs" />
     <Compile Include="Tools.cs" />
+    <Compile Include="ToolsForEnum.cs" />
     <Compile Include="TreeINode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

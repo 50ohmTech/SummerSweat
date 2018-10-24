@@ -1,22 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Model;
 using Model.Elements;
 
 namespace View
 {
-    //TODO: неправильное название. Это не комбобокс. Это генератор тестовых цепей
+    //TODO: неправильное название. Это не комбобокс. Это генератор тестовых цепей \ DONE
     /// <summary>
-    /// Класс для создание готовых цепей
+    ///     Класс для создание готовых цепей
     /// </summary>
-    public class CircuitsComboBox
+    public class GenerateCircuits
     {
         #region Public methods
 
-        public void CreateCircuit(string selectedState,
-            List<Tools.Pair<char, int>> vectorOfElements, Circuit circuit)
+        public void CreateCircuit(int selectedState,
+            List<Tuple<char, int>> vectorOfElements, Circuit circuit)
         {
-            //TODO: лучше бы, конечно, по индексу, чем по русской строке с номером
-            if (selectedState == "Цепь №1")
+            const int FIRST_CURCUIT = 1;
+            const int SECOND_CIRCUIT = 2;
+            const int THIRD_CIRCUIT = 3;
+            const int FOURTH_CIRCUIT = 4;
+            const int FIFTH_CIRCUIT = 5;
+            //TODO: лучше бы, конечно, по индексу, чем по русской строке с номером \ DONE
+            if (selectedState == FIRST_CURCUIT)
             {
                 var resistor = new Resistor("R1", 10);
                 var inductor = new Inductor("L1", 50);
@@ -24,9 +30,9 @@ namespace View
 
                 vectorOfElements.Clear();
 
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('C', 1));
+                vectorOfElements.Add(new Tuple<char, int>('R', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 1));
+                vectorOfElements.Add(new Tuple<char, int>('C', 1));
 
                 var parallelSubcircuit = new ParallelSubcircuit();
                 parallelSubcircuit.Nodes.Add(capacitor);
@@ -44,7 +50,7 @@ namespace View
                 circuit.Add(null, serialSubcircuit);
             }
 
-            if (selectedState == "Цепь №2")
+            if (selectedState == SECOND_CIRCUIT)
             {
                 var capacitor1 = new Capacitor("C1", 20);
                 var inductor2 = new Inductor("L1", 20);
@@ -53,10 +59,10 @@ namespace View
 
                 vectorOfElements.Clear();
 
-                vectorOfElements.Add(new Tools.Pair<char, int>('C', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 2));
+                vectorOfElements.Add(new Tuple<char, int>('C', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 1));
+                vectorOfElements.Add(new Tuple<char, int>('R', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 2));
 
                 var parallelSubcircuit1 = new ParallelSubcircuit();
                 parallelSubcircuit1.Nodes.Add(capacitor1);
@@ -81,7 +87,7 @@ namespace View
                 circuit.Add(null, parallelSubcircuit1);
             }
 
-            if (selectedState == "Цепь №3")
+            if (selectedState == THIRD_CIRCUIT)
             {
                 var resistor1 = new Resistor("R1", 20);
                 var inductor2 = new Inductor("L1", 20);
@@ -93,13 +99,13 @@ namespace View
 
                 vectorOfElements.Clear();
 
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 2));
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 3));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 2));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 3));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 4));
+                vectorOfElements.Add(new Tuple<char, int>('R', 1));
+                vectorOfElements.Add(new Tuple<char, int>('R', 2));
+                vectorOfElements.Add(new Tuple<char, int>('R', 3));
+                vectorOfElements.Add(new Tuple<char, int>('L', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 2));
+                vectorOfElements.Add(new Tuple<char, int>('L', 3));
+                vectorOfElements.Add(new Tuple<char, int>('L', 4));
 
                 var parallelSubcircuit1 = new ParallelSubcircuit();
 
@@ -137,7 +143,7 @@ namespace View
                 circuit.Add(null, parallelSubcircuit1);
             }
 
-            if (selectedState == "Цепь №4")
+            if (selectedState == FOURTH_CIRCUIT)
             {
                 var resistor1 = new Resistor("R1", 1);
                 var capacitor2 = new Capacitor("C1", 20);
@@ -148,11 +154,11 @@ namespace View
 
                 vectorOfElements.Clear();
 
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 2));
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 2));
-                vectorOfElements.Add(new Tools.Pair<char, int>('C', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 2));
+                vectorOfElements.Add(new Tuple<char, int>('R', 1));
+                vectorOfElements.Add(new Tuple<char, int>('R', 2));
+                vectorOfElements.Add(new Tuple<char, int>('C', 1));
 
                 var serialSubcircuit1 = new SerialSubcircuit();
                 var parallelSubcircuit1 = new ParallelSubcircuit();
@@ -178,7 +184,7 @@ namespace View
                 circuit.Add(null, serialSubcircuit1);
             }
 
-            if (selectedState == "Цепь №5")
+            if (selectedState == FIFTH_CIRCUIT)
             {
                 var resistor1 = new Resistor("R1", 20);
                 var capacitor2 = new Capacitor("C1", 20);
@@ -191,14 +197,14 @@ namespace View
 
                 vectorOfElements.Clear();
 
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 2));
-                vectorOfElements.Add(new Tools.Pair<char, int>('R', 3));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 4));
-                vectorOfElements.Add(new Tools.Pair<char, int>('C', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 1));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 2));
-                vectorOfElements.Add(new Tools.Pair<char, int>('L', 3));
+                vectorOfElements.Add(new Tuple<char, int>('R', 1));
+                vectorOfElements.Add(new Tuple<char, int>('R', 2));
+                vectorOfElements.Add(new Tuple<char, int>('R', 3));
+                vectorOfElements.Add(new Tuple<char, int>('L', 4));
+                vectorOfElements.Add(new Tuple<char, int>('C', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 1));
+                vectorOfElements.Add(new Tuple<char, int>('L', 2));
+                vectorOfElements.Add(new Tuple<char, int>('L', 3));
 
                 var serialSubcircuit1 = new SerialSubcircuit();
                 var serialSubcircuit2 = new SerialSubcircuit();

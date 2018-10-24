@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Model;
 using Model.Elements;
 
+
 namespace View
 {
     public partial class MainForm : Form
@@ -21,12 +22,14 @@ namespace View
         /// <summary>
         ///     Объект готовых цепей.
         /// </summary>
-        private readonly CircuitsComboBox _circuitsComboBox;
+        private readonly GenerateCircuits _generateCircuits;
 
         /// <summary>
         ///     Лист, который хранит имена всех элементов.
         /// </summary>
-        private readonly List<Tools.Pair<char, int>> _vectorOfElements;
+        private readonly List<Tuple<char, int>> _vectorOfElements;
+
+        private readonly Tuple<char, int> vectorofelements;
 
         #endregion
 
@@ -45,8 +48,12 @@ namespace View
         /// <summary>
         ///     Форма для расчета импеданса.
         /// </summary>
-        private ImpedanceForm impedanceForm;
+        private ImpedanceForm _impedanceForm;
 
+        /// <summary>
+        ///     Форма для изменения значения элемента.
+        /// </summary>
+        private EditForm _editForm;
         #endregion
 
         #endregion
@@ -73,7 +80,7 @@ namespace View
 
             foreach (NodeType element in arrayElements)
             {
-                elements.Add(Tools.GetDescription(element));
+                elements.Add(ToolsForEnum.GetDescription(element));
             }
 
 
@@ -81,10 +88,12 @@ namespace View
             NadeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _circuit = new Circuit();
 
-            _vectorOfElements = new List<Tools.Pair<char, int>>();
+            _vectorOfElements = new List<Tuple<char, int>>();
 
-            _circuitsComboBox = new CircuitsComboBox();
+            _generateCircuits = new GenerateCircuits();
             circuitPictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+
+            vectorofelements = new Tuple<char, int>('!',0);
         }
 
         #endregion
@@ -115,7 +124,7 @@ namespace View
                 NominalTextBox.Enter -= NominalTextBox_Enter;
                 if (Tools.IsCellCorrect(NominalTextBox.Text) == false)
                 {
-                    Tools.ShowError(NominalTextBox);
+                    Tools.ShowError(NominalTextBox.Text);
 
                     NominalTextBox.Clear();
                 }
@@ -125,10 +134,10 @@ namespace View
         private void SelectingCircuitsComboBox_SelectedIndexChanged(object sender,
             EventArgs e)
         {
-            if (_circuitsComboBox != null)
+            if (_generateCircuits != null)
             {
-                var selectedState = CircuitsComboBox.SelectedItem.ToString();
-                if (selectedState == "Своя цепь")
+                var selectedState = CircuitsComboBox.Items.IndexOf(CircuitsComboBox.SelectedItem.ToString());
+                if (selectedState == 0)
                 {
                     _count = 0;
                     treeView.Nodes.Clear();
@@ -138,11 +147,10 @@ namespace View
                     return;
                 }
 
-                _circuitsComboBox.CreateCircuit(selectedState, _vectorOfElements,
+                _generateCircuits.CreateCircuit(selectedState, _vectorOfElements,
                     _circuit);
 
                 _count = _vectorOfElements.Count;
-
                 UpdateTreeView();
             }
         }
@@ -239,9 +247,9 @@ namespace View
                         _vectorOfElements.Add(Tools.CreateName('R', _vectorOfElements));
                         _circuit.Add(_currentNode,
                             new Resistor(
-                                _vectorOfElements[_count].First +
+                                _vectorOfElements[_count].Item1 +
                                 _vectorOfElements[_count]
-                                    .Second.ToString(),
+                                    .Item2.ToString(),
                                 double.Parse(NominalTextBox.Text)));
 
                         _count++;
@@ -256,9 +264,9 @@ namespace View
                         _vectorOfElements.Add(Tools.CreateName('L', _vectorOfElements));
                         _circuit.Add(_currentNode,
                             new Inductor(
-                                _vectorOfElements[_count].First +
+                                _vectorOfElements[_count].Item1 +
                                 _vectorOfElements[_count]
-                                    .Second.ToString(),
+                                    .Item2.ToString(),
                                 double.Parse(NominalTextBox.Text)));
 
                         _count++;
@@ -273,9 +281,9 @@ namespace View
                         _vectorOfElements.Add(Tools.CreateName('C', _vectorOfElements));
                         _circuit.Add(_currentNode,
                             new Capacitor(
-                                _vectorOfElements[_count].First +
+                                _vectorOfElements[_count].Item1 +
                                 _vectorOfElements[_count]
-                                    .Second.ToString(),
+                                    .Item2.ToString(),
                                 double.Parse(NominalTextBox.Text)));
 
                         _count++;
@@ -315,13 +323,13 @@ namespace View
 
                 if (_currentNode is ElementBase currentNode)
                 {
-                    var deletedElement = new Tools.Pair<char, int>(currentNode.Name[0],
+                    var deletedElement = new Tuple<char, int>(currentNode.Name[0],
                         (int) char.GetNumericValue(currentNode.Name[1]));
 
                     for (var i = 0; i < _vectorOfElements.Count; i++)
                     {
-                        if (_vectorOfElements[i].First == deletedElement.First &&
-                            _vectorOfElements[i].Second == deletedElement.Second)
+                        if (_vectorOfElements[i].Item1 == deletedElement.Item1 &&
+                            _vectorOfElements[i].Item2 == deletedElement.Item2)
                         {
                             _vectorOfElements.Remove(_vectorOfElements[i]);
                         }
@@ -337,9 +345,9 @@ namespace View
 
         private void CalculateImpedanceButton_Click(object sender, EventArgs e)
         {
-            impedanceForm = new ImpedanceForm();
-            impedanceForm.Circuit = _circuit;
-            impedanceForm.ShowDialog();
+            _impedanceForm = new ImpedanceForm();
+            _impedanceForm.Circuit = _circuit;
+            _impedanceForm.ShowDialog();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -348,13 +356,12 @@ namespace View
             {
                 if (_currentNode is ElementBase element)
                 {
-                    var result = new EditForm(element).ShowDialog();
-                    if (result == DialogResult.Cancel)
-                    {
-                        //TODO: если результат завершения равен Cancel, тогда обновить дерево,
-                        // а если элемент действительно изменен, то обновлять дерево не нужно?
-                        UpdateTreeView();
-                    }
+                    _editForm = new EditForm();
+                    _editForm.Element = element;
+                    _editForm.ShowDialog();
+                        //TODO: если результат завершения равен Cancel, тогда обновить дерево, \ DONE
+                        // а если элемент действительно изменен, то обновлять дерево не нужно? \ DONE
+                    UpdateTreeView();
                 }
                 else
                 {

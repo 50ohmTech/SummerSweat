@@ -18,14 +18,10 @@ namespace View
     {
         #region Fields
 
-        #region Readonly fields
-
         /// <summary>
         ///     Элемент
         /// </summary>
-        private readonly ElementBase _element;
-
-        #endregion
+        private  ElementBase _element;
 
         #region Private fields
 
@@ -33,6 +29,8 @@ namespace View
         ///     Номинал
         /// </summary>
         private double _value;
+
+        public ElementBase Element { get; set; }
 
         #endregion
 
@@ -49,8 +47,9 @@ namespace View
         private void ButtonClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            //TODO: А Close() зачем убрал?
-            //TODO: Либо здесь Close(), либо этот обработчик вообще не нужен
+            Close();
+            //TODO: А Close() зачем убрал? \ DONE
+            //TODO: Либо здесь Close(), либо этот обработчик вообще не нужен \ DONE
         }
 
         private void TextBoxValue_TextChanged(object sender, EventArgs e)
@@ -74,25 +73,26 @@ namespace View
 
         #region Public methods
 
-        //TODO: ЕЩЕ РАЗ! элемент должен быть открытым свойством, а не входным аргументом конструктора!
-        //TODO: НЕЛЬЗЯ ПРОСТО ТАК УДАЛЯТЬ TODO!!!
+        //TODO: ЕЩЕ РАЗ! элемент должен быть открытым свойством, а не входным аргументом конструктора! \ DONE
+        //TODO: НЕЛЬЗЯ ПРОСТО ТАК УДАЛЯТЬ TODO!!! \ DONE
         /// <summary>
         ///     Конструктор
         /// </summary>
         /// <param name="element">Элемент</param>
-        public EditForm(ElementBase element)
+        public EditForm()
         {
-            _element = element ?? throw new ArgumentNullException(nameof(element));
             InitializeComponent();
-            Text = "Элемент: " + element.Name;
-            _textBoxValue.Text = element.Value.ToString();
-
-            //TODO: Результат диалога должен присваиваться в обработчиках, закрывающих форму, а не в конструкторе
-            DialogResult = DialogResult.Yes;
-            //TODO: Зачем кнопке присваивать DialogResult?
-            buttonCancel.DialogResult = DialogResult.Cancel;
+            //TODO: Результат диалога должен присваиваться в обработчиках, закрывающих форму, а не в конструкторе\ DONE
+            //TODO: Зачем кнопке присваивать DialogResult? \ DONE
         }
 
         #endregion
+
+        private void EditForm_Load(object sender, EventArgs e)
+        {
+            _element = Element ?? throw new ArgumentNullException(nameof(_element));
+            Text = "Элемент: " + _element.Name;
+            _textBoxValue.Text = _element.Value.ToString();
+        }
     }
 }

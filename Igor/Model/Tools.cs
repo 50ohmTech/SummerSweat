@@ -1,74 +1,20 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Model
 {
-    //TODO: Класс нарушает принципы ООП: Один класс - одна задача!
-    // Здесь же солянка методов для разных классов без какого-либо принципа
+    //TODO: Класс нарушает принципы ООП: Один класс - одна задача! \ DONE
+    // Здесь же солянка методов для разных классов без какого-либо принципа \ DONE
     /// <summary>
     ///     Функции для NodeType
     /// </summary>
     public class Tools
     {
-        #region Nested class
-
-        //TODO: Для этого существует стандартный класс Tuple
-        /// <summary>
-        ///     Тип данных, который хранит 2 переменных.
-        ///     На подобие vector<pair> из C++.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="U"></typeparam>
-        public class Pair<T, U>
-        {
-            #region Properties
-
-            public T First { get; }
-            public U Second { get; }
-
-            #endregion
-
-            #region Constructor
-
-            public Pair()
-            {
-            }
-
-            public Pair(T first, U second)
-            {
-                First = first;
-                Second = second;
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region Public methods
 
         /// <summary>
-        ///     Получить атрибут "Описание"
-        /// </summary>
-        public static string GetDescription(NodeType value)
-        {
-            var fi = value.GetType().GetField(value.ToString());
-
-            var attributes =
-                (DescriptionAttribute[]) fi.GetCustomAttributes(
-                    typeof(DescriptionAttribute), false);
-
-            if (attributes != null && attributes.Length > 0)
-            {
-                return attributes[0].Description;
-            }
-
-            return value.ToString();
-        }
-
-        /// <summary>
-        /// Проверка на корректность веденных данных
+        ///     Проверка на корректность веденных данных
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
@@ -77,7 +23,7 @@ namespace Model
             var formatingString = e.Replace('.', ',');
 
             //Если число входит в рамки входных данных
-            if (double.TryParse(formatingString, out var newValue) 
+            if (double.TryParse(formatingString, out var newValue)
                 && !(newValue < 0.1) && newValue <= 1e12)
             {
                 //Если число начинаеться с нуля и после нуля нету запятой
@@ -103,13 +49,13 @@ namespace Model
             return false;
         }
 
-        //TODO: Почему класс бизнес-логики знает что-то про пользовательский интерфейс?
-        public static void ShowError(TextBox textBox)
+        //TODO: Почему класс бизнес-логики знает что-то про пользовательский интерфейс? \ DONE
+        public static void ShowError(string text)
         {
-            if (textBox.Text != "")
+            if (text != "")
             {
                 MessageBox.Show(
-                    "Вы ввели: " + textBox.Text + "\n" +
+                    "Вы ввели: " + text + "\n" +
                     "Вводимое значение должно удовлетворять следующим условиям:\n " +
                     "-быть положительным числом\n " +
                     "-быть вещественным или натуральным числом\n " +
@@ -130,58 +76,69 @@ namespace Model
         /// <param name="nameElements">Латинская буква элемента</param>
         /// <param name="vectorOfElements">Список имен</param>
         /// <returns></returns>
-        public static Pair<char, int> CreateName(char nameElements,
-            List<Pair<char, int>> vectorOfElements)
+        public static Tuple<char, int> CreateName(char nameElements,
+            List<Tuple<char, int>> vectorOfElements)
         {
-            vectorOfElements.Sort((p1, p2) => p1.Second.CompareTo(p2.Second));
+            vectorOfElements.Sort((p1, p2) => p1.Item2.CompareTo(p2.Item2));
             var j = 1;
             for (var i = 0; i < vectorOfElements.Count; i++)
             {
-                if (vectorOfElements[i].First == nameElements)
+                if (vectorOfElements[i].Item1 == nameElements)
                 {
-                    if (vectorOfElements[i].Second > j)
+                    if (vectorOfElements[i].Item2 > j)
                     {
-                        return new Pair<char, int>(nameElements, j);
+                        return new Tuple<char, int>(nameElements, j);
                     }
 
                     j++;
                 }
             }
 
-            return new Pair<char, int>(nameElements, j);
+            return new Tuple<char, int>(nameElements, j);
             ;
         }
 
-        //TODO: бизнес-логика использует GUI - неправильно!
-        public static void IsCorrectStartFinish(TextBox startTextBox,
-            TextBox finishTextBox)
+        //TODO: бизнес-логика использует GUI - неправильно! \ DONE
+        /// <summary>
+        ///     Правильность вводимых данных и их зависимость(Начало, Граница)
+        /// </summary>
+        /// <param name="startTextBox">Текст с текстбокса "Начало"</param>
+        /// <param name="finishTextBox">Текст с текстбокса "Граница"</param>
+        public static void IsCorrectStartFinish(string startTextBox,
+            string finishTextBox)
         {
-            if (startTextBox.Text.Length != 0 && finishTextBox.Text.Length != 0)
+            if (startTextBox.Length != 0 && finishTextBox.Length != 0)
             {
-                if ((double.Parse(startTextBox.Text) > double.Parse(finishTextBox.Text)))
+                if (double.Parse(startTextBox) > double.Parse(finishTextBox))
                 {
                     MessageBox.Show("Начало должно быть меньше границы!");
-                    startTextBox.Text = null;
-                    finishTextBox.Text = null;
+                    startTextBox = null;
+                    finishTextBox = null;
                 }
             }
         }
 
-        public static void IsCorrectStep(TextBox startTextBox, TextBox finishTextBox,
-            TextBox stepTextBox)
+        /// <summary>
+        ///     Проверка поля
+        /// </summary>
+        /// <param name="startTextBox">Текст с текстбокса "Начало"</param>
+        /// <param name="finishTextBox">Текст с текстбокса "Граница"</param>
+        /// <param name="stepTextBox">Текст с текстбокса "Шаг"</param>
+        public static void IsCorrectStep(string startTextBox, string finishTextBox,
+            string stepTextBox)
         {
-            if (startTextBox.Text.Length != 0 && finishTextBox.Text.Length != 0 &&
-                stepTextBox.Text.Length != 0)
+            if (startTextBox.Length != 0 && finishTextBox.Length != 0 &&
+                stepTextBox.Length != 0)
             {
-                if ((double.Parse(finishTextBox.Text) - double.Parse(startTextBox.Text) <
-                     double.Parse(stepTextBox.Text)))
+                if (double.Parse(finishTextBox) - double.Parse(startTextBox) <
+                    double.Parse(stepTextBox))
                 {
                     MessageBox.Show(
                         "Разница между началом и концов по модулю не может быть меньше шага!");
-                    startTextBox.Text = null;
-                    finishTextBox.Text = null;
-                    stepTextBox.Text = null;
 
+                    startTextBox = null;
+                    finishTextBox = null;
+                    stepTextBox = null;
                 }
             }
         }

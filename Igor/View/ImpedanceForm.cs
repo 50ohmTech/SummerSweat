@@ -52,28 +52,26 @@ namespace View
             var finish = double.Parse(FinishTextBox.Text.Replace('.', ','));
             var step = double.Parse(StepTextBox.Text.Replace('.', ','));
 
-            //TODO: Заменить на список, а список преобразовать в массив при передаче в CalculateZ с помощью LINQ-запроса ToArray().
-            // Иначе твоя логика постоянного увеличения массива на один элемент внутри цикла просто отвратительно читается.
-            //TODO: массив хранит не частоту, а частотЫ (много частот). Название переменной неправильное
+            //TODO: Заменить на список, а список преобразовать в массив при передаче в CalculateZ с помощью LINQ-запроса ToArray(). \ DONE
+            // Иначе твоя логика постоянного увеличения массива на один элемент внутри цикла просто отвратительно читается. \ DONE
+            //TODO: массив хранит не частоту, а частотЫ (много частот). Название переменной неправильное \ DONE
             var frequency = new double[1];
+
+            List<double> listOfFrequency = new List<double>();
+
+
 
             var j = 0;
             for (var i = start; i <= finish; i += step)
             {
-                frequency[j] = i;
+                listOfFrequency.Add(i);
                 j++;
-                if (!(finish - i == 0))
-                {
-                    Array.Resize(ref frequency, frequency.Length + 1);
-                }
             }
 
-            if (frequency[frequency.Length - 1] == 0)
-            {
-                Array.Resize(ref frequency, frequency.Length - 1);
-            }
+            var arrayOfElements = new double [listOfFrequency.Count];
+            arrayOfElements = listOfFrequency.ToArray();
 
-            var impedances = _circuit.CalculateZ(frequency);
+            var impedances = _circuit.CalculateZ(arrayOfElements);
             var correctListOfImpedances = new List<string>();
 
             for (var i = 0; i < impedances.Count; i++)
@@ -85,14 +83,14 @@ namespace View
 
             for (var i = 0; i < impedances.Count; i++)
             {
-                dataGridView.Rows.Add(Math.Round(frequency[i], 3),
+                dataGridView.Rows.Add(Math.Round(arrayOfElements[i], 3),
                     correctListOfImpedances[i]);
             }
         }
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            Tools.IsCorrectStartFinish(StartTextBox, FinishTextBox);
+            Tools.IsCorrectStartFinish(StartTextBox.Text, FinishTextBox.Text);
             CalculateImpedance();
         }
 
@@ -100,7 +98,7 @@ namespace View
         {
             if (Tools.IsCellCorrect(textBox.Text) != true)
             {
-                Tools.ShowError(textBox);
+                Tools.ShowError(textBox.Text);
                 textBox.Text = null;
                 textBox.Clear();
                 return;
@@ -127,7 +125,7 @@ namespace View
                 ValidatigTextBox(StartTextBox);
             }
 
-            Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
+            Tools.IsCorrectStep(StartTextBox.Text, FinishTextBox.Text, StepTextBox.Text);
         }
 
         private void FinishTextBox_TextChanged(object sender, EventArgs e)
@@ -137,7 +135,7 @@ namespace View
                 ValidatigTextBox(FinishTextBox);
             }
 
-            Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
+            Tools.IsCorrectStep(StartTextBox.Text, FinishTextBox.Text, StepTextBox.Text);
         }
 
         private void StepTextBox_TextChanged(object sender, EventArgs e)
@@ -147,7 +145,7 @@ namespace View
                 ValidatigTextBox(StepTextBox);
             }
 
-            Tools.IsCorrectStep(StartTextBox, FinishTextBox, StepTextBox);
+            Tools.IsCorrectStep(StartTextBox.Text, FinishTextBox.Text, StepTextBox.Text);
         }
 
         #endregion
