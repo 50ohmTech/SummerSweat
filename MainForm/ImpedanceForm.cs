@@ -32,6 +32,7 @@ namespace MainForm
             InitializeComponent();
             _circuit = circuit;
 
+            //TODO: Зачем ContextMenu?
             StartValueTextBox.ContextMenu = new ContextMenu();
             StepValueTextBox.ContextMenu = new ContextMenu();
             EndValueTextBox.ContextMenu = new ContextMenu();
@@ -54,10 +55,14 @@ namespace MainForm
         /// </summary>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+            //TODO: кусок кода полностью совпадает с кодом Аханова,
+            // который в свою очередь накопировал у Шагаева.
+            // Удалить скопированное и написать своё решение
             ValueValidators.ChangeSeparator(StartValueTextBox);
             ValueValidators.ChangeSeparator(StepValueTextBox);
             ValueValidators.ChangeSeparator(EndValueTextBox);
 
+            //TODO: Почему start и step - double, а finish - uint?
             var start = double.Parse(StartValueTextBox.Text);
             var step = double.Parse(StepValueTextBox.Text);
             var finish = uint.Parse(EndValueTextBox.Text);
@@ -67,6 +72,8 @@ namespace MainForm
                 return;
             }
 
+            //TODO: Заменить на список вместо массива, 
+            //и конвертировать список в массив уже при вызове CalculateZ() с помощью LINQ-метода ToArray()
             double[] frequency = new double[1];
 
             var j = 0;
