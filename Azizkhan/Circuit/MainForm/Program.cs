@@ -3,17 +3,21 @@ using System.Windows.Forms;
 
 namespace CircuitView
 {
-    static class Program
+    internal static class Program
     {
+        #region Private methods
+
         /// <summary>
-        /// Главная точка входа для приложения.
+        ///     Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
+
+        #endregion
     }
 }
