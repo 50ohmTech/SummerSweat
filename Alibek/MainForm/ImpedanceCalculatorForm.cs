@@ -35,8 +35,9 @@ namespace MainForm
         private List<Complex> _impedances;
 
         //TODO: почему uint только endvalue?
-        //поправил
-        private double _endValue;
+        //по идее это костыль
+        //ТАК СДЕЛАЙ БЕЗ КОСТЫЛЯ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        private uint _endValue;
         private double _startValue;
         private double _stepValue;
 
@@ -44,6 +45,7 @@ namespace MainForm
 
         #region Constructor
 
+        //TODO: цепь должна передаваться через открытое свойство, а не аргумент конструктора
         /// <summary>
         ///     Конструктор формы
         /// </summary>
@@ -68,7 +70,7 @@ namespace MainForm
             
             double.TryParse(_startValueTextBox.Text, out _startValue);
             double.TryParse(_stepValueTextBox.Text, out _stepValue);
-            double.TryParse(_endValueTextBox.Text, out _endValue);
+            uint.TryParse(_endValueTextBox.Text, out _endValue);
 
             if (!ValueValidators.IsCorrectFrequency(_startValue, _stepValue, _endValue))
             {

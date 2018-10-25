@@ -92,6 +92,7 @@ namespace MainForm
         /// <param name="e">Параметры события</param>
         private void TestCircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //TODO: всю генерацию цепей вынести в отдельный класс
             var selectedCircuit = _testCircuitsComboBox.SelectedItem.ToString();
             if (selectedCircuit == "Цепь №1")
             {
