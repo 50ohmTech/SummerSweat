@@ -1,4 +1,7 @@
-﻿namespace MainForm
+﻿using System;
+using System.Windows.Forms;
+
+namespace MainForm
 {
     partial class MainForm
     {
@@ -28,160 +31,177 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PaintGroupBox = new System.Windows.Forms.GroupBox();
-            this.AddButton = new System.Windows.Forms.Button();
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.CalculateImpedanceButton = new System.Windows.Forms.Button();
-            this.NominalTextBox = new System.Windows.Forms.TextBox();
-            this.SelectingCircuitComboBox = new System.Windows.Forms.ComboBox();
-            this.SelectingCircuitLabel = new System.Windows.Forms.Label();
-            this.treeView = new System.Windows.Forms.TreeView();
-            this.NodeComboBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ConnectionComboBox = new System.Windows.Forms.ComboBox();
+            this._addButton = new System.Windows.Forms.Button();
+            this._deleteButton = new System.Windows.Forms.Button();
+            this._calculateImpedanceButton = new System.Windows.Forms.Button();
+            this._nominalTextBox = new System.Windows.Forms.TextBox();
+            this._selectingCircuitComboBox = new System.Windows.Forms.ComboBox();
+            this._nodeComboBox = new System.Windows.Forms.ComboBox();
+            this._addElementLable = new System.Windows.Forms.Label();
+            this._connectionComboBox = new System.Windows.Forms.ComboBox();
+            this._treeView = new System.Windows.Forms.TreeView();
+            this._circuitPictureBox = new System.Windows.Forms.PictureBox();
+            this._choiceLabel = new System.Windows.Forms.Label();
+            this._editValueButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this._circuitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // PaintGroupBox
+            // _addButton
             // 
-            this.PaintGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PaintGroupBox.Location = new System.Drawing.Point(191, 12);
-            this.PaintGroupBox.Name = "PaintGroupBox";
-            this.PaintGroupBox.Size = new System.Drawing.Size(330, 298);
-            this.PaintGroupBox.TabIndex = 0;
-            this.PaintGroupBox.TabStop = false;
+            this._addButton.Location = new System.Drawing.Point(15, 258);
+            this._addButton.Name = "_addButton";
+            this._addButton.Size = new System.Drawing.Size(80, 23);
+            this._addButton.TabIndex = 0;
+            this._addButton.Text = "Добавить";
+            this._addButton.UseVisualStyleBackColor = true;
             // 
-            // AddButton
+            // _deleteButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(15, 258);
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(80, 23);
-            this.AddButton.TabIndex = 0;
-            this.AddButton.Text = "Добавить";
-            this.AddButton.UseVisualStyleBackColor = true;
-            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            this._deleteButton.Location = new System.Drawing.Point(105, 258);
+            this._deleteButton.Name = "_deleteButton";
+            this._deleteButton.Size = new System.Drawing.Size(80, 23);
+            this._deleteButton.TabIndex = 1;
+            this._deleteButton.Text = "Удалить";
+            this._deleteButton.UseVisualStyleBackColor = true;
             // 
-            // DeleteButton
+            // _calculateImpedanceButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(105, 258);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(80, 23);
-            this.DeleteButton.TabIndex = 1;
-            this.DeleteButton.Text = "Удалить";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            this._calculateImpedanceButton.Location = new System.Drawing.Point(15, 316);
+            this._calculateImpedanceButton.Name = "_calculateImpedanceButton";
+            this._calculateImpedanceButton.Size = new System.Drawing.Size(170, 23);
+            this._calculateImpedanceButton.TabIndex = 2;
+            this._calculateImpedanceButton.Text = "Рассчитать импеданс";
+            this._calculateImpedanceButton.UseVisualStyleBackColor = true;
+            this._calculateImpedanceButton.Click += new System.EventHandler(this.CalculateImpedanceButton_Click);
             // 
-            // CalculateImpedanceButton
+            // _nominalTextBox
             // 
-            this.CalculateImpedanceButton.Location = new System.Drawing.Point(15, 287);
-            this.CalculateImpedanceButton.Name = "CalculateImpedanceButton";
-            this.CalculateImpedanceButton.Size = new System.Drawing.Size(170, 23);
-            this.CalculateImpedanceButton.TabIndex = 2;
-            this.CalculateImpedanceButton.Text = "Рассчитать импеданс";
-            this.CalculateImpedanceButton.UseVisualStyleBackColor = true;
+            this._nominalTextBox.Location = new System.Drawing.Point(15, 200);
+            this._nominalTextBox.Name = "_nominalTextBox";
+            this._nominalTextBox.Size = new System.Drawing.Size(170, 20);
+            this._nominalTextBox.TabIndex = 3;
+            this._nominalTextBox.Text = "Введите номинал";
             // 
-            // NominalTextBox
+            // _selectingCircuitComboBox
             // 
-            this.NominalTextBox.Location = new System.Drawing.Point(15, 200);
-            this.NominalTextBox.Name = "NominalTextBox";
-            this.NominalTextBox.Size = new System.Drawing.Size(170, 20);
-            this.NominalTextBox.TabIndex = 3;
+            this._selectingCircuitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._selectingCircuitComboBox.FormattingEnabled = true;
+            this._selectingCircuitComboBox.Location = new System.Drawing.Point(102, 9);
+            this._selectingCircuitComboBox.Name = "_selectingCircuitComboBox";
+            this._selectingCircuitComboBox.Size = new System.Drawing.Size(83, 21);
+            this._selectingCircuitComboBox.TabIndex = 4;
+            this._selectingCircuitComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectingCircuitComboBox_SelectedIndexChanged);
             // 
-            // SelectingCircuitComboBox
+            // _nodeComboBox
             // 
-            this.SelectingCircuitComboBox.FormattingEnabled = true;
-            this.SelectingCircuitComboBox.Items.AddRange(new object[] {
-            "Цепь №1",
-            "Цепь №2",
-            "Цепь №3",
-            "Цепь №4",
-            "Цепь №5"});
-            this.SelectingCircuitComboBox.Location = new System.Drawing.Point(85, 9);
-            this.SelectingCircuitComboBox.Name = "SelectingCircuitComboBox";
-            this.SelectingCircuitComboBox.Size = new System.Drawing.Size(100, 21);
-            this.SelectingCircuitComboBox.TabIndex = 4;
-            this.SelectingCircuitComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectingCircuitComboBox_SelectedIndexChanged);
+            this._nodeComboBox.FormattingEnabled = true;
+            this._nodeComboBox.Items.AddRange(new object[] {
+            "Резистор",
+            "Катушка",
+            "Конденсатор"});
+            this._nodeComboBox.Location = new System.Drawing.Point(15, 173);
+            this._nodeComboBox.Name = "_nodeComboBox";
+            this._nodeComboBox.Size = new System.Drawing.Size(170, 21);
+            this._nodeComboBox.TabIndex = 7;
+            this._nodeComboBox.Text = "Выберите тип элемента";
             // 
-            // SelectingCircuitLabel
+            // _addElementLable
             // 
-            this.SelectingCircuitLabel.AutoSize = true;
-            this.SelectingCircuitLabel.Location = new System.Drawing.Point(12, 12);
-            this.SelectingCircuitLabel.Name = "SelectingCircuitLabel";
-            this.SelectingCircuitLabel.Size = new System.Drawing.Size(67, 13);
-            this.SelectingCircuitLabel.TabIndex = 5;
-            this.SelectingCircuitLabel.Text = "Выбор цепи";
+            this._addElementLable.AutoSize = true;
+            this._addElementLable.Location = new System.Drawing.Point(12, 157);
+            this._addElementLable.Name = "_addElementLable";
+            this._addElementLable.Size = new System.Drawing.Size(103, 13);
+            this._addElementLable.TabIndex = 8;
+            this._addElementLable.Text = "Добавить элемент";
             // 
-            // treeView
+            // _connectionComboBox
             // 
-            this.treeView.Location = new System.Drawing.Point(15, 36);
-            this.treeView.MinimumSize = new System.Drawing.Size(170, 111);
-            this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(170, 111);
-            this.treeView.TabIndex = 6;
+            this._connectionComboBox.FormattingEnabled = true;
+            this._connectionComboBox.Items.AddRange(new object[] {
+            "Последовательно",
+            "Параллельно"});
+            this._connectionComboBox.Location = new System.Drawing.Point(15, 226);
+            this._connectionComboBox.Name = "_connectionComboBox";
+            this._connectionComboBox.Size = new System.Drawing.Size(170, 21);
+            this._connectionComboBox.TabIndex = 9;
+            this._connectionComboBox.Text = "Выберите тип связи";
             // 
-            // NodeComboBox
+            // _treeView
             // 
-            this.NodeComboBox.FormattingEnabled = true;
-            this.NodeComboBox.Location = new System.Drawing.Point(15, 173);
-            this.NodeComboBox.Name = "NodeComboBox";
-            this.NodeComboBox.Size = new System.Drawing.Size(170, 21);
-            this.NodeComboBox.TabIndex = 7;
+            this._treeView.Location = new System.Drawing.Point(15, 36);
+            this._treeView.Name = "_treeView";
+            this._treeView.Size = new System.Drawing.Size(170, 118);
+            this._treeView.TabIndex = 11;
+            this._treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterSelect);
             // 
-            // label2
+            // _circuitPictureBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 157);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Добавить элемент";
+            this._circuitPictureBox.Location = new System.Drawing.Point(193, 12);
+            this._circuitPictureBox.Name = "_circuitPictureBox";
+            this._circuitPictureBox.Size = new System.Drawing.Size(333, 327);
+            this._circuitPictureBox.TabIndex = 12;
+            this._circuitPictureBox.TabStop = false;
             // 
-            // ConnectionComboBox
+            // _choiceLabel
             // 
-            this.ConnectionComboBox.FormattingEnabled = true;
-            this.ConnectionComboBox.Location = new System.Drawing.Point(15, 226);
-            this.ConnectionComboBox.Name = "ConnectionComboBox";
-            this.ConnectionComboBox.Size = new System.Drawing.Size(170, 21);
-            this.ConnectionComboBox.TabIndex = 9;
+            this._choiceLabel.AutoSize = true;
+            this._choiceLabel.Location = new System.Drawing.Point(12, 12);
+            this._choiceLabel.Name = "_choiceLabel";
+            this._choiceLabel.Size = new System.Drawing.Size(84, 13);
+            this._choiceLabel.TabIndex = 13;
+            this._choiceLabel.Text = "Выберите цепь";
+            // 
+            // _editValueButton
+            // 
+            this._editValueButton.Location = new System.Drawing.Point(15, 287);
+            this._editValueButton.Name = "_editValueButton";
+            this._editValueButton.Size = new System.Drawing.Size(170, 23);
+            this._editValueButton.TabIndex = 14;
+            this._editValueButton.Text = "Изменить элемент";
+            this._editValueButton.UseVisualStyleBackColor = true;
+            this._editValueButton.Click += new System.EventHandler(this._editValueButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 324);
-            this.Controls.Add(this.ConnectionComboBox);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.NodeComboBox);
-            this.Controls.Add(this.treeView);
-            this.Controls.Add(this.SelectingCircuitLabel);
-            this.Controls.Add(this.SelectingCircuitComboBox);
-            this.Controls.Add(this.NominalTextBox);
-            this.Controls.Add(this.AddButton);
-            this.Controls.Add(this.DeleteButton);
-            this.Controls.Add(this.CalculateImpedanceButton);
-            this.Controls.Add(this.PaintGroupBox);
-            this.MinimumSize = new System.Drawing.Size(554, 341);
+            this.ClientSize = new System.Drawing.Size(538, 350);
+            this.Controls.Add(this._editValueButton);
+            this.Controls.Add(this._choiceLabel);
+            this.Controls.Add(this._circuitPictureBox);
+            this.Controls.Add(this._treeView);
+            this.Controls.Add(this._connectionComboBox);
+            this.Controls.Add(this._addElementLable);
+            this.Controls.Add(this._nodeComboBox);
+            this.Controls.Add(this._selectingCircuitComboBox);
+            this.Controls.Add(this._nominalTextBox);
+            this.Controls.Add(this._addButton);
+            this.Controls.Add(this._deleteButton);
+            this.Controls.Add(this._calculateImpedanceButton);
+            this.MaximumSize = new System.Drawing.Size(554, 389);
+            this.MinimumSize = new System.Drawing.Size(554, 389);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CircuitMainForm";
+            ((System.ComponentModel.ISupportInitialize)(this._circuitPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox PaintGroupBox;
-        private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button DeleteButton;
-        private System.Windows.Forms.Button CalculateImpedanceButton;
-        private System.Windows.Forms.TextBox NominalTextBox;
-        private System.Windows.Forms.ComboBox SelectingCircuitComboBox;
-        private System.Windows.Forms.Label SelectingCircuitLabel;
-        private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.ComboBox NodeComboBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox ConnectionComboBox;
+        private System.Windows.Forms.Button _addButton;
+        private System.Windows.Forms.Button _deleteButton;
+        private System.Windows.Forms.Button _calculateImpedanceButton;
+        private System.Windows.Forms.TextBox _nominalTextBox;
+        private System.Windows.Forms.ComboBox _selectingCircuitComboBox;
+        private System.Windows.Forms.ComboBox _nodeComboBox;
+        private System.Windows.Forms.Label _addElementLable;
+        private System.Windows.Forms.ComboBox _connectionComboBox;
+        private System.Windows.Forms.TreeView _treeView;
+        private System.Windows.Forms.PictureBox _circuitPictureBox;
+        private System.Windows.Forms.Label _choiceLabel;
+        private System.Windows.Forms.Button _editValueButton;
     }
 }
 

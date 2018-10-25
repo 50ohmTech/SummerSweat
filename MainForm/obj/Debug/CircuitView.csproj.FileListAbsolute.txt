@@ -9,3 +9,17 @@ C:\Users\wwwyu_000\source\repos\MainForm\obj\Debug\CircuitView.csproj.CoreCompil
 C:\Users\wwwyu_000\source\repos\MainForm\obj\Debug\MainForm.exe
 C:\Users\wwwyu_000\source\repos\MainForm\obj\Debug\MainForm.pdb
 C:\Users\wwwyu_000\source\repos\MainForm\obj\Debug\MainForm.MainForm.resources
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\CircuitView.csprojResolveAssemblyReference.cache
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\MainForm.ImpedanceForm.resources
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\MainForm.MainForm.resources
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\MainForm.Properties.Resources.resources
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\CircuitView.csproj.GenerateResource.Cache
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\CircuitView.csproj.CoreCompileInputs.cache
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\MainForm.exe
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\MainForm.pdb
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\MainForm.exe.config
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\MainForm.exe
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\MainForm.pdb
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\CircuitModel.dll
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\bin\Debug\CircuitModel.pdb
+C:\Users\wwwyu_000\Documents\GitHub\SummerSweat\Yulya\MainForm\obj\Debug\MainForm.EditValueForm.resources

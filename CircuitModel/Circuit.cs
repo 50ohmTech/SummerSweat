@@ -4,6 +4,8 @@ using System.Numerics;
 
 namespace CircuitModel
 {
+    //TODO: Скопированная реализация?
+    //AddAfter - да. (Добавила пару проверок)
     /// <summary>
     /// Класс цепи.
     /// </summary>
@@ -12,42 +14,62 @@ namespace CircuitModel
         #region ~ Приватные переменные ~
 
         /// <summary>
-        /// Корень дерева.
+        /// Список элементов цепи.
         /// </summary>
-        private INode _root;
+        private List<ElementBase> _elements;
 
         #endregion
 
         #region ~ Свойства ~
 
-        public INode Root { get; set; }
+        /// <summary>
+        /// Получить корень дерева.
+        /// </summary>
+        public INode Root { get; private set; }
 
         #endregion
 
         #region ~ Публичные методы ~
 
-        #region Недописанная функция, в последствии будет исправлено.
         /// <summary>
         /// Добавление нового узла.
         /// </summary>
-        /// <param name="node"> Узел. </param>
+        /// <param name="currentNode"> Узел. </param>
         /// <param name="newNode"> Новый узел. </param>
-        //public void AddAfter(INode node, INode newNode)
-        //{
-        //    if (IsEmpty())
-        //    {
-        //        Root = newNode;
-        //        return;
-        //    }
+        public void AddAfter(INode currentNode, INode newNode)
+        {
+            if (IsEmpty())
+            {
+                Root = newNode;
+                return;
+            }
 
-        //    if (newNode == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(newNode), 
-        //            "Выбранный узел пуст.");
-        //    }
+            if (currentNode == newNode)
+            {
+                throw new ArgumentOutOfRangeException("Узел равен новому узлу.");
+            }
 
-        //}
-        #endregion
+            if (newNode == null)
+            {
+                throw new ArgumentNullException(nameof(newNode),
+                    "Новый узел должен быть определен.");
+            }
+
+            if (currentNode is SubcircuitBase subcircuit)
+            {
+                subcircuit.Nodes.Add(newNode);
+
+                if (newNode is SubcircuitBase newSubcircuit)
+                {
+                    newSubcircuit.Parent = subcircuit;
+                }
+
+                if (newNode is ElementBase newElementBase)
+                {
+                    newElementBase.Parent = subcircuit;
+                }
+            }
+        }
 
         /// <summary>
         /// Расчет импеданса цепи для списка частот.
@@ -58,17 +80,17 @@ namespace CircuitModel
         {
             if (frequencies == null)
             {
-                throw new ArgumentNullException(
-                    "Значение частоты должно быть больше нуля!");
+                throw new ArgumentNullException(nameof(frequencies));
             }
 
-            var impedances = new List<Complex>();
+            var impedance = new List<Complex>();
 
             foreach (var frequency in frequencies)
             {
-                impedances.Add(_root.CalculateZ(frequency));
+                impedance.Add(Root.CalculateZ(frequency));
             }
-            return impedances;
+
+            return impedance;
         }
 
         /// <summary>

@@ -3,6 +3,9 @@ using System.Numerics;
 
 namespace CircuitModel
 {
+    /// <summary>
+    /// Интерфейс узла дерева.
+    /// </summary>
     public interface INode
     {
         #region ~ Публичные методы ~
@@ -19,14 +22,14 @@ namespace CircuitModel
         #region ~ Свойства ~
 
         /// <summary>
-        /// Дочерние узлы.
+        /// Получить дочерние узлы.
         /// </summary>
         List<INode> Nodes { get; }
 
         /// <summary>
-        /// Родитель элемента.
+        /// Получить и вернуть родитель элемента.
         /// </summary>
-        INode Parent { get; }
+        INode Parent { get; set; }
 
         #endregion
     }
