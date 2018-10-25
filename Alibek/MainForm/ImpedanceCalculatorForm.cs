@@ -35,8 +35,8 @@ namespace MainForm
         private List<Complex> _impedances;
 
         //TODO: почему uint только endvalue?
-        //по идее это костыль
-        private uint _endValue;
+        //поправил
+        private double _endValue;
         private double _startValue;
         private double _stepValue;
 
@@ -68,7 +68,7 @@ namespace MainForm
             
             double.TryParse(_startValueTextBox.Text, out _startValue);
             double.TryParse(_stepValueTextBox.Text, out _stepValue);
-            uint.TryParse(_endValueTextBox.Text, out _endValue);
+            double.TryParse(_endValueTextBox.Text, out _endValue);
 
             if (!ValueValidators.IsCorrectFrequency(_startValue, _stepValue, _endValue))
             {

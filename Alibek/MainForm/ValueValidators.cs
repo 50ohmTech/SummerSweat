@@ -150,7 +150,7 @@ namespace MainForm
         /// <param name="count">Конечное значение</param>
         /// <returns>Bool значение</returns>
         public static bool IsCorrectFrequency(double startValue, double interval,
-            uint count)
+            double count)
         {
            
             const double maxStepValue = 10000000000.0;

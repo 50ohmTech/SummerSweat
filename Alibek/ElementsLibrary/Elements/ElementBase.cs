@@ -65,7 +65,7 @@ namespace ElementsLibrary.Elements
 
         #endregion
 
-        //public event EventHandler<Value> ValueChanged;
+        public event EventHandler<ValueChangedEvent> ValueChanged;
 
         #region Constructor
 
