@@ -1,33 +1,24 @@
 ﻿using System;
-//using System.Web.UI.WebControls;
 using System.Windows.Forms;
-using Model.Elements;
 
-namespace Model
+namespace CircuitModel
 {
-    public class TreeINode : TreeNode
+    /// <summary>
+    /// Модифицируемый узел TreeNode.
+    /// </summary>
+    public class TreeViewNode : TreeNode
     {
-        #region Properties
+        #region ~ Конструктор ~
 
         /// <summary>
-        ///     Значение.
+        /// Конструктор класса TreeViewNode.
         /// </summary>
-        public INode Value { get; }
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        ///     Конструктор.
-        /// </summary>
-        /// <param name="node">Нода.</param>
-        public TreeINode(INode node)
+        /// <param name="node"> Узел дерева. </param>
+        public TreeViewNode(INode node)
         {
             if (node == null)
             {
                 return;
-
             }
 
             Value = node;
@@ -35,10 +26,10 @@ namespace Model
             switch (node)
             {
                 case SerialSubcircuit series:
-                    Text = $"[Послед] (Id:{series.Id})";
+                    Text = $"[Послед] (Id:{series.uniqueID})";
                     break;
                 case ParallelSubcircuit parallel:
-                    Text = $"[Паралл] (Id:{parallel.Id})";
+                    Text = $"[Паралл] (Id:{parallel.uniqueID})";
                     break;
                 case Resistor resistor:
                     Text = $"({resistor.Name}) [{resistor.Value}]";
@@ -55,6 +46,15 @@ namespace Model
         }
 
         #endregion
+
+        #region ~ Свойства ~
+
+        /// <summary>
+        /// Получить значение.
+        /// </summary>
+        public INode Value { get; }
+
+        #endregion
+
     }
 }
-

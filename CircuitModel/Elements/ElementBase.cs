@@ -31,6 +31,7 @@ namespace CircuitModel
         #endregion
 
         #region ~ Конструктор ~
+
         /// <summary>
         /// Конструктор базового элемента.
         /// </summary>
@@ -45,6 +46,7 @@ namespace CircuitModel
         #endregion
 
         #region ~ Публичные методы ~
+
         /// <summary>
         /// Расчет импеданса.
         /// </summary>
@@ -102,6 +104,9 @@ namespace CircuitModel
                 {
                     throw new ArgumentException(nameof(value));
                 }
+
+                ValueChanged?.Invoke(this, new ValueEventArgs(Name, _value));
+
                 _value = value;
             }
         }
@@ -110,6 +115,8 @@ namespace CircuitModel
 
         #region ~ События ~
 
+        //TODO: Событие создано, но нигде не зажигается. Должно зажигаться в сеттере Value
+        //+
         /// <summary>
         /// Событие, возникающее при изменении номинала элемента.
         /// </summary>

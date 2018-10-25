@@ -100,6 +100,9 @@
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -136,7 +139,7 @@
             this.CalculateButton.TabIndex = 7;
             this.CalculateButton.Text = "Расчитать";
             this.CalculateButton.UseVisualStyleBackColor = true;
-            this.CalculateButton.Click += new System.EventHandler(this.button1_Click);
+            this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
             // ImpedanceForm
             // 
@@ -151,10 +154,13 @@
             this.Controls.Add(this.StepLabel);
             this.Controls.Add(this.EndLabel);
             this.Controls.Add(this.StartLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(287, 298);
             this.Name = "ImpedanceForm";
-            this.Text = "ImpedanceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Расчет импеданса";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ImpedanceForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

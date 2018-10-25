@@ -6,7 +6,7 @@ namespace CircuitModel
     /// <summary>
     /// Катушка индуктивности.
     /// </summary>
-    class Inductor : ElementBase
+    public class Inductor : ElementBase
     {
         #region ~ Конструктор ~
 
