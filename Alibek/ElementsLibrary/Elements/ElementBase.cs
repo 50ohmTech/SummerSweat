@@ -6,6 +6,7 @@ using System.Windows.Forms;
 namespace ElementsLibrary.Elements
 {
     //TODO: По заданию в минимальной версии должны быть еще событие ValueChanged!
+    //сделал
     /// <summary>
     ///     Базовый класс элемента <see cref="ElementBase" />
     /// </summary>

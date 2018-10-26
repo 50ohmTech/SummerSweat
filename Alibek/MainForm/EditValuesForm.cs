@@ -18,15 +18,18 @@ namespace MainForm
 
         #endregion
 
+        private ElementBase element { get; set; }
+
         #region Constructor
 
         //TODO: элемент должен передаваться через открытое свойство, а не аргумент конструктора
+        //сделал
         /// <summary>
         ///     Конструктор формы
         /// </summary>
         /// <param name="element">Элемент цепи</param>
         /// <returns>Инициализирует форму</returns>
-        public EditValuesForm(ElementBase element)
+        public EditValuesForm()
         {
             _element = element ?? throw new ArgumentNullException(nameof(element));
             InitializeComponent();
@@ -85,7 +88,8 @@ namespace MainForm
             //долгая история но если поставить DialogResult.OK, то значения не меняются
             //и я понятия не имею с чем это связано
             // РАЗБЕРИСЬ И СДЕЛАЙ ЧЕРЕЗ OK, А НЕ ПРОСТО КОПИРУЙ КОД
-            DialogResult = DialogResult.Cancel;
+     
+            DialogResult = DialogResult.OK;
         }
 
         /// <summary>

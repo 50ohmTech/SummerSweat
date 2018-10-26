@@ -20,6 +20,7 @@ namespace MainForm
         /// </summary>
         private readonly Circuit _circuit;
 
+        public Circuit circuit { get; set; }
 
         #endregion
 
@@ -46,11 +47,11 @@ namespace MainForm
         #region Constructor
 
         //TODO: цепь должна передаваться через открытое свойство, а не аргумент конструктора
+        //сделал
         /// <summary>
         ///     Конструктор формы
         /// </summary>
-        /// <param name="circuit">Цепь</param>
-        public ImpedanceCalculatorForm(Circuit circuit)
+        public ImpedanceCalculatorForm()
         {
             InitializeComponent();
             //TODO: зачем ContextMenu?
