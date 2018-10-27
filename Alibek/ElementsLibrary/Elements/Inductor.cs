@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace ElementsLibrary
+namespace ElementsLibrary.Elements
 {
     /// <summary>
     ///     Класс катушка индуктивности <see cref="Inductor" />

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Numerics;
 
-namespace ElementsLibrary
+namespace ElementsLibrary.Elements
 {
     /// <summary>
-    ///     Класс Конденсатор <see cref="Capacitor" />
+    ///     Класс Конденсатор 
     /// </summary>
     public class Capacitor : ElementBase
     {
@@ -35,7 +35,7 @@ namespace ElementsLibrary
                 throw new ArgumentOutOfRangeException(nameof(frequency));
             }
 
-            return new Complex(0, -1 / 2 * Math.PI * frequency * Value);
+            return new Complex(0, 1 / (2 * Math.PI * frequency * Value));
         }
 
         #endregion
