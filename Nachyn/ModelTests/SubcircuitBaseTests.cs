@@ -9,6 +9,7 @@ namespace ModelTests
         #region Public methods
 
         [Test(Description = "Тест инкремента Id у подцепи")]
+        [TestOf("Тест инкремента Id у подцепи")]
         public void IdTest()
         {
             bool test = true;
@@ -24,6 +25,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест на вызов события")]
+        [TestOf("Тест на вызов события")]
         public void EventTest()
         {
             SeriesSubcircuit seriesSubcircuit = new SeriesSubcircuit();

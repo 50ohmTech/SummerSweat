@@ -11,6 +11,7 @@ namespace ModelTests
         #region Public methods
 
         [Test(Description = "Тест на добавление элемента в цепь")]
+        [TestOf("Тест на добавление элемента в цепь")]
         public void AddAfterTest()
         {
             Circuit circuit = new Circuit();
@@ -26,6 +27,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест на удаление элемента из цепи")]
+        [TestOf("Тест на удаление элемента из цепи")]
         public void RemoveTest()
         {
             Circuit circuit = new Circuit();
@@ -42,6 +44,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест 2 на удаление элемента из цепи")]
+        [TestOf("Тест 2 на удаление элемента из цепи")]
         public void RemoveRootTest()
         {
             Circuit circuit = new Circuit();
@@ -56,6 +59,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест на пустой корень при вычислении")]
+        [TestOf("Тест на пустой корень при вычислении")]
         public void CalculateEmptyRootTest()
         {
             Assert.Throws<NullReferenceException>(() =>
@@ -66,6 +70,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест на пустой корень при удалении")]
+        [TestOf("Тест на пустой корень при удалении")]
         public void RemoveEmptyRootTest()
         {
             Assert.Throws<InvalidOperationException>(() =>

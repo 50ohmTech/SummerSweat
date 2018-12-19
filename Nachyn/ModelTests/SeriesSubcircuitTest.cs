@@ -10,6 +10,7 @@ namespace ModelTests
         #region Public methods
 
         [Test(Description = "Негативный тест на расчет.")]
+        [TestOf("Негативный тест на расчет.")]
         public void NegativeCalculateZTest()
         {
             SeriesSubcircuit seriesSubcircuit = new SeriesSubcircuit();

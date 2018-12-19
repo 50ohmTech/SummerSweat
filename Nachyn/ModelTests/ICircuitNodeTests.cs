@@ -12,6 +12,7 @@ namespace ModelTests
         #region Public methods
 
         [Test(Description = "Тест правильности расчета сложной цепи")]
+        [TestOf("Тест правильности расчета сложной цепи")]
         public void NodesAddTest()
         {
             SeriesSubcircuit seriesRoot = new SeriesSubcircuit();
@@ -43,6 +44,7 @@ namespace ModelTests
         [TestCase("   ")]
         [TestCase(null)]
         [Test(Description = "Негативный Тест имени")]
+        [TestOf("Негативный Тест имени")]
         public void NegativeNameTest(string name)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -53,6 +55,7 @@ namespace ModelTests
 
 
         [Test(Description = "Тест имени у базового элемента")]
+        [TestOf("Тест имени у базового элемента")]
         public void NameTest()
         {
             string name = Guid.NewGuid().ToString().Substring(0, 5);
@@ -63,6 +66,7 @@ namespace ModelTests
         [TestCase(-200)]
         [TestCase(-20000)]
         [Description("Негативный тест на отрицательный номинал")]
+        [TestOf("Негативный тест на отрицательный номинал")]
         public void NegativeValueTest(double resistance)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -75,6 +79,7 @@ namespace ModelTests
         [TestCase(-100)]
         [TestCase(1000000000001)]
         [Description("Негативный тест на отрицательную частоту")]
+        [TestOf("Негативный тест на отрицательную частоту")]
         public void NegativeFrequencyTest(double frequency)
         {
             ElementBase elementBase = new Capacitor("C", 20);
@@ -82,6 +87,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест на вызов события")]
+        [TestOf("Тест на вызов события")]
         public void EventHandlerTest()
         {
             Inductor inductor = new Inductor("I", 40);
@@ -98,6 +104,7 @@ namespace ModelTests
         [TestCase(2345)]
         [TestCase(1000)]
         [Test(Description = "Тест номинала у аргумента события")]
+        [TestOf("Тест номинала у аргумента события")]
         public void EventArgsValueTest(
             double value)
         {

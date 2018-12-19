@@ -15,6 +15,7 @@ namespace ModelTests
         [TestCase(-2000.2)]
         [TestCase(-100000000000)]
         [Test(Description = "Негативный Тест номинала у аргумента события")]
+        [TestOf("Негативный Тест номинала у аргумента события")]
         public void NegativeValueTest(double value)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -24,6 +25,7 @@ namespace ModelTests
         }
 
         [Test(Description = "Тест сообщения у аргумента события")]
+        [TestOf("Тест сообщения у аргумента события")]
         public void MessageTest()
         {
             string message = Guid.NewGuid().ToString();
@@ -34,6 +36,7 @@ namespace ModelTests
         [TestCase("   ")]
         [TestCase(null)]
         [Test(Description = "Негативный Тест имени у аргумента события")]
+        [TestOf("Негативный Тест имени у аргумента события")]
         public void NegativeMessageTest(string message)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>

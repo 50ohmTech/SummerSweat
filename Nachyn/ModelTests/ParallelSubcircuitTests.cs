@@ -11,6 +11,7 @@ namespace ModelTests
         #region Public methods
 
         [Test(Description = "Негативный тест параллельного соединения на вычисление")]
+        [TestOf("Негативный тест параллельного соединения на вычисление")]
         public void NegativeCalculateZTest()
         {
             ParallelSubcircuit parallel = new ParallelSubcircuit();
